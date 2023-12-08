@@ -1,3 +1,4 @@
+'''導入庫'''
 # 從 dash 庫導入 Dash, dcc, html 用於應用構建
 from dash import Dash, dcc, html
 
@@ -13,14 +14,14 @@ import numpy as np
 # 導入 dash_bootstrap_components 用於引入 Bootstrap 風格
 import dash_bootstrap_components as dbc
 
-"""模擬一些數據"""
+'''模擬數據'''
 '''
 這裡說明一下，首先透過模擬的方式產生數據，然後把這個數據儲存為 EXCEL
 透過觀察 EXCEL 可知道文件的內容，特過這樣的過程，
 下一步可以試圖取得與 EXCEL 中的數據相同的內容來製圖
 那這個腳本就會是一個相對完整的腳本了
 '''
-# 設置隨機種子以確保數據的可重現性
+# 設置隨機種子
 np.random.seed(0)
 # 生成工作日的日期範圍
 dates = pd.date_range("2020-01-01", "2023-05-31", freq="B")
@@ -37,6 +38,8 @@ snp_values = np.random.normal(
 df_portfolio = pd.DataFrame(
     {"Date": dates, "Portfolio": portfolio_values, "S&P 500": snp_values}
 )
+# 測試觀察
+df_portfolio.to_excel('portfolio_data_1.xlsx', index=False)
 df_portfolio = df_portfolio.melt(
     id_vars="Date", var_name="Type", value_name="Value"
 )
@@ -49,6 +52,8 @@ monthly_return = (
     .last()
     .unstack()
 )
+# 測試觀察
+monthly_return.to_excel('monthly_return_data_1.xlsx', index=True)
 monthly_return = \
     monthly_return.pct_change().dropna().stack().reset_index(name="Return")
 monthly_return["Date"] = monthly_return["Date"].dt.strftime("%Y-%m")
@@ -58,8 +63,8 @@ top_holdings = pd.Series(
     np.random.rand(15), index=[f"Stock {i}" for i in range(1, 16)]
 )
 
-'''保存數據為 Excel 文件'''
-#
+'''保存數據'''
+# 儲存為 Excel
 df_portfolio.to_excel('portfolio_data.xlsx', index=False)
 monthly_return.to_excel('monthly_return_data.xlsx', index=False)
 
@@ -161,7 +166,7 @@ app.layout = dbc.Container(
     fluid=True,
 )
 
-# 運行服務器
+'''運行服務器'''
 if __name__ == "__main__":
     # 開啟調試模式
     app.run_server(debug=True)
