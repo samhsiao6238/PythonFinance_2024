@@ -7,22 +7,32 @@ import dash_bootstrap_components as dbc
 # 模拟一些数据
 np.random.seed(0)
 dates = pd.date_range("2020-01-01", "2021-05-31", freq="B")
-portfolio_values = np.random.normal(loc=0.0002, scale=0.001, size=len(dates)).cumsum()
-snp_values = np.random.normal(loc=0.0001, scale=0.001, size=len(dates)).cumsum()
+portfolio_values = np.random.normal(
+    loc=0.0002, scale=0.001, size=len(dates)
+).cumsum()
+snp_values = np.random.normal(
+    loc=0.0001, scale=0.001, size=len(dates)
+).cumsum()
 
 df_portfolio = pd.DataFrame(
     {"Date": dates, "Portfolio": portfolio_values, "S&P 500": snp_values}
 )
-df_portfolio = df_portfolio.melt(id_vars="Date", var_name="Type", value_name="Value")
+df_portfolio = df_portfolio.melt(
+    id_vars="Date", var_name="Type", value_name="Value"
+)
 
 # 用于月度回报的数据
 monthly_return = (
-    df_portfolio.groupby([df_portfolio["Date"].dt.to_period("M"), "Type"])["Value"]
+    df_portfolio.groupby(
+        [df_portfolio["Date"].dt.to_period("M"), "Type"]
+    )["Value"]
     .last()
     .unstack()
 )
-monthly_return = monthly_return.pct_change().dropna().stack().reset_index(name="Return")
-monthly_return["Date"] = monthly_return["Date"].dt.strftime("%Y-%m")
+monthly_return = monthly_return.pct_change() \
+    .dropna().stack().reset_index(name="Return")
+monthly_return["Date"] = monthly_return["Date"] \
+    .dt.strftime("%Y-%m")
 
 # 持股比例饼图的数据
 top_holdings = pd.Series(
