@@ -118,7 +118,7 @@ app.layout = dbc.Container(
         # 中間列
         dbc.Row(
             [
-                # 佔滿柱狀圖
+                # 左側柱狀圖
                 dbc.Col(
                     dcc.Graph(
                         # 圖表 ID
@@ -132,48 +132,26 @@ app.layout = dbc.Container(
                             title="Monthly Return (%)",
                         ),
                     ),
-                    # 全部
-                    width=12,
-                )
+                    # 占一半行
+                    width=6,
+                ),
+                # 右側餅圖
+                dbc.Col(
+                    dcc.Graph(
+                        # 圖表 ID
+                        id="holdings-pie-chart",
+                        # 餅圖表
+                        figure=px.pie(
+                            top_holdings,
+                            values=top_holdings.values,
+                            names=top_holdings.index,
+                            title="Top X Holdings",
+                        ),
+                    ),
+                    # 占一半行
+                    width=6,
+                ),
             ]
-        ),
-        # 添加一個甜甜圈圖
-        dbc.Row(
-                [
-                    # 左側餅圖
-                    dbc.Col(
-                        dcc.Graph(
-                            # 圖表 ID
-                            id="holdings-pie-chart",
-                            # 餅圖表
-                            figure=px.pie(
-                                top_holdings,
-                                values=top_holdings.values,
-                                names=top_holdings.index,
-                                title="Top X Holdings",
-                            ),
-                        ),
-                        # 占一半行
-                        width=6,
-                    ),
-                    # 右側甜甜圈圖
-                    dbc.Col(
-                        dcc.Graph(
-                            id='holdings-donut-chart',
-                            figure=px.pie(
-                                top_holdings,
-                                values=top_holdings.values,
-                                names=top_holdings.index,
-                                title="Top X Holdings",
-                                # 添加這個 hole 參數就是一個甜甜圈圖
-                                # 可通過更改數值來增加或減少中間空白的大小
-                                hole=0.7
-                            ),
-                        ),
-                        # 占一半行
-                        width=6,
-                    ),
-                ]
         ),
         # 底部區塊
         dbc.Row(
