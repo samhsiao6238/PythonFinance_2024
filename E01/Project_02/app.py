@@ -59,8 +59,9 @@ monthly_return = \
 monthly_return["Date"] = monthly_return["Date"].dt.strftime("%Y-%m")
 
 # 創建持股比例餅圖的數據
+NUMBER = 10
 top_holdings = pd.Series(
-    np.random.rand(15), index=[f"Stock {i}" for i in range(1, 16)]
+    np.random.rand(NUMBER), index=[f"Stock {i}" for i in range(1, NUMBER + 1)]
 )
 # 測試觀察
 top_holdings.to_excel('top_holdings_1.xlsx')
@@ -144,7 +145,7 @@ app.layout = dbc.Container(
                             top_holdings,
                             values=top_holdings.values,
                             names=top_holdings.index,
-                            title="Top 15 Holdings",
+                            title="Top X Holdings",
                         ),
                     ),
                     # 占一半行
