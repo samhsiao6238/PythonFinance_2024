@@ -62,6 +62,8 @@ monthly_return["Date"] = monthly_return["Date"].dt.strftime("%Y-%m")
 top_holdings = pd.Series(
     np.random.rand(15), index=[f"Stock {i}" for i in range(1, 16)]
 )
+# 測試觀察
+top_holdings.to_excel('top_holdings_1.xlsx')
 
 '''保存數據'''
 # 儲存為 Excel
@@ -73,7 +75,7 @@ top_holdings_df = pd.DataFrame(top_holdings, columns=['Value'])
 top_holdings_df.to_excel('top_holdings_data.xlsx')
 
 # 輸出結果
-print("Files have been saved successfully.")
+print("檔案儲存完畢。")
 
 '''建立圖表'''
 # 創建 Dash 應用，並使用 Bootstrap 主題
