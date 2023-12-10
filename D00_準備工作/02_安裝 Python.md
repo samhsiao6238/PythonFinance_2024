@@ -4,25 +4,25 @@
 
 ## Windows
 
-1. 官方  [下載](https://www.python.org/downloads/windows/)
+1. 官網 [下載](https://www.python.org/downloads/windows/) 。
 
     ![](images/img_21.png)
 
 <br>
 
-2. 以系統管理員安裝
+2. 以系統管理員身份執行安裝。
 
     ![](images/img_22.png)
 
 <br>
 
-3. 務必勾選添加路徑，然後選擇客製化安裝
+3. 務必勾選添加路徑，然後選擇客製化安裝。
 
     ![](images/img_23.png)
 
 <br>
 
-4. 點擊 `NEXT`
+4. 點擊 `NEXT` 。
 
     ![](images/img_24.png)
 
@@ -42,7 +42,7 @@
 
 _回到終端機_
 
-7. 查詢版本
+7. 查詢版本。
 
     ```bash
     python --version
