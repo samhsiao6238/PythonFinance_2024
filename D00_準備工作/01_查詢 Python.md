@@ -1,4 +1,4 @@
-# Python 環境
+# 查詢當前 Python 環境
 
 <br>
 
@@ -19,7 +19,6 @@
     ```
 
     ![](images/img_03.png)
-
 
 <br>
 
@@ -66,7 +65,6 @@
     ```bash
     whereis python
     ```
-
 
 <br>
 

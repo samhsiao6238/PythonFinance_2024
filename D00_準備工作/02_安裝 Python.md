@@ -5,27 +5,27 @@
 
 1. 官方  [下載](https://www.python.org/downloads/windows/)
 
-    ![](images/img_01.png)
+    ![](images/img_21.png)
 
 2. 以系統管理員安裝
 
-    ![](images/img_02.png)
+    ![](images/img_22.png)
 
 3. 務必勾選添加路徑，然後選擇客製化安裝
 
-    ![](images/img_03.png)
+    ![](images/img_23.png)
 
 4. 點擊 `NEXT`
 
-    ![](images/img_04.png)
+    ![](images/img_24.png)
 
 5. 勾選 `Install for all users`，就是因為要在這裡確認 `路徑中沒有中文`，所以選擇客製化安裝。
 
-    ![](images/img_05.png)
+    ![](images/img_25.png)
 
 6. 安裝完成，關閉即可。
 
-    ![](images/img_06.png)
+    ![](images/img_26.png)
 
 ## 回到終端機
 
@@ -36,4 +36,4 @@ python --version
 
 2. 就會是剛剛安裝完成的版本。
 
-    ![](images/img_07.png)
+    ![](images/img_27.png)
