@@ -4,7 +4,7 @@
 
 ## Windows
 
-1. 查詢當前 Python 版本
+1. 查詢當前 Python 版本。
 
     ```bash
     python --version
@@ -35,7 +35,7 @@
 
 ## MacOS
 
-1. 查詢當前 Python 版本
+1. 查詢當前 Python 版本。
 
     ```bash
     python --version
@@ -61,7 +61,7 @@
 
 <br>
 
-4. 搜索標準系統目錄中所安裝的 Python
+4. 搜索標準系統目錄中所安裝的 Python。
 
     ```bash
     whereis python
