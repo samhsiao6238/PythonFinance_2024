@@ -1,0 +1,106 @@
+# pyenv
+
+<br>
+
+## 說明
+
+1. `pyenv` 是用於在 Unix-like 系統上管理多個 Python 版本的工具，而在 Windows 系統則使用另一個分支 `pyenv-win` 。
+
+<br>
+
+##  MacOS
+
+1. 安裝。
+
+    ```bash
+    brew update && brew install pyenv
+    ```
+
+<br>
+
+2. 檢查版本。
+
+    ```bash
+    pyenv --version
+    ```
+
+    ![](images/img_19.png)
+
+<br>
+
+##  Windows
+
+1. 使用 `pyenv-win` 這個專門為 Windows 環境設計的分支版本，可參考 [官網安裝說明](https://github.com/pyenv-win/pyenv-win/blob/master/docs/installation.md#python-pip)。
+
+<br>
+
+2. 安裝。
+
+    ```bash
+    pip install pyenv-win --target %USERPROFILE%\\.pyenv
+    ```
+
+<br>
+
+3. 添加兩個環境參數：特別注意，假如還沒安裝 Python 的話， `shims` 資料夾還不存在。
+
+    ```ini
+    C:\Users\<使用者名稱>\.pyenv\pyenv-win\bin
+    C:\Users\<使用者名稱>\.pyenv\pyenv-win\shims
+    ```
+
+<br>
+
+4. 檢查 pyenv 版本號：用已確認已經安裝完成。
+
+    ```bash
+    pyenv --version
+    ```
+
+    ![](images/img_18.png)
+
+<br>
+
+## 使用說明
+
+1. 列出可安裝版本。
+
+    ```bash
+    pyenv install --list
+    ```
+
+<br>
+
+2. 安裝指定版本：比如說 `3.9.0`。
+
+    ```bash
+    pyenv install 3.9.0
+    ```
+
+<br>
+
+3. 指定全局版本。
+
+    ```bash
+    pyenv global
+    ```
+
+<br>
+
+4. 指定當前目錄版本。
+
+    ```bash
+    pyenv local 3.9.0
+    ```
+
+<br>
+
+## 補充
+
+_`pyenv` 在管理 Python 版本時不會干涉系統自帶的 Python 版本_。
+
+<br>
+
+---
+
+_END_
