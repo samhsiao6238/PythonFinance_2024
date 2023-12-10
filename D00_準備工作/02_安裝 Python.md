@@ -40,9 +40,9 @@
 
 <br>
 
-## 回到終端機
+_回到終端機_
 
-1. 查詢版本
+7. 查詢版本
 
     ```bash
     python --version
@@ -50,12 +50,18 @@
 
 <br>
 
-2. 就會是剛剛安裝完成的版本。
+8. 就會是剛剛安裝完成的版本。
 
     ![](images/img_27.png)
 
 
 <br>
+
+## MacOS
+
+1. [官方下載](https://www.python.org/downloads/macos/) 。
+
+    ![](images/img_14.png)
 
 ---
 
