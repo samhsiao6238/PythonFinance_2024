@@ -31,3 +31,23 @@
     ![](images/img_10.png)
 
 ## MacOS
+
+1. 編輯環境參數。
+
+    ```bash
+    sudo nano ~/.zshrc
+    ```
+
+2. 假設使用某個環境作為預設的版本。
+
+    ```ini
+    export PATH="/Users/samhsiao/Documents/PythonVenv/envDash/bin:$PATH"   
+    ```
+    
+    ![](images/img_11.png)
+
+3. 重新載入配置文件。
+
+    ```bash
+    source ~/.zshrc
+    ```
