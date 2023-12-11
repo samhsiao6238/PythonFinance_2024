@@ -2,7 +2,7 @@
 
 <br>
 
-1. 安裝
+1. 安裝 `yfinance` 套件。
 
     ```bash
     pip install yfinance
@@ -10,7 +10,7 @@
 
 <br>
 
-2. 檢查更新
+2. 更新套件。
 
     ```bash
     pip install yfinance --upgrade --no-cache-dir
@@ -18,12 +18,11 @@
 
 <br>
 
-3. 查看版本
+3. 查看版本：可能出現警告，參考講義 SSL 部分的說明。
 
     ```python
     import yfinance as yf 
     print(yf.__version__)
-    
     ```
 
 <br>
