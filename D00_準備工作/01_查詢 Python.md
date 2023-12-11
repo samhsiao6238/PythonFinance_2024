@@ -1,5 +1,7 @@
 # 查詢當前 Python 環境
 
+_Python 需要正確的版本以建立虛擬環境_
+
 <br>
 
 ## Windows
