@@ -41,8 +41,9 @@
 
     ```python
     stock = yf.Ticker("AAPL")
-    price = stock.info['regularMarketPrice']
-    print("Apple's current stock price: $", price)
+    stock_info = stock.info
+    price_available = 'regularMarketPrice' in stock_info
+    yf_version, price_available, list(stock_info.keys())[:10]
     ```
 
 <br>
