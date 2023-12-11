@@ -1,11 +1,20 @@
 # yfinance
 
+_使用 yfinance 查詢_
+
+## 說明
+
+1. 成果圖。
+
+    ![](images/img_01.png)
+
+
 <br>
 
 1. 安裝 `yfinance` 套件。
 
     ```bash
-    pip install yfinance
+    pip install yfinance TA-Lib ta plotly
     ```
 
 <br>
