@@ -1,9 +1,15 @@
+import ssl
 import plotly.graph_objects as go
 import pandas as pd
 from dash import Dash, dcc, html
 
+# 禁用 SSL 驗證
+ssl._create_default_https_context = ssl._create_unverified_context
+
 # 地圖代碼
-df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/2014_ebola.csv")
+df = pd.read_csv(
+    "https://raw.githubusercontent.com/plotly/datasets/master/2014_ebola.csv"
+)
 
 colors = ["rgb(239,243,255)", "rgb(189,215,231)", "rgb(107,174,214)", "rgb(33,113,181)"]
 months = {6: "June", 7: "July", 8: "Aug", 9: "Sept"}
