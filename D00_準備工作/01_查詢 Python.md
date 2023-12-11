@@ -22,7 +22,7 @@
 
 <br>
 
-3. 搜索並顯示所有在環境參數的系統路徑（System PATH）上與 python 匹配的可執行文件路徑。
+3. 搜索並顯示所有在環境參數的系統路徑（System PATH）與 python 匹配的可執行文件路徑。
 
     ```bash
     where python
