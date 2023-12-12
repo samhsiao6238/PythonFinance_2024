@@ -10,6 +10,30 @@
 
 <br>
 
+## 上課資訊
+
+1. Google Meet 會議代碼與 [連結](https://meet.google.com/whu-mjxb-soq)。
+
+    ```txt
+    whu-mjxb-soq
+    ```
+
+2. Email
+
+    ```txt
+    gsam6238@gmail.com
+    ```
+    或
+    ```txt
+    samhsiao6238@gmail.com
+    ```
+
+<br>
+
+---
+
+<br>
+
 ## 課程元素
 _從課綱看_
 
