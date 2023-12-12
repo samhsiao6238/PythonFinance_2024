@@ -124,11 +124,19 @@ _將特定的 Python 版本鏈接別名_
 
 <br>
 
-1. 鏈接符號，用以將指定版的 Python 指向指定名稱。
+1. 鏈接符號，用以將指定版本的 Python 指向指定的鏈接符號，請注意， Python 與 Python3 要分別做。
 
     ```bash
-    ln -s /usr/local/bin/python3.10 /usr/local/bin/python3
+    ln -s /usr/local/bin/python3.10 /usr/local/bin/python
     ```
+
+<br>
+
+2. 假如符號已經存在，要先進行刪除，然後再指定一次。
+
+```bash
+rm /usr/local/bin/python
+```
 
 <br>
 
