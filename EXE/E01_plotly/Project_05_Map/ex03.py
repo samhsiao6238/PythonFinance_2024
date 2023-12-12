@@ -9,8 +9,7 @@ import sys
 
 
 # 資料檔案 URL
-url = "https://raw.githubusercontent.com/ \
-    plotly/datasets/master/2014_us_cities.csv"
+url = "https://raw.githubusercontent.com/plotly/datasets/master/2014_us_cities.csv"
 
 # 發送 GET 請求
 response = requests.get(url)

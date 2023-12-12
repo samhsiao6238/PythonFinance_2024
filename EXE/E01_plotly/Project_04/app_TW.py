@@ -25,7 +25,12 @@ lon = np.random.uniform(120, 122, 1000)
 lat = np.random.uniform(22, 25, 1000)
 
 # 創建一個DataFrame來儲存散點的經緯度和大小
-df = pd.DataFrame({"lat": lat, "lon": lon, "size": np.random.rand(1000) * 1000})
+df = pd.DataFrame(
+    {
+        "lat": lat, "lon": lon,
+        "size": np.random.rand(1000) * 1000
+    }
+)
 
 # 模擬教育分布和收入分布數據（這些分布可以根據實際數據進行調整）
 education_distribution = pd.DataFrame(
@@ -48,7 +53,14 @@ education_distribution = pd.DataFrame(
 income_distribution = pd.DataFrame(
     {
         "Income Bracket": np.random.choice(
-            ["<20k", "20k-40k", "40k-60k", "60k-80k", "80k-100k", ">100k"], size=1000
+            [
+                "<20k",
+                "20k-40k",
+                "40k-60k",
+                "60k-80k",
+                "80k-100k",
+                ">100k"
+            ], size=1000
         ),
         "Count": np.random.randint(1, 100, size=1000),
     }
@@ -65,7 +77,7 @@ app.layout = dbc.Container(
             [
                 dbc.Col(
                     html.H1(
-                        "Taiwan Population Distribution",
+                        "台灣人口分佈",
                         className="text-center",
                     ),
                     width=12,
@@ -84,7 +96,7 @@ app.layout = dbc.Container(
                             size="size",
                             scope="asia",
                             center={"lat": 23.5, "lon": 121},
-                            title="Population Distribution in Taiwan",
+                            title="台灣人口分佈",
                         ).update_layout(
                             margin={"r": 0, "t": 0, "l": 0, "b": 0}, height=600
                         ),
@@ -102,7 +114,7 @@ app.layout = dbc.Container(
                             education_distribution,
                             x="Education Level",
                             y="Count",
-                            title="Education Distribution in Taiwan",
+                            title="台灣人口教育程度分佈",
                         ),
                     ),
                     width=6,
@@ -114,7 +126,7 @@ app.layout = dbc.Container(
                             income_distribution,
                             x="Income Bracket",
                             y="Count",
-                            title="Income Distribution in Taiwan",
+                            title="台灣人口收入分佈",
                         ),
                     ),
                     width=6,
