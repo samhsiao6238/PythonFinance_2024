@@ -44,12 +44,16 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 <br>
 
-3. 添加兩個環境參數：特別注意，假如還沒安裝 Python 的話， `shims` 資料夾還不存在。
+3. 添加兩個環境參數：特別注意，假如還沒用 pyenv 安裝過 Python 的話， `shims` 資料夾還不存在。
 
     ```ini
     C:\Users\<使用者名稱>\.pyenv\pyenv-win\bin
     C:\Users\<使用者名稱>\.pyenv\pyenv-win\shims
     ```
+
+    ![](images/img_37.png)
+    
+    _上面畫紅線橫槓的部分是要提醒同學務必改為自己的帳號名_
 
 <br>
 
