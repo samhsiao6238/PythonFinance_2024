@@ -4,6 +4,14 @@ _Python 需要正確的版本以建立虛擬環境_
 
 <br>
 
+## 說明
+
+1. 在 Windows11 的 CMD 中執行 `python` 指令，將會觸發啟動商店，不用理會。
+
+    ![](images/img_31.png)
+
+<br>
+
 ## Windows
 
 1. 查詢當前 Python 版本。
