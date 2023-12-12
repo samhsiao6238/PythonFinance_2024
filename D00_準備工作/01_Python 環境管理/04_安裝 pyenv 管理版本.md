@@ -20,13 +20,17 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 <br>
 
-2. 檢查版本。
+2. 檢查 pyenv 的版本。
 
     ```bash
     pyenv --version
     ```
 
     ![](images/img_19.png)
+
+<br>
+
+3. 其餘指令與 Windows 相同，直接參考下方說明即可。
 
 <br>
 
@@ -57,7 +61,7 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 <br>
 
-4. 檢查 pyenv 版本號：用已確認已經安裝完成。
+4. 檢查 pyenv 版本號：透過檢查版本可確認 pyenv 是否完成安裝。
 
     ```bash
     pyenv --version
@@ -69,7 +73,7 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 ## 使用說明
 
-1. 列出可安裝版本。
+1. 列出所有可透過 pyenv 安裝的應用版本：不限於 Python。
 
     ```bash
     pyenv install --list
@@ -77,7 +81,23 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 <br>
 
-2. 安裝指定版本：比如說 `3.9.0`。
+2. 目前使用的版本：會以安裝 pyenv 時使用的版本為預設版本。
+
+    ```bash
+    pyenv version
+    ```
+
+<br>
+
+3. 目前已安裝的全部版本：指透過 pyenv 安裝的版本。
+
+    ```bash
+    pyenv versions
+    ```
+
+<br>
+
+4. 安裝指定版本：比如說 `3.9.0`。
 
     ```bash
     pyenv install 3.9.0
@@ -85,7 +105,7 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 <br>
 
-3. 指定全局版本。
+5. 指定全局版本。
 
     ```bash
     pyenv global
@@ -93,7 +113,7 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 <br>
 
-4. 指定當前目錄版本。
+6. 指定當前目錄版本。
 
     ```bash
     pyenv local 3.9.0
