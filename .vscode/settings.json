@@ -6,5 +6,7 @@
     // 預設名稱
     "pasteImage.defaultName": "0",
     // 已經存在就彈出視窗自訂名稱
-    "pasteImage.showFilePathConfirmInputBox": true
+    "pasteImage.showFilePathConfirmInputBox": true,
+    // flake8 長度
+    "python.linting.flake8Args": ["--max-line-length", "200"]
 }

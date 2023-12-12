@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import dash_bootstrap_components as dbc
 
-# 模拟一些数据
+# 模擬一些數據
 np.random.seed(0)
 dates = pd.date_range("2020-01-01", "2021-05-31", freq="B")
 portfolio_values = np.random.normal(
@@ -21,7 +21,7 @@ df_portfolio = df_portfolio.melt(
     id_vars="Date", var_name="Type", value_name="Value"
 )
 
-# 用于月度回报的数据
+# 用於月度回報的數據
 monthly_return = (
     df_portfolio.groupby(
         [df_portfolio["Date"].dt.to_period("M"), "Type"]
@@ -34,15 +34,15 @@ monthly_return = monthly_return.pct_change() \
 monthly_return["Date"] = monthly_return["Date"] \
     .dt.strftime("%Y-%m")
 
-# 持股比例饼图的数据
+# 持股比例餅圖的數據
 top_holdings = pd.Series(
     np.random.rand(15), index=[f"Stock {i}" for i in range(1, 16)]
 )
 
-# 创建 Dash 应用
+# 創建 Dash 應用
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-# 设置应用布局
+# 設置應用佈局
 app.layout = dbc.Container(
     [
         dbc.Row(
@@ -108,6 +108,6 @@ app.layout = dbc.Container(
     fluid=True,
 )
 
-# 运行服务器
+# 運行服務器
 if __name__ == "__main__":
     app.run_server(debug=True)

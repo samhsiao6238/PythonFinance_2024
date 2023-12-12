@@ -55,6 +55,23 @@
 
 <br>
 
+2. 關於插件 `PasteImage`。
+
+    ```json
+    {
+        // 設定貼上相片的預設路徑
+        "pasteImage.path": "${currentFileDir}/images/", 
+        // 圖片前綴
+        "pasteImage.namePrefix": "img_",
+        // 預設名稱
+        "pasteImage.defaultName": "0",
+        // 已經存在就彈出視窗自訂名稱
+        "pasteImage.showFilePathConfirmInputBox": true,
+    }
+    ```
+
+<br>
+
 ---
 
 _END：持續補充_
