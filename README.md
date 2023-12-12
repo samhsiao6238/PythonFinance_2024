@@ -18,7 +18,11 @@
     whu-mjxb-soq
     ```
 
-2. Email
+2. [課程講義](https://github.com/samhsiao6238/PythonAI_Web_20231217) 。
+
+<br>
+
+3. Email
 
     ```txt
     gsam6238@gmail.com
