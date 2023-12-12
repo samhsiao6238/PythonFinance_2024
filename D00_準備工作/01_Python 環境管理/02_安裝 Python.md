@@ -74,13 +74,23 @@ _相同部分不贅述_
 
     ![](images/img_14.png)
 
+<br>
+
 2. 接著就是繼續、繼續、同意、安裝、密碼
 
     ![](images/img_33.png)
 
+<br>
+
 3. 安裝完成會在 Applications 中看到。
 
     ![](images/img_34.png)
+
+<br>
+
+4. 特別注意，在 MacOS 中安裝了不同版本的 Python 後，系統並不會修正環境參數檔案如 `.zshrc` 的內容，但是會自動更新 `/usr/local/bin` 中的符號鏈接，也就是將新安裝的版本指向 Python 與 Python3，所以查詢版本時會發現已經變更為最新安裝的版本。
+
+<br>
 
 ---
 
