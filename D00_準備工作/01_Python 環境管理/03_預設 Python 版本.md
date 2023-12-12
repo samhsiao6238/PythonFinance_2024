@@ -132,7 +132,7 @@ _將特定的 Python 版本鏈接別名_
 
 <br>
 
-1. 假如符號已經存在，要先進行刪除。
+2. 假如符號已經存在，要先進行刪除。
 
     ```bash
     sudo rm /usr/local/bin/python
