@@ -66,10 +66,21 @@ _回到終端機_
 <br>
 
 ## MacOS
+_相同部分不贅述_
+
+<br>
 
 1. [官方下載](https://www.python.org/downloads/macos/) 。
 
     ![](images/img_14.png)
+
+2. 接著就是繼續、繼續、同意、安裝、密碼
+
+    ![](images/img_33.png)
+
+3. 安裝完成會在 Applications 中看到。
+
+    ![](images/img_34.png)
 
 ---
 
