@@ -1,3 +1,8 @@
+'''
+以下範例不使用太複雜的佈局，主要用於演釋回調的運作
+'''
+
+
 '''導入庫'''
 import dash
 from dash import dcc, html, Input, Output
@@ -69,8 +74,9 @@ app.layout = html.Div(
             id="bike-slider",
             min=selected_df["可借車數"].min(),
             max=selected_df["可借車數"].max(),
+            # 設定 slider 的預設值
             # value=selected_df["可借車數"].max(),
-            value=10,
+            value=20,
             marks={
                 i: str(i)
                 for i in range(selected_df["可借車數"].min(), selected_df["可借車數"].max() + 1)
@@ -80,6 +86,8 @@ app.layout = html.Div(
         dcc.Graph(id="youbike-graph"),
     ]
 )
+
+'''建立監聽：回調'''
 
 
 # 定義 callback 來監聽輸入的變動
@@ -96,18 +104,26 @@ app.layout = html.Div(
 def update_graph(selected_area, selected_bike_num):
     # 根據所選的區域和滑塊範圍過濾數據
     filtered_df = selected_df[
-        (selected_df["所在區域"] == selected_area)
-        & (selected_df["可借車數"] >= selected_bike_num)
+        (
+            selected_df["所在區域"] == selected_area
+        ) & (
+            selected_df["可借車數"] >= selected_bike_num
+        )
     ]
 
     # 產生圖表
     fig = px.bar(
-        filtered_df, x="站點名稱", y=["車位總數", "可借車數"], barmode="group", title="YouBike站點數據"
+        filtered_df,
+        x="站點名稱",
+        y=["車位總數", "可借車數"],
+        barmode="group",
+        title="YouBike站點數據"
     )
 
     return fig
 
 
+'''運行伺服器'''
 # 運行應用
 if __name__ == "__main__":
     app.run_server(debug=True)
