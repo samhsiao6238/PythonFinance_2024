@@ -10,7 +10,12 @@ df = pd.read_csv(
 )
 df.head()
 
-colors = ["rgb(239,243,255)", "rgb(189,215,231)", "rgb(107,174,214)", "rgb(33,113,181)"]
+colors = [
+    "rgb(239,243,255)",
+    "rgb(189,215,231)",
+    "rgb(107,174,214)",
+    "rgb(33,113,181)"
+]
 months = {6: "June", 7: "July", 8: "Aug", 9: "Sept"}
 
 fig = go.Figure()
@@ -23,7 +28,11 @@ for i in range(6, 10)[::-1]:
             lat=df_month["Lat"],
             text=df_month["Value"],
             name=months[i],
-            marker=dict(size=df_month["Value"] / 50, color=colors[i - 6], line_width=0),
+            marker=dict(
+                size=df_month["Value"] / 50,
+                color=colors[i - 6],
+                line_width=0
+            ),
         )
     )
 
@@ -31,7 +40,8 @@ df_sept = df.query("Month == 9")
 fig["data"][0].update(
     mode="markers+text",
     textposition="bottom center",
-    text=df_sept["Value"].map("{:.0f}".format).astype(str) + " " + df_sept["Country"],
+    text=df_sept["Value"]
+    .map("{:.0f}".format).astype(str) + " " + df_sept["Country"],
 )
 
 # Inset
