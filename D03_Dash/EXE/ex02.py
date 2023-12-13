@@ -1,15 +1,22 @@
+'''導入庫'''
 import dash
 from dash import dcc, html, Input, Output
 import plotly.express as px
 import pandas as pd
 import requests
 
-# 你的程式碼來取得和處理數據
+'''取得並處理數據'''
+# 資料連結
 url = "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json"
+# 下載數據
 response = requests.get(url)
+# 處理數據
 if response.status_code == 200:
+    # 讀取數據
     data = response.json()
+    # 將數據轉換為 DataFrame
     df = pd.DataFrame(data)
+    # 建立欄位名稱映射
     column_mapping = {
         "sno": "站點編號",
         "sna": "站點名稱",
@@ -30,18 +37,20 @@ if response.status_code == 200:
         "infoTime": "訊息時間",
         "infoDate": "訊息日期",
     }
+    # 重命名欄位名稱 rename
     df.rename(columns=column_mapping, inplace=True)
+    # 取出部分欄位資料
     selected_df = df[["站點名稱", "車位總數", "可借車數", "所在區域"]]
 else:
     print("無法下載數據，狀態碼：", response.status_code)
 
-
-# 可添加一些運算取得數據，然後
+'''添加額外運算'''
 # 中位數
 median_bike_num = selected_df["可借車數"].median()
 # 最大數值的一半
 half_max_bike_num = selected_df["可借車數"].max() / 2
 
+'''建立網頁'''
 # 建立 Dash 應用
 app = dash.Dash(__name__)
 
@@ -73,10 +82,16 @@ app.layout = html.Div(
 )
 
 
-# 定義callback來更新圖表
+# 定義 callback 來監聽輸入的變動
+# 在 Dash 應用中，可使用 callback 建立輸出 Output 與輸入 Input 間的關聯
+# Output(標籤, 組件)
 @app.callback(
+    # 更新標籤為 youbike-graph 的 dcc.Graph 組件 figure 屬性
     Output("youbike-graph", "figure"),
-    [Input("area-dropdown", "value"), Input("bike-slider", "value")],
+    [
+        Input("area-dropdown", "value"),
+        Input("bike-slider", "value")
+    ],
 )
 def update_graph(selected_area, selected_bike_num):
     # 根據所選的區域和滑塊範圍過濾數據
