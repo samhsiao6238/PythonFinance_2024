@@ -42,20 +42,47 @@
 
 <br>
 
-## 常用設定
+## 設定
 
-1. Flake8 長度限制。
+_以 Flake8 插件為例_
+
+<br>
+
+1. 首先可參考插件說明。
+
+    ![](images/img_43.png)
+
+<br>
+
+2. 舊版的參數設置為 `python.linting.flake8Args`，若寫錯會呈現淡色。
+
+    ![](images/img_44.png)
+
+<br>
+
+3. 正確設置：Flake8 長度限制。
 
     ```json
     {
-        // flake8 長度
-        "python.linting.flake8Args": ["--max-line-length", "200"]
+        "flake8.args": [
+            "--max-line-length=200",
+            // 要取消的其他項目代碼，以逗號相隔即可
+            // "--ignore=E501, E502"
+        ],
     }
     ```
 
 <br>
 
-2. 關於插件 `PasteImage`。
+
+## 其他設定
+
+_不說明細節_
+
+
+<br>
+
+1. 關於插件 `PasteImage`。
 
     ```json
     {
