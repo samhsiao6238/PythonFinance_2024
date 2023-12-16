@@ -54,7 +54,7 @@ for prod in stocks:
                 cover_time=n_time
                 cover_price=n_open
                 # 交易紀錄
-                trade=trade.append(pd.Series([
+                trade=trade._append(pd.Series([
                             prod,
                             'Buy',
                             order_time,

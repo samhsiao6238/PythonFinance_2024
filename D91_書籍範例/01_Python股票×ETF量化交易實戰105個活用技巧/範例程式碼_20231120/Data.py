@@ -265,7 +265,7 @@ def getTSEInstitutionalInvestors(prod, st, en):
     # 沒有的話就取檔案內容
     else:
         # 取得檔案內容
-        tmpdata = pd.read_csv("三大法人爬蟲資料.csv", encoding="cp950")
+        tmpdata = pd.read_csv("三大法人爬蟲資料.csv", encoding="utf-8")
         tmpdata = tmpdata[
             (tmpdata["證券代號"] == prod) &
             (tmpdata["日期"] >= int(st)) &
@@ -452,7 +452,7 @@ def getTSEMarginTrading(prod, st, en):
     # 沒有的話就取檔案內容
     else:
         # 取得檔案內容
-        tmpdata = pd.read_csv("融資融券爬蟲資料.csv", encoding="cp950")
+        tmpdata = pd.read_csv("融資融券爬蟲資料.csv", encoding="utf-8")
         tmpdata = tmpdata[
             (tmpdata["股票代號"] == prod) &
             (tmpdata["日期"] >= int(st)) &
@@ -530,7 +530,7 @@ def getTSEShortSales(prod, st, en):
     # 沒有的話就取檔案內容
     else:
         # 取得檔案內容
-        tmpdata = pd.read_csv("融券借券爬蟲資料.csv", encoding="cp950")
+        tmpdata = pd.read_csv("融券借券爬蟲資料.csv", encoding="utf-8")
         tmpdata = tmpdata[
             (tmpdata["股票代號"] == prod)
             & (tmpdata["日期"] >= int(st))
@@ -643,7 +643,7 @@ def getTSEMonthRevenue(prod, st, en):
     # 沒有的話就取檔案內容
     else:
         # 取得檔案內容
-        tmpdata = pd.read_csv("月營收爬蟲資料.csv", encoding="cp950")
+        tmpdata = pd.read_csv("月營收爬蟲資料.csv", encoding="utf-8")
         tmpdata = tmpdata[
             (tmpdata["公司代號"] == int(prod))
             & (tmpdata["日期"] >= int(st))

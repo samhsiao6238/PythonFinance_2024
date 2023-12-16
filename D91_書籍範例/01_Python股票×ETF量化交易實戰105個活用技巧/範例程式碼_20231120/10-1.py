@@ -28,7 +28,7 @@ for y,m in ym_list:
 
         # 下載該年月的網站，並用 pandas 轉換成 dataframe
         r = requests.get(url)
-        r.encoding = 'cp950'
+        r.encoding = 'utf-8'
         # 解析成pd.Dataframe
         dfs = pd.read_html(r.text)
         
@@ -45,10 +45,10 @@ for y,m in ym_list:
         data['日期'] = ym+'10'
         
         if first_write:
-            data.to_csv('月營收爬蟲資料.csv',encoding='cp950',index=False)
+            data.to_csv('月營收爬蟲資料.csv',encoding='utf-8',index=False)
             first_write=False
         else:
-            data.to_csv('月營收爬蟲資料.csv',encoding='cp950',mode='a',index=False,header=False) 
+            data.to_csv('月營收爬蟲資料.csv',encoding='utf-8',mode='a',index=False,header=False) 
     except:
         print(ym ,'爬蟲失敗')
         continue
