@@ -1,10 +1,12 @@
 from FinMind.data import DataLoader
 import pandas as pd
 import yfinance as yf
-import sys
+
+# import sys
 import numpy as np
 import os
-import time
+
+# import time
 import requests
 import warnings
 
@@ -18,9 +20,8 @@ FM = DataLoader()
 
 datapath = "data"
 
+
 # 取得yahoo finance 資料
-
-
 def getDataYF(prod, st, en):
     # 取得資料
     tmpdata = yf.download(prod, start=st, end=en)
@@ -29,21 +30,20 @@ def getDataYF(prod, st, en):
     # 回傳資料
     return tmpdata
 
+
 # 更新資料源為 yahoo finance
-
-
 def getDataFM(prod, st, en):
-    bakfile = 'data//YF_%s_%s_%s_stock_daily_adj.csv' % (prod, st, en)
+    bakfile = "data//YF_%s_%s_%s_stock_daily_adj.csv" % (prod, st, en)
     if os.path.exists(bakfile):
         data = pd.read_csv(bakfile)
-        data['Date'] = pd.to_datetime(data['Date'])
-        data = data.set_index('Date')
+        data["Date"] = pd.to_datetime(data["Date"])
+        data = data.set_index("Date")
     else:
         data = yf.download(f"{prod}.TW", start=st, end=en)
         data.columns = [i.lower() for i in data.columns]
         # 除錯 如果沒有資料
         if data.shape[0] == 0:
-            print('沒有資料')
+            print("沒有資料")
             return pd.DataFrame()
         # 將資料寫入備份檔
         data.to_csv(bakfile)
@@ -120,42 +120,34 @@ def ShareHolderWeekly(data):
         # 撈出當天的所有資料
         data1 = data[data.index == dt]
         # 依照不同級距 轉換為特定欄位
-        tmprow = data1.loc[data1["HoldingSharesLevel"]
-                           == "1-999", "percent"].values
+        tmprow = data1.loc[data1["HoldingSharesLevel"] == "1-999", "percent"].values
         tmprow = np.append(
             tmprow,
-            data1.loc[data1["HoldingSharesLevel"]
-                      == "1,000-5,000", "percent"].values,
+            data1.loc[data1["HoldingSharesLevel"] == "1,000-5,000", "percent"].values,
         )
         tmprow = np.append(
             tmprow,
-            data1.loc[data1["HoldingSharesLevel"] ==
-                      "5,001-10,000", "percent"].values,
+            data1.loc[data1["HoldingSharesLevel"] == "5,001-10,000", "percent"].values,
         )
         tmprow = np.append(
             tmprow,
-            data1.loc[data1["HoldingSharesLevel"] ==
-                      "10,001-15,000", "percent"].values,
+            data1.loc[data1["HoldingSharesLevel"] == "10,001-15,000", "percent"].values,
         )
         tmprow = np.append(
             tmprow,
-            data1.loc[data1["HoldingSharesLevel"] ==
-                      "15,001-20,000", "percent"].values,
+            data1.loc[data1["HoldingSharesLevel"] == "15,001-20,000", "percent"].values,
         )
         tmprow = np.append(
             tmprow,
-            data1.loc[data1["HoldingSharesLevel"] ==
-                      "20,001-30,000", "percent"].values,
+            data1.loc[data1["HoldingSharesLevel"] == "20,001-30,000", "percent"].values,
         )
         tmprow = np.append(
             tmprow,
-            data1.loc[data1["HoldingSharesLevel"] ==
-                      "30,001-40,000", "percent"].values,
+            data1.loc[data1["HoldingSharesLevel"] == "30,001-40,000", "percent"].values,
         )
         tmprow = np.append(
             tmprow,
-            data1.loc[data1["HoldingSharesLevel"] ==
-                      "40,001-50,000", "percent"].values,
+            data1.loc[data1["HoldingSharesLevel"] == "40,001-50,000", "percent"].values,
         )
         tmprow = np.append(
             tmprow,
@@ -201,8 +193,7 @@ def ShareHolderWeekly(data):
         )
         # 總股東人數
         tmprow = np.append(
-            tmprow, data1.loc[data1["HoldingSharesLevel"]
-                              == "total", "people"].values
+            tmprow, data1.loc[data1["HoldingSharesLevel"] == "total", "people"].values
         )
         # 將DF資料存放到容器
         rs_sh.append(tmprow)
@@ -242,19 +233,16 @@ def getPriceAndShareHolder(prod, st, en):
     # 從每個股權分散的資料 去抓出開高低收
     for i in range(1, data2a.shape[0]):
         tmpdata = data1.loc[
-            (data1.index > data2a.index[i - 1]
-             ) & (data1.index <= data2a.index[i]),
+            (data1.index > data2a.index[i - 1]) & (data1.index <= data2a.index[i]),
         ]
         # 如果沒有資料 可能遇到連假
         if tmpdata.shape[0] == 0:
             # 移除資料
             continue
-        data2a.loc[data2a.index[i],
-                   "open"] = tmpdata.loc[tmpdata.index[0], "open"]
+        data2a.loc[data2a.index[i], "open"] = tmpdata.loc[tmpdata.index[0], "open"]
         data2a.loc[data2a.index[i], "high"] = tmpdata.loc[:, "high"].max()
         data2a.loc[data2a.index[i], "low"] = tmpdata.loc[:, "low"].min()
-        data2a.loc[data2a.index[i],
-                   "close"] = tmpdata.loc[tmpdata.index[-1], "close"]
+        data2a.loc[data2a.index[i], "close"] = tmpdata.loc[tmpdata.index[-1], "close"]
         data2a.loc[data2a.index[i], "volume"] = tmpdata.loc[:, "volume"].sum()
     data2a = data2a.dropna()
     return data2a
@@ -279,9 +267,9 @@ def getTSEInstitutionalInvestors(prod, st, en):
         # 取得檔案內容
         tmpdata = pd.read_csv("三大法人爬蟲資料.csv", encoding="cp950")
         tmpdata = tmpdata[
-            (tmpdata["證券代號"] == prod)
-            & (tmpdata["日期"] >= int(st))
-            & (tmpdata["日期"] <= int(en))
+            (tmpdata["證券代號"] == prod) &
+            (tmpdata["日期"] >= int(st)) &
+            (tmpdata["日期"] <= int(en))
         ]
         tmpdata["日期"] = pd.to_datetime(tmpdata["日期"], format="%Y%m%d")
         tmpdata = tmpdata.set_index(tmpdata["日期"])
@@ -466,9 +454,9 @@ def getTSEMarginTrading(prod, st, en):
         # 取得檔案內容
         tmpdata = pd.read_csv("融資融券爬蟲資料.csv", encoding="cp950")
         tmpdata = tmpdata[
-            (tmpdata["股票代號"] == prod)
-            & (tmpdata["日期"] >= int(st))
-            & (tmpdata["日期"] <= int(en))
+            (tmpdata["股票代號"] == prod) &
+            (tmpdata["日期"] >= int(st)) &
+            (tmpdata["日期"] <= int(en))
         ]
         tmpdata["日期"] = pd.to_datetime(tmpdata["日期"], format="%Y%m%d")
         tmpdata = tmpdata.set_index(tmpdata["日期"])
@@ -703,19 +691,16 @@ def getTSEPriceAndRevenue(prod, st, en):
     # 從每個月營收的資料 去抓出開高低收
     for i in range(1, data2.shape[0]):
         tmpdata = data1.loc[
-            (data1.index > data2.index[i - 1]
-             ) & (data1.index <= data2.index[i]),
+            (data1.index > data2.index[i - 1]) & (data1.index <= data2.index[i]),
         ]
         # 如果沒有資料
         if tmpdata.shape[0] == 0:
             # 移除資料
             continue
-        data2.loc[data2.index[i],
-                  "open"] = tmpdata.loc[tmpdata.index[0], "open"]
+        data2.loc[data2.index[i], "open"] = tmpdata.loc[tmpdata.index[0], "open"]
         data2.loc[data2.index[i], "high"] = tmpdata.loc[:, "high"].max()
         data2.loc[data2.index[i], "low"] = tmpdata.loc[:, "low"].min()
-        data2.loc[data2.index[i],
-                  "close"] = tmpdata.loc[tmpdata.index[-1], "close"]
+        data2.loc[data2.index[i], "close"] = tmpdata.loc[tmpdata.index[-1], "close"]
         data2.loc[data2.index[i], "volume"] = tmpdata.loc[:, "volume"].sum()
     data2 = data2.drop_duplicates()
     return data2
@@ -728,19 +713,16 @@ def getFMPriceAndRevenue(prod, st, en):
     # 從每個月營收的資料 去抓出開高低收
     for i in range(1, data2.shape[0]):
         tmpdata = data1.loc[
-            (data1.index > data2.index[i - 1]
-             ) & (data1.index <= data2.index[i]),
+            (data1.index > data2.index[i - 1]) & (data1.index <= data2.index[i]),
         ]
         # 如果沒有資料
         if tmpdata.shape[0] == 0:
             # 移除資料
             continue
-        data2.loc[data2.index[i],
-                  "open"] = tmpdata.loc[tmpdata.index[0], "open"]
+        data2.loc[data2.index[i], "open"] = tmpdata.loc[tmpdata.index[0], "open"]
         data2.loc[data2.index[i], "high"] = tmpdata.loc[:, "high"].max()
         data2.loc[data2.index[i], "low"] = tmpdata.loc[:, "low"].min()
-        data2.loc[data2.index[i],
-                  "close"] = tmpdata.loc[tmpdata.index[-1], "close"]
+        data2.loc[data2.index[i], "close"] = tmpdata.loc[tmpdata.index[-1], "close"]
         data2.loc[data2.index[i], "volume"] = tmpdata.loc[:, "volume"].sum()
     data2 = data2.dropna()
     return data2
@@ -759,22 +741,17 @@ def getPriceAndRevenueAndInstInvest(prod, st, en):
     for i in range(b.shape[0]):
         if i != b.shape[0] - 1:
             a.loc[
-                (a.index > b.index[i]) & (
-                    a.index <= b.index[i + 1]), "去年同月增減(%)"
+                (a.index > b.index[i]) & (a.index <= b.index[i + 1]), "去年同月增減(%)"
             ] = b.loc[b.index[i], "去年同月增減(%)"]
             a.loc[
-                (a.index > b.index[i]) & (
-                    a.index <= b.index[i + 1]), "前期比較增減(%)"
+                (a.index > b.index[i]) & (a.index <= b.index[i + 1]), "前期比較增減(%)"
             ] = b.loc[b.index[i], "前期比較增減(%)"]
             a.loc[
-                (a.index > b.index[i]) & (
-                    a.index <= b.index[i + 1]), "平均累計月營收成長率"
+                (a.index > b.index[i]) & (a.index <= b.index[i + 1]), "平均累計月營收成長率"
             ] = b.loc[b.index[i], "平均累計月營收成長率"]
         else:
-            a.loc[(a.index > b.index[i]),
-                  "去年同月增減(%)"] = b.loc[b.index[i], "去年同月增減(%)"]
-            a.loc[(a.index > b.index[i]),
-                  "前期比較增減(%)"] = b.loc[b.index[i], "前期比較增減(%)"]
+            a.loc[(a.index > b.index[i]), "去年同月增減(%)"] = b.loc[b.index[i], "去年同月增減(%)"]
+            a.loc[(a.index > b.index[i]), "前期比較增減(%)"] = b.loc[b.index[i], "前期比較增減(%)"]
             a.loc[(a.index > b.index[i]), "平均累計月營收成長率"] = b.loc[
                 b.index[i], "平均累計月營收成長率"
             ]
@@ -793,8 +770,7 @@ def getStockList():
     # 沒有的話就取檔案內容
     else:
         # 取得檔案內容
-        res = requests.get(
-            "http://isin.twse.com.tw/isin/C_public.jsp?strMode=2")
+        res = requests.get("http://isin.twse.com.tw/isin/C_public.jsp?strMode=2")
         df = pd.read_html(res.text)[0]
         df.columns = df.iloc[0]
         df = df.iloc[2:]
