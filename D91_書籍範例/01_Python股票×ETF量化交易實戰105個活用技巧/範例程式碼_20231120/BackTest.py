@@ -2,7 +2,7 @@
 import mplfinance as mpf
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
+import lineTool
 
 
 # 繪製蠟燭圖
@@ -165,8 +165,6 @@ def Performance(trade=pd.DataFrame(), prodtype="ETF"):
     return trade1
 
 
-import lineTool
-
 # Line 推播
 token = "權杖"
 
@@ -175,6 +173,6 @@ def line_print(msg):
     print(msg)
     try:
         lineTool.lineNotify(token, msg)
-    except:
-        print("line notify 失效")
+    except Exception as e:
+        print(f"line notify 失效：{e}")
         pass
