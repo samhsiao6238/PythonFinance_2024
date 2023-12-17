@@ -454,7 +454,7 @@ def getTSEMarginTrading(prod, st, en):
         # 取得檔案內容
         tmpdata = pd.read_csv("融資融券爬蟲資料.csv", encoding="utf-8")
         tmpdata = tmpdata[
-            (tmpdata["股票代號"] == prod) &
+            (tmpdata["證券代號"] == prod) &
             (tmpdata["日期"] >= int(st)) &
             (tmpdata["日期"] <= int(en))
         ]
@@ -469,7 +469,7 @@ def getTSEMarginTrading(prod, st, en):
         tmpdata.to_csv(bakfile)
     # 回傳資料
     tmpdata.columns = [
-        "股票代號",
+        "證券代號",
         "股票名稱",
         "融資買進",
         "融資賣出",
@@ -532,7 +532,7 @@ def getTSEShortSales(prod, st, en):
         # 取得檔案內容
         tmpdata = pd.read_csv("融券借券爬蟲資料.csv", encoding="utf-8")
         tmpdata = tmpdata[
-            (tmpdata["股票代號"] == prod)
+            (tmpdata["證券代號"] == prod)
             & (tmpdata["日期"] >= int(st))
             & (tmpdata["日期"] <= int(en))
         ]
@@ -547,7 +547,7 @@ def getTSEShortSales(prod, st, en):
         tmpdata.to_csv(bakfile)
     # 回傳資料
     tmpdata.columns = [
-        "股票代號",
+        "證券代號",
         "股票名稱",
         "融券前日餘額",
         "融券賣出",
