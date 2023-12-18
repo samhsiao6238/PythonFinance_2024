@@ -1,0 +1,71 @@
+version: '3.0'
+services:
+  initdb:
+    image: linsamtw/dataflow:12.5
+    command: pipenv run airflow db init
+    restart: on-failure
+    # swarm 設定
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.labels.airflow == true]
+    networks:
+        - my_network
+
+  create-user:
+    image: linsamtw/dataflow:12.5
+    command: pipenv run airflow users create --username admin --firstname lin --lastname sam --role Admin -p admin --email finmind.tw@gmail.com
+    depends_on:
+      - initdb
+    restart: on-failure
+    # swarm 設定
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.labels.airflow == true]
+    networks:
+        - my_network
+  
+  webserver:
+    image: linsamtw/dataflow:12.5
+    hostname: "airflow-webserver"
+    command: pipenv run airflow webserver -p 8888
+    depends_on:
+      - initdb
+    restart: always
+    ports:
+        - 8888:8888
+    environment:
+      - TZ=Asia/Taipei
+    # swarm 設定
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.labels.airflow == true]
+    networks:
+        - my_network
+
+  scheduler:
+    image: linsamtw/dataflow:12.5
+    hostname: "airflow-scheduler"
+    command: pipenv run airflow scheduler
+    depends_on:
+      - initdb
+    restart: always
+    # swarm 設定
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.labels.airflow == true]
+    environment:
+      - TZ=Asia/Taipei
+    networks:
+        - my_network
+
+networks:
+  my_network:
+    external: true

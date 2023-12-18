@@ -1,0 +1,7 @@
+FROM linsamtw/dataflow:12.7
+
+RUN rm -rf dataflow/dags/*.py
+COPY . /FinMindProject
+COPY ./airflow.cfg /FinMindProject/dataflow/airflow.cfg
+
+WORKDIR /FinMindProject/

@@ -1,4 +1,6 @@
 envDash
 .DS_Store
 node_modules
-.ttf
+*.ttf
+*.mp4
+Python大數據特訓班(第三版)學習資源.zip
