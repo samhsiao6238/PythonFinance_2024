@@ -5,8 +5,7 @@
 yahoo finance ：金融商品資料取得
 
 安裝套件
-# pip install yfinance 
-
+# pip install yfinance
 """
 
 # 載入套件
