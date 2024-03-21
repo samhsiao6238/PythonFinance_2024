@@ -4,13 +4,16 @@
 
 <br>
 
-在搜尋欄位輸入要查詢的商品名稱
+
+## 觀察網址
+
+1. 在 `搜尋` 欄位輸入要查詢的商品名稱，這裡示範使用 `可口可樂`。
 
 ![](images/img_01.png)
 
 <br>
 
-觀察網址列的內容
+2. 觀察網址列的內容
 
 ```html
 https://www.momoshop.com.tw/search/searchShop.jsp?keyword=可口可樂&searchType=1&curPage=1&_isFuzzy=0&showType=chessboardType&isBrandCategory=N&serviceCode=MT01
@@ -18,57 +21,65 @@ https://www.momoshop.com.tw/search/searchShop.jsp?keyword=可口可樂&searchTyp
 
 <br>
 
-複製下來會出現 `網址編碼(URL Encoding)` 格式，也稱為 `百分比編碼(Percent-Encoding)`，每個字符會被一個百分比符號 `%` 跟隨兩位十六進制數替代，這樣編碼可以使得這些字符在網址中被安全地傳輸與識別。
+3. 在 `keyword` 參數之後會接著搜尋的字串
+
+![](images/img_02.png)
+
+<br>
+
+4. 複製貼上會出現如下的 `網址編碼(URL Encoding)` 格式，也稱為 `百分比編碼(Percent-Encoding)`，每個字符會被一個百分比符號 `%` 跟隨兩位十六進制數替代，這樣編碼可以使得這些字符在網址中被安全地傳輸與識別。
+
 ```html
 https://www.momoshop.com.tw/search/searchShop.jsp?keyword=%E5%8F%AF%E5%8F%A3%E5%8F%AF%E6%A8%82&searchType=1&curPage=1&_isFuzzy=0&showType=chessboardType&isBrandCategory=N&serviceCode=MT01
 ```
 
 <br>
 
-在這個範例中
+5. 在這個範例中的 `可口可樂` 顯示如下。
+
 ```txt
 %E5%8F%AF：代表「可」
 %E5%8F%A3：代表「口」
 %E6%A8%82：代表「樂」
 ```
 
-在 `keyword` 參數之後會接著搜尋的字串
-
-![](images/img_02.png)
-
 <br>
 
-為了快速查詢網頁內容的 `Xpath` 路徑，先進行安裝 `Chrome` 套件
+6. 接下來，為了快速查詢網頁內容的 `Xpath` 路徑，先進行安裝 `Chrome` 套件。
 
 ![](images/img_03.png)
 
 <br>
 
-點擊開啟
+7. 點擊插件的 `icon` 開啟，對話框會出現在畫面中指定的位置上。
 
 ![](images/img_04.png)
 
 <br>
 
-先進行資料展開，將格狀顯示換為條列式
+8. 先進行資料展開，將 `格狀` 顯示換為 `條列式`。
 
 ![](images/img_06.png)
 
 <br>
 
-確定是所要查詢的資料，按著鍵盤 `SHIFT` 並移動到網頁元件上，此時 `XPATH` 插件的對話框內便會顯示 `XPATH` 以及元件在網頁上所顯示的內容。ａ
+9. 觀察網頁所顯示的內容是所要查詢的資料，這時可按下鍵盤的 `SHIFT`，並將滑鼠指標移動到網頁元件上，此時 `XPATH` 插件的對話框內便會顯示 `XPATH` 以及元件在網頁上所顯示的內容。
 
 ![](images/img_05.png)
 
 <br>
 
-`QUERY` 就是所請求的路徑
+10. 左側 `QUERY` 就是所請求的路徑。
 
 ![](images/img_07.png)
 
 <br>
 
-右側 `RESULT` 會顯示網頁上元件顯示的內容
+11. 右側 `RESULT` 會顯示網頁上元件顯示的內容。
 
 ![](images/img_08.png)
+
+<br>
+
+## 編寫腳本
 
