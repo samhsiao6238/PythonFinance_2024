@@ -93,6 +93,8 @@
     from selenium.webdriver import Chrome
     ```
 
+<br>
+
 2. 導入 `時間` 相關庫，用以處理 `Timestamp` 時間戳。
 
     ```python
@@ -100,6 +102,8 @@
     import dateutil.tz
     import time
     ```
+
+<br>
 
 3. 自訂要搜尋的關鍵字，並且依據前面的說明，宣告搜尋網址。
 
@@ -109,6 +113,8 @@
     # 網址
     URL = f'https://www.momoshop.com.tw/search/searchShop.jsp?keyword={_keyword}&searchType=1&curPage=1&_isFuzzy=0&showType=chessboardType&isBrandCategory=N&serviceCode=MT01'
     ```
+
+<br>
 
 4. 建立瀏覽器物件。
 
@@ -121,6 +127,8 @@
     chrome.get(URL)
     ```
 
+<br>
+
 5. 切換為清單（條列）模式。
 
     ```python
@@ -131,6 +139,8 @@
     # 點擊
     button_list.click()
     ```
+
+<br>
 
 6. 確認搜尋結果的筆數。
 
@@ -145,12 +155,16 @@
     print(_count)
     ```
 
+<br>
+
 7. 初步先不處理 `翻頁`，所以顯示 `30` 筆資料即可。
 
     ```python
     if _count > 30:
         _count = 30
     ```
+
+<br>
 
 8. 將結果輸出查看一下。
 
@@ -175,3 +189,6 @@
         print(_info.text)
         print(_price.text)
     ```
+
+
+<br>
