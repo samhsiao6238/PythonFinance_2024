@@ -190,5 +190,8 @@
         print(_price.text)
     ```
 
-
 <br>
+
+## 存入 Firebase
+
+待續
