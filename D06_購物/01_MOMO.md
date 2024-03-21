@@ -394,6 +394,7 @@ print(ref.get())
     ```
 
 <br>
+
 27. 回傳自訂內容表示正確讀取節點資訊。
 
     ![](images/img_32.png)
