@@ -293,8 +293,111 @@
 ```python
 import firebase_admin
 from firebase_admin import credentials
-
+# 要替換為自己的金鑰名稱
 cred = credentials.Certificate("fir-2024-6e360-firebase-adminsdk-16wwf-d2983e1f68.json")
 firebase_admin.initialize_app(cred)
 ```
 
+<br>
+
+點擊右上方 `文件`
+
+![](images/img_24.png)
+
+<br>
+
+建構
+
+![](images/img_25.png)
+
+<br>
+
+切換到英文
+
+![](images/img_26.png)
+
+<br>
+
+選擇
+
+![](images/img_27.png)
+
+<br>
+
+滑動到下方，切換到 `Python`
+
+![](images/img_28.png)
+
+<br>
+
+複製並修改
+
+```python
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
+
+#
+cred = credentials.Certificate(
+    'fir-2024-6e360-firebase-adminsdk-16wwf-d2983e1f68.json'
+)
+
+#
+firebase_admin.initialize_app(
+    cred, {
+    'databaseURL': 'https://databaseName.firebaseio.com'
+})
+
+#
+ref = db.reference('restricted_access/secret_document')
+print(ref.get())
+```
+
+<br>
+
+回到資料庫去複製資料庫網址
+
+![](images/img_29.png)
+
+<br>
+
+替換腳本中的網址
+
+![](images/img_30.png)
+
+<br>
+
+任意添加一個節點來測試連線
+
+![](images/img_31.png)
+
+<br>
+
+修改腳本來進行連線測試
+
+```python
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
+
+#
+cred = credentials.Certificate(
+    'fir-2024-6e360-firebase-adminsdk-16wwf-d2983e1f68.json'
+)
+#
+firebase_admin.initialize_app(
+    cred, {
+    'databaseURL': 'https://fir-2024-6e360-default-rtdb.firebaseio.com/'
+})
+
+#
+ref = db.reference('Test/ABC')
+print(ref.get())
+```
+
+<br>
+回傳自訂內容表示正確讀取節點資訊
+
+![](images/img_32.png)
+
+<br>
