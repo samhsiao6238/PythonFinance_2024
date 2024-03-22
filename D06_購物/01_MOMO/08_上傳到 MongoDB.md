@@ -2,6 +2,8 @@
 
 _讀取 Firebase 節點上的資料，然後寫入 MongoDB_
 
+<br>
+
 ## 腳本說明
 
 1. 以下要自定義一個資料庫（Database）名稱、一個集合（Collection）名稱。
@@ -49,3 +51,5 @@ else:
 # 關閉MongoDB連接
 client.close()
 ```
+
+<br>
