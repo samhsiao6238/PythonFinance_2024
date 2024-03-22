@@ -1,4 +1,4 @@
-# 上傳到 MongiDB
+# 上傳到 MongoDB
 
 _讀取 Firebase 節點上的資料，然後寫入 MongoDB_
 
