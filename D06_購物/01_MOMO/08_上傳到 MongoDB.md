@@ -56,19 +56,19 @@ _讀取 Firebase 節點上的資料，然後寫入 MongoDB_
 
 <br>
 
-3. 在 `Jupyter NB` 運行後，可顯示以下訊息。
+3. 複製以上腳本，貼在 `Jupyter NB` 運行後，可顯示以下訊息。
 
     ![](images/img_82.png)
 
 <br>
 
-4. 進入 `MongoDB` 觀察。
+4. 進入 `MongoDB` 官網進行觀察。
 
     ![](images/img_83.png)
 
 <br>
 
-5. 接著會顯示內容。
+5. 點擊 `Browse Collections` 接著會顯示資料內容。
 
     ![](images/img_84.png)
 
