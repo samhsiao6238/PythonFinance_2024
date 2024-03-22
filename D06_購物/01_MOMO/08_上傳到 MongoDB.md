@@ -55,3 +55,25 @@ client.close()
 ```
 
 <br>
+
+3. 在 `Jupyter NB` 運行後，可顯示以下訊息。
+
+    ![](images/img_82.png)
+
+<br>
+
+4. 進入 `MongoDB` 觀察。
+
+    ![](images/img_83.png)
+
+<br>
+
+5. 接著會顯示內容。
+
+    ![](images/img_84.png)
+
+<br>
+
+___
+
+_END_
