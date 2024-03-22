@@ -12,14 +12,16 @@ _以下合併以上的腳本，將查詢結果上傳到雲端資料庫。_
 # Firebase
 import firebase_admin
 from firebase_admin import credentials
-# 注意，db 是 realtime database 的庫名，變數使用時要注意不要重複
+# 這個 db 是給 realtime 使用，注意 firestore 的相關物件命名不要重複到庫名 db
 from firebase_admin import db
+
 
 # 金鑰
 CredFile = 'fir-2024-6e360-firebase-adminsdk-16wwf-d2983e1f68.json'
 # 資料庫網址
-StorageBucket = 'https://pythonai-a25df.firebaseio.com/'
-# 初始化 database，並檢查 Firebase app 是否已經初始化
+StorageBucket = 'https://fir-2024-6e360-default-rtdb.firebaseio.com/'
+
+# 初始化：database，並檢查 Firebase app 是否已經初始化
 if not firebase_admin._apps:
     cred = credentials.Certificate(CredFile)
     firebase_admin.initialize_app(cred, {
@@ -50,17 +52,23 @@ _info_time = datetime.datetime.now(tz).strftime("%Y%m%d%H%M%S")
 3. 上傳
 
 ```python
-# Dict
 _datas = {}
 #
 for i in range(_count):
     _i = str(i+1)
+    #
+    # xpath_name = f"/html/body/div[@id='BodyBase']/div[@class='bt_2_layout searchbox searchListArea selectedtop']/div[@class='searchPrdListArea bookList']/div[@id='columnType']/ul/li[{_i}]/a[@class='goodsUrl']/div[@class='prdInfoWrap']/h3[@class='prdName']"
+    # xpath_info = f"/html/body/div[@id='BodyBase']/div[@class='bt_2_layout searchbox searchListArea selectedtop']/div[@class='searchPrdListArea bookList']/div[@id='columnType']/ul/li[{_i}]/a[@class='goodsUrl']/div[@class='prdInfoWrap']/p[@class='sloganTitle']"
+    # xpath_price = f"/html/body/div[@id='BodyBase']/div[@class='bt_2_layout searchbox searchListArea selectedtop']/div[@class='searchPrdListArea bookList']/div[@id='columnType']/ul/li[{_i}]/a[@class='goodsUrl']/div[@class='prdInfoWrap']/p[@class='money']/span[@class='price']/b"
     #
     xpath_name = f"/html/body/div[@id='BodyBase']/div[@class='bt_2_layout searchbox searchListArea selectedtop']/div[@class='searchPrdListArea bookList']/div[@id='columnType']/ul[@class='clearfix']/li[{_i}]/a[@class='goodsUrl']/div[@class='prdInfoWrap']/div[@class='prdNameTitle']/h3[@class='prdName']"
     xpath_info = f"/html/body/div[@id='BodyBase']/div[@class='bt_2_layout searchbox searchListArea selectedtop']/div[@class='searchPrdListArea bookList']/div[@id='columnType']/ul[@class='clearfix']/li[{_i}]/a[@class='goodsUrl']/div[@class='prdInfoWrap']/p[@class='sloganTitle']"
     xpath_price = f"/html/body/div[@id='BodyBase']/div[@class='bt_2_layout searchbox searchListArea selectedtop']/div[@class='searchPrdListArea bookList']/div[@id='columnType']/ul[@class='clearfix']/li[{_i}]/a[@class='goodsUrl']/div[@class='prdInfoWrap']/p[@class='money']/span[@class='price']/b"
 
     #
+    # _name = chrome.find_element_by_xpath(xpath_name)
+    # _info = chrome.find_element_by_xpath(xpath_info)
+    # _price = chrome.find_element_by_xpath(xpath_price)
     _name = chrome.find_element(By.XPATH, xpath_name)
     _info = chrome.find_element(By.XPATH, xpath_info)
     _price = chrome.find_element(By.XPATH, xpath_price)
