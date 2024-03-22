@@ -8,6 +8,8 @@ _讀取 Firebase 節點上的資料，然後寫入 MongoDB_
 
 1. 以下要自定義一個資料庫（Database）名稱、一個集合（Collection）名稱。
 
+    ![](images/img_81.png)
+
 <br>
 
 2. 完整腳本。
