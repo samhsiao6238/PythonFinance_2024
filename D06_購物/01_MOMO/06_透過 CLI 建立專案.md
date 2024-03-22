@@ -14,7 +14,7 @@ _部署到 Firebase Hosting_
 
 <br>
 
-2. 安裝。
+2. 安裝 CLI 工具。
 
     ```bash
     sudo npm -g install firebase-tools
@@ -22,7 +22,7 @@ _部署到 Firebase Hosting_
 
 <br>
 
-3. 建立進併入專案資料夾。
+3. 建立並進入專案資料夾。
 
     ```bash
     mkdir MyWeb2024 && cd MyWeb2024
@@ -30,7 +30,7 @@ _部署到 Firebase Hosting_
 
 <br>
 
-4. 登入帳號
+4. 登入 Google 帳號。
 
     ```bash
     firebase login
@@ -58,7 +58,7 @@ _部署到 Firebase Hosting_
 
 <br>
 
-8. 初始化
+8. 初始化專案環境。
 
     ```bash
     firebase init
@@ -72,7 +72,7 @@ _部署到 Firebase Hosting_
 
 <br>
 
-10. 選取現存專案
+10. 選取之前步驟所建立的專案。
 
     ![](images/img_52.png)
 
@@ -102,7 +102,7 @@ _部署到 Firebase Hosting_
 
 <br>
 
-15. 顯示設定完成
+15. 顯示設定完成。
 
     ![](images/img_59.png)
 
@@ -112,31 +112,33 @@ _部署到 Firebase Hosting_
 
     ![](images/img_60.png)
 
+<br>
+
 17. 直接輸入 `code .` 指令開啟 VSCode 進行編輯。
 
     ![](images/img_61.png)
 
 <br>
 
-18. 透過 `Live Server` 插件瀏覽 `index.html` 檔案。
+18. 透過 `Live Server` 插件瀏覽預設的 `index.html` 文件內容。
 
     ![](images/img_62.png)
 
 <br>
 
-19. 將之前練習範例的金鑰名稱貼到 `.gitignore` 中。
+19. 接下來要用之前建立的專案來覆蓋，在此之前先將之前範例使用的金鑰名稱貼到專案資料夾內的 `.gitignore` 中，這是避免接下來誤將敏感檔案部署到雲端。
 
     ![](images/img_63.png)
 
 <br>
 
-20. 然後將金鑰拖曳到 `public` 資料夾。
+20. 加入例外清單後，再將金鑰檔案拖曳複製到 `public` 資料夾。
 
     ![](images/img_64.png)
 
 <br>
 
-21. 將之前的 `index.html` 內容複製並覆蓋範例文件內容，再次進行瀏覽，會看到之前專案的顯示內容。
+21. 將之前的 `index.html` 內容複製並覆蓋範例文件內容，再次進行瀏覽，會看到之前專案的顯示內容，確認無誤後便可以進行部署。
 
     ![](images/img_65.png)
 
