@@ -137,7 +137,7 @@ _使用 Jupyter Notebook 編輯即可_
 
 <br>
 
-10. 觀察 Jupyter NB 顯示的結果。
+10. 觀察 Jupyter NB 顯示的結果，並可比對與網站資訊是否相同。
 
     ![](images/img_36.png)
 
