@@ -152,7 +152,7 @@ _部署到 Firebase Hosting_
 
 <br>
 
-23. 完成時會顯示專案網頁的公網網址。
+23. 完成時會顯示專案網頁的公網網址 [https://fir-2024-6e360.web.app/](https://fir-2024-6e360.web.app/)。
 
     ![](images/img_66.png)
 
