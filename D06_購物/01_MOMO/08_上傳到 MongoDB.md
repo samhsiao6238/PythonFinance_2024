@@ -27,7 +27,7 @@ _讀取 Firebase 節點上的資料，然後寫入 MongoDB_
     })
 
     # MongoDB 連接設定
-    uri = "mongodb+srv://sam6238:sam112233@cluster0.yhwvqqt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    uri = "mongodb+srv://<輸入自己的帳號>:<輸入自己的密碼>@cluster0.yhwvqqt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     client = MongoClient(uri)
 
     # 建立 MongoDB 數據庫和集合
