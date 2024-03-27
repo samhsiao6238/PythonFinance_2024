@@ -32,11 +32,11 @@ _以下腳本必須合併以上腳本的內容執行，並將查詢結果上傳�
     refData = db.reference('momo').child(_keyword)
     # 自訂函數：寫入 Firebase
     def writeToFirebaseDB(_ref, _key, _value):
-    try:
-        _ref.update({_key: _value})
-    except:
-        # 實際上發生錯誤時應該中止或跳出程序
-        print('發生錯誤')
+        try:
+            _ref.update({_key: _value})
+        except:
+            # 實際上發生錯誤時應該中止或跳出程序
+            print('發生錯誤')
     ```
 
 <br>
@@ -105,6 +105,17 @@ _以下腳本必須合併以上腳本的內容執行，並將查詢結果上傳�
 4. 結果，在主節點 `momo` 下逐一將商品寫入，在價格 `price` 節點之下，以時間戳作為 `key`，然後將價格以 `value` 寫入。
 
     ![](images/img_38.png)
+
+<br>
+
+## 程式碼
+
+1. 完整程式碼。
+
+```python
+
+
+```
 
 <br>
 
