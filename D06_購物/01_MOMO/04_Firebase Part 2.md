@@ -15,6 +15,8 @@ _以下腳本必須合併以上腳本的內容執行，並將查詢結果上傳�
     # db 是 Realtime Database 預設庫，注意相關物件命名不要重複
     from firebase_admin import db
 
+    # 關鍵字
+    _keyword = '可口可樂'
 
     # 金鑰
     CredFile = 'fir-2024-6e360-firebase-adminsdk-16wwf-d2983e1f68.json'
