@@ -15,6 +15,10 @@
 1. 觀察以下這個腳本
 
     ```python
+    # 導入庫
+    import requests
+    from bs4 import BeautifulSoup
+   
     # 取得reponse
     req = requests.get("https://fubon-ebrokerdj.fbs.com.tw/z/zg/zg_A_0_5.djhtm")
     # 取得網頁原始碼文字
