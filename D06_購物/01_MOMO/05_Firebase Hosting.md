@@ -1,5 +1,7 @@
 # Firebase Hosting
 
+_建立網頁應用程式_
+
 <br>
 
 ## 步驟說明
@@ -114,86 +116,86 @@ ___
 
 <br>
 
-2. 直接貼上以下的文本內容。
+2. 直接貼上以下的文本內容，這裡暫時不說明腳本具體的製作過程，之後會再說明。
    
-```html
-<!DOCTYPE html>
-<html lang="en">
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firebase Data Display</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
-    <!-- Add Firebase database -->
-    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Firebase Data Display</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+        <!-- Add Firebase database -->
+        <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+    </head>
 
-<body>
-    <div class="container mt-5">
-        <h2>Firebase 資料庫</h2>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody id="dataList"></tbody>
-            </table>
+    <body>
+        <div class="container mt-5">
+            <h2>Firebase 資料庫</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataList"></tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
-    <script>
-        // 初始化 Firebase，要使用自己的資料
-        var firebaseConfig = {
-            apiKey: "AIzaSyA7PXB6PKTBU6qEwQXebp47qLcb7Mxit5w",
-            authDomain: "fir-2024-6e360.firebaseapp.com",
-            databaseURL: "https://fir-2024-6e360-default-rtdb.firebaseio.com",
-            projectId: "fir-2024-6e360",
-            storageBucket: "fir-2024-6e360.appspot.com",
-            messagingSenderId: "1024135627355",
-            appId: "1:1024135627355:web:35cbd5ab47ecd31ddd757e"
-        };
-        firebase.initializeApp(firebaseConfig);
+        <script>
+            // 初始化 Firebase，要使用自己的資料
+            var firebaseConfig = {
+                apiKey: "AIzaSyA7PXB6PKTBU6qEwQXebp47qLcb7Mxit5w",
+                authDomain: "fir-2024-6e360.firebaseapp.com",
+                databaseURL: "https://fir-2024-6e360-default-rtdb.firebaseio.com",
+                projectId: "fir-2024-6e360",
+                storageBucket: "fir-2024-6e360.appspot.com",
+                messagingSenderId: "1024135627355",
+                appId: "1:1024135627355:web:35cbd5ab47ecd31ddd757e"
+            };
+            firebase.initializeApp(firebaseConfig);
 
-        // 建立資料庫參考物件
-        var database = firebase.database();
+            // 建立資料庫參考物件
+            var database = firebase.database();
 
-        // 讀取資料庫資料
-        var ref = database.ref('momo');
-        ref.on('value', function (snapshot) {
-            var data = snapshot.val();
-            var list = document.getElementById('dataList');
-            list.innerHTML = ''; // 清除資料
-            for (var key in data) {
-                if (data.hasOwnProperty(key)) {
-                    var item = data[key];
-                    for (var product in item) {
-                        if (item.hasOwnProperty(product)) {
-                            var price = Object.values(item[product].price)[0]; // 取得第一個價格
-                            var row = `<tr><td>${product}</td><td>${price}</td></tr>`;
-                            list.innerHTML += row;
+            // 讀取資料庫資料
+            var ref = database.ref('momo');
+            ref.on('value', function (snapshot) {
+                var data = snapshot.val();
+                var list = document.getElementById('dataList');
+                list.innerHTML = ''; // 清除資料
+                for (var key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        var item = data[key];
+                        for (var product in item) {
+                            if (item.hasOwnProperty(product)) {
+                                var price = Object.values(item[product].price)[0]; // 取得第一個價格
+                                var row = `<tr><td>${product}</td><td>${price}</td></tr>`;
+                                list.innerHTML += row;
+                            }
                         }
                     }
                 }
-            }
-        });
-    </script>
+            });
+        </script>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.5/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.5/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
 
-</html>
-```
+    </html>
+    ```
 
 <br>
 
