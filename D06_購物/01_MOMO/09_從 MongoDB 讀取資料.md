@@ -2,7 +2,57 @@
 
 <br>
 
+## 關於文件查詢
+
+_以下說明如何查詢文件_
+
+<br>
+
+1. 在瀏覽器中搜尋 `mongodb`，點擊進入[文件](https://www.mongodb.com/docs/)。
+
+    ![](images/img_97.png)
+
+<br>
+
+2. 或是在官網內選取 `文件`。
+    
+    ![](images/img_98.png)
+
+<br>
+
+3. 點擊放大鏡搜尋。
+
+    ![](images/img_99.png)
+
+<br>
+
+4. 查詢 `MongoDB API Reference`。
+    
+    ![](images/img_100.png)
+
+<br>
+
+5. 結構上來說，位置在。
+    
+    ![](images/img_101.png)
+
+<br>
+
+6. 從右側導覽中可以看到相關函數。
+
+    ![](images/img_102.png)
+
+<br>
+
+7. 點擊後便可以查看詳細的語法說明與範例。
+
+    ![](images/img_103.png)
+
+<br>
+
 ## 腳本
+
+<br>
 
 1. 完整腳本。
 
