@@ -26,25 +26,31 @@ _以下說明如何查詢文件_
 
 <br>
 
-4. 查詢 `MongoDB API Reference`。
+4. 使用關鍵字 `collecxtion.find` 進行查詢。
     
     ![](images/img_100.png)
 
 <br>
 
-5. 結構上來說，位置在。
+5. 從左側可看到資料的位置在 `MongoDB API Reference`。
     
     ![](images/img_101.png)
 
 <br>
 
-6. 從右側導覽中可以看到相關函數。
+6. 中間可查看內容，位置在 `Docs Home` 的 `Atlas App Services`。
+
+    ![](images/img_104.png)
+
+<br>
+
+7. 從右側導覽中可以看到相關函數。
 
     ![](images/img_102.png)
 
 <br>
 
-7. 點擊後便可以查看詳細的語法說明與範例。
+8. 點擊後便可以查看詳細的語法說明與範例。
 
     ![](images/img_103.png)
 
