@@ -6,13 +6,17 @@ _讀取 Firebase 節點上的資料，然後寫入 MongoDB_
 
 ## 腳本說明
 
-1. 以下要自定義一個資料庫（Database）名稱、一個集合（Collection）名稱。
+1. 使用前一個小節的官方範例，並結合之前的 `MOMO` 購物網查詢腳本，先導入 `Firebase` 相關庫、讀取節點上的購物資訊，然後寫入 `MongoDB` 資料庫中。
+
+<br>
+
+2. 以下要自定義 `MongoDB` 的資料庫（Database）名稱以及集合（Collection）名稱，同學可自行定義。
 
     ![](images/img_81.png)
 
 <br>
-
-2. 完整腳本。
+   
+3. 完整腳本。
 
     ```python
     # 導入庫
@@ -56,7 +60,7 @@ _讀取 Firebase 節點上的資料，然後寫入 MongoDB_
 
 <br>
 
-3. 複製以上腳本，貼在 `Jupyter NB` 運行後，可顯示以下訊息。
+4. 複製以上腳本，貼在 `Jupyter NB` 運行後，可顯示以下訊息，其中 `Objectid` 就是寫入資料庫的文檔 ID。
 
     ![](images/img_82.png)
 
