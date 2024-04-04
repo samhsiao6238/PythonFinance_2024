@@ -4,6 +4,48 @@
 
 <br>
 
+## 第一次申請 
+
+<br>
+
+1. 開始免費試用。
+
+    ![](images/img_91.png)
+
+<br>
+
+2. 註冊
+
+    ![](images/img_88.png)
+
+<br>
+
+3. 滑動到最下方，勾選 `同意` 並使用 Google 帳號登入。
+
+    ![](images/img_89.png)
+
+<br>
+
+4. 勾選 `接受` 後再點擊 `Submit`。
+
+    ![](images/img_92.png)
+
+<br>
+
+5. 任意填寫以下內容之後點擊 `Finish`。
+
+    ![](images/img_90.png)
+
+<br>
+
+6. 接下來延續下面 `已經有帳號` 的第七個步驟。
+
+<br>
+
+## 已經有帳號
+
+<br>
+
 1. 點擊 `免費開始使用`。
 
     ![](images/img_69.png)
@@ -40,15 +82,15 @@
 
 <br>
 
-7. 選取 `免費`，其餘用預設值即可。
+7. 選取 `免費`，其餘用預設值即可，其中 `Cluster` 的名稱預設為 `Cluster0`，之後可再更改，另外，預設的 Provider 是 `AWS`，點擊 `Create Deployment` 繼續下一個步驟。
 
     ![](images/img_75.png)
 
 <br>
 
-8. 建立資料庫使用者。
+8. 建立資料庫使用者，這裡使用者名稱自訂為 `myname`，密碼自訂為 `mypassword`，同學請自行命名，然後點擊 `Create Database User`。
 
-    ![](images/img_76.png)
+    ![](images/img_93.png)
 
 <br>
 
@@ -64,21 +106,27 @@
 
 <br>
 
-11. 使用指令安裝 Python 的 MogoDB 套件。
+11. 選取所使用的語言及版本，這裡選取 `Python` 以及 `3.6 or later`。
+
+    ![](images/img_94.png)
+
+<br>
+
+12. 接著可看到 Python 安裝指令，並指定了 MogoDB 套件的版本，可修改雙等號 `==` 後面的數字來指定版本，不指定代表為最新版本。
 
     ```bash
-    python -m pip install pymongo
+    python -m pip install "pymongo[srv]"==3.6
     ```
 
 <br>
 
-12. 開啟功能查可看腳本。
+13. 開啟 `View full code sample` 功能查可看腳本。
 
     ![](images/img_79.png)
 
 <br>
 
-13. 以下是複製下來的腳本，我另外加入一些說明，帳號密碼部分 `<輸入自己的帳號>:<輸入自己的密碼>` 務必修改為自己的帳號密碼，輸入時不要包含括號 `< >`，假如有自訂 `cluster` 名稱，也要修改 `appName` 之後的 `Cluster0`，範例如下。
+14. 以下是複製下來的腳本，我另外加入一些說明，帳號密碼部分 `<輸入自己的帳號>:<輸入自己的密碼>` 務必修改為自己的帳號密碼，輸入時不要包含括號 `< >`，假如有自訂 `cluster` 名稱，也要修改 `appName` 之後的 `Cluster0`，範例如下。
 
     ```python
     # 導入庫
@@ -99,7 +147,7 @@
 
 <br>
 
-14. 在 `Jupyter NB` 中測試這個腳本，成功回傳表示連線成功，特別注意以下的 `uri` 中的帳號密碼表達式是沒有 `< >` 的，這裡繞過安全檢查提供截圖作為參考，後續不再提示。
+15. 在 `Jupyter NB` 中測試這個腳本，成功回傳表示連線成功，特別注意以下的 `uri` 中的帳號密碼表達式是沒有 `< >` 的，這裡繞過安全檢查提供截圖作為參考，後續不再提示。
 
     ![](images/img_80.png)
 
