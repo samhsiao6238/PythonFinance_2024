@@ -1,0 +1,19 @@
+{
+    // 設定貼上相片的預設路徑
+    "pasteImage.path": "${currentFileDir}/images/", 
+    // 圖片前綴
+    "pasteImage.namePrefix": "img_",
+    // 預設名稱
+    "pasteImage.defaultName": "0",
+    // 已經存在就彈出視窗自訂名稱
+    "pasteImage.showFilePathConfirmInputBox": true,
+    // flake8 長度
+    "flake8.args": [
+        // 取消長度
+        "--max-line-length=200",
+        // 取消首行必須是 import 的規定
+        "--ignore=E402"
+        // 要取消的其他項目代碼，以逗號相隔即可
+        // "--ignore=E501, E402"
+    ],
+}
