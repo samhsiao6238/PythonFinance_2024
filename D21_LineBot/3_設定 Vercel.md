@@ -83,61 +83,93 @@ _以上完成敏感資訊處理_
 
 ## 進行部署
 
-8.  完成後可透過 Vercel CLI 進行部署。
+1. 透過 Vercel CLI 進行部署，進入根目錄中開啟終端機，務必確認是在根目錄。
 
    ```bash
    sudo vercel
    ```
 
-</br>
+2. 執行後會出現對話。
 
-8. 在設定的步驟。
-
-   1. 同意設定且部署目前所在的資料夾（Y）
-   2. 選擇專案的擁有者，唯一選擇，所以等於沒選（ENTER）
-   3. 是否連結現有專案（N）
-   4. 專案名稱，使用預設即可（ENTER）
-   5. 在哪個目錄（ENTER）
-
-   ![](images/img_52.png)
+    ![](images/img_140.png)
 
 </br>
 
-9. 開始部署。
+3. 使用 `Github` 進行登入。
+
+    ![](images/img_141.png)
+
+4. 成功登入後會顯示如下畫面，不會自動返回終端機，要手動切換。
+
+    ![](images/img_142.png)
+
+5. 表示這個專案資料夾並非是一個 `repo`，詢問是否設置並且部署：`Y`。
+
+    ![](images/img_143.png)
+
+6. 選擇當前的專案。
+
+    ![](images/img_144.png)
+
+7. 不要連結現有專案：N。
+
+    ![](images/img_145.png)
+
+8. 專案名稱，幾如有提供預設則使用預設即可（ENTER）。
+    
+    ![](images/img_146.png)
+
+9. 在哪個目錄（ENTER）。
+
+    ![](images/img_147.png)
+
+10. 假如沒有提供預設名稱，則手動輸入。
+
+    ![](images/img_153.png)
+
+
+</br>
+
+## 開始部署
+
+1. 開始部署。
 
    ![](images/img_53.png)
 
 </br>
 
-10. 完成時會顯示連結，可以不用急著複製，等一下在專案控制台去複製。
+2. 出現錯誤。
+
+    ![](images/img_151.png)
+
+3. 手動切換到 `18.0`。
+
+    ![](images/img_150.png)
+
+4. 切換後記得儲存 `Save`。
+
+    ![](images/img_152.png)
+
+5. 完成時會顯示連結，可以不用急著複製，等一下在專案控制台去複製。
 
     ![](images/img_54.png)
 
-</br>
+6. 過程中顯示因為 `builds` 已經存在於設置檔案中，所以設置沒有套用。
 
-## B. 再次前往 Line Developers
-
-1. 開啟 [Line Developers](https://developers.line.biz/zh-hant/)。
-
-   ![](images/img_55.png)
-
-</br>
-
-_省略一部分的說明，這裡的操作很簡單，有必要再補充_
+    ![](images/img_154.png)
 
 
+7. 改用以下指令進行部署。
 
-</br>
-
-1.  接下來很重要一件事是設定 `Webhook`。
-
-    ![](images/img_68.png)
+    ```bash
+    sudo vercel --prod
+    ```
 
 </br>
 
 ## C. 前往 Vercel 主控台
 
-1. 到 Vercel 主控台，點擊剛剛上傳的專案，這裡示範是 `test06`。
+1. 到 Vercel 主控台，點擊剛剛上傳的專案，這裡示範是 `mybot`，名稱是部署的時候自動建立的。
 
    ![](images/img_69.png)
 
