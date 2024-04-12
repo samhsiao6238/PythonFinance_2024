@@ -1,22 +1,22 @@
 # Vercel
 
-- Heroku 的替代方案
-- 可以部署 LineBot
-- [官網](https://vercel.com/)
+- Heroku 的替代方案。
+- 可以部署 LineBot。
+- [官網網址](https://vercel.com/)。
 
 </br>
 
 # 註冊步驟
 
-1. 開始。
+1. 進入官網後點擊 `Start Deploying` 開始部署。
 
 ![](images/img_101.png)
 
 
-## 
+## 新用戶
 
 
-1. 建立帳號
+1. 建立帳號。
 
    - 輸入類型以及名字
 
@@ -110,4 +110,4 @@
 
 ---
 
-_待續_
+_以上是完成 Vercel 的註冊，準備好後待用。_
