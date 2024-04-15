@@ -1,5 +1,7 @@
 # Zeabur
 
+_這部分將示範使用 [Zeabur]((https://zeabur.com/)) 服務來進行 LineBot 部署。_
+
 <br>
 
 ## 開始之前
