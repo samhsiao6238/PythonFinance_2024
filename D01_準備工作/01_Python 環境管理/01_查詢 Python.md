@@ -42,6 +42,12 @@ _Python 需要正確的版本以建立虛擬環境_
 
 <br>
 
+4. 特別說明，在 Windows 系統中的 `AppData\Local\Microsoft\WindowsApps` 目錄中出現對應的執行檔通常是捷徑或佔位符，而不是真正的可執行檔，而這個檔案通常來自於透過 Microsoft Store 安裝 Python 時，`WindowsApps` 目錄會包含一個指向 Microsoft Store 安裝版本的 Python 捷徑。如果這個 Python 版本未被完整安裝或已被卸載，但捷徑未被刪除時，則試圖執行這個捷徑將不會有任何輸出，結果如下。
+
+    ![](images/img_40.png)
+
+<br>
+
 ## MacOS
 
 1. 查詢當前 Python 版本。
