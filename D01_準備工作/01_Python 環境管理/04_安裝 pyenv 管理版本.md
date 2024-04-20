@@ -61,7 +61,13 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 <br>
 
-4. 檢查 pyenv 版本號：透過檢查版本可確認 pyenv 是否完成安裝。
+4. 特別注意，pyenv 依賴於 shims 目錄來控制 Python 版本，所以要確保 shims 目錄的路徑在 PATH 環境變數中的其他 Python 安裝路徑之前，設定好路徑之後務必上移到頂部。
+
+    ![](images/img_47.png)
+
+<br>
+
+5. 檢查 pyenv 版本號：透過檢查版本可確認 pyenv 是否完成安裝。
 
     ```bash
     pyenv --version
