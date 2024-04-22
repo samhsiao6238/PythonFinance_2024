@@ -77,6 +77,30 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 <br>
 
+6. 透過 `dir` 指令可知 `.pyenv` 路徑。
+
+    ![](images/img_51.png)
+
+<br>
+
+7. 可以將 `PYENV`、`PYENV_HOME`、`PYENV_ROOT` 設為這個路徑 `C:\Users\<使用者名稱>\.pyenv`。
+
+    ![](images/img_52.png)
+
+<br>
+
+8. 設定完成如下。
+
+    ![](images/img_53.png)
+
+<br>
+
+9. 再次運行 `pyenv --version` 查詢得到以下結果。
+
+    ![](images/img_54.png)
+
+<br>
+
 ## 使用說明
 
 1. 列出所有可透過 pyenv 安裝的應用版本：不限於 Python。
