@@ -199,11 +199,13 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 1. _`pyenv` 在管理 Python 版本時不會干涉系統自帶的 Python 版本_。
 
+<br>
+
 2. Windows 系統若要刪除非空的資料夾。
 
-```bash
-rmdir /s /q <資料夾名稱>
-```
+    ```bash
+    rmdir /s /q <資料夾名稱>
+    ```
 
 <br>
 
