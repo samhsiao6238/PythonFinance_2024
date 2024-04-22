@@ -96,6 +96,18 @@ _使用另一種方式：透過 py 啟動器來執行 Python。_
 
 <br>
 
+8. 手動修改環境變數設置。
+
+    ![](images/img_49.png)
+
+<br>
+
+9. 再次查詢版本。 
+
+    ![](images/img_50.png)
+
+<br>
+
 ## MacOS
 
 _三種原生方式設定 Python 預設版本_
