@@ -141,25 +141,69 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 <br>
 
-6. 指定全局版本。
+6. 指定全局版本為 `3.9.0`。
 
     ```bash
-    pyenv global
+    pyenv global 3.9.0
     ```
 
 <br>
 
-7. 指定當前目錄版本。
+7. 再次查詢版本。
+
+    ![](images/img_56.png)
+
+<br>
+
+8. 安裝另一個版本 `3.8.10`。
 
     ```bash
-    pyenv local 3.9.0
+    pyenv install 3.8.10
     ```
+
+<br>
+
+9. 進入任意目錄並指定當前目錄的 Python 版本為 `3.8.10`。
+
+    ```bash
+    pyenv local 3.8.10
+    ```
+
+<br>
+
+10. 執行 `dir` 指令會看到一個 `.python-version` 檔案。
+
+    ![](images/img_57.png)
+
+<br>
+
+11. 透過 `type .python-version` 指令可看到檔案內就是紀錄了資料夾的 Python 版本。
+
+    ![](images/img_58.png)
+
+<br>
+
+12. 查詢版本。
+
+    ![](images/img_59.png)
+
+<br>
+
+13. 透過 `del .python-version && python --version` 指令先刪除設定檔案並查詢版本，此時回到全域設定的 `3.9.0`。
+
+    ![](images/img_60.png)
 
 <br>
 
 ## 補充
 
-_`pyenv` 在管理 Python 版本時不會干涉系統自帶的 Python 版本_。
+1. _`pyenv` 在管理 Python 版本時不會干涉系統自帶的 Python 版本_。
+
+2. Windows 系統若要刪除非空的資料夾。
+
+```bash
+rmdir /s /q <資料夾名稱>
+```
 
 <br>
 
