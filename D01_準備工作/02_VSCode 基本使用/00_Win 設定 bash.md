@@ -10,7 +10,7 @@
 
 <br>
 
-2. 預設可能是 CMD 或是 SHELL。
+2. 當前的預設 _可能是_ `powershell`。
 
     ![](images/img_46.png)
 
@@ -22,19 +22,19 @@
 
 <br>
 
-4. 上方導覽中選取 `Git Bash`。
+4. 上方導覽中選取 `Command prompt`，這就是 `cmd`。
 
     ![](images/img_48.png)
 
 <br>
 
-5. 將開啟中的 CMD 或 SHELL 刪除。
+5. 將開啟中的 `powershell` 刪除。
 
     ![](images/img_49.png)
 
 <br>
 
-6. 再次開啟終端機，就會是熟悉的 bash 了。
+6. 再次開啟終端機，就會是熟悉的 `cmd` 了。
 
     ![](images/img_50.png)
 
