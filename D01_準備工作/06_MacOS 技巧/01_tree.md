@@ -1,8 +1,16 @@
 # MacOS 指令 tree
 
-_在 MacOS 的終端機中並未預設該指令，以下示範透過 Homebrew 進行安裝。_
+<br>
+
+## 說明
+
+1. 在 MacOS 的終端機中並未預設該指令，進行開發時，這是個好用的指令。
 
     ![](images/img_01.png)
+
+<br>
+
+2. 以下示範透過 Homebrew 進行安裝。
 
 <br>
 
