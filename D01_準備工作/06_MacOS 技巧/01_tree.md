@@ -1,12 +1,14 @@
 # MacOS 指令 tree
 
-_在 Linux 是預設的_
+_在 MacOS 的終端機中並未預設該指令，以下示範透過 Homebrew 進行安裝。_
+
+    ![](images/img_01.png)
 
 <br>
 
 ## 安裝 Homebrew
 
-1. 查詢版本
+1. 查詢當前 Homebrew 版本。
 
     ```bash
     brew -v
@@ -14,7 +16,7 @@ _在 Linux 是預設的_
 
 <br>
 
-2. 假如要安裝 Homebrew
+2. 假如尚未安裝 Homebrew，可執行以下指令進行安裝。
 
     ```bash
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -22,7 +24,7 @@ _在 Linux 是預設的_
 
 <br>
 
-3. 安裝。
+3. 安裝 tree。
 
     ```bash
     brew install tree
@@ -31,6 +33,10 @@ _在 Linux 是預設的_
 <br>
 
 ## brew 報錯
+
+_若有報錯可執行對應指令排除。_
+
+<br>
 
 1. 修理。
 
