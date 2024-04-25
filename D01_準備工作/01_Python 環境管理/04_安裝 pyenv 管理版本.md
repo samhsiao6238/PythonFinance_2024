@@ -206,6 +206,28 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 <br>
 
+## 停止 pyenv 管理
+
+1. 清除設置。
+
+    ```bash
+    pyenv global --unset
+    ```
+
+<br>
+
+2. 執行之後會出現沒有安裝任何版本，而實際上是希望回到系統的 Python 管理中。
+
+    ![](images/img_66.png)
+
+<br>
+
+3. 透過編輯環境變數將其順位移動到其他 Python 版本之後即可。
+
+    ![](images/img_67.png)
+
+<br>
+
 ## 補充
 
 1. _`pyenv` 在管理 Python 版本時不會干涉系統自帶的 Python 版本_。
