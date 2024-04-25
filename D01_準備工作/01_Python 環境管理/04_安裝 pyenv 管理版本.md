@@ -61,7 +61,15 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 <br>
 
-4. 特別注意，pyenv 依賴於 shims 目錄來控制 Python 版本，所以要確保 shims 目錄的路徑在 PATH 環境變數中的其他 Python 安裝路徑之前，設定好路徑之後務必上移到頂部。
+4. 另外，也可以使用變數來取代名稱，如此可自動指向當前登入的使用者，特別注意， `%USERPROFILE%` 已經包括了 `C:\Users\<使用者名稱>` 這部分的路徑，因此直接將 `%USERPROFILE%` 作為路徑的起點即可。
+
+    ```ini
+    %USERPROFILE%\.pyenv\pyenv-win\bin
+    %USERPROFILE%\.pyenv\pyenv-win\shims
+    ```
+<br>
+
+5. 特別注意，pyenv 依賴於 shims 目錄來控制 Python 版本，所以要確保 shims 目錄的路徑在 PATH 環境變數中的其他 Python 安裝路徑之前，設定好路徑之後務必上移到頂部。
 
     ![](images/img_47.png)
 
