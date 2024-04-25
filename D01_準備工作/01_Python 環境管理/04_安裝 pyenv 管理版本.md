@@ -69,7 +69,7 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
     ```
 
     ![](images/img_61.png)
-    
+
 <br>
 
 5. 特別注意，pyenv 依賴於 shims 目錄來控制 Python 版本，所以要確保 shims 目錄的路徑在 PATH 環境變數中的其他 Python 安裝路徑之前，設定好路徑之後務必上移到頂部。
@@ -78,7 +78,7 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 <br>
 
-5. 檢查 pyenv 版本號：透過檢查版本可確認 pyenv 是否完成安裝。
+6. 檢查 pyenv 版本號：透過檢查版本可確認 pyenv 是否完成安裝。
 
     ```bash
     pyenv --version
@@ -88,25 +88,25 @@ _可透過 pyenv 套件協助管理 Python 多版本安裝，至於版本的支�
 
 <br>
 
-6. 會顯示變數並未被設定，可先透過 `dir` 指令確認 `.pyenv` 路徑的絕對位置。
+7. 會顯示變數並未被設定，可先透過 `dir` 指令確認 `.pyenv` 路徑的絕對位置。
 
     ![](images/img_51.png)
 
 <br>
 
-7. 設定三個系統變數 `PYENV`、`PYENV_HOME`、`PYENV_ROOT`，路徑設置為 `C:\Users\<使用者名稱>\.pyenv`，務必確保更換其中 `使用者名稱` 為自己的字串。
+8. 設定三個系統變數 `PYENV`、`PYENV_HOME`、`PYENV_ROOT`，路徑設置為 `C:\Users\<使用者名稱>\.pyenv`，務必確保更換其中 `使用者名稱` 為自己的字串。
 
     ![](images/img_52.png)
 
 <br>
 
-8. 設定完成顯示如下。
+9. 設定完成顯示如下。
 
     ![](images/img_53.png)
 
 <br>
 
-9. 再次運行 `pyenv --version` 查詢得到以下結果，不再有其他警告或提示。
+10. 再次運行 `pyenv --version` 查詢得到以下結果，不再有其他警告或提示。
 
     ![](images/img_54.png)
 
