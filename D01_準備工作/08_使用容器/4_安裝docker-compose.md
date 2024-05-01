@@ -78,10 +78,11 @@ _[官方文件中](https://docs.docker.com/compose/install/) 依據作業系統�
 <br>
 
 ### 安裝完畢檢查狀態
+
 1. 查看內容是否為一個有效的二進位文件。
 
     ```bash
-    cat /usr/local/bin/docker-compose
+    cat /opt/homebrew/bin/docker-compose
     ```
 
 2. 確認路徑是否在 `/opt/homebrew/bin/`，假如不是的話務必確保路徑已寫入 `.zshrc`。
