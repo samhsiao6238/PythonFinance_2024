@@ -204,11 +204,11 @@ _以下展示透過自動化腳本建立容器的步驟，可接續已完成的�
 
 <br>
 
-3. 編輯文件 `Dockerfile`。
+3. 編輯文件 `Dockerfile`，這裡要觀察變化，所以將版本號改為 `3.10-bullseye`。
 
    ```dockerfile
    # 使用指定映像
-   FROM python:3.12-bullseye
+   FROM python:3.10-bullseye
 
    # 安裝必要庫
    RUN apt-get update && apt-get install -y git zsh && rm -rf /var/lib/apt/lists/*
@@ -216,7 +216,7 @@ _以下展示透過自動化腳本建立容器的步驟，可接續已完成的�
 
 <br>
 
-4. 關於 Docker 文件，可以參考 [Docker Hub](https://hub.docker.com/) 的官方版本，進入後搜尋 `python`。
+4. 關於 Docker 說明文件及相關映像的版本號，可以參考 [Docker Hub](https://hub.docker.com/) 的官方版本，進入後搜尋 `python`。
 
    ![](images/img_27.png)
 
@@ -228,32 +228,17 @@ _以下展示透過自動化腳本建立容器的步驟，可接續已完成的�
 
 <br>
 
-6. 修改配置文件 `devcontainer.json` ，將 `image` 註解起來，並添加 `build` 設置來指向 `Dockerfile`。
+6. 修改配置文件 `devcontainer.json` ，依據新的版本號修改 `name`，將 `image` 註解起來，並添加 `build` 設置來指向 `Dockerfile`。
 
    ```json
-   {
-       "name": "Python 3.12.3",
-       // "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye",
-       "build": {
-           "dockerfile": "Dockerfile"
-       },
-       "postCreateCommand": "pip install --upgrade pip",
-       "customizations": {
-           "vscode": {
-               "settings": {
-                   "pasteImage.path": "${currentFileDir}/images/",
-                   "pasteImage.namePrefix": "img_",
-                   "pasteImage.defaultName": "0",
-                   "pasteImage.showFilePathConfirmInputBox": true,
-                   "flake8.args": [
-                       "--max-line-length=200",
-                       "--ignore=E402"
-                   ]
-               },
-               "extensions": ["ms-python.python"]
-           }
-       }
-   }
+    {
+        "name": "Python 3.10.14",
+        //"image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye",
+        "build": {
+            "dockerfile": "Dockerfile"
+        },
+        "postCreateCommand": "pip install --upgrade pip"
+    }
    ```
 
 <br>
