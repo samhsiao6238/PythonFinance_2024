@@ -648,17 +648,7 @@ _以下開始實作_
 
 <br>
 
-5. _在容器中_ 安裝 `docker-compose`，以下是三行指令，可以一次貼上運行。
-
-   ```bash
-   apt update && apt install -y curl
-   curl -L "https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-   chmod +x /usr/local/bin/docker-compose
-   ```
-
-<br>
-
-6. 透過查詢版本來驗證安裝。
+5. 透過查詢版本來驗證本機系統中是否已經安裝了 `docker-compose`，若尚未安裝，請參考 `4_安裝docker-compose`。
 
    ```bash
    docker-compose --version
@@ -666,7 +656,7 @@ _以下開始實作_
 
 <br>
 
-7. _回到本機中_ 開啟終端機，並執行這個腳本來依照設置運行容器。
+6. 在腳本所在路徑執行這個指令以依照設置運行容器。
 
    ```bash
    docker-compose up -d
@@ -674,9 +664,9 @@ _以下開始實作_
 
 <br>
 
-8. 透過這樣的設置，便可允許外部設備通過訪問主機來訪問容器中的服務。
+7. 透過這樣的設置，便可允許外部設備通過訪問主機來訪問容器中的服務。
 
-![](images/img_39.png)
+   ![](images/img_39.png)
 
 <br>
 
