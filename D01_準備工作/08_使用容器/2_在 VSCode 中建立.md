@@ -431,6 +431,72 @@ _回到 VSCode 中_
 1. 先前所使用的 `devcontainer.json` 文件主要用於配置 `VSCode` 如何與容器互動，包括 _設定開發環境_、_安裝 VSCode 擴充功能_ 等，雖然在這個文件中也可以 _指定連接埠轉送的規則_ ，但這通常用於開發時的連接埠轉送需求，而不是容器服務之間的連接埠對映，所以在端口管理上，`docker-compose.yml` 文建會是更好的選擇，而 `devcontainer.json` 文件則專注在配置與 VSCode 直接相關的設置。 
 
 2. 在 `.devcontainer` 資料夾中建立文件 `docker-compose.yml`。
+
+3. 假設該容器將用於 Streamlit 專案使用，並將使用 MariaDB 以及 MongoDM，其端口預設分別為 `8501`、`3306`、`27017`。
+```yaml
+version: '3.10'
+
+services:
+  # streamlit
+  streamlit:
+    build:
+      # 使用 Dockerfile
+      context: .
+      dockerfile: Dockerfile
+    # 當前目錄掛載位置
+    volumes:
+      - .:/app
+    working_dir: /app
+    ports:
+      - "8501:8501"
+    # 先安裝依賴庫再啟動服務
+    command: sh -c "pip install -r requirements.txt && streamlit run app.py"
+    # 確保服務在兩者之後啟動
+    depends_on:
+      - mariadb
+      - mongodb
+
+  mariadb:
+    # 使用官方鏡像
+    image: mariadb
+    # 需要手動設置這些數值
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  mongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: mongopassword
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  mariadb_data:
+  mongodb_data:
+```
+
+4. 安裝 `docker-compose`，以下是三行指令。
+```bash
+apt update && apt install -y curl
+curl -L "https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+```
+5. 透過查詢版本來驗證安裝。
+
+```bash
+docker-compose --version
+```
+6. 啟動所有服務。
 ---
 
 _END_
