@@ -265,7 +265,7 @@ _觀察容器_
 
 <br>
 
-1. 安裝 [Docker Desktop](https://www.docker.com/products/docker-desktop/) 後可查看定管理容器。
+1. 安裝 [Docker Desktop](https://www.docker.com/products/docker-desktop/) 後可查看並管理容器。
 
     ![](images/img_20.png)
 
@@ -502,7 +502,11 @@ _這裡展示一個 Streamlit 專案來說明端口映射_
 
 <br>
 
-5. VSCode 提供了轉接的服務。
+5. 補充說明，倘若應用綁定的是 `0.0.0.0`，表示監聽所有可用的網路接口，包含了公有和私有的 IP，所以也能接收所有來自同一個區網其他設備的訪問
+
+<br>
+
+6. VSCode 提供了轉接的服務。
 
     ![](images/img_44.png)
 
@@ -514,66 +518,71 @@ _這裡展示一個 Streamlit 專案來說明端口映射_
 
 ## 建立 docker-compose.yml
 
-1. 先前所使用的 `devcontainer.json` 文件主要用於配置 `VSCode` 如何與容器互動，包括 _設定開發環境_、_安裝 VSCode 擴充功能_ 等，雖然在這個文件中也可以 _指定連接埠轉送的規則_ ，但這通常用於開發時的連接埠轉送需求，而不是容器服務之間的連接埠對映，所以在端口管理上，`docker-compose.yml` 文建會是更好的選擇，而 `devcontainer.json` 文件則專注在配置與 VSCode 直接相關的設置。 
+_定義和管理多個容器配置的文件，如 `services`、`networks`、`volumes` 等，其中包含了 `端口映射` 。_
+
+<br>
+
+1. 先前所使用的 `devcontainer.json` 文件主要用於配置 `VSCode` 如何與容器互動，包括 _設定開發環境_、_安裝 VSCode 擴充功能_ 等，雖然在這個文件中也可以 _指定連接埠轉送的規則_ ，但這通常用於開發時的連接埠轉送需求，而不是容器服務之間的連接埠對映，所以在端口管理上，`docker-compose.yml` 文件會是更好的選擇，而 `devcontainer.json` 文件則專注在配置與 VSCode 直接相關的設置。 
 
 <br>
 
 2. 在 `.devcontainer` 資料夾中建立文件 `docker-compose.yml`。
 
+    ![](images/img_45.png)
+
 <br>
 
-3. 假設該容器將用於 Streamlit 專案使用，並將使用 MariaDB 以及 MongoDM，其端口預設分別為 `8501`、`3306`、`27017`。
+3. 假設該容器將用於 Streamlit 專案使用，並將使用 MariaDB 以及 MongoDM，其端口預設分別為 `8501`、`3306`、`27017`，列舉一個相對詳盡的設置範例如下。
 
     ```yaml
-    version: '3.10'
+    version: '1'
 
     services:
-    # streamlit
-    streamlit:
-        build:
-        # 使用 Dockerfile
-        context: .
-        dockerfile: Dockerfile
-        # 當前目錄掛載位置
-        volumes:
-        - .:/app
-        working_dir: /app
-        ports:
-        - "8501:8501"
-        # 先安裝依賴庫再啟動服務
-        command: sh -c "pip install -r requirements.txt && streamlit run app.py"
-        # 確保服務在兩者之後啟動
-        depends_on:
-        - mariadb
-        - mongodb
+        streamlit:
+            build:
+            # 使用 Dockerfile
+            context: .
+            dockerfile: Dockerfile
+            # 當前目錄掛載位置
+            volumes:
+            - .:/app
+            working_dir: /app
+            ports:
+            - "8501:8501"
+            # 先安裝依賴庫再啟動服務
+            command: sh -c "pip install -r requirements.txt && streamlit run app.py"
+            # 確保服務在兩者之後啟動
+            depends_on:
+            - mariadb
+            - mongodb
 
-    mariadb:
-        # 使用官方鏡像
-        image: mariadb
-        # 需要手動設置這些數值
-        environment:
-        MYSQL_ROOT_PASSWORD: rootpassword
-        MYSQL_DATABASE: exampledb
-        MYSQL_USER: user
-        MYSQL_PASSWORD: userpassword
-        volumes:
-        - mariadb_data:/var/lib/mysql
-        ports:
-        - "3306:3306"
+        mariadb:
+            # 使用官方鏡像
+            image: mariadb
+            # 需要手動設置這些數值
+            environment:
+            MYSQL_ROOT_PASSWORD: rootpassword
+            MYSQL_DATABASE: exampledb
+            MYSQL_USER: user
+            MYSQL_PASSWORD: userpassword
+            volumes:
+            - mariadb_data:/var/lib/mysql
+            ports:
+            - "3306:3306"
 
-    mongodb:
-        image: mongo
-        environment:
-        MONGO_INITDB_ROOT_USERNAME: mongouser
-        MONGO_INITDB_ROOT_PASSWORD: mongopassword
-        volumes:
-        - mongodb_data:/data/db
-        ports:
-        - "27017:27017"
+        mongodb:
+            image: mongo
+            environment:
+            MONGO_INITDB_ROOT_USERNAME: mongouser
+            MONGO_INITDB_ROOT_PASSWORD: mongopassword
+            volumes:
+            - mongodb_data:/data/db
+            ports:
+            - "27017:27017"
 
     volumes:
-    mariadb_data:
-    mongodb_data:
+        mariadb_data:
+        mongodb_data:
     ```
 
 <br>
