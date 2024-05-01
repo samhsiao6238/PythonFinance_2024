@@ -572,56 +572,79 @@ _定義和管理多個容器配置的文件，如 `services`、`networks`、`vol
    version: '1'
 
    services:
-       streamlit:
-           build:
-           # 使用 Dockerfile
-           context: .
-           dockerfile: Dockerfile
-           # 當前目錄掛載位置
-           volumes:
-           - .:/app
-           working_dir: /app
-           ports:
-           - "8501:8501"
-           # 先安裝依賴庫再啟動服務
-           command: sh -c "pip install -r requirements.txt && streamlit run app.py"
-           # 確保服務在兩者之後啟動
-           depends_on:
-           - mariadb
-           - mongodb
+      streamlit:
+         build:
+         # 使用 Dockerfile
+         context: .
+         dockerfile: Dockerfile
+         # 當前目錄掛載位置
+         volumes:
+            - .:/app
+         working_dir: /app
+         ports:
+            - "8501:8501"
+         # 先安裝依賴庫再啟動服務
+         command: sh -c "pip install -r requirements.txt && streamlit run app.py"
+         # 確保服務在兩者之後啟動
+         depends_on:
+            - mariadb
+            - mongodb
 
-       mariadb:
-           # 使用官方鏡像
-           image: mariadb
-           # 需要手動設置這些數值
-           environment:
-           MYSQL_ROOT_PASSWORD: rootpassword
-           MYSQL_DATABASE: exampledb
-           MYSQL_USER: user
-           MYSQL_PASSWORD: userpassword
-           volumes:
-           - mariadb_data:/var/lib/mysql
-           ports:
-           - "3306:3306"
+      mariadb:
+         # 使用官方鏡像
+         image: mariadb
+         # 需要手動設置這些數值
+         environment:
+            MYSQL_ROOT_PASSWORD: rootpassword
+            MYSQL_DATABASE: exampledb
+            MYSQL_USER: user
+            MYSQL_PASSWORD: userpassword
+         volumes:
+            - mariadb_data:/var/lib/mysql
+         ports:
+            - "3306:3306"
 
-       mongodb:
-           image: mongo
-           environment:
-           MONGO_INITDB_ROOT_USERNAME: mongouser
-           MONGO_INITDB_ROOT_PASSWORD: mongopassword
-           volumes:
-           - mongodb_data:/data/db
-           ports:
-           - "27017:27017"
+      mongodb:
+         image: mongo
+         environment:
+            MONGO_INITDB_ROOT_USERNAME: mongouser
+            MONGO_INITDB_ROOT_PASSWORD: mongopassword
+         volumes:
+            - mongodb_data:/data/db
+         ports:
+            - "27017:27017"
 
    volumes:
-       mariadb_data:
-       mongodb_data:
+      mariadb_data:
+      mongodb_data:
    ```
 
 <br>
 
-4. 安裝 `docker-compose`，以下是三行指令。
+4. 暫時僅測試 Streamlit，所以先簡化 `docker-compose.yml`。
+   
+   ```yaml
+   version: '1'
+
+   services:
+      streamlit:
+         build:
+            # 使用 Dockerfile
+            context: .
+            dockerfile: Dockerfile
+         # 當前目錄掛載位置
+         volumes:
+            - .:/app
+         working_dir: /app
+         ports:
+            - "8501:8501"
+            - "37621:37621"
+            - "38377:38377"
+   ```
+
+<br>
+
+5. _在容器中_ 安裝 `docker-compose`，以下是三行指令，可以一次貼上運行。
 
    ```bash
    apt update && apt install -y curl
@@ -631,7 +654,7 @@ _定義和管理多個容器配置的文件，如 `services`、`networks`、`vol
 
 <br>
 
-5. 透過查詢版本來驗證安裝。
+6. 透過查詢版本來驗證安裝。
 
    ```bash
    docker-compose --version
@@ -639,7 +662,7 @@ _定義和管理多個容器配置的文件，如 `services`、`networks`、`vol
 
 <br>
 
-6. 回到本機中開啟終端機，並執行這個腳本來依照設置運行容器。
+7. _回到本機中_ 開啟終端機，並執行這個腳本來依照設置運行容器。
 
    ```bash
    docker-compose up -d
@@ -647,7 +670,7 @@ _定義和管理多個容器配置的文件，如 `services`、`networks`、`vol
 
 <br>
 
-7. 透過這樣的設置，便可允許外部設備通過訪問主機來訪問容器中的服務。
+8. 透過這樣的設置，便可允許外部設備通過訪問主機來訪問容器中的服務。
 
 ![](images/img_39.png)
 
