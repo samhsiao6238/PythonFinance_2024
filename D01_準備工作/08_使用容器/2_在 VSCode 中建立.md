@@ -566,10 +566,10 @@ _定義和管理多個容器配置的文件，如 `services`、`networks`、`vol
 
 <br>
 
-3. 假設該容器將用於 Streamlit 專案使用，並將使用 MariaDB 以及 MongoDM，其端口預設分別為 `8501`、`3306`、`27017`，列舉一個相對詳盡的設置範例如下。
+3. 假設該容器將用於 Streamlit 專案使用，並將使用 MariaDB 以及 MongoDM，其端口預設分別為 `8501`、`3306`、`27017`，列舉一個相對詳盡的設置範例如下，特別注意，文件中的 _version_ 是 `Docker Compose` 的版本，當前最新的是 `version 3`，相關資訊可參考 [官網](https://docs.docker.com/compose/compose-file/) 。
 
    ```yaml
-   version: '1'
+   version: '3'
 
    services:
       streamlit:
@@ -624,7 +624,7 @@ _定義和管理多個容器配置的文件，如 `services`、`networks`、`vol
 4. 暫時僅測試 Streamlit，所以先簡化 `docker-compose.yml`。
    
    ```yaml
-   version: '1'
+   version: '3'
 
    services:
       streamlit:
