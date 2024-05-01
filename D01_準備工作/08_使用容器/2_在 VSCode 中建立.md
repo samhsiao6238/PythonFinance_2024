@@ -243,9 +243,13 @@ _以下展示透過自動化腳本建立容器的步驟，可接續已完成的�
 
 <br>
 
-5. 再次重建 `Rebuild` ，完成後依照指示按下 `ENTER`。
+7. 再次重建 `Rebuild`，順利完成表示以上設置都正確，依照指示按下 `ENTER`。
 
    ![](images/img_17.png)
+
+<br>
+
+_以上完成透過 Dockerfile 安裝容器 。_
 
 <br>
 
@@ -261,7 +265,7 @@ _觀察容器_
 
 <br>
 
-2. 在 DashBoard 可查看前面建立的容器，其中 Name 就是容器名稱。
+2. 在 DashBoard 可查看前面步驟所建立的容器，其中 Name 就是容器名稱。
 
    ![](images/img_37.png)
 
@@ -284,6 +288,10 @@ _觀察容器_
 5. 刷新就可看到。
 
    ![](images/img_38.png)
+
+<br>
+
+_以上是 Docker Desktop 的基本操作_
 
 <br>
 
@@ -700,23 +708,6 @@ _以 STreamlit 為例_
 
 <br>
 
-## 其他
-
-1. 停止容器。
-
-   ```bash
-   docker stop my-cotainer
-   ```
-
-<br>
-
-2. 刪除容器。
-
-   ```bash
-   docker rm my-cotainer
-   ```
-
-<br>
 
 ---
 
