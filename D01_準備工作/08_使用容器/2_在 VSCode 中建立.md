@@ -157,14 +157,14 @@ FROM python:1-3.12-bullseye
 RUN apt-get update && apt-get install -y \
     git \
     zsh \
-    # 
+    # ㄏㄟ
     && rm -rf /var/lib/apt/lists/*
 ```
 
 4. 關於 Docker 文件，可以參考 [Docker Hub](https://hub.docker.com/) 的官方版本，進入後搜尋 `python`。
 ![](images/img_27.png)
 
-5. 找到對應的版本，點擊進入後檔案內容很多，這裡省略。
+5. 找到對應的版本，點擊進入後檔案內容很多，也可以使用這個版本來建立，但非常耗時，尤其在建立 Codespace 的時候，所以這裡省略。
 ![](images/img_28.png)
 
 6. 修改配置文件 `devcontainer.json` ，將 `image` 註解起來，並指向 `Dockerfile`。
