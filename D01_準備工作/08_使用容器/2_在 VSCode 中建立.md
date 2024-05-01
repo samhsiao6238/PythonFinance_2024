@@ -411,11 +411,11 @@ _以更換 Python 版本號為例_
 
 <br>
 
-3. 在倉庫中開啟 `Dockerfile` 並修改 Python 版本號，標準安裝太耗時，這裡試試使用簡易的文件。
+3. 在倉庫中開啟 `Dockerfile` ，當前版本號是 `3.10-bullseye`，修改為 `3-12-bullseye`，標準安裝太耗時，這裡試試使用簡易的文件。
 
    ```dockerfile
    # 使用指定映像
-   FROM python:3.10-bullseye
+   FROM python:3.12-bullseye
 
    # 安裝必要庫
    RUN apt-get update && apt-get install -y git zsh && rm -rf /var/lib/apt/lists/*
