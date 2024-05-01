@@ -405,13 +405,12 @@ _以更換 Python 版本號為例_
 <br>
 
 1. 進入 [Docker Hub](https://hub.docker.com/) 查詢 Python 映像的版本號。
-2. 搜尋 Python 映像的版本號，這裡示範使用 `3.10`。
 
    ![](images/img_25.png)
 
 <br>
 
-3. 在倉庫中開啟 `Dockerfile` ，當前版本號是 `3.10-bullseye`，修改為 `3-12-bullseye`，標準安裝太耗時，這裡試試使用簡易的文件。
+2. 在倉庫中開啟 `Dockerfile` ，當前版本號是 `3.10-bullseye`，修改為 `3-12-bullseye`，標準安裝太耗時，這裡試試使用簡易的文件。
 
    ```dockerfile
    # 使用指定映像
@@ -423,44 +422,44 @@ _以更換 Python 版本號為例_
 
 <br>
 
-4. 嘗試重新建立。
+3. 嘗試重新建立。
 
    ![](images/img_26.png)
 
 <br>
 
-5. 查詢後會顯示新的版本號。
+4. 查詢後會顯示新的版本號。
 
    ![](images/img_31.png)
 
 <br>
 
-6. 提交更新後的文件並完成同步。
+5. 提交更新後的文件並完成同步。
    ![](images/img_32.png)
 
 _回到 VSCode 中_
 
 <br>
 
-7. 在本機的 VSCode 中點擊 `Fetch`。
+6. 在本機的 VSCode 中點擊 `Fetch`。
 
    ![](images/img_33.png)
 
 <br>
 
-8. 完成同步。
+7. 完成同步。
 
    ![](images/img_34.png)
 
 <br>
 
-9. 重建容器。
+8. 重建容器。
 
    ![](images/img_35.png)
 
 <br>
 
-10. 如此便完成容器的同步。
+9. 如此便完成容器的同步。
 
     ![](images/img_36.png)
 
