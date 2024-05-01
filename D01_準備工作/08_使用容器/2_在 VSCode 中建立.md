@@ -425,6 +425,12 @@ _回到 VSCode 中_
 
 <br>
 
+
+##  建立 docker-compose.yml
+
+1. 先前所使用的 `devcontainer.json` 文件主要用於配置 `VSCode` 如何與容器互動，包括 _設定開發環境_、_安裝 VSCode 擴充功能_ 等，雖然在這個文件中也可以 _指定連接埠轉送的規則_ ，但這通常用於開發時的連接埠轉送需求，而不是容器服務之間的連接埠對映，所以在端口管理上，`docker-compose.yml` 文建會是更好的選擇，而 `devcontainer.json` 文件則專注在配置與 VSCode 直接相關的設置。 
+
+2. 在 `.devcontainer` 資料夾中建立文件 `docker-compose.yml`。
 ---
 
 _END_
