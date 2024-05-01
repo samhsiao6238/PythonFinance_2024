@@ -577,46 +577,46 @@ _以下開始實作_
 
    services:
       streamlit:
-         build:
-         # 使用 Dockerfile
+         build: # 使用 Dockerfile
+
          context: .
          dockerfile: Dockerfile
          # 當前目錄掛載位置
          volumes:
-            - .:/app
+               - .:/app
          working_dir: /app
          ports:
-            - "8501:8501"
+               - "8501:8501"
          # 先安裝依賴庫再啟動服務
          command: sh -c "pip install -r requirements.txt && streamlit run app.py"
          # 確保服務在兩者之後啟動
          depends_on:
-            - mariadb
-            - mongodb
+               - mariadb
+               - mongodb
 
       mariadb:
          # 使用官方鏡像
          image: mariadb
          # 需要手動設置這些數值
          environment:
-            MYSQL_ROOT_PASSWORD: rootpassword
-            MYSQL_DATABASE: exampledb
-            MYSQL_USER: user
-            MYSQL_PASSWORD: userpassword
+               MYSQL_ROOT_PASSWORD: rootpassword
+               MYSQL_DATABASE: exampledb
+               MYSQL_USER: user
+               MYSQL_PASSWORD: userpassword
          volumes:
-            - mariadb_data:/var/lib/mysql
+               - mariadb_data:/var/lib/mysql
          ports:
-            - "3306:3306"
+               - "3306:3306"
 
       mongodb:
          image: mongo
          environment:
-            MONGO_INITDB_ROOT_USERNAME: mongouser
-            MONGO_INITDB_ROOT_PASSWORD: mongopassword
+               MONGO_INITDB_ROOT_USERNAME: mongouser
+               MONGO_INITDB_ROOT_PASSWORD: mongopassword
          volumes:
-            - mongodb_data:/data/db
+               - mongodb_data:/data/db
          ports:
-            - "27017:27017"
+               - "27017:27017"
 
    volumes:
       mariadb_data:
@@ -633,17 +633,17 @@ _以下開始實作_
    services:
       streamlit:
          build:
-            # 使用 Dockerfile
-            context: .
-            dockerfile: Dockerfile
+               # 使用 Dockerfile
+               context: .
+               dockerfile: Dockerfile
          # 當前目錄掛載位置
          volumes:
-            - .:/app
+               - .:/app
          working_dir: /app
          ports:
-            - "8501:8501"
-            - "37621:37621"
-            - "38377:38377"
+               - "8501:8501"
+               - "37621:37621"
+               - "38377:38377"
    ```
 
 <br>
