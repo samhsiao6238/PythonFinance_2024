@@ -265,6 +265,8 @@ _在 VScode 中建立，以下紀錄簡化的步驟_
 
 _以下示範使用 CLI_
 
+<br>
+
 1. 建立 Git 倉庫基礎步驟。
 
     ```bash
@@ -425,78 +427,236 @@ _回到 VSCode 中_
 
 <br>
 
+## 查詢容器與更名
+
+1. 使用 Docker Desktop。
+
+    ![](images/img_37.png)
+
+<br>
+
+2. 特別注意，容器的 `Name` 是自動分配且隨機生成的，由一對 `形容詞＋名詞` 組成，可透過以下指令進行自訂。
+
+    ```bash
+    docker rename beautiful_wilbur my-cotainer
+    ```
+
+<br>
+
+3. 刷新就可看到。
+
+    ![](images/img_38.png)
+
+<br>
 
 ##  建立 docker-compose.yml
 
 1. 先前所使用的 `devcontainer.json` 文件主要用於配置 `VSCode` 如何與容器互動，包括 _設定開發環境_、_安裝 VSCode 擴充功能_ 等，雖然在這個文件中也可以 _指定連接埠轉送的規則_ ，但這通常用於開發時的連接埠轉送需求，而不是容器服務之間的連接埠對映，所以在端口管理上，`docker-compose.yml` 文建會是更好的選擇，而 `devcontainer.json` 文件則專注在配置與 VSCode 直接相關的設置。 
 
+<br>
+
 2. 在 `.devcontainer` 資料夾中建立文件 `docker-compose.yml`。
 
+<br>
+
 3. 假設該容器將用於 Streamlit 專案使用，並將使用 MariaDB 以及 MongoDM，其端口預設分別為 `8501`、`3306`、`27017`。
-```yaml
-version: '3.10'
 
-services:
-  # streamlit
-  streamlit:
-    build:
-      # 使用 Dockerfile
-      context: .
-      dockerfile: Dockerfile
-    # 當前目錄掛載位置
+    ```yaml
+    version: '3.10'
+
+    services:
+    # streamlit
+    streamlit:
+        build:
+        # 使用 Dockerfile
+        context: .
+        dockerfile: Dockerfile
+        # 當前目錄掛載位置
+        volumes:
+        - .:/app
+        working_dir: /app
+        ports:
+        - "8501:8501"
+        # 先安裝依賴庫再啟動服務
+        command: sh -c "pip install -r requirements.txt && streamlit run app.py"
+        # 確保服務在兩者之後啟動
+        depends_on:
+        - mariadb
+        - mongodb
+
+    mariadb:
+        # 使用官方鏡像
+        image: mariadb
+        # 需要手動設置這些數值
+        environment:
+        MYSQL_ROOT_PASSWORD: rootpassword
+        MYSQL_DATABASE: exampledb
+        MYSQL_USER: user
+        MYSQL_PASSWORD: userpassword
+        volumes:
+        - mariadb_data:/var/lib/mysql
+        ports:
+        - "3306:3306"
+
+    mongodb:
+        image: mongo
+        environment:
+        MONGO_INITDB_ROOT_USERNAME: mongouser
+        MONGO_INITDB_ROOT_PASSWORD: mongopassword
+        volumes:
+        - mongodb_data:/data/db
+        ports:
+        - "27017:27017"
+
     volumes:
-      - .:/app
-    working_dir: /app
-    ports:
-      - "8501:8501"
-    # 先安裝依賴庫再啟動服務
-    command: sh -c "pip install -r requirements.txt && streamlit run app.py"
-    # 確保服務在兩者之後啟動
-    depends_on:
-      - mariadb
-      - mongodb
+    mariadb_data:
+    mongodb_data:
+    ```
 
-  mariadb:
-    # 使用官方鏡像
-    image: mariadb
-    # 需要手動設置這些數值
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: exampledb
-      MYSQL_USER: user
-      MYSQL_PASSWORD: userpassword
-    volumes:
-      - mariadb_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
-
-  mongodb:
-    image: mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: mongouser
-      MONGO_INITDB_ROOT_PASSWORD: mongopassword
-    volumes:
-      - mongodb_data:/data/db
-    ports:
-      - "27017:27017"
-
-volumes:
-  mariadb_data:
-  mongodb_data:
-```
+<br>
 
 4. 安裝 `docker-compose`，以下是三行指令。
-```bash
-apt update && apt install -y curl
-curl -L "https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-```
+
+    ```bash
+    apt update && apt install -y curl
+    curl -L "https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+    ```
+
+<br>
+
 5. 透過查詢版本來驗證安裝。
 
-```bash
-docker-compose --version
-```
-6. 啟動所有服務。
+    ```bash
+    docker-compose --version
+    ```
+
+<br>
+
+6. 回到本機中開啟終端機，並執行這個腳本來依照設置運行容器。
+
+    ```bash
+    docker-compose up -d
+    ```
+
+<br>
+
+7. 透過這樣的設置，便可允許外部設備通過訪問主機來訪問容器中的服務。
+
+![](images/img_39.png)
+
+<br>
+
+## 從外部訪問容器
+
+_以 STreamlit 為例_
+
+<br>
+
+1. 建立一個範例腳本 `app.py`。
+
+    ```python
+    import streamlit as st
+
+    st.title('Hello Streamlit in Docker!')
+    st.write("This is a simple Streamlit app running inside a Docker container.")
+    ```
+
+<br>
+
+2. 修改 Dockerfile。
+
+    ```dockerfile
+    # 使用指定映像
+    FROM python:3.10-bullseye
+
+    # 安裝必要庫，並清理快取以減少鏡像體積
+    RUN apt-get update && \
+        apt-get install -y git zsh && \
+        rm -rf /var/lib/apt/lists/*
+
+    # 建立一個新用戶 'appuser' 並切換到此用戶
+    RUN useradd -m appuser
+    USER appuser
+
+    # 設定工作目錄
+    WORKDIR /app
+
+    # 複製目前目錄內容到容器中的 /app
+    COPY . /app
+
+    # 安裝 Streamlit
+    RUN pip install --no-cache-dir streamlit
+
+    # 使得 8501 連接埠在容器外部可存取
+    EXPOSE 8501
+
+    # 在容器啟動時執行 Streamlit
+    CMD ["streamlit", "run", "app.py"]
+    ```
+
+<br>
+
+3. 簡化 `docker-compose.yml`。
+
+    ```yaml
+    version: '3.10'
+
+    services:
+    # streamlit
+    streamlit:
+        build:
+        # 使用 Dockerfile
+        context: .
+        dockerfile: Dockerfile
+        # 當前目錄掛載位置
+        volumes:
+        - .:/app
+        working_dir: /app
+        ports:
+        - "8501:8501"
+    ```
+
+<br>
+
+4. 在項目資料夾內運行。
+
+    ```bash
+    docker-compose up --build
+    ```
+
+<br>
+
+5. 完成時會顯示。
+
+    ![](images/img_40.png)
+
+<br>
+
+6. 透過瀏覽器訪問。
+
+    ![](images/img_41.png)
+
+<br>
+
+## 其他
+
+1. 停止容器。
+
+    ```bash
+    docker stop my-cotainer
+    ```
+
+<br>
+
+2. 刪除容器。
+
+    ```bash
+    docker rm my-cotainer
+    ```
+
+<br>
+
 ---
 
 _END_
