@@ -11,13 +11,13 @@ _在 VScode 中建立，以下紀錄簡化的步驟_
 
 <br>
 
-2. 新增容器設定檔。
+2. 在左下角 `命令選擇區` 中 `新增開發人員容器設定檔`。
 
     ![](images/img_01.png)
 
 <br>
 
-3. 選擇新增至工作區或使用者資料夾皆可，這裡示範添加到工作區。
+3. 選擇 `將設定新增至工作區` 或使用者資料夾皆可，這裡示範添加到工作區。
 
     ![](images/img_02.png)
 
@@ -47,19 +47,19 @@ _在 VScode 中建立，以下紀錄簡化的步驟_
 
 <br>
 
-8. 點擊重建 `Rebuild` 。
-
-    ![](images/img_19.png)
-
-<br>
-
-9. 在工作區中會添加兩個資料夾並各有一個文件，分別是 `.devcontainer ` 中有文件 `devcontainer.json`，`.github` 中有文件 `dependabot.yml`。
+8. 在工作區中會添加兩個資料夾並各有一個文件，分別是 `.devcontainer ` 中有文件 `devcontainer.json`，`.github` 中有文件 `dependabot.yml`。
 
     ![](images/img_06.png)
 
 <br>
 
-10. 假如容器尚未連線，可點擊左下角的連線。
+9. 倘若有修改設定文件，都要提示進行重建 `Rebuild`，或手動透過選單重建也可以 。
+
+    ![](images/img_19.png)
+
+<br>
+
+10. 查看左下角連線設置會顯示連線容器，假如尚未連線，可點擊進行設置。
 
     ![](images/img_09.png)
 
@@ -95,7 +95,7 @@ _在 VScode 中建立，以下紀錄簡化的步驟_
 
 <br>
 
-16. 預設的容器設定文件 `devcontainer.json` 內容如下，特別注意，這個版本號是 VSCode 建立容器時自動生成的。
+16. 建立容器時，自動生成的容器預設設定文件 `devcontainer.json` 內容如下，特別注意，這個版本號是 VSCode 建立容器時自動生成的。
 
     ```json
     // For format details, see https://aka.ms/devcontainer.json. For config options, see the
@@ -134,6 +134,8 @@ _在 VScode 中建立，以下紀錄簡化的步驟_
     }
     ```
 
+<br>
+
 18. 可將自己原本的 `settings.json` 融入到容器的設置文件 `devcontainer.json` 中，這裡以我自己的為例。
 
     ```json
@@ -161,7 +163,7 @@ _在 VScode 中建立，以下紀錄簡化的步驟_
 
 <br>
 
-19. 修改過設定文件後要重新 rebuild。
+1.  修改設定文件後右下角會提示重建，也可手動家下重新 rebuild。
 
     ![](images/img_13.png)
 
@@ -170,6 +172,12 @@ _在 VScode 中建立，以下紀錄簡化的步驟_
 20. 完成後會出現以下訊息。
 
     ![](images/img_14.png)
+
+<br>
+
+21. 按下任意鍵回到終端機。
+
+    ![](images/img_42.png)
 
 <br>
 
