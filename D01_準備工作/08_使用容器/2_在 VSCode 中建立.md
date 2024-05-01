@@ -163,7 +163,7 @@ _在 VScode 中建立，以下紀錄簡化的步驟_
 
 <br>
 
-1.  修改設定文件後右下角會提示重建，也可手動家下重新 rebuild。
+19. 修改設定文件後右下角會提示重建，也可手動家下重新 rebuild。
 
     ![](images/img_13.png)
 
@@ -181,21 +181,25 @@ _在 VScode 中建立，以下紀錄簡化的步驟_
 
 <br>
 
-## 建立 Dockerfile
+## 使用 Dockerfile 
 
-1. 在資料夾 `.devcontainer` 中建立文件 `Dockerfile`。
+_這是一個自動化建立容器的方式_
+
+<br>
+
+1. 在資料夾 `.devcontainer` 中手動新增文件 `Dockerfile`， _無副檔名_ 。
 
     ![](images/img_15.png)
 
 <br>
 
-2. 依照指示安裝 Docker。
+2. 依照指示安裝 Docker 到容器中。
 
     ![](images/img_16.png)
 
 <br>
 
-3. 編輯文件。
+3. 編輯文件 `Dockerfile`。
 
     ```dockerfile
     # 使用指定映像
@@ -219,7 +223,7 @@ _在 VScode 中建立，以下紀錄簡化的步驟_
 
 <br>
 
-6. 修改配置文件 `devcontainer.json` ，將 `image` 註解起來，並指向 `Dockerfile`。
+6. 修改配置文件 `devcontainer.json` ，將 `image` 註解起來，並添加 `build` 設置來指向 `Dockerfile`。
 
     ```json
     {
@@ -257,15 +261,39 @@ _在 VScode 中建立，以下紀錄簡化的步驟_
 
 ## Docker Desktop
 
-1. 安裝桌面版 Docker 後可看到所建立的容器。
+_觀察容器_
+
+<br>
+
+1. 安裝 [Docker Desktop](https://www.docker.com/products/docker-desktop/) 後可查看定管理容器。
 
     ![](images/img_20.png)
 
 <br>
 
-2. 觀察容器詳情。
+2. 在 DashBoard 可查看前面建立的容器，其中 Name 就是容器名稱。
+
+    ![](images/img_37.png)
+
+<br>
+
+3. 觀察容器詳情。
 
     ![](images/img_21.png)
+
+<br>
+
+4. 特別注意，容器的 `Name` 是自動分配且隨機生成的，由一對 `形容詞＋名詞` 組成，可透過以下指令進行自訂。
+
+    ```bash
+    docker rename <原本名字> my-cotainer
+    ```
+
+<br>
+
+5. 刷新就可看到。
+
+    ![](images/img_38.png)
 
 <br>
 
@@ -435,29 +463,56 @@ _回到 VSCode 中_
 
 <br>
 
-## 查詢容器與更名
+## 端口映射  
 
-1. 使用 Docker Desktop。
-
-    ![](images/img_37.png)
+_這裡展示一個 Streamlit 專案來說明端口映射_
 
 <br>
 
-2. 特別注意，容器的 `Name` 是自動分配且隨機生成的，由一對 `形容詞＋名詞` 組成，可透過以下指令進行自訂。
+1. 在項目的 `.devcontainer` 資料夾內建立一個 Streamlit 腳本 `app.py`，內容如下。
 
-    ```bash
-    docker rename beautiful_wilbur my-cotainer
+    ```python
+    import streamlit as st
+
+    st.title('Hello Streamlit in Docker!')
+    st.write("這是在容器中的 Streamlit 服務範例。")
     ```
 
 <br>
 
-3. 刷新就可看到。
+2. 開啟容器的終端機，運行以下指令安裝套件。
 
-    ![](images/img_38.png)
+    ```bash
+    pip install streamlit
+    ```
 
 <br>
 
-##  建立 docker-compose.yml
+3. 運行腳本。
+
+    ```bash
+    streamlit app.py
+    ```
+
+<br>
+
+4. 此時終端機會出現兩個 URL 如下，其中 `Local URL` 是指容器內部的 `localhost`，也就是 `127.0.0.1` ，它只能從容器內部訪問，即只有容器內的進程可以使用這個位址存取 Streamlit 應用；另外 ` Network URL`，這是容器在 Docker 內部網路中的 IP 位址，這位址在容器之間是可存取的，兩者若無映射，都無透過從外部或主機上訪問。
+
+    ![](images/img_43.png)
+
+<br>
+
+5. VSCode 提供了轉接的服務。
+
+    ![](images/img_44.png)
+
+<br>
+
+6. 特別說明，在 Mac 系統中使用 Docker Desktop 時，雖然容器被視為獨立的主機，但彼此的 localhost 是共享的，所以透過 MacOS 的溜覽器將可以訪問容器運行的 Streamlit 應用。
+
+<br>
+
+## 建立 docker-compose.yml
 
 1. 先前所使用的 `devcontainer.json` 文件主要用於配置 `VSCode` 如何與容器互動，包括 _設定開發環境_、_安裝 VSCode 擴充功能_ 等，雖然在這個文件中也可以 _指定連接埠轉送的規則_ ，但這通常用於開發時的連接埠轉送需求，而不是容器服務之間的連接埠對映，所以在端口管理上，`docker-compose.yml` 文建會是更好的選擇，而 `devcontainer.json` 文件則專注在配置與 VSCode 直接相關的設置。 
 
@@ -567,7 +622,7 @@ _以 STreamlit 為例_
     import streamlit as st
 
     st.title('Hello Streamlit in Docker!')
-    st.write("This is a simple Streamlit app running inside a Docker container.")
+    st.write("這是在容器中的 Streamlit 服務範例。")
     ```
 
 <br>
