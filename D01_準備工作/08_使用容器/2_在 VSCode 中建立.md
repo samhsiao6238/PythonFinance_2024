@@ -1,22 +1,13 @@
-# 介紹與說明
 
-_分別在 Codespace 中安裝與本地安裝_
+# 建立容器 
 
-<br>
-
-## Codespace
-
-_關於在 Codespace 中建立容器，參考其他的章節中的 [詳細說明](https://github.com/samhsiao6238/RaspberryPi_20231015/blob/main/D02_Git_&_GitHub/3_整合_GitHub/1_Codespaces/3_使用_Docker_容器.md) 。_
+_在 VScode 中建立，以下紀錄簡化的步驟_
 
 <br>
 
-## VScode
+## 基礎建置
 
-_以下紀錄簡化的步驟，詳細步驟可參考前面說明，大致上是一樣的。_
-
-<br>
-
-1. 建立一個專案資料夾並啟動 VSCode。
+1. 建立本機一個專案資料夾並啟動 VSCode。
 
 2. 新增容器設定檔。
 
@@ -163,17 +154,27 @@ z![](images/img_12.png)
 FROM python:1-3.12-bullseye
 
 # 安裝必要庫
-RUN apt-get update && apt-get install -y git zsh && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    git \
+    zsh \
+    # 
+    && rm -rf /var/lib/apt/lists/*
 ```
 
-4. 修改配置文件 `devcontainer.json` ，將 `image` 註解起來，並指向 `Dockerfile`。
+4. 關於 Docker 文件，可以參考 [Docker Hub](https://hub.docker.com/) 的官方版本，進入後搜尋 `python`。
+![](images/img_27.png)
+
+5. 找到對應的版本，點擊進入後檔案內容很多，這裡省略。
+![](images/img_28.png)
+
+6. 修改配置文件 `devcontainer.json` ，將 `image` 註解起來，並指向 `Dockerfile`。
 ```json
 {
     "name": "Python 3.12.3",
     // "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye",
     "build": {
         "dockerfile": "Dockerfile"
-     },
+    },
     "postCreateCommand": "pip install --upgrade pip",
     "customizations": {
         "vscode": {
@@ -199,6 +200,96 @@ RUN apt-get update && apt-get install -y git zsh && rm -rf /var/lib/apt/lists/*
 ![](images/img_17.png)
 
 
+## Docker Desktop
+
+1. 安裝桌面版 Docker 後可看到所建立的容器。
+
+![](images/img_20.png)
+
+2. 觀察容器詳情。
+
+![](images/img_21.png)
+
+## 進行版本控制
+
+_以下示範使用 CLI_
+
+1. 建立 Git 倉庫基礎步驟。
+```bash
+# 初始化
+git init
+# 添加當前倉庫文件
+git add .
+# 提交
+git commit -m "init"
+# 指定分支
+git branch -M main
+```
+
+2. 在 Github 上建立一個新的倉庫，並記錄所提供的網址 `https://github.com/samhsiao6238/_container_.git`。
+
+![](images/img_22.png)
+
+3. 特別注意，不要初始化帶有 README 的遠端倉庫，這可能導致後續推送時產生衝突。
+
+4. 另外，之後有更新時都要再次進行添加與提交。
+```bash
+# 添加當前倉庫文件
+git add .
+# 提交
+git commit -m "update"
+```
+
+5. 添加遠程倉庫，使用前面步驟取得的網址。
+```bash
+git remote add origin https://github.com/samhsiao6238/_container_.git
+```
+
+6. 推送到倉庫。
+```bash
+git push -u origin main
+```
+
+7. 完成。
+
+![](images/img_23.png)
+
+8. 可為容器配置的重要版本的 Git 標籤，或使用分支來管理不同的配置版本，這有助於重建特定版本的容器。
+```bash
+# 建立標籤與註解
+git tag -a "v1.0-container-setup" -m "Version 1.0 of container setup"
+git push --tags
+```
+
+## 啟動 Codespace
+
+1. 初次建立。
+![](images/img_24.png)
+
+2. Codespace 會自動識別倉庫中的 `.devcontainer` 配置來建立開發環境，這包含 `devcontainer.json` 和 `Dockerfile` 。
+
+3. 運行後跳出關於插件安裝的視窗，特別注意，由於 Codespace 可能會有些限制導致插件未能正確安裝或使用。
+
+## 在遠端重建
+
+1. 進入 [Docker Hub](https://hub.docker.com/) 查詢版本號。
+
+
+2. 搜尋 Python 版本號，這裡示範使用 `3.10`。
+
+![](images/img_25.png)
+
+3. 在雲端開啟 Dockerfile 並修改 Python 版本號，標準安裝太耗時，這裡試試使用簡易的文件。
+```dockerfile
+# 使用指定映像
+FROM python:3.10-bullseye
+
+# 安裝必要庫
+RUN apt-get update && apt-get install -y git zsh && rm -rf /var/lib/apt/lists/*
+```
+
+4. 重新建立。
+![](images/img_26.png)
 ---
 
 _END_
