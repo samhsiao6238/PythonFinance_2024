@@ -444,7 +444,7 @@ _回到 VSCode 中_
 
 <br>
 
-6. 在本機的 VSCode 中點擊 `Fetch`。
+6. 在本機的 VSCode 中點擊 `Fetch`，假如點不到顯示更多 `...`，將導覽列橫向拉寬即可。
 
    ![](images/img_33.png)
 
@@ -456,15 +456,27 @@ _回到 VSCode 中_
 
 <br>
 
-8. 重建容器。
+8. 這時 Dockerfile 的版本已經更新。
+
+   ![](images/img_48.png)
+
+<br>
+
+9. 假如沒有連線容器，下選取 `在容器中重新開啟`。
+
+   ![](images/img_49.png)
+
+<br>
+
+10. 然後再次 `重建容器`。
 
    ![](images/img_35.png)
 
 <br>
 
-9. 如此便完成容器的同步。
+11. 如此便完成容器的同步，版本號重新回到 `3.12.3`。
 
-    ![](images/img_36.png)
+   ![](images/img_36.png)
 
 <br>
 
@@ -496,28 +508,45 @@ _這裡展示一個 Streamlit 專案來說明端口映射_
 3. 運行腳本。
 
    ```bash
-   streamlit app.py
+   streamlit run app.py
    ```
 
 <br>
 
-4. 此時終端機會出現兩個 URL 如下，其中 `Local URL` 是指容器內部的 `localhost`，也就是 `127.0.0.1` ，它只能從容器內部訪問，即只有容器內的進程可以使用這個位址存取 Streamlit 應用；另外 ` Network URL`，這是容器在 Docker 內部網路中的 IP 位址，這位址在容器之間是可存取的，兩者若無映射，都無透過從外部或主機上訪問。
+4. 會提示輸入電子郵件，也可以按下 `ENTER` 留白即可。
 
-   ![](images/img_43.png)
-
-<br>
-
-5. 補充說明，倘若應用綁定的是 `0.0.0.0`，表示監聽所有可用的網路接口，包含了公有和私有的 IP，所以也能接收所有來自同一個區網其他設備的訪問
+   ![](images/img_50.png)
 
 <br>
 
-6. VSCode 提供了轉接的服務。
+5. 右下角出現視窗，但是不用點擊，自動會啟動瀏覽器。
+
+   ![](images/img_51.png)
+
+<br>
+
+6. 點擊 `查看所有轉送的連接埠` ，目前可透過 `localhost:8501` 或 `127.0.0.1:8501` 進行訪問。
 
    ![](images/img_44.png)
 
 <br>
 
-6. 特別說明，在 Mac 系統中使用 Docker Desktop 時，雖然容器被視為獨立的主機，但彼此的 localhost 是共享的，所以透過 MacOS 的溜覽器將可以訪問容器運行的 Streamlit 應用。
+7. 另外，終端機會出現兩個 URL 如下，其中 `Local URL` 是指容器內部的 `localhost`，也就是 `127.0.0.1` ，它只能從容器內部訪問，即只有容器內的進程可以使用這個位址存取 Streamlit 應用；另外 ` Network URL`，這是容器在 Docker 內部網路中的 IP 位址，這位址在容器之間是可存取的，兩者若無映射，都無透過從外部或主機上訪問。
+
+   ![](images/img_43.png)
+
+<br>
+
+8. 補充說明，倘若應用綁定的是 `0.0.0.0`，表示監聽所有可用的網路接口，包含了公有和私有的 IP，所以也能接收所有來自同一個區網其他設備的訪問，可透過以下指令運行腳本。
+
+   ```bash
+   streamlit run app.py --server.address=0.0.0.0
+   ```
+
+<br>
+
+
+9. 特別說明，在 Mac 系統中使用 Docker Desktop 時，雖然容器被視為獨立的主機，但彼此的 localhost 是共享的，所以透過 MacOS 的溜覽器將可以訪問容器運行的 Streamlit 應用。
 
 <br>
 
