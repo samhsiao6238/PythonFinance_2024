@@ -286,7 +286,7 @@ _觀察容器_
 4. 特別注意，容器的 `Name` 是自動分配且隨機生成的，由一對 `形容詞＋名詞` 組成，可透過以下指令進行自訂。
 
    ```bash
-   docker rename <原本名字> my-cotainer
+   docker rename <原本名字> my-container
    ```
 
 <br>
@@ -642,8 +642,6 @@ _以下開始實作_
          working_dir: /app
          ports:
                - "8501:8501"
-               - "37621:37621"
-               - "38377:38377"
    ```
 
 <br>
@@ -672,7 +670,7 @@ _以下開始實作_
 
 ## 從外部訪問容器
 
-_以 STreamlit 為例_
+_以 Streamlit 為例_
 
 <br>
 
@@ -691,7 +689,7 @@ _以 STreamlit 為例_
 
    ```dockerfile
    # 使用指定映像
-   FROM python:3.10-bullseye
+   FROM python:3.12-bullseye
 
    # 安裝必要庫，並清理快取以減少鏡像體積
    RUN apt-get update && \
@@ -723,7 +721,7 @@ _以 STreamlit 為例_
 3. 簡化 `docker-compose.yml`。
 
    ```yaml
-   version: '3.10'
+   version: '3'
 
    services:
    # streamlit
@@ -745,7 +743,7 @@ _以 STreamlit 為例_
 4. 在項目資料夾內運行。
 
    ```bash
-   docker-compose up --build
+   docker-compose up --build --no-cache
    ```
 
 <br>
