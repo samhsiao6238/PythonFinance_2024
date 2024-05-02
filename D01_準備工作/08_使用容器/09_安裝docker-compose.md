@@ -1,5 +1,11 @@
 # 安裝 `docker-compose` 
 
+_進行下一個步驟前，先進行工具的安裝_
+
+<br>
+
+## 說明
+
 _[官方文件中](https://docs.docker.com/compose/install/) 依據作業系統分為 Windows、MacOS 和 Linux 三個安裝指南 。_
 
 <br>
