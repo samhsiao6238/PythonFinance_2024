@@ -57,7 +57,6 @@ _說明如何使用 Docker 及 Docker Compose 來運行 ngrok 連接到 Docker �
 6. 使用 Docker Compose 整合 ngrok，所以先建立一個 `docker-compose.yml` 檔案來定義 Streamlit 和 ngrok 服務；特別注意，配置中 `ngrok` 服務將連接到 `streamlit` 服務的 8501 連接埠， 然後將 `your_ngrok_auth_token` 替換為自己的 `ngrok auth token`。
 
     ```yaml
-    version: '3.8'
     services:
         streamlit:
             image: my-streamlit-app
@@ -68,7 +67,7 @@ _說明如何使用 Docker 及 Docker Compose 來運行 ngrok 連接到 Docker �
             image: ngrok/ngrok:latest
             environment:
             - NGROK_AUTHTOKEN=your_ngrok_auth_token
-            command: ["http", "streamlit:8501"]
+            command: [ "http", "--log=stdout", "streamlit:8501" ]
             depends_on:
             - streamlit
     ```
@@ -85,16 +84,72 @@ _說明如何使用 Docker 及 Docker Compose 來運行 ngrok 連接到 Docker �
 
 <br>
 
-## 存取 ngrok 提供的 URL
+2. 終端機輸出的訊息中會看到 ngrok 配發的公網網址。
 
-1. 啟動服務後，可透過查看 ngrok 的日誌來找到 ngrok 提供的公網 URL。
+    ![](images/img_66.png)
+
+<br>
+
+3. 複製網址並透過瀏覽器訪問，點擊 `Visit Site`。
+
+    ![](images/img_67.png)
+
+<br>
+
+4. 正確顯示網頁內容。
+
+    ![](images/img_68.png)
+
+<br>
+
+## 關閉服務
+
+1. 在終端機中按下組合鍵 `control`+`c` 可結束服務。
+
+    ![](images/img_69.png)
+
+<br>
+
+2. 透過 `docker ps` 指令查詢當前服務狀態。
+
+    ![](images/img_70.png)
+
+<br>
+
+3. 同樣也可觀察容器 ID。
+
+    ![](images/img_72.png)
+
+<br>
+
+4. 可透過 ID 查詢日誌。
 
     ```bash
-    docker logs <ngrok_container_id>
+    docker logs <容器ID>
     ```
 
 <br>
 
-__
+5. 這裡也有網址等資訊。
+
+    ![](images/img_73.png)
+
+<br>
+
+6. 也可以另外開啟一個終端執行以下指令停止服務。
+
+    ```bash
+    docker-compose down
+    ```
+
+<br>
+
+5. 同樣會顯示結束並移除服務的訊息。
+
+    ![](images/img_71.png)
+
+<br>
+
+___
 
 _END_
