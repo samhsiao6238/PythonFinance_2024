@@ -11,7 +11,7 @@ _說明如何使用 Docker 及 Docker Compose 來運行 ngrok，藉此從外網�
 
 <br>
 
-1. 準備好 Streamlit 應用 `app.py`。
+1. 建立一個專案資料夾，添加一個 `app.py` 檔案作為 Streamlit 應用的腳本，內容如下。
 
     ```python
     import streamlit as st
@@ -22,7 +22,7 @@ _說明如何使用 Docker 及 Docker Compose 來運行 ngrok，藉此從外網�
 
 <br>
 
-2. 建立一個 Dockerfile 來定義如何建置 Streamlit 應用程式的 Docker 映像。
+2. 在資料夾內新增一個 `Dockerfile` 檔案，藉此建置 Streamlit 應用程式的 Docker 映像。
 
     ```dockerfile
     # 使用官方 Python 鏡像作為基礎鏡像
@@ -46,7 +46,7 @@ _說明如何使用 Docker 及 Docker Compose 來運行 ngrok，藉此從外網�
 
 <br>
 
-5. 在包含 Dockerfile 和 `app.py` 的目錄中執行以下命令來建立 Docker 映像：
+3. 在包含 `Dockerfile` 和 `app.py` 的目錄中執行以下命令來建立 Docker 映像，其中參數 `-t` 參數是 `--tag` 的簡寫形式，用於指定鏡像 `名稱`與 `標籤`，如本例中僅提供名稱但不指定的 `標籤` 的情況會預設為 `latest`，如果要指定則改寫為 `my-streamlit-app:tagname` 的格式即可。
 
     ```bash
     docker build -t my-streamlit-app .
@@ -54,7 +54,7 @@ _說明如何使用 Docker 及 Docker Compose 來運行 ngrok，藉此從外網�
 
 <br>
 
-6. 使用 Docker Compose 整合 ngrok，所以先建立一個 `docker-compose.yml` 檔案來定義 Streamlit 和 ngrok 服務；特別注意，配置中 `ngrok` 服務將連接到 `streamlit` 服務的 8501 連接埠， 然後將 `your_ngrok_auth_token` 替換為自己的 `ngrok auth token`。
+4. 使用 Docker Compose 整合 ngrok，所以先建立一個 `docker-compose.yml` 檔案來定義 Streamlit 和 ngrok 服務；特別注意，配置中 `ngrok` 服務將連接到 `streamlit` 服務的 8501 連接埠， 然後將 `your_ngrok_auth_token` 替換為自己的 `ngrok auth token`。
 
     ```yaml
     services:
