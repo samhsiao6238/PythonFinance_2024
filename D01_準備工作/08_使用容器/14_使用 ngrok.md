@@ -59,18 +59,18 @@ _說明如何使用 Docker 及 Docker Compose 來運行 ngrok 連接到 Docker �
     ```yaml
     version: '3.8'
     services:
-    streamlit:
-        image: my-streamlit-app
-        ports:
-        - "8501:8501"
+        streamlit:
+            image: my-streamlit-app
+            ports:
+            - "8501:8501"
 
-    ngrok:
-        image: ngrok/ngrok:latest
-        environment:
-        - NGROK_AUTHTOKEN=your_ngrok_auth_token
-        command: ["http", "streamlit:8501"]
-        depends_on:
-        - streamlit
+        ngrok:
+            image: ngrok/ngrok:latest
+            environment:
+            - NGROK_AUTHTOKEN=your_ngrok_auth_token
+            command: ["http", "streamlit:8501"]
+            depends_on:
+            - streamlit
     ```
 
 <br>
