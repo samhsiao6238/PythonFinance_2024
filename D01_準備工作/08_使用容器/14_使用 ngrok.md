@@ -110,7 +110,7 @@ _說明如何使用 Docker 及 Docker Compose 來運行 ngrok，藉此從外網�
 
 <br>
 
-2. 透過 `docker ps` 指令查詢當前服務狀態。
+2. 透過 `docker ps` 指令查詢當前服務狀態，在結束服務的狀態時會顯示為空白的。
 
     ![](images/img_70.png)
 
