@@ -84,7 +84,7 @@ _說明如何使用 Docker 及 Docker Compose 來運行 ngrok 連接到 Docker �
 
 <br>
 
-2. 終端機輸出的訊息中會看到 ngrok 配發的公網網址。
+2. 終端機輸出訊息的最後一行會看到 ngrok 配發的公網網址。
 
     ![](images/img_66.png)
 
