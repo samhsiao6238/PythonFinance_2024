@@ -6,7 +6,7 @@ _參考 [官方說明](https://ngrok.com/docs/using-ngrok-with/docker/)_
 
 ## 步驟
 
-_說明如何使用 Docker 及 Docker Compose 來運行 ngrok 連接到 Docker 容器中運行的 Streamlit 服務，並使該服務可以從外部訪問。_
+_說明如何使用 Docker 及 Docker Compose 來運行 ngrok，藉此從外網連接到 Docker 容器中運行的 Streamlit 服務。_
 
 
 <br>
