@@ -1,17 +1,17 @@
-_未完成_
-
 # pull.rebase
 
 ## 說明
 
-1. `rebase` 顧名思義就是重新調整提交 `commit` 的基線 `base`，`pull.rebase` 選項就是拉取 `pull` 的時候是否重建基線的設定，這個設定的預設值就是 `false`。
+1. `rebase` 顧名思義就是重新調整 `提交 commit` 的 `基線 base`，而 `pull.rebase` 選項就是定義 `拉取 pull` 的時候 _是否重建基線_，設定為 `true` 的時候，`git pull` 指令將自動使用 `rebase`，此時拉取遠程分支的變更時，Git 會先把本地的變更（尚未推送的提交）移動到拉取的變更之上，而不是通過創建一個合併提交來合併這些變更。
 
-2. 參數 `config` 可對 Git 進行設定，透過以下指令可將 `pull.rebase` 選項設定為 `false`，這會影響 `git pull` 命令的行為。
+2. `pull.rebase` 選項的預設值是 `false`，也就是 `merge`，這會在本地分支上生成一個新的合併提交，將遠程分支的變更合併到本地的分支上。
+
+3. 進行設定時須透過 `git config` 對 Git 進行設定。
 ```bash
 git config pull.rebase false
 ```
 
-3. `git pull` 命令用於從遠端倉庫拉取最新的變更並合併到當前分支，其預設值為 `false` ，所以執行這個命令也就是執行了 `git fetch` 與 `git merge`，效果上會以合併 `merge` 的方式整合遠程倉庫的變更。
+4. `git pull` 命令用於從遠端倉庫拉取最新的變更並合併到當前分支，其預設值為 `false` ，所以執行這個命令也就是執行了 `git fetch` 與 `git merge`，效果上會以合併 `merge` 的方式整合遠程倉庫的變更。
 
 ## 設定為 True
 
