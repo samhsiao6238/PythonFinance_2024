@@ -181,6 +181,20 @@ _在 VScode 中建立，以下分解各階段步驟並說明_
     ![](images/img_42.png)
 
 <br>
+
+## 其他指令
+
+1. 查詢操作系統說明，特別注意，容器建立後要 `rebuild` 才會顯示。
+
+    ```bash
+    cat /etc/os-release
+    ```
+
+    ![](images/img_74.png)
+
+<br>
+
+
 ___
 
 _END：以上完成容器的建立_
