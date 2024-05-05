@@ -64,7 +64,9 @@ _`git` 是一個開源的分布式版本控制系統工具，廣泛用於程式�
 5. `push` 和 `pull`：推送變更到遠程倉庫、從遠端倉庫拉取變更。
 
     ```bash
+    # 推送
     git push origin main
+    # 拉取
     git pull origin main
     ```
 
