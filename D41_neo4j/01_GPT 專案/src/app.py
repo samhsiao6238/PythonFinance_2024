@@ -1,11 +1,7 @@
 """
-這是一個完整的Streamlit和Langchain的集成腳本，旨在利用OpenAI的語言模型和Neo4j圖形資料庫進行對話。
+這是一個完整的 Streamlit 和 Langchain 的集成腳本；
+旨在利用 OpenAI 的語言模型和 Neo4j 圖形資料庫進行對話。
 """
-
-import os
-
-# 載入 dotenv
-from dotenv import load_dotenv
 
 #
 from typing import List, Union
@@ -26,10 +22,14 @@ from langchain.schema import HumanMessage, AIMessage
 # 引入自定義的Cypher鏈和提問提示
 from cypher_chain import CYPHER_QA_PROMPT, CustomCypherChain
 
+import os
+# 載入 dotenv
+from dotenv import load_dotenv
+
 # 載入環境變數
 load_dotenv()
 
-# 設置OpenAI API Key
+# 設置 OpenAI API Key
 openai_api_key = os.getenv("OPENAPI_API_KEY")
 # 將API鍵設定為環境變數
 os.environ["OPENAI_API_KEY"] = openai_api_key
