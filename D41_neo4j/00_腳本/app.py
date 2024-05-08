@@ -9,7 +9,7 @@ load_dotenv()
 
 # 資料庫連接資訊
 URI = os.getenv("NEO4J_URI")
-USER = os.getenv("NEO4J_USER")
+USER = os.getenv("NEO4J_USERNAME")
 PASSWORD = os.getenv("NEO4J_PASSWORD")
 
 
