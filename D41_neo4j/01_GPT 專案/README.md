@@ -26,7 +26,56 @@ _來源的部分先省略，之後再補上，這裡先說我的解析_。
 
 ## 補充說明
 
-_待_
+_關於範例腳本運行時出現的錯誤，以下進行排除紀錄_
+
+<br>
+
+1. 更新套件
+
+    ```bash
+    pip install -U langchain-openai
+    ```
+
+<br>
+
+2. 更新導入庫。
+
+    ```python
+    # from langchain.chat_models import ChatOpenAI
+    from langchain_openai import ChatOpenAI
+    # from langchain.graphs import Neo4jGraph
+    from langchain_community.graphs import Neo4jGraph
+    ```
+
+<br>
+
+3. 在容器中安裝套件。
+
+    ```bash
+    sudo apt-get update && sudo apt-get install curl telnet -y
+    ```
+
+<br>
+
+4. 測試。
+
+    ```bash
+    telnet demo.neo4jlabs.com 7687
+    ```
+
+<br>
+
+## 關於 `graphviz` 安裝
+
+1. 指令。
+
+    ```bash
+    pip install graphviz && brew install graphviz
+    ```
+
+<br>
+
+2. 當在 Python 中使用 `graphviz` 庫時，實際上需要調用  `graphviz`  的系統級二進制文件來執行操作。因此，除了在 Python 虛擬環境中安裝 `graphviz` Python 庫，仍然需要在系統層面安裝其相應的二進制文件和庫，以確保所有功能都可以正常工作，特別注意，這並不代表可以省去在虛擬環境安裝套件。
 
 <br>
 

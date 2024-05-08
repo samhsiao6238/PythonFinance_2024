@@ -11,10 +11,14 @@ import streamlit as st
 import graphviz
 
 # 從Langchain引入用於OpenAI聊天模型的封裝
-from langchain.chat_models import ChatOpenAI
+# from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
+
 
 # 引入Langchain對Neo4j圖形資料庫的封裝
-from langchain.graphs import Neo4jGraph
+# from langchain.graphs import Neo4jGraph
+from langchain_community.graphs import Neo4jGraph
+
 
 # 引入Langchain消息架構
 from langchain.schema import HumanMessage, AIMessage
@@ -38,7 +42,8 @@ os.environ["OPENAI_API_KEY"] = openai_api_key
 st.title("VC Chatbot")
 
 # 設定Neo4j資料庫的連接信息
-url = "neo4j+s://demo.neo4jlabs.com"
+# url = "neo4j+s://demo.neo4jlabs.com"
+url = "neo4j+s://demo.neo4jlabs.com:7687"
 username = "companies"
 password = "companies"
 database = "companies"
@@ -78,12 +83,10 @@ if "cypher" not in st.session_state:
     st.session_state["cypher"] = []
 
 # 生成聊天機器下回應的上下文
-"""參數與回傳值：
-prompt: 字串，表示當前用戶的輸入。
-context_data: 字串，預設為 "generated"，用來指定從 st.session_state 中讀取哪個對話數據，通常是用來指定是從哪類型的消息中抽取歷史數據。
-返回一個列表，包含混合類型的 AIMessage 和 HumanMessage 對象，這些對象代表了生成回應所需的上下文。
-"""
-
+# 參數與回傳值：
+# prompt: 字串，表示當前用戶的輸入。
+# context_data: 字串，預設為 "generated"，用來指定從 st.session_state 中讀取哪個對話數據，通常是用來指定是從哪類型的消息中抽取歷史數據。
+# 返回一個列表，包含混合類型的 AIMessage 和 HumanMessage 對象，這些對象代表了生成回應所需的上下文。
 
 def generate_context(
     prompt: str, context_data: str = "generated"
@@ -107,11 +110,7 @@ def generate_context(
 
 
 # 動態生成多個響應標籤（Tabs），並根據用戶與 AI 對話的內容和結果來展示相應的數據和視覺化信息
-"""參數
-i：表示要展示的對話和相關數據在列表中的索引
-"""
-
-
+# 參數 i：表示要展示的對話和相關數據在列表中的索引
 def dynamic_response_tabs(i):
     # 建立一個列表 tabs_to_add，預設包含 `💬Chat` 標籤，此標籤用於展示用戶和 AI 的對話
     tabs_to_add = ["💬Chat"]
