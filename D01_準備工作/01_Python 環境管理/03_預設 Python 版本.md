@@ -159,7 +159,7 @@ _別名指向指定 Python 版本_
 
 <br>
 
-2. `alias` 是在 Unix 和 Unix-like 系統中用來創建命令的快捷，可透過別名設定指向系統中的 Python 解釋器。
+2. `alias` 是在 Unix 和 Unix-like 系統中用來建立命令的快捷，可透過別名設定指向系統中的 Python 解釋器。
 
 <br>
 

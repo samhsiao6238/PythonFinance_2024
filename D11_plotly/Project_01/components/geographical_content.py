@@ -24,7 +24,7 @@ df_counts = df.groupby(
 # 按 'year_added' 排序，確保動畫幀按升序排列
 df_counts = df_counts.sort_values("year_added")
 
-# 創建地圖，包含年份的滑動條
+# 建立地圖，包含年份的滑動條
 fig1 = px.choropleth(
     df_counts,
     locations="country",
@@ -42,7 +42,7 @@ fig1.update_layout(width=1280, height=720, title_x=0.5)  # 更新佈局設置
 # 計算每年按類型製作的內容數量，並為缺失的類型-年份對填充零
 df_year_counts = df.groupby(["year_added", "type"]).size().reset_index(name="count")
 
-# 使用 plotly express 創建折線圖
+# 使用 plotly express 建立折線圖
 fig2 = px.line(
     df_year_counts,
     x="year_added",

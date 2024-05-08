@@ -66,7 +66,7 @@ def handle_message(event):
     else:
         _text = "我不明你想表達什麼 > <"
 
-    # 創建了一個 API client 實例，使用在 configuration 中定義的配置。
+    # 建立了一個 API client 實例，使用在 configuration 中定義的配置。
     # with 語句確保在該代碼區塊執行結束後可釋放資源。
     with ApiClient(configuration) as api_client:
         # 使用客戶端實例初始化一個 MessagingApi 物件，用於後續的消息操作。

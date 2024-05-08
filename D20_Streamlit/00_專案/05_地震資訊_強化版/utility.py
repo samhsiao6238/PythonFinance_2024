@@ -71,7 +71,7 @@ def data_filter(df: pd.DataFrame) -> pd.DataFrame:
         # 修改以腳本，原本的 source 面板並未被使用到而會出現警告
         # 這部分僅顯示資料來源沒有其他用途
         with filter_col2:
-            # 假設有多個數據源可選擇時可修改列表
+            # 假設有多個資料來源可選擇時可修改列表
             source_options = ["United States Geological Survey"]
             #
             source = st.selectbox(

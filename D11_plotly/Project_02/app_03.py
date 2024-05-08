@@ -1,5 +1,5 @@
 '''導入庫'''
-# 從 dash 庫導入 Dash, dcc, html 用於應用構建
+# 從 dash 庫導入 Dash, dcc, html 用於應用建立
 from dash import Dash, dcc, html
 
 # 導入 plotly.express 用於數據可視化
@@ -34,7 +34,7 @@ snp_values = np.random.normal(
     loc=0.0001, scale=0.001, size=len(dates)
 ).cumsum()
 
-# 創建 DataFrame 並進行整形處理
+# 建立 DataFrame 並進行整形處理
 df_portfolio = pd.DataFrame(
     {"Date": dates, "Portfolio": portfolio_values, "S&P 500": snp_values}
 )
@@ -58,7 +58,7 @@ monthly_return = \
     monthly_return.pct_change().dropna().stack().reset_index(name="Return")
 monthly_return["Date"] = monthly_return["Date"].dt.strftime("%Y-%m")
 
-# 創建持股比例餅圖的數據
+# 建立持股比例餅圖的數據
 NUMBER = 10
 top_holdings = pd.Series(
     np.random.rand(NUMBER), index=[f"Stock {i}" for i in range(1, NUMBER + 1)]
@@ -79,7 +79,7 @@ top_holdings_df.to_excel('top_holdings_data.xlsx')
 print("檔案儲存完畢。")
 
 '''建立圖表'''
-# 創建 Dash 應用，並使用 Bootstrap 主題
+# 建立 Dash 應用，並使用 Bootstrap 主題
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 # 設置應用佈局

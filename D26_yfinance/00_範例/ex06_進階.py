@@ -4,7 +4,7 @@
 from ta.trend import MACD
 from ta.momentum import StochasticOscillator
 
-# 導入市場數據庫
+# 導入市場資料庫
 import yfinance as yf
 
 # 數據可視化
@@ -42,7 +42,7 @@ stoch = StochasticOscillator(
 # 初始化 plotly 圖形
 fig = go.Figure()
 
-# 創建含有多個子圖的圖形
+# 建立含有多個子圖的圖形
 fig = make_subplots(
     rows=4,
     cols=1,

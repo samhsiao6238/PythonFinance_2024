@@ -25,7 +25,7 @@ def main():
     url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv"
     # 自訂的函數 get_dataframe
     df = get_dataframe(url)
-    # 創建一個副本，用於操作數據但不影響原資料
+    # 建立一個副本，用於操作數據但不影響原資料
     # 使用 sidebar 插件建立側邊欄位
     sidebar_df = df.copy()
 

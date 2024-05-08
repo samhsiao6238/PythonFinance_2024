@@ -25,7 +25,7 @@ closes = [
 ]  # 收盤價格在最高和最低之間
 volumes = np.random.randint(100000, 200000, num_days)
 
-# 創建 DataFrame
+# 建立 DataFrame
 df = pd.DataFrame(
     {
         "Date": dates,

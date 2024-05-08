@@ -82,7 +82,7 @@
 
 <br>
 
-11. 進入容器：以交互方式進入。
+11. 進入容器：以互動方式進入。
 
     ```bash
     docker exec -it <容器ID> /bin/bash
@@ -98,7 +98,7 @@
 
 <br>
 
-13. 創建容器網路。
+13. 建立容器網路。
 
     ```bash
     docker network create <網路名稱>

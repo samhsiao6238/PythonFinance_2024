@@ -101,7 +101,7 @@ response = requests.get(url)
 def transform_date(_date_str):
     # 轉換為秒
     timestamp_s = _date_str / 1000.0
-    # 創建 datetime 對象
+    # 建立 datetime 對象
     dt = datetime.utcfromtimestamp(timestamp_s)
     # 設置時區為 UTC
     dt = dt.replace(tzinfo=pytz.utc)

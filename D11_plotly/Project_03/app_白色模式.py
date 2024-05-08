@@ -11,7 +11,7 @@ batch_numbers = np.arange(1, 31)
 control_chart_data = np.random.rand(30) * 0.1
 control_chart_limits = [0.08, 0.02]
 
-# 創建 Dash 應用
+# 建立 Dash 應用
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 # 應用佈局

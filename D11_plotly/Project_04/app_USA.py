@@ -20,7 +20,7 @@ lon = np.random.uniform(-130, -60, 1000)
 # 緯度，隨機數在20到50之間
 lat = np.random.uniform(20, 50, 1000)
 
-# 創建一個DataFrame來儲存散點的經緯度和大小
+# 建立一個DataFrame來儲存散點的經緯度和大小
 df = pd.DataFrame({
     "lat": lat,
     "lon": lon,
@@ -47,7 +47,7 @@ income_distribution = pd.DataFrame(
     }
 )
 
-# 創建Dash應用程序
+# 建立Dash應用程序
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 # 定義應用布局

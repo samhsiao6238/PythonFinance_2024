@@ -39,7 +39,7 @@ top_holdings = pd.Series(
     np.random.rand(15), index=[f"Stock {i}" for i in range(1, 16)]
 )
 
-# 創建 Dash 應用
+# 建立 Dash 應用
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 # 設置應用佈局

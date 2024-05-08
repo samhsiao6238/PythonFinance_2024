@@ -19,7 +19,7 @@ df = df.explode("listed_in")
 # 計算每種類型和類型組合的數量
 df_counts = df.groupby(["type", "listed_in"]).size().reset_index(name="count")
 
-# 創建樹形圖來顯示不同類型和類型的內容
+# 建立樹形圖來顯示不同類型和類型的內容
 fig = px.treemap(
     df_counts,
     path=["type", "listed_in"],

@@ -30,7 +30,7 @@ def main():
     else:
         st.write("No data found.")
 
-    # 關閉數據庫對話
+    # 關閉資料庫對話
     session.close()
 
 
