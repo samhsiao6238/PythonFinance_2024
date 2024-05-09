@@ -6,7 +6,7 @@
 
 ## 說明
 
-1. 官方載點，點擊下載。
+1. 進入官方載點頁面後，點擊 [下載](https://neo4j.com/download/?_ga=2.95150232.542787322.1715227813-156909372.1715227813) 後填寫簡單資料，然後再次點擊 `Dwonload Desktop`，接續會開啟說明的畫面，官方說明 _非常詳細_，所以這裡不贅述。
 
     ![](images/img_27.png)
 
@@ -73,6 +73,53 @@
 11. 會運行資料庫的視窗界面。
 
     ![](images/img_41.png)
+
+<br>
+
+
+## 建立專案
+
+<br>
+
+1. 開啟之後點擊 `+ New`，接著 `Create project`。
+
+    ![](images/img_63.png)
+
+<br>
+
+2. 點擊右上方 `+ Add` 中的 `Remote connection`。
+
+    ![](images/img_62.png)
+
+<br>
+
+3. 依據下載的憑證文件填入 `URL`，接著點擊 `Next`。
+
+    ![](images/img_64.png)
+
+<br>
+
+4. 寫入 `Username`、`Password` 之後 `Save`。
+
+    ![](images/img_65.png)
+
+<br>
+
+5. 連線。
+
+    ![](images/img_66.png)
+
+<br>
+
+6. 完成時會顯示 `Active`，點擊右側的 `Open` 開啟。
+
+    ![](images/img_67.png)
+
+<br>
+
+7. 畫面如下，其餘操作步驟將另做說明。
+
+    ![](images/img_68.png)
 
 <br>
 
