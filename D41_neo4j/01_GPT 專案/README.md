@@ -24,7 +24,7 @@ _來源的部分先省略，之後再補上，這裡先說我的解析_。
 
 <br>
 
-## 補充說明
+## 相關錯誤排除
 
 _關於範例腳本運行時出現的錯誤，以下進行排除紀錄_
 
@@ -79,7 +79,84 @@ _關於範例腳本運行時出現的錯誤，以下進行排除紀錄_
 
 <br>
 
+
+## 步驟記錄
+
+_包含了容器的重建_
+
+1. 因為使用容器，所以不用建立或指定虛擬環境，建立專案資料夾並啟動 VSCode。
+```bash
+cd ~/Desktop && mkdir neo4jBot && cd neo4jBot && code .
+```
+
+2. 在當前路徑中建立容器資料夾，並建立`開發容器配置文件`，檔名為 `devcontainer.json`，這是用來配置 VSCode 中的開發容器環境所用，進階用戶可參考使用 `Dockerfile` 進行環境建置。
+```bash
+mkdir .devcontainer && touch .devcontainer/devcontainer.json
+```
+
+3. 關於使用 `映像檔案`、`Dockerfiles` 或 `Docker Compose` 安裝的相關技術可參考 [ Dev Container 官方說明](https://containers.dev/guide/dockerfile)。
+
+
+4. 編輯 `devcontainer.json` 內容如下。
+```json
+{
+  "name": "Python 3",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md", "src/app.py"]
+    },
+    "vscode": {
+      "settings": {},
+      "extensions": ["ms-python.python", "ms-python.vscode-pylance"]
+    }
+  },
+  "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit; echo '✅ Packages installed and Requirements met'",
+  "postAttachCommand": {
+    "server": "streamlit run src/app.py --server.enableCORS false --server.enableXsrfProtection false"
+  },
+  "portsAttributes": {
+    "7687": {
+      "label": "Neo4j Bolt Port",
+      "onAutoForward": "ignore"
+    },
+    "8501": {
+      "label": "Streamlit Application",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "forwardPorts": [8501, 7687]
+}
+```
+
+5. 建立套件統籌文件 `requirements.txt`。
+```bash
+touch requirements.txt
+```
+
+6. 加入以下套件。
+```bash
+streamlit==1.26.0
+openai
+langchain
+langchain-openai
+neo4j
+graphviz==0.20.1
+pydantic==2.3.0
+python-dotenv
+```
+
+7. 建立 .env 文件，並寫入 OpenAI 的 API Key。
+```bash
+touch .env
+```
+![](images/img_02.png)
+
+8. 點擊 `在容器中重新開啟`，這時便會啟動容器的建立。
+![](images/img_01.png)
+
 ___
+
 
 _END_
 
