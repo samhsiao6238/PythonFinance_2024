@@ -225,32 +225,6 @@ _包含了容器的重建_
 
 <br>
 
-11. 另外，也可以繼承 `Neo4jGraph` 類並拓展添加 `__enter__` 和 `__exit__` 方法，使其支援上下文管理，這樣就可以在 `with` 語句中使用 `Neo4jGraph` 的子類來自動處理資源的關閉，這不僅更符合 Python 的風格，也能在發生錯誤時保證資源被適當釋放。
-
-  ```python
-  # 繼承原有的 Neo4jGraph
-  class EnhancedNeo4jGraph(Neo4jGraph):
-      def __enter__(self):
-          # 可以進行額外的初始化操作
-          # 呼叫父類的 __enter__
-          return super().__enter__()
-
-      def __exit__(self, exc_type, exc_val, exc_tb):
-          # 進行資源清理
-          # 確保父類的退出操作被執行
-          super().__exit__(exc_type, exc_val, exc_tb)
-          # 額外的錯誤處理或清理可以在這裡添加
-  ```
-
-  _進一步修改代碼，使用子類建立物件_
-  ```python
-  with EnhancedNeo4jGraph(username=username, password=password, url=url, database=database) as graph:
-      # 進行操作
-      # 當離開 with 區塊時自動執行 graph.close()
-  ```
-
-<br>
-
 ___
 
 _END_
