@@ -79,149 +79,175 @@ _關於範例腳本運行時出現的錯誤，以下進行排除紀錄_
 
 <br>
 
-
 ## 步驟記錄
 
 _包含了容器的重建_
 
+<br>
+
 1. 因為使用容器，所以不用建立或指定虛擬環境，建立專案資料夾並啟動 VSCode。
-```bash
-cd ~/Desktop && mkdir neo4jBot && cd neo4jBot && code .
-```
+
+  ```bash
+  cd ~/Desktop && mkdir neo4jBot && cd neo4jBot && code .
+  ```
+
+<br>
 
 2. 在當前路徑中建立容器資料夾，並建立`開發容器配置文件`，檔名為 `devcontainer.json`，這是用來配置 VSCode 中的開發容器環境所用，進階用戶可參考使用 `Dockerfile` 進行環境建置。
-```bash
-mkdir .devcontainer && touch .devcontainer/devcontainer.json
-```
+
+  ```bash
+  mkdir .devcontainer && touch .devcontainer/devcontainer.json
+  ```
+
+<br>
 
 3. 關於使用 `映像檔案`、`Dockerfiles` 或 `Docker Compose` 安裝的相關技術可參考 [ Dev Container 官方說明](https://containers.dev/guide/dockerfile)。
 
+<br>
 
 4. 編輯 `devcontainer.json` 內容如下。
-```json
-{
-  // 指定開發環境名稱，這是可以自訂的
-  "name": "Python 3",
-  // 容器基於的映像，當前設定使用微軟的 `python:1-3.11-bullseye`
-  "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
-  "customizations": {
-    // 指定在 Codespace 中要使用的設定，特別注意這裡是相對於根目錄的路徑
-    "codespaces": {
-      "openFiles": ["README.md", "app.py"]
+
+  ```json
+  {
+    // 指定開發環境名稱，這是可以自訂的
+    "name": "Python 3",
+    // 容器基於的映像，當前設定使用微軟的 `python:1-3.11-bullseye`
+    "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
+    "customizations": {
+      // 指定在 Codespace 中要使用的設定，特別注意這裡是相對於根目錄的路徑
+      "codespaces": {
+        "openFiles": ["README.md", "app.py"]
+      },
+      // 在 VScode 中的設定與拓展插件
+      "vscode": {
+        "settings": {},
+        "extensions": ["ms-python.python", "ms-python.vscode-pylance"]
+      }
     },
-    // 在 VScode 中的設定與拓展插件
-    "vscode": {
-      "settings": {},
-      "extensions": ["ms-python.python", "ms-python.vscode-pylance"]
-    }
-  },
-  // 檢查 `packages.txt` 並安裝其中列出的 Debian 軟體包
-  // 檢查 `requirements.txt` 並安裝指定的 Python 套件
-  // 安裝 `streamlit` 以及相關更新
-  "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit; echo '✅ Packages installed and Requirements met'",
-  // 這個指令是在附加容器後運行
-  "postAttachCommand": {
-    // --server.enableCORS 具有跨域資源共享(CORS)功能
-    // 這個設定是在受控環境中執行服務並希望避免可能使開發互動複雜化的安全措施時使用
-    "server": "streamlit run app.py --server.enableCORS false --server.enableXsrfProtection false"
-  },
-  // 定義如何處理容器內的特定連接埠
-  "portsAttributes": {
-    "7687": {
-      "label": "Neo4j Bolt Port",
-      "onAutoForward": "ignore"
+    // 檢查 `packages.txt` 並安裝其中列出的 Debian 軟體包
+    // 檢查 `requirements.txt` 並安裝指定的 Python 套件
+    // 安裝 `streamlit` 以及相關更新
+    "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit; echo '✅ Packages installed and Requirements met'",
+    // 這個指令是在附加容器後運行
+    "postAttachCommand": {
+      // --server.enableCORS 具有跨域資源共享(CORS)功能
+      // 這個設定是在受控環境中執行服務並希望避免可能使開發互動複雜化的安全措施時使用
+      "server": "streamlit run app.py --server.enableCORS false --server.enableXsrfProtection false"
     },
-    "8501": {
-      "label": "Streamlit Application",
-      "onAutoForward": "openPreview"
-    }
-  },
-  // 列出容器啟動時應自動轉送的連接埠
-  "forwardPorts": [8501, 7687]
-}
-```
+    // 定義如何處理容器內的特定連接埠
+    "portsAttributes": {
+      "7687": {
+        "label": "Neo4j Bolt Port",
+        "onAutoForward": "ignore"
+      },
+      "8501": {
+        "label": "Streamlit Application",
+        "onAutoForward": "openPreview"
+      }
+    },
+    // 列出容器啟動時應自動轉送的連接埠
+    "forwardPorts": [8501, 7687]
+  }
+  ```
+
+<br>
 
 5. 延續上一點，特別留意鍵值 `postAttachCommand` 中的指令是有路徑的，當前在同級路徑所以是 `streamlit run app.py`，若將 `app.py` 置於不同層級路徑，則需進行修改，例如將其至於子目錄 `src` 中，則是 `streamlit run sec/app.py`
 
 <br>
 
 6. 建立套件統籌文件 `requirements.txt`。
-```bash
-touch requirements.txt
-```
+
+  ```bash
+  touch requirements.txt
+  ```
+
+<br>
 
 7. 加入以下套件。
-```bash
-streamlit==1.26.0
-openai
-langchain
-langchain-openai
-neo4j
-graphviz==0.20.1
-pydantic==2.3.0
-python-dotenv
-```
+
+  ```bash
+  streamlit==1.26.0
+  openai
+  langchain
+  langchain-openai
+  neo4j
+  graphviz==0.20.1
+  pydantic==2.3.0
+  python-dotenv
+  ```
+
+<br>
 
 8. 建立 .env 文件，並寫入 OpenAI 的 API Key。
-```bash
-touch .env
-```
-![](images/img_02.png)
+
+  ```bash
+  touch .env
+  ```
+
+  ![](images/img_02.png)
+
+<br>
 
 9. 點擊 `在容器中重新開啟`，這時便會啟動容器的建立。
-![](images/img_01.png)
+
+  ![](images/img_01.png)
+
+<br>
 
 10. 特別注意，`Neo4jGraph` 的實體不支援 `with` 作為上下文管理（context manager），所以使用 `try-except` 中的 `finally` 來達到執行完畢時可以運行與 `close` 同效果的代碼。
-```python
-## 示範
-# 創建一個Neo4j圖形資料庫實例
-graph = Neo4jGraph(username=username, password=password, url=url, database=database)
 
-try:
-    # 從語言模型創建自定義的Cypher查詢鏈
-    graph_search = CustomCypherChain.from_llm(
-        cypher_llm=ChatOpenAI(temperature=0.0, model_name="gpt-4"),
-        qa_llm=ChatOpenAI(temperature=0.0),
-        graph=graph,
-        qa_prompt=CYPHER_QA_PROMPT,
-    )
+  ```python
+  ## 示範
+  # 創建一個Neo4j圖形資料庫實例
+  graph = Neo4jGraph(username=username, password=password, url=url, database=database)
 
-    # 其他操作，比如處理用戶輸入和生成回應等
+  try:
+      # 從語言模型創建自定義的Cypher查詢鏈
+      graph_search = CustomCypherChain.from_llm(
+          cypher_llm=ChatOpenAI(temperature=0.0, model_name="gpt-4"),
+          qa_llm=ChatOpenAI(temperature=0.0),
+          graph=graph,
+          qa_prompt=CYPHER_QA_PROMPT,
+      )
 
-finally:
-    # 確保無論如何都會關閉 Neo4j 連線
-    if hasattr(graph, 'close'):
-        graph.close()
-    elif hasattr(graph, 'disconnect'):
-        graph.disconnect()
-    else:
-        print("No method to close or disconnect the graph was found.")
-```
+      # 其他操作，比如處理用戶輸入和生成回應等
 
-10. 另外，也可以自己在 `Neo4jGraph` 類中添加 `__enter__` 和 `__exit__` 方法，使其支援上下文管理，這樣就可以在 `with` 語句中使用 `Neo4jGraph` 來自動處理資源的關閉，這不僅更符合 Python 的風格，也能在發生錯誤時保證資源被適當釋放。
+  finally:
+      # 確保無論如何都會關閉 Neo4j 連線
+      if hasattr(graph, 'close'):
+          graph.close()
+      elif hasattr(graph, 'disconnect'):
+          graph.disconnect()
+      else:
+          print("No method to close or disconnect the graph was found.")
+  ```
 
-```python
-class Neo4jGraph:
-    def __enter__(self):
-        # 初始化連接
-        return self
+<br>
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        # 確保連接被關閉
-        self.close()
-```
+11. 另外，也可以自己在 `Neo4jGraph` 類中添加 `__enter__` 和 `__exit__` 方法，使其支援上下文管理，這樣就可以在 `with` 語句中使用 `Neo4jGraph` 來自動處理資源的關閉，這不僅更符合 Python 的風格，也能在發生錯誤時保證資源被適當釋放。
 
-_進一步修改代碼_
-```python
-with Neo4jGraph(username=username, password=password, url=url, database=database) as graph:
-    # 進行操作
-    # 當離開 with 區塊時自動執行 graph.close()
-```
+  ```python
+  class Neo4jGraph:
+      def __enter__(self):
+          # 初始化連接
+          return self
 
+      def __exit__(self, exc_type, exc_val, exc_tb):
+          # 確保連接被關閉
+          self.close()
+  ```
+
+  _進一步修改代碼_
+  ```python
+  with Neo4jGraph(username=username, password=password, url=url, database=database) as graph:
+      # 進行操作
+      # 當離開 with 區塊時自動執行 graph.close()
+  ```
+
+<br>
 
 ___
-
-
 
 _END_
 
