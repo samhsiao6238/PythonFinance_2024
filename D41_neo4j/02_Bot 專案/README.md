@@ -30,6 +30,8 @@
     python -m venv envllmChatBot
     ```
 
+<br>
+
 3. 修改環境參數
 
     ```bash
@@ -43,6 +45,8 @@
     ```bash
     source /Users/samhsiao/Documents/PythonVenv/envllmChatBot/bin/activate
     ```
+
+<br>
 
 5. 啟動虛擬環境。
 
