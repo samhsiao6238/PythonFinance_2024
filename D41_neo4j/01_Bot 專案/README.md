@@ -907,7 +907,7 @@ _在 VSCode 中操作_
 
 <br>
 
-9. 編輯 `devcontainer.json`，添加指令在容器建立後安裝指定的套件，包含 `requirements.txt`、`streamlit`、`python-dotenv`，其中 `streamlit` 應該是可以寫入 `requirements.txt`，但 `python-dotenv` 在部署在雲端時無需安裝，所以要另外以指令進行安裝。
+9. 編輯 `devcontainer.json`，除了將版本號改為 `python:3.10-bullseye`，並添加指令使榮器在建立後考會安裝指定的套件，包含 `requirements.txt`、`streamlit`、`python-dotenv`，其中 `streamlit` 已寫入 `requirements.txt`，但 `python-dotenv` 在部署在雲端時無需安裝，所以要另外以指令進行安裝。
 
     ```json
     {
@@ -978,6 +978,12 @@ _在 VSCode 中操作_
 
 <br>
 
+15. 此時可在本地容器運行並進行問答。
+
+    ![](images/img_51.png)
+
+<br>
+
 ## 部署到 GitHub
 
 1. 點擊 `原始檔控制`。
@@ -1010,11 +1016,11 @@ _在 VSCode 中操作_
 
 <br>
 
-6. 過程中可以點擊 `View logs` 觀察。
+6. 過程中可以點擊 `View logs` 觀察即時訊息，確保沒有錯誤發生。
 
     ![](images/img_20.png)
 
-_完成時先不急著動作，因為還有一些程序是在建立好之後要做的。_
+_顯示完成時先不急著動作，因為還有一些安裝程序是在建立好之後進行的。_
 
 <br>
 
@@ -1030,31 +1036,37 @@ _完成時先不急著動作，因為還有一些程序是在建立好之後要�
 
 <br>
 
-9. 可嘗試手動建立 `.env` 文件，並將本地的內容複製貼上，用以測試腳本的運行，因為 `.gitignore` 文件是有同步的，所以若更新倉庫依舊不會有安全外洩問題。
+## 加入敏感資訊
+
+_排除前一個步驟的錯誤訊息_
+
+<br>
+
+1. 在 Codespace 專案資料夾的根目錄中手動建立 `.env` 文件，並將本地的內容複製貼上，用以測試腳本的運行，因為 `.gitignore` 文件是有同步的，所以若更新倉庫不會有安全外洩問題。
 
     ![](images/img_23.png)
 
 <br>
 
-10. 刷新網頁後，Bot 可以順利運行。
+2. 刷新網頁後，Bot 就可以順利運行。
 
     ![](images/img_24.png)
 
 <br>
 
-11. 測試一下重建容器。
+3. 測試一下重建容器。
 
     ![](images/img_25.png)
 
 <br>
 
-12. 完成後會自動啟動服務，開啟瀏覽器便可進行使用。
+4. 完成後會自動啟動服務，開啟瀏覽器便可進行對話。
 
     ![](images/img_26.png)
 
 <br>
 
-13. 正常運行。
+5. 正常運行。
 
     ![](images/img_27.png)
 
@@ -1062,19 +1074,23 @@ _完成時先不急著動作，因為還有一些程序是在建立好之後要�
 
 ## 部署到 Streamlit 服務器上
 
-1. 在專案路徑中建立一個 `.streamlit` 資料夾，並添加一個 `secrets.toml` 文件。
+_回到本機操作，在 Codespace 也是可以。_
+
+<br>
+
+1. 在專案根目錄中建立一個 `.streamlit` 資料夾，並添加一個 `secrets.toml` 文件。
 
     ![](images/img_28.png)
 
 <br>
 
-2. 將 `.env` 文件中的內容複製到 `secrets.toml` 文件中，因為 `.toml` 格式中，等號右側的是 `字串值` ，所以必須加上引號。
+2. 將 `.env` 文件中的內容複製到 `secrets.toml` 文件中，因為在 `.toml` 格式中，等號右側的是 `字串值` ，所以必須加上引號，此時基於 `一致性原則` 可在等號兩側都加上一個空白字元。
 
     ![](images/img_41.png)   
 
 <br>
 
-3. 同樣要把 `secrets.toml` 文件加入 `.gitignore` 中。
+3. 同樣要把 `secrets.toml` 文件加入 `.gitignore` 中，這部分預設已經寫入。
 
     ```bash
     # 敏感資訊
@@ -1104,49 +1120,61 @@ _完成時先不急著動作，因為還有一些程序是在建立好之後要�
 
 ## 建立專案
 
-1. New。
+1. New app。
 
     ![](images/img_32.png)
 
 <br>
 
-2. 部署。
+2. 部署：選取倉庫，最重要的是要修改主腳本的名稱，在這個專案中為 `bot.py`，然後可自訂一個公網名稱，尾綴固定是 `streamlit.app`。
 
     ![](images/img_33.png)
 
 <br>
 
-3. 尚未設定敏感資訊，所以一樣是會出錯的。
+3. 接著可點擊 `Advanced settings...`
+
+    ![](images/img_52.png)
+
+<br>
+
+4. 假如未進行設定就進入下一步，會因為尚未設定敏感資訊而出錯的。
 
     ![](images/img_34.png)
 
 <br>
 
-4. 回到主控台，在專案右側點擊更多展開，並點擊設定。
+5. 那就必須回到主控台，在專案右側點擊 `...` 顯示更多來展開，並點擊設定 `Settings`。
 
     ![](images/img_35.png)
 
 <br>
 
-5. 切換到 `Secrets`。
+6. 然後切換到 `Secrets` 進行密鑰等環境參數設定，但特別注意的是，透過這樣的設定步驟將無法選擇 `Python version`，在某些情境下可能會出錯。
 
     ![](images/img_36.png)
 
 <br>
 
-6. 因為 `secrets.toml` 文件是不會進行同步的，所以要將 `secrets.toml` 的內容複製貼在 Streamlit 服務器上；。
+7. 回到前面 `Advanced settings...` 的步驟，點擊後進入，首先選擇跟容器相同版本的 `3.10`。
+
+    ![](images/img_53.png)
+
+<br>
+
+8. 在 `Secrets` 的部分，因為 `secrets.toml` 文件是排除同步的，所以要將 `secrets.toml` 的內容複製貼在 Streamlit 服務器上。
 
     ![](images/img_37.png)
 
 <br>
 
-7. 修改 `graph.py`、`llm.py`、`vector.py` 三個腳本中原本使用 `os.getenv()` 的部分要改為 `st.secrets["<鍵>"]`
+9. 至此，應該要去修改 `graph.py`、`llm.py`、`vector.py` 三個腳本中原本如下圖使用 `os.getenv()` 的部分，因應 `Secrets` 的環境設置而改為 `st.secrets["<鍵>"]`，但這樣的修改模式將使得腳本在不同環境下運作時，又得再次手動修改，相當很麻煩。
 
     ![](images/img_39.png)
 
 <br>
 
-8. 延續上一點，但這樣的修改在不同環境下要手動修改很麻煩，所以在專案的 `tools` 資料夾中添加一個模組 `secret.py`，添加判斷環境的功能。
+10. 延續上一點，為了避免這樣的繁瑣，可在專案中添加一個模組 `secret.py` 來判斷所處在的運作環境為何，這裡示範將這個腳本置於 `tools` 資料夾中。
 
     ```python
     # utility.py
@@ -1166,7 +1194,7 @@ _完成時先不急著動作，因為還有一些程序是在建立好之後要�
             return os.getenv(key)
     ```
 
-2. 分別在  `graph.py`、`llm.py`、`vector.py` 導入函數，其中  `graph.py` 及 `vector.py` 改寫如下。
+11. 分別在  `graph.py`、`llm.py`、`vector.py` 導入函數，其中  `graph.py` 及 `vector.py` 改寫如下。
 
     ```python
     # graph.py
@@ -1188,7 +1216,7 @@ _完成時先不急著動作，因為還有一些程序是在建立好之後要�
 
 <br>
 
-9. 另外 `llm.py` 需要的是 OpenAPI 的 API Key，所以改寫內容與另外兩個腳本不同。
+12. 另外 `llm.py` 需要的是 OpenAPI 的 API Key，所以改寫內容與另外兩個腳本不同。
 
     ```python
     # 導入自訂函數
@@ -1204,19 +1232,19 @@ _完成時先不急著動作，因為還有一些程序是在建立好之後要�
 
 <br>
 
-10. 設定改變後都要進行 `Reboot`。
+13. 設定改變後都要進行 `Reboot`。
 
     ![](images/img_38.png)
 
 <br>
 
-11. 在 Codespace 中開發後，切記要同步變更到 Github 倉庫中，然後再刷新 Streamlit 網頁服務，這時會出現關於套件 `dotenv` 的錯誤，因為服務器上無法安裝這個套件。
+14. 在 Codespace 中開發後，切記要同步變更到 Github 倉庫中，然後再刷新 Streamlit 網頁服務，這時會出現關於套件 `dotenv` 的錯誤，因為服務器上無法安裝這個套件。
 
     ![](images/img_40.png)
 
 <br>
 
-12. 修改 `secret.py` 中的 `get_secret()`，將 `dotenv` 的使用移入所在環境判斷的區塊內，只有確認在本機或容器中運行時才導入使用。
+15. 修改 `secret.py` 中的 `get_secret()`，將 `dotenv` 的使用移入所在環境判斷的區塊內，只有確認在本機或容器中運行時才導入使用。
 
     ```python
     # 判斷環境取得密鑰
@@ -1250,7 +1278,7 @@ _完成時先不急著動作，因為還有一些程序是在建立好之後要�
 
 <br>
 
-13. 然後進入 Streamlit 服務器的 `Secrets` 中加入。
+16. 然後進入 Streamlit 服務器的 `Secrets` 中加入。
 
     ```bash
     STREAMLIT_SHARING_MODE = 1
@@ -1260,7 +1288,7 @@ _完成時先不急著動作，因為還有一些程序是在建立好之後要�
 
 <br>
 
-14. 切記更新設定都要 `Reboot`，至此無論在本機的容器中、 Codespace 容器中，或是部署在 Streamlit 服務器上的應用皆可正常運行了。
+17. 切記更新設定都要 `Reboot`，至此無論在本機的容器中、 Codespace 容器中，或是部署在 Streamlit 服務器上的應用皆可正常運行了。
 
     ![](images/img_43.png)
 
