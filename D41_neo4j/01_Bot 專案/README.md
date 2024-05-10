@@ -1315,10 +1315,11 @@ _回到本機操作，在 Codespace 也是可以。_
 
 <br>
 
-16. 修改 `secret.py` 中的 `get_secret()`，將 `dotenv` 的使用移入所在環境判斷的區塊內，只有確認在本機或容器中運行時才導入使用；特別注意，要將 `from dotenv import load_dotenv` 註解或刪除。
+16. 修改 `secret.py` 中的 `get_secret()`，將 `dotenv` 的使用移入所在環境判斷的區塊內，只有確認在本機或容器中運行時才導入使用；特別注意，除了要新增 `import streamlit as st`，還要將 `from dotenv import load_dotenv` 註解或刪除。
 
     ```python
     # secret.py
+    import streamlit as st
     import os
     # from dotenv import load_dotenv
 
