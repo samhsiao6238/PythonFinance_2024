@@ -6,13 +6,13 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 ## 說明
 
-1. 範例的 [教程網址](https://graphacademy.neo4j.com/courses/llm-chatbot-python/1-project-setup/)。
+1. 這個筆記是依據以下的 [教程](https://graphacademy.neo4j.com/courses/llm-chatbot-python/1-project-setup/) 所進行的拓展。
 
     ![](images/img_01.png)
 
 <br>
 
-2. 範例中的腳本可參考 [GitHub](https://github.com/neo4j-graphacademy/llm-chatbot-python?tab=readme-ov-file)，後續也會透過 `Git` 下載來修改。
+2. 範例中的腳本可參考 [GitHub](https://github.com/neo4j-graphacademy/llm-chatbot-python?tab=readme-ov-file)，後續操作中也會透過 `Git` 指令克隆後修改。
 
 <br>
 
