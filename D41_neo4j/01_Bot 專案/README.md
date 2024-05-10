@@ -18,7 +18,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 ## 步驟
 
-1. 因為 `Langchain` 模組不支援 `Python 3.12` 以上版本，所以要查詢並確認當前環境的版本號可用。
+1. 特別注意，因為專案中會使用到的 `Langchain` 模組不支援 `Python 3.12` 以上版本，所以開始進行錢，請確認當前環境的版本號可用。
 
     ```bash
     python --version
