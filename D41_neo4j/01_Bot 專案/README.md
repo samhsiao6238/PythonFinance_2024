@@ -899,7 +899,7 @@ _在 VSCode 中操作_
 
 <br>
 
-9. 編輯 `devcontainer.json`，添加指令在容器建立後安裝指定的套件，包含 `requirements.txt`、`streamlit`、`python-dotenv`，其中 `streamlit` 應該是可以寫入 `requirements.txt`，但 `python-dotenv` 在部署在雲端時無需安裝，所以可另外以指令進行安裝。
+9. 編輯 `devcontainer.json`，添加指令在容器建立後安裝指定的套件，包含 `requirements.txt`、`streamlit`、`python-dotenv`，其中 `streamlit` 應該是可以寫入 `requirements.txt`，但 `python-dotenv` 在部署在雲端時無需安裝，所以要另外以指令進行安裝。
 
     ```json
     {
@@ -919,7 +919,39 @@ _在 VSCode 中操作_
 
 <br>
 
-10. 在 VSCode 左下方的連線也會顯示連入容器。
+10. 將 `streamlit` 寫入後的 `requirements.txt`。
+
+    ```txt
+    langchain
+    openai
+    langchain_openai
+    neo4j-driver
+    streamlit
+    ```
+
+<br>
+
+11. 延續上一點，同時將 `devcontainer.json` 文件也修改一下，將 `streamlit` 的安裝指令拿掉。
+
+    ```json
+    {
+        // 命名
+        "name": "Python 3",
+        // 映像
+        "image": "mcr.microsoft.com/devcontainers/python:1-3.10-bullseye",
+        // 容器啟動後執行指令進行安裝 `requirements.txt`、`streamlit`、`python-dotenv`
+        "updateContentCommand": "[ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user python-dotenv; echo '✅ Packages installed and Requirements met'",
+        // 運行主腳本
+        // --server.enableCORS false：允許應用接受來自不同埠或域的請求
+        // --server.enableXsrfProtection false：禁用保護，在開發階段使用以避免遇到與 CSRF 保護相關的問題
+        "postAttachCommand": "streamlit run bot.py --server.enableCORS false --server.enableXsrfProtection false"
+    }
+
+    ```
+
+<br>
+
+12. 在 VSCode 左下方的連線也會顯示連入容器。
 
     ![](images/img_14.png)
 
