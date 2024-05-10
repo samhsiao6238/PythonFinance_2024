@@ -1252,7 +1252,7 @@ _回到本機操作，在 Codespace 也是可以。_
 
 <br>
 
-1.  修改 `secret.py` 中的 `get_secret()`，將 `dotenv` 的使用移入所在環境判斷的區塊內，只有確認在本機或容器中運行時才導入使用。
+16. 修改 `secret.py` 中的 `get_secret()`，將 `dotenv` 的使用移入所在環境判斷的區塊內，只有確認在本機或容器中運行時才導入使用。
 
     ```python
     # 判斷環境取得密鑰
@@ -1286,7 +1286,7 @@ _回到本機操作，在 Codespace 也是可以。_
 
 <br>
 
-17. 然後進入 Streamlit 服務器的 `Secrets` 中加入。
+17. 然後進入 Streamlit 服務器的 `Secrets` 中加入一個新的變數 `STREAMLIT_SHARING_MODE`，這是設計用來判斷當前環境是否為 Streamlit 服務器的一個機制。
 
     ```bash
     STREAMLIT_SHARING_MODE = 1
