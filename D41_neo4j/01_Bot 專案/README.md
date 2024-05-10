@@ -1198,21 +1198,73 @@ _回到本機操作，在 Codespace 也是可以。_
 
 11. 分別在  `graph.py`、`llm.py`、`vector.py` 導入函數，其中  `graph.py` 及 `vector.py` 改寫如下。
 
+    _graph.py_
+
     ```python
     # graph.py
+    from langchain_community.graphs import Neo4jGraph
     # 導入自訂函數
     from solutions.tools.secret import get_secret
-    
-    # 中間這段不變 ...
-    
-    # 註解變數取的方式
-    # NEO4J_URI = os.getenv("NEO4J_URI")
-    # NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
-    # NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
-    # 改寫用 get_secret 函數取得變數
+
+    # 讀取環境變數
     NEO4J_URI = get_secret("NEO4J_URI")
     NEO4J_USERNAME = get_secret("NEO4J_USERNAME")
     NEO4J_PASSWORD = get_secret("NEO4J_PASSWORD")
+
+    # Neo4j Graph
+    graph = Neo4jGraph(
+        url=NEO4J_URI,
+        username=NEO4J_USERNAME,
+        password=NEO4J_PASSWORD,
+    )
+
+    ```
+
+    _vector.py_
+
+    ```python
+    # vector.py
+    from langchain_community.vectorstores.neo4j_vector import Neo4jVector
+    from langchain.chains import RetrievalQA
+    from solutions.llm import llm, embeddings
+    # 導入自訂函數
+    from solutions.tools.secret import get_secret
+
+    # 讀取環境變數
+    NEO4J_URI = get_secret("NEO4J_URI")
+    NEO4J_USERNAME = get_secret("NEO4J_USERNAME")
+    NEO4J_PASSWORD = get_secret("NEO4J_PASSWORD")
+
+    neo4jvector = Neo4jVector.from_existing_index(
+        embeddings,                 # <1>
+        url=NEO4J_URI,              # <2>
+        username=NEO4J_USERNAME,    # <3>
+        password=NEO4J_PASSWORD,    # <4>
+        index_name="moviePlots",    # <5>
+        node_label="Movie",         # <6>
+        text_node_property="plot",  # <7>
+        embedding_node_property="plotEmbedding",  # <8>
+        retrieval_query="""
+        RETURN
+            node.plot AS text,
+            score,
+            {
+                title: node.title,
+                directors: [ (person)-[:DIRECTED]->(node) | person.name ],
+                actors: [ (person)-[r:ACTED_IN]->(node) | [person.name, r.role] ],
+                tmdbId: node.tmdbId,
+                source: 'https://www.themoviedb.org/movie/'+ node.tmdbId
+            } AS metadata
+        """,
+    )
+
+    retriever = neo4jvector.as_retriever()
+
+    kg_qa = RetrievalQA.from_chain_type(
+        llm,  # <1>
+        chain_type="stuff",  # <2>
+        retriever=retriever,  # <3>
+    )
 
     ```
 
@@ -1221,15 +1273,26 @@ _回到本機操作，在 Codespace 也是可以。_
 12. 另外 `llm.py` 需要的是 OpenAPI 的 API Key，所以改寫內容與另外兩個腳本不同。
 
     ```python
+    # llm.py
+    from langchain_openai import ChatOpenAI
+    from langchain_openai import OpenAIEmbeddings
     # 導入自訂函數
     from solutions.tools.secret import get_secret
 
-    # 註解原本取的變數的方式
-    # OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-    # OPENAI_MODEL = os.getenv("OPENAI_MODEL")
     # 改寫
     OPENAI_API_KEY = get_secret("OPENAI_API_KEY")
     OPENAI_MODEL = get_secret("OPENAI_MODEL")
+
+    # 建立 ChatOpenAI 實體
+    llm = ChatOpenAI(
+        openai_api_key=OPENAI_API_KEY,
+        model=OPENAI_MODEL,
+    )
+
+    # OpenAIEmbeddings 是用來生成和處理嵌入向量（embeddings）
+    # 這些嵌入向量是從使用 OpenAI 模型（如 GPT-4）生成的文本中獲取的
+    embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+
     ```
 
 <br>
