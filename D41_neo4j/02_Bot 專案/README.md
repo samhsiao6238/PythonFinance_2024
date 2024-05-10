@@ -10,7 +10,7 @@
 
 <br>
 
-2. 可參考 [GitHub](https://github.com/neo4j-graphacademy/llm-chatbot-python?tab=readme-ov-file)。
+2. 範例中的腳本可參考 [GitHub](https://github.com/neo4j-graphacademy/llm-chatbot-python?tab=readme-ov-file)，後續也會透過 `Git` 下載來修改。
 
 <br>
 
@@ -40,7 +40,7 @@
 
 <br>
 
-4. 加入，然後儲存 `control+o`、退出 `control+x`
+4. 在 `.zshrc` 文件中加入以下代碼，然後將文件儲存 `control+o` 並退出 `control+x`。
 
     ```bash
     source /Users/samhsiao/Documents/PythonVenv/envllmChatBot/bin/activate
@@ -64,15 +64,25 @@
 
 <br>
 
-7. 透過指令安裝套件。
+7. 透過指令安裝 `requirements.txt` 文件中指定的模組與版本。
 
     ```bash
     pip install -r requirements.txt
     ```
+    
+    _這裡觀察一下文件的內容_
+    ```txt
+    langchain
+    openai
+    langchain_openai
+    langchainhub
+    neo4j-driver
+    streamlit
+    ```
 
 <br>
 
-8. 另外安裝一個套件，因為沒安裝在後面會出現錯誤。
+8. 預設文件中沒有 `langchainhub` 模組，若未加入文件中統籌安裝，可手動進行安裝；若未安裝在後續的執行步驟將會報錯。
 
     ```bash
     pip install langchainhub
@@ -80,7 +90,7 @@
 
 <br>
 
-9. 如指示更新就照做。
+9. 如有提示要更新就照做。
 
     ```bash
     pip install --upgrade pip
