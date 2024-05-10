@@ -1174,10 +1174,10 @@ _回到本機操作，在 Codespace 也是可以。_
 
 <br>
 
-10. 延續上一點，為了避免這樣的繁瑣，可在專案中添加一個模組 `secret.py` 來判斷所處在的運作環境為何，這裡示範將這個腳本置於 `tools` 資料夾中。
+10. 延續上一點，為了避免這樣的繁瑣，可在專案中添加一個模組 `secret.py` 來判斷所處在的運作環境為何，這裡示範將這個腳本置於 `tools` 資料夾中，函數名稱為 `get_secret()`。
 
     ```python
-    # utility.py
+    # secret.py
     # 原本沒有導入 dotenv，這裡要添加
     import os
     from dotenv import load_dotenv
@@ -1193,6 +1193,8 @@ _回到本機操作，在 Codespace 也是可以。_
             # 如果 st.secrets 沒有該鍵或 st.secrets 未被設定，則從環境變量中獲取
             return os.getenv(key)
     ```
+
+<br>
 
 11. 分別在  `graph.py`、`llm.py`、`vector.py` 導入函數，其中  `graph.py` 及 `vector.py` 改寫如下。
 
@@ -1232,19 +1234,25 @@ _回到本機操作，在 Codespace 也是可以。_
 
 <br>
 
-13. 設定改變後都要進行 `Reboot`。
+13. 無論以上程序是在本機修改或在 Codespace 進行編輯，都記得要記得同步。
+
+    ![](images/img_54.png)
+
+<br>
+
+14. 進入 Streamlit 主控台，因為專案的設定改變了，所以要進行 `Reboot`，假如只是內容改變可以不用重啟。
 
     ![](images/img_38.png)
 
 <br>
 
-14. 在 Codespace 中開發後，切記要同步變更到 Github 倉庫中，然後再刷新 Streamlit 網頁服務，這時會出現關於套件 `dotenv` 的錯誤，因為服務器上無法安裝這個套件。
+15. 完成後會出現關於套件 `dotenv` 的錯誤，因為服務器上無法安裝這個套件。
 
     ![](images/img_40.png)
 
 <br>
 
-15. 修改 `secret.py` 中的 `get_secret()`，將 `dotenv` 的使用移入所在環境判斷的區塊內，只有確認在本機或容器中運行時才導入使用。
+1.  修改 `secret.py` 中的 `get_secret()`，將 `dotenv` 的使用移入所在環境判斷的區塊內，只有確認在本機或容器中運行時才導入使用。
 
     ```python
     # 判斷環境取得密鑰
@@ -1278,7 +1286,7 @@ _回到本機操作，在 Codespace 也是可以。_
 
 <br>
 
-16. 然後進入 Streamlit 服務器的 `Secrets` 中加入。
+17. 然後進入 Streamlit 服務器的 `Secrets` 中加入。
 
     ```bash
     STREAMLIT_SHARING_MODE = 1
@@ -1288,7 +1296,7 @@ _回到本機操作，在 Codespace 也是可以。_
 
 <br>
 
-17. 切記更新設定都要 `Reboot`，至此無論在本機的容器中、 Codespace 容器中，或是部署在 Streamlit 服務器上的應用皆可正常運行了。
+18. 切記更新設定都要 `Reboot`，至此無論在本機的容器中、 Codespace 容器中，或是部署在 Streamlit 服務器上的應用皆可正常運行了。
 
     ![](images/img_43.png)
 
