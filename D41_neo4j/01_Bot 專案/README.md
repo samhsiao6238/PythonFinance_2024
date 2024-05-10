@@ -34,7 +34,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-3. 修改環境參數
+3. 編輯環境參數。
 
     ```bash
     sudo nano ~/.zshrc
@@ -42,7 +42,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-4. 在 `.zshrc` 文件中加入以下代碼，然後將文件儲存 `control+o` 並退出 `control+x`。
+4. 在 `.zshrc` 文件中加入以下代碼，通常寫在最下方即可，然後透過組合鍵將文件儲存 `control+o` 並退出 `control+x`。
 
     ```bash
     source /Users/samhsiao/Documents/PythonVenv/envllmChatBot/bin/activate
@@ -128,7 +128,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-2. 在本地運行，所以使用 `.env`，儲存 `OPENAI_API_KEY` 及 `OPENAI_MODEL`，先運行 `gpt-3.5-turbo` 試試，或是換作 `GPT-4` 試試。
+2. 在敏感資訊部分，使用 `.env` 來儲存 `OPENAI_API_KEY` 及 `OPENAI_MODEL` 等變數，而模型部分先運行 `gpt-3.5-turbo` 試試，若有付費的會員可換 `GPT-4`。
 
     ```bash
     touch .env .gitignore
@@ -136,7 +136,13 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-3. 編輯 `.gitignore`。
+3. 關於模型代號可查詢 [官網](https://platform.openai.com/docs/models/models)。
+
+    ![](images/img_46.png)
+
+<br>
+
+4. 編輯 `.gitignore`。
 
     ```json
     __pycache__
@@ -148,7 +154,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-4. 在 `.env` 寫入敏感資訊，其中 `OPENAI_MODEL` 查詢官網。
+5. 在 `.env` 寫入敏感資訊，其中 `OPENAI_MODEL` 查詢官網。
 
     ```json
     OPENAI_API_KEY=sk-...
@@ -157,7 +163,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-5. 安裝套件。
+6. 安裝套件。
 
     ```bash
     pip install python-dotenv
@@ -165,7 +171,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-6. 改寫官方的 `llm.py`。
+7. 改寫官方的 `llm.py`。
 
     ```python
     from langchain_openai import ChatOpenAI
@@ -194,19 +200,19 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-7. 建立 [Neo4j Sandbox](https://sandbox.neo4j.com/onboarding)。
+8. 建立 [Neo4j Sandbox](https://sandbox.neo4j.com/onboarding)。
 
     ![](images/img_05.png)
 
 <br>
 
-8. 輸入一些基本資訊。
+9. 輸入一些基本資訊。
 
     ![](images/img_03.png)
 
 <br>
 
-9. 展開可查看訊息，這與教程寫的一樣。
+10. 展開可查看訊息，這與教程寫的一樣。
 
     ```bash
     # Connection URL
@@ -221,7 +227,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-10. 修改 `.env` 文件，將 Sandbox 資訊寫入。
+11. 修改 `.env` 文件，將 Sandbox 資訊寫入。
 
     ```bash
     OPENAI_API_KEY=sk-...
@@ -234,7 +240,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-11. 接著編輯 `graph.py`。
+12. 接著編輯 `graph.py`。
 
     ```bash
     from langchain_community.graphs import Neo4jGraph
@@ -260,7 +266,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-12. 接著編輯 `agent.py`。
+13. 接著編輯 `agent.py`。
 
     ```python
     # agent.py
@@ -340,7 +346,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-13. 改寫 `vector.py`。
+14. 改寫 `vector.py`。
 
     ```python
     # vector.py
@@ -394,7 +400,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-14. 彙整後修改主腳本 `bot.py`。
+15. 彙整後修改主腳本 `bot.py`。
 
     ```python
     # bot.py
@@ -454,7 +460,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-15. 修改功能腳本 `utils.py`。
+16. 修改功能腳本 `utils.py`。
 
     ```python
     # utility.py
