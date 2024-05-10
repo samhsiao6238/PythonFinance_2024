@@ -1255,6 +1255,8 @@ _回到本機操作，在 Codespace 也是可以。_
 16. 修改 `secret.py` 中的 `get_secret()`，將 `dotenv` 的使用移入所在環境判斷的區塊內，只有確認在本機或容器中運行時才導入使用。
 
     ```python
+    # secret.py
+    import os
     # 判斷環境取得密鑰
     # def get_secret(key):
     #     try:
