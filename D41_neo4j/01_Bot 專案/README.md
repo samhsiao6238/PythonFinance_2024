@@ -356,7 +356,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-14. 改寫 `vector.py`。
+7. 改寫 `vector.py`：主要是載入 `dotenv` 相關設定，另外也刪除一些無謂的註解。
 
     ```python
     # vector.py
