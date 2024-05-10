@@ -1228,8 +1228,8 @@ _回到本機操作，在 Codespace 也是可以。_
     # OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     # OPENAI_MODEL = os.getenv("OPENAI_MODEL")
     # 改寫
-    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-    OPENAI_MODEL = os.getenv("OPENAI_MODEL")
+    OPENAI_API_KEY = get_secret("OPENAI_API_KEY")
+    OPENAI_MODEL = get_secret("OPENAI_MODEL")
     ```
 
 <br>
