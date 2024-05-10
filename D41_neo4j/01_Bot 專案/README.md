@@ -136,13 +136,19 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-3. 關於模型代號可查詢 [官網](https://platform.openai.com/docs/models/models)。
+3. 關於模型介紹可閱讀 [官網](https://platform.openai.com/docs/models/models) 說明，特別注意，假如是要填入 `模型代號`，要再參考下方的說明。
+
+    _這是說明_
 
     ![](images/img_46.png)
 
+    _這是代號_
+
+    ![](images/img_47.png)
+
 <br>
 
-4. 編輯 `.gitignore`。
+4. 編輯 `.gitignore`，範例已經將 `.env` 寫入，可以不用添加了。
 
     ```json
     __pycache__
@@ -154,7 +160,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-5. 在 `.env` 寫入敏感資訊，其中 `OPENAI_MODEL` 查詢官網。
+5. 在 `.env` 寫入敏感資訊，其中 `OPENAI_API_KEY` 部分填入自己的 `API Key`，而 `OPENAI_MODEL` 可查詢 [官網](https://platform.openai.com/docs/models/models)。
 
     ```json
     OPENAI_API_KEY=sk-...
