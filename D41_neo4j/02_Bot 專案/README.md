@@ -794,6 +794,16 @@
 
 <br>
 
+## 刪除沒用到的文件
+
+1. 刪除文件。
+
+    ```bash
+    sudo rm -rf .gitpod.yml README.adoc examples .streamlit
+    ```
+
+<br>
+
 ## 部署到 Streamlit 服務器上
 
 _待續_
