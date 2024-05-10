@@ -1,5 +1,7 @@
 # Bot
 
+_這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上運行。_
+
 <br>
 
 ## 說明
