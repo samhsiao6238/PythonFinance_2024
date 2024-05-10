@@ -957,9 +957,15 @@ _在 VSCode 中操作_
 
 <br>
 
-13. 在 VSCode 左下方的連線也會顯示連入容器。
+13. VSCode 左下方的連線顯示連入容器就表示完成。
 
     ![](images/img_14.png)
+
+<br>
+
+14. 這裡直接按下 `ENTER` 即可。
+
+    ![](images/img_50.png)
 
 <br>
 
