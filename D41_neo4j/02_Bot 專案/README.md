@@ -61,11 +61,12 @@ streamlit run bot.py
 ```
 
 當前的機器人只會回應相同訊息
+
 ![](images/img_02.png)
 
 退出運行 `control+c` 並開啟 VSCode
 ```bash
-code .
+code . && streamlit run bot.py
 ```
 
 ## 建立 LLM 實體
@@ -120,7 +121,12 @@ embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
 
 ```
 
-建立 Sandbox
+建立 [Neo4j Sandbox](https://sandbox.neo4j.com/onboarding)
+
+![](images/img_05.png)
+
+輸入一些基本資訊
+
 ![](images/img_03.png)
 
 展開可查看訊息，這與教程寫的一樣。
