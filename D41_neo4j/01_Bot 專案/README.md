@@ -906,20 +906,20 @@ _在 VSCode 中操作_
         // 命名
         "name": "Python 3",
         // 映像
-        "image": "mcr.microsoft.com/devcontainers/python:1-3.10-bullseye",
+        "image": "mcr.microsoft.com/devcontainers/python:3.10-bullseye",
         // 容器啟動後執行指令進行安裝 `requirements.txt`、`streamlit`、`python-dotenv`
-        "updateContentCommand": "[ -f requirements.txt ] && pip install --user -r requirements.txt; pip install --user streamlit python-dotenv; echo '✅ Packages installed and Requirements met'",
-        // 運行主腳本
+        "updateContentCommand": "[ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit python-dotenv; echo '✅ Packages installed and Requirements met'",
+        // 運行主腳本：可加入參數
         // --server.enableCORS false：允許應用接受來自不同埠或域的請求
         // --server.enableXsrfProtection false：禁用保護，在開發階段使用以避免遇到與 CSRF 保護相關的問題
-        "postAttachCommand": "streamlit run bot.py --server.enableCORS false --server.enableXsrfProtection false"
+        "postAttachCommand": "streamlit run bot.py"
     }
 
     ```
 
 <br>
 
-10. 將 `streamlit` 寫入後的 `requirements.txt`。
+10. 將 `streamlit` 寫入的 `requirements.txt`。
 
     ```txt
     langchain
@@ -939,13 +939,13 @@ _在 VSCode 中操作_
         // 命名
         "name": "Python 3",
         // 映像
-        "image": "mcr.microsoft.com/devcontainers/python:1-3.10-bullseye",
-        // 容器啟動後執行指令進行安裝 `requirements.txt`、`streamlit`、`python-dotenv`
-        "updateContentCommand": "[ -f requirements.txt ] && pip install --user -r requirements.txt; pip install --user langchain python-dotenv; echo '✅ Packages installed and Requirements met'",
-        // 運行主腳本
+        "image": "mcr.microsoft.com/devcontainers/python:3.10-bullseye",
+        // 容器啟動後執行指令進行安裝
+        "updateContentCommand": "[ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user python-dotenv; echo '✅ Packages installed and Requirements met'",
+        // 運行主腳本：可使用參數
         // --server.enableCORS false：允許應用接受來自不同埠或域的請求
         // --server.enableXsrfProtection false：禁用保護，在開發階段使用以避免遇到與 CSRF 保護相關的問題
-        "postAttachCommand": "streamlit run bot.py --server.enableCORS false --server.enableXsrfProtection false"
+        "postAttachCommand": "streamlit run bot.py"
     }
 
     ```
