@@ -825,51 +825,534 @@
 _在 VSCode 中操作_
 
 1. 建立容器。
-![](images/img_07.png)
+
+    ![](images/img_07.png)
+
+<br>
 
 2. 將設定新增到工作區。
-![](images/img_08.png)
+
+    ![](images/img_08.png)
+
+<br>
 
 3. 使用 Python3。
-![](images/img_09.png)
+
+    ![](images/img_09.png)
+
+<br>
 
 4. 由於前面提及的版本限制，這裡選擇 `3.10 bulleye`。
-![](images/img_10.png)
+
+    ![](images/img_10.png)
+
+<br>
 
 5. 不用選取任何功能。
-![](images/img_11.png)
+
+    ![](images/img_11.png)
+
+<br>
 
 6. 完成時在容器中重新開啟。
-![](images/img_12.png)
+
+    ![](images/img_12.png)
+
+<br>
 
 7. 會添加設定資料夾與檔案，但內容僅有命名與映像原來，可刪除無用的註解部分。
-![](images/img_13.png)
+
+    ![](images/img_13.png)
+
+<br>
 
 8. 編輯 `devcontainer.json`，添加指令在容器建立後，會安裝指定套件，包含 `requirements.txt`、`streamlit`、`python-dotenv`，其中 `streamlit` 應該是可以寫入 `requirements.txt`，但 `python-dotenv` 在部署在雲端時無需安裝，所以可另外以指令進行安裝。
-```json
-{
-	// 命名
-	"name": "Python 3",
-	// 映像
-	"image": "mcr.microsoft.com/devcontainers/python:1-3.10-bullseye",
-	// 容器啟動後執行指令進行安裝 `requirements.txt`、`streamlit`、`python-dotenv`
-	"updateContentCommand": "[ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit python-dotenv; echo '✅ Packages installed and Requirements met'",
-	// 運行主腳本
-	// --server.enableCORS false：允許應用接受來自不同埠或域的請求
-	// --server.enableXsrfProtection false：禁用保護，在開發階段使用以避免遇到與 CSRF 保護相關的問題
-	"postAttachCommand": "streamlit run bot.py --server.enableCORS false --server.enableXsrfProtection false"
-}
 
-```
+    ```json
+    {
+        // 命名
+        "name": "Python 3",
+        // 映像
+        "image": "mcr.microsoft.com/devcontainers/python:1-3.10-bullseye",
+        // 容器啟動後執行指令進行安裝 `requirements.txt`、`streamlit`、`python-dotenv`
+        "updateContentCommand": "[ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit python-dotenv; echo '✅ Packages installed and Requirements met'",
+        // 運行主腳本
+        // --server.enableCORS false：允許應用接受來自不同埠或域的請求
+        // --server.enableXsrfProtection false：禁用保護，在開發階段使用以避免遇到與 CSRF 保護相關的問題
+        "postAttachCommand": "streamlit run bot.py --server.enableCORS false --server.enableXsrfProtection false"
+    }
+
+    ```
+
+<br>
 
 9. 在 VSCode 左下方的連線也會顯示連入容器。
-![](images/img_14.png)
+
+    ![](images/img_14.png)
+
+<br>
 
 ## 部署到 GitHub
 
 1. 點擊 `原始檔控制`。
-![](images/img_15.png)
+
+    ![](images/img_15.png)
+
+<br>
+
+2. 發佈到 GitHub。
+
+    ![](images/img_16.png)
+
+<br>
+
+3. 自訂一個名稱，然後點擊公開。
+
+    ![](images/img_17.png)
+
+<br>
+
+4. 在 GitHub 上開啟。
+
+    ![](images/img_18.png)
+
+<br>
+
+5. 點擊 `Code` 並建立 `Codespace`。
+
+    ![](images/img_19.png)
+
+<br>
+
+6. 過程中可以點擊 `View logs` 觀察。
+
+    ![](images/img_20.png)
+
+_完成時先不急著動作，因為還有一些程序是在建立好之後要做的。_
+
+<br>
+
+7. 看到 `Streamlit` 服務啟動時，可以點擊 `以瀏覽器開啟`，或查看所有的轉接埠。
+
+    ![](images/img_21.png)
+
+<br>
+
+8. 接著就會看到發生錯誤，因為那些敏感資訊都已經被排除了。
+
+    ![](images/img_22.png)
+
+<br>
+
+9. 可嘗試手動建立 `.env` 文件，並將本地的內容複製貼上，用以測試腳本的運行，因為 `.gitignore` 文件是有同步的，所以若更新倉庫依舊不會有安全外洩問題。
+
+    ![](images/img_23.png)
+
+<br>
+
+10. 刷新網頁後，Bot 可以順利運行。
+
+    ![](images/img_24.png)
+
+<br>
+
+11. 測試一下重建容器。
+
+    ![](images/img_25.png)
+
+<br>
+
+12. 完成後會自動啟動服務，開啟瀏覽器便可進行使用。
+
+    ![](images/img_26.png)
+
+<br>
+
+13. 正常運行。
+
+    ![](images/img_27.png)
+
+<br>
 
 ## 部署到 Streamlit 服務器上
 
-_待續_
+1. 在專案路徑中建立一個 `.streamlit` 資料夾，並添加一個 `secrets.toml` 文件。
+
+    ![](images/img_28.png)
+
+<br>
+
+2. 將 `.env` 文件中的內容複製到 `secrets.toml` 文件中，因為 `.toml` 格式中，等號右側的是 `字串值` ，所以必須加上引號。
+
+    ![](images/img_41.png)   
+
+<br>
+
+3. 同樣要把 `secrets.toml` 文件加入 `.gitignore` 中。
+
+    ```bash
+    # 敏感資訊
+    .streamlit/secrets.toml
+    .env
+    ```
+
+<br>
+
+4. 進入 Streamlit [官網](https://streamlit.io/) 並點擊 `Sign in`，可使用 Google 或 GitHub 帳號登入。
+
+    ![](images/img_29.png)
+
+<br>
+
+5. 假如選擇 Google，接下來還是會詢問是否連結 GitHub 帳號。
+
+    ![](images/img_30.png)
+
+<br>
+
+6. 填寫完畢點擊 `Continue` 完成設定。
+
+    ![](images/img_31.png)
+
+<br>
+
+## 建立專案
+
+1. New。
+
+    ![](images/img_32.png)
+
+<br>
+
+2. 部署。
+
+    ![](images/img_33.png)
+
+<br>
+
+3. 尚未設定敏感資訊，所以一樣是會出錯的。
+
+    ![](images/img_34.png)
+
+<br>
+
+4. 回到主控台，在專案右側點擊更多展開，並點擊設定。
+
+    ![](images/img_35.png)
+
+<br>
+
+5. 切換到 `Secrets`。
+
+    ![](images/img_36.png)
+
+<br>
+
+6. 因為 `secrets.toml` 文件是不會進行同步的，所以要將 `secrets.toml` 的內容複製貼在 Streamlit 服務器上；。
+
+    ![](images/img_37.png)
+
+<br>
+
+7. 修改 `graph.py`、`llm.py`、`vector.py` 三個腳本中原本使用 `os.getenv()` 的部分要改為 `st.secrets["<鍵>"]`
+
+    ![](images/img_39.png)
+
+<br>
+
+8. 延續上一點，但這樣的修改在不同環境下要手動修改很麻煩，所以在專案的 `tools` 資料夾中添加一個模組 `secret.py`，添加判斷環境的功能。
+
+    ```python
+    # utility.py
+    # 原本沒有導入 dotenv，這裡要添加
+    import os
+    from dotenv import load_dotenv
+    #
+    load_dotenv()
+    
+    # 新增判斷函數
+    def get_secret(key):
+        try:
+            # 嘗試從 Streamlit secrets 獲取敏感資訊
+            return st.secrets[key]
+        except AttributeError:
+            # 如果 st.secrets 沒有該鍵或 st.secrets 未被設定，則從環境變量中獲取
+            return os.getenv(key)
+    ```
+
+2. 分別在  `graph.py`、`llm.py`、`vector.py` 導入函數，其中  `graph.py` 及 `vector.py` 改寫如下。
+
+    ```python
+    # graph.py
+    # 導入自訂函數
+    from solutions.tools.secret import get_secret
+    
+    # 中間這段不變 ...
+    
+    # 註解變數取的方式
+    # NEO4J_URI = os.getenv("NEO4J_URI")
+    # NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
+    # NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
+    # 改寫用 get_secret 函數取得變數
+    NEO4J_URI = get_secret("NEO4J_URI")
+    NEO4J_USERNAME = get_secret("NEO4J_USERNAME")
+    NEO4J_PASSWORD = get_secret("NEO4J_PASSWORD")
+
+    ```
+
+<br>
+
+9. 另外 `llm.py` 需要的是 OpenAPI 的 API Key，所以改寫內容與另外兩個腳本不同。
+
+    ```python
+    # 導入自訂函數
+    from solutions.tools.secret import get_secret
+
+    # 註解原本取的變數的方式
+    # OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    # OPENAI_MODEL = os.getenv("OPENAI_MODEL")
+    # 改寫
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    OPENAI_MODEL = os.getenv("OPENAI_MODEL")
+    ```
+
+<br>
+
+10. 設定改變後都要進行 `Reboot`。
+
+    ![](images/img_38.png)
+
+<br>
+
+11. 在 Codespace 中開發後，切記要同步變更到 Github 倉庫中，然後再刷新 Streamlit 網頁服務，這時會出現關於套件 `dotenv` 的錯誤，因為服務器上無法安裝這個套件。
+
+    ![](images/img_40.png)
+
+<br>
+
+12. 修改 `secret.py` 中的 `get_secret()`，將 `dotenv` 的使用移入所在環境判斷的區塊內，只有確認在本機或容器中運行時才導入使用。
+
+    ```python
+    # 判斷環境取得密鑰
+    # def get_secret(key):
+    #     try:
+    #         # 嘗試從 Streamlit secrets 獲取敏感資訊
+    #         return st.secrets[key]
+    #     except AttributeError:
+    #         # 如果 st.secrets 沒有該鍵或 st.secrets 未被設定，則從環境變量中獲取
+    #         return os.getenv(key)
+
+    # 改寫
+    def get_secret(key):
+        # 檢查是否在 Streamlit 雲端環境中運行，Streamlit 雲端環境會設置特定的環境變量
+        if 'STREAMLIT_SHARING_MODE' in os.environ:
+            # 在 Streamlit 雲端，使用 st.secrets 讀取配置
+            try:
+                return st.secrets[key]
+            except KeyError:
+                print(f"Key {key} not found in Streamlit secrets.")
+        else:
+            # 在本機環境，嘗試從 .env 文件讀取配置
+            from dotenv import load_dotenv
+            load_dotenv()  # 讀取 .env 文件中的環境變量
+            secret_value = os.getenv(key)
+            if secret_value is not None:
+                return secret_value
+            else:
+                print(f"Key {key} not found in environment variables.")
+    ```
+
+<br>
+
+13. 然後進入 Streamlit 服務器的 `Secrets` 中加入。
+
+    ```bash
+    STREAMLIT_SHARING_MODE = 1
+    ```
+
+    ![](images/img_42.png)
+
+<br>
+
+14. 切記更新設定都要 `Reboot`，至此無論在本機的容器中、 Codespace 容器中，或是部署在 Streamlit 服務器上的應用皆可正常運行了。
+
+    ![](images/img_43.png)
+
+<br>
+
+## 補上四個修改的腳本
+
+1. **utility.py**
+
+    ```python
+    # secret.py
+    import streamlit as st
+    # dotenv
+    import os
+    # from dotenv import load_dotenv
+    # 載入環境變數
+    # load_dotenv()
+
+
+    # 判斷環境取得密鑰
+    # def get_secret(key):
+    #     try:
+    #         # 嘗試從 Streamlit secrets 獲取敏感資訊
+    #         return st.secrets[key]
+    #     except AttributeError:
+    #         # 如果 st.secrets 沒有該鍵或 st.secrets 未被設定，則從環境變量中獲取
+    #         return os.getenv(key)
+
+    # 改寫
+    def get_secret(key):
+        # 檢查是否在 Streamlit 雲端環境中運行，Streamlit 雲端環境會設置特定的環境變量
+        if 'STREAMLIT_SHARING_MODE' in os.environ:
+            # 在 Streamlit 雲端，使用 st.secrets 讀取配置
+            try:
+                return st.secrets[key]
+            except KeyError:
+                print(f"Key {key} not found in Streamlit secrets.")
+        else:
+            # 在本機環境，嘗試從 .env 文件讀取配置
+            from dotenv import load_dotenv
+            load_dotenv()  # 讀取 .env 文件中的環境變量
+            secret_value = os.getenv(key)
+            if secret_value is not None:
+                return secret_value
+            else:
+                print(f"Key {key} not found in environment variables.")
+    ```
+
+<br>
+
+2. **graph.py**
+
+    ```python
+    from langchain_community.graphs import Neo4jGraph
+    # 導入自訂函數
+    from solutions.tools.secret import get_secret
+    # dotenv
+    import os
+    # from dotenv import load_dotenv
+    # 環境參數
+    # load_dotenv()
+
+    # 取得環境變數
+    # 改寫
+    # NEO4J_URI = os.getenv("NEO4J_URI")
+    # NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
+    # NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
+
+    NEO4J_URI = get_secret("NEO4J_URI")
+    NEO4J_USERNAME = get_secret("NEO4J_USERNAME")
+    NEO4J_PASSWORD = get_secret("NEO4J_PASSWORD")
+
+    # Neo4j Graph
+    graph = Neo4jGraph(
+        url=NEO4J_URI,
+        username=NEO4J_USERNAME,
+        password=NEO4J_PASSWORD,
+    )
+
+    ```
+
+<br>
+
+3. **llm.py**
+
+    ```python
+    from langchain_openai import ChatOpenAI
+    from langchain_openai import OpenAIEmbeddings
+    # 導入自訂函數
+    from solutions.tools.secret import get_secret
+    # 環境變數
+    import os
+    # from dotenv import load_dotenv
+    #
+    # load_dotenv()
+
+    # 取得環境變數
+    # OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    # OPENAI_MODEL = os.getenv("OPENAI_MODEL")
+    # 改寫
+    OPENAI_API_KEY = get_secret("OPENAI_API_KEY")
+    OPENAI_MODEL = get_secret("OPENAI_MODEL")
+
+    # 建立 ChatOpenAI 實體
+    llm = ChatOpenAI(
+        openai_api_key=OPENAI_API_KEY,
+        model=OPENAI_MODEL,
+    )
+
+    # OpenAIEmbeddings 是用來生成和處理嵌入向量（embeddings）
+    # 這些嵌入向量是從使用 OpenAI 模型（如 GPT-4）生成的文本中獲取的
+    embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+
+    ```
+
+<br>
+
+4. **vector.py**
+
+    ```python
+    # vector.py
+    from langchain_community.vectorstores.neo4j_vector import Neo4jVector
+    from langchain.chains import RetrievalQA
+    from solutions.llm import llm, embeddings
+    # 導入自訂函數
+    from solutions.tools.secret import get_secret
+
+    #
+    import os
+    # from dotenv import load_dotenv
+    #
+    # load_dotenv()
+
+    # 改寫
+    # NEO4J_URI = os.getenv("NEO4J_URI")
+    # NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
+    # NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
+
+    NEO4J_URI = get_secret("NEO4J_URI")
+    NEO4J_USERNAME = get_secret("NEO4J_USERNAME")
+    NEO4J_PASSWORD = get_secret("NEO4J_PASSWORD")
+
+    neo4jvector = Neo4jVector.from_existing_index(
+        embeddings,                 # <1>
+        url=NEO4J_URI,              # <2>
+        username=NEO4J_USERNAME,    # <3>
+        password=NEO4J_PASSWORD,    # <4>
+        index_name="moviePlots",    # <5>
+        node_label="Movie",         # <6>
+        text_node_property="plot",  # <7>
+        embedding_node_property="plotEmbedding",  # <8>
+        retrieval_query="""
+        RETURN
+            node.plot AS text,
+            score,
+            {
+                title: node.title,
+                directors: [ (person)-[:DIRECTED]->(node) | person.name ],
+                actors: [ (person)-[r:ACTED_IN]->(node) | [person.name, r.role] ],
+                tmdbId: node.tmdbId,
+                source: 'https://www.themoviedb.org/movie/'+ node.tmdbId
+            } AS metadata
+        """,
+    )
+
+    retriever = neo4jvector.as_retriever()
+
+    kg_qa = RetrievalQA.from_chain_type(
+        llm,  # <1>
+        chain_type="stuff",  # <2>
+        retriever=retriever,  # <3>
+    )
+
+    ```
+
+
+<br>
+
+___
+
+_END_
