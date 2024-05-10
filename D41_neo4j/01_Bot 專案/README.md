@@ -1296,7 +1296,7 @@ _回到本機操作，在 Codespace 也是可以。_
 
 <br>
 
-18. 切記更新設定都要 `Reboot`，至此無論在本機的容器中、 Codespace 容器中，或是部署在 Streamlit 服務器上的應用皆可正常運行了。
+18. 切記本機或 Codespace 要進行同步，另外 Streamlit 服務器更新設定都要 `Reboot`，至此無論在本機的容器中、 Codespace 容器中，或是部署在 Streamlit 服務器上的應用皆可正常運行了。
 
     ![](images/img_43.png)
 
