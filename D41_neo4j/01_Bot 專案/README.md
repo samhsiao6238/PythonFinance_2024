@@ -908,7 +908,7 @@ _在 VSCode 中操作_
         // 映像
         "image": "mcr.microsoft.com/devcontainers/python:1-3.10-bullseye",
         // 容器啟動後執行指令進行安裝 `requirements.txt`、`streamlit`、`python-dotenv`
-        "updateContentCommand": "[ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit python-dotenv; echo '✅ Packages installed and Requirements met'",
+        "updateContentCommand": "[ -f requirements.txt ] && pip install --user -r requirements.txt; pip install --user streamlit python-dotenv; echo '✅ Packages installed and Requirements met'",
         // 運行主腳本
         // --server.enableCORS false：允許應用接受來自不同埠或域的請求
         // --server.enableXsrfProtection false：禁用保護，在開發階段使用以避免遇到與 CSRF 保護相關的問題
@@ -925,6 +925,7 @@ _在 VSCode 中操作_
     langchain
     openai
     langchain_openai
+    langchainhub
     neo4j-driver
     streamlit
     ```
@@ -940,7 +941,7 @@ _在 VSCode 中操作_
         // 映像
         "image": "mcr.microsoft.com/devcontainers/python:1-3.10-bullseye",
         // 容器啟動後執行指令進行安裝 `requirements.txt`、`streamlit`、`python-dotenv`
-        "updateContentCommand": "[ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user python-dotenv; echo '✅ Packages installed and Requirements met'",
+        "updateContentCommand": "[ -f requirements.txt ] && pip install --user -r requirements.txt; pip install --user langchain python-dotenv; echo '✅ Packages installed and Requirements met'",
         // 運行主腳本
         // --server.enableCORS false：允許應用接受來自不同埠或域的請求
         // --server.enableXsrfProtection false：禁用保護，在開發階段使用以避免遇到與 CSRF 保護相關的問題
