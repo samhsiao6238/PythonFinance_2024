@@ -1350,6 +1350,19 @@ _完成時先不急著動作，因為還有一些程序是在建立好之後要�
 
     ```
 
+<br>
+
+## 關於 OpenAPI
+
+1. 使用付費服務要特別關注 [使用量](https://platform.openai.com/usage)。
+
+    ![](images/img_44.png)
+
+<br>
+
+2. 會有詳細的用量與帳單資訊。
+
+    ![](images/img_45.png)
 
 <br>
 
