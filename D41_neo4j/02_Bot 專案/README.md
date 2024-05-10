@@ -804,6 +804,72 @@
 
 <br>
 
+## 刪除原本的原始檔控制
+
+1. 這是網路下載的倉庫，因為修改後提示要做原始檔控制。
+
+    ![](images/img_06.png)
+
+<br>
+
+2. 刪除 Git 相關訊息，然後關閉工作區重新啟動即可。
+
+    ```bash
+    rm -rf .git
+    ```
+
+<br>
+
+## 打包為容器
+
+_在 VSCode 中操作_
+
+1. 建立容器。
+![](images/img_07.png)
+
+2. 將設定新增到工作區。
+![](images/img_08.png)
+
+3. 使用 Python3。
+![](images/img_09.png)
+
+4. 由於前面提及的版本限制，這裡選擇 `3.10 bulleye`。
+![](images/img_10.png)
+
+5. 不用選取任何功能。
+![](images/img_11.png)
+
+6. 完成時在容器中重新開啟。
+![](images/img_12.png)
+
+7. 會添加設定資料夾與檔案，但內容僅有命名與映像原來，可刪除無用的註解部分。
+![](images/img_13.png)
+
+8. 編輯 `devcontainer.json`，添加指令在容器建立後，會安裝指定套件，包含 `requirements.txt`、`streamlit`、`python-dotenv`，其中 `streamlit` 應該是可以寫入 `requirements.txt`，但 `python-dotenv` 在部署在雲端時無需安裝，所以可另外以指令進行安裝。
+```json
+{
+	// 命名
+	"name": "Python 3",
+	// 映像
+	"image": "mcr.microsoft.com/devcontainers/python:1-3.10-bullseye",
+	// 容器啟動後執行指令進行安裝 `requirements.txt`、`streamlit`、`python-dotenv`
+	"updateContentCommand": "[ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit python-dotenv; echo '✅ Packages installed and Requirements met'",
+	// 運行主腳本
+	// --server.enableCORS false：允許應用接受來自不同埠或域的請求
+	// --server.enableXsrfProtection false：禁用保護，在開發階段使用以避免遇到與 CSRF 保護相關的問題
+	"postAttachCommand": "streamlit run bot.py --server.enableCORS false --server.enableXsrfProtection false"
+}
+
+```
+
+9. 在 VSCode 左下方的連線也會顯示連入容器。
+![](images/img_14.png)
+
+## 部署到 GitHub
+
+1. 點擊 `原始檔控制`。
+![](images/img_15.png)
+
 ## 部署到 Streamlit 服務器上
 
 _待續_
