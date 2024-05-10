@@ -409,7 +409,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-15. 彙整後修改主腳本 `bot.py`。
+8. 彙整後修改主腳本 `bot.py`：導入 `generate_response()` 函數。
 
     ```python
     # bot.py
