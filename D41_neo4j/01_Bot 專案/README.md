@@ -71,8 +71,16 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
     ```bash
     echo "langchainhub" >> requirements.txt && pip install -r requirements.txt
     ```
-    
-    _這裡觀察一下文件的內容_
+
+<br>
+
+8. 可透過指令觀察添加套件後的內容。
+
+    ```bash
+    cat requirements.txt
+    ```
+
+    _結果如下_
     ```txt
     langchain
     openai
@@ -84,7 +92,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-8. 補充說明上一點，文件中預設並沒有 `langchainhub` 模組，但在後續的運作中會報錯缺少這個套件，可屆時再透過以下指令手動進行安裝，但加入 `requirements.txt` 批次安裝較為方便，也可避免後續建立容器時需要在 `devcontainer.json` 文件中添加指令的設置。
+9. 補充說明上一點，文件中預設並沒有 `langchainhub` 模組，但在後續的運作中會報錯缺少這個套件，可屆時再透過以下指令手動進行安裝，但加入 `requirements.txt` 批次安裝較為方便，也可避免後續建立容器時需要在 `devcontainer.json` 文件中添加指令的設置。
 
     ```bash
     pip install langchainhub
@@ -92,7 +100,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-9. 如有提示要更新就照做。
+10. 如有提示要更新就照做。
 
     ```bash
     pip install --upgrade pip
@@ -100,7 +108,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-10. 嘗試運行主腳本 `bot.py`。
+11. 嘗試運行主腳本 `bot.py`。
 
     ```bash
     streamlit run bot.py
@@ -108,13 +116,13 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-11. 當前的機器人只會回應相同訊息。
+12. 當前的機器人只會回應相同訊息。
 
     ![](images/img_02.png)
 
 <br>
 
-12. 退出運行 `control+c` 並開啟 VSCode。
+13. 退出運行 `control+c` 並開啟 VSCode。
 
     ```bash
     code . && streamlit run bot.py
