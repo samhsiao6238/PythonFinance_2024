@@ -469,7 +469,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-16. 修改功能腳本 `utils.py`。
+9. 修改功能腳本 `utils.py`：並無額外變更，只是添加了一些 `輸出` 代碼來觀察運行過程中的數據傳送與處裡。
 
     ```python
     # utility.py
@@ -507,6 +507,10 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 ## 補充其他尚未修正的腳本
 
+_僅刪除不必要內容及排版，可直接複製貼上覆蓋原本的代碼 。_
+
+<br>
+
 1. **cypher.py**
 
     ```python
@@ -520,6 +524,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
         llm,            # <1>
         graph=graph,    # <2>
     )
+
     ```
 
 <br>
@@ -588,6 +593,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
     cypher_qa = GraphCypherQAChain.from_llm(
         llm, graph=graph, verbose=True, cypher_prompt=cypher_prompt
     )
+
     ```
 
 <br>
@@ -651,6 +657,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
             return_direct=True
         )
     ]
+
     ```
 
 <br>
@@ -715,6 +722,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
     Question: {question}
     """
+
     ```
 
 <br>
@@ -761,45 +769,46 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 
     agent_prompt = PromptTemplate.from_template(
-    """
-    You are a movie expert providing information about movies.
-    Be as helpful as possible and return as much information as possible.
-    Do not answer any questions that do not relate to movies, actors or directors.
+        """
+        You are a movie expert providing information about movies.
+        Be as helpful as possible and return as much information as possible.
+        Do not answer any questions that do not relate to movies,
+        actors or directors.
 
-    Do not answer any questions using your pre-trained knowledge,
-    only use the info provided in the context.
+        Do not answer any questions using your pre-trained knowledge,
+        only use the info provided in the context.
 
-    TOOLS:
-    ------
+        TOOLS:
+        ------
 
-    You have access to the following tools:
+        You have access to the following tools:
 
-    {tools}
+        {tools}
 
-    To use a tool, please use the following format:
+        To use a tool, please use the following format:
 
-    '''
-    Thought: Do I need to use a tool? Yes
-    Action: the action to take, should be one of [{tool_names}]
-    Action Input: the input to the action
-    Observation: the result of the action
-    '''
+        '''
+        Thought: Do I need to use a tool? Yes
+        Action: the action to take, should be one of [{tool_names}]
+        Action Input: the input to the action
+        Observation: the result of the action
+        '''
 
-    When you have a response to say to the Human,
-    or if you do not need to use a tool, you MUST use the format:
+        When you have a response to say to the Human,
+        or if you do not need to use a tool, you MUST use the format:
 
-    '''
-    Thought: Do I need to use a tool? No
-    Final Answer: [your response here]
-    '''
+        '''
+        Thought: Do I need to use a tool? No
+        Final Answer: [your response here]
+        '''
 
-    Begin!
+        Begin!
 
-    Previous conversation history:
-    {chat_history}
+        Previous conversation history:
+        {chat_history}
 
-    New input: {input}
-    {agent_scratchpad}
+        New input: {input}
+        {agent_scratchpad}
     """
     )
 
@@ -807,13 +816,14 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
     agent_executor = AgentExecutor(
         agent=agent, tools=tools, memory=memory, verbose=True
     )
+
     ```
 
 <br>
 
 ## 刪除沒用到的文件
 
-1. 刪除文件。
+1. 刪除文件，其中 `.streamlit` 在後續步驟會重新建立。
 
     ```bash
     sudo rm -rf .gitpod.yml README.adoc examples .streamlit
@@ -829,7 +839,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-2. 刪除 Git 相關訊息，然後關閉工作區重新啟動即可。
+2. 刪除 Git 相關訊息，然後關閉工作區中開啟的文件即可。
 
     ```bash
     rm -rf .git
@@ -841,49 +851,55 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 _在 VSCode 中操作_
 
-1. 建立容器。
+1. 開啟 `命令選擇區`。
+
+    ![](images/img_48.png)
+
+<br>
+
+2. 建立容器。
 
     ![](images/img_07.png)
 
 <br>
 
-2. 將設定新增到工作區。
+3. 將設定新增到工作區。
 
     ![](images/img_08.png)
 
 <br>
 
-3. 使用 Python3。
+4. 使用 Python3。
 
     ![](images/img_09.png)
 
 <br>
 
-4. 由於前面提及的版本限制，這裡選擇 `3.10 bulleye`。
+5. 由於前面提及的版本限制，這裡選擇 `3.10 bulleye`。
 
     ![](images/img_10.png)
 
 <br>
 
-5. 不用選取任何功能。
+6. 不用選取任何功能。
 
     ![](images/img_11.png)
 
 <br>
 
-6. 完成時在容器中重新開啟。
+7. 完成時在容器中重新開啟。
 
     ![](images/img_12.png)
 
 <br>
 
-7. 會添加設定資料夾與檔案，但內容僅有命名與映像原來，可刪除無用的註解部分。
+8. 會添加設定資料夾與檔案，但內容僅有命名與映像原來，可刪除無用的註解部分。
 
     ![](images/img_13.png)
 
 <br>
 
-8. 編輯 `devcontainer.json`，添加指令在容器建立後，會安裝指定套件，包含 `requirements.txt`、`streamlit`、`python-dotenv`，其中 `streamlit` 應該是可以寫入 `requirements.txt`，但 `python-dotenv` 在部署在雲端時無需安裝，所以可另外以指令進行安裝。
+9. 編輯 `devcontainer.json`，添加指令在容器建立後，會安裝指定套件，包含 `requirements.txt`、`streamlit`、`python-dotenv`，其中 `streamlit` 應該是可以寫入 `requirements.txt`，但 `python-dotenv` 在部署在雲端時無需安裝，所以可另外以指令進行安裝。
 
     ```json
     {
@@ -903,7 +919,7 @@ _在 VSCode 中操作_
 
 <br>
 
-9. 在 VSCode 左下方的連線也會顯示連入容器。
+10. 在 VSCode 左下方的連線也會顯示連入容器。
 
     ![](images/img_14.png)
 
