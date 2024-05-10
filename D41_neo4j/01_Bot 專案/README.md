@@ -1372,31 +1372,18 @@ _回到本機操作，在 Codespace 也是可以。_
 
 ## 補上四個修改的腳本
 
-1. **utility.py**
+1. **secret.py**
 
     ```python
     # secret.py
     import streamlit as st
-    # dotenv
     import os
-    # from dotenv import load_dotenv
-    # 載入環境變數
-    # load_dotenv()
 
 
-    # 判斷環境取得密鑰
-    # def get_secret(key):
-    #     try:
-    #         # 嘗試從 Streamlit secrets 獲取敏感資訊
-    #         return st.secrets[key]
-    #     except AttributeError:
-    #         # 如果 st.secrets 沒有該鍵或 st.secrets 未被設定，則從環境變量中獲取
-    #         return os.getenv(key)
-
-    # 改寫
+    # 自訂函數
     def get_secret(key):
         # 檢查是否在 Streamlit 雲端環境中運行，Streamlit 雲端環境會設置特定的環境變量
-        if 'STREAMLIT_SHARING_MODE' in os.environ:
+        if "STREAMLIT_SHARING_MODE" in os.environ:
             # 在 Streamlit 雲端，使用 st.secrets 讀取配置
             try:
                 return st.secrets[key]
@@ -1405,12 +1392,14 @@ _回到本機操作，在 Codespace 也是可以。_
         else:
             # 在本機環境，嘗試從 .env 文件讀取配置
             from dotenv import load_dotenv
+
             load_dotenv()  # 讀取 .env 文件中的環境變量
             secret_value = os.getenv(key)
             if secret_value is not None:
                 return secret_value
             else:
                 print(f"Key {key} not found in environment variables.")
+
     ```
 
 <br>
@@ -1418,21 +1407,12 @@ _回到本機操作，在 Codespace 也是可以。_
 2. **graph.py**
 
     ```python
-    from langchain_community.graphs import Neo4jGraph
+    # graph.py
     # 導入自訂函數
     from solutions.tools.secret import get_secret
-    # dotenv
-    import os
-    # from dotenv import load_dotenv
-    # 環境參數
-    # load_dotenv()
+    from langchain_community.graphs import Neo4jGraph
 
     # 取得環境變數
-    # 改寫
-    # NEO4J_URI = os.getenv("NEO4J_URI")
-    # NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
-    # NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
-
     NEO4J_URI = get_secret("NEO4J_URI")
     NEO4J_USERNAME = get_secret("NEO4J_USERNAME")
     NEO4J_PASSWORD = get_secret("NEO4J_PASSWORD")
@@ -1451,20 +1431,13 @@ _回到本機操作，在 Codespace 也是可以。_
 3. **llm.py**
 
     ```python
-    from langchain_openai import ChatOpenAI
-    from langchain_openai import OpenAIEmbeddings
+    # llm.py
     # 導入自訂函數
     from solutions.tools.secret import get_secret
-    # 環境變數
-    import os
-    # from dotenv import load_dotenv
-    #
-    # load_dotenv()
+    from langchain_openai import ChatOpenAI
+    from langchain_openai import OpenAIEmbeddings
 
-    # 取得環境變數
-    # OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-    # OPENAI_MODEL = os.getenv("OPENAI_MODEL")
-    # 改寫
+    # 取的環境變數
     OPENAI_API_KEY = get_secret("OPENAI_API_KEY")
     OPENAI_MODEL = get_secret("OPENAI_MODEL")
 
@@ -1492,17 +1465,7 @@ _回到本機操作，在 Codespace 也是可以。_
     # 導入自訂函數
     from solutions.tools.secret import get_secret
 
-    #
-    import os
-    # from dotenv import load_dotenv
-    #
-    # load_dotenv()
-
-    # 改寫
-    # NEO4J_URI = os.getenv("NEO4J_URI")
-    # NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
-    # NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
-
+    # 讀取環境變數
     NEO4J_URI = get_secret("NEO4J_URI")
     NEO4J_USERNAME = get_secret("NEO4J_USERNAME")
     NEO4J_PASSWORD = get_secret("NEO4J_PASSWORD")
