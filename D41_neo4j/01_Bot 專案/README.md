@@ -26,10 +26,10 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-2. 建立虛擬環境。
+2. 建立虛擬環境：請進入自己管理 Python 虛擬環境的路徑中建立，這裡示範的路徑是 `~/Documents/PythonVenv`。
 
     ```bash
-    python -m venv envllmChatBot
+    cd ~/Documents/PythonVenv && python -m venv envllmChatBot
     ```
 
 <br>
