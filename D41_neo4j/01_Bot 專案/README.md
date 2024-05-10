@@ -128,7 +128,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-2. 在敏感資訊部分，使用 `.env` 來儲存 `OPENAI_API_KEY` 及 `OPENAI_MODEL` 等變數，而模型部分先運行 `gpt-3.5-turbo` 試試，若有付費的會員可換 `GPT-4`。
+2. 在敏感資訊部分，使用 `.env` 來儲存 `OPENAI_API_KEY` 及 `OPENAI_MODEL` 等變數，而模型部分先運行 `GPT-3.5 Turbo` 的 `gpt-3.5-turbo` 試試，若有付費的會員可換 `GPT-4` 的 `gpt-4-turbo`。
 
     ```bash
     touch .env .gitignore
@@ -182,10 +182,10 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
     ```python
     from langchain_openai import ChatOpenAI
     from langchain_openai import OpenAIEmbeddings
-    # 環境變數
+    # 載入庫
     import os
     from dotenv import load_dotenv
-    #
+    # 載入環境變數
     load_dotenv()
 
     # 取得環境變數
@@ -206,19 +206,22 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-8. 建立 [Neo4j Sandbox](https://sandbox.neo4j.com/onboarding)。
+
+## Neo4j Sandbox
+
+1. 建立 [Neo4j Sandbox](https://sandbox.neo4j.com/onboarding)，進入後點擊 `Next`。
 
     ![](images/img_05.png)
 
 <br>
 
-9. 輸入一些基本資訊。
+2. 任意輸入一些基本資訊，然後點擊 `Complete` 完成。
 
     ![](images/img_03.png)
 
 <br>
 
-10. 展開可查看訊息，這與教程寫的一樣。
+3. 點擊名稱可展開，切換到 `Connection details` 頁籤可查看訊息，這些訊息要寫入 `.env` 文件。
 
     ```bash
     # Connection URL
@@ -233,7 +236,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-11. 修改 `.env` 文件，將 Sandbox 資訊寫入。
+4. 在 `.env` 文件中添加前一個步驟取得的 Sandbox 資訊。
 
     ```bash
     OPENAI_API_KEY=sk-...
@@ -246,9 +249,10 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-12. 接著編輯 `graph.py`。
+5. 接著編輯 `graph.py`：將使用 `dotenv` 的相關代碼寫入。
 
     ```bash
+    # graph.py
     from langchain_community.graphs import Neo4jGraph
     # dotenv
     import os
@@ -272,7 +276,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-13. 接著編輯 `agent.py`。
+6. 接著編輯 `agent.py`：改寫原本腳本中的 `generate_response()` 函數，加入一些邏輯來判斷透過 `prompt` 語句產生的回應 `response` 是否有例外發生，避免程序崩潰。
 
     ```python
     # agent.py
@@ -359,17 +363,16 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
     from langchain_community.vectorstores.neo4j_vector import Neo4jVector
     from langchain.chains import RetrievalQA
     from solutions.llm import llm, embeddings
-    #
+    # 載入套件
     import os
     from dotenv import load_dotenv
-    #
+    # 載入環境變數
     load_dotenv()
 
-    #
+    # 取得環境變數
     NEO4J_URI = os.getenv("NEO4J_URI")
     NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
     NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
-
 
     neo4jvector = Neo4jVector.from_existing_index(
         embeddings,                 # <1>
