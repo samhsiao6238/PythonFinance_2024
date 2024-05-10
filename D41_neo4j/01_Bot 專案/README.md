@@ -69,7 +69,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 7. 透過指令安裝 `requirements.txt` 文件中指定的模組與版本。
 
     ```bash
-    pip install -r requirements.txt
+    echo "langchainhub" >> requirements.txt && pip install -r requirements.txt
     ```
     
     _這裡觀察一下文件的內容_
@@ -77,14 +77,14 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
     langchain
     openai
     langchain_openai
-    langchainhub
     neo4j-driver
     streamlit
+    langchainhub
     ```
 
 <br>
 
-8. 預設文件中沒有 `langchainhub` 模組，若未加入文件中統籌安裝，可手動進行安裝；若未安裝在後續的執行步驟將會報錯。
+8. 補充說明上一點，文件中預設並沒有 `langchainhub` 模組，但在後續的運作中會報錯缺少這個套件，可屆時再透過以下指令手動進行安裝，但加入 `requirements.txt` 批次安裝較為方便，也可避免後續建立容器時需要在 `devcontainer.json` 文件中添加指令的設置。
 
     ```bash
     pip install langchainhub
