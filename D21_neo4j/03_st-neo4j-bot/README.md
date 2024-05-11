@@ -288,7 +288,7 @@ _後補_
 
 <br>
 
-2. **從 CSV 加載數據**:
+2. **從 CSV 加載數據**
 
    ```cypher
    LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/tomasonjo/streamlit-neo4j-hackathon/main/fewshot.csv" AS row
@@ -303,7 +303,7 @@ _後補_
 
 <br>
 
-3. **嵌入和索引建立**:
+3. **嵌入和索引建立**
 
    ```cypher
    MATCH (f:Fewshot)
@@ -316,7 +316,8 @@ _後補_
 
 <br>
 
-4. **創建向量索引**:
+4. **創建向量索引**
+
    ```cypher
    CALL db.index.vector.createNodeIndex('fewshot', 'Fewshot', 'embedding', 1536, 'cosine');
    CALL db.index.vector.createNodeIndex('news', 'Chunk', 'embedding', 1536, 'cosine');
@@ -325,7 +326,7 @@ _後補_
 
 <br>
 
-5. **創建全文索引**:
+5. **創建全文索引**
 
    ```cypher
    CREATE FULLTEXT INDEX entity FOR (p:Person|Organization) ON EACH [p.name];
