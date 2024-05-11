@@ -19,7 +19,7 @@ password: companies
 database: companies
 ```
 
-![Graph schema](schema.png)
+![Graph schema](images/schema.png)
 
 The database contains both structured information about organizations and people as well as news articles.
 The news articles are linked to the mentioned entity, while the actual text is stored in the `Chunk` nodes alongside their _text-embedding-ada-002_ vector representations.
