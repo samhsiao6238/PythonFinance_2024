@@ -82,6 +82,19 @@ _先說明一下運行步驟_
 
 <br>
 
+11. 出現與 `mypy` 有關的錯誤訊息如下，可嘗試更新套件進行排除。
+
+    ```json
+    Error running mypy in /Volumes/SSD_01/00_Python課程專用/PythonFinance_2024: mypy failed with error: "8.1.2 is not a valid Python package name". See Output panel for details.
+    ```
+
+    _將套件更新即可_
+    ```bash
+    pip install --upgrade mypy
+    ```
+
+<br>
+
 ## `app.py`
 
 _後補_
