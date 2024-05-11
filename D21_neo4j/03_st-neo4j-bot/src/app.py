@@ -182,8 +182,8 @@ try:
             context = generate_context(user_input)
             # `graph_search` 是一個 `CustomCypherChain.from_llm` 物件
             # 傳入使用者輸入與歷史查詢
-            print(f'user_input={user_input}')
-            print(f'chat_history={context}')
+            print(f'=>輸出：user_input={user_input}', '\n')
+            print(f'=>輸出：chat_history={context}', '\n')
             output = graph_search({"query": user_input, "chat_history": context})
             # session_state 是一個持久化儲存技術，將這些跨頁面的數據可以用字典的型態被保存
             # 儲存當前對話
@@ -196,8 +196,6 @@ try:
             st.session_state.database.append(output["database"])
             # 儲存生成的 Cypher 查詢（Query）
             st.session_state.cypher.append(output["cypher"])
-
-
     if st.session_state["generated"]:
         # 先計算鍵值 `generated` 的資料個數
         size = len(st.session_state["generated"])
@@ -205,8 +203,8 @@ try:
         for i in range(max(size - 3, 0), size):
             #
             dynamic_response_tabs(i)
-except:
-    print('=發生例外狀況=')
+except Exception as e:
+    print(f'=>發生例外狀況：{e}')
 finally:
     #
     print('=try 結束=')

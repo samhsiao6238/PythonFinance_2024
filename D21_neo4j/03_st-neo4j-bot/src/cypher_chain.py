@@ -122,7 +122,7 @@ class CustomCypherChain(GraphCypherQAChain):
             Entities, self.qa_chain.llm, prompt
         )
         entities = entity_chain.run(text)
-        print(entities)
+        print(f'=> 輸出：entities = {entities}', '==============================================\n')
         return entities.name
 
     def get_viz_data(self, entities: List[str]) -> List[Tuple[str, str]]:
@@ -208,8 +208,8 @@ class CustomCypherChain(GraphCypherQAChain):
         )
 
         fewshot = "\n".join([f"#{el['question']}\n{el['cypher']}" for el in results])
-        print("-" * 30)
-        print(fewshot)
+        print("=" * 40)
+        print(f'=>輸出 fewshot：{fewshot}', '\n')
         return fewshot
 
     def _call(
@@ -222,29 +222,29 @@ class CustomCypherChain(GraphCypherQAChain):
         callbacks = _run_manager.get_child()
         question = inputs[self.input_key]
         chat_history = inputs["chat_history"]
-        # Extract mentioned people and organizations and match them to database values
+        # 提取提到的人員 `people` 和組織 `organizations`，並將其與資料庫值進行匹配
         entities = self.process_entities(question)
-        print(f"NER found: {entities}")
+        print(f"=>輸出 NER found：{entities}", '\n')
         relevant_entities = dict()
         for entity in entities:
             relevant_entities[entity] = self.find_entity_match(entity)
-        print(f"Relevant entities are: {relevant_entities}")
+        print(f"=>輸出：relevant_entities ={relevant_entities}", '\n')
 
-        # Get few-shot examples using vector search
+        # 使用向量搜尋獲取 `few-shot`` 範例
         fewshots = self.get_fewshot_examples(question)
 
         system = self.generate_system_message(str(relevant_entities), fewshots)
         generated_cypher = self.cypher_generation_chain.llm.predict_messages(
             [system] + chat_history
         )
-        print(generated_cypher.content)
+        print(f'=>輸出 generated_cypher.content：{generated_cypher.content}', '\n')
         generated_cypher = extract_cypher(generated_cypher.content)
         validated_cypher = cypher_query_corrector(
             generated_cypher
         )
-        print(validated_cypher)
-        # If Cypher statement wasn't generated
-        # Usually happens when LLM decides it can't answer
+        print(f'=>輸出 validated_cypher：{validated_cypher}', '\n')
+        # 如果未產生 Cypher 語句
+        # 通常發生在 LLM 決定無法回答時
         if not "RETURN" in validated_cypher:
             chain_result: Dict[str, Any] = {
                 self.output_key: validated_cypher,
@@ -254,7 +254,7 @@ class CustomCypherChain(GraphCypherQAChain):
             }
             return chain_result
 
-        # Retrieve and limit the number of results
+        # 檢索 `Retrieve` 並限制結果數量
         context = self.graph.query(
             validated_cypher, {"openai_api_key": os.environ["OPENAI_API_KEY"]}
         )[: self.top_k]

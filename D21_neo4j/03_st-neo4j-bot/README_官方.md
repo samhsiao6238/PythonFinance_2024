@@ -34,7 +34,7 @@ The code include a couple of improvements to the original LangChain [GraphCypher
 * Dynamic few-shot examples: Fewshot Cypher statement examples are imported to the database and indexed using the vector index. At query time, vector index search is used to find the most similar fewshot example, which are then used in the Cypher generating prompt
 * Relationship direction validation: A module has been added that programatically validates and corrects relationship directions in LLM-generated Cypher statements based on the existing graph schema.
 
-![Chain](chain.png)
+![Chain](image/chain.png)
 
 ## Setup local environment
 

@@ -1,8 +1,84 @@
 # 說明
 
+_03_st-neo4j-bot_
+
+<br>
+
 1. 這個專案主要包含了三個腳本：`app.py`、`cypher_chain.py`、`cypher_validator.py`。
 
 2. 以下將分別解說這三個腳本。
+
+<br>
+
+## 運行紀錄
+
+1. 容器啟動後可正常運行。
+
+    ![](images/img_01.png)
+
+<br>
+
+2. 輸入 API Key 之後按下 `ENTER`。
+
+    ![](images/img_02.png)
+
+<br>
+
+3. 這時會出現 `Failed to write data to connection ResolvedIPv4Address ...` 的錯誤，但運行沒問題，目前尚無法排除這個狀況。
+
+    ![](images/img_03.png)
+
+<br>
+
+4. 查詢問題 `如何查詢官方預設的 movie 資料庫？` 時出現一些 `棄用` 的通知，但這些並非使用者可以調用的函數，暫時不予理會。
+
+    ![](images/img_04.png)
+
+<br>
+
+5. 同時得到這並非這個應用所提供的服務。
+
+    ![](images/img_05.png)
+
+<br>
+
+6. 針對提示查詢以下問題 `請查詢官方資料庫「movies」，並顯示前面25筆資料的關係圖。`，得到相對滿意的答覆，並包含了 `Chat`、`Cypher`、`Database results`、`Visualization` 等四個完整的頁籤。
+
+    ![](images/img_06.png)
+
+<br>
+
+7. 比如說切換到 `Cypher` 頁籤便會顯示語法。
+
+    ![](images/img_07.png)
+
+<br>
+
+8. `Database` 則會顯示資料內容，其餘省略說明。
+
+    ![](images/img_08.png)
+
+<br>
+
+9. 觀察終端機中的訊息，其中 `chat_history` 是一個包含了 `HumanMessage` 與 `AIMessage` 物件的列表。
+
+    ![](images/img_09.png)
+
+<br>
+
+10. 另外還會輸出。
+
+    ```json
+    name=['movies']
+    NER found: ['movies']
+    Relevant entities are: {'movies': ['Movies.com', 'Nickelodeon Movies', 'Movies 24']}
+    ```
+
+<br>
+
+## `app.py`
+
+_後補_
 
 <br>
 
