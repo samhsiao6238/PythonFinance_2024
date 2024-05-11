@@ -6,11 +6,17 @@ _03_st-neo4j-bot_
 
 1. 這個專案主要包含了三個腳本：`app.py`、`cypher_chain.py`、`cypher_validator.py`。
 
-2. 以下將分別解說這三個腳本。
+2. 另外還有一個 `import.cql` 文件，副檔名 `.cql` 就是 `Cypher Query Language` 的縮寫，是 Neo4j 圖形資料庫專用的查詢語言文件。
+
+3. 以下將分別解說這三個腳本與一個文件。
 
 <br>
 
-## 運行紀錄
+## 步驟說明
+
+_先說明一下運行步驟_
+
+<br>
 
 1. 容器啟動後可正常運行。
 
