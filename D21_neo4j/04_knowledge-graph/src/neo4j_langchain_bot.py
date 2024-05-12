@@ -9,7 +9,7 @@ from src.config import (
 )
 from src.prompt import SUFFIX_WITH_ENTITIES
 from src.memory import ConversationEntityKGMemory
-from src.neo4j_graph import Neo4jEntityGraph
+from src.neo4j_graph.neo4j_graph import Neo4jEntityGraph
 
 
 class Neo4jLangchainBot:

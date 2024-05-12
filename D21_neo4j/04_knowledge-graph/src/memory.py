@@ -1,10 +1,6 @@
 from typing import Dict, Any, Union, List
-from langchain.memory import (
-    ConversationKGMemory,
-)
-from langchain.schema import (
-    get_buffer_string,
-)
+from langchain.memory import ConversationKGMemory
+from langchain.schema import get_buffer_string
 
 
 class ConversationEntityKGMemory(ConversationKGMemory):
@@ -22,11 +18,22 @@ class ConversationEntityKGMemory(ConversationKGMemory):
         if self.return_messages:
             message_buffer = self.chat_memory.messages[-self.k * 2:]
         else:
-            message_buffer = get_buffer_string(
+            # 原本的腳本會報錯，註解並重寫
+            # message_buffer = get_buffer_string(
+            #    self.chat_memory.messages[-self.k * 2:],
+            #    human_prefix=self.human_prefix,
+            #    ai_prefix=self.ai_prefix,
+            # )
+            # 當 return_messages 為 False 時，獲取消息的字串
+            buffer_string = get_buffer_string(
                 self.chat_memory.messages[-self.k * 2:],
                 human_prefix=self.human_prefix,
                 ai_prefix=self.ai_prefix,
             )
+            # 在 else 情況下為 message_buffer 賦予一個空列表作為傳出使用
+            message_buffer = []
+            # 這裡暫時不做其他處理，僅輸出
+            print(f'=>buffer_string={buffer_string}')
 
         entity_strings = []
         for entity in entities:
