@@ -150,34 +150,34 @@ _先完成以下的套件安裝及環境設置_
 
 10. 完成時可見右上角已經是核心的名稱與版本號。
 
-   ![](images/img_21.png)
+      ![](images/img_21.png)
 
 <br>
 
 11. 在專案根目錄中也會顯示虛擬環境安裝的資料夾。
 
-   ![](images/img_22.png)
+      ![](images/img_22.png)
 
 <br>
 
 12. 特別強調，同步之前務必確認編輯了 `.gitignore` 文件。
 
-   ```json
-   # Python
-   venv
-   **/__pycache__
+      ```json
+      # Python
+      venv
+      **/__pycache__
 
-   # App Specific
-   .env
+      # App Specific
+      .env
 
-   # IDE
-   .vscode
+      # IDE
+      .vscode
 
-   # Neo4j local DB
-   data
-   neo4j_db/data
-   neo4j_db/plugins
-   ```
+      # Neo4j local DB
+      data
+      neo4j_db/data
+      neo4j_db/plugins
+      ```
 
 <br>
 
