@@ -380,58 +380,58 @@ _回到專案中_
 
 10. 在圖形資料庫中，除了基本的 `關係`，可以進一步創建更多類型的關係以及添加屬性到關係和節點上拓展實體之間的關聯性，如此可建立更豐富的資料模型，從而更細緻地表達實體間的各種連結和特徵。
 
-   ```python
-   from neo4j import GraphDatabase
+      ```python
+      from neo4j import GraphDatabase
 
-   uri = "bolt://localhost:7687"
-   username = "neo4j"
-   password = "sam112233"
+      uri = "bolt://localhost:7687"
+      username = "neo4j"
+      password = "sam112233"
 
-   # 連接到資料庫
-   driver = GraphDatabase.driver(uri, auth=(username, password))
+      # 連接到資料庫
+      driver = GraphDatabase.driver(uri, auth=(username, password))
 
-   def add_people_and_complex_relationships(tx):
-      # 透過添加關係和節點束性來建立多個人物節點間的多種關係
-      query = """
-      CREATE (a:Person {name: 'Alice', age: 30, occupation: 'Engineer'})
-      CREATE (b:Person {name: 'Bob', age: 25, occupation: 'Designer'})
-      CREATE (c:Person {name: 'Carol', age: 33, occupation: 'Manager'})
-      CREATE (d:Person {name: 'Dave', age: 45, occupation: 'Developer'})
-      CREATE (e:Person {name: 'Eve', age: 29, occupation: 'Analyst'})
-      
-      CREATE (a)-[:FRIENDS_WITH {since: 2020}]->(b)
-      CREATE (a)-[:COLLEAGUES_WITH {since: 2018}]->(c)
-      CREATE (b)-[:FRIENDS_WITH {since: 2021}]->(d)
-      CREATE (c)-[:COLLEAGUES_WITH {since: 2019}]->(d)
-      CREATE (d)-[:FRIENDS_WITH {since: 2019}]->(e)
-      CREATE (e)-[:COLLEAGUES_WITH {since: 2021}]->(a)
-      CREATE (a)-[:MENTOR_OF {since: 2022}]->(e)
-      CREATE (b)-[:WORKS_WITH {on: 'Project X'}]->(c)
-      CREATE (d)-[:LIVES_NEAR {distance: '5km'}]->(b)
-      
-      RETURN a, b, c, d, e
-      """
-      results = tx.run(query)
-      # 傳回創建的節點和關係
-      return results.single()
+      def add_people_and_complex_relationships(tx):
+         # 透過添加關係和節點束性來建立多個人物節點間的多種關係
+         query = """
+         CREATE (a:Person {name: 'Alice', age: 30, occupation: 'Engineer'})
+         CREATE (b:Person {name: 'Bob', age: 25, occupation: 'Designer'})
+         CREATE (c:Person {name: 'Carol', age: 33, occupation: 'Manager'})
+         CREATE (d:Person {name: 'Dave', age: 45, occupation: 'Developer'})
+         CREATE (e:Person {name: 'Eve', age: 29, occupation: 'Analyst'})
+         
+         CREATE (a)-[:FRIENDS_WITH {since: 2020}]->(b)
+         CREATE (a)-[:COLLEAGUES_WITH {since: 2018}]->(c)
+         CREATE (b)-[:FRIENDS_WITH {since: 2021}]->(d)
+         CREATE (c)-[:COLLEAGUES_WITH {since: 2019}]->(d)
+         CREATE (d)-[:FRIENDS_WITH {since: 2019}]->(e)
+         CREATE (e)-[:COLLEAGUES_WITH {since: 2021}]->(a)
+         CREATE (a)-[:MENTOR_OF {since: 2022}]->(e)
+         CREATE (b)-[:WORKS_WITH {on: 'Project X'}]->(c)
+         CREATE (d)-[:LIVES_NEAR {distance: '5km'}]->(b)
+         
+         RETURN a, b, c, d, e
+         """
+         results = tx.run(query)
+         # 傳回創建的節點和關係
+         return results.single()
 
-   # 運行並輸出結果
-   with driver.session() as session:
-      entities = session.write_transaction(add_people_and_complex_relationships)
-      print("Created the following nodes and relationships:")
-      for entity in entities:
-         print(f"Created: {entity['name']} with attributes {dict(entity)}")
+      # 運行並輸出結果
+      with driver.session() as session:
+         entities = session.write_transaction(add_people_and_complex_relationships)
+         print("Created the following nodes and relationships:")
+         for entity in entities:
+            print(f"Created: {entity['name']} with attributes {dict(entity)}")
 
-   # 關閉資料庫連接
-   driver.close()
+      # 關閉資料庫連接
+      driver.close()
 
-   ```
+      ```
 
 <br>
 
 11. 可以點擊左側的關係來切換各種視角。
 
-   ![](images/img_30.png)
+      ![](images/img_30.png)
 
 <br>
 
