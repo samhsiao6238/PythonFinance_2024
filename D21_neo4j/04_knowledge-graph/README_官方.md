@@ -33,7 +33,7 @@ _先完成以下的套件安裝及環境設置_
 2. 透過以下網址訪問 Neo4j 的 Web UI，預設的用戶名和密碼都是 `neo4j`，然後按照指示設置新密碼。
 
    ```html
-   http://localhost:7474/browser/
+   <a href="http://localhost:7474/browser/">http://localhost:7474/browser/</a>
    ```
 
 <br>
