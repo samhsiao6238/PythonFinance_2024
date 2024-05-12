@@ -3,13 +3,16 @@ import os
 # 內建類型檢查模組
 from typing import List, Union
 import streamlit as st
-# 繪圖工具
+# 繪圖工具庫
 import graphviz
 # 棄用或不適用
 # from langchain.chat_models import ChatOpenAI
 # from langchain_community.chat_models import ChatOpenAI
+# 提供與 OpenAPI GPT 模型集成相關的功能
 from langchain_openai import ChatOpenAI
+# 用於處理圖形資料庫的互動
 from langchain.graphs import Neo4jGraph
+# 這兩個庫是用於定義人與 AI 間交換訊息的數據結構
 from langchain.schema import HumanMessage, AIMessage
 
 # 自訂函數

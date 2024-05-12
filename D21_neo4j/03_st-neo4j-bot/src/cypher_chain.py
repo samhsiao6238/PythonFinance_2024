@@ -69,14 +69,14 @@ AVAILABLE_RELATIONSHIPS = [
     Schema("Article", "HAS_CHUNK", "Chunk"),
     Schema("Article", "MENTIONS", "Organization")
 ]
-
+#
 CYPHER_SYSTEM_TEMPLATE = """
 Purpose:
 Your role is to convert user questions concerning data in a Neo4j database into accurate Cypher queries.
 """
-
+#
 cypher_query_corrector = CypherQueryCorrector(AVAILABLE_RELATIONSHIPS)
-
+#
 CYPHER_QA_TEMPLATE = """You are an assistant that helps to form nice and human understandable answers.
 The information part contains the provided information that you must use to construct an answer.
 The provided information is authoritative, you must never doubt it or try to use your internal knowledge to correct it.
@@ -89,11 +89,15 @@ Information:
 
 Question: {question}
 Helpful Answer:"""
+
+# 使用 `langchain.prompts` 的 `PromptTemplate`
 CYPHER_QA_PROMPT = PromptTemplate(
-    input_variables=["context", "question"], template=CYPHER_QA_TEMPLATE
+    input_variables=["context", "question"],
+    template=CYPHER_QA_TEMPLATE
 )
 
 
+# 定義一個繼承基類的類
 class Entities(BaseModel):
     """Identifying information about entities."""
 
@@ -103,6 +107,7 @@ class Entities(BaseModel):
     )
 
 
+# 定義一個繼承 `langchain.chains` 中的 `GraphCypherQAChain` 類的類
 class CustomCypherChain(GraphCypherQAChain):
     def process_entities(self, text: str) -> List[str]:
         prompt = ChatPromptTemplate.from_messages(
