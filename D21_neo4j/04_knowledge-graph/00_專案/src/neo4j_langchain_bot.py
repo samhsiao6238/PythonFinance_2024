@@ -3,13 +3,13 @@ from langchain.agents import (
     AgentExecutor,
 )
 from langchain.chat_models import ChatOpenAI
-from src.config import (
+from config import (
     OPENAI_API_KEY,
     CHATGPT_MODEL,
 )
-from src.prompt import SUFFIX_WITH_ENTITIES
-from src.memory import ConversationEntityKGMemory
-from src.neo4j_graph.neo4j_graph import Neo4jEntityGraph
+from prompt import SUFFIX_WITH_ENTITIES
+from memory import ConversationEntityKGMemory
+from neo4j_graph.entity_graph import Neo4jEntityGraph
 
 
 class Neo4jLangchainBot:

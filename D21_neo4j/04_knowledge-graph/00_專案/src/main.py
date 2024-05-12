@@ -1,5 +1,5 @@
 # main.py
-from src.neo4j_langchain_bot import Neo4jLangchainBot
+from neo4j_langchain_bot import Neo4jLangchainBot
 
 
 def main():

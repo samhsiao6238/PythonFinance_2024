@@ -9,7 +9,7 @@ from langchain.graphs.networkx_graph import (
     NetworkxEntityGraph,
     KnowledgeTriple,
 )
-from src.config import (
+from config import (
     NEO4J_DB_URI,
     NEO4J_DB_NAME,
     NEO4J_DB_USER,

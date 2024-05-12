@@ -1,6 +1,6 @@
 from typing import List
 from neo4j import ManagedTransaction, Record
-from src.config import NEO4J_ENTITY_NAME_FULLTEXT_INDEX_NAME
+from config import NEO4J_ENTITY_NAME_FULLTEXT_INDEX_NAME
 from .model import (
     Node,
     Edge,

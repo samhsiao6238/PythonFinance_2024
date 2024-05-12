@@ -187,7 +187,7 @@ _回到專案中_
 
 <br>
 
-1. 在專案根目錄創建一個 `.env` 檔案，並填入必要的環境變量，包括 Neo4j 的連接配置和 OpenAI API 密鑰。
+1. 在專案根目錄創建一個 `.env` 檔案，並填入必要的環境變量，包括 Neo4j 的連接配置和 OpenAI API 密鑰；並確認 `.env` 文件已經寫入 `.gitignore` 文件中。
 
    ```json
    OPENAI_API_KEY=<輸入 API KEY>
@@ -201,23 +201,16 @@ _回到專案中_
 
 <br>
 
-2. 建立並啟動虛擬環境。
+2. 在根目錄新增終端機，並確認啟動的虛擬環境是正確的。
+
+   ![](images/img_23.png)
+
+<br>
+
+3. 透過指令安裝所需的 Python 依賴。
 
    ```bash
-   # 在當前路徑中建立虛擬環境
-   python -m venv ./venv
-   
-   # 激活虛擬環境，在 Windows 下
-   .\venv\Scripts\activate
-   
-   # 或在 Unix 或 MacOS 下
-   source ./venv/bin/activate
-   ```
-
-3. 安裝所需的 Python 依賴。
-
-   ```bash
-   pip install -r requirement.txt
+   pip install -r requirements.txt
    ```
 
 <br>
@@ -237,6 +230,208 @@ _回到專案中_
    ```bash
    python ./src/main.py
    ```
+
+<br>
+
+3. 成功啟動後，可輸入語句跟 Bot 開始聊天。
+
+   ![](images/img_24.png)
+
+<br>
+
+## 編輯腳本
+
+1. 在之前步驟中建立的 `test.ipynb` 文件中，加入以下代碼並且執行。
+
+   ```python
+   # 添加一筆資料
+   from neo4j import GraphDatabase
+
+   uri = "bolt://localhost:7687"  # Neo4j Bolt URL
+   username = "neo4j"
+   password = "sam112233"
+
+   # 連接到數據庫
+   driver = GraphDatabase.driver(uri, auth=(username, password))
+
+   def add_person(tx, name):
+      query = (
+         "CREATE (p:Person {name: $name}) "
+         "RETURN p"
+      )
+      return tx.run(query, name=name).single()[0]
+
+   # 新增節點
+   with driver.session() as session:
+      person = session.write_transaction(add_person, "Alice2")
+      print(f"Created: {person['name']}")
+
+   # 關閉數據庫連接
+   driver.close()
+   ```
+
+<br>
+
+2. 完成時顯示建立了一個資料。
+
+   ![](images/img_25.png)
+
+<br>
+
+3. 再使用以下腳本進行查詢。
+
+   ```python
+   # 查詢資料
+   def find_person(tx, name):
+      query = (
+         "MATCH (p:Person {name: $name}) "
+         "RETURN p.name AS name"
+      )
+      result = tx.run(query, name=name).single()
+      return result["name"] if result else "No such person found"
+
+   # 查詢節點
+   with driver.session() as session:
+      person_name = session.read_transaction(find_person, "Alice2")
+      print(f"Found: {person_name}")
+   ```
+
+<br>
+
+4. 結果顯示如下。
+
+   ![](images/img_26.png)
+
+<br>
+
+5. 可使用 Neo4j Desktop 觀察。
+
+   ![](images/img_27.png)
+
+<br>
+
+6. 回到腳本中多添加幾筆資料，然後在 Neo4j Desktop 查看，可使用介面查詢或語法查詢。
+
+   ```bash
+   MATCH (n) RETURN n LIMIT 25
+   ```
+
+<br>
+
+7. 輸入語法便會顯示結果。
+
+   ![](images/img_28.png)
+
+<br>
+
+8. 透過腳本建立具有 `關係` 的數據。
+
+   ```python
+   from neo4j import GraphDatabase
+
+   uri = "bolt://localhost:7687"  # Neo4j Bolt URL
+   username = "neo4j"
+   password = "sam112233"
+
+   # 連接到資料庫
+   driver = GraphDatabase.driver(uri, auth=(username, password))
+
+
+   def add_people_and_relationships(tx):
+      # 建立多個人物節點和它們之間的關係
+      query = """
+         CREATE (a:Person {name: 'Alice'})
+         CREATE (b:Person {name: 'Bob'})
+         CREATE (c:Person {name: 'Carol'})
+         CREATE (d:Person {name: 'Dave'})
+         CREATE (e:Person {name: 'Eve'})
+         
+         CREATE (a)-[:FRIENDS_WITH]->(b)
+         CREATE (a)-[:COLLEAGUES_WITH]->(c)
+         CREATE (b)-[:FRIENDS_WITH]->(d)
+         CREATE (c)-[:COLLEAGUES_WITH]->(d)
+         CREATE (d)-[:FRIENDS_WITH]->(e)
+         CREATE (e)-[:COLLEAGUES_WITH]->(a)
+         
+         RETURN a, b, c, d, e
+      """
+      results = tx.run(query)
+      return results.single()  # Return the created nodes
+
+
+   # 運行事務並列印結果
+   with driver.session() as session:
+      people = session.write_transaction(add_people_and_relationships)
+      print("Created the following nodes:")
+      for person in people:
+         print(f"Created: {person['name']}")
+
+   # 關閉資料庫連接
+   driver.close()
+   ```
+
+<br>
+
+9. 再次進入資料庫查詢。
+
+   ![](images/img_29.png)
+
+<br>
+
+10. 在圖形資料庫中，除了基本的 `關係`，可以進一步創建更多類型的關係以及添加屬性到關係和節點上拓展實體之間的關聯性，如此可建立更豐富的資料模型，從而更細緻地表達實體間的各種連結和特徵。
+
+   ```python
+   from neo4j import GraphDatabase
+
+   uri = "bolt://localhost:7687"
+   username = "neo4j"
+   password = "sam112233"
+
+   # 連接到資料庫
+   driver = GraphDatabase.driver(uri, auth=(username, password))
+
+   def add_people_and_complex_relationships(tx):
+      # 透過添加關係和節點束性來建立多個人物節點間的多種關係
+      query = """
+      CREATE (a:Person {name: 'Alice', age: 30, occupation: 'Engineer'})
+      CREATE (b:Person {name: 'Bob', age: 25, occupation: 'Designer'})
+      CREATE (c:Person {name: 'Carol', age: 33, occupation: 'Manager'})
+      CREATE (d:Person {name: 'Dave', age: 45, occupation: 'Developer'})
+      CREATE (e:Person {name: 'Eve', age: 29, occupation: 'Analyst'})
+      
+      CREATE (a)-[:FRIENDS_WITH {since: 2020}]->(b)
+      CREATE (a)-[:COLLEAGUES_WITH {since: 2018}]->(c)
+      CREATE (b)-[:FRIENDS_WITH {since: 2021}]->(d)
+      CREATE (c)-[:COLLEAGUES_WITH {since: 2019}]->(d)
+      CREATE (d)-[:FRIENDS_WITH {since: 2019}]->(e)
+      CREATE (e)-[:COLLEAGUES_WITH {since: 2021}]->(a)
+      CREATE (a)-[:MENTOR_OF {since: 2022}]->(e)
+      CREATE (b)-[:WORKS_WITH {on: 'Project X'}]->(c)
+      CREATE (d)-[:LIVES_NEAR {distance: '5km'}]->(b)
+      
+      RETURN a, b, c, d, e
+      """
+      results = tx.run(query)
+      # 傳回創建的節點和關係
+      return results.single()
+
+   # 運行並輸出結果
+   with driver.session() as session:
+      entities = session.write_transaction(add_people_and_complex_relationships)
+      print("Created the following nodes and relationships:")
+      for entity in entities:
+         print(f"Created: {entity['name']} with attributes {dict(entity)}")
+
+   # 關閉資料庫連接
+   driver.close()
+
+   ```
+
+<br>
+
+11. 可以點擊左側的關係來切換各種視角。
+
+   ![](images/img_30.png)
 
 <br>
 
