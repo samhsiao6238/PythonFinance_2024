@@ -34,37 +34,37 @@ _依據這些步驟開始使用 Neo4j 知識圖。_
    
    - 點擊右上角 `Add`，然後點擊 `Remote connection`。
 
-   ![](images/img_02.png)
+      ![](images/img_02.png)
 
 <br>
 
    - 使用預設的 `URL`，點擊 `Next`。
 
-   ![](images/img_03.png)
+      ![](images/img_03.png)
 
 <br>
 
    - 輸入 `Username` 及 `Password` 之後點擊 `Save`。
 
-   ![](images/img_04.png)
+      ![](images/img_04.png)
 
 <br>
 
    - 點擊 `Connect`。
 
-   ![](images/img_05.png)
+      ![](images/img_05.png)
 
 <br>
 
    - 接著 `Open`。
 
-   ![](images/img_06.png)
+      ![](images/img_06.png)
 
 <br>
 
    - 點擊左上角的資料庫圖標展開，就會看到一樣的內容了。
 
-   ![](images/img_07.png)
+      ![](images/img_07.png)
 
 <br>
 
