@@ -30,7 +30,13 @@ _先完成以下的套件安裝及環境設置_
 
 <br>
 
-2. 透過以下網址訪問 Neo4j 的 Web UI，預設的用戶名和密碼都是 `neo4j`，然後按照指示設置新密碼。
+2. 可透過 Docker desktop 觀察到建立了一個容器。
+
+   ![](images/img_08.png)
+
+<br>
+
+3. 透過以下網址訪問 Neo4j 的 Web UI，預設的用戶名和密碼都是 `neo4j`，然後按照指示設置新密碼。
 
 
    [http://localhost:7474/browser/](http://localhost:7474/browser/)

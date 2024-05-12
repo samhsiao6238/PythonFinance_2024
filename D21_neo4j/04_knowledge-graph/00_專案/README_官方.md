@@ -1,6 +1,5 @@
 _以下為原文_
 
-# Langchain Neo4j Knowledge Graph Demo
 
 This project aims to demonstrate the potential use of Neo4j graph database as memory of Langchain agent, which contains
 
@@ -33,7 +32,6 @@ python ./scripts/add_index_for_neo4j_db.py
 ```
 
 6. Run the app with `python ./src/main.py` in project root.
-
 
 # Notes
 

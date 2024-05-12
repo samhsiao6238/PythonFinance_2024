@@ -9,6 +9,6 @@ venv
 .vscode
 
 # Neo4j local DB
-
+data
 neo4j_db/data
 neo4j_db/plugins
