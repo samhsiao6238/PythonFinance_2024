@@ -716,6 +716,96 @@ _回到專案中_
 
 <br>
 
+10. 加入透明度來優化頻率的顯示。
+
+      ```python
+      import matplotlib.pyplot as plt
+      import networkx as nx
+      from neo4j import GraphDatabase
+      import numpy as np
+
+      # Neo4j Bolt URL
+      uri = "bolt://localhost:7687"
+      username = "neo4j"
+      password = "sam112233"
+
+      driver = GraphDatabase.driver(uri, auth=(username, password))
+
+
+      def fetch_data(tx):
+         # 查询关键字和与其相关的文献数量
+         query = """
+         MATCH (k:Keyword)<-[:HAS_KEYWORD]-(p:Paper)
+         RETURN k.name AS keyword, COUNT(p) AS papers
+         """
+         return list(tx.run(query))
+
+
+      def plot_keywords_graph(data):
+         G = nx.Graph()
+         papers_counts = [record["papers"] for record in data]
+         min_papers = min(papers_counts)
+         max_papers = max(papers_counts)
+
+         keywords = [record["keyword"] for record in data]
+         for record in data:
+            keyword, weight = record["keyword"], record["papers"]
+            normalized_weight = (weight - min_papers) / (max_papers - min_papers)
+            scaled_size = 300 + normalized_weight * 800  # Scaling node sizes
+            G.add_node(keyword, size=scaled_size, count=weight)
+
+         for i in range(len(data)):
+            for j in range(i + 1, len(data)):
+                  G.add_edge(keywords[i], keywords[j])
+
+         pos = nx.spring_layout(G)
+         sizes = [G.nodes[node]["size"] for node in G.nodes()]
+         normalized_counts = [
+            (G.nodes[node]["count"] - min_papers) / (max_papers - min_papers)
+            for node in G.nodes()
+         ]
+         colors = [plt.cm.YlOrRd(count) for count in normalized_counts]  # Generating colors
+
+         fig, ax = plt.subplots()
+         for node, color, size in zip(G.nodes(), colors, sizes):
+            nx.draw_networkx_nodes(
+                  G,
+                  pos,
+                  nodelist=[node],
+                  node_size=[size],
+                  node_color=[color],
+                  alpha=0.3
+                  + 0.7 * ((G.nodes[node]["count"] - min_papers) / (max_papers - min_papers)),
+                  ax=ax,
+            )
+         nx.draw_networkx_edges(G, pos, ax=ax, edge_color="gray")
+         nx.draw_networkx_labels(G, pos, ax=ax)
+
+         sm = plt.cm.ScalarMappable(
+            cmap=plt.cm.YlOrRd, norm=plt.Normalize(vmin=min_papers, vmax=max_papers)
+         )
+         sm.set_array([])
+         plt.colorbar(sm, ax=ax, label="Normalized Number of Papers")
+
+         plt.title("Keyword Co-occurrence Graph")
+         plt.show()
+
+
+      with driver.session() as session:
+         keyword_data = session.read_transaction(fetch_data)
+         plot_keywords_graph(keyword_data)
+
+      driver.close()
+      ```
+
+<br>
+
+11. 結果。
+
+   ![](images/img_35.png)
+
+<br>
+
 ___
 
 _END_
