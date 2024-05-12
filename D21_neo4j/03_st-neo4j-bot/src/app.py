@@ -1,17 +1,22 @@
 # app.py
 import os
+
 # 內建類型檢查模組
 from typing import List, Union
 import streamlit as st
+
 # 繪圖工具庫
 import graphviz
+
 # 棄用或不適用
 # from langchain.chat_models import ChatOpenAI
 # from langchain_community.chat_models import ChatOpenAI
 # 提供與 OpenAPI GPT 模型集成相關的功能
 from langchain_openai import ChatOpenAI
+
 # 用於處理圖形資料庫的互動
 from langchain.graphs import Neo4jGraph
+
 # 這兩個庫是用於定義人與 AI 間交換訊息的數據結構
 from langchain.schema import HumanMessage, AIMessage
 
@@ -119,7 +124,7 @@ def dynamic_response_tabs(i):
 
 # 自訂函數：取得使用者的輸入
 def get_text() -> str:
-    # 輸入框 
+    # 輸入框
     input_text = st.chat_input("誰是 Neo4j 的 CEO？")
     # 假如還沒輸出，檢查的邏輯是判斷有沒有以 `sk-` 開頭的字串
     if not openai_api_key.startswith("sk-"):
@@ -181,8 +186,8 @@ try:
             context = generate_context(user_input)
             # `graph_search` 是一個 `CustomCypherChain.from_llm` 物件
             # 傳入使用者輸入與歷史查詢
-            print(f'=>輸出：user_input={user_input}', '\n')
-            print(f'=>輸出：chat_history={context}', '\n')
+            print(f"=>輸出：user_input={user_input}", "\n")
+            print(f"=>輸出：chat_history={context}", "\n")
             output = graph_search({"query": user_input, "chat_history": context})
             # session_state 是一個持久化儲存技術，將這些跨頁面的數據可以用字典的型態被保存
             # 儲存當前對話
@@ -203,7 +208,7 @@ try:
             #
             dynamic_response_tabs(i)
 except Exception as e:
-    print(f'=>發生例外狀況：{e}')
+    print(f"=>發生例外狀況：{e}")
 finally:
     #
-    print('=try 結束=')
+    print("=try 結束=")
