@@ -502,7 +502,13 @@ _回到專案中_
 
 <br>
 
-3. 從Neo4j資料庫中提取關鍵字及其與文獻的關係數據，然後根據關鍵字出現的次數來調整節點的大小。
+## 使用 Python 繪圖
+
+1. 從 Neo4j 資料庫中 `提取關鍵字` 及其與文獻的關係數據，然後根據關鍵字 `出現的頻率` 來調整節點的大小。
+
+<br>
+
+2. 先安裝必要的套件。
 
    ```bash
    pip install matplotlib
@@ -510,7 +516,7 @@ _回到專案中_
 
 <br>
 
-4. 在本地輸出圖片。
+3. 讀取資料並在本地輸出圖片。
 
    ```python
    import matplotlib.pyplot as plt
@@ -567,13 +573,13 @@ _回到專案中_
 
 <br>
 
-5. 結果。
+4. 結果。
 
    ![](images/img_32.png)
 
 <br>
 
-6. 加入顏色來顯示頻率。
+5. 加入顏色來映射頻率的高低。
 
    ```python
    import matplotlib.pyplot as plt
@@ -635,13 +641,13 @@ _回到專案中_
 
 <br>
 
-7. 結果。
+6. 結果。
 
    ![](images/img_33.png)
 
 <br>
 
-8. 優化大小的比例。
+7. 進一步優化，透過節低的大小來映射頻率的高低。
 
    ```python
    import matplotlib.pyplot as plt
@@ -710,97 +716,97 @@ _回到專案中_
 
 <br>
 
-9. 結果。
+8. 結果。
 
    ![](images/img_34.png)
 
 <br>
 
-10. 加入透明度來優化頻率的顯示。
+9. 再度優化，加入透明度來映射頻率的高低。
 
-      ```python
-      import matplotlib.pyplot as plt
-      import networkx as nx
-      from neo4j import GraphDatabase
-      import numpy as np
+   ```python
+   import matplotlib.pyplot as plt
+   import networkx as nx
+   from neo4j import GraphDatabase
+   import numpy as np
 
-      # Neo4j Bolt URL
-      uri = "bolt://localhost:7687"
-      username = "neo4j"
-      password = "sam112233"
+   # Neo4j Bolt URL
+   uri = "bolt://localhost:7687"
+   username = "neo4j"
+   password = "sam112233"
 
-      driver = GraphDatabase.driver(uri, auth=(username, password))
-
-
-      def fetch_data(tx):
-         # 查询关键字和与其相关的文献数量
-         query = """
-         MATCH (k:Keyword)<-[:HAS_KEYWORD]-(p:Paper)
-         RETURN k.name AS keyword, COUNT(p) AS papers
-         """
-         return list(tx.run(query))
+   driver = GraphDatabase.driver(uri, auth=(username, password))
 
 
-      def plot_keywords_graph(data):
-         G = nx.Graph()
-         papers_counts = [record["papers"] for record in data]
-         min_papers = min(papers_counts)
-         max_papers = max(papers_counts)
+   def fetch_data(tx):
+      # 查询关键字和与其相关的文献数量
+      query = """
+      MATCH (k:Keyword)<-[:HAS_KEYWORD]-(p:Paper)
+      RETURN k.name AS keyword, COUNT(p) AS papers
+      """
+      return list(tx.run(query))
 
-         keywords = [record["keyword"] for record in data]
-         for record in data:
-            keyword, weight = record["keyword"], record["papers"]
-            normalized_weight = (weight - min_papers) / (max_papers - min_papers)
-            scaled_size = 300 + normalized_weight * 800  # Scaling node sizes
-            G.add_node(keyword, size=scaled_size, count=weight)
 
-         for i in range(len(data)):
-            for j in range(i + 1, len(data)):
-                  G.add_edge(keywords[i], keywords[j])
+   def plot_keywords_graph(data):
+      G = nx.Graph()
+      papers_counts = [record["papers"] for record in data]
+      min_papers = min(papers_counts)
+      max_papers = max(papers_counts)
 
-         pos = nx.spring_layout(G)
-         sizes = [G.nodes[node]["size"] for node in G.nodes()]
-         normalized_counts = [
-            (G.nodes[node]["count"] - min_papers) / (max_papers - min_papers)
-            for node in G.nodes()
-         ]
-         colors = [plt.cm.YlOrRd(count) for count in normalized_counts]  # Generating colors
+      keywords = [record["keyword"] for record in data]
+      for record in data:
+         keyword, weight = record["keyword"], record["papers"]
+         normalized_weight = (weight - min_papers) / (max_papers - min_papers)
+         scaled_size = 300 + normalized_weight * 800  # Scaling node sizes
+         G.add_node(keyword, size=scaled_size, count=weight)
 
-         fig, ax = plt.subplots()
-         for node, color, size in zip(G.nodes(), colors, sizes):
-            nx.draw_networkx_nodes(
-                  G,
-                  pos,
-                  nodelist=[node],
-                  node_size=[size],
-                  node_color=[color],
-                  alpha=0.3
-                  + 0.7 * ((G.nodes[node]["count"] - min_papers) / (max_papers - min_papers)),
-                  ax=ax,
-            )
-         nx.draw_networkx_edges(G, pos, ax=ax, edge_color="gray")
-         nx.draw_networkx_labels(G, pos, ax=ax)
+      for i in range(len(data)):
+         for j in range(i + 1, len(data)):
+               G.add_edge(keywords[i], keywords[j])
 
-         sm = plt.cm.ScalarMappable(
-            cmap=plt.cm.YlOrRd, norm=plt.Normalize(vmin=min_papers, vmax=max_papers)
+      pos = nx.spring_layout(G)
+      sizes = [G.nodes[node]["size"] for node in G.nodes()]
+      normalized_counts = [
+         (G.nodes[node]["count"] - min_papers) / (max_papers - min_papers)
+         for node in G.nodes()
+      ]
+      colors = [plt.cm.YlOrRd(count) for count in normalized_counts]  # Generating colors
+
+      fig, ax = plt.subplots()
+      for node, color, size in zip(G.nodes(), colors, sizes):
+         nx.draw_networkx_nodes(
+               G,
+               pos,
+               nodelist=[node],
+               node_size=[size],
+               node_color=[color],
+               alpha=0.3
+               + 0.7 * ((G.nodes[node]["count"] - min_papers) / (max_papers - min_papers)),
+               ax=ax,
          )
-         sm.set_array([])
-         plt.colorbar(sm, ax=ax, label="Normalized Number of Papers")
+      nx.draw_networkx_edges(G, pos, ax=ax, edge_color="gray")
+      nx.draw_networkx_labels(G, pos, ax=ax)
 
-         plt.title("Keyword Co-occurrence Graph")
-         plt.show()
+      sm = plt.cm.ScalarMappable(
+         cmap=plt.cm.YlOrRd, norm=plt.Normalize(vmin=min_papers, vmax=max_papers)
+      )
+      sm.set_array([])
+      plt.colorbar(sm, ax=ax, label="Normalized Number of Papers")
+
+      plt.title("Keyword Co-occurrence Graph")
+      plt.show()
 
 
-      with driver.session() as session:
-         keyword_data = session.read_transaction(fetch_data)
-         plot_keywords_graph(keyword_data)
+   with driver.session() as session:
+      keyword_data = session.read_transaction(fetch_data)
+      plot_keywords_graph(keyword_data)
 
-      driver.close()
-      ```
+   driver.close()
+   ```
 
 <br>
 
-11. 結果。
+10. 結果。
 
       ![](images/img_35.png)
 
