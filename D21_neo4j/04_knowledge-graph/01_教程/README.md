@@ -50,37 +50,43 @@ _先完成以下的套件安裝及環境設置_
 
 <br>
 
-5. 另外，也可使用 Neo4j Desktop 進行連線，以確保數據庫的運行與連接：點擊右上角 `Add`，然後點擊 `Remote connection`。
+5. 另外，也可使用 Neo4j Desktop 進行連線。
+
+   ![](images/img_11.png)
+
+<br>
+
+6. 點擊右上角 `Add`，然後點擊 `Remote connection`
 
    ![](images/img_02.png)
 
 <br>
 
-6. 使用預設的 `URL`，點擊 `Next`。
+7. 使用預設的 `URL`，點擊 `Next`。
 
    ![](images/img_03.png)
 
 <br>
 
-7. 輸入 `Username` 及 `Password` 之後點擊 `Save`。
+8. 輸入 `Username` 及 `Password` 之後點擊 `Save`。
 
    ![](images/img_04.png)
 
 <br>
 
-8. 點擊 `Connect`。
+9. 點擊 `Connect`。
 
    ![](images/img_05.png)
 
 <br>
 
-9. 接著 `Open`。
+10. 接著 `Open`。
 
    ![](images/img_06.png)
 
 <br>
 
-10. 點擊左上角的資料庫圖標展開，就會看到一樣的內容了。
+11. 點擊左上角的資料庫圖標展開，就會看到一樣的內容了。
 
    ![](images/img_07.png)
 
