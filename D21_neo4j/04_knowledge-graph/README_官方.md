@@ -18,9 +18,7 @@ _依據這些步驟開始使用 Neo4j 知識圖。_
 
 <br>
 
-2. 使用 Docker 啟動 Neo4j 數據庫。
-
-   - 進入 `docker-compose.yml` 文件所在路徑，透過 Docker Compose 啟動 Neo4j 數據庫。
+2. 使用 Docker 啟動 Neo4j 數據庫：進入 `docker-compose.yml` 文件所在路徑，透過在終端機使用 Docker Compose 指令來啟動容器中的 Neo4j 數據庫。
 
    ```bash
    docker-compose up -d
@@ -34,9 +32,7 @@ _依據這些步驟開始使用 Neo4j 知識圖。_
 
 <br>
 
-4. 如果使用 Neo4j Desktop，可透過以下步驟確保數據庫運行並可以連接。
-   
-   - 點擊右上角 `Add`，然後點擊 `Remote connection`。
+4. 另外，也可使用 Neo4j Desktop 進行連線，以確保數據庫的運行與連接：點擊右上角 `Add`，然後點擊 `Remote connection`。
 
    ![](images/img_02.png)
 
@@ -72,9 +68,9 @@ _依據這些步驟開始使用 Neo4j 知識圖。_
 
 <br>
 
-1. **配置環境變量**
+## 配置環境變量
 
-   - 在專案根目錄創建一個 `.env` 檔案，並填入必要的環境變量，包括 Neo4j 的連接配置和 OpenAI API 密鑰，可參考範例中的 `.env.example` 檔案。
+1. 在專案根目錄創建一個 `.env` 檔案，並填入必要的環境變量，包括 Neo4j 的連接配置和 OpenAI API 密鑰，可參考範例中的 `.env.example` 檔案。
 
    ```json
    OPENAI_API_KEY=<輸入 API KEY>
@@ -88,55 +84,49 @@ _依據這些步驟開始使用 Neo4j 知識圖。_
 
 <br>
 
-5. **安裝 Python 依賴**
+2. 安裝 Python 依賴：初次啟用可在專案根目錄創建並啟動虛擬環境。
 
-   - 初次啟用可在專案根目錄創建並啟動虛擬環境
+   ```bash
+   python -m venv ./venv
+   # 激活虛擬環境，在 Windows 下
+   .\venv\Scripts\activate
+   # 或在 Unix 或 MacOS 下
+   source ./venv/bin/activate
+   ```
 
-    ```bash
-    python -m venv ./venv
-    # 激活虛擬環境，在 Windows 下
-    .\venv\Scripts\activate
-    # 或在 Unix 或 MacOS 下
-    source ./venv/bin/activate
-    ```
+3. 安裝所需的 Python 依賴。
 
-  - 安裝所需的 Python 依賴
-
-    ```bash
-    pip install -r ./requirement.txt
-    ```
+   ```bash
+   pip install -r ./requirement.txt
+   ```
 
 <br>
 
-6. **初始化 Neo4j 數據庫**
+## 初始化 Neo4j 數據庫
 
-   - 在專案根目錄下運行初始化腳本以創建 `所需的索引`，這對於在 Neo4j 知識圖中進行全文檢索是必要的
+1. 在專案根目錄下運行初始化腳本以創建 `所需的索引`，這對於在 Neo4j 知識圖中進行全文檢索是必要的
 
-    ```bash
-    python ./scripts/add_index_for_neo4j_db.py
-    ```
-
-<br>
-
-7. **運行應用**
-
-   - 確保所有設定正確無誤後，在根目錄運行主應用程序，切記要在根目錄運行才能正確載入環境參數。
-
-    ```bash
-    python ./src/main.py
-    ```
+   ```bash
+   python ./scripts/add_index_for_neo4j_db.py
+   ```
 
 <br>
 
-8. **觀察和交互**
+2. 運行應用：確保所有設定正確無誤後，在根目錄運行主應用程序，切記要在根目錄運行才能正確載入環境參數。
 
-   - 運行應用後，你可以進行交互並觀察輸出，若需要查看知識圖的所有節點和邊，可以在 Neo4j 的 Web UI 中運行。
+   ```bash
+   python ./src/main.py
+   ```
 
-   - 注意，如果節點數量很多，這個查詢可能會很慢。
+<br>
 
-    ```cypher
-    MATCH (n) RETURN n
-    ```
+## 觀察和交互
+
+1. 運行應用後，你可以進行交互並觀察輸出，若需要查看知識圖的所有節點和邊，可以在 Neo4j 的 Web UI 中運行，注意，如果節點數量很多，這個查詢可能會很慢。
+
+   ```cypher
+   MATCH (n) RETURN n
+   ```
 
 <br>
 
