@@ -76,7 +76,11 @@ _先完成以下的套件安裝及環境設置_
 
 ## 配置環境變量
 
-1. 在專案根目錄創建一個 `.env` 檔案，並填入必要的環境變量，包括 Neo4j 的連接配置和 OpenAI API 密鑰，可參考範例中的 `.env.example` 檔案。
+_回到專案中_
+
+<br>
+
+1. 在專案根目錄創建一個 `.env` 檔案，並填入必要的環境變量，包括 Neo4j 的連接配置和 OpenAI API 密鑰。
 
    ```json
    OPENAI_API_KEY=<輸入 API KEY>
@@ -90,12 +94,15 @@ _先完成以下的套件安裝及環境設置_
 
 <br>
 
-2. 安裝 Python 依賴：初次啟用可在專案根目錄創建並啟動虛擬環境。
+2. 建立並啟動虛擬環境。
 
    ```bash
+   # 在當前路徑中建立虛擬環境
    python -m venv ./venv
+   
    # 激活虛擬環境，在 Windows 下
    .\venv\Scripts\activate
+   
    # 或在 Unix 或 MacOS 下
    source ./venv/bin/activate
    ```
@@ -103,7 +110,7 @@ _先完成以下的套件安裝及環境設置_
 3. 安裝所需的 Python 依賴。
 
    ```bash
-   pip install -r ./requirement.txt
+   pip install -r requirement.txt
    ```
 
 <br>
