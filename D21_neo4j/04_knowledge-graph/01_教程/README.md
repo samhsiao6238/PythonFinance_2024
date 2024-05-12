@@ -56,7 +56,7 @@ _先完成以下的套件安裝及環境設置_
 
 <br>
 
-6. 點擊右上角 `Add`，然後點擊 `Remote connection`
+6. 點擊右上角 `Add`，然後點擊 `Remote connection`。
 
    ![](images/img_02.png)
 
@@ -68,7 +68,7 @@ _先完成以下的套件安裝及環境設置_
 
 <br>
 
-8. 輸入 `Username` 及 `Password` 之後點擊 `Save`。
+8. 輸入 `Username` 及 `Password` 之後點擊 `Save`，`Username` 是預設的 `neo4j`，密碼則是前面步驟重設的。
 
    ![](images/img_04.png)
 
@@ -82,13 +82,13 @@ _先完成以下的套件安裝及環境設置_
 
 10. 接著 `Open`。
 
-   ![](images/img_06.png)
+      ![](images/img_06.png)
 
 <br>
 
 11. 點擊左上角的資料庫圖標展開，就會看到一樣的內容了。
 
-   ![](images/img_07.png)
+      ![](images/img_07.png)
 
 <br>
 
