@@ -20,7 +20,7 @@ _先完成以下的套件安裝及環境設置_
 
 ## 開始操作
 
-1. 使用 Docker 啟動 Neo4j 數據庫：進入 `docker-compose.yml` 文件所在路徑，透過在終端機使用 Docker Compose 指令來啟動容器中的 Neo4j 數據庫。
+1. 使用 Docker 啟動 Neo4j 數據庫：進入 `docker-compose.yml` 文件所在路徑，接著在終端機使用 Docker Compose 指令來啟動容器中的 Neo4j 數據庫。
 
    ```bash
    docker-compose up -d
@@ -30,7 +30,11 @@ _先完成以下的套件安裝及環境設置_
 
 <br>
 
-2. 透過網址 `http://localhost:7474/browser/` 以訪問 Neo4j 的 Web UI，預設的用戶名和密碼都是 `neo4j`，然後按照指示設置新密碼。
+2. 透過以下網址訪問 Neo4j 的 Web UI，預設的用戶名和密碼都是 `neo4j`，然後按照指示設置新密碼。
+
+   ```html
+   http://localhost:7474/browser/
+   ```
 
 <br>
 
