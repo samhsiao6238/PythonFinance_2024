@@ -1,0 +1,14 @@
+# Python
+venv
+**/__pycache__
+
+# App Specific
+.env
+
+# IDE
+.vscode
+
+# Neo4j local DB
+
+neo4j_db/data
+neo4j_db/plugins

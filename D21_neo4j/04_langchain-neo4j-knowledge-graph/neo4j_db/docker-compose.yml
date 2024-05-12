@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+  neo4j:
+    image: neo4j:5.7.0
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - ./data:/data
+      - ./plugins:/plugins
+    environment:
+      - NEO4J_apoc_import_file_use__neo4j__config=true
+      - NEO4J_PLUGINS=["apoc"]
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
