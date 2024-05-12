@@ -479,11 +479,11 @@ _回到專案中_
       papers = {f"Paper {i}": random.sample(keywords, k=random.randint(2, 5)) for i in range(1, 101)}
 
       with driver.session() as session:
-         # Ensure all keywords exist in the database
+         # 確保所有關鍵字都存在於資料庫中
          for keyword in set(sum(papers.values(), [])):
                session.write_transaction(create_keyword, keyword)
          
-         # Create papers and their relationships to keywords
+         # 創建論文及其與關鍵字的關係
          for title, paper_keywords in papers.items():
                session.write_transaction(create_paper_with_keywords, title, paper_keywords)
 
@@ -531,7 +531,7 @@ _回到專案中_
    driver = GraphDatabase.driver(uri, auth=(username, password))
 
    def fetch_data(tx):
-      # 查询关键字和与其相关的文献数量
+      # 查詢關鍵字和與其相關的文獻數量
       query = """
       MATCH (k:Keyword)<-[:HAS_KEYWORD]-(p:Paper)
       RETURN k.name AS keyword, COUNT(p) AS papers
@@ -544,23 +544,24 @@ _回到專案中_
          keyword, weight = record['keyword'], record['papers']
          G.add_node(keyword, size=weight)
       
-      # 添加节点之间的边（这里假设是示例，实际需要根据实际数据调整）
+      # 新增節點之間的邊，這裡假設是範例，實際需要根據實際資料調整
       for i in range(len(data)):
          for j in range(i + 1, len(data)):
                G.add_edge(data[i]['keyword'], data[j]['keyword'])
-      
-      pos = nx.spring_layout(G)  # 使用Spring布局
-      sizes = [G.nodes[node]['size'] * 100 for node in G]  # 调整节点大小
+      # 使用 Spring 佈局
+      pos = nx.spring_layout(G)
+      # 調整節點大小
+      sizes = [G.nodes[node]['size'] * 100 for node in G]
 
-      # 打印关键词及其文献数量
+      # 輸出關鍵字即文獻數量
       print("Keyword and their respective number of papers:")
       for record in data:
          print(f"{record['keyword']}: {record['papers']}")
 
-      # 绘制节点
+      # 繪製節點
       nx.draw(G, pos, with_labels=True, node_size=sizes, node_color='lightblue', edge_color='gray')
       
-      # 显示图形
+      # 顯示圖形
       plt.title('Keyword Co-occurrence Graph')
       plt.show()
 
@@ -595,7 +596,7 @@ _回到專案中_
    driver = GraphDatabase.driver(uri, auth=(username, password))
 
    def fetch_data(tx):
-      # 查询关键字和与其相关的文献数量
+      # 查詢關鍵字和與其相關的文獻數量
       query = """
       MATCH (k:Keyword)<-[:HAS_KEYWORD]-(p:Paper)
       RETURN k.name AS keyword, COUNT(p) AS papers
@@ -663,7 +664,7 @@ _回到專案中_
    driver = GraphDatabase.driver(uri, auth=(username, password))
 
    def fetch_data(tx):
-      # 查询关键字和与其相关的文献数量
+      # 查詢關鍵字和與其相關的文獻數量
       query = """
       MATCH (k:Keyword)<-[:HAS_KEYWORD]-(p:Paper)
       RETURN k.name AS keyword, COUNT(p) AS papers
@@ -676,13 +677,15 @@ _回到專案中_
       min_papers = min(papers_counts)
       max_papers = max(papers_counts)
 
-      # Calculate size factor based on the range of paper counts
-      base_size = 300  # Base size for the smallest node
-      size_range = 800  # Additional size for the largest node
+      # 根據紙張計數範圍計算尺寸係數
+      # 最小的節點的基本大小
+      base_size = 300
+      # 最大節點的額外大小
+      size_range = 800
 
       for record in data:
          keyword, weight = record['keyword'], record['papers']
-         # Normalize weight and apply scaling factor
+         # 標準化權重並應用比例因子
          normalized_weight = (weight - min_papers) / (max_papers - min_papers)
          scaled_size = base_size + normalized_weight * size_range
          G.add_node(keyword, size=scaled_size, count=weight)
@@ -692,7 +695,8 @@ _回到專案中_
                G.add_edge(data[i]['keyword'], data[j]['keyword'])
       
       pos = nx.spring_layout(G)
-      sizes = [G.nodes[node]['size'] for node in G]  # Use calculated size
+      # 使用計算的大小
+      sizes = [G.nodes[node]['size'] for node in G]
       normalized_counts = [(G.nodes[node]['count'] - min_papers) / (max_papers - min_papers) for node in G]
       cmap = plt.get_cmap('YlOrRd')
       norm = plt.Normalize(vmin=min_papers, vmax=max_papers)
@@ -739,7 +743,7 @@ _回到專案中_
 
 
    def fetch_data(tx):
-      # 查询关键字和与其相关的文献数量
+      # 查詢關鍵字和與其相關的文獻數量
       query = """
       MATCH (k:Keyword)<-[:HAS_KEYWORD]-(p:Paper)
       RETURN k.name AS keyword, COUNT(p) AS papers
@@ -770,7 +774,8 @@ _回到專案中_
          (G.nodes[node]["count"] - min_papers) / (max_papers - min_papers)
          for node in G.nodes()
       ]
-      colors = [plt.cm.YlOrRd(count) for count in normalized_counts]  # Generating colors
+      # 生成顏色
+      colors = [plt.cm.YlOrRd(count) for count in normalized_counts]
 
       fig, ax = plt.subplots()
       for node, color, size in zip(G.nodes(), colors, sizes):
