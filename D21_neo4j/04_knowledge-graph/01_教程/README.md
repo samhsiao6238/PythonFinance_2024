@@ -36,45 +36,51 @@ _先完成以下的套件安裝及環境設置_
 
 <br>
 
-3. 透過以下網址訪問 Neo4j 的 Web UI，預設的用戶名和密碼都是 `neo4j`，然後按照指示設置新密碼。
-
+3. 透過以下網址訪問 Neo4j 的 Web UI，預設的用戶名和密碼都是 `neo4j`。
 
    [http://localhost:7474/browser/](http://localhost:7474/browser/)
 
+   ![](images/img_09.png)
 
 <br>
 
-3. 另外，也可使用 Neo4j Desktop 進行連線，以確保數據庫的運行與連接：點擊右上角 `Add`，然後點擊 `Remote connection`。
+4. 按照指示設置新密碼。
+
+   ![](images/img_10.png)
+
+<br>
+
+5. 另外，也可使用 Neo4j Desktop 進行連線，以確保數據庫的運行與連接：點擊右上角 `Add`，然後點擊 `Remote connection`。
 
    ![](images/img_02.png)
 
 <br>
 
-4. 使用預設的 `URL`，點擊 `Next`。
+6. 使用預設的 `URL`，點擊 `Next`。
 
    ![](images/img_03.png)
 
 <br>
 
-5. 輸入 `Username` 及 `Password` 之後點擊 `Save`。
+7. 輸入 `Username` 及 `Password` 之後點擊 `Save`。
 
    ![](images/img_04.png)
 
 <br>
 
-6. 點擊 `Connect`。
+8. 點擊 `Connect`。
 
    ![](images/img_05.png)
 
 <br>
 
-7. 接著 `Open`。
+9. 接著 `Open`。
 
    ![](images/img_06.png)
 
 <br>
 
-8. 點擊左上角的資料庫圖標展開，就會看到一樣的內容了。
+10. 點擊左上角的資料庫圖標展開，就會看到一樣的內容了。
 
    ![](images/img_07.png)
 
