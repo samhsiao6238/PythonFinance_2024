@@ -160,6 +160,27 @@ _先完成以下的套件安裝及環境設置_
 
 <br>
 
+12. 特別強調，同步之前務必確認編輯了 `.gitignore` 文件。
+
+   ```json
+   # Python
+   venv
+   **/__pycache__
+
+   # App Specific
+   .env
+
+   # IDE
+   .vscode
+
+   # Neo4j local DB
+   data
+   neo4j_db/data
+   neo4j_db/plugins
+   ```
+
+<br>
+
 ## 配置環境變量
 
 _回到專案中_
