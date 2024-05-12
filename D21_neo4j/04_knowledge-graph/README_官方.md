@@ -4,19 +4,23 @@ _以中文重新整理官方說明_
 
 <br>
 
-## 基本步驟
+## 環境設置
 
-1. 先完成以下的套件安裝及環境設置。
-
-   - **Docker + Docker Compose** 。
-
-   - **Neo4j 數據庫應用** 如 Neo4j Desktop 或雲端實例。
-
-   - 將示範使用 **VSCode** 內建的 **venv** 虛擬環境管理。
+_先完成以下的套件安裝及環境設置_
 
 <br>
 
-2. 使用 Docker 啟動 Neo4j 數據庫：進入 `docker-compose.yml` 文件所在路徑，透過在終端機使用 Docker Compose 指令來啟動容器中的 Neo4j 數據庫。
+1. Docker + Docker Compose。
+
+2. Neo4j 數據庫應用如 Neo4j Desktop 或雲端實例。
+
+3. 在稍後的操作中將示範使用 `VSCode` 內建的 `venv` 虛擬環境管理。
+
+<br>
+
+## 開始操作
+
+1. 使用 Docker 啟動 Neo4j 數據庫：進入 `docker-compose.yml` 文件所在路徑，透過在終端機使用 Docker Compose 指令來啟動容器中的 Neo4j 數據庫。
 
    ```bash
    docker-compose up -d
@@ -26,41 +30,41 @@ _以中文重新整理官方說明_
 
 <br>
 
-3. 透過網址 `http://localhost:7474/browser/` 以訪問 Neo4j 的 Web UI，預設的用戶名和密碼都是 `neo4j`，然後按照指示設置新密碼。
+2. 透過網址 `http://localhost:7474/browser/` 以訪問 Neo4j 的 Web UI，預設的用戶名和密碼都是 `neo4j`，然後按照指示設置新密碼。
 
 <br>
 
-4. 另外，也可使用 Neo4j Desktop 進行連線，以確保數據庫的運行與連接：點擊右上角 `Add`，然後點擊 `Remote connection`。
+3. 另外，也可使用 Neo4j Desktop 進行連線，以確保數據庫的運行與連接：點擊右上角 `Add`，然後點擊 `Remote connection`。
 
    ![](images/img_02.png)
 
 <br>
 
-5. 使用預設的 `URL`，點擊 `Next`。
+4. 使用預設的 `URL`，點擊 `Next`。
 
    ![](images/img_03.png)
 
 <br>
 
-6. 輸入 `Username` 及 `Password` 之後點擊 `Save`。
+5. 輸入 `Username` 及 `Password` 之後點擊 `Save`。
 
    ![](images/img_04.png)
 
 <br>
 
-7. 點擊 `Connect`。
+6. 點擊 `Connect`。
 
    ![](images/img_05.png)
 
 <br>
 
-8. 接著 `Open`。
+7. 接著 `Open`。
 
    ![](images/img_06.png)
 
 <br>
 
-9. 點擊左上角的資料庫圖標展開，就會看到一樣的內容了。
+8. 點擊左上角的資料庫圖標展開，就會看到一樣的內容了。
 
    ![](images/img_07.png)
 
