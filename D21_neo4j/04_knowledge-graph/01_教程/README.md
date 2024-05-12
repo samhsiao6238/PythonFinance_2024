@@ -435,14 +435,287 @@ _回到專案中_
 
 <br>
 
-## 觀察和交互
+## 進階腳本
 
-1. 運行應用後，你可以進行交互並觀察輸出，若需要查看知識圖的所有節點和邊，可以在 Neo4j 的 Web UI 中運行，注意，如果節點數量很多，這個查詢可能會很慢。
+1. 模擬 VOSViwer。
 
-   ```cypher
-   MATCH (n) RETURN n
+   ```python
+   import random
+   from neo4j import GraphDatabase
+
+   # Neo4j Bolt URL
+   uri = "bolt://localhost:7687"
+   username = "neo4j"
+   password = "sam112233"
+
+   driver = GraphDatabase.driver(uri, auth=(username, password))
+
+   def create_keyword(tx, keyword):
+      query = (
+         "MERGE (k:Keyword {name: $name}) "
+         "RETURN k"
+      )
+      return tx.run(query, name=keyword).single()[0]
+
+   def create_paper_with_keywords(tx, title, keywords):
+      create_paper_query = (
+         "CREATE (p:Paper {title: $title}) "
+         "RETURN p"
+      )
+      paper_node = tx.run(create_paper_query, title=title).single()[0]
+      
+      for keyword in keywords:
+         create_relationship_query = (
+               "MATCH (p:Paper {title: $title}), (k:Keyword {name: $keyword}) "
+               "MERGE (p)-[:HAS_KEYWORD]->(k)"
+         )
+         tx.run(create_relationship_query, title=title, keyword=keyword)
+      return paper_node
+
+   def simulate_literature_review():
+      keywords = ['machine learning', 'data mining', 'artificial intelligence', 
+                  'neural networks', 'deep learning', 'big data', 'natural language processing',
+                  'computer vision', 'bioinformatics', 'blockchain']
+      papers = {f"Paper {i}": random.sample(keywords, k=random.randint(2, 5)) for i in range(1, 101)}
+
+      with driver.session() as session:
+         # Ensure all keywords exist in the database
+         for keyword in set(sum(papers.values(), [])):
+               session.write_transaction(create_keyword, keyword)
+         
+         # Create papers and their relationships to keywords
+         for title, paper_keywords in papers.items():
+               session.write_transaction(create_paper_with_keywords, title, paper_keywords)
+
+   if __name__ == "__main__":
+      simulate_literature_review()
+      print("Simulation of literature review data completed successfully.")
+      driver.close()
+
    ```
 
 <br>
 
+2. 結果。
+
+   ![](images/img_31.png)
+
+<br>
+
+3. 從Neo4j資料庫中提取關鍵字及其與文獻的關係數據，然後根據關鍵字出現的次數來調整節點的大小。
+
+   ```bash
+   pip install matplotlib
+   ```
+
+<br>
+
+4. 在本地輸出圖片。
+
+   ```python
+   import matplotlib.pyplot as plt
+   import networkx as nx
+   from neo4j import GraphDatabase
+
+   # Neo4j Bolt URL
+   uri = "bolt://localhost:7687"
+   username = "neo4j"
+   password = "sam112233"
+
+   driver = GraphDatabase.driver(uri, auth=(username, password))
+
+   def fetch_data(tx):
+      # 查询关键字和与其相关的文献数量
+      query = """
+      MATCH (k:Keyword)<-[:HAS_KEYWORD]-(p:Paper)
+      RETURN k.name AS keyword, COUNT(p) AS papers
+      """
+      return list(tx.run(query))
+
+   def plot_keywords_graph(data):
+      G = nx.Graph()
+      for record in data:
+         keyword, weight = record['keyword'], record['papers']
+         G.add_node(keyword, size=weight)
+      
+      # 添加节点之间的边（这里假设是示例，实际需要根据实际数据调整）
+      for i in range(len(data)):
+         for j in range(i + 1, len(data)):
+               G.add_edge(data[i]['keyword'], data[j]['keyword'])
+      
+      pos = nx.spring_layout(G)  # 使用Spring布局
+      sizes = [G.nodes[node]['size'] * 100 for node in G]  # 调整节点大小
+
+      # 打印关键词及其文献数量
+      print("Keyword and their respective number of papers:")
+      for record in data:
+         print(f"{record['keyword']}: {record['papers']}")
+
+      # 绘制节点
+      nx.draw(G, pos, with_labels=True, node_size=sizes, node_color='lightblue', edge_color='gray')
+      
+      # 显示图形
+      plt.title('Keyword Co-occurrence Graph')
+      plt.show()
+
+   with driver.session() as session:
+      keyword_data = session.read_transaction(fetch_data)
+      plot_keywords_graph(keyword_data)
+
+   driver.close()
+   ```
+
+<br>
+
+5. 結果。
+
+   ![](images/img_32.png)
+
+<br>
+
+6. 加入顏色來顯示頻率。
+
+   ```python
+   import matplotlib.pyplot as plt
+   import networkx as nx
+   from neo4j import GraphDatabase
+   import numpy as np
+
+   # Neo4j Bolt URL
+   uri = "bolt://localhost:7687"
+   username = "neo4j"
+   password = "sam112233"
+
+   driver = GraphDatabase.driver(uri, auth=(username, password))
+
+   def fetch_data(tx):
+      # 查询关键字和与其相关的文献数量
+      query = """
+      MATCH (k:Keyword)<-[:HAS_KEYWORD]-(p:Paper)
+      RETURN k.name AS keyword, COUNT(p) AS papers
+      """
+      return list(tx.run(query))
+
+   def plot_keywords_graph(data):
+      G = nx.Graph()
+      papers_counts = [record['papers'] for record in data]
+      min_papers = min(papers_counts)
+      max_papers = max(papers_counts)
+
+      for record in data:
+         keyword, weight = record['keyword'], record['papers']
+         G.add_node(keyword, size=weight, count=weight)
+      
+      for i in range(len(data)):
+         for j in range(i + 1, len(data)):
+               G.add_edge(data[i]['keyword'], data[j]['keyword'])
+      
+      pos = nx.spring_layout(G)
+      sizes = [G.nodes[node]['size'] * 100 for node in G]
+      normalized_counts = [(G.nodes[node]['count'] - min_papers) / (max_papers - min_papers) for node in G]
+      cmap = plt.get_cmap('YlOrRd')
+      norm = plt.Normalize(vmin=min_papers, vmax=max_papers)
+
+      fig, ax = plt.subplots()
+      nx.draw(G, pos, ax=ax, with_labels=True, node_size=sizes, node_color=normalized_counts, cmap=cmap, edge_color='gray')
+
+      sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
+      sm.set_array([])
+      plt.colorbar(sm, ax=ax, label='Normalized Number of Papers')
+
+      plt.title('Keyword Co-occurrence Graph')
+      plt.show()
+
+   with driver.session() as session:
+      keyword_data = session.read_transaction(fetch_data)
+      plot_keywords_graph(keyword_data)
+
+   driver.close()
+   ```
+
+<br>
+
+7. 結果。
+
+   ![](images/img_33.png)
+
+<br>
+
+8. 優化大小的比例。
+
+   ```python
+   import matplotlib.pyplot as plt
+   import networkx as nx
+   from neo4j import GraphDatabase
+   import numpy as np
+
+   # Neo4j Bolt URL
+   uri = "bolt://localhost:7687"
+   username = "neo4j"
+   password = "sam112233"
+
+   driver = GraphDatabase.driver(uri, auth=(username, password))
+
+   def fetch_data(tx):
+      # 查询关键字和与其相关的文献数量
+      query = """
+      MATCH (k:Keyword)<-[:HAS_KEYWORD]-(p:Paper)
+      RETURN k.name AS keyword, COUNT(p) AS papers
+      """
+      return list(tx.run(query))
+
+   def plot_keywords_graph(data):
+      G = nx.Graph()
+      papers_counts = [record['papers'] for record in data]
+      min_papers = min(papers_counts)
+      max_papers = max(papers_counts)
+
+      # Calculate size factor based on the range of paper counts
+      base_size = 300  # Base size for the smallest node
+      size_range = 800  # Additional size for the largest node
+
+      for record in data:
+         keyword, weight = record['keyword'], record['papers']
+         # Normalize weight and apply scaling factor
+         normalized_weight = (weight - min_papers) / (max_papers - min_papers)
+         scaled_size = base_size + normalized_weight * size_range
+         G.add_node(keyword, size=scaled_size, count=weight)
+      
+      for i in range(len(data)):
+         for j in range(i + 1, len(data)):
+               G.add_edge(data[i]['keyword'], data[j]['keyword'])
+      
+      pos = nx.spring_layout(G)
+      sizes = [G.nodes[node]['size'] for node in G]  # Use calculated size
+      normalized_counts = [(G.nodes[node]['count'] - min_papers) / (max_papers - min_papers) for node in G]
+      cmap = plt.get_cmap('YlOrRd')
+      norm = plt.Normalize(vmin=min_papers, vmax=max_papers)
+
+      fig, ax = plt.subplots()
+      nx.draw(G, pos, ax=ax, with_labels=True, node_size=sizes, node_color=normalized_counts, cmap=cmap, edge_color='gray')
+
+      sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
+      sm.set_array([])
+      plt.colorbar(sm, ax=ax, label='Normalized Number of Papers')
+
+      plt.title('Keyword Co-occurrence Graph')
+      plt.show()
+
+   with driver.session() as session:
+      keyword_data = session.read_transaction(fetch_data)
+      plot_keywords_graph(keyword_data)
+
+   driver.close()
+   ```
+
+<br>
+
+9. 結果。
+
+   ![](images/img_34.png)
+
+<br>
+
 ___
+
+_END_
