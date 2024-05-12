@@ -1,3 +1,4 @@
+# app.py
 import os
 # 內建類型檢查模組
 from typing import List, Union
@@ -15,10 +16,8 @@ from langchain.schema import HumanMessage, AIMessage
 from cypher_chain import CYPHER_QA_PROMPT
 from cypher_chain import CustomCypherChain
 
-
 # 標題
 st.title("VC Chatbot")
-
 
 url = st.secrets["NEO4J_URI"]
 username = st.secrets["NEO4J_USERNAME"]
@@ -27,22 +26,18 @@ database = st.secrets["NEO4J_DATABASE"]
 
 # Langchain x Neo4j connections
 graph = Neo4jGraph(username=username, password=password, url=url, database=database)
-
+#
 graph_search = None
 
 # Session state
 if "generated" not in st.session_state:
     st.session_state["generated"] = []
-
 if "user_input" not in st.session_state:
     st.session_state["user_input"] = []
-
 if "viz_data" not in st.session_state:
     st.session_state["viz_data"] = []
-
 if "database" not in st.session_state:
     st.session_state["database"] = []
-
 if "cypher" not in st.session_state:
     st.session_state["cypher"] = []
 
