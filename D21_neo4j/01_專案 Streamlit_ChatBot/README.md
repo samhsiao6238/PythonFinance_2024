@@ -130,7 +130,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-14. 退出運行 `control+c` 並開啟 VSCode。
+14. 使用組合鍵 `control+c` 退出運行，然後開啟 VSCode 並再次運行。
 
     ```bash
     code . && streamlit run bot.py
@@ -140,14 +140,14 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 ## 建立 LLM 實體
 
-1. 進入 [OpenAI 官網]( platform.openai.com) 取得 API Key，這裡先跳過。
+1. 進入 [OpenAI 官網]( platform.openai.com) 取得 API Key，這裡先跳過說明，假設已取得。
 
 <br>
 
-2. 在敏感資訊部分，使用 `.env` 來儲存 `OPENAI_API_KEY` 及 `OPENAI_MODEL` 等變數，而模型部分先運行 `GPT-3.5 Turbo` 的 `gpt-3.5-turbo` 試試，若有付費的會員可換 `GPT-4` 的 `gpt-4-turbo`。
+1. 在敏感資訊部分，使用 `dotenv` 處理並以 `.env` 來儲存 `OPENAI_API_KEY` 及 `OPENAI_MODEL` 等變數；其中模型版本部分可選用 `GPT-3.5 Turbo` 的 `gpt-3.5-turbo`，若有具有付費會員者可換 `GPT-4` 的 `gpt-4-turbo`，另外務必記得將 `.env` 寫入 `.gitignore`，由於 `.gitignore` 已存在於範例中且已納入 `.env`，所以這裡僅提示建立 `.env` 文件。 
 
     ```bash
-    touch .env .gitignore
+    touch .env
     ```
 
 <br>
@@ -164,7 +164,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-4. 編輯 `.gitignore`，範例已經將 `.env` 寫入，可以不用添加了。
+4. 範例中的 `.gitignore` 文件已經將 `.env` 寫入，可以不用添加。
 
     ```json
     __pycache__
@@ -176,7 +176,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-5. 在 `.env` 寫入敏感資訊，其中 `OPENAI_API_KEY` 部分填入自己的 `API Key`，而 `OPENAI_MODEL` 可查詢 [官網](https://platform.openai.com/docs/models/models)。
+5. 在 `.env` 寫入敏感資訊，其中 `OPENAI_API_KEY` 部分填入自己的 `API Key`，而 `OPENAI_MODEL` 可查詢 [官網](https://platform.openai.com/docs/models/models)；由於 `.env` 文件並非腳本，所以字串部分無需加上引號，等號兩側也無需間隔，但若加上間隔或引號亦無妨。
 
     ```json
     OPENAI_API_KEY=sk-...
@@ -196,6 +196,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 7. 改寫官方的 `llm.py`：將 OpenAPI 的資訊寫入。
 
     ```python
+    # llm.py
     from langchain_openai import ChatOpenAI
     from langchain_openai import OpenAIEmbeddings
     # 載入庫
@@ -237,16 +238,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-3. 點擊名稱可展開，切換到 `Connection details` 頁籤可查看訊息，這些訊息要寫入 `.env` 文件。
-
-    ```bash
-    # Connection URL
-    3.239.239.7
-    # Username
-    neo4j
-    # Password
-    hitch-humans-menu
-    ```
+3. 點擊名稱 `Recommendations` 可展開，切換到 `Connection details` 頁籤可查看訊息，這些訊息要寫入 `.env` 文件。
 
     ![](images/img_04.png)
 
@@ -258,9 +250,9 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
     OPENAI_API_KEY=sk-...
     OPENAI_MODEL=gpt-4-turbo
 
-    NEO4J_URI = "bolt://3.239.239.7:7687"
+    NEO4J_URI = "bolt://3.89.23.242:7687"
     NEO4J_USERNAME = "neo4j"
-    NEO4J_PASSWORD = "hitch-humans-menu"
+    NEO4J_PASSWORD = "stencil-interface-buckets"
     ```
 
 <br>
