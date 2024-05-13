@@ -6,7 +6,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 ## 說明
 
-1. 這個筆記是依據以下的 [教程](https://graphacademy.neo4j.com/courses/llm-chatbot-python/1-project-setup/) 所進行的拓展。
+1. 這個筆記是基於官方的 [GraphAcademy 教程](https://graphacademy.neo4j.com/courses/llm-chatbot-python/1-project-setup/) 所進行的拓展。
 
     ![](images/img_01.png)
 
