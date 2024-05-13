@@ -24,6 +24,8 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
     python --version
     ```
 
+    ![](images/img_55.png)
+
 <br>
 
 2. 建立虛擬環境：請進入自己管理 Python 虛擬環境的路徑中建立，這裡示範的路徑是 `~/Documents/PythonVenv`。
@@ -66,7 +68,17 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-7. 透過指令安裝 `requirements.txt` 文件中指定的模組與版本。
+7. 透過指令查看 `requirements.txt` 文件中預設了哪些模組。
+
+    ```bash
+    cat requirements.txt
+    ```
+
+    ![](images/img_56.png)
+
+<br>
+
+8. 透過指令安裝 `requirements.txt` 文件中指定的模組與對應的版本，另外，透過 `echo` 指令添加一個套件；特別說明，這裡是因為依據範例操作之後會發現缺少套件，故在此示範套件的添加，不特別說明該套件。
 
     ```bash
     echo "langchainhub" >> requirements.txt && pip install -r requirements.txt
@@ -74,11 +86,7 @@ _這是一個完整的專案，可在本地、Codespace、Streamlit 服務器上
 
 <br>
 
-8. 可透過指令觀察添加套件後的內容。
-
-    ```bash
-    cat requirements.txt
-    ```
+9. 可再次確認 `requirements.txt` 的內容。
 
     _結果如下_
     ```txt
