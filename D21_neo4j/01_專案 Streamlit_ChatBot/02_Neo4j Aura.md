@@ -4,7 +4,7 @@ _官方的持久化資料庫，與沙箱略有不同_
 
 <br>
 
-1. 除了 `沙箱`，也可以參考 [官網](https://neo4j.com/) 的範例，進入官網後點擊 `Aura Login`。
+1. `Aura` 是官方的持久化資料庫，可以參考 [官網](https://neo4j.com/) 的範例，進入官網後點擊 `Aura Login`。
 
     ![](images/img_64.png)
 
@@ -229,7 +229,11 @@ _官方的持久化資料庫，與沙箱略有不同_
 
 ## Transaction
 
-1. 官方腳本：核心功能是管理 `Person` 和 `Organization` 節點，以及它們間的 `WORKS_FOR` 關係，可視為描述了組織與員工的資料架構；該腳本確保每個 Person 都被分配到一個組織，並且如果需要，會創建新的 Organization 來容納新員工。
+_交易_
+
+<br>
+
+1. 官方腳本：這個範例的核心功能是管理 `Person` 和 `Organization` 節點，以及它們間的 `WORKS_FOR` 關係，可視為描述了組織與員工的資料架構；該腳本確保每個 Person 都被分配到一個組織，並且如果需要，會創建新的 Organization 來容納新員工。
 
 <br>
 
@@ -317,30 +321,6 @@ _官方的持久化資料庫，與沙箱略有不同_
     _添加了 100 筆資料_
 
     ![](images/img_78.png)
-
-<br>
-
-4. `回滾交易（Rollback Transaction）` 是指在資料庫管理系統中，當一個 `交易（Transaction）` 在執行過程中遇到錯誤、失敗或被用戶取消時，系統會將所有在此交易中所做的修改撤銷，使資料庫返回到交易開始之前的狀態。回滾交易保證了資料庫的一致性和完整性，即使在發生故障的情況下，也能確保資料不會處於不一致的狀態，以下是程式碼作簡單說明。
-```python
-def employ_person_tx(tx, name):
-    result = tx.run("""
-        MERGE (p:Person {name: $name})
-        RETURN p.name AS name
-        """, name=name
-    )
-
-    result = tx.run("""
-        MATCH (o:Organization)
-        RETURN o.id AS id, COUNT{(p:Person)-[r:WORKS_FOR]->(o)} AS employees_n
-        ORDER BY o.created_date DESC
-        LIMIT 1
-    """)
-    org = result.single()
-
-    if org is not None and org["employees_n"] == 0:
-        raise Exception("Most recent organization is empty.")
-        # 交易回滾，Person 節點不會被創建
-```
 
 <br>
 
