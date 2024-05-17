@@ -1,2 +1,4 @@
 __pycache__
 *.zip
+.streamlit/secrets.toml
+secrets.toml

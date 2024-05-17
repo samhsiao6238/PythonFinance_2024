@@ -34,7 +34,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # 設置 OpenAI API Key
-openai_api_key = os.getenv("OPENAPI_API_KEY")
+openai_api_key = st.secrets["OPENAPI_API_KEY"]
 # 將API鍵設定為環境變數
 os.environ["OPENAI_API_KEY"] = openai_api_key
 
