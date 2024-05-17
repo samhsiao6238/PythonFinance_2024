@@ -203,11 +203,11 @@ class CustomCypherChain(GraphCypherQAChain):
     def get_fewshot_examples(self, question):
         results = self.graph.query(
             """
-        CALL apoc.ml.openai.embedding([$question], $openai_api_key)
-                                    YIELD embedding                             
-        CALL db.index.vector.queryNodes('fewshot', 3, embedding)
-                                    YIELD node, score
-        RETURN node.Question AS question, node.Cypher as cypher
+            CALL apoc.ml.openai.embedding([$question], $openai_api_key)
+                                        YIELD embedding
+            CALL db.index.vector.queryNodes('fewshot', 3, embedding)
+                                        YIELD node, score
+            RETURN node.Question AS question, node.Cypher as cypher
                                     """,
             {"question": question, "openai_api_key": os.environ["OPENAI_API_KEY"]},
         )
