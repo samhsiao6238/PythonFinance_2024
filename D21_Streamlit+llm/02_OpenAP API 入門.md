@@ -1,6 +1,6 @@
 # OpenAI 入門
 
-_先簡介一下這個主要的套件_
+_先簡介主要套件 OpenAI_
 
 <br>
 
@@ -10,7 +10,7 @@ _先簡介一下這個主要的套件_
 
 <br>
 
-2. 在官方 GitHub 上提到 `api_key` 是預設的讀取環境參數中 `OPENAI_API_KEY` 的鍵值，可透過寫入環境參數的方式進行設定，如此在代碼中可以不用再寫。
+2. 在官方 GitHub 上提到 `api_key` 預設是讀取環境參數中 `OPENAI_API_KEY` 的鍵值，所以可透過寫入環境參數來進行設定，如此在代碼中可以不用再寫。
 
     ```python
     client = OpenAI(
@@ -21,7 +21,7 @@ _先簡介一下這個主要的套件_
 
 <br>
 
-3. 另外 `model` 部分可在客戶端初始化時設置，也可以在 API 具體調用函數時設置，這樣的設計是因應不同的 API 調用可以設計使用不同的模型。
+3. 參數 `model` 可在客戶端初始化時設置，也可在 API 具體調用函數時設置，這樣的設計是因應不同的 API 在調用時，可透過編程以使用不同的模型，當有這樣的需求時，可在具體調用時再指定 `model`。
 
     _全局設置_
     ```python
@@ -57,7 +57,7 @@ _先簡介一下這個主要的套件_
 
 <br>
 
-4. 所以在官方文件中，僅示範兩個參數 `organization` 與 `project` 這兩個用於組織和項目管理的附加信息，並未說明 `api_key` 與 `model`。
+4. 延續上一點說明，所以在官方文件中，一開始並未說明 `api_key` 與 `model` 參數，僅示範 `organization` 與 `project` 這兩個用於 `組織和項目管理` 附加信息的參數。
 
     ```python
     from openai import OpenAI
@@ -119,17 +119,17 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
     client = OpenAI()
 
     response = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    # 一系列消息，每條消息都有一個角色（role）和內容（content）
-    messages=[
-        # system：系統消息，用於設定助理的角色和行為，這裡告訴助理要扮演的是 `有幫助的助手`
-        {"role": "system", "content": "You are a helpful assistant."},
-        # user：用戶消息，表示用戶的輸入
-        {"role": "user", "content": "Who won the world series in 2020?"},
-        # assistant：助理消息，表示助理的回應
-        {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
-        {"role": "user", "content": "Where was it played?"}
-    ]
+        model="gpt-3.5-turbo",
+        # 一系列消息，每條消息都有一個角色（role）和內容（content）
+        messages=[
+            # system：系統消息，用於設定助理的角色和行為，這裡告訴助理要扮演的是 `有幫助的助手`
+            {"role": "system", "content": "You are a helpful assistant."},
+            # user：用戶消息，表示用戶的輸入
+            {"role": "user", "content": "Who won the world series in 2020?"},
+            # assistant：助理消息，表示助理的回應
+            {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
+            {"role": "user", "content": "Where was it played?"}
+        ]
     )
     ```
 
@@ -197,9 +197,8 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
         "id": "cmpl-6YB1j12345",
         "object": "text_completion",
         "created": 1614639685,
-        "model": "gpt-3.5-turbo",
-        "choices": [
-        {
+        "model": "gpt-4-turbo",
+        "choices": [{
             // index：該選項在列表中的位置
             "index": 0,
             // 生成的消息，包含 role 和 content。
@@ -207,10 +206,9 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
                 "role": "assistant",
                 "content": "The Los Angeles Dodgers won the World Series in 2020."
             },
-        // 模型停止生成的原因
-        "finish_reason": "stop"
-        }
-    ]
+            // 模型停止生成的原因
+            "finish_reason": "stop"
+        }]
     }
     ```
 
