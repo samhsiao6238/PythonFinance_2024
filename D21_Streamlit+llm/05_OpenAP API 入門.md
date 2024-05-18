@@ -100,9 +100,94 @@ _先簡介主要套件 OpenAI_
 
 <br>
 
-## Audio & Speech to text
+## Audio
 
-_[語音轉文字](https://platform.openai.com/docs/guides/speech-to-text)_
+_[Text-to-speech 語音轉文字](https://platform.openai.com/docs/guides/text-to-speech)_
+
+<br>
+
+1. 輸入文本：提供需要轉換為語音的文本內容。
+
+2. 選擇模型和語音：選擇要使用的 TTS 模型，如 `tts-1` ，選擇要使用的語音，如 `alloy`。
+
+3. 生成語音：調用 API 將文本轉換為語音。
+
+4. 輸出格式：選擇音頻的輸出格式（默認為 MP3，但也支持其他格式如 opus、aac、flac、wav、pcm）。
+
+5. 保存或播放：將生成的音頻文件保存或實時播放。
+
+6. 範例。
+
+    ```python
+    from pathlib import Path
+    from openai import OpenAI
+
+    # 初始化 OpenAI 客戶端
+    client = OpenAI(api_key="YOUR_API_KEY")
+
+    # 設定保存音頻文件的路徑
+    speech_file_path = Path(__file__).parent / "speech.mp3"
+
+    # 調用 API 將文本轉換為語音
+    response = client.audio.speech.create(
+    # 使用的 TTS 模型
+    model="tts-1",
+    # 使用的語音
+    voice="alloy",
+    # 要轉換的文本
+    input="今天是個美好的日子，因為我要去見個重要的人。"
+    )
+
+    # 將生成的音頻流保存為 MP3 文件
+    response.stream_to_file(speech_file_path)
+    ```
+
+<br>
+
+_[Speech-to-text 語音轉文字](https://platform.openai.com/docs/guides/speech-to-text)_
+
+<br>
+
+1. 腳本。
+
+    ```python
+    from openai import OpenAI
+    client = OpenAI()
+
+    audio_file= open("audio.mp3", "rb")
+    transcription = client.audio.transcriptions.create(
+    model="whisper-1", 
+    file=audio_file
+    )
+    print(transcription.text)
+    ```
+
+<br>
+
+2. 預設輸出為 `JSON` 文件。
+
+    ```json
+    {
+        "text": "Imagine the wildest idea that you've ever had, and you're curious about how it might scale to something that's a 100, a 1,000 times bigger."
+    }
+    ```
+
+<br>
+
+3. 可加入參數來指定輸出為其他格式如 `Text`。
+
+    ```python
+    from openai import OpenAI
+    client = OpenAI()
+
+    audio_file = open("/path/to/file/speech.mp3", "rb")
+    transcription = client.audio.transcriptions.create(
+    model="whisper-1", 
+    file=audio_file, 
+    response_format="text"
+    )
+    print(transcription.text)
+    ```
 
 <br>
 
