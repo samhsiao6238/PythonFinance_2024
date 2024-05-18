@@ -146,8 +146,6 @@ _[Text-to-speech 語音轉文字](https://platform.openai.com/docs/guides/text-t
 
 _[Speech-to-text 語音轉文字](https://platform.openai.com/docs/guides/speech-to-text)_
 
-<br>
-
 1. 腳本。
 
     ```python
@@ -164,7 +162,7 @@ _[Speech-to-text 語音轉文字](https://platform.openai.com/docs/guides/speech
 
 <br>
 
-2. 預設輸出為 `JSON` 文件。
+2. 預設輸出為 `JSON` 文件，參數設置為 `response_format="verbose_json"`。
 
     ```json
     {
@@ -174,7 +172,7 @@ _[Speech-to-text 語音轉文字](https://platform.openai.com/docs/guides/speech
 
 <br>
 
-3. 可加入參數來指定輸出為其他格式如 `Text`。
+3. 可加入參數來指定輸出為其他格式如 `text`。
 
     ```python
     from openai import OpenAI
@@ -187,6 +185,119 @@ _[Speech-to-text 語音轉文字](https://platform.openai.com/docs/guides/speech
     response_format="text"
     )
     print(transcription.text)
+    ```
+
+<br>
+
+4. 其他參數還有 `timestamp_granularities=["word"]`。
+
+<br>
+
+## Prompting
+
+1. 在 OpenAI API 中，prompt 參數用於 `Text-to-Speech (TTS)` 和 `語音轉錄（Transcription）` 服務中，提供上下文或提示信息以幫助模型更好地理解和生成期望的輸出。在語音轉錄（Transcription）服務中，prompt 可以用來指定一些特定的詞語或短語，這些詞語或短語可能在音頻中出現，從而提高轉錄結果的 `準確性`。
+
+<br>
+
+2. 在以下範例中，`prompt` 參數提供了一些特定的術語，如 `ZyntriQix`、`Digique Plus`、`CynapseFive` 等，這些術語可以是技術名詞、品牌名、產品名或其他特定詞彙，如果這些詞彙在音頻中出現，模型可以利用這些提示信息更準確地轉錄它們，而不是猜測或產生錯誤的結果。
+
+<br>
+
+3. 範例。 
+
+    ```python
+    from openai import OpenAI
+
+    # 初始化 OpenAI 客戶端
+    client = OpenAI(api_key="YOUR_API_KEY")
+    # 打開要轉錄的音頻文件
+    audio_file = open("/path/to/file/speech.mp3", "rb")
+
+    # 調用 API 將音頻文件轉錄為文本，並提供提示信息
+    transcription = client.audio.transcriptions.create(
+        # 使用的轉錄模型
+        model="whisper-1",
+        # 音頻文件
+        file=audio_file,
+        # 轉錄結果的格式
+        response_format="text",
+        # 提供的提示信息
+        prompt="ZyntriQix, Digique Plus, CynapseFive, VortiQore V8, EchoNix Array, OrbitalLink Seven, DigiFractal Matrix, PULSE, RAPT, B.R.I.C.K., Q.U.A.R.T.Z., F.L.I.N.T."  
+    )
+
+    # 輸出結果
+    print(transcription.text)
+    ```
+
+<br>
+
+4. 程式碼：示範使用 `OpenAI` 的 `語音轉錄（Transcription）` 和 `文本生成（Chat Completion）` API 來處理音頻文件，生成文本轉錄並進行文本校正。
+
+    ```python
+    # 用於與 OpenAI API 進行交互
+    from openai import OpenAI
+    # 環境變數
+    import os
+    from dotenv import load_dotenv
+    # 加載環境變數
+    load_dotenv()
+
+    # 從環境變數中獲取 API 密鑰
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+    # 初始化 OpenAI 客戶端
+    client = OpenAI(api_key=OPENAI_API_KEY)
+
+    # 系統提示，用於提供上下文信息和特定指令
+    system_prompt = (
+        "You are a helpful assistant for the company ZyntriQix. "
+        "Your task is to correct any spelling discrepancies in the transcribed text. "
+        "Make sure that the names of the following products are spelled correctly: "
+        "ZyntriQix, Digique Plus, CynapseFive, VortiQore V8, EchoNix Array, "
+        "OrbitalLink Seven, DigiFractal Matrix, PULSE, RAPT, B.R.I.C.K., Q.U.A.R.T.Z., F.L.I.N.T. "
+        "Only add necessary punctuation such as periods, commas, and capitalization, and use only the context provided."
+    )
+
+    # 音頻文件路徑
+    fake_company_filepath = "/path/to/fake_company_audio.mp3"
+
+    # 用於轉錄音頻的函數
+    def transcribe(audio_file, prompt):
+        # 打開音頻文件
+        with open(audio_file, "rb") as file:
+            # 調用 OpenAI 的轉錄 API
+            response = client.audio.transcriptions.create(
+                model="whisper-1",
+                file=file,
+                response_format="text",
+                prompt=prompt
+            )
+        return response.text
+
+    # 用於生成修正後的轉錄文本的函數
+    def generate_corrected_transcript(temperature, system_prompt, audio_file):
+        # 調用 OpenAI 的聊天完成 API
+        response = client.chat.completions.create(
+            model="gpt-4-turbo",
+            temperature=temperature,
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_prompt
+                },
+                {
+                    "role": "user",
+                    "content": transcribe(audio_file, "")
+                }
+            ]
+        )
+        return response.choices[0].message.content
+
+    # 設置溫度參數，生成修正後的轉錄文本
+    corrected_text = generate_corrected_transcript(0, system_prompt, fake_company_filepath)
+
+    # 輸出文本
+    print(corrected_text)
     ```
 
 <br>
