@@ -6,7 +6,9 @@ _以下將透過範例演繹如何使用 `Streamlit` 加上 `OpenAI` 等相關�
 
 ## 各範例使用的模組
 
-範例一
+<br>
+
+🌿 範例一
 ```python
 import streamlit as st
 # 官方套件
@@ -15,7 +17,7 @@ from openai import OpenAI
 
 <br>
 
-範例二
+🌿 範例二
 ```python
 import streamlit as st
 # AI 模組
@@ -24,7 +26,7 @@ import anthropic
 
 <br>
 
-範例三
+🌿 範例三
 ```python
 import streamlit as st
 # 用於初始化代理
@@ -39,14 +41,14 @@ from langchain.tools import DuckDuckGoSearchRun
 
 <br>
 
-範例四
+🌿 範例四
 ```python
 import streamlit as st
 # 使用 langchain 集成的 OpenAI
 from langchain.llms import OpenAI
 ```
 
-範例五
+🌿 範例五
 ```python
 import streamlit as st
 # 使用 langchain_openai 的 ChatOpenAI
@@ -59,7 +61,7 @@ import re
 
 <br>
 
-範例六
+🌿 範例六
 ```python
 # 使用 openai 的 OpenAI
 from openai import OpenAI
