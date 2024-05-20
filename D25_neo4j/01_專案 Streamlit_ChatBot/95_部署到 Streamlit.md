@@ -1,12 +1,10 @@
-# 部署
-
-<br>
-
-## 部署到 Streamlit 服務器上
+# 部署到 Streamlit 服務器上
 
 _回到本機操作，在 Codespace 也是可以。_
 
 <br>
+
+## 假如原本使用 `.env`
 
 1. 在專案根目錄中建立一個 `.streamlit` 資料夾，並添加一個 `secrets.toml` 文件。
 
@@ -30,19 +28,21 @@ _回到本機操作，在 Codespace 也是可以。_
 
 <br>
 
-4. 進入 Streamlit [官網](https://streamlit.io/) 並點擊 `Sign in`，可使用 Google 或 GitHub 帳號登入。
+## 建立 Streamlit 帳號
+
+1. 進入 Streamlit [官網](https://streamlit.io/) 並點擊 `Sign in`，可使用 Google 或 GitHub 帳號登入。
 
    ![](images/img_29.png)
 
 <br>
 
-5. 假如選擇 Google，接下來還是會詢問是否連結 GitHub 帳號。
+2. 假如選擇 Google，接下來還是會詢問是否連結 GitHub 帳號。
 
    ![](images/img_30.png)
 
 <br>
 
-6. 填寫完畢點擊 `Continue` 完成設定。
+3. 填寫完畢點擊 `Continue` 完成設定。
 
    ![](images/img_31.png)
 
