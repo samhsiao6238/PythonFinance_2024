@@ -52,41 +52,45 @@ _回到本機操作，在 Codespace 也是可以。_
 
 1. New app。
 
-   ![](images/img_32.png)
+    ![](images/img_32.png)
 
 <br>
 
-2. 部署：選取倉庫，最重要的是要修改主腳本的名稱，在這個專案中為 `bot.py`，然後可自訂一個公網名稱，尾綴固定是 `streamlit.app`。
+2. 選取倉庫，最重要的是要修改主腳本的名稱，在這個專案中為 `bot.py`，然後可自訂一個公網名稱，尾綴固定是 `streamlit.app`。
 
-   ![](images/img_33.png)
+    ![](images/img_33.png)
 
 <br>
 
 3. 接著可點擊 `Advanced settings...`
 
-   ![](images/img_52.png)
+    ![](images/img_52.png)
 
 <br>
 
-4. 假如未進行設定就進入下一步，會因為尚未設定敏感資訊而出錯的。
+4. 假如未進行設定就進入下一步，同樣會因為尚未設定敏感資訊而出錯的。
 
    ![](images/img_34.png)
 
 <br>
 
-5. 那就必須回到主控台，在專案右側點擊 `...` 顯示更多來展開，並點擊設定 `Settings`。
+5. 延續上一點，若部署前未進行 `Advanced settings` ，那就必須回到主控台，在專案右側點擊 `...` 顯示更多來展開，並點擊設定 `Settings`。
 
    ![](images/img_35.png)
 
 <br>
 
-6. 然後切換到 `Secrets` 進行密鑰等環境參數設定，但特別注意的是，透過這樣的設定步驟將無法選擇 `Python version`，在某些情境下可能會出錯。
+6. 然後切換到 `Secrets` 進行密鑰等環境參數設定；_特別注意_，若透過這樣的設定步驟將無法選擇 `Python version`，在某些情境下可能會出錯。
 
    ![](images/img_36.png)
 
 <br>
 
-7. 回到前面 `Advanced settings...` 的步驟，點擊後進入，首先選擇跟容器相同版本的 `3.10`。
+_到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
+
+<br>
+
+7. 若是點擊 `Advanced settings` 進入，可先選擇跟容器相同版本的 `3.10` 或 `3.11`。
 
    ![](images/img_53.png)
 
@@ -98,7 +102,22 @@ _回到本機操作，在 Codespace 也是可以。_
 
 <br>
 
-9. 至此，應該要去修改 `graph.py`、`llm.py`、`vector.py` 三個腳本中原本如下圖使用 `os.getenv()` 的部分，因應 `Secrets` 的環境設置而改為 `st.secrets["<鍵>"]`，但這樣的修改模式將使得腳本在不同環境下運作時，又得再次手動修改，相當很麻煩。
+9. 在 `.toml` 文件中可使用 `[]` 進行標註如下，但_特別注意_，括號 `[]` 內的字串不可有 `空格`。
+
+    ```bash
+    [OpenAI_API]
+    OPENAI_API_KEY = "sk-"
+    OPENAI_MODEL = "gpt-4-turbo"
+
+    [Neo4j]
+    NEO4J_URI = "bolt://34.201.131.176:7687"
+    NEO4J_USERNAME = "neo4j"
+    NEO4J_PASSWORD = "oxides-winch-controls"
+    ```
+
+<br>
+
+10. 至此，應該要去修改 `graph.py`、`llm.py`、`vector.py` 三個腳本中原本如下圖使用 `os.getenv()` 的部分，因應 `Secrets` 的環境設置而改為 `st.secrets["<鍵>"]`，但這樣的修改模式將使得腳本在不同環境下運作時，又得再次手動修改，相當很麻煩。
 
    ![](images/img_39.png)
 
