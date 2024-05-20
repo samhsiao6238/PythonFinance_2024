@@ -67,6 +67,39 @@ _除了 `max_tokens`，還可以使用其他參數來最佳化和控制費用_
 
 <br>
 
+## 在本專案中應用
+
+1. `llm` 是通過 `ChatOpenAI` 創建的物件，設置了 `max_tokens` 之後，任何調用 `llm` 之處都會遵循這個設置。
+
+<br>
+
+2. 具體使用。
+
+    ```python
+    import streamlit as st
+    from langchain_openai import ChatOpenAI
+
+    # 建立 ChatOpenAI 實體
+    llm = ChatOpenAI(
+        openai_api_key=st.secrets["OPENAI_API_KEY"],
+        model=st.secrets["OPENAI_MODEL"],
+        # 設置最大 token
+        max_tokens=100,
+        # 設置隨機性
+        temperature=0.7,
+        # 核採樣
+        top_p=0.9
+    )
+
+    from langchain_openai import OpenAIEmbeddings
+
+    # OpenAIEmbeddings 是用來生成和處理嵌入向量（embeddings）
+    # 這些嵌入向量是從使用 OpenAI 模型（如 GPT-4）生成的文本中獲取的
+    embeddings = OpenAIEmbeddings(
+        openai_api_key=st.secrets["OPENAI_API_KEY"]
+    )
+    ```
+
 ___
 
 _END_
