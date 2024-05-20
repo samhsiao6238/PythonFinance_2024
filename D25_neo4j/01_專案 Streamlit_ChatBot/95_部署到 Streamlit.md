@@ -102,7 +102,7 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
 
 <br>
 
-9. 在 `.toml` 文件中可使用 `[]` 進行標註如下，但_特別注意_，括號 `[]` 內的字串不可有 `空格`。
+9. 在 `.toml` 文件中可使用 `[]` 進行標註如下，但 _特別注意_，括號 `[]` 內的字串不可有 `空格`，如 `OpenAI API` 可使用下底線進行串聯。
 
     ```bash
     [OpenAI_API]
@@ -117,13 +117,13 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
 
 <br>
 
-10. 至此，應該要去修改 `graph.py`、`llm.py`、`vector.py` 三個腳本中原本如下圖使用 `os.getenv()` 的部分，因應 `Secrets` 的環境設置而改為 `st.secrets["<鍵>"]`，但這樣的修改模式將使得腳本在不同環境下運作時，又得再次手動修改，相當很麻煩。
+10. _再次提醒_，要記得修改腳本中原使用 `os.getenv()` 的部分，使用方式與在本地腳本中使用 `st.secrets["<鍵>"]` 一樣。
 
    ![](images/img_39.png)
 
 <br>
 
-10. 延續上一點，為了避免這樣的繁瑣，可在專案中添加一個模組 `secret.py` 來判斷所處在的運作環境為何，這裡示範將這個腳本置於 `tools` 資料夾中，函數名稱為 `get_secret()`。
+11. 若專案因為有不同環境運作必要而需同時存在 `st.secrets[]` 與 `os.getenv()` 兩種方式時，避免每次都得手動修改相當很麻煩，可在專案中添加一個模組 `secret.py` 來判斷所處在的運作環境為何，這裡示範將這個腳本置於 `tools` 資料夾中，函數名稱為 `get_secret()`。
 
     ```python
     # secret.py
@@ -145,31 +145,7 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
 
 <br>
 
-11. 分別在  `graph.py`、`llm.py`、`vector.py` 導入函數，其中  `graph.py` 及 `vector.py` 改寫如下。
-
-    _graph.py_
-
-    ```python
-    # graph.py
-    from langchain_community.graphs import Neo4jGraph
-    # 導入自訂函數
-    from solutions.tools.secret import get_secret
-
-    # 讀取環境變數
-    NEO4J_URI = get_secret("NEO4J_URI")
-    NEO4J_USERNAME = get_secret("NEO4J_USERNAME")
-    NEO4J_PASSWORD = get_secret("NEO4J_PASSWORD")
-
-    # Neo4j Graph
-    graph = Neo4jGraph(
-        url=NEO4J_URI,
-        username=NEO4J_USERNAME,
-        password=NEO4J_PASSWORD,
-    )
-
-    ```
-
-    _vector.py_
+12. 然後分別在需要導入環境變數的腳本中導入 `def get_secret()` 函數，以 `vector.py` 示範改寫如下。
 
     ```python
     # vector.py
@@ -184,63 +160,7 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
     NEO4J_USERNAME = get_secret("NEO4J_USERNAME")
     NEO4J_PASSWORD = get_secret("NEO4J_PASSWORD")
 
-    neo4jvector = Neo4jVector.from_existing_index(
-        embeddings,                 # <1>
-        url=NEO4J_URI,              # <2>
-        username=NEO4J_USERNAME,    # <3>
-        password=NEO4J_PASSWORD,    # <4>
-        index_name="moviePlots",    # <5>
-        node_label="Movie",         # <6>
-        text_node_property="plot",  # <7>
-        embedding_node_property="plotEmbedding",  # <8>
-        retrieval_query="""
-        RETURN
-            node.plot AS text,
-            score,
-            {
-                title: node.title,
-                directors: [ (person)-[:DIRECTED]->(node) | person.name ],
-                actors: [ (person)-[r:ACTED_IN]->(node) | [person.name, r.role] ],
-                tmdbId: node.tmdbId,
-                source: 'https://www.themoviedb.org/movie/'+ node.tmdbId
-            } AS metadata
-        """,
-    )
-
-    retriever = neo4jvector.as_retriever()
-
-    kg_qa = RetrievalQA.from_chain_type(
-        llm,  # <1>
-        chain_type="stuff",  # <2>
-        retriever=retriever,  # <3>
-    )
-
-    ```
-
-<br>
-
-12. 另外 `llm.py` 需要的是 OpenAPI 的 API Key，所以改寫內容與另外兩個腳本不同。
-
-    ```python
-    # llm.py
-    from langchain_openai import ChatOpenAI
-    from langchain_openai import OpenAIEmbeddings
-    # 導入自訂函數
-    from solutions.tools.secret import get_secret
-
-    # 改寫
-    OPENAI_API_KEY = get_secret("OPENAI_API_KEY")
-    OPENAI_MODEL = get_secret("OPENAI_MODEL")
-
-    # 建立 ChatOpenAI 實體
-    llm = ChatOpenAI(
-        openai_api_key=OPENAI_API_KEY,
-        model=OPENAI_MODEL,
-    )
-
-    # OpenAIEmbeddings 是用來生成和處理嵌入向量（embeddings）
-    # 這些嵌入向量是從使用 OpenAI 模型（如 GPT-4）生成的文本中獲取的
-    embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+    # 其餘不變 ...
 
     ```
 
@@ -258,7 +178,7 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
 
 <br>
 
-15. 完成後會出現關於套件 `dotenv` 的錯誤，因為服務器上無法安裝這個套件。
+15. 完成後會出現關於套件 `dotenv` 的錯誤，因為 Streamlit 服務器無法安裝這個套件。
 
     ![](images/img_40.png)
 
@@ -270,16 +190,6 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
     # secret.py
     import streamlit as st
     import os
-    # from dotenv import load_dotenv
-
-    # 判斷環境取得密鑰
-    # def get_secret(key):
-    #     try:
-    #         # 嘗試從 Streamlit secrets 獲取敏感資訊
-    #         return st.secrets[key]
-    #     except AttributeError:
-    #         # 如果 st.secrets 沒有該鍵或 st.secrets 未被設定，則從環境變量中獲取
-    #         return os.getenv(key)
 
     # 改寫
     def get_secret(key):
