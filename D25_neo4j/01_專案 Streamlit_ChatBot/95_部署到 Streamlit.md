@@ -123,7 +123,15 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
 
 <br>
 
-11. 若專案因為有不同環境運作必要而需同時存在 `st.secrets[]` 與 `os.getenv()` 兩種方式時，避免每次都得手動修改相當很麻煩，可在專案中添加一個模組 `secret.py` 來判斷所處在的運作環境為何，這裡示範將這個腳本置於 `tools` 資料夾中，函數名稱為 `get_secret()`。
+11. 訪問。
+
+    ![](images/img_23.png)
+
+<br>
+
+## 優化與拓展
+
+1. 若專案因為有不同環境運作必要而需同時存在 `st.secrets[]` 與 `os.getenv()` 兩種方式時，避免每次都得手動修改相當很麻煩，可在專案中添加一個模組 `secret.py` 來判斷所處在的運作環境為何，這裡示範將這個腳本置於 `tools` 資料夾中，函數名稱為 `get_secret()`。
 
     ```python
     # secret.py
@@ -145,7 +153,7 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
 
 <br>
 
-12. 然後分別在需要導入環境變數的腳本中導入 `def get_secret()` 函數，以 `vector.py` 示範改寫如下。
+2. 然後分別在需要導入環境變數的腳本中導入 `def get_secret()` 函數，以 `vector.py` 示範改寫如下。
 
     ```python
     # vector.py
@@ -166,25 +174,25 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
 
 <br>
 
-13. 無論以上程序是在本機修改或在 Codespace 進行編輯，都記得要記得同步。
+3. 無論以上程序是在本機修改或在 Codespace 進行編輯，都記得要記得同步。
 
     ![](images/img_54.png)
 
 <br>
 
-14. 進入 Streamlit 主控台，因為專案的設定改變了，所以要進行 `Reboot`，假如只是內容改變可以不用重啟。
+4. 進入 Streamlit 主控台，因為專案的設定改變了，所以要進行 `Reboot`，假如只是內容改變可以不用重啟。
 
     ![](images/img_38.png)
 
 <br>
 
-15. 完成後會出現關於套件 `dotenv` 的錯誤，因為 Streamlit 服務器無法安裝這個套件。
+5. 完成後會出現關於套件 `dotenv` 的錯誤，因為 Streamlit 服務器無法安裝這個套件。
 
     ![](images/img_40.png)
 
 <br>
 
-16. 修改 `secret.py` 中的 `get_secret()`，將 `dotenv` 的使用移入所在環境判斷的區塊內，只有確認在本機或容器中運行時才導入使用；特別注意，除了要新增 `import streamlit as st`，還要將 `from dotenv import load_dotenv` 註解或刪除。
+6. 修改 `secret.py` 中的 `get_secret()`，將 `dotenv` 的使用移入所在環境判斷的區塊內，只有確認在本機或容器中運行時才導入使用；特別注意，除了要新增 `import streamlit as st`，還要將 `from dotenv import load_dotenv` 註解或刪除。
 
     ```python
     # secret.py
@@ -213,7 +221,7 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
 
 <br>
 
-17. 然後進入 Streamlit 服務器的 `Secrets` 中加入一個新的變數 `STREAMLIT_SHARING_MODE`，這是設計用來判斷當前環境是否為 Streamlit 服務器的一個機制。
+7. 然後進入 Streamlit 服務器的 `Secrets` 中加入一個新的變數 `STREAMLIT_SHARING_MODE`，這是設計用來判斷當前環境是否為 Streamlit 服務器的一個機制。
 
     ```bash
     STREAMLIT_SHARING_MODE = 1
@@ -223,7 +231,7 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
 
 <br>
 
-18. 切記本機或 Codespace 要進行同步，另外 Streamlit 服務器更新設定都要 `Reboot`；至此無論在 `本機虛擬環境中`、`本機的容器中`、 `Codespace 容器中`，或是部署在 `Streamlit 服務器上` 的應用皆可正常運行了。
+8. 切記本機或 Codespace 要進行同步，另外 Streamlit 服務器更新設定都要 `Reboot`；至此無論在 `本機虛擬環境中`、`本機的容器中`、 `Codespace 容器中`，或是部署在 `Streamlit 服務器上` 的應用皆可正常運行了。
 
     ![](images/img_43.png)
 
