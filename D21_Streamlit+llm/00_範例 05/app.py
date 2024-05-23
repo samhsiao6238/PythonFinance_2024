@@ -26,7 +26,7 @@ def generate_outline(topic):
     prompt = PromptTemplate(
         # 指定模板中使用的變量名稱
         input_variables=["topic"],
-        # 提供模板字符串
+        # 提供模板字串
         template=template,
     )
     # 格式化提示，將主題插入到模板中
