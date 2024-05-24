@@ -384,6 +384,14 @@ _在專案中實際上使用了 LangChain 庫來進行函數的解析和執行�
 
 <br>
 
+## 補充 MongoDB 資料結構
+
+1. `MongoDB` 的結構示意如下，也就是 `database -> collection -> document` 的格式。
+
+    ![](images/img_18.png)
+
+<br>
+
 ___
 
 _END_
