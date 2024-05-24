@@ -392,6 +392,16 @@ _在專案中實際上使用了 LangChain 庫來進行函數的解析和執行�
 
 <br>
 
+2. 進行實測。
+
+    ```bash
+    請列出MongoDB中第一個 Document 的內容。
+    ```
+
+    ![](images/img_19.png)
+
+<br>
+
 ___
 
 _END_
