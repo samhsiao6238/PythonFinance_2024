@@ -124,6 +124,8 @@ _這個範例的功能是使用 Atlas Vector Search 和 LangChain 來實現基�
     from langchain.text_splitter import RecursiveCharacterTextSplitter
     # MongoDB
     from pymongo import MongoClient
+    # SSL
+    import certifi
     ```
 
 <br>
@@ -156,7 +158,10 @@ _將自定義數據加載到 Atlas 並實例化為向量資料庫。_
 
     ```python
     # 建立連線
-    client = MongoClient(ATLAS_CONNECTION_STRING)
+    client = MongoClient(
+        ATLAS_CONNECTION_STRING,
+        tlsCAFile=certifi.where()
+    )
     # 定義資料庫與集合名稱
     db_name = "MyDatabase2024"
     collection_name = "MyCollection2024"
