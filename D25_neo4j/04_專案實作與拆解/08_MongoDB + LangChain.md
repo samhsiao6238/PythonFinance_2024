@@ -204,6 +204,38 @@ _將自定義數據加載到 Atlas 並實例化為向量資料庫。_
 
 <br>
 
+## 說明範例數據
+
+1. 這個範例數據由 [官方提供](https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4HkJP)。
+
+    ![](images/img_33.png)
+
+<br>
+
+2. 說明的大綱如下。
+
+    ```txt
+    Table of Contents
+    Introduction 1
+    Preparing for a MongoDB Deployment 2
+    Scaling a MongoDB Atlas Cluster 9
+    Continuous Availability & Data Consistency 11
+    Managing MongoDB 12
+    Security 16
+    Business Intelligence with MongoDB Atlas 17
+    Considerations for Proofs of Concept 18
+    MongoDB Stitch: Serverless Platform from MongoDB 18
+    We Can Help 19
+    Resources 19
+    ```
+
+<br>
+
+
+
+
+<br>
+
 ## 建立 Atlas 向量搜索索引
 
 _在 MongoDB 控制板上操作，以 `MyDatabase2024.MyCollection2024` 為例_
