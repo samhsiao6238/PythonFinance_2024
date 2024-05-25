@@ -23,7 +23,7 @@ _使用 LangChain 整合 MongoDB Atlas 建立向量索引並進行向量搜索_
 1. 安裝庫。
 
     ```bash
-    %pip install --upgrade --quiet langchain langchain-mongodb langchain-openai pymongo pypdf
+    pip install --upgrade --quiet langchain langchain-mongodb langchain-openai pymongo pypdf
     ```
 
 <br>
@@ -112,7 +112,9 @@ _將自定義數據加載到 Atlas 並實例化為向量數據庫。_
 
 ## 創建 Atlas 向量搜索索引
 
-1. 要在向量存儲上運行向量搜索查詢，需要在 `langchain_db.test` 集合上創建 Atlas 向量搜索索引。
+_以 `MyDatabase2024.MyCollection2024` 為例_
+
+1. 要在向量存儲上運行向量搜索查詢，需要在 `MyDatabase2024.MyCollection2024` 集合上創建 Atlas 向量搜索索引。
 
 <br>
 
@@ -129,15 +131,29 @@ _將自定義數據加載到 Atlas 並實例化為向量數據庫。_
    - 點擊集群名稱。
    - 點擊 Atlas Search 標籤。
 
+    ![](images/img_20.png)
+
 <br>
 
-4. 定義 Atlas 向量搜索索引。
+1. 定義 Atlas 向量搜索索引。
 
    - 點擊 Create Search Index。
+
+    ![](images/img_21.png)
+
    - 在 Atlas Vector Search 下，選擇 JSON Editor 然後點擊 Next。
-   - 在 Database 和 Collection 部分，找到 `langchain_db` 數據庫，並選擇 `test` 集合。
+
+    ![](images/img_22.png)
+
+   - 在 Database 和 Collection 部分，找到 `MyDatabase2024` 數據庫，並選擇 `MyCollection2024` 集合。
+
+    ![](images/img_24.png)
+
    - 在 Index Name 欄位中輸入 `vector_index`。
-   - 用以下索引定義替換默認定義，然後點擊 Next：
+
+    ![](images/img_23.png)
+
+   - 用以下索引定義替換默認定義。
 
     ```json
     {
@@ -155,12 +171,20 @@ _將自定義數據加載到 Atlas 並實例化為向量數據庫。_
         ]
     }
     ```
+   - 然後點擊 Next。 
+
+    ![](images/img_25.png)
 
 <br>
 
-5. 創建搜索索引。
-   - 審查索引定義，然後點擊 Create Search Index。
-   - 關閉 You're All Set! 的模態窗口，等待索引構建完成。
+1. 創建搜索索引：審查索引定義，然後點擊 Create Search Index。
+
+
+    ![](images/img_26.png)
+
+2. 關閉 You're All Set! 的模態窗口，等待索引構建完成。
+
+    ![](images/img_27.png)
 
 <br>
 
