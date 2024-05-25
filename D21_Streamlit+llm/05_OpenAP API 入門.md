@@ -77,7 +77,7 @@ _先簡介主要套件 OpenAI_
     ```python
     # 引入 OpenAI 模組
     from openai import OpenAI
-    # 創建 OpenAI 客戶端
+    # 建立 OpenAI 客戶端
     client = OpenAI()
 
     # 發送 Streaming 請求
@@ -335,7 +335,7 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
 
     ```python
     from openai import OpenAI
-    # 創建 OpenAI 客戶端
+    # 建立 OpenAI 客戶端
     client = OpenAI(api_key='YOUR_API_KEY')
 
     # 初始化對話列表

@@ -60,7 +60,7 @@ if prompt := st.chat_input(placeholder="Who won the Women's U.S. Open in 2018?")
         agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
         handle_parsing_errors=True
     )
-    # 創建一個新的聊天消息塊，顯示助手的回應
+    # 建立一個新的聊天消息塊，顯示助手的回應
     with st.chat_message("assistant"):
         # 初始化回調處理器
         st_cb = StreamlitCallbackHandler(

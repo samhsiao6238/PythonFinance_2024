@@ -16,7 +16,7 @@ PASSWORD = os.getenv("NEO4J_PASSWORD")
 def main():
     st.title("Neo4j Movie Data")
 
-    # 創建驅動實例
+    # 建立驅動實例
     driver = get_neo4j_driver(URI, USER, PASSWORD)
 
     try:

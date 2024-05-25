@@ -39,10 +39,10 @@ _使用 OpenAI 生成 MongoDB 查詢語法_
     MongoDB 查詢語法：
     """
 
-    # 使用模板創建一個 PromptTemplate 對象
+    # 使用模板建立一個 PromptTemplate 對象
     mongodb_prompt = PromptTemplate.from_template(MONGODB_QUERY_TEMPLATE)
 
-    # 創建一個 LLMChain 對象，用於生成 MongoDB 查詢語法
+    # 建立一個 LLMChain 對象，用於生成 MongoDB 查詢語法
     mongodb_chain = LLMChain(prompt=mongodb_prompt, llm=llm)
     ```
 
@@ -247,10 +247,10 @@ _使用 OpenAI 生成 MongoDB 查詢語法_
     MongoDB 查詢語法：
     """
 
-    # 使用模板創建一個 PromptTemplate 對象
+    # 使用模板建立一個 PromptTemplate 對象
     mongodb_prompt = PromptTemplate.from_template(MONGODB_QUERY_TEMPLATE)
 
-    # 創建一個 LLMChain 對象，用於生成 MongoDB 查詢語法
+    # 建立一個 LLMChain 對象，用於生成 MongoDB 查詢語法
     mongodb_chain = LLMChain(prompt=mongodb_prompt, llm=llm)
 
 

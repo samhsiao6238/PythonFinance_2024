@@ -3,7 +3,7 @@ import streamlit as st
 # 使用 langchain_openai 的 ChatOpenAI
 from langchain_openai import ChatOpenAI
 
-# 引入 LangChain 的 PromptTemplate 模組，用於創建 `提示模板`
+# 引入 LangChain 的 PromptTemplate 模組，用於建立 `提示模板`
 from langchain.prompts import (
     PromptTemplate,
 )
@@ -23,7 +23,7 @@ st.title("🦜🔗 Langchain - Blog Outline Generator App")
 def re_outline(topic):
     # 實例化語言模型對象
     llm = ChatOpenAI(model_name=OPENAI_API_MODEL, openai_api_key=OPENAI_API_KEY)
-    # 創建提示模板
+    # 建立提示模板
     template = "作為經驗豐富的資料科學家和學者，請你為有關 {topic} 的主題製定演講大綱"
     template = """
         作為經驗豐富的資料科學家和學者，請你為有關 {topic} 的主題製定演講大綱。
@@ -80,7 +80,7 @@ def re_response(response):
     return formatted_response
 
 
-# 創建名為 "myform" 的表單，用於接收用戶輸入
+# 建立名為 "myform" 的表單，用於接收用戶輸入
 with st.form("myform"):
     # 在表單內添加一個文本輸入框，讓用戶輸入主題
     topic_text = st.text_input("請輸入主題關鍵字：", "")

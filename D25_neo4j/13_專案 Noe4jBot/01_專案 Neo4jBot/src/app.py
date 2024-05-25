@@ -68,7 +68,7 @@ def generate_context(
     return context
 
 
-# 用於創建並顯示 st 應用中的動態響應標籤，參數 `i` 當前處理對話的索引
+# 用於建立並顯示 st 應用中的動態響應標籤，參數 `i` 當前處理對話的索引
 def dynamic_response_tabs(i):
     # 初始化一個標籤列表，用於展示雙方對話
     tabs_to_add = ["💬Chat"]
@@ -109,7 +109,7 @@ def dynamic_response_tabs(i):
                 st.write(st.session_state["database"][i])
         if len(selected_tabs) > 3:
             with selected_tabs[3]:
-                # 創建一個圖，並添加節點和邊
+                # 建立一個圖，並添加節點和邊
                 graph_object = graphviz.Digraph()
                 for final_entity in st.session_state["viz_data"][i][1]:
                     graph_object.node(

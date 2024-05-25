@@ -7,7 +7,7 @@
 from typing import List, Union
 import streamlit as st
 
-# 用於創建和呈現圖形結構
+# 用於建立和呈現圖形結構
 import graphviz
 
 # 從Langchain引入用於OpenAI聊天模型的封裝
@@ -48,10 +48,10 @@ username = "companies"
 password = "companies"
 database = "companies"
 
-# 創建一個Neo4j圖形資料庫實例
+# 建立一個Neo4j圖形資料庫實例
 graph = Neo4jGraph(username=username, password=password, url=url, database=database)
 
-# 從語言模型創建自定義的Cypher查詢鏈
+# 從語言模型建立自定義的Cypher查詢鏈
 graph_search = CustomCypherChain.from_llm(
     # 設置OpenAI聊天模型
     cypher_llm=ChatOpenAI(temperature=0.0, model_name="gpt-4"),
@@ -130,13 +130,13 @@ def dynamic_response_tabs(i):
         if has_data:
             tabs_to_add.append(tab_name)
 
-    # 創建一個對話框來展示用戶的輸入
+    # 建立一個對話框來展示用戶的輸入
     with st.chat_message("user"):
         # 展示指定索引的用戶輸入
         st.write(st.session_state["user_input"][i])
-    # 創建一個對話框來展示助理的回應
+    # 建立一個對話框來展示助理的回應
     with st.chat_message("assistant"):
-        # 創建多個標籤，根據先前檢查的數據類型動態添加
+        # 建立多個標籤，根據先前檢查的數據類型動態添加
         selected_tabs = st.tabs(tabs_to_add)
         # 遍歷並展示每個標籤對應的內容
         with selected_tabs[0]:
@@ -152,7 +152,7 @@ def dynamic_response_tabs(i):
                 st.write(st.session_state["database"][i])
         if len(selected_tabs) > 3:
             with selected_tabs[3]:
-                # 若存在視覺化數據，則使用 graphviz.Digraph() 創建一個有向圖
+                # 若存在視覺化數據，則使用 graphviz.Digraph() 建立一個有向圖
                 graph_object = graphviz.Digraph()
                 # 添加節點和邊
                 # 根據 st.session_state["viz_data"][i] 儲存的視覺化數據建立圖形

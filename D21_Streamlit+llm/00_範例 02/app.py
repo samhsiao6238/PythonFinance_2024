@@ -37,7 +37,7 @@ if uploaded_file and question and anthropic_api_key:
     prompt = f"""{anthropic.HUMAN_PROMPT} Here's an article:\n\n<article>
     {article}\n\n</article>\n\n{question}{anthropic.AI_PROMPT}"""
 
-    # 使用提供的API密鑰創建Anthropic API客戶端
+    # 使用提供的API密鑰建立Anthropic API客戶端
     client = anthropic.Client(api_key=anthropic_api_key)
     response = client.completions.create(
         # 傳遞構建好的提示語

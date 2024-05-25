@@ -1,7 +1,7 @@
 from neo4j import GraphDatabase
 
 
-# 創建 Neo4j 資料庫驅動實例
+# 建立 Neo4j 資料庫驅動實例
 def get_neo4j_driver(uri, user, password):
     driver = GraphDatabase.driver(uri, auth=(user, password))
     return driver

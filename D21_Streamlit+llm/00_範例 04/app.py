@@ -29,7 +29,7 @@ def generate_response(input_text):
     st.info(llm(input_text))
 
 
-# `st.form` 創建表單的函數，`my_form` 是表單的識別名稱，可用於管理、處理表單的提交事件
+# `st.form` 建立表單的函數，`my_form` 是表單的識別名稱，可用於管理、處理表單的提交事件
 with st.form("my_form"):
     # 輸入要查詢的文字
     text = st.text_area("輸入文字：", "學習程式設計的 3 個關鍵建議是什麼？")

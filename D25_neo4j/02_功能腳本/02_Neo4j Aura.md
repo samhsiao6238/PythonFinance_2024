@@ -233,11 +233,11 @@ _交易_
 
 <br>
 
-1. 官方腳本：這個範例的核心功能是管理 `Person` 和 `Organization` 節點，以及它們間的 `WORKS_FOR` 關係，可視為描述了組織與員工的資料架構；該腳本確保每個 Person 都被分配到一個組織，並且如果需要，會創建新的 Organization 來容納新員工。
+1. 官方腳本：這個範例的核心功能是管理 `Person` 和 `Organization` 節點，以及它們間的 `WORKS_FOR` 關係，可視為描述了組織與員工的資料架構；該腳本確保每個 Person 都被分配到一個組織，並且如果需要，會建立新的 Organization 來容納新員工。
 
 <br>
 
-2. 在流程上，首先會建立 `Person` 節點，新增節點時會先確認節點是否已經存在，不存在才會新增的；接著檢查組織節點，計算組織中已有的員工數，如果新建立的組織員工數不足預設閾值，則將新增的員工添加到新的組織中，如果已經達到閾值，則添加新的組織；如果新建的組織沒有員工，則 `回滾交易`，也就是不建立任何新的節點。這個腳本通過動態分配員工到組織，確保每個組織的員工數量不會超過預設的閾值，並且在需要時創建新的組織以容納更多的員工。
+2. 在流程上，首先會建立 `Person` 節點，新增節點時會先確認節點是否已經存在，不存在才會新增的；接著檢查組織節點，計算組織中已有的員工數，如果新建立的組織員工數不足預設閾值，則將新增的員工添加到新的組織中，如果已經達到閾值，則添加新的組織；如果新建的組織沒有員工，則 `回滾交易`，也就是不建立任何新的節點。這個腳本通過動態分配員工到組織，確保每個組織的員工數量不會超過預設的閾值，並且在需要時建立新的組織以容納更多的員工。
 
 <br>
 
@@ -255,7 +255,7 @@ _交易_
     def main():
         # 上下文管理：使用 GraphDatabase 連接到 Neo4j 資料庫
         with GraphDatabase.driver(URI, auth=AUTH) as driver:
-            # 創建會話
+            # 建立會話
             with driver.session(database="neo4j") as session:
                 # 重複 100 次，也就是添加 100 個員工
                 for i in range(100):
@@ -267,16 +267,16 @@ _交易_
                     print(f"將員工 {name} 加入組織 {org_id}")
 
 
-    # 創建具有給定名稱的新 Person 節點
+    # 建立具有給定名稱的新 Person 節點
     def employ_person_tx(tx, name):
-        # 使用 `MERGE` 達成如果已存在則不重複創建
+        # 使用 `MERGE` 達成如果已存在則不重複建立
         result = tx.run("""
             MERGE (p:Person {name: $name})
             RETURN p.name AS name
             """, name=name
         )
 
-        # 獲取最近創建的組織 ID 及其相關聯的員工數量
+        # 獲取最近建立的組織 ID 及其相關聯的員工數量
         result = tx.run("""
             MATCH (o:Organization)
             RETURN o.id AS id, COUNT{(p:Person)-[r:WORKS_FOR]->(o)} AS employees_n
@@ -288,7 +288,7 @@ _交易_
         # 如果最近的組織沒有員工，則拋出異常
         if org is not None and org["employees_n"] == 0:
             raise Exception("最新建立的組織是空的。")
-            # 交易將回滾 -> 連 Person 都不會創建!
+            # 交易將回滾 -> 連 Person 都不會建立!
 
         # 如果組織員工數未達上限，將該員工添加到該組織
         if org is not None and org.get("employees_n") < employee_threshold:
@@ -299,7 +299,7 @@ _交易_
                 RETURN $org_id AS id
                 """, org_id=org["id"], name=name
             )
-        # 如果組織員工數已達上限，創建一個新的組織並將該員工添加到新組織
+        # 如果組織員工數已達上限，建立一個新的組織並將該員工添加到新組織
         else:
             result = tx.run("""
                 MATCH (p:Person {name: $name})

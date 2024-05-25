@@ -69,7 +69,7 @@ _除了 `max_tokens`，還可以使用其他參數來最佳化和控制費用_
 
 ## 在本專案中應用
 
-1. `llm` 是通過 `ChatOpenAI` 創建的物件，設置了 `max_tokens` 之後，任何調用 `llm` 之處都會遵循這個設置。
+1. `llm` 是通過 `ChatOpenAI` 建立的物件，設置了 `max_tokens` 之後，任何調用 `llm` 之處都會遵循這個設置。
 
 <br>
 

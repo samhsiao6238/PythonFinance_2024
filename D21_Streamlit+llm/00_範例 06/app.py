@@ -4,7 +4,7 @@ import streamlit as st
 # streamlit_feedback 用於收集用戶反饋
 # 每次回應後會顯示一個反饋界面，讓用戶對語言模型的回應進行評價
 from streamlit_feedback import streamlit_feedback
-# trubrics 用於存儲和處理用戶反饋
+# trubrics 用於儲存和處理用戶反饋
 import trubrics
 
 # 密鑰和模型名稱
@@ -22,7 +22,7 @@ st.title("📝 Chat with feedback (Trubrics)")
 # 在頁面中顯示應用的說明
 """
 此範例使用 [streamlit-feedback](https://github.com/trubrics/streamlit-feedback) 和
-Trubrics 來收集和存儲用戶對 LLM 回應的反饋。
+Trubrics 來收集和儲存用戶對 LLM 回應的反饋。
 """
 
 # 初始化會話狀態中的消息列表
@@ -50,13 +50,13 @@ if prompt := st.chat_input(placeholder="Tell me a joke about sharks"):
     if not OPENAI_API_KEY:
         st.info("請新增 OpenAI API 金鑰以繼續。")
         st.stop()
-    # 創建 OpenAI 客戶端
+    # 建立 OpenAI 客戶端
     client = OpenAI(api_key=OPENAI_API_KEY)
     # 使用 OpenAI 的聊天模型生成回應
     response = client.chat.completions.create(
         model=OPENAI_API_MODEL, messages=messages
     )
-    # 將回應存儲在會話狀態中
+    # 將回應儲存在會話狀態中
     st.session_state["response"] = response.choices[0].message.content
     # 顯示助手的回應
     with st.chat_message("assistant"):

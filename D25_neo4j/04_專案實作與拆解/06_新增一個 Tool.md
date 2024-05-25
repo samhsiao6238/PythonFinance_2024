@@ -337,7 +337,7 @@ _在專案中實際上使用了 LangChain 庫來進行函數的解析和執行�
 
 <br>
 
-2. 創建 `代理（Agent）`：使用 `LangChain` 的 `create_react_agent` 函數來創建一個代理，並傳入定義好的工具列表，這個代理能夠根據自然語言查詢動態調用適當的工具。
+2. 建立 `代理（Agent）`：使用 `LangChain` 的 `create_react_agent` 函數來建立一個代理，並傳入定義好的工具列表，這個代理能夠根據自然語言查詢動態調用適當的工具。
 
     ```python
     agent = create_react_agent(llm, tools, agent_prompt)
@@ -345,7 +345,7 @@ _在專案中實際上使用了 LangChain 庫來進行函數的解析和執行�
 
 <br>
 
-3. `代理執行器（AgentExecutor）`：使用 `AgentExecutor` 創建一個代理執行器，這個執行器負責解析自然語言查詢，選擇合適的工具，並執行對應的函數。
+3. `代理執行器（AgentExecutor）`：使用 `AgentExecutor` 建立一個代理執行器，這個執行器負責解析自然語言查詢，選擇合適的工具，並執行對應的函數。
 
     ```python
     agent_executor = AgentExecutor(

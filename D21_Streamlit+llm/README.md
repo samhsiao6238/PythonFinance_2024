@@ -53,7 +53,7 @@ from langchain.llms import OpenAI
 import streamlit as st
 # 使用 langchain_openai 的 ChatOpenAI
 from langchain_openai import ChatOpenAI
-# 引入 LangChain 的 PromptTemplate 模組，用於創建 `提示模板`
+# 引入 LangChain 的 PromptTemplate 模組，用於建立 `提示模板`
 from langchain.prompts import PromptTemplate
 # 加入正則表達
 import re
@@ -69,7 +69,7 @@ import streamlit as st
 # streamlit_feedback 用於收集用戶反饋
 # 每次回應後會顯示一個反饋界面，讓用戶對語言模型的回應進行評價
 from streamlit_feedback import streamlit_feedback
-# trubrics 用於存儲和處理用戶反饋
+# trubrics 用於儲存和處理用戶反饋
 import trubrics
 ```
 

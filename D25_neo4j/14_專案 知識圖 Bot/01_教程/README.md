@@ -187,7 +187,7 @@ _回到專案中_
 
 <br>
 
-1. 在專案根目錄創建一個 `.env` 檔案，並填入必要的環境變量，包括 Neo4j 的連接配置和 OpenAI API 密鑰；並確認 `.env` 文件已經寫入 `.gitignore` 文件中。
+1. 在專案根目錄建立一個 `.env` 檔案，並填入必要的環境變量，包括 Neo4j 的連接配置和 OpenAI API 密鑰；並確認 `.env` 文件已經寫入 `.gitignore` 文件中。
 
    ```json
    OPENAI_API_KEY=<輸入 API KEY>
@@ -217,7 +217,7 @@ _回到專案中_
 
 ## 初始化 Neo4j 數據庫
 
-1. 在專案根目錄下運行初始化腳本以創建 `所需的索引`，這對於在 Neo4j 知識圖中進行全文檢索是必要的
+1. 在專案根目錄下運行初始化腳本以建立 `所需的索引`，這對於在 Neo4j 知識圖中進行全文檢索是必要的
 
    ```bash
    python ./scripts/add_index_for_neo4j_db.py
@@ -378,7 +378,7 @@ _回到專案中_
 
 <br>
 
-10. 在圖形資料庫中，除了基本的 `關係`，可以進一步創建更多類型的關係以及添加屬性到關係和節點上拓展實體之間的關聯性，如此可建立更豐富的資料模型，從而更細緻地表達實體間的各種連結和特徵。
+10. 在圖形資料庫中，除了基本的 `關係`，可以進一步建立更多類型的關係以及添加屬性到關係和節點上拓展實體之間的關聯性，如此可建立更豐富的資料模型，從而更細緻地表達實體間的各種連結和特徵。
 
       ```python
       from neo4j import GraphDatabase
@@ -412,7 +412,7 @@ _回到專案中_
          RETURN a, b, c, d, e
          """
          results = tx.run(query)
-         # 傳回創建的節點和關係
+         # 傳回建立的節點和關係
          return results.single()
 
       # 運行並輸出結果
@@ -483,7 +483,7 @@ _回到專案中_
          for keyword in set(sum(papers.values(), [])):
                session.write_transaction(create_keyword, keyword)
          
-         # 創建論文及其與關鍵字的關係
+         # 建立論文及其與關鍵字的關係
          for title, paper_keywords in papers.items():
                session.write_transaction(create_paper_with_keywords, title, paper_keywords)
 

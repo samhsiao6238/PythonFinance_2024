@@ -44,7 +44,7 @@ if prompt := st.chat_input():
         # 停止應用
         st.stop()
 
-    # 使用提供的API密鑰創建OpenAI客戶端
+    # 使用提供的API密鑰建立OpenAI客戶端
     client = OpenAI(
         api_key=OPENAI_API_KEY
     )

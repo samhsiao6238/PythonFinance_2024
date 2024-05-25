@@ -302,7 +302,7 @@ _後補_
    ```
    - 這部分從給定的 URL 加載 CSV 文件中的數據，CSV 文件的每一行都作為一個帶有標頭的映射(`row`)載入。
    
-   - 使用 `MERGE` 確保從 CSV 文件的每一條目創建圖中的唯一節點，或匹配現有節點而不創建重複項，這裡使用 `linenumber()` 作為 `Fewshot` 節點的標識符。
+   - 使用 `MERGE` 確保從 CSV 文件的每一條目建立圖中的唯一節點，或匹配現有節點而不建立重複項，這裡使用 `linenumber()` 作為 `Fewshot` 節點的標識符。
    
    - `SET f += row;` 用 CSV 行中的屬性更新 `Fewshot` 節點。`+=` 運算符基於 CSV 的標頭和值添加或更新節點的屬性。
 
@@ -317,26 +317,26 @@ _後補_
    ```
    - 這部分找到所有的 `Fewshot` 節點並調用 APOC（Neo4j 的常用過程和函數庫）過程，使用 OpenAI 的機器學習能力為每個 `Fewshot` 節點的 `Question` 屬性生成嵌入。
 
-   - 每個問題的嵌入被存儲回 `Fewshot` 節點的 `embedding` 屬性中。
+   - 每個問題的嵌入被儲存回 `Fewshot` 節點的 `embedding` 屬性中。
 
 <br>
 
-4. **創建向量索引**
+4. **建立向量索引**
 
    ```cypher
    CALL db.index.vector.createNodeIndex('fewshot', 'Fewshot', 'embedding', 1536, 'cosine');
    CALL db.index.vector.createNodeIndex('news', 'Chunk', 'embedding', 1536, 'cosine');
    ```
-   - 這幾行為標籤為 `Fewshot` 和 `Chunk` 的節點在它們的 `embedding` 屬性上創建向量索引，使用 1536 維度和餘弦相似度進行索引。這對於執行基於向量的快速搜索非常有用，例如基於嵌入找到相似的節點。
+   - 這幾行為標籤為 `Fewshot` 和 `Chunk` 的節點在它們的 `embedding` 屬性上建立向量索引，使用 1536 維度和餘弦相似度進行索引。這對於執行基於向量的快速搜索非常有用，例如基於嵌入找到相似的節點。
 
 <br>
 
-5. **創建全文索引**
+5. **建立全文索引**
 
    ```cypher
    CREATE FULLTEXT INDEX entity FOR (p:Person|Organization) ON EACH [p.name];
    ```
-   - 這創建了一個在 `Person` 或 `Organization` 標籤的節點的 `name` 屬性上的全文索引。全文索引允許對屬性中的文本數據進行快速搜索，支持複雜的文本查詢。
+   - 這建立了一個在 `Person` 或 `Organization` 標籤的節點的 `name` 屬性上的全文索引。全文索引允許對屬性中的文本數據進行快速搜索，支持複雜的文本查詢。
 
 <br>
 
