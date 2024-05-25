@@ -184,7 +184,7 @@ _將自定義數據加載到 Atlas 並實例化為向量資料庫。_
 
 <br>
 
-3. 這個文件是由官方提供練習使用的 PDF 檔案。
+3. 這個文件是由官方提供練習使用的 PDF 檔案，後面內容將詳細說明。
 
     ![](images/img_29.png)
 
@@ -231,8 +231,24 @@ _將自定義數據加載到 Atlas 並實例化為向量資料庫。_
 
 <br>
 
+3. 內容就是各種說明與簡介。
 
-
+    ```txt
+    Preparing for a MongoDB
+    Deployment
+    Schema Design
+    Developers and data architects should work together to
+    develop the right data model, and they should invest time in
+    this exercise early in the project. The requirements of the
+    application should drive the data model, updates, and
+    queries of your MongoDB system. Given MongoDB's
+    dynamic schema, developers and data architects can
+    continue to iterate on the data model throughout the
+    development and deployment processes to optimize
+    performance and storage efficiency, as well as support the
+    addition of new application features. All of this can be done
+    without expensive schema migrations.
+    ```
 
 <br>
 
