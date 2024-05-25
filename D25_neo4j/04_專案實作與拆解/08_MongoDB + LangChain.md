@@ -408,6 +408,117 @@ _索引構建完成後，返回運行向量搜索查詢_
 
 <br>
 
+## 提取向量儲存進行查看
+
+1. 透過以下腳本進行查看。
+
+    ```python
+    # 提取存儲在指定集合中的向量
+    def retrieve_vectors(collection):
+        # 僅提取嵌入向量，過濾掉不包含 'embedding' 鍵的文檔
+        vectors = collection.find({"embedding": {"$exists": True}}, {"embedding": 1, "_id": 0})
+        return list(vectors)
+
+    vectors = retrieve_vectors(atlas_collection)
+    pprint.pprint(vectors)
+    ```
+
+<br>
+
+2. 輸出結果，
+
+    ```json
+    [{'embedding': [-0.0018253393278703542,
+                    0.010664365298763957,
+                    0.026917761791941067,
+                    -0.020397225398459055,
+                    -0.006756837632330743,
+                    0.017753394082321933,
+                    -0.016780793339565524,
+                    0.002035955386253036,
+                    -0.010321900261614836,
+                    -0.017410928113850154,
+    // 以下省略 ...
+    ```
+
+<br>
+
+## 操作向量索引
+
+1. 安裝套件。
+
+    ```bash
+    pip install scikit-learn matplotlib
+    ```
+
+<br>
+
+2. 計算向量的相似度：使用 scikit-learn 計算向量間的餘弦相似度。
+
+    ```python
+    from sklearn.metrics.pairwise import cosine_similarity
+    import numpy as np
+
+    # 計算相似度矩陣
+    def calculate_similarity(vectors):
+        # 過濾掉沒有 'embedding' 鍵的項
+        embeddings = [v['embedding'] for v in vectors if 'embedding' in v]
+        embeddings = np.array(embeddings)
+        similarity_matrix = cosine_similarity(embeddings)
+        return similarity_matrix
+
+    similarity_matrix = calculate_similarity(vectors)
+    print(similarity_matrix)
+    ```
+
+    ![](images/img_36.png)
+
+<br>
+
+3. 聚類分析：使用 k-means 聚類來分組相似的向量。
+
+    ```python
+    from sklearn.cluster import KMeans
+
+    def perform_clustering(vectors, num_clusters=5):
+        embeddings = np.array([v['embedding'] for v in vectors])
+        kmeans = KMeans(n_clusters=num_clusters)
+        kmeans.fit(embeddings)
+        labels = kmeans.labels_
+        return labels
+
+    labels = perform_clustering(vectors, num_clusters=5)
+    print(labels)
+    ```
+
+    ![](images/img_35.png)
+
+<br>
+
+4. 可視化：使用 `t-SNE` 將高維向量降維並可視化，有助於直觀了解向量的分佈和聚類效果。
+
+    ```python
+    from sklearn.manifold import TSNE
+    import matplotlib.pyplot as plt
+
+    def visualize_embeddings(vectors):
+        embeddings = np.array([v['embedding'] for v in vectors])
+        tsne = TSNE(n_components=2, random_state=0)
+        reduced_embeddings = tsne.fit_transform(embeddings)
+        
+        plt.scatter(reduced_embeddings[:, 0], reduced_embeddings[:, 1])
+        plt.title('t-SNE visualization of embeddings')
+        plt.xlabel('Dimension 1')
+        plt.ylabel('Dimension 2')
+        plt.show()
+
+    visualize_embeddings(vectors)
+    ```
+
+    ![](images/img_37.png)
+
+<br>
+
 ___
 
 _END_
