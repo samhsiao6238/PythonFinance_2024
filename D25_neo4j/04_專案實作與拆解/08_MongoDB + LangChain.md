@@ -18,6 +18,28 @@ _使用 LangChain 整合 MongoDB Atlas 建立向量索引並進行向量搜索_
 
 <br>
 
+## 實作一個範例
+
+_這個範例的功能是使用 Atlas Vector Search 和 LangChain 來實現基於向量搜索的檢索增強生成（RAG）應用，以回答一個有關 MongoDB Atlas 集群安全性問題的例子。_
+
+<br>
+
+1. 實例化檢索器：將 Atlas Vector Search 實例化為檢索器，用於根據相似度搜索來查找相關文檔。
+
+2. 定義提示模板：建立一個提示模板，指導模型如何回答問題。
+
+3. 創建 OpenAI 聊天模型：使用 OpenAI 的 ChatGPT 模型來生成回答。
+
+4. 格式化文檔：定義一個函數，用於將文檔內容格式化為字符串。
+
+5. 建立問答鏈：通過結合檢索器、提示模板和聊天模型，建立一個處理問答的鏈。
+
+6. 提出問題並獲取回答：向這個鏈提出一個問題，並獲取回答。
+
+7. 打印源文檔：最後，查找並打印與問題相關的源文檔。
+
+<br>
+
 ## 環境設置
 
 1. 安裝庫。
@@ -179,7 +201,6 @@ _以 `MyDatabase2024.MyCollection2024` 為例_
 
 1. 創建搜索索引：審查索引定義，然後點擊 Create Search Index。
 
-
     ![](images/img_26.png)
 
 2. 關閉 You're All Set! 的模態窗口，等待索引構建完成。
@@ -209,36 +230,54 @@ _索引構建完成後，返回運行向量搜索查詢_
     ```python
     # 將 Atlas Vector Search 實例化為擷取器
     retriever = vector_search.as_retriever(
-    search_type = "similarity",
-    search_kwargs = {"k": 10, "score_threshold": 0.75}
+        # 指定搜索類型為相似度搜索
+        search_type="similarity",
+        # 設定查詢時僅返回前 10 個相關性最高的文檔，並且只使用分數高於 0.75 的文檔
+        search_kwargs={"k": 10, "score_threshold": 0.75},
     )
     # 定義提示模板
+    # template = """
+    # Use the following pieces of context to answer the question at the end.
+    # If you don't know the answer, just say that you don't know, don't try to make up an answer.
+    # {context}
+    # Question: {question}
+    # """
     template = """
-    Use the following pieces of context to answer the question at the end.
-    If you don't know the answer, just say that you don't know, don't try to make up an answer.
+    使用以下內容來回答最後的問題。
+    如果你不知道答案，就說你不知道，不要試圖編造答案。
     {context}
-    Question: {question}
+    問題：{question}
     """
-    #
+
+    # 根據模板創建一個提示對象
     custom_rag_prompt = PromptTemplate.from_template(template)
+    # 創建一個 OpenAI 聊天模型
     llm = ChatOpenAI()
-    
+
+
+    # 定義格式化文檔的函數
     def format_docs(docs):
         return "\n\n".join(doc.page_content for doc in docs)
-    
+
+
     # 建立一條鏈來回答有關您的數據的問題
     rag_chain = (
-        { "context": retriever | format_docs, "question": RunnablePassthrough()}
+        {"context": retriever | format_docs, "question": RunnablePassthrough()}
         | custom_rag_prompt
         | llm
         | StrOutputParser()
     )
-    # Prompt the chain
-    question = "How can I secure my MongoDB Atlas cluster?"
+    # 提示這條鏈
+    # 問題：如何保障我的 MongoDB Atlas 集群的安全？
+    # question = "How can I secure my MongoDB Atlas cluster?"
+    question = "如何保障我的 MongoDB Atlas 集群的安全？"
+
+    # 執行查詢，獲取回答
     answer = rag_chain.invoke(question)
     print("Question: " + question)
     print("Answer: " + answer)
-    # Return source documents
+
+    # 返回源文檔，獲取與問題相關的文檔
     documents = retriever.get_relevant_documents(question)
     print("\nSource documents:")
     pprint.pprint(documents)
@@ -246,6 +285,11 @@ _索引構建完成後，返回運行向量搜索查詢_
 
 <br>
 
+3. 得到以下回覆。
+
+    ![](images/img_28.png)
+
+<br>
 ___
 
 _END_
