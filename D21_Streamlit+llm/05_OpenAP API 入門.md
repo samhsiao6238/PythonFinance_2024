@@ -505,7 +505,7 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
         similar_reviews = df.sort_values('similarity', ascending=False)
         return similar_reviews
 
-    # 查詢示例
+    # 查詢範例
     query = "best cookies"
     similar_reviews = find_similar_reviews(query, df)
     print(similar_reviews[['combined', 'similarity']])
@@ -692,7 +692,7 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
         prediction = clf.predict([embedding])
         return prediction[0]
 
-    # 新文本示例
+    # 新文本範例
     # new_text_1 = "這款產品真的很棒，我會再次購買。"
     new_text_1 = "我覺得這款產品還不錯耶。"
     # new_text_0 = "這款產品真的不太好，我不會再買了。"

@@ -444,7 +444,7 @@ _這兩個範例展示了如何處理單一輸入和多個輸入的情況。大�
     from pydantic import BaseModel, Field
 
     class SearchInput(BaseModel):
-        query: str = Field(description="要查詢的字符串")
+        query: str = Field(description="要查詢的字串")
 
     class AsyncSearchTool(BaseTool):
         name = "async_search"

@@ -249,14 +249,14 @@
 
             if isinstance(output, dict):
                 print('=> agent.py -> 備註：回應是一個 dict=')
-                # 將 dict 的項轉換為字符串並連接
+                # 將 dict 的項轉換為字串並連接
                 response_output = ', '.join([f"{key}: {value}" for key, value in output.items()])
             elif isinstance(output, str):
                 response_output = output
             else:
                 raise ValueError(f"=> 非預期的結果型態 `output type` -> {type(output)}")
 
-            # 確保 response_output 是字符串或列表
+            # 確保 response_output 是字串或列表
             if not isinstance(response_output, str):
                 raise ValueError(f"=> 無效的回應結果型態 `response output type` -> {type(response_output)}")
 

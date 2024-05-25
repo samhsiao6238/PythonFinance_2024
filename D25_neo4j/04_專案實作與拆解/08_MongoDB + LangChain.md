@@ -50,19 +50,39 @@ _使用 LangChain 整合 MongoDB Atlas 建立 `向量索引` 並進行 `向量�
 
 <br>
 
+## 向量儲存 `Vector Store`
+
+1. `向量儲存` 指的是將文本數據轉換為 `向量嵌入（Vector Embeddings）`，並將這些向量嵌入儲存在資料庫中，這個過程包含了文本數據轉換、向量儲存兩個步驟，轉換通常由語言模型來完成，向量儲存在這個範例中則是存放在 MongoDB。
+
+<br>
+
+2. 在本範例中的向量儲存如下，`from_documents` 方法接收文本文件（docs）並將其轉換為向量嵌入（embedding），然後將這些向量嵌入存儲在指定的資料庫集合（atlas_collection）中。
+
+    ```python
+    # 建立向量儲存
+    vector_search = MongoDBAtlasVectorSearch.from_documents(
+        documents = docs,
+        embedding = OpenAIEmbeddings(disallowed_special=()),
+        collection = atlas_collection,
+        index_name = vector_search_index
+    )
+    ```
+
+<br>
+
 ## 實作一個範例
 
 _這個範例的功能是使用 Atlas Vector Search 和 LangChain 來實現基於向量搜索的檢索增強生成（RAG）應用，以回答一個有關 MongoDB Atlas 集群安全性問題的例子。_
 
 <br>
 
-1. 實例化檢索器：將 Atlas Vector Search 實例化為檢索器，用於根據相似度搜索來查找相關文檔。
+1. 實例化檢索器：將 `Atlas Vector Search` 實例化為 `檢索器`，用於根據相似度搜索來查找相關文檔。
 
 2. 定義提示模板：建立一個提示模板，指導模型如何回答問題。
 
 3. 建立 OpenAI 聊天模型：使用 OpenAI 的 ChatGPT 模型來生成回答。
 
-4. 格式化文檔：定義一個函數，用於將文檔內容格式化為字符串。
+4. 格式化文檔：定義一個函數，用於將文檔內容格式化為字串。
 
 5. 建立問答鏈：通過結合檢索器、提示模板和聊天模型，建立一個處理問答的鏈。
 
@@ -85,29 +105,40 @@ _這個範例的功能是使用 Atlas Vector Search 和 LangChain 來實現基�
 2. 導入所需的庫。
 
     ```python
+    # getpass：安全地提示用戶輸入密碼或其他敏感信息
     import getpass, os, pymongo, pprint
+    # PyPDFLoader：加載 PDF 文件並將其內容轉換為可處理的文本或數據結構
     from langchain_community.document_loaders import PyPDFLoader
+    # StrOutputParser：將模型生成的輸出解析為字串
     from langchain_core.output_parsers import StrOutputParser
+    # RunnablePassthrough：將輸入直接傳遞到下一步而不進行任何處理的可運行單元
     from langchain_core.runnables import RunnablePassthrough
+    # 與 MongoDB Atlas Vector Search 集成，以實現向量搜索功能
     from langchain_mongodb import MongoDBAtlasVectorSearch
+    # ChatOpenAI 用於與 OpenAI 的聊天模型交互
+    # OpenAIEmbeddings 用於生成文本的向量嵌入
     from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+    # 定義和管理提示模板，以生成特定的查詢或指令
     from langchain.prompts import PromptTemplate
+    # 將長文本拆分為較小的片段，以便於處理和分析。
     from langchain.text_splitter import RecursiveCharacterTextSplitter
+    # MongoDB
     from pymongo import MongoClient
     ```
 
 <br>
 
-3. 設置環境變量：執行以下代碼並按提示輸入您的 OpenAI API Key 和 Atlas 集群的 SRV 連接字符串。
+3. 設置環境變量：執行以下代碼會提示用戶輸入 OpenAI API Key 和 Atlas 集群的 SRV 連接字串。
 
     ```python
+    # 輸入後會保存在環境變數以及變數中
     os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
     ATLAS_CONNECTION_STRING = getpass.getpass("MongoDB Atlas SRV Connection String:")
     ```
 
 <br>
 
-4. 特別注意，連結字串應使用以下格式。
+4. `SRV 連結字串` 的格式如下，全名是 `Service Resource Locator Connection String`，在建立 MongoDB 資料庫時會提供並提示。
 
     ```python
     `mongodb+srv://<username>:<password>@<clusterName>.<hostname>.mongodb.net`
@@ -141,16 +172,25 @@ _將自定義數據加載到 Atlas 並實例化為向量數據庫。_
     # 載入 PDF
     loader = PyPDFLoader("https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4HkJP")
     data = loader.load()
+    # 文件分割器
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=200, chunk_overlap=20
+    )
     # 分割文件
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=200, chunk_overlap=20)
     docs = text_splitter.split_documents(data)
-    # 列印
-    docs[0]
+    # 可輸出觀察看看
+    print(docs[0], '\n')
     ```
 
 <br>
 
-3. 實例化向量儲存：使用以下代碼從示例文檔建立一個名為 `vector_search` 的向量儲存。
+3. 這個文件是由官方提供練習使用的 PDF 檔案。
+
+    ![](images/img_29.png)
+
+<br>
+
+4. 實例化向量儲存：使用以下代碼從範例文檔建立一個名為 `vector_search` 的向量儲存，過程為 `from_documents` 方法 `接收文本文件（docs）` 並將其 `轉換為向量嵌入（embedding）` ，然後將這些向量嵌入`儲存在指定的資料庫集合（atlas_collection）` 中。
 
     ```python
     # 建立向量儲存
@@ -166,7 +206,7 @@ _將自定義數據加載到 Atlas 並實例化為向量數據庫。_
 
 ## 建立 Atlas 向量搜索索引
 
-_以 `MyDatabase2024.MyCollection2024` 為例_
+_在 MongoDB 控制板上操作，以 `MyDatabase2024.MyCollection2024` 為例_
 
 <br>
 
@@ -174,17 +214,13 @@ _以 `MyDatabase2024.MyCollection2024` 為例_
 
 <br>
 
-2. 進入 Atlas 中的集群頁面。
+2. 進入 Atlas 中的 `集群 Cluster` 頁面，點擊側邊欄中的 Database。
 
-   - 如果未顯示，從導航欄中的組織菜單中選擇包含所需項目的組織。
-
-   - 如果未顯示，從項目菜單中選擇所需項目。
-
-   - 如果未顯示集群頁面，點擊側邊欄中的 Database。
+    ![](images/img_30.png)
 
 <br>
 
-3. 轉到 Atlas Search 頁面 -> 點擊集群名稱 -> 點擊 Atlas Search 標籤。
+3. 轉到 `Atlas Search` 頁面 -> 點擊 `集群名稱` -> 點擊 `Atlas Search` 標籤。
 
     ![](images/img_20.png)
 
@@ -269,7 +305,7 @@ _索引構建完成後，返回運行向量搜索查詢_
 
 <br>
 
-2. 檢索增強生成（RAG）：使用以下代碼示例實現 RAG，根據您的數據回答問題。
+2. 檢索增強生成（RAG）：使用以下代碼範例實現 RAG，根據您的數據回答問題。
 
     ```python
     # 將 Atlas Vector Search 實例化為擷取器

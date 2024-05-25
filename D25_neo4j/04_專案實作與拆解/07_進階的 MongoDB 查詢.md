@@ -89,7 +89,7 @@ _使用 OpenAI 生成 MongoDB 查詢語法_
         """
         從生成的文本中提取 MongoDB 查詢語法
         :param text: 生成的文本
-        :return: 查詢語法字符串
+        :return: 查詢語法字串
         """
         match = re.search(r"find\((\{.*?\})\)", text)
         if match:
@@ -120,7 +120,7 @@ _使用 OpenAI 生成 MongoDB 查詢語法_
         print(f"生成的查詢語法：{query_prompt}")
 
         try:
-            # 提取查詢語法字符串
+            # 提取查詢語法字串
             text = query_prompt.strip()
 
             # 驗證並修正查詢語法
@@ -130,7 +130,7 @@ _使用 OpenAI 生成 MongoDB 查詢語法_
             query_str = extract_query(text)
             print(f"提取的查詢語法：{query_str}")
 
-            # 將查詢語法轉換為有效的 JSON 字符串
+            # 將查詢語法轉換為有效的 JSON 字串
             query_str = query_str.replace("'", '"')  # 替換單引號為雙引號
             query_str = re.sub(r"(\w+):", r'"\1":', query_str)  # 添加鍵的引號
 
@@ -286,7 +286,7 @@ _使用 OpenAI 生成 MongoDB 查詢語法_
         """
         從生成的文本中提取 MongoDB 查詢語法
         :param text: 生成的文本
-        :return: 查詢語法字符串
+        :return: 查詢語法字串
         """
         match = re.search(r"find\((\{.*?\})\)", text)
         if match:
@@ -317,7 +317,7 @@ _使用 OpenAI 生成 MongoDB 查詢語法_
         print(f"生成的查詢語法：{query_prompt}")
 
         try:
-            # 提取查詢語法字符串
+            # 提取查詢語法字串
             text = query_prompt.strip()
 
             # 驗證並修正查詢語法
@@ -327,7 +327,7 @@ _使用 OpenAI 生成 MongoDB 查詢語法_
             query_str = extract_query(text)
             print(f"提取的查詢語法：{query_str}")
 
-            # 將查詢語法轉換為有效的 JSON 字符串
+            # 將查詢語法轉換為有效的 JSON 字串
             query_str = query_str.replace("'", '"')  # 替換單引號為雙引號
             query_str = re.sub(r"(\w+):", r'"\1":', query_str)  # 添加鍵的引號
 
