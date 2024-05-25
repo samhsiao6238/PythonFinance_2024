@@ -234,9 +234,10 @@ _將自定義數據加載到 Atlas 並實例化為向量資料庫。_
 3. 內容就是各種說明與簡介。
 
     ```txt
-    Preparing for a MongoDB
-    Deployment
+    Preparing for a MongoDB Deployment
+    
     Schema Design
+    
     Developers and data architects should work together to
     develop the right data model, and they should invest time in
     this exercise early in the project. The requirements of the
