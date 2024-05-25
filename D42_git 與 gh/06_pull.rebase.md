@@ -58,7 +58,7 @@
 
 <br>
 
-2. 全局設定要加上 `--global` 參數，所有的 `git pull` 操作默認將使用合併而非 `rebase`。
+2. 全局設定要加上 `--global` 參數，所有的 `git pull` 操作預設將使用合併而非 `rebase`。
 
     ```bash
     git config --global pull.rebase false

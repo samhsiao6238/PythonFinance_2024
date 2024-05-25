@@ -141,7 +141,7 @@ try:
     os.environ["OPENAI_API_KEY"] = openai_api_key
     # 假如 True
     if openai_api_key:
-        # 這是主要查詢的邏輯，使用圖形數據庫查詢鏈 `CustomCypherChain` 來建立實體
+        # 這是主要查詢的邏輯，使用圖形資料庫查詢鏈 `CustomCypherChain` 來建立實體
         graph_search = CustomCypherChain.from_llm(
             # 預設使用 `gpt-4-turbo`
             # temperature 範圍 0~1，越低代表越精準，這是自然語言領域中常見的一個參數

@@ -148,7 +148,7 @@ _這個範例的功能是使用 Atlas Vector Search 和 LangChain 來實現基�
 
 ## 使用 Atlas 作為向量儲存
 
-_將自定義數據加載到 Atlas 並實例化為向量數據庫。_
+_將自定義數據加載到 Atlas 並實例化為向量資料庫。_
 
 <br>
 
@@ -210,47 +210,49 @@ _在 MongoDB 控制板上操作，以 `MyDatabase2024.MyCollection2024` 為例_
 
 <br>
 
-1. 要在向量儲存上運行向量搜索查詢，需要在 `MyDatabase2024.MyCollection2024` 集合上建立 Atlas 向量搜索索引。
+1. 要在 `向量儲存` 上運行 `向量搜索` 查詢，需要在指定資料庫中的指定集合上建立 Atlas 向量搜索索引，在這個範例中將使用 `MyDatabase2024.MyCollection2024`。
+
+    ![](images/img_31.png)
 
 <br>
 
-2. 進入 Atlas 中的 `集群 Cluster` 頁面，點擊側邊欄中的 Database。
+2. 進入 Atlas ，展開 `專案 Projects` 並進入指定專案中的指定 `集群 Cluster`， 接著點擊側邊欄中的 `Atlas Search` 。
 
     ![](images/img_30.png)
 
 <br>
 
-3. 轉到 `Atlas Search` 頁面 -> 點擊 `集群名稱` -> 點擊 `Atlas Search` 標籤。
+3. 在 `Atlas Search` 頁面中選取資料來源 `Select data source`，也就是選取集群，接著點擊 `Go ti Atlas Search`。
 
     ![](images/img_20.png)
 
 <br>
 
-4. 定義 Atlas 向量搜索索引：點擊 Create Search Index。
+4. 定義 Atlas `向量搜索索引`，點擊 `Create Search Index`。
 
     ![](images/img_21.png)
 
 <br>
 
-5. 在 Atlas Vector Search 下，選擇 JSON Editor 然後點擊 Next。
+5. 在 `Atlas Vector Search` 下，選擇 `JSON Editor` 然後點擊 `Next`。
 
     ![](images/img_22.png)
 
 <br>
 
-6. 在 Database 和 Collection 部分，找到 `MyDatabase2024` 數據庫，並選擇 `MyCollection2024` 集合。
+6. 在 `Database and Collection` 部分，找到 `MyDatabase2024` 資料庫，並選擇 `MyCollection2024` 集合。
 
     ![](images/img_24.png)
 
 <br>
 
-7. 在 Index Name 欄位中輸入 `vector_index`。
+7. 在 `Index Name` 欄位中 _手動輸入_ `vector_index`。
 
     ![](images/img_23.png)
 
 <br>
 
-8. 用以下索引定義替換默認定義。
+8. 並使用以下自訂的 `索引定義` 替換預設定義。
 
     ```json
     {
@@ -271,19 +273,19 @@ _在 MongoDB 控制板上操作，以 `MyDatabase2024.MyCollection2024` 為例_
 
 <br>
 
-9. 然後點擊 Next。 
+9. 然後點擊 `Next`。 
 
     ![](images/img_25.png)
 
 <br>
 
-10. 建立搜索索引：審查索引定義，然後點擊 Create Search Index。
+10. 確認自訂的索引定義都正確就可以點擊 `Create Search Index`。
 
     ![](images/img_26.png)
 
 <br>
 
-11. 關閉 You're All Set! 的模態窗口，等待索引構建完成。
+11. 關閉 `You're All Set!` 的窗口，等待索引構建完成。
 
     ![](images/img_27.png)
 
@@ -302,6 +304,8 @@ _索引構建完成後，返回運行向量搜索查詢_
     results = vector_search.similarity_search(query)
     pprint.pprint(results)
     ```
+
+    ![](images/img_32.png)
 
 <br>
 

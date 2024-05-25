@@ -12,7 +12,7 @@ import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 
 
-# 覆蓋 Yahoo Finance 的默認設置
+# 覆蓋 Yahoo Finance 的預設設置
 yf.pdr_override()
 
 # 輸入股票代號進行查詢

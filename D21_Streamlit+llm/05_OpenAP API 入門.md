@@ -112,7 +112,7 @@ _[Text-to-speech 語音轉文字](https://platform.openai.com/docs/guides/text-t
 
 3. 生成語音：調用 API 將文本轉換為語音。
 
-4. 輸出格式：選擇音頻的輸出格式（默認為 MP3，但也支持其他格式如 opus、aac、flac、wav、pcm）。
+4. 輸出格式：選擇音頻的輸出格式（預設為 MP3，但也支持其他格式如 opus、aac、flac、wav、pcm）。
 
 5. 保存或播放：將生成的音頻文件保存或實時播放。
 

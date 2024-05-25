@@ -193,7 +193,7 @@
             return_direct=False,
         ),
         # 用於使用 Cypher 查詢語句來回答有關電影的具體問題。
-        # 如果問題需要從 Neo4j 數據庫中檢索電影信息，並涉及生成和執行 Cypher 查詢。
+        # 如果問題需要從 Neo4j 資料庫中檢索電影信息，並涉及生成和執行 Cypher 查詢。
         # 注意這裡會調用 cypher_qa
         Tool.from_function(
             # 這名稱會在終端機中顯示為 `Action：Cypher QA`

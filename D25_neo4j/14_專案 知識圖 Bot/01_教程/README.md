@@ -12,7 +12,7 @@ _先完成以下的套件安裝及環境設置_
 
 1. Docker + Docker Compose。
 
-2. Neo4j 數據庫應用如 Neo4j Desktop 或雲端實例。
+2. Neo4j 資料庫應用如 Neo4j Desktop 或雲端實例。
 
 3. 在稍後的操作中將示範使用 `VSCode` 內建的 `venv` 虛擬環境管理。
 
@@ -20,7 +20,7 @@ _先完成以下的套件安裝及環境設置_
 
 ## 開始操作
 
-1. 使用 Docker 啟動 Neo4j 數據庫：進入 `docker-compose.yml` 文件所在路徑，接著在終端機使用 Docker Compose 指令來啟動容器中的 Neo4j 數據庫。
+1. 使用 Docker 啟動 Neo4j 資料庫：進入 `docker-compose.yml` 文件所在路徑，接著在終端機使用 Docker Compose 指令來啟動容器中的 Neo4j 資料庫。
 
    ```bash
    docker-compose up -d
@@ -215,7 +215,7 @@ _回到專案中_
 
 <br>
 
-## 初始化 Neo4j 數據庫
+## 初始化 Neo4j 資料庫
 
 1. 在專案根目錄下運行初始化腳本以建立 `所需的索引`，這對於在 Neo4j 知識圖中進行全文檢索是必要的
 
@@ -251,7 +251,7 @@ _回到專案中_
    username = "neo4j"
    password = "sam112233"
 
-   # 連接到數據庫
+   # 連接到資料庫
    driver = GraphDatabase.driver(uri, auth=(username, password))
 
    def add_person(tx, name):
@@ -266,7 +266,7 @@ _回到專案中_
       person = session.write_transaction(add_person, "Alice2")
       print(f"Created: {person['name']}")
 
-   # 關閉數據庫連接
+   # 關閉資料庫連接
    driver.close()
    ```
 
