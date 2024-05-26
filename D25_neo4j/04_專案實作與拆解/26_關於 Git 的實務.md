@@ -120,7 +120,7 @@ choco install git-lfs
 git lfs install
 ```
 
-3. 跟蹤大型檔案。
+3. 跟蹤大型檔案：指定 Git LFS 追蹤所有的 .csv 和 .zip 文件，這將使所有的 .csv 和 .zip 檔案由 Git LFS 管理，從而將這些檔案儲存在 LFS 的遠端存儲，而不是直接儲存在 Git 倉庫中。這樣可以避免超大的文件直接在 Git 倉庫中，防止倉庫變得臃腫。
 ```bash
 git lfs track "*.csv" && git lfs track "*.zip"
 ```
@@ -131,3 +131,43 @@ git add .gitattributes
 git add path/to/your/large/file.csv
 git commit -m "Track large files using Git LFS"
 ```
+
+5. 推送。
+```bash
+git push origin main
+```
+
+6. 完成後觀察 `.gitattributes` 文件，這表明所有的 .csv 和 .zip 檔案以及兩個指定檔案都將由 Git LFS 管理。
+```bash
+三大法人爬蟲資料.csv filter=lfs diff=lfs merge=lfs -text
+over100.zip filter=lfs diff=lfs merge=lfs -text
+*.csv filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+```
+
+## 補充關於 `.gitignore` 的寫法
+
+1. 不追蹤全部的 `.csv` 和 `.zip` 文件
+
+    ```bash
+    *.csv
+    *.zip
+    ```
+
+2. 不追蹤指定文件名稱，但不限於路徑。
+
+    ```bash
+    **/secrets.toml
+    ```
+
+3. 不追蹤指定資料夾內的指定副檔名文件。
+
+    ```bash
+    data/*.csv
+    ```
+
+4. 不追蹤指定資料夾及其子資料夾內全部的指定副檔名文件。
+
+    ```bash
+    data/**/*.csv
+    ```
