@@ -46,7 +46,7 @@ pip install pillow
 import os
 from PIL import Image
 
-def convert_images_to_jpg(source_folder, target_folder, output_format='jpg', target_size=(224, 224)):
+def convert_images_to_jpg(source_folder, target_folder, output_format='jpeg', target_size=(224, 224)):
     # 確保輸出格式是小寫
     output_format = output_format.lower()
     
@@ -59,25 +59,24 @@ def convert_images_to_jpg(source_folder, target_folder, output_format='jpg', tar
         if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
             source_file_path = os.path.join(source_folder, filename)
             img = Image.open(source_file_path)
-            # 調整圖像大小
-            img = img.resize(target_size, Image.ANTIALIAS)
-            # 將文件名擷取出來
+            # 調整影像大小
+            img = img.resize(target_size, Image.Resampling.LANCZOS)
+            # 將檔案名稱提取出來
             base = os.path.splitext(filename)[0]
-            # 新文件名
+            # 新檔名
             new_filename = f"{base}.{output_format}"
             target_file_path = os.path.join(target_folder, new_filename)
             
-            # 保存為指定格式到目標資料夾
+            # 儲存為指定格式到目標資料夾
             img.convert('RGB').save(target_file_path, output_format.upper())
             print(f"Converted {filename} to {new_filename} with size {target_size}")
 
 # 指定來源資料夾和目標資料夾路徑
-source_folder = "./source_images"  # 替換為你的來源資料夾路徑
-target_folder = "./target_images"  # 替換為你的目標資料夾路徑
+source_folder = "./face_detect_source" # 替換為你的來源資料夾路徑
+target_folder = "./face_detect_done" # 替換為你的目標資料夾路徑
 
-# 轉換所有圖片為 .jpg 格式，調整解析度並保存到目標資料夾
-convert_images_to_jpg(source_folder, target_folder, output_format='jpg', target_size=(224, 224))
-
+# 轉換所有圖片為 .jpeg 格式，調整解析度並儲存到目標資料夾
+convert_images_to_jpg(source_folder, target_folder, output_format='jpeg', target_size=(224, 224))
 ```
 
 ## 範例
@@ -140,7 +139,7 @@ convert_images_to_jpg(source_folder, target_folder, output_format='jpg', target_
             atlas_collection.insert_one({"image_name": img_name, "embedding": embedding.tolist()})
 
     # 初始化資料
-    image_folder = "./image_folder"  # 替換為圖片文件夾路徑
+    image_folder = "./face_detect_done"
     store_image_embeddings(image_folder)
 
     # 執行向量搜索的函數
@@ -161,7 +160,7 @@ convert_images_to_jpg(source_folder, target_folder, output_format='jpg', target_
         return top_images
 
     # 查詢圖片
-    query_image_path = "./image_folder/image_1.jpg"
+    query_image_path = "./face_detect_source/image_01.jpg"
     similar_images = perform_vector_search(query_image_path)
 
     # 顯示結果
