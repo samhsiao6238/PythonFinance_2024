@@ -1,6 +1,6 @@
 # 向量索引 `csv`
 
-_使用 `[yahoo! 財經](https://hk.finance.yahoo.com/quote/%5ETWII/history/)` 資料_
+_使用 [yahoo! 財經](https://hk.finance.yahoo.com/quote/%5ETWII/history/) 資料_
 
 <br>
 
