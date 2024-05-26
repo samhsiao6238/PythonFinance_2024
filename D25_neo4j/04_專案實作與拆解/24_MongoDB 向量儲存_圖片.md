@@ -804,6 +804,7 @@ _展示出圖片_
     base_model = VGG16(weights="imagenet")
     model = Model(inputs=base_model.input, outputs=base_model.get_layer("fc1").output)
 
+
     # 定義圖片嵌入函數
     def get_image_embedding(img_path):
         img = Image.open(img_path)
@@ -826,10 +827,12 @@ _展示出圖片_
         vgg16_feature = model.predict(img_data)
         return vgg16_feature.flatten()
 
+
     # 刪除現有數據的函數
     def delete_existing_data():
         result = atlas_collection.delete_many({})
         return result.deleted_count
+
 
     # 初始化數據
     def initialize_data(image_folder):
@@ -845,6 +848,7 @@ _展示出圖片_
                     {"image_name": filename, "embedding": embedding.tolist()}
                 )
                 print(f"Inserted {filename} into the database.")
+
 
     # 搜索相似圖片並顯示相似度
     def search_similar_images(query_img_path):
@@ -866,15 +870,17 @@ _展示出圖片_
         top_images = [(image_names[i], similarity_scores[i]) for i in sorted_indices[:5]]
         return top_images
 
+
     # 顯示圖片
     def display_images(query_img_path, similar_images, image_folder):
         # 在 Streamlit 中顯示查詢圖片
-        st.image(query_img_path, caption='Query Image', use_column_width=True)
+        st.image(query_img_path, caption="Query Image", use_column_width=True)
 
         # 顯示相似圖片
         for img_name, similarity in similar_images:
             img_path = os.path.join(image_folder, img_name)
-            st.image(img_path, caption=f'相似度: {similarity:.4f}', use_column_width=True)
+            st.image(img_path, caption=f"相似度: {similarity:.4f}", use_column_width=True)
+
 
     # Streamlit 應用程序
     st.title("圖片相似度搜索")
