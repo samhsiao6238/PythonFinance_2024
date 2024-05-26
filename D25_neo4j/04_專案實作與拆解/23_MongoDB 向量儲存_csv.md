@@ -1,4 +1,4 @@
-# 向量索引 `csv`
+# 向量儲存 `csv`
 
 _使用 [yahoo! 財經](https://hk.finance.yahoo.com/quote/%5ETWII/history/) 資料_
 
