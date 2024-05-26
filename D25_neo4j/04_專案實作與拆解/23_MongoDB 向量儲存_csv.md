@@ -1,15 +1,19 @@
 # 向量儲存 `csv`
 
-_使用 [yahoo! 財經](https://hk.finance.yahoo.com/quote/%5ETWII/history/) 資料_
+_讀取 CSV 並建立向量索引系統_
 
 <br>
 
 ## 步驟
 
-1. 取得數據。
+1. 使用 [yahoo! 財經](https://hk.finance.yahoo.com/quote/%5ETWII/history/) 資料取得數據。
+
 2. 處理數據：將數據轉換為適合的格式，例如 `CSV` 或 `JSON` 格式。
+
 3. 轉換為向量：使用合適的嵌入技術將數據轉換為向量表示。
+
 4. 存儲向量：將轉換為向量的數據存儲在 `MongoDB Atlas` 中。
+
 5. 查詢數據：使用向量搜索技術進行語義查詢。
 
 <br>
