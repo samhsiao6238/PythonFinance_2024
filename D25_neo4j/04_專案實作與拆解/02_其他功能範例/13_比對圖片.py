@@ -1,7 +1,5 @@
 import os
-import pymongo
 import certifi
-import json
 from pymongo import MongoClient
 from keras.applications.vgg16 import VGG16
 from keras.models import Model

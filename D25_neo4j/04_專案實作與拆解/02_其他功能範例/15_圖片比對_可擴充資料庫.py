@@ -1,7 +1,5 @@
 import os
-import pymongo
 import certifi
-import json
 from pymongo import MongoClient
 from keras.applications.vgg16 import VGG16
 from keras.models import Model
@@ -128,7 +126,9 @@ st.title("圖片相似度搜索")
 image_folder = "./face_detect_done"
 
 # 檢查集合是否為空，若為空且未刪除則初始化資料
-if atlas_collection.count_documents({}) == 0 and not st.session_state.get("data_deleted", False):
+if atlas_collection.count_documents({}) == 0 and not st.session_state.get(
+    "data_deleted", False
+):
     st.write("初始化資料並創建向量存儲...")
     initialize_data(image_folder)
     st.session_state["data_initialized"] = True
