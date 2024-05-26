@@ -1,4 +1,2 @@
-三大法人爬蟲資料.csv filter=lfs diff=lfs merge=lfs -text
-over100.zip filter=lfs diff=lfs merge=lfs -text
 *.csv filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text

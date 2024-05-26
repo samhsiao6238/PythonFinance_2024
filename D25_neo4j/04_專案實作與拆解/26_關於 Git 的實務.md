@@ -171,3 +171,17 @@ over100.zip filter=lfs diff=lfs merge=lfs -text
     ```bash
     data/**/*.csv
     ```
+
+## 託管大型檔案但依舊排除部分大型檔案
+
+1. 在 `.gitattributes` 中已經設定了大型檔案的管理。
+```bash
+*.csv filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+```
+
+2. 但依舊可以在 `` 文件中指定忽略指定的大型檔案。
+```bash
+Python大數據特訓班(第三版)學習資源.zip
+範例程式碼_20231120.zip
+```
