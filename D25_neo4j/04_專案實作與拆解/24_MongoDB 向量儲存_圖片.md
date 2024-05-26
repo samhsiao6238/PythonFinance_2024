@@ -8,7 +8,7 @@ _以處理圖片為例_
 
 1. 以下將進行一個典型的計算機視覺任務，處理圖片數據並將其轉換為向量嵌入並儲存在 MongoDB 中，將使用深度學習模型來完成最後的搜尋工作。
 
-2. 至少需要10張圖片進行嵌入和查詢操作。圖片數量越多，向量儲存和查詢的效果會更好。
+2. 至少需要10張圖片進行嵌入和查詢操作，圖片數量越多，向量儲存和查詢的效果會更好。
 
 3. 文件採用以下結構進行儲存。
 
@@ -32,6 +32,53 @@ _以處理圖片為例_
 7. 查詢圖片：計算查詢圖片與儲存圖片的相似度，並返回最相似的圖片。
 
 <br>
+
+## 前置作業
+
+1. 先遍歷指定資料夾中的所有影像文件，包括 `.jpg`、`.jpeg`、`.png` 都轉換為相同的格式 `.jpg` 並儲存到同一資料夾中。
+
+2. 安裝了 `Pillow` 庫。
+```bash
+pip install pillow
+```
+3. 程式碼。
+```python
+import os
+from PIL import Image
+
+def convert_images_to_jpg(source_folder, target_folder, output_format='jpg', target_size=(224, 224)):
+    # 確保輸出格式是小寫
+    output_format = output_format.lower()
+    
+    # 確保目標資料夾存在
+    if not os.path.exists(target_folder):
+        os.makedirs(target_folder)
+    
+    # 遍歷來源資料夾中的所有文件
+    for filename in os.listdir(source_folder):
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
+            source_file_path = os.path.join(source_folder, filename)
+            img = Image.open(source_file_path)
+            # 調整圖像大小
+            img = img.resize(target_size, Image.ANTIALIAS)
+            # 將文件名擷取出來
+            base = os.path.splitext(filename)[0]
+            # 新文件名
+            new_filename = f"{base}.{output_format}"
+            target_file_path = os.path.join(target_folder, new_filename)
+            
+            # 保存為指定格式到目標資料夾
+            img.convert('RGB').save(target_file_path, output_format.upper())
+            print(f"Converted {filename} to {new_filename} with size {target_size}")
+
+# 指定來源資料夾和目標資料夾路徑
+source_folder = "./source_images"  # 替換為你的來源資料夾路徑
+target_folder = "./target_images"  # 替換為你的目標資料夾路徑
+
+# 轉換所有圖片為 .jpg 格式，調整解析度並保存到目標資料夾
+convert_images_to_jpg(source_folder, target_folder, output_format='jpg', target_size=(224, 224))
+
+```
 
 ## 範例
 
