@@ -379,7 +379,21 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 <br>
 
-3. 比較生成模型：選擇最佳的檢索嵌入模型後，接著比較生成模型，並使用 RAG 鏈來生成答案。
+3. 依舊無法解決連線問題，嘗試 `禁用 IP V6`。
+```python
+    client = MongoClient(
+        ATLAS_CONNECTION_STRING,
+        tlsCAFile=certifi.where(),
+        # 伺服器選擇超時
+        serverSelectionTimeoutMS=5000,
+        # 套接字超時
+        socketTimeoutMS=5000,
+        # 連接超時
+        connectTimeoutMS=5000
+    )
+```
+
+4. 比較生成模型：選擇最佳的檢索嵌入模型後，接著比較生成模型，並使用 RAG 鏈來生成答案。
 
     ```python
     from langchain_openai import ChatOpenAI
