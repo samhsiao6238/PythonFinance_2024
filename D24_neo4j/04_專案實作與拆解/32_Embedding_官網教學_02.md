@@ -159,7 +159,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
     # 切割文件
     from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-    # 切割氣
+    # 切割器
     text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
         encoding_name="cl100k_base",
         keep_separator=False,
