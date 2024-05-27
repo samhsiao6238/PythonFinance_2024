@@ -157,7 +157,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 <br>
 
-## 繼續編輯腳本
+## 繼續編輯
 
 1. 創建參考文檔塊：將長的參考文本拆分成較小的塊以便於檢索，這可使用 `LangChain` 的 `RecursiveCharacterTextSplitter` 來完成的。
 
@@ -189,9 +189,11 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
     docs = [item for chunk in all_chunks for item in chunk]
     ```
 
+    ![](images/img_79.png)
+
 <br>
 
-6. 創建嵌入並將其寫入 MongoDB：將文本塊轉換為嵌入並將其存儲到 MongoDB 中，這樣就可以用於檢索。
+2. 創建嵌入並將其寫入 MongoDB：將文本塊轉換為嵌入並將其存儲到 MongoDB 中，這樣就可以用於檢索。
 
     ```python
     from pymongo import MongoClient
@@ -233,7 +235,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 _接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
 
-7. 比較檢索嵌入模型：使用不同的嵌入模型來比較檢索效果，並評估檢索到的上下文的精度和召回率。
+3. 比較檢索嵌入模型：使用不同的嵌入模型來比較檢索效果，並評估檢索到的上下文的精度和召回率。
 
     ```python
     from langchain_openai import OpenAIEmbeddings
@@ -284,7 +286,7 @@ _接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
 
 <br>
 
-8. 比較生成模型：選擇最佳的檢索嵌入模型後，接著比較生成模型，並使用 RAG 鏈來生成答案。
+4. 比較生成模型：選擇最佳的檢索嵌入模型後，接著比較生成模型，並使用 RAG 鏈來生成答案。
 
     ```python
     from langchain_openai import ChatOpenAI
@@ -334,7 +336,7 @@ _接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
 
 <br>
 
-9. 測量 RAG 應用的整體性能：使用最佳的檢索和生成模型來評估整體系統的性能。
+5. 測量 RAG 應用的整體性能：使用最佳的檢索和生成模型來評估整體系統的性能。
 
     ```python
     from ragas.metrics import answer_similarity, answer_correctness
@@ -360,7 +362,7 @@ _接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
 
 <br>
 
-10. 追蹤性能變化：在 MongoDB Atlas 中記錄評估結果，並使用 Atlas Charts 來追蹤和可視化性能，這樣可以在 MongoDB Atlas 中創建儀表板來可視化評估結果。。
+6. 追蹤性能變化：在 MongoDB Atlas 中記錄評估結果，並使用 Atlas Charts 來追蹤和可視化性能，這樣可以在 MongoDB Atlas 中創建儀表板來可視化評估結果。。
 
     ```python
     from datetime import datetime
