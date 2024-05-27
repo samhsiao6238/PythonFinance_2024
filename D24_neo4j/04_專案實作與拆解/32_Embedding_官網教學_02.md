@@ -264,7 +264,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 ## 在 MongoDB Atlas UI 中為每個集合創建向量索引
 
-1. 比較檢索嵌入模型：使用不同的嵌入模型來比較檢索效果，並評估檢索到的上下文的精度和召回率。
+1. 這段代碼是使用 `LangChain` 與 `OpenAI` 生成 `嵌入向量`，並將這些嵌入向量儲存到 `MongoDB Atlas`，然後進行檢索和評估。具體來說，該代碼定義了一個 `檢索器 (retriever) 函數`，用於根據指定的模型和參數從 MongoDB Atlas 中檢索嵌入向量，並從資料集中提取問題和正確答案，最後使用 `ragas 庫` 評估不同嵌入模型在檢索上的表現。
 
     ```python
     from langchain_openai import OpenAIEmbeddings
@@ -279,15 +279,20 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
     # 配置 MongoDB 連接
     client = MongoClient(
+        # MongoDB Atlas 連接字串
         ATLAS_CONNECTION_STRING,
+        # 使用 certifi 提供的 CA 證書
         tlsCAFile=certifi.where()
     )
+    # 指定資料庫名稱
     DB_NAME = "ragas_evals"
     db = client[DB_NAME]
 
     # 定義嵌入模型
     EVAL_EMBEDDING_MODELS = [
+        # OpenAI 的 text-embedding-ada-002 模型
         "text-embedding-ada-002",
+        # OpenAI 的 text-embedding-3-small 模型
         "text-embedding-3-small"
     ]
 
@@ -299,20 +304,28 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
         # 創建 MongoDB 向量檢索對象
         vector_store = MongoDBAtlasVectorSearch.from_connection_string(
             connection_string=ATLAS_CONNECTION_STRING,
+            # 指定命名空間（資料庫和集合）
             namespace=f"{DB_NAME}.{model}",
+            # 指定嵌入模型
             embedding=embeddings,
+            # 向量索引名稱
             index_name="vector_index",
+            # 文本鍵名
             text_key="text",
         )
         # 返回檢索器對象
         return vector_store.as_retriever(
+            # 指定檢索類型為相似度檢索
             search_type="similarity",
+            # 指定檢索參數
             search_kwargs={"k": k}
         )
 
 
     # 轉換數據框中的列為列表
+    # 指定檢索參數
     QUESTIONS = df["question"].to_list()
+    # 提取正確答案列表
     GROUND_TRUTH = df["correct_answer"].tolist()
 
     # 允許嵌套使用 asyncio
@@ -321,8 +334,11 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
     for model in EVAL_EMBEDDING_MODELS:
         # 構建數據字典
         data = {
+            # 問題
             "question": [],
+            # 正確答案
             "ground_truth": [],
+            # 上下文
             "contexts": []
         }
         data["question"] = QUESTIONS
@@ -351,7 +367,19 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 <br>
 
-2. 比較生成模型：選擇最佳的檢索嵌入模型後，接著比較生成模型，並使用 RAG 鏈來生成答案。
+2. 以上代碼是使用 certifi 提供的 CA 證書，倘若仍舊出現錯誤 `ServerSelectionTimeoutError`，可嘗試暫時禁用 SSL 驗證，但要注意這僅適用於測試環境，不建議在生產環境中使用。
+
+    ```python
+    client = MongoClient(
+        ATLAS_CONNECTION_STRING,
+        tls=True,
+        tlsAllowInvalidCertificates=True
+    )
+    ```
+
+<br>
+
+3. 比較生成模型：選擇最佳的檢索嵌入模型後，接著比較生成模型，並使用 RAG 鏈來生成答案。
 
     ```python
     from langchain_openai import ChatOpenAI
