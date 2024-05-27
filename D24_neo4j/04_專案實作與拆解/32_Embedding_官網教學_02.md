@@ -128,7 +128,22 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 <br>
 
-4. 若出現訊息顯示在 Jupyter Notebook 中未找到 `IProgress`，依據提示進行更新。
+4. 可使用 `datasets` 庫內建的清除功能。
+
+    ```python
+    from datasets import load_dataset, DatasetDict
+
+    # 清理所有數據集缓存
+    DatasetDict.cleanup_cache_files()
+
+    # 清理特定數據集缓存
+    dataset = load_dataset("explodinggradients/ragas-wikiqa", split="train")
+    dataset.cleanup_cache_files()
+    ```
+
+<br>
+
+5. 若出現訊息顯示在 Jupyter Notebook 中未找到 `IProgress`，依據提示進行更新。
 
     ```bash
     pip install --upgrade jupyter ipywidgets
