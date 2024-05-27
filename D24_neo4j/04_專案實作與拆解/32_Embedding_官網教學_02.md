@@ -153,15 +153,22 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 ## 繼續編輯腳本
 
-1. 創建參考文檔塊：將長的參考文本拆分成較小的塊以便於檢索，這是使用 `LangChain` 的 `RecursiveCharacterTextSplitter` 來完成的。
+1. 創建參考文檔塊：將長的參考文本拆分成較小的塊以便於檢索，這可使用 `LangChain` 的 `RecursiveCharacterTextSplitter` 來完成的。
 
     ```python
+    # 切割文件
     from langchain.text_splitter import RecursiveCharacterTextSplitter
 
+    # 切割氣
     text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
-        encoding_name="cl100k_base", keep_separator=False, chunk_size=200, chunk_overlap=30
+        encoding_name="cl100k_base",
+        keep_separator=False,
+        chunk_size=200,
+        chunk_overlap=30
     )
 
+
+    # 自定義切割函數
     def split_texts(texts):
         chunked_texts = []
         for text in texts:
@@ -169,6 +176,8 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
             chunked_texts.extend([chunk.page_content for chunk in chunks])
         return chunked_texts
 
+
+    # 顯示切割後的文件
     df["chunks"] = df["context"].apply(lambda x: split_texts(x))
     all_chunks = df["chunks"].tolist()
     docs = [item for chunk in all_chunks for item in chunk]
