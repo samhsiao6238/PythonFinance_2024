@@ -50,6 +50,7 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線數據�
     import toml
     
     # 載入 secrets.toml 文件
+    secrets = toml.load("secrets.toml")
 
     # MongoDB URI
     ATLAS_CONNECTION_STRING = secrets["MONGODB_URL"]
