@@ -83,12 +83,15 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線數據�
 4. 下載評估數據集：使用 `Hugging Face` 的 `datasets` 庫來下載 `評估數據集`，並將其轉換為 `pandas dataframe`，數據集的關鍵列包括 `question`（用戶問題）、`correct_answer`（正確答案）和 `context`（參考文本）。
 
     ```python
+    # 下載數據集
     from datasets import load_dataset
     import pandas as pd
 
+    # 數據
     data = load_dataset(
         "explodinggradients/ragas-wikiqa", split="train"
     )
+    # 顯示
     df = pd.DataFrame(data)
     ```
 
