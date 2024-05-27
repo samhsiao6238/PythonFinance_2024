@@ -103,7 +103,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 <br>
 
-2. 查詢數據集位置。
+2. 查詢數據集位置，務必確認下載路徑是否位在本地倉庫中，若是則需評估是否在 `.gitignore` 中設定忽略。
 
     ```python
     from datasets import load_dataset
@@ -197,7 +197,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 <br>
 
-3. 將文本塊轉換為嵌入並將其存儲到 MongoDB 中，這樣就可以用於檢索。
+3. 將文本塊轉換為嵌入並將其存儲到 MongoDB 中，這是通過 `OpenAI API` 請求生成 `嵌入向量`，完成後可用於檢索。
 
     ```python
     from pymongo import MongoClient
@@ -205,25 +205,38 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
     # SSL
     import certifi
 
-    # 資料庫物件
+    # 連接到 MongoDB
     client = MongoClient(
         ATLAS_CONNECTION_STRING,
         tlsCAFile=certifi.where()
     )
+    # 設置資料庫和集合
     DB_NAME = "ragas_evals"
     db = client[DB_NAME]
     batch_size = 128
 
-    EVAL_EMBEDDING_MODELS = ["text-embedding-ada-002", "text-embedding-3-small"]
+    # 模型
+    EVAL_EMBEDDING_MODELS = [
+        "text-embedding-ada-002",
+        "text-embedding-3-small"
+    ]
 
+    
+    # 定義 get_embeddings 函數：
     def get_embeddings(docs, model):
         docs = [doc.replace("\n", " ") for doc in docs]
         response = openai_client.embeddings.create(input=docs, model=model)
         return [r.embedding for r in response.data]
 
+
+    # 處理每個模型
+    # 遍歷文本文檔 (docs) 的批次，生成嵌入向量
+    # 並將嵌入向量和文本文檔一起存儲在 MongoDB 中
     for model in EVAL_EMBEDDING_MODELS:
         embedded_docs = []
         print(f"Getting embeddings for the {model} model")
+        # tqdm 用於顯示進度條
+        # 將嵌入向量和文本文檔存儲在 MongoDB 的集合，集合名稱與模型名稱相同
         for i in tqdm(range(0, len(docs), batch_size)):
             end = min(len(docs), i + batch_size)
             batch = docs[i:end]
@@ -240,12 +253,18 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
         collection.insert_many(embedded_docs)
         print(f"Finished inserting embeddings for the {model} model")
     ```
+    
+<br>
+
+4. 完成嵌入，特別注意，這是在線請求模型服務。
+
+    ![](images/img_80.png)
 
 <br>
 
-_接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
+## 在 MongoDB Atlas UI 中為每個集合創建向量索引
 
-4. 比較檢索嵌入模型：使用不同的嵌入模型來比較檢索效果，並評估檢索到的上下文的精度和召回率。
+1. 比較檢索嵌入模型：使用不同的嵌入模型來比較檢索效果，並評估檢索到的上下文的精度和召回率。
 
     ```python
     from langchain_openai import OpenAIEmbeddings
@@ -296,7 +315,7 @@ _接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
 
 <br>
 
-5. 比較生成模型：選擇最佳的檢索嵌入模型後，接著比較生成模型，並使用 RAG 鏈來生成答案。
+2. 比較生成模型：選擇最佳的檢索嵌入模型後，接著比較生成模型，並使用 RAG 鏈來生成答案。
 
     ```python
     from langchain_openai import ChatOpenAI
@@ -346,7 +365,7 @@ _接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
 
 <br>
 
-6. 測量 RAG 應用的整體性能：使用最佳的檢索和生成模型來評估整體系統的性能。
+3. 測量 RAG 應用的整體性能：使用最佳的檢索和生成模型來評估整體系統的性能。
 
     ```python
     from ragas.metrics import answer_similarity, answer_correctness
@@ -372,7 +391,7 @@ _接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
 
 <br>
 
-7. 追蹤性能變化：在 MongoDB Atlas 中記錄評估結果，並使用 Atlas Charts 來追蹤和可視化性能，這樣可以在 MongoDB Atlas 中創建儀表板來可視化評估結果。。
+4. 追蹤性能變化：在 MongoDB Atlas 中記錄評估結果，並使用 Atlas Charts 來追蹤和可視化性能，這樣可以在 MongoDB Atlas 中創建儀表板來可視化評估結果。。
 
     ```python
     from datetime import datetime
