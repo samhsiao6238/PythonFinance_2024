@@ -189,11 +189,15 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
     docs = [item for chunk in all_chunks for item in chunk]
     ```
 
+<br>
+
+2. 結果。
+
     ![](images/img_79.png)
 
 <br>
 
-2. 創建嵌入並將其寫入 MongoDB：將文本塊轉換為嵌入並將其存儲到 MongoDB 中，這樣就可以用於檢索。
+3. 創建嵌入並將其寫入 MongoDB：將文本塊轉換為嵌入並將其存儲到 MongoDB 中，這樣就可以用於檢索。
 
     ```python
     from pymongo import MongoClient
@@ -235,7 +239,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 _接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
 
-3. 比較檢索嵌入模型：使用不同的嵌入模型來比較檢索效果，並評估檢索到的上下文的精度和召回率。
+4. 比較檢索嵌入模型：使用不同的嵌入模型來比較檢索效果，並評估檢索到的上下文的精度和召回率。
 
     ```python
     from langchain_openai import OpenAIEmbeddings
@@ -286,7 +290,7 @@ _接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
 
 <br>
 
-4. 比較生成模型：選擇最佳的檢索嵌入模型後，接著比較生成模型，並使用 RAG 鏈來生成答案。
+5. 比較生成模型：選擇最佳的檢索嵌入模型後，接著比較生成模型，並使用 RAG 鏈來生成答案。
 
     ```python
     from langchain_openai import ChatOpenAI
@@ -336,7 +340,7 @@ _接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
 
 <br>
 
-5. 測量 RAG 應用的整體性能：使用最佳的檢索和生成模型來評估整體系統的性能。
+6. 測量 RAG 應用的整體性能：使用最佳的檢索和生成模型來評估整體系統的性能。
 
     ```python
     from ragas.metrics import answer_similarity, answer_correctness
@@ -362,7 +366,7 @@ _接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
 
 <br>
 
-6. 追蹤性能變化：在 MongoDB Atlas 中記錄評估結果，並使用 Atlas Charts 來追蹤和可視化性能，這樣可以在 MongoDB Atlas 中創建儀表板來可視化評估結果。。
+7. 追蹤性能變化：在 MongoDB Atlas 中記錄評估結果，並使用 Atlas Charts 來追蹤和可視化性能，這樣可以在 MongoDB Atlas 中創建儀表板來可視化評估結果。。
 
     ```python
     from datetime import datetime
