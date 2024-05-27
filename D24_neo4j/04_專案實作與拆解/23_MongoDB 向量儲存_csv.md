@@ -120,7 +120,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
         delete_existing_data()
 
         df = load_data(file_path)
-        # 將每行數據拼接成一個描述字符串
+        # 將每行數據拼接成一個描述字串
         df["description"] = df.apply(
             lambda row: f"日期: {row['Date']}, 開盤: {row['Open']}, 最高: {row['High']}, 最低: {row['Low']}, 收盤: {row['Close']}, 調整後收盤: {row['Adj Close']}, 成交量: {row['Volume']}",
             axis=1,

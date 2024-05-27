@@ -69,7 +69,7 @@ _以下步驟涵蓋了新聞爬取、嵌入向量生成、儲存到 MongoDB、�
 
 <br>
 
-3. 配置 API Key 和 MongoDB 連接字串。
+3. 配置 API Key 和 MongoDB 超連結。
 
     ```python
     import os
@@ -289,7 +289,7 @@ _以下步驟涵蓋了新聞爬取、嵌入向量生成、儲存到 MongoDB、�
     import pprint
     from langchain.docstore.document import Document
 
-    # 配置 OpenAI API Key 和 MongoDB 連接字串
+    # 配置 OpenAI API Key 和 MongoDB 超連結
     os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
     ATLAS_CONNECTION_STRING = st.secrets["MONGODB_URL"]
 

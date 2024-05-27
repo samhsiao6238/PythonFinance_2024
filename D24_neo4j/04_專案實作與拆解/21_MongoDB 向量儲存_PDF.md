@@ -373,15 +373,15 @@ _優化腳本_
 
     - `retriever`：這是由 `vector_search.as_retriever()` 創建的檢索器。它負責基於相似度從向量儲存中檢索相關文檔。
 
-    - `format_docs`：這是一個函數，用於將檢索到的文檔格式化為字符串。
+    - `format_docs`：這是一個函數，用於將檢索到的文檔格式化為字串。
 
-    - `retriever | format_docs`：這是管道操作符（`|`），它將 `retriever` 的輸出直接傳遞給 `format_docs` 函數。換句話說，從 `retriever` 檢索到的文檔會被傳遞給 `format_docs` 函數進行格式化。
+    - `retriever | format_docs`：這是管道運算子（`|`），它將 `retriever` 的輸出直接傳遞給 `format_docs` 函數。換句話說，從 `retriever` 檢索到的文檔會被傳遞給 `format_docs` 函數進行格式化。
 
 <br>
 
 4. `RunnablePassthrough`
 
-    - `RunnablePassthrough()`：這是一個簡單的運行單元，直接將輸入傳遞到下一步而不進行任何處理。在這裡，它用於處理 "question"（問題）字段，確保它被正確傳遞到下一步。
+    - `RunnablePassthrough()`：這是一個簡單的運行單元，直接將輸入傳遞到下一步而不進行任何處理。在這裡，它用於處理 "question"（問題）欄位，確保它被正確傳遞到下一步。
 
 <br>
 
@@ -399,7 +399,7 @@ _優化腳本_
 
 7. `StrOutputParser`
 
-    - `StrOutputParser()`：這是一個輸出解析器，用於將模型的輸出解析為字符串格式。
+    - `StrOutputParser()`：這是一個輸出解析器，用於將模型的輸出解析為字串格式。
 
 <br>
 

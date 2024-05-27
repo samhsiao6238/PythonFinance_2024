@@ -28,10 +28,10 @@ _使用 OpenAI 生成 MongoDB 查詢語法_
     你是一名專業的 MongoDB 開發者，將用戶的問題轉換為 MongoDB 查詢語句，以回答問題並提供資料。
     根據模式轉換用戶的問題。
 
-    請務必使用以下集合和字段名稱進行查詢：
+    請務必使用以下集合和欄位名稱進行查詢：
     - 資料庫名稱: MyDatabase2024
     - 集合名稱: MyCollection2024
-    - 字段名稱: product_name (表示產品名稱)
+    - 欄位名稱: product_name (表示產品名稱)
 
     問題：
     {question}
@@ -100,7 +100,7 @@ _使用 OpenAI 生成 MongoDB 查詢語法_
 
     def validate_query_structure(query: str) -> str:
         """
-        檢查並替換查詢語法中的集合名稱和字段名稱
+        檢查並替換查詢語法中的集合名稱和欄位名稱
         :param query: 生成的查詢語法
         :return: 修正後的查詢語法
         """
@@ -236,10 +236,10 @@ _使用 OpenAI 生成 MongoDB 查詢語法_
     你是一名專業的 MongoDB 開發者，將用戶的問題轉換為 MongoDB 查詢語句，以回答問題並提供資料。
     根據模式轉換用戶的問題。
 
-    請務必使用以下集合和字段名稱進行查詢：
+    請務必使用以下集合和欄位名稱進行查詢：
     - 資料庫名稱: MyDatabase2024
     - 集合名稱: MyCollection2024
-    - 字段名稱: product_name (表示產品名稱)
+    - 欄位名稱: product_name (表示產品名稱)
 
     問題：
     {question}
@@ -297,7 +297,7 @@ _使用 OpenAI 生成 MongoDB 查詢語法_
 
     def validate_query_structure(query: str) -> str:
         """
-        檢查並替換查詢語法中的集合名稱和字段名稱
+        檢查並替換查詢語法中的集合名稱和欄位名稱
         :param query: 生成的查詢語法
         :return: 修正後的查詢語法
         """

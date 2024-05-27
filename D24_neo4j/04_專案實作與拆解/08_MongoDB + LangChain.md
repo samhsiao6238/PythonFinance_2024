@@ -130,7 +130,7 @@ _這個範例的功能是使用 Atlas Vector Search 和 LangChain 來實現基�
 
 <br>
 
-3. 設置環境變量：執行以下代碼會提示用戶輸入 OpenAI API Key 和 Atlas 集群的 SRV 連接字串。
+3. 設置環境變量：執行以下代碼會提示用戶輸入 OpenAI API Key 和 Atlas 集群的 SRV 超連結。
 
     ```python
     # 輸入後會保存在環境變數以及變數中

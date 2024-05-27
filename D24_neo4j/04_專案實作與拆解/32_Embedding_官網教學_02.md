@@ -281,7 +281,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
     # 配置 MongoDB 連接
     client = MongoClient(
-        # MongoDB Atlas 連接字串
+        # MongoDB Atlas 超連結
         ATLAS_CONNECTION_STRING,
         # 使用 certifi 提供的 CA 證書
         tlsCAFile=certifi.where()
