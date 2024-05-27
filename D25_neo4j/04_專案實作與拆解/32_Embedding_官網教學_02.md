@@ -4,73 +4,73 @@
 
 [Part 2](https://www.mongodb.com/developer/products/atlas/evaluate-llm-applications-rag/)
 
+_以下官方教程從安裝必要的工具開始，接著設置與連線數據庫、使用 API 密鑰、下載和處理數據集、生成嵌入並存儲到 MongoDB 中，然後使用這些 `嵌入` 來進行 `檢索和生成`，最後評估整體系統的性能並追蹤 變化。這些步驟確保了我們能夠高效地評估和改進我們的 LLM 應用。_
+
 
 ## 說明
 
-1. 安裝所需的庫
-
-這一步涉及安裝本文中所需的所有 Python 庫。以下是相關的代碼：
+1. 安裝所需的庫：參數 `-q` 是 `安靜模式`，減少無謂的訊息輸出；參數 `-U` 是自動更新已安裝的套件。
 
 ```python
-!pip install -qU datasets ragas langchain langchain-mongodb langchain-openai pymongo pandas tqdm matplotlib seaborn
+pip install -qU toml datasets ragas langchain langchain-mongodb langchain-openai pymongo pandas tqdm matplotlib seaborn
 ```
 
-這些庫包括：
-- `datasets`：從 Hugging Face Hub 獲取數據集。
-- `ragas`：RAGAS 框架，用於評估 RAG 應用。
-- `langchain`：用於開發 LLM 應用。
-- `langchain-mongodb`：用於將 MongoDB Atlas 作為向量存儲使用。
-- `langchain-openai`：用於在 LangChain 中使用 OpenAI 模型。
-- `pymongo`：用於與 MongoDB 交互的 Python 驅動。
-- `pandas`：用於數據分析、探索和操作。
-- `tdqm`：顯示進度條。
-- `matplotlib` 和 `seaborn`：用於數據可視化。
+   - `datasets`：從 Hugging Face Hub 獲取數據集。
 
-### Step 2: 設置先決條件
+   - `ragas`：RAGAS 框架，用於評估 RAG 應用。
 
-在這一步，我們設置了 MongoDB Atlas 作為向量存儲並獲取連接字符串。
+   - `langchain`：用於開發 LLM 應用。
 
-#### 步驟：
-1. 註冊 MongoDB Atlas 帳戶。
-2. 創建數據庫集群。
-3. 獲取連接字符串。
-4. 將主機機器的 IP 添加到集群的 IP 訪問列表中。
+   - `langchain-mongodb`：用於將 MongoDB Atlas 作為向量存儲使用。
 
-#### 代碼：
+   - `langchain-openai`：用於在 LangChain 中使用 OpenAI 模型。
+
+   - `pymongo`：用於與 MongoDB 交互的 Python 驅動。
+
+   - `pandas`：用於數據分析、探索和操作。
+
+   - `tdqm`：顯示進度條。
+
+   - `matplotlib` 和 `seaborn`：用於數據可視化。
+
+1. 設置先決條件：設置 `MongoDB Atlas` 作為 `向量存儲` ，建立資料庫與集合，並取得連線的 `URI`，記得將主機 IP 加入可訪問列表中。
+
+2. 代碼。
+
 ```python
 import getpass
-MONGODB_URI = getpass.getpass("Enter your MongoDB connection string:")
+import toml
+
+MONGODB_URI = toml.load("<資料庫連線 URI>")
 ```
 
-我們還需要獲取 OpenAI API 密鑰並將其設置為環境變量：
+3. 設定 OpenAI API 密鑰並將其設置為環境變量。
 
 ```python
 import os
 from openai import OpenAI
-os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter your OpenAI API Key:")
+import toml
+
+os.environ["OPENAI_API_KEY"] = toml.load("OPENAI_API_KEY")
 openai_client = OpenAI()
 ```
 
-### Step 3: 下載評估數據集
+4. 下載評估數據集：使用 `Hugging Face` 的 `datasets` 庫來下載 `評估數據集`，並將其轉換為 `pandas dataframe`，數據集的關鍵列包括 `question`（用戶問題）、`correct_answer`（正確答案）和 `context`（參考文本）。
 
-我們使用 Hugging Face 的 `datasets` 庫來下載評估數據集，並將其轉換為 pandas dataframe。
-
-#### 代碼：
 ```python
 from datasets import load_dataset
 import pandas as pd
 
-data = load_dataset("explodinggradients/ragas-wikiqa", split="train")
+data = load_dataset(
+    "explodinggradients/ragas-wikiqa", split="train"
+)
 df = pd.DataFrame(data)
 ```
 
-數據集的關鍵列包括 `question`（用戶問題）、`correct_answer`（正確答案）和 `context`（參考文本）。
 
-### Step 4: 創建參考文檔塊
 
-我們將長的參考文本拆分成較小的塊，以便於檢索。這是使用 LangChain 的 `RecursiveCharacterTextSplitter` 來完成的。
+5. 創建參考文檔塊：將長的參考文本拆分成較小的塊以便於檢索，這是使用 `LangChain` 的 `RecursiveCharacterTextSplitter` 來完成的。
 
-#### 代碼：
 ```python
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
@@ -90,11 +90,8 @@ all_chunks = df["chunks"].tolist()
 docs = [item for chunk in all_chunks for item in chunk]
 ```
 
-### Step 5: 創建嵌入並將其寫入 MongoDB
+6. 創建嵌入並將其寫入 MongoDB：將文本塊轉換為嵌入並將其存儲到 MongoDB 中，這樣就可以用於檢索。
 
-我們將文本塊轉換為嵌入並將其存儲到 MongoDB 中，這樣就可以用於檢索。
-
-#### 代碼：
 ```python
 from pymongo import MongoClient
 from tqdm.auto import tqdm
@@ -131,13 +128,10 @@ for model in EVAL_EMBEDDING_MODELS:
     print(f"Finished inserting embeddings for the {model} model")
 ```
 
-接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。
+_接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
 
-### Step 6: 比較檢索嵌入模型
+7. 比較檢索嵌入模型：使用不同的嵌入模型來比較檢索效果，並評估檢索到的上下文的精度和召回率。
 
-我們使用不同的嵌入模型來比較檢索效果，並評估檢索到的上下文的精度和召回率。
-
-#### 代碼：
 ```python
 from langchain_openai import OpenAIEmbeddings
 from langchain_mongodb import MongoDBAtlasVectorSearch
@@ -185,11 +179,8 @@ for model in EVAL_EMBEDDING_MODELS:
     print(f"Result for the {model} model: {result}")
 ```
 
-### Step 7: 比較生成模型
+8. 比較生成模型：選擇最佳的檢索嵌入模型後，接著比較生成模型，並使用 RAG 鏈來生成答案。
 
-我們選擇最佳的檢索嵌入模型後，接著比較生成模型，並使用 RAG 鏈來生成答案。
-
-#### 代碼：
 ```python
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
@@ -236,11 +227,8 @@ ceptions=False,
     print(f"Result for the {model} model: {result}")
 ```
 
-### Step 8: 測量 RAG 應用的整體性能
+9. 測量 RAG 應用的整體性能：使用最佳的檢索和生成模型來評估整體系統的性能。
 
-使用最佳的檢索和生成模型來評估整體系統的性能。
-
-#### 代碼：
 ```python
 from ragas.metrics import answer_similarity, answer_correctness
 
@@ -263,11 +251,8 @@ result = evaluate(
 print(f"Overall metrics: {result}")
 ```
 
-### Step 9: 追蹤性能變化
+10. 追蹤性能變化：在 MongoDB Atlas 中記錄評估結果，並使用 Atlas Charts 來追蹤和可視化性能，這樣可以在 MongoDB Atlas 中創建儀表板來可視化評估結果。。
 
-最後，我們在 MongoDB Atlas 中記錄評估結果，並使用 Atlas Charts 來追蹤和可視化性能。
-
-#### 代碼：
 ```python
 from datetime import datetime
 
@@ -275,9 +260,3 @@ result["timestamp"] = datetime.now()
 collection = db["metrics"]
 collection.insert_one(result)
 ```
-
-這樣，我們可以在 MongoDB Atlas 中創建儀表板來可視化評估結果。
-
-### 結論
-
-這個教程分別展示了如何安裝必要的工具、設置數據庫和 API 密鑰、下載和處理數據集、生成嵌入並存儲到 MongoDB 中，然後使用這些嵌入來進行檢索和生成，最後評估整體系統的性能並追蹤變化。這些步驟確保了我們能夠高效地評估和改進我們的 LLM 應用。
