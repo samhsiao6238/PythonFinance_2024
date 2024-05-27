@@ -80,7 +80,13 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線數據�
 
 <br>
 
-4. 下載評估數據集：使用 `Hugging Face` 的 `datasets` 庫來下載 `評估數據集`，並將其轉換為 `pandas dataframe`，數據集的關鍵列包括 `question`（用戶問題）、`correct_answer`（正確答案）和 `context`（參考文本）。
+## 下載數據集
+
+_專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
+
+<br>
+
+1. 下載評估數據集：使用 `Hugging Face` 的 `datasets` 庫來下載 `評估數據集`，並將其轉換為 `pandas dataframe`，數據集的關鍵列包括 `question`（用戶問題）、`correct_answer`（正確答案）和 `context`（參考文本）。
 
     ```python
     # 下載數據集
@@ -97,7 +103,42 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線數據�
 
 <br>
 
-5. 創建參考文檔塊：將長的參考文本拆分成較小的塊以便於檢索，這是使用 `LangChain` 的 `RecursiveCharacterTextSplitter` 來完成的。
+2. 查詢數據集位置。
+
+    ```python
+    from datasets import load_dataset
+
+    # 加載數據集
+    dataset = load_dataset("explodinggradients/ragas-wikiqa", split="train")
+
+    # 獲取數據集的本地路徑
+    dataset_path = dataset.cache_files[0]['filename']
+    print(dataset_path)
+    ```
+
+    ![](images/img_77.png)
+
+<br>
+
+3. 若要刪除數據集，可刪除上述目錄或是 `整個 Hugging Face`。
+
+    ```bash
+    rm -rf ~/.cache/huggingface
+    ```
+
+<br>
+
+4. 若出現訊息顯示在 Jupyter Notebook 中未找到 `IProgress`，依據提示進行更新。
+
+    ```bash
+    pip install --upgrade jupyter ipywidgets
+    ```
+
+<br>
+
+## 繼續編輯腳本
+
+1. 創建參考文檔塊：將長的參考文本拆分成較小的塊以便於檢索，這是使用 `LangChain` 的 `RecursiveCharacterTextSplitter` 來完成的。
 
     ```python
     from langchain.text_splitter import RecursiveCharacterTextSplitter
