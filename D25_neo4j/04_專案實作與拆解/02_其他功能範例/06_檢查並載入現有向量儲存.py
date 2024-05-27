@@ -1,5 +1,4 @@
 import os
-import pymongo
 import pprint
 import certifi
 import streamlit as st
@@ -30,7 +29,9 @@ def initialize_data():
     loader = PyPDFLoader("論文01.pdf")
     data = loader.load()
     # Split documents
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=200, chunk_overlap=20)
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=200, chunk_overlap=20
+    )
     docs = text_splitter.split_documents(data)
     # Create vector store
     vector_search = MongoDBAtlasVectorSearch.from_documents(

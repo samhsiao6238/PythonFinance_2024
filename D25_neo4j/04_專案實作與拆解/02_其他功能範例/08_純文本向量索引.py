@@ -1,6 +1,4 @@
 import os
-import pymongo
-import pprint
 import certifi
 import streamlit as st
 from langchain_community.document_loaders import TextLoader
@@ -30,7 +28,9 @@ def initialize_data():
     loader = TextLoader("紅樓夢.txt")
     data = loader.load()
     # 文件分割器
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=200, chunk_overlap=20)
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=200, chunk_overlap=20
+    )
     # 分割文件
     docs = text_splitter.split_documents(data)
     # 建立向量儲存
