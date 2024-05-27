@@ -191,19 +191,20 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 <br>
 
-2. 結果。
+2. 查看切割結果。
 
     ![](images/img_79.png)
 
 <br>
 
-3. 創建嵌入並將其寫入 MongoDB：將文本塊轉換為嵌入並將其存儲到 MongoDB 中，這樣就可以用於檢索。
+3. 將文本塊轉換為嵌入並將其存儲到 MongoDB 中，這樣就可以用於檢索。
 
     ```python
     from pymongo import MongoClient
     from tqdm.auto import tqdm
 
-    client = MongoClient(MONGODB_URI)
+    # 資料庫物件
+    client = MongoClient(ATLAS_CONNECTION_STRING)
     DB_NAME = "ragas_evals"
     db = client[DB_NAME]
     batch_size = 128
@@ -249,7 +250,7 @@ _接下來，在 MongoDB Atlas UI 中為每個集合創建向量索引。_
     def get_retriever(model, k):
         embeddings = OpenAIEmbeddings(model=model)
         vector_store = MongoDBAtlasVectorSearch.from_connection_string(
-            connection_string=MONGODB_URI,
+            connection_string=ATLAS_CONNECTION_STRING,
             namespace=f"{DB_NAME}.{model}",
             embedding=embeddings,
             index_name="vector_index",
