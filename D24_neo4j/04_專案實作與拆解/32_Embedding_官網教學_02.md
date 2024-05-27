@@ -42,14 +42,17 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線數據�
 
 ## 撰寫代碼
 
-1. 設置敏感資訊處理模式：官網使用 `getpass`，這裡我改用 `toml`。
+1. 設置敏感資訊處理模式：官網使用 `getpass`，這裡我改用 `toml`，使用語法如下。
 
     ```python
     # import getpass
+    # 改用 toml
     import toml
+    
+    # 載入 secrets.toml 文件
 
     # MongoDB URI
-    ATLAS_CONNECTION_STRING = toml.load("MONGODB_URL")
+    ATLAS_CONNECTION_STRING = secrets["MONGODB_URL"]
     ```
 
 <br>
@@ -69,7 +72,7 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線數據�
     from openai import OpenAI
 
     # 設置環境變數
-    os.environ["OPENAI_API_KEY"] = toml.load("OPENAI_API_KEY")
+    os.environ["OPENAI_API_KEY"] = secrets["OPENAI_API_KEY"]
     # 初始化 OpenAI 物件
     openai_client = OpenAI()
     ```
