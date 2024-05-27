@@ -202,9 +202,14 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
     ```python
     from pymongo import MongoClient
     from tqdm.auto import tqdm
+    # SSL
+    import certifi
 
     # 資料庫物件
-    client = MongoClient(ATLAS_CONNECTION_STRING)
+    client = MongoClient(
+        ATLAS_CONNECTION_STRING,
+        tlsCAFile=certifi.where()
+    )
     DB_NAME = "ragas_evals"
     db = client[DB_NAME]
     batch_size = 128
