@@ -270,9 +270,33 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
     from langchain_openai import OpenAIEmbeddings
     from langchain_mongodb import MongoDBAtlasVectorSearch
     from langchain_core.vectorstores import VectorStoreRetriever
+    from datasets import Dataset
+    from ragas import evaluate, RunConfig
+    from ragas.metrics import context_precision, context_recall
+    import nest_asyncio
+    from pymongo import MongoClient
+    import certifi
 
+    # 配置 MongoDB 連接
+    client = MongoClient(
+        ATLAS_CONNECTION_STRING,
+        tlsCAFile=certifi.where()
+    )
+    DB_NAME = "ragas_evals"
+    db = client[DB_NAME]
+
+    # 定義嵌入模型
+    EVAL_EMBEDDING_MODELS = [
+        "text-embedding-ada-002",
+        "text-embedding-3-small"
+    ]
+
+
+    # 定義獲取檢索器的函數
     def get_retriever(model, k):
+        # 創建嵌入模型對象
         embeddings = OpenAIEmbeddings(model=model)
+        # 創建 MongoDB 向量檢索對象
         vector_store = MongoDBAtlasVectorSearch.from_connection_string(
             connection_string=ATLAS_CONNECTION_STRING,
             namespace=f"{DB_NAME}.{model}",
@@ -280,37 +304,49 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
             index_name="vector_index",
             text_key="text",
         )
-        return vector_store.as_retriever(search_type="similarity", search_kwargs={"k": k})
+        # 返回檢索器對象
+        return vector_store.as_retriever(
+            search_type="similarity",
+            search_kwargs={"k": k}
+        )
 
+
+    # 轉換數據框中的列為列表
     QUESTIONS = df["question"].to_list()
     GROUND_TRUTH = df["correct_answer"].tolist()
 
-    from datasets import Dataset
-    from ragas import evaluate, RunConfig
-    from ragas.metrics import context_precision, context_recall
-    import nest_asyncio
-
+    # 允許嵌套使用 asyncio
     nest_asyncio.apply()
-
+    # 遍歷所有嵌入模型進行評估
     for model in EVAL_EMBEDDING_MODELS:
-        data = {"question": [], "ground_truth": [], "contexts": []}
+        # 構建數據字典
+        data = {
+            "question": [],
+            "ground_truth": [],
+            "contexts": []
+        }
         data["question"] = QUESTIONS
         data["ground_truth"] = GROUND_TRUTH
-
+        # 獲取檢索器
         retriever = get_retriever(model, 2)
+        # 遍歷所有問題進行檢索
         for i in tqdm(range(0, len(QUESTIONS))):
             data["contexts"].append(
                 [doc.page_content for doc in retriever.get_relevant_documents(QUESTIONS[i])]
             )
+        # 將數據字典轉換為 Dataset 對象
         dataset = Dataset.from_dict(data)
+        # 配置運行參數
         run_config = RunConfig(max_workers=4, max_wait=180)
+        # 使用 ragas 進行評估
         result = evaluate(
             dataset=dataset,
             metrics=[context_precision, context_recall],
             run_config=run_config,
             raise_exceptions=False,
         )
-        print(f"Result for the {model} model: {result}")
+        # 輸出評估結果
+        print(f"{model} 模型的結果：{result}")
     ```
 
 <br>
