@@ -40,13 +40,24 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線數據�
 
 <br>
 
-3. 代碼。
+## 撰寫代碼
+
+1. 設置敏感資訊處理模式：官網使用 `getpass`，這裡我改用 `toml`。
 
     ```python
-    import getpass
+    # import getpass
     import toml
 
-    MONGODB_URI = toml.load("<資料庫連線 URI>")
+    # MongoDB URI
+    ATLAS_CONNECTION_STRING = toml.load("MONGODB_URL")
+    ```
+
+<br>
+
+2. 在腳本同層級目錄新建存放密鑰的敏感茲訓的腳本 `secrets.toml`，_特別注意_，要觀察一下 `.gitignore` 文件中是否已經寫入 `secrets.toml` 或 `**/secrets.toml`，並且記得替換自己的密碼。
+
+    ```bash
+    MONGODB_URL = "mongodb+srv://sam6238:<password>@cluster0.yhwvqqt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     ```
 
 <br>
@@ -56,9 +67,10 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線數據�
     ```python
     import os
     from openai import OpenAI
-    import toml
 
+    # 設置環境變數
     os.environ["OPENAI_API_KEY"] = toml.load("OPENAI_API_KEY")
+    # 初始化 OpenAI 物件
     openai_client = OpenAI()
     ```
 
