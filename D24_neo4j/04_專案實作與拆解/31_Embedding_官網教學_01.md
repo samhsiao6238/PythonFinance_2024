@@ -1,3 +1,5 @@
+_尚未完成_
+
 # 官網教學
 
 [Part 1](https://www.mongodb.com/developer/products/atlas/choose-embedding-model-rag/)
