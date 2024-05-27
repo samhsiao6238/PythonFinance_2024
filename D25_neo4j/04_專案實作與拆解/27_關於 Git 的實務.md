@@ -112,7 +112,7 @@ _剛好遇到錯誤，所以紀錄排除步驟_
 
 <br>
 
-13. 添加 `.gitignore`
+13. 添加 `.gitignore`。
 
     ```bash
     **/secrets.toml

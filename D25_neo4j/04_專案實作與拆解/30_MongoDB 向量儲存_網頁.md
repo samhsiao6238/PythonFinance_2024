@@ -171,7 +171,10 @@ _以下步驟涵蓋了新聞爬取、嵌入向量生成、儲存到 MongoDB、�
     pprint.pprint(results)
     ```
 
-    9. 定義 RAG 鏈，用於基於檢索到的文檔生成回答。
+<br>
+
+9. 定義 RAG 鏈，用於基於檢索到的文檔生成回答。
+
     ```python
     from langchain.prompts import PromptTemplate
     from langchain_core.output_parsers import StrOutputParser
