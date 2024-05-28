@@ -87,7 +87,7 @@ _已經在 NAS 上架設好容器_
 
 _預設沒帳號密碼_
 
-1. 連線。
+1. 連線：`--authenticationDatabase` 是指定驗證的資料庫，通常是 admin 資料庫。
 
     ```bash
     mongo --host 192.168.1.240 --port 27017 --authenticationDatabase admin
