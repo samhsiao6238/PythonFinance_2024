@@ -1,3 +1,5 @@
+_尚未實測_
+
 # Firestore + LangChain
 
 1. 參考 [官網範例](https://api.python.langchain.com/en/latest/_modules/langchain_community/chat_message_histories/firestore.html)。
