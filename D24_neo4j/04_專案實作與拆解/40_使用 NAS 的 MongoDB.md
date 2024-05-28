@@ -25,7 +25,7 @@ _已經在 NAS 上架設好容器_
     from pymongo import MongoClient
 
     # 設置 MongoDB 連接 URI，包含帳號、密碼和 NAS 的 IP 地址及端口
-    MONGODB_URI = "mongodb://sam6238:sam112233@192.168.1.240:21017/"
+    MONGODB_URI = "mongodb://sam6238:sam112233@192.168.1.240:27017/"
 
     # 使用 MongoClient 類進行連接
     client = MongoClient(MONGODB_URI)
@@ -78,6 +78,85 @@ _已經在 NAS 上架設好容器_
         print("MongoDB 連接成功:", db)
     except Exception as e:
         print("MongoDB 連接失敗:", e)
+    ```
+
+<br>
+
+
+## 使用終端機指令
+
+_預設沒帳號密碼_
+
+1. 連線。
+
+    ```bash
+    mongo --host 192.168.1.240 --port 27017 --authenticationDatabase admin
+    ```
+
+<br>
+
+2. 顯示當前資料庫
+
+    ```bash
+    db
+    ```
+
+
+3. 列出所有資料庫。
+
+    ```bash
+    show dbs
+    ```
+ 
+4. 切換到指定資料庫。
+
+    ```bash
+    use <資料庫名稱>
+    ```
+
+
+5. 顯示當前資料庫中的集合。
+
+    ```bash
+    show collections
+    ```
+
+
+6. 查詢集合中的所有文件。
+
+    ```bash
+    # `pretty()` 方法會使輸出更具可讀性
+    db.<集合名稱>.find().pretty()
+    ```
+
+7. 插入一個新文件到集合。
+
+    ```bash
+    db.<集合名稱>.insert({name: "John", age: 30, city: "New York"})
+    ```
+
+8. 查詢特定條件的文件。
+
+    ```bash
+    db.<集合名稱>.find({name: "John"})
+    ```
+
+9. 更新集合中的文件：將 `myCollection` 中 `name` 為 `John` 的文件的 `age` 更新為 `31`。
+
+    ```bash
+    db.<collection_name>.update({name: "John"}, {$set: {age: 31}})
+    ```
+
+10. 刪除集合中的文件。
+
+    ```bash
+    db.<collection_name>.remove({name: "John"})
+    ```
+
+11. 顯示資料庫狀態：顯示當前資料庫的狀態信息，包括大小、集合數量等。
+
+    ```bash
+    db.stats()
     ```
 
 <br>
