@@ -25,7 +25,7 @@ _已經在 NAS 上架設好容器_
     from pymongo import MongoClient
 
     # 設置 MongoDB 連接 URI，包含帳號、密碼和 NAS 的 IP 地址及端口
-    MONGODB_URI = "mongodb://sam6238:sam112233@192.168.1.240:27017/"
+    MONGODB_URI = "mongodb://192.168.1.240:27017/"
 
     # 使用 MongoClient 類進行連接
     client = MongoClient(MONGODB_URI)
@@ -40,6 +40,8 @@ _已經在 NAS 上架設好容器_
         print("MongoDB 連接失敗:", e)
     ```
 
+    ![](images/img_82.png)
+
 <br>
 
 ## 說明
@@ -52,10 +54,10 @@ _已經在 NAS 上架設好容器_
 
 <br>
 
-2. 設置 MongoDB 連接 URI。
+2. 設置 MongoDB 連接 URI，預設沒帳號密碼，所以也不要使用 `SSL`。
 
     ```python
-    MONGODB_URI = "mongodb://sam6238:sam112233@192.168.1.240:5000/"
+    MONGODB_URI = "mongodb://192.168.1.240:5000/"
     ```
 
 <br>
