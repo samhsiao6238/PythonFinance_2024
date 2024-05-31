@@ -96,8 +96,8 @@ _連接到 PostgreSQL 資料庫_
     # 使用 psycopg2 連接到 PostgreSQL 資料庫
     conn = psycopg2.connect(
         dbname="mydatabase",
-        user="myuser",
-        password="mypassword",
+        user="sam6238",
+        password="<輸入自訂的密碼>",
         # 如果是本機，使用 "localhost"
         # 如果是雲端，使用雲端資料庫的終端點
         host="localhost",
@@ -116,6 +116,14 @@ _連接到 PostgreSQL 資料庫_
     cur.close()
     conn.close()
     ```
+
+<br>
+
+
+2. 完成連線會顯示。
+```bash
+Database version: ('PostgreSQL 15.5 on aarch64-apple-darwin21.6.0, compiled by Apple clang version 14.0.0 (clang-1400.0.29.102), 64-bit',)
+```
 
 <br>
 
