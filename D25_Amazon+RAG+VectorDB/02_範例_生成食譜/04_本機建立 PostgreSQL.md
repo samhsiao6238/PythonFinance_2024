@@ -66,17 +66,17 @@ _可以在本機或雲端進行，這裡示範在本機安裝。_
 
 <br>
 
-3. 建立用戶 `myuser`，並自訂密碼。
+3. 建立用戶 `sam6238`，並自訂密碼，_特別注意_，這裡的帳戶名稱是 `sam6238`。
 
     ```sql
-    CREATE USER myuser WITH ENCRYPTED PASSWORD '<輸入自訂的密碼>';
+    CREATE USER sam6238 WITH ENCRYPTED PASSWORD '<輸入自訂的密碼>';
     ```
 
 <br>
 
-4. 授權用戶。
+4. 授權用戶 `sam6238` 對於資料庫 `mydatabase` 擁有權限。
     ```sql
-    GRANT ALL PRIVILEGES ON DATABASE mydatabase TO myuser;
+    GRANT ALL PRIVILEGES ON DATABASE mydatabase TO sam6238;
     ```
 
 <br>
