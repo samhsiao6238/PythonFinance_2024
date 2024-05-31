@@ -58,11 +58,24 @@ _可以在本機或雲端進行，這裡示範在本機安裝。_
 
 <br>
 
-2. 使用資料庫語言創建新的資料庫和用戶。
+2. 使用資料庫語言創建新的資料庫 `mydatabase`。
 
     ```sql
     CREATE DATABASE mydatabase;
-    CREATE USER myuser WITH ENCRYPTED PASSWORD 'mypassword';
+    ```
+
+<br>
+
+3. 建立用戶 `myuser`，並自訂密碼。
+
+    ```sql
+    CREATE USER myuser WITH ENCRYPTED PASSWORD '<輸入自訂的密碼>';
+    ```
+
+<br>
+
+4. 授權用戶。
+    ```sql
     GRANT ALL PRIVILEGES ON DATABASE mydatabase TO myuser;
     ```
 
