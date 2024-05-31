@@ -1,0 +1,1 @@
+[參考資料](https://github.com/build-on-aws/llm-rag-vectordb-python/tree/main/ingredient-to-recipe)
