@@ -1,5 +1,7 @@
 # 說明
 
+_這個腳本是使用 `Hugging Face` 搭配 `LangChain` 製作一個 `Streamlit` 應用_
+
 <br>
 
 ## 圖片轉文本
