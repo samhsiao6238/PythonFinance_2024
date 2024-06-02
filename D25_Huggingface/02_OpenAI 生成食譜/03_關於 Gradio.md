@@ -93,21 +93,44 @@ _可參考 [官方文檔](https://gradio.app/)_
     ```python
     import gradio as gr
     from transformers import pipeline
+    from PIL import Image
 
     # 建立影像分類的 pipeline
-    classifier = pipeline("image-classification", model="google/vit-base-patch16-224")
+    classifier = pipeline(
+        "image-classification",
+        model="google/vit-base-patch16-224"
+    )
 
-    # 分類函數
+
+    # 定義分類函數，確保影像以PIL格式傳遞
     def classify_image(image):
+        # 如果影像不是PIL格式，轉換為PIL格式
+        if not isinstance(image, Image.Image):
+            image = Image.fromarray(image)
         result = classifier(image)
-        return {item['label']: item['score'] for item in result}
+        return {item["label"]: item["score"] for item in result}
 
-    # 使用 Gradio 建立 Web 介面並產生公共鏈接
+
+    # 使用 Gradio 建立 Web 介面
     gr.Interface(
         fn=classify_image,
-        inputs="image",
-        outputs="label"
+        inputs=gr.Image(type="numpy"),
+        outputs=gr.Label()
     ).launch(share=True)
+    ```
+
+<br>
+
+2. 可透過公網訪問。
+
+    ![](images/img_16.png)
+
+<br>
+
+3. 這個公鏈有效 72 小時，另外，本地運行的腳本不可觀避。
+
+    ```bash
+    This share link expires in 72 hours. For free permanent hosting and GPU upgrades, run `gradio deploy` from Terminal to deploy to Spaces (https://huggingface.co/spaces)
     ```
 
 <br>
