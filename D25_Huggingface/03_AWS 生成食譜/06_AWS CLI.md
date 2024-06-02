@@ -1,4 +1,4 @@
-# 暫時性紀律
+# AWS CLI
 
 1. 運行。
 
@@ -33,7 +33,7 @@
     profile                <not set>             None    None
     access_key     ****************8434 shared-credentials-file    
     secret_key     ****************2233 shared-credentials-file    
-        region                us-west-2      config-file    ~/.aws/config
+        region                us-east-1      config-file    ~/.aws/config
     ```
 
 <br>
