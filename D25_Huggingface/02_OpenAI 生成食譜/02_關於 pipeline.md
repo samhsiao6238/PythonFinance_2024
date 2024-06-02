@@ -1,18 +1,20 @@
 # pipeline
 
-_關於 `transformers` 庫中的 `pipeline` 可參考 [Hugging Face Transformers 文檔](https://huggingface.co/transformers/main_classes/pipelines.html)_
+_更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Transformers 文檔](https://huggingface.co/transformers/main_classes/pipelines.html) 。_
 
 <br>
 
 ## 說明
 
-1. `pipeline` 可使用 Hugging Face Hub 的模型進行推理，支持多種語言、計算機視覺、語音和多模態任務。
+1. `pipeline` 可使用 `Hugging Face Hub` 的模型進行推理，支持多種語言、計算機視覺、語音和多模態任務。
+
+2. 以下分做各種應用情境進行範例展示。 
 
 <br>
 
 ## 自動語音識別 (ASR)
 
-1. 安裝工具。
+1. 安裝工具，這是要讀取音檔使用的工具。
 
     ```bash
     brew install ffmpeg
@@ -20,7 +22,7 @@ _關於 `transformers` 庫中的 `pipeline` 可參考 [Hugging Face Transformers
 
 <br>
 
-2. 範例：推薦使用 OpenAI 的 Whisper 模型來進行語音識別。
+2. 程式碼：推薦使用 OpenAI 的 Whisper 模型來進行語音識別。
 
     ```python
     from transformers import pipeline
@@ -37,13 +39,13 @@ _關於 `transformers` 庫中的 `pipeline` 可參考 [Hugging Face Transformers
 
 <br>
 
-3. 會下載和加載模型及相關文件。
+3. 運行後會下載模型及相關文件。
 
     ![](images/img_01.png)
 
 <br>
 
-4. 透過腳本可查詢緩存的位置。
+4. 透過腳本可查詢上述模型緩存的位置。
 
     ```python
     from transformers import TRANSFORMERS_CACHE
@@ -59,7 +61,13 @@ _關於 `transformers` 庫中的 `pipeline` 可參考 [Hugging Face Transformers
 
 <br>
 
-5. 一次處理多個音頻輸入。
+5. 查詢 `ls ~/.cache/huggingface/hub`。
+
+    ![](images/img_13.png)
+
+<br>
+
+6. 一次處理多個音頻輸入。
 
     ```python
     from transformers import pipeline
