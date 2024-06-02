@@ -86,6 +86,12 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
 
 <br>
 
+7. 正確辨識並輸出為中文。
+
+    ![](images/img_14.png)
+
+<br>
+
 ## 設置設備
 
 1. 指定使用 GPU。
