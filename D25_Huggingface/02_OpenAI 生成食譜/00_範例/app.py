@@ -47,6 +47,7 @@ def get_llm():
     return openai_llm
 
 
+# 生成圖片描述
 def image_to_text(url):
     with st.spinner("Processing image..."):
         pipe = pipeline(
@@ -58,6 +59,7 @@ def image_to_text(url):
     return text
 
 
+# 生成食譜
 def generate_recipe(ingredients):
     template = """
     你是一位極為博學的營養師、健美運動員和廚師，精通一切關於最佳快速健康食譜的知識。
@@ -98,9 +100,14 @@ def generate_recipe(ingredients):
     使指導易於理解並逐步進行。
     """
     try:
-        prompt = PromptTemplate(template=template, input_variables=["ingredients"])
+        prompt = PromptTemplate(
+            template=template,
+            input_variables=["ingredients"]
+        )
         llm = get_llm()
-        recipe_chain = LLMChain(llm=llm, prompt=prompt, verbose=True)
+        recipe_chain = LLMChain(
+            llm=llm, prompt=prompt, verbose=True
+        )
         recipe = recipe_chain.run(ingredients)
         return recipe
     except Exception as e:
@@ -109,58 +116,37 @@ def generate_recipe(ingredients):
 
 def main():
     st.markdown(
-        "<h1 style='text-align: center; color: red;'>🍲 Recipe Generator 🍲 </h1>",
+        "<h1 style='text-align: center; color: red;"
+        "'>🍲 食譜生成器 🍲 </h1>",
         unsafe_allow_html=True,
     )
-    st.markdown(
-        "<h2 style='text-align: center; font-size: 24px; color: black'>Powered by <span style='color: orange;'>OpenAI</span></h2>",
-        unsafe_allow_html=True,
-    )
-
-    st.markdown(
-        """
-        <div style="display: flex; justify-content: center;">
-            <a href="https://d1nd1o4zkls5mq.cloudfront.net/img1.jpeg" target="_blank">
-                <button style="margin-right: 10px; color: white; background-color: #007BFF; border: none; border-radius: 2px; padding: 10px 15px; transition: background-color 0.3s;">
-                    Download Sample Image 1
-                </button>
-            </a>
-            <a href="https://d1nd1o4zkls5mq.cloudfront.net/img2.jpeg" target="_blank">
-                <button style="color: white; background-color: #007BFF; border: none; border-radius: 2px; padding: 10px 15px; transition: background-color 0.3s;">
-                    Download Sample Image 2
-                </button>
-            </a>
-        </div>
-        <style>
-            button:hover {
-                background-color: #0056b3;
-            }
-        </style>
-    """,
-        unsafe_allow_html=True,
-    )
-
+    # 上傳圖片檔案
     upload_file = st.file_uploader(
-        "Choose an image:", type=["jpg", "png"], accept_multiple_files=False
+        "選擇一張圖片：",
+        type=["jpg", "png"],
+        accept_multiple_files=False
     )
-
+    # 假如上傳
     if upload_file is not None:
         file_bytes = upload_file.getvalue()
         with open(upload_file.name, "wb") as file:
             file.write(file_bytes)
 
         st.image(
-            upload_file, caption="The uploaded image", use_column_width=True, width=250
+            upload_file,
+            caption="The uploaded image",
+            use_column_width=True,
+            width=250
         )
 
-        st.markdown("### 🥗 Ingredients from Image")
+        st.markdown("### 🥗 圖片中的原料")
         ingredients = image_to_text(upload_file.name)
-        with st.expander("Ingredients 👀"):
+        with st.expander("圖片描述 👀"):
             st.write(ingredients.capitalize())
 
-        st.markdown("### 📋 Recipe")
+        st.markdown("### 📋 食譜")
         recipe = generate_recipe(ingredients=ingredients)
-        with st.expander("Cooking Instructions 👀"):
+        with st.expander("烹飪指南 👀"):
             st.write(recipe)
 
 
