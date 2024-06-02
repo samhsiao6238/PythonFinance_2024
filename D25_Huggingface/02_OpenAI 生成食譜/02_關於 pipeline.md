@@ -8,7 +8,7 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
 
 1. `pipeline` 可使用 `Hugging Face Hub` 的模型進行推理，支持多種語言、計算機視覺、語音和多模態任務。
 
-2. 以下分做各種應用情境進行範例展示。 
+2. 以下分做各種應用情境進行範例展示，包含了 `自動語音識別`、`圖像分類`、`自然語言處理`、`多模態`。 
 
 <br>
 
@@ -516,57 +516,72 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
 ## 多模態
 
 1. 先安裝 Tesseract OCR 引擎，Windows 系統 [透過安裝包安裝](https://github.com/UB-Mannheim/tesseract/wiki)。
-```bash
-# MacOS
-brew install tesseract
-```
+
+    ```bash
+    # MacOS
+    brew install tesseract
+    ```
+
+<br>
 
 2. 然後安裝 Python 包。
-```bash
-pip install pytesseract
-```
+
+    ```bash
+    pip install pytesseract
+    ```
+
+<br>
 
 3. 使用視覺問答 (VQA) 模型來回答關於圖像的問題，腳本會自動下載模型。
-![](images/img_10.png)
+
+    ![](images/img_10.png)
+
+<br>
 
 4. 程式碼。
-```python
-from transformers import pipeline
 
-# 確保你已經安裝了 pytesseract
-import pytesseract
+    ```python
+    from transformers import pipeline
 
-# 創建文件問答的 pipeline
-vqa = pipeline(model="impira/layoutlm-document-qa")
+    # 確保你已經安裝了 pytesseract
+    import pytesseract
 
-# 處理圖片並提出問題
-result = vqa(
-    image="invoice.png",
-    question="請問這一張發票的號碼？"
-)
+    # 創建文件問答的 pipeline
+    vqa = pipeline(model="impira/layoutlm-document-qa")
 
-# 格式化輸出結果
-if result:
-    for answer in result:
-        text = answer.get('answer', 'N/A')
-        confidence = answer.get('score', 'N/A')
-        start = answer.get('start', 'N/A')
-        end = answer.get('end', 'N/A')
-        print(
-            f"Answer: {text}\nConfidence: {confidence}\n"
-            f"start: {start}\nend: {end}\n"
-        )
-else:
-    print("No answer found.")
-```
+    # 處理圖片並提出問題
+    result = vqa(
+        image="invoice.png",
+        question="請問這一張發票的號碼？"
+    )
+
+    # 格式化輸出結果
+    if result:
+        for answer in result:
+            text = answer.get('answer', 'N/A')
+            confidence = answer.get('score', 'N/A')
+            start = answer.get('start', 'N/A')
+            end = answer.get('end', 'N/A')
+            print(
+                f"Answer: {text}\nConfidence: {confidence}\n"
+                f"start: {start}\nend: {end}\n"
+            )
+    else:
+        print("No answer found.")
+    ```
+
+<br>
 
 5. 結果，其中的 `start` 和 `end` 參數表示答案在文本中的起始和結束位置，這些位置是指字串在整個文本中的索引。
-```bash
-Answer: us-001
-Confidence: 0.0035401417408138514
-start: 15
-end: 15
-```
+
+    ```bash
+    Answer: us-001
+    Confidence: 0.0035401417408138514
+    start: 15
+    end: 15
+    ```
+
+<br>
 
 6. 多個問題。
 
