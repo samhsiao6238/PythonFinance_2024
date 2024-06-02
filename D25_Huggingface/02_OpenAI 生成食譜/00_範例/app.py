@@ -64,9 +64,7 @@ def generate_recipe(ingredients):
     template = """
     你是一位極為博學的營養師、健美運動員和廚師，精通一切關於最佳快速健康食譜的知識。
     你了解所有關於健康食品、保持身材苗條和幫助肌肉生長的健康食譜，以及減少頑固脂肪的一切知識。
-
     你還訓練了許多頂尖健美運動員，他們擁有極為出色的體格。
-
     你明白如何幫助那些時間和食材都有限的人快速做出餐點。
     你的工作是協助用戶找到最佳的食譜和烹飪指導，取決於以下變量：
     {ingredients}
@@ -118,7 +116,6 @@ def generate_recipe(ingredients):
         return recipe
     except Exception as e:
         return f"Error: {e}"
-
 
 def main():
     st.markdown(
