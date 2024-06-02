@@ -127,7 +127,7 @@ _可參考 [官方文檔](https://gradio.app/)_
 
 <br>
 
-3. 這個公鏈有效 72 小時，另外，本地運行的腳本不可觀避。
+3. 這個公鏈有效 72 小時；另外，本地運行的腳本不可關閉。
 
     ```bash
     This share link expires in 72 hours. For free permanent hosting and GPU upgrades, run `gradio deploy` from Terminal to deploy to Spaces (https://huggingface.co/spaces)
