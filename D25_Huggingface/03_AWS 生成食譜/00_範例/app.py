@@ -4,7 +4,8 @@ from langchain_core.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from transformers import pipeline
 import streamlit as st
-from langchain.llms.openai import OpenAI
+# from langchain.llms.openai import OpenAI
+from langchain.llms.bedrock import Bedrock
 
 # 設定 Streamlit 頁面的配置
 PAGE_CONFIG = {
@@ -37,14 +38,14 @@ load_dotenv()
 
 
 def get_llm():
-    # 使用 OpenAI 作為替代模型
-    openai_llm = OpenAI(
-        model_name="gpt-4-turbo",
-        temperature=0.7,
-        max_tokens=4096,
-        api_key=os.getenv("OPENAI_API_KEY"),
+    bedrock_llm = Bedrock(
+        model_id="anthropic.claude-v2",
+        model_kwargs={
+            "temperature": 0.7,
+            "max_tokens_to_sample": 1024
+        }
     )
-    return openai_llm
+    return bedrock_llm
 
 
 # 生成圖片描述
@@ -120,15 +121,12 @@ def generate_recipe(ingredients):
 
 def main():
     st.markdown(
-        "<h1 style='text-align: center; color: red;"
-        "'>🍲 食譜生成器 🍲 </h1>",
+        "<h1 style='text-align: center; color: red;" "'>🍲 食譜生成器 🍲 </h1>",
         unsafe_allow_html=True,
     )
     # 上傳圖片檔案
     upload_file = st.file_uploader(
-        "選擇一張圖片：",
-        type=["jpg", "png"],
-        accept_multiple_files=False
+        "選擇一張圖片：", type=["jpg", "png"], accept_multiple_files=False
     )
     # 假如上傳
     if upload_file is not None:
@@ -156,6 +154,5 @@ def main():
 
 if __name__ == "__main__":
     load_dotenv()
-    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
+    HUGGINFACE_HUB_API_TOKEN = os.getenv("HUGGINFACE_HUB_API_TOKEN")
     main()
