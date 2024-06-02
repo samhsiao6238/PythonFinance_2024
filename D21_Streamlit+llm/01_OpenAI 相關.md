@@ -52,11 +52,11 @@ _LangChain 於 2021 年發布_
 
 <br>
 
-3. 主要功能：LangChain 提供的語言模型接口，用於與 OpenAI 的模型進行交互。
+3. 主要功能：LangChain 提供的語言模型接口，用於與 OpenAI 的模型進行互動。
 
 <br>
 
-4. 差異：這個 `OpenAI` 是 LangChain 封裝的接口，旨在簡化在 LangChain 框架內與 OpenAI 模型的交互。
+4. 差異：這個 `OpenAI` 是 LangChain 封裝的接口，旨在簡化在 LangChain 框架內與 OpenAI 模型的互動。
 
 <br>
 
@@ -82,7 +82,7 @@ _LangChain 於 2021 年發布_
 
 <br>
 
-3. 主要功能：LangChain OpenAI 提供的聊天模型接口，用於與 OpenAI 的聊天模型進行交互，適用於 LangChain 的擴展包。
+3. 主要功能：LangChain OpenAI 提供的聊天模型接口，用於與 OpenAI 的聊天模型進行互動，適用於 LangChain 的擴展包。
 
 <br>
 

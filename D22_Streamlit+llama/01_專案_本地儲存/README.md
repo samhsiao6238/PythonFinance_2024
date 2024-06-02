@@ -165,7 +165,7 @@ response = agent.chat(cross_query_str)
 print(str(response))
 ```
 
-### 第九步：設置交互循環
+### 第九步：設置互動循環
 
 設置一個簡單的互動循環來與SEC增強的聊天機器人互動。
 
@@ -292,7 +292,7 @@ cross_query_str = (
 response = agent.chat(cross_query_str)
 print(str(response))
 
-# 設置交互循環
+# 設置互動循環
 agent = OpenAIAgent.from_tools(tools)
 
 while True:

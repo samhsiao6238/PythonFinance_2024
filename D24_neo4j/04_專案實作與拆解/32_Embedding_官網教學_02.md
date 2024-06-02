@@ -28,7 +28,7 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線數據�
 
    - `langchain-openai`：用於在 LangChain 中使用 OpenAI 模型。
 
-   - `pymongo`：用於與 MongoDB 交互的 Python 驅動。
+   - `pymongo`：用於與 MongoDB 互動的 Python 驅動。
 
    - `pandas`：用於數據分析、探索和操作。
 

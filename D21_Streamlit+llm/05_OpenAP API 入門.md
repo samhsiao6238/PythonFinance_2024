@@ -234,7 +234,7 @@ _[Speech-to-text 語音轉文字](https://platform.openai.com/docs/guides/speech
 4. 程式碼：示範使用 `OpenAI` 的 `語音轉錄（Transcription）` 和 `文本生成（Chat Completion）` API 來處理音頻文件，生成文本轉錄並進行文本校正。
 
     ```python
-    # 用於與 OpenAI API 進行交互
+    # 用於與 OpenAI API 進行互動
     from openai import OpenAI
     # 環境變數
     import os

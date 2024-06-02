@@ -19,7 +19,7 @@ _讀取 PDF 並建立向量索引系統_
     from langchain_core.runnables import RunnablePassthrough
     # 與 MongoDB Atlas Vector Search 集成，以實現向量搜索功能
     from langchain_mongodb import MongoDBAtlasVectorSearch
-    # ChatOpenAI 用於與 OpenAI 的聊天模型交互
+    # ChatOpenAI 用於與 OpenAI 的聊天模型互動
     # OpenAIEmbeddings 用於生成文本的向量嵌入
     from langchain_openai import ChatOpenAI, OpenAIEmbeddings
     # 定義和管理提示模板，以生成特定的查詢或指令

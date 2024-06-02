@@ -148,7 +148,7 @@ query_engine, individual_query_engine_tools = setup_sub_question_query_engine(
 )
 agent = setup_agent(query_engine, individual_query_engine_tools)
 
-# 聊天機器人交互循環
+# 聊天機器人互動循環
 user_input = st.text_input("User:", "")
 if user_input:
     try:
