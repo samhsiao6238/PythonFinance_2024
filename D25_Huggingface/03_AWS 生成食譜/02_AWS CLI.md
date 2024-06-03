@@ -6,7 +6,7 @@ _說明本範例中的操作及其他補充，也考參考 [官網說明](https:
 
 ## 安裝
 
-1. MacOS。
+1. MacOS 可透過官網 [下載 PKG 安裝程式](https://aws.amazon.com/tw/cli/) 或透過以下指令安裝。
 
     ```bash
     brew install awscli
@@ -18,7 +18,7 @@ _說明本範例中的操作及其他補充，也考參考 [官網說明](https:
 
 <br>
 
-3. Linux 系統。
+3. Linux 系統可透過以下指令下載並且安裝。
 
     ```bash
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
