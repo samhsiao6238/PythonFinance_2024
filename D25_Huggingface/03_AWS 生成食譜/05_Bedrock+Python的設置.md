@@ -16,7 +16,7 @@ _在本地進行開發_
 
 <br>
 
-## 測試腳本
+## 檢查 Bedrock 設置
 
 _測試 AWS Bedrock 是否完成設置_
 
@@ -229,7 +229,9 @@ _測試 AWS Bedrock 是否完成設置_
 
 <br>
 
-4. 檢查使用者對指定模型如 `anthropic.claude-v2` 的訪問權限：。
+## 檢查指定模型權限 
+
+1. 檢查使用者對指定模型如 `anthropic.claude-v2` 的訪問權限：。
 
     ```bash
     aws bedrock get-foundation-model --model-identifier anthropic.claude-v2 --region us-east-1
@@ -264,7 +266,92 @@ _測試 AWS Bedrock 是否完成設置_
 
 <br>
 
-## 製作查看可用模型的腳本
+2. 透過代碼檢查。
+
+    ```python
+    import os
+    import boto3
+    from botocore.exceptions import ClientError
+    from dotenv import load_dotenv
+    import json
+
+    # 環境變數
+    load_dotenv()
+
+    def check_model_access():
+        # 獲取密鑰
+        aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
+        aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
+        region_name = os.getenv("AWS_REGION")
+
+        # 確認取得變數
+        if not all([
+            aws_access_key_id,
+            aws_secret_access_key,
+            region_name
+        ]):
+            print("錯誤：環境變數中並未設置 AWS 憑證或區域。")
+            return
+
+        # 建立 AWS Bedrock 客戶端實體
+        client = boto3.client(
+            "bedrock-runtime",
+            aws_access_key_id=aws_access_key_id,
+            aws_secret_access_key=aws_secret_access_key,
+            region_name=region_name,
+        )
+        
+            # 指定要使用的模型 ID
+            # model_id = "anthropic.claude-v2"
+            model_id = "amazon.titan-tg1-large"
+
+            try:
+                # 調用模型
+                body = json.dumps({
+                    # 這是對話指定的格式
+                    "prompt": "\n\nHuman: 請簡短一句話介紹自己。\n\nAssistant:",
+                    "max_tokens_to_sample": 100
+                })
+                response = client.invoke_model(
+                    modelId=model_id,
+                    body=body.encode('utf-8'),
+                    contentType='application/json',
+                    accept='application/json'
+                )
+                response_body = json.loads(response['body'].read())
+                print("成功：存取模型已經被允許。")
+                print("響應內容：", response_body.get('completion', 'No completion in response'))
+            except ClientError as e:
+                if e.response["Error"]["Code"] == "AccessDeniedException":
+                    print(f"Access Denied: {e.response['Error']['Message']}")
+                else:
+                    print(f"Error: {e.response['Error']['Message']}")
+            except Exception as e:
+                print(f"Unexpected error: {e}")
+
+        if __name__ == "__main__":
+            check_model_access()
+    ```
+
+<br>
+
+2. 可用時會顯示。
+
+    ![](images/img_49.png)
+
+<br>
+
+3. 不可用時會顯示。
+
+    ![](images/img_50.png)
+
+<br>
+
+## 製作 Shell Script 腳本
+
+_簡介如何製作查看可用模型的殼層腳本_
+
+<br>
 
 1. 建立腳本：在桌面建立腳本 `check_accessible_models.sh`。
 
