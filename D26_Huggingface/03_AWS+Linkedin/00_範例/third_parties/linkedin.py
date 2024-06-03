@@ -6,7 +6,9 @@ def scrape_linkedin_profile(linkedin_profile_url):
     """scrape information from LinkedIn profiles,
     Manually scrape the information from the LinkedIn profile"""
     api_endpoint = "https://nubela.co/proxycurl/api/v2/linkedin"
-    header_dic = {"Authorization": f'Bearer {os.environ.get("PROXYCURL_API_KEY")}'}
+    header_dic = {
+        "Authorization": f'Bearer {os.environ.get("PROXYCURL_API_KEY")}'
+    }
 
     # For production
     response = requests.get(
@@ -17,8 +19,7 @@ def scrape_linkedin_profile(linkedin_profile_url):
     data = {
         k: v
         for k, v in data.items()
-        if v not in ([], "", "", None)
-        and k
+        if v not in ([], "", "", None) and k
         not in [
             "people_also_viewed",
             "certifications",

@@ -32,7 +32,9 @@ def ice_break_with(name: str):
     if not linkedin_profile_url:
         return "未能找到該人的 LinkedIn 資料。"
 
-    linkedin_data = scrape_linkedin_profile(linkedin_profile_url=linkedin_profile_url)
+    linkedin_data = scrape_linkedin_profile(
+        linkedin_profile_url=linkedin_profile_url
+    )
     if not linkedin_data:
         return "未能抓取該人的 LinkedIn 資料。"
 
