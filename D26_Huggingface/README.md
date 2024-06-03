@@ -1,10 +1,14 @@
 # Huggingface
 
+<br>
 
 [官網控制台](https://huggingface.co/)
 
 LangChain 的 Huggingface Endpoints [說明](https://python.langchain.com/v0.2/docs/integrations/llms/huggingface_endpoint/)
 
+[範例倉庫](https://github.com/build-on-aws/llm-rag-vectordb-python/tree/main/ingredient-to-recipe)
+
+<br>
 
 ## 介紹
 
