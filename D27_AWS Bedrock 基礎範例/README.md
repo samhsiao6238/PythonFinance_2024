@@ -1,5 +1,7 @@
 # Bedrock
 
+_這是一個基礎的應用_
+
 <br>
 
 ## 說明
@@ -62,7 +64,7 @@
     import os
     from dotenv import load_dotenv
 
-    # 加载环境变量
+    # 環境變數
     load_dotenv()
 
     bedrock_client = boto3.client(service_name='bedrock-agent-runtime')
@@ -121,8 +123,11 @@
                 pdf_text += pdf_reader.pages[page].extract_text()
             return base64.b64encode(pdf_text.encode('utf-8')).decode('utf-8')
 
-    model_id = "anthropic.claude-3-sonnet-20240229-v1:0"  # 替换为您的模型ID
-    document_path = "HuggingFace物件偵測應用.pdf"  # 替换为您的本地PDF文件路径
+
+    # 模型 ID
+    model_id = "anthropic.claude-3-sonnet-20240229-v1:0"
+    # 本地 PDF 文件路徑
+    document_path = "HuggingFace物件偵測應用.pdf"
     pdf_content_base64 = read_pdf_as_base64(document_path)
     print(pdf_content_base64)
 
