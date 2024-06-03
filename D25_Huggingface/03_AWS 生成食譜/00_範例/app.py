@@ -2,71 +2,28 @@ import os
 from dotenv import load_dotenv
 # 用於生成提示模板
 from langchain_core.prompts import PromptTemplate
-# 處理大語言模型鏈
-from langchain.chains import LLMChain
 # 用於生成各種自然語言處理管道
 from transformers import pipeline
 import streamlit as st
 # 用於連接 Amazon Bedrock
 from langchain_aws import BedrockLLM
+# 導入翻譯函數
+from googletrans import Translator
 
 # 環境參數
 load_dotenv()
 
-PAGE_CONFIG = {
-    # 頁面標題
-    "page_title": "Image to Recipe",
-    # 頁面圖標
-    "page_icon": ":chef:",
-    # 頁面佈局為居中
-    "layout": "centered",
-}
-# 設定頁面配置
-st.set_page_config(
-    page_title=PAGE_CONFIG["page_title"],
-    page_icon=PAGE_CONFIG["page_icon"],
-    layout=PAGE_CONFIG["layout"],
-)
-#
-st.markdown(
-    """
-    <style>
-        body {
-            /*設定頁面的背景顏色*/
-            background-color: #fafafa;
-            /*設定頁面的字體顏色*/
-            color: #333;
-        }
-        h1, h2 {
-            /*設定標題的字體顏色*/
-            color: #ff6347;
-        }
-        .fileUploader .btn {
-            /*設定上傳按鈕的背景顏色*/
-            background-color: #ff6347;
-            /*設定上傳按鈕的字體顏色*/
-            color: white;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+# 初始化翻譯器
+translator = Translator()
 
 
 # 定義函數以獲取大語言模型
 def get_llm():
-    # 無需直接傳遞AWS憑證
     bedrock_llm = BedrockLLM(
-        # 使用 Claude v2 模型
         model_id="anthropic.claude-v2",
-        # 設定 AWS 區域
         region_name=os.getenv("AWS_REGION"),
-        # 設定模型參數
-        model_kwargs={
-            "temperature": 0.7,
-            "max_tokens_to_sample": 4096},
+        model_kwargs={"temperature": 0.7, "max_tokens_to_sample": 4096},
     )
-    # 返回大語言模型實例
     return bedrock_llm
 
 
@@ -130,19 +87,13 @@ def generate_recipe(ingredients):
     使指導易於理解並逐步進行。
     """
 
-    # 顯示處理中的提示
     with st.spinner("Making the recipe for you..."):
         prompt = PromptTemplate(
-            template=template,
-            input_variables=["ingredients"]
+            template=template, input_variables=["ingredients"]
         )
         llm = get_llm()
-        recipe_chain = LLMChain(
-            llm=llm,
-            prompt=prompt,
-            verbose=True
-        )
-        recipe = recipe_chain.run(ingredients)
+        recipe_chain = prompt | llm
+        recipe = recipe_chain.invoke({"ingredients": ingredients})
 
     return recipe
 
@@ -182,8 +133,11 @@ def main():
 
         st.markdown("### 🥗 相片中的原料")
         ingredients = image_to_text(upload_file.name)
+        ingredients_zh = translator.translate(
+            ingredients, src='en', dest='zh-tw').text
         with st.expander("原料 👀"):
-            st.write(ingredients.capitalize())
+            # st.write(ingredients.capitalize())
+            st.write(ingredients_zh)
 
         st.markdown("### 📋 食譜")
         recipe = generate_recipe(ingredients=ingredients)
