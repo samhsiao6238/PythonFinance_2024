@@ -1,12 +1,14 @@
 # 基本操作
 
-_搭配範例 01 進行_
+_搭配範例進行操作_
 
 <br>
 
 ## 安裝 pgAdmin4
 
-1. 特別注意，要從 [官網載點](https://www.pgadmin.org/download/pgadmin-4-macos/) 進行下載，截至最後更新日期 `2024/06/05` 的版本是 `8.7`。
+1. 特別注意，建議從 [官網載點](https://www.pgadmin.org/download/pgadmin-4-macos/) 進行下載，截至最後更新日期 `2024/06/05` 的版本是 `8.7`。
+
+    ![](images/img_13.png)
 
 <br>
 
