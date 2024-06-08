@@ -10,6 +10,8 @@ _[Haystack 官網](https://haystack.deepset.ai/)、[deepset 官網](https://www.
 
 2. `Haystack` 用於建立基於 `搜索` 和 `問答` 的應用程序，允許開發者建立和部署 `端到端` 的自然語言處理（NLP）管道，特別適合處理大型文件集合，並在這些文件中找到準確答案。
 
+3. `Haystack` 支持多種 NLP 模型和數據存儲，並且能夠與各種檢索後端無縫集成，如 Elasticsearch、FAISS、Milvus 等。
+
 <br>
 
 ## 主要功能
