@@ -65,7 +65,7 @@
     # 創建系統消息和用戶消息的 ChatMessage 對象
     messages = [
         ChatMessage.from_system(
-            "即使某些輸入資料採用其他語言，也始終以德語回應。"
+            "即使某些輸入資料採用其他語言，也始終以繁體中文回應。"
         ),
         ChatMessage.from_user(
             "什麼是自然語言處理？要簡潔。"
@@ -416,11 +416,18 @@
 2. 將獲得一個以 JSON 格式顯示且包含 `工具名稱` 和 `參數` 的 `ChatMessage`。
 
     ```python
-    {'replies': [
-        ChatMessage(
-            content='[{"index": 0, "id": "call_3VnT0XQH0ye41g3Ip5CRz4ri", "function": {"arguments": "{\\"query\\":\\"Where does Mark live?\\"}", "name": "rag_pipeline_func"}, "type": "function"}]', role=<ChatRole.ASSISTANT: 'assistant'>, 
-            name=None, 
-            meta={'model': 'gpt-3.5-turbo-0125', 'index': 0, 'finish_reason': 'tool_calls', 'usage': {}}
+    {
+        'replies': [
+            ChatMessage(
+                content='[{"index": 0, "id": "call_2ARyzeivzPqS0ETx3jVHt4ct", "function": {"arguments": "{\\"query\\":\\"Where does Mark live?\\"}", "name": "rag_pipeline_func"}, "type": "function"}]',
+                role=<ChatRole.ASSISTANT: 'assistant'>,
+                name=None,
+                meta={
+                    'model': 'gpt-4-turbo-2024-04-09',
+                    'index': 0,
+                    'finish_reason': 'tool_calls',
+                    'usage': {}
+                }
             )
         ]
     }
