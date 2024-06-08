@@ -9,15 +9,22 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
 1. 使用 Haystack 2.0 來創建使用檢索增強 (RAG) 方法的生成問答管道，包含以下主要模組及 `OpenAI API`。
 
     ```bash
+    # 用於儲存和管理文檔
     InMemoryDocumentStore
+
+    # 用於將文檔轉換為嵌入向量
     SentenceTransformersDocumentEmbedder
-    # 用於創建用戶查詢的嵌入
+    
+    # 將用戶的查詢轉換為嵌入向量
     SentenceTransformersTextEmbedder
-    # 用於檢索相關文件
+    
+    # 用於根據嵌入向量在內存中檢索相關文檔
     InMemoryEmbeddingRetriever
+    
     # 用於創建模板提示
     PromptBuilder
-    # 用於生成回答
+    
+    # 使用 OpenAI 的生成模型來生成文本的模組
     OpenAIGenerator  
     ```
 
