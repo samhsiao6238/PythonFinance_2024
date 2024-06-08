@@ -159,7 +159,31 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
 
 <br>
 
-8. 初始化生成器：生成器是與大型語言模型 (LLMs) 互動的模組，同時需要設置 `OPENAI_API_KEY` 環境變量，並初始化可與 OpenAI GPT 模型通信的 `OpenAIGenerator`。初始化時需指定模型名稱。
+8. 可將提示改為繁體中文。
+
+    ```python
+    from haystack.components.builders import PromptBuilder
+
+    # 定義模板提示
+    template = """
+    根據以下信息，回答問題。
+
+    上下文:
+    {% for document in documents %}
+        {{ document.content }}
+    {% endfor %}
+
+    問題: {{question}}
+    答案:
+    """
+
+    # 初始化提示生成器
+    prompt_builder = PromptBuilder(template=template)
+    ```
+
+<br>
+
+9. 初始化生成器：生成器是與大型語言模型 (LLMs) 互動的模組，同時需要設置 `OPENAI_API_KEY` 環境變量，並初始化可與 OpenAI GPT 模型通信的 `OpenAIGenerator`。初始化時需指定模型名稱。
 
     ```python
     import os
