@@ -22,7 +22,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
 
 3. 轉換為向量：使用合適的嵌入技術將數據轉換為向量表示。
 
-4. 存儲向量：將轉換為向量的數據存儲在 `MongoDB Atlas` 中。
+4. 儲存向量：將轉換為向量的數據儲存在 `MongoDB Atlas` 中。
 
 5. 查詢數據：使用向量搜索技術進行語義查詢。
 
@@ -66,7 +66,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
 
 ## 建立向量儲存和查詢應用
 
-1. 這段代碼從一個名為 `taiwan_stock_data.csv` 的文件中加載台股數據，將其轉換為向量表示並存儲到MongoDB Atlas中，其中使用 `TfidfVectorizer` 將文本數據轉換為向量，並以 Streamlit 建立網頁進行用戶互動，允許用戶輸入問題並觸發查詢。
+1. 這段代碼從一個名為 `taiwan_stock_data.csv` 的文件中加載台股數據，將其轉換為向量表示並儲存到MongoDB Atlas中，其中使用 `TfidfVectorizer` 將文本數據轉換為向量，並以 Streamlit 建立網頁進行用戶互動，允許用戶輸入問題並觸發查詢。
 
 <br>
 
@@ -140,7 +140,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
 
     # 檢查集合是否為空，若為空則初始化資料
     if atlas_collection.count_documents({}) == 0 or not os.path.exists("tfidf_vocabulary.json"):
-        print("初始化資料並創建向量存儲...")
+        print("初始化資料並創建向量儲存...")
         initialize_data("台股大盤2015_2024.csv")
     else:
         print("載入現有向量儲存...")

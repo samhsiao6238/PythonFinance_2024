@@ -254,7 +254,7 @@ _優化腳本_
 
     # Check if the collection is empty and initialize data if necessary
     if atlas_collection.count_documents({}) == 0:
-        st.write("初始化資料並創建向量存儲...")
+        st.write("初始化資料並創建向量儲存...")
         vector_search = initialize_data()
     else:
         st.write("載入現有向量儲存...")
@@ -475,7 +475,7 @@ _優化腳本_
 
     # 檢查向量儲存是否存在
     if atlas_collection.count_documents({}) == 0:
-        st.sidebar.write("初始化資料並創建向量存儲...")
+        st.sidebar.write("初始化資料並創建向量儲存...")
         vector_search = initialize_data()
     else:
         st.sidebar.write("已有資料，載入現有向量儲存...")

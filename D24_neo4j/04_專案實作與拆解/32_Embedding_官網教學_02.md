@@ -6,7 +6,7 @@ _尚未完成_
 
 [Part 2](https://www.mongodb.com/developer/products/atlas/evaluate-llm-applications-rag/)
 
-_以下官方教程從安裝必要的工具開始，接著設置與連線數據庫、使用 API 密鑰、下載和處理數據集、生成嵌入並存儲到 MongoDB 中，然後使用這些 `嵌入` 來進行 `檢索和生成，最後評估整體系統的性能並追蹤變化。這些步驟確保了我們能夠高效地評估和改進我們的 LLM 應用。_
+_以下官方教程從安裝必要的工具開始，接著設置與連線數據庫、使用 API 密鑰、下載和處理數據集、生成嵌入並儲存到 MongoDB 中，然後使用這些 `嵌入` 來進行 `檢索和生成，最後評估整體系統的性能並追蹤變化。這些步驟確保了我們能夠高效地評估和改進我們的 LLM 應用。_
 
 <br>
 
@@ -24,7 +24,7 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線數據�
 
    - `langchain`：用於開發 LLM 應用。
 
-   - `langchain-mongodb`：用於將 MongoDB Atlas 作為向量存儲使用。
+   - `langchain-mongodb`：用於將 MongoDB Atlas 作為向量儲存使用。
 
    - `langchain-openai`：用於在 LangChain 中使用 OpenAI 模型。
 
@@ -38,7 +38,7 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線數據�
 
 <br>
 
-2. 設置先決條件：設置 `MongoDB Atlas` 作為 `向量存儲` ，建立資料庫與集合，並取得連線的 `URI`，記得將主機 IP 加入可訪問列表中。
+2. 設置先決條件：設置 `MongoDB Atlas` 作為 `向量儲存` ，建立資料庫與集合，並取得連線的 `URI`，記得將主機 IP 加入可訪問列表中。
 
 <br>
 
@@ -199,7 +199,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 <br>
 
-3. 將文本塊轉換為嵌入並將其存儲到 MongoDB 中，這是通過 `OpenAI API` 請求生成 `嵌入向量`，完成後可用於檢索。
+3. 將文本塊轉換為嵌入並將其儲存到 MongoDB 中，這是通過 `OpenAI API` 請求生成 `嵌入向量`，完成後可用於檢索。
 
     ```python
     from pymongo import MongoClient
@@ -233,12 +233,12 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
     # 處理每個模型
     # 遍歷文本文件 (docs) 的批次，生成嵌入向量
-    # 並將嵌入向量和文本文件一起存儲在 MongoDB 中
+    # 並將嵌入向量和文本文件一起儲存在 MongoDB 中
     for model in EVAL_EMBEDDING_MODELS:
         embedded_docs = []
         print(f"Getting embeddings for the {model} model")
         # tqdm 用於顯示進度條
-        # 將嵌入向量和文本文件存儲在 MongoDB 的集合，集合名稱與模型名稱相同
+        # 將嵌入向量和文本文件儲存在 MongoDB 的集合，集合名稱與模型名稱相同
         for i in tqdm(range(0, len(docs), batch_size)):
             end = min(len(docs), i + batch_size)
             batch = docs[i:end]

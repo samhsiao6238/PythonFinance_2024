@@ -56,7 +56,7 @@ _使用 LangChain 整合 MongoDB Atlas 建立 `向量索引` 並進行 `向量�
 
 <br>
 
-2. 在本範例中的向量儲存如下，`from_documents` 方法接收文本文件（docs）並將其轉換為向量嵌入（embedding），然後將這些向量嵌入存儲在指定的資料庫集合（atlas_collection）中。
+2. 在本範例中的向量儲存如下，`from_documents` 方法接收文本文件（docs）並將其轉換為向量嵌入（embedding），然後將這些向量嵌入儲存在指定的資料庫集合（atlas_collection）中。
 
     ```python
     # 建立向量儲存
@@ -418,7 +418,7 @@ _索引構建完成後，返回運行向量搜索查詢_
 1. 透過以下腳本進行查看。
 
     ```python
-    # 提取存儲在指定集合中的向量
+    # 提取儲存在指定集合中的向量
     def retrieve_vectors(collection):
         # 僅提取嵌入向量，過濾掉不包含 'embedding' 鍵的文件
         vectors = collection.find({"embedding": {"$exists": True}}, {"embedding": 1, "_id": 0})

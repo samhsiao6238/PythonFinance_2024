@@ -127,10 +127,10 @@ image_folder = "./face_detect_done"
 
 # 檢查集合是否為空，若為空則初始化資料
 if atlas_collection.count_documents({}) == 0:
-    st.write("初始化資料並創建向量存儲...")
+    st.write("初始化資料並創建向量儲存...")
     initialize_data(image_folder)
 else:
-    st.write("載入現有向量存儲...")
+    st.write("載入現有向量儲存...")
 
 # 確保上傳圖片的目錄存在
 upload_folder = "./uploaded_images"
@@ -152,10 +152,10 @@ if "data_deleted" not in st.session_state:
 if not st.session_state["data_deleted"]:
     # 檢查集合是否為空，若為空則初始化資料
     if atlas_collection.count_documents({}) == 0:
-        st.write("初始化資料並創建向量存儲...")
+        st.write("初始化資料並創建向量儲存...")
         initialize_data(image_folder)
     else:
-        st.write("載入現有向量存儲...")
+        st.write("載入現有向量儲存...")
 
 # 顯示當前資料庫中的資料筆數
 data_count = atlas_collection.count_documents({})

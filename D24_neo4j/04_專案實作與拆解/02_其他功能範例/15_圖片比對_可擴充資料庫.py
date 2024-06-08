@@ -129,11 +129,11 @@ image_folder = "./face_detect_done"
 if atlas_collection.count_documents({}) == 0 and not st.session_state.get(
     "data_deleted", False
 ):
-    st.write("初始化資料並創建向量存儲...")
+    st.write("初始化資料並創建向量儲存...")
     initialize_data(image_folder)
     st.session_state["data_initialized"] = True
 else:
-    st.write("載入現有向量存儲...")
+    st.write("載入現有向量儲存...")
 
 if st.sidebar.button("刪除所有數據"):
     # 調用自訂函數刪除數據
@@ -149,12 +149,12 @@ if "data_deleted" not in st.session_state:
 if not st.session_state["data_deleted"]:
     # 檢查集合是否為空，若為空則初始化資料
     if atlas_collection.count_documents({}) == 0:
-        st.write("初始化資料並創建向量存儲...")
+        st.write("初始化資料並創建向量儲存...")
         initialize_data(image_folder)
         # 添加狀態的設定
         st.session_state["data_initialized"] = True
     else:
-        st.write("載入現有向量存儲...")
+        st.write("載入現有向量儲存...")
 
 # 顯示當前資料庫中的資料筆數
 data_count = atlas_collection.count_documents({})

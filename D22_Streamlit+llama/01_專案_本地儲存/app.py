@@ -50,8 +50,8 @@ def download_and_parse_data():
 
 
 # 步驟二：設置向量索引
-# 將解析後的文件數據轉換為向量並存儲在本地磁碟中的指定目錄內
-# 向量索引是存儲在各年度對應的目錄中，如 ./storage/2022、./storage/2021 等
+# 將解析後的文件數據轉換為向量並儲存在本地磁碟中的指定目錄內
+# 向量索引是儲存在各年度對應的目錄中，如 ./storage/2022、./storage/2021 等
 def setup_vector_indices(years, doc_set):
     Settings.chunk_size = 512
     Settings.chunk_overlap = 64

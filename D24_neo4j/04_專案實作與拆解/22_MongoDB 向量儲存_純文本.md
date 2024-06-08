@@ -18,7 +18,7 @@ _讀取純文本文件_
 
 <br>
 
-1. 以下範例展示如何加載純文本文件並將其轉換為向量嵌入，然後存儲在 MongoDB 的向量索引中。
+1. 以下範例展示如何加載純文本文件並將其轉換為向量嵌入，然後儲存在 MongoDB 的向量索引中。
 
 <br>
 
@@ -72,7 +72,7 @@ _讀取純文本文件_
 
     # 檢查集合是否存在
     if atlas_collection.count_documents({}) == 0:
-        st.write("初始化資料並創建向量存儲...")
+        st.write("初始化資料並創建向量儲存...")
         vector_search = initialize_data()
     else:
         st.write("已有資料，載入現有向量儲存...")

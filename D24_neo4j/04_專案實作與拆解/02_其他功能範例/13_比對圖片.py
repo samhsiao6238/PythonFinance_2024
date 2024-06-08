@@ -136,10 +136,10 @@ image_folder = "./face_detect_done"
 
 # 檢查集合是否為空，若為空則初始化資料
 if atlas_collection.count_documents({}) == 0:
-    print("初始化資料並創建向量存儲...")
+    print("初始化資料並創建向量儲存...")
     initialize_data(image_folder)
 else:
-    print("載入現有向量存儲...")
+    print("載入現有向量儲存...")
 
 # 搜索相似圖片
 # 替換為所要查詢圖片路徑

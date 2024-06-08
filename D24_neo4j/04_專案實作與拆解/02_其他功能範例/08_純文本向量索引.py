@@ -45,7 +45,7 @@ def initialize_data():
 
 # 檢查集合是否存在
 if atlas_collection.count_documents({}) == 0:
-    st.write("初始化資料並創建向量存儲...")
+    st.write("初始化資料並創建向量儲存...")
     vector_search = initialize_data()
 else:
     st.write("已有資料，載入現有向量儲存...")
