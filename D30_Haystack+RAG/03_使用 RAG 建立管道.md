@@ -231,7 +231,40 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
 
 <br>
 
-10. 提問：使用管道的 `run()` 方法。確保為 `text_embedder` 和 `prompt_builder` 提供問題。這確保了模板提示中的 `{{question}}` 變量被替換為的具體問題。
+10. 輸出以下訊息，這裡逐行說明一下詳細內容。
+
+    ```json
+    // 這是一個 Pipeline 對象
+    <haystack.core.pipeline.pipeline.Pipeline object at 0x377e1a8c0>
+    // 組件
+    🚅 Components
+        // 嵌入器組件，使用 Sentence Transformers 模型將文本轉換成嵌入向量
+        - text_embedder: SentenceTransformersTextEmbedder
+        // 檢索器組件，從內存中根據嵌入向量檢索相關的文檔
+        // 使用嵌入向量進行相似性檢索
+        - retriever: InMemoryEmbeddingRetriever
+        // 提示生成器，根據檢索到的文檔來構建提示 Prompt
+        // 這些提示會被用來生成輸出或進行進一步的處理
+        - prompt_builder: PromptBuilder
+        // 大型語言模型生成器組件，使用 OpenAI 的生成器來生成自然語言文本回應
+        - llm: OpenAIGenerator
+
+    // 連接
+    🛤️ Connections
+        // 組件將文本轉換為嵌入向量（embedding）
+        // 這些嵌入向量作為 retriever 組件的輸入查詢嵌入（query_embedding）
+        - text_embedder.embedding -> retriever.query_embedding (List[float])
+        // 組件根據查詢嵌入檢索到的相關文檔（documents）
+        // 這些文檔被傳遞給 prompt_builder 組件
+        - retriever.documents -> prompt_builder.documents (List[Document])
+        // 組件根據文檔生成一個提示（prompt）
+        // 這個提示被傳遞給 llm 組件來生成最終的自然語言回應
+        - prompt_builder.prompt -> llm.prompt (str)
+    ```
+
+<br>
+
+11. 提問：使用管道的 `run()` 方法。確保為 `text_embedder` 和 `prompt_builder` 提供問題。這確保了模板提示中的 `{{question}}` 變量被替換為的具體問題。
 
     ```python
     # 提問
