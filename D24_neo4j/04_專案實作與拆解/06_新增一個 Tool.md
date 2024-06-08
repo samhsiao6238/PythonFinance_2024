@@ -184,7 +184,7 @@
             return_direct=False,
         ),
         # 用於基於向量搜索的電影情節信息檢索。
-        # 如果問題涉及查找與特定電影情節相似的電影，並且需要使用向量搜索技術，會使用此工具。
+        # 如果問題涉及搜尋與特定電影情節相似的電影，並且需要使用向量搜索技術，會使用此工具。
         Tool.from_function(
             name="Vector Search Index",
             description="用於基於向量搜索的電影情節信息檢索。",
@@ -304,7 +304,7 @@
 
 <br>
 
-7. 根據定義的 `execute_mongodb_query` 函數，這個查詢條件會被用來查詢 MongoDB，查詢語句的意思是：在集合 `MyCollection2024` 中查找 `product_name` 為 `Coca-Cola` 的 `document`，並透過限制返回結果的前三筆，其中 `collection.find({"product_name": "Coca-Cola"}).limit(3)` 就是查詢語句。
+7. 根據定義的 `execute_mongodb_query` 函數，這個查詢條件會被用來查詢 MongoDB，查詢語句的意思是：在集合 `MyCollection2024` 中搜尋 `product_name` 為 `Coca-Cola` 的 `document`，並透過限制返回結果的前三筆，其中 `collection.find({"product_name": "Coca-Cola"}).limit(3)` 就是查詢語句。
 
     ```python
     result = collection.find({"product_name": "Coca-Cola"}).limit(3)

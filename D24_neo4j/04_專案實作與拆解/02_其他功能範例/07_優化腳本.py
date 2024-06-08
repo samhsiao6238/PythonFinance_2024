@@ -60,7 +60,7 @@ def initialize_data():
 
 # Check if the collection is empty and initialize data if necessary
 if atlas_collection.count_documents({}) == 0:
-    st.sidebar.write("初始化資料並創建向量儲存...")
+    st.sidebar.write("初始化資料並建立向量儲存...")
     vector_search = initialize_data()
 else:
     st.sidebar.write("已有資料，載入現有向量儲存...")

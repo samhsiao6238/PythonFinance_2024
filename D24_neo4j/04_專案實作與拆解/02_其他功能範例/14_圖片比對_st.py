@@ -127,7 +127,7 @@ image_folder = "./face_detect_done"
 
 # 檢查集合是否為空，若為空則初始化資料
 if atlas_collection.count_documents({}) == 0:
-    st.write("初始化資料並創建向量儲存...")
+    st.write("初始化資料並建立向量儲存...")
     initialize_data(image_folder)
 else:
     st.write("載入現有向量儲存...")
@@ -152,7 +152,7 @@ if "data_deleted" not in st.session_state:
 if not st.session_state["data_deleted"]:
     # 檢查集合是否為空，若為空則初始化資料
     if atlas_collection.count_documents({}) == 0:
-        st.write("初始化資料並創建向量儲存...")
+        st.write("初始化資料並建立向量儲存...")
         initialize_data(image_folder)
     else:
         st.write("載入現有向量儲存...")

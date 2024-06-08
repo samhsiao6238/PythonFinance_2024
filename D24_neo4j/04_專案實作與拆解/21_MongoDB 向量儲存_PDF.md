@@ -254,7 +254,7 @@ _優化腳本_
 
     # Check if the collection is empty and initialize data if necessary
     if atlas_collection.count_documents({}) == 0:
-        st.write("初始化資料並創建向量儲存...")
+        st.write("初始化資料並建立向量儲存...")
         vector_search = initialize_data()
     else:
         st.write("載入現有向量儲存...")
@@ -365,13 +365,13 @@ _優化腳本_
 
 <br>
 
-2. 這腳本的目的是創建一個 `處理問答的流程鏈`，該鏈條將用於基於語義相似度從文件中檢索相關內容並生成回答。
+2. 這腳本的目的是建立一個 `處理問答的流程鏈`，該鏈條將用於基於語義相似度從文件中檢索相關內容並生成回答。
 
 <br>
 
 3. `retriever | format_docs`
 
-    - `retriever`：這是由 `vector_search.as_retriever()` 創建的檢索器。它負責基於相似度從向量儲存中檢索相關文件。
+    - `retriever`：這是由 `vector_search.as_retriever()` 建立的檢索器。它負責基於相似度從向量儲存中檢索相關文件。
 
     - `format_docs`：這是一個函數，用於將檢索到的文件格式化為字串。
 
@@ -387,7 +387,7 @@ _優化腳本_
 
 5. `custom_rag_prompt`
 
-    - 這是根據提示模板創建的 `PromptTemplate` 對象，用於指導模型如何回答問題。模板中包含上下文（`context`）和問題（`question`）的占位符。
+    - 這是根據提示模板建立的 `PromptTemplate` 對象，用於指導模型如何回答問題。模板中包含上下文（`context`）和問題（`question`）的占位符。
 
 <br>
 
@@ -475,7 +475,7 @@ _優化腳本_
 
     # 檢查向量儲存是否存在
     if atlas_collection.count_documents({}) == 0:
-        st.sidebar.write("初始化資料並創建向量儲存...")
+        st.sidebar.write("初始化資料並建立向量儲存...")
         vector_search = initialize_data()
     else:
         st.sidebar.write("已有資料，載入現有向量儲存...")

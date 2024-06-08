@@ -6,7 +6,7 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
 
 ## 說明
 
-1. 使用 Haystack 2.0 來創建使用檢索增強 (RAG) 方法的生成問答管道，包含以下主要模組及 `OpenAI API`。
+1. 使用 Haystack 2.0 來建立使用檢索增強 (RAG) 方法的生成問答管道，包含以下主要模組及 `OpenAI API`。
 
     ```bash
     # 用於儲存和管理文件
@@ -21,7 +21,7 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
     # 用於根據嵌入向量在內存中檢索相關文件
     InMemoryEmbeddingRetriever
     
-    # 用於創建模板提示
+    # 用於建立模板提示
     PromptBuilder
     
     # 使用 OpenAI 的生成模型來生成文本的模組
@@ -44,7 +44,7 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
 
 ## 範例說明
 
-1. 索引文件：通過下載數據並將其嵌入索引到 `DocumentStore` 來創建問答系統，使用 `InMemoryDocumentStore` 來初始化 DocumentStore 以儲存問答系統用於查找答案的文件。
+1. 索引文件：通過下載數據並將其嵌入索引到 `DocumentStore` 來建立問答系統，使用 `InMemoryDocumentStore` 來初始化 DocumentStore 以儲存問答系統用於搜尋答案的文件。
 
     ```python
     from haystack.document_stores.in_memory import InMemoryDocumentStore
@@ -99,10 +99,10 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
 
 <br>
 
-6. 將文件寫入 DocumentStore：運行 `doc_embedder` 與文件，嵌入器將為每個文件創建嵌入並將這些嵌入儲存在文件對象的 `embedding` 字段中。然後使用 `write_documents()` 方法將文件寫入 DocumentStore。
+6. 將文件寫入 DocumentStore：運行 `doc_embedder` 與文件，嵌入器將為每個文件建立嵌入並將這些嵌入儲存在文件對象的 `embedding` 字段中。然後使用 `write_documents()` 方法將文件寫入 DocumentStore。
 
     ```python
-    # 創建文件嵌入並寫入文件儲存
+    # 建立文件嵌入並寫入文件儲存
     docs_with_embeddings = doc_embedder.run(docs)
     document_store.write_documents(docs_with_embeddings["documents"])
     ```
@@ -111,7 +111,7 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
 
 <br>
 
-5. 建立 RAG 管道：首先需要初始化文本嵌入器來為用戶查詢創建嵌入，創建的嵌入將由檢索器用來從 DocumentStore 中檢索相關文件。_請注意_，之前使用 `sentence-transformers/all-MiniLM-L6-v2` 模型創建了文件的嵌入，這裡需要使用相同的模型來嵌入用戶查詢。
+5. 建立 RAG 管道：首先需要初始化文本嵌入器來為用戶查詢建立嵌入，建立的嵌入將由檢索器用來從 DocumentStore 中檢索相關文件。_請注意_，之前使用 `sentence-transformers/all-MiniLM-L6-v2` 模型建立了文件的嵌入，這裡需要使用相同的模型來嵌入用戶查詢。
 
     ```python
     from haystack.components.embedders import SentenceTransformersTextEmbedder
@@ -135,7 +135,7 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
 
 <br>
 
-7. 創建一個自定義提示，用於使用 RAG 方法進行生成問答任務。提示應該接受兩個參數：從文件儲存檢索到的文件和用戶的問題。使用 `Jinja2` 循環語法將檢索到的文件內容組合到提示中。接著使用提示模板初始化一個 `PromptBuilder` 實例。當給定必要的值時，`PromptBuilder` 將自動填充變量值並生成完整的提示。這種方法允許更具針對性和有效的問答體驗。
+7. 建立一個自定義提示，用於使用 RAG 方法進行生成問答任務。提示應該接受兩個參數：從文件儲存檢索到的文件和用戶的問題。使用 `Jinja2` 循環語法將檢索到的文件內容組合到提示中。接著使用提示模板初始化一個 `PromptBuilder` 實例。當給定必要的值時，`PromptBuilder` 將自動填充變量值並生成完整的提示。這種方法允許更具針對性和有效的問答體驗。
 
     ```python
     from haystack.components.builders import PromptBuilder

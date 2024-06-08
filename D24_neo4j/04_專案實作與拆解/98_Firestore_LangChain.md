@@ -161,11 +161,11 @@ _尚未實測_
 
 <br>
 
-2. 設置 Firebase：在 Firebase 控制台創建一個項目，並生成服務帳戶密鑰文件。這個文件需要在程式碼中初始化 Firebase 應用。
+2. 設置 Firebase：在 Firebase 控制台建立一個項目，並生成服務帳戶密鑰文件。這個文件需要在程式碼中初始化 Firebase 應用。
 
 <br>
 
-3. 創建 `secrets.toml` 文件
+3. 建立 `secrets.toml` 文件
 
     ```toml
     [secrets]

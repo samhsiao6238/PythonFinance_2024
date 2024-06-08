@@ -75,7 +75,7 @@ _這兩個範例展示了如何處理單一輸入和多個輸入的情況。大�
 
     @tool
     def search(query: str) -> str:
-        """在線查找內容。"""
+        """在線搜尋內容。"""
         return "LangChain"
 
     # Output: search
@@ -109,7 +109,7 @@ _這兩個範例展示了如何處理單一輸入和多個輸入的情況。大�
 
     @tool("search-tool", args_schema=SearchInput, return_direct=True)
     def search(query: str) -> str:
-        """在線查找內容。"""
+        """在線搜尋內容。"""
         return "LangChain"
 
     print('search.name：', search.name)

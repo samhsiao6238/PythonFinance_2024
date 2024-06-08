@@ -194,7 +194,7 @@ _使用 OpenAI 生成 MongoDB 查詢語法_
             return_direct=False
         ),
         # 用於基於向量搜索的電影情節信息檢索。
-        # 如果問題涉及查找與特定電影情節相似的電影，並且需要使用向量搜索技術，會使用此工具。
+        # 如果問題涉及搜尋與特定電影情節相似的電影，並且需要使用向量搜索技術，會使用此工具。
         Tool.from_function(
             name="Vector Search Index",
             description="用於基於向量搜索的電影情節信息檢索。",

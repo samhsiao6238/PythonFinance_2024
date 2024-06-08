@@ -28,7 +28,7 @@ _Proxycurl 是一個專門用於獲取 LinkedIn 資料的 API_
 
 <br>
 
-1. 進入 [Proxycurl 註冊頁面](https://nubela.co/proxycurl/#/signup) 並創建一個新帳戶。
+1. 進入 [Proxycurl 註冊頁面](https://nubela.co/proxycurl/#/signup) 並建立一個新帳戶。
 
     ![](images/img_01.png)
 
@@ -52,7 +52,7 @@ _SerpAPI 是一個搜索引擎結果頁面 (SERP) 的 API_
 
 <br>
 
-1. 訪問 [SerpAPI 註冊頁面](https://serpapi.com/users/sign_up) 並創建一個新帳戶。
+1. 訪問 [SerpAPI 註冊頁面](https://serpapi.com/users/sign_up) 並建立一個新帳戶。
 
     ![](images/img_04.png)
 
@@ -103,7 +103,7 @@ _SerpAPI 是一個搜索引擎結果頁面 (SERP) 的 API_
 
 <br>
 
-2. LinkedIn 查找代理沒有有效的工具來抓取 LinkedIn 資料。
+2. LinkedIn 搜尋代理沒有有效的工具來抓取 LinkedIn 資料。
 
 <br>
 
@@ -183,7 +183,7 @@ _修改後的_
             return "未能抓取該人的 LinkedIn 資料。"
 
         summary_template = """
-        鑑於有關某人的 LinkedIn 資訊 {information}，請創建以下內容，並用繁體中文回答：
+        鑑於有關某人的 LinkedIn 資訊 {information}，請建立以下內容，並用繁體中文回答：
         1. 先介紹他的名字
         2. 簡短總結
         2. 關於他的兩個有趣的事實

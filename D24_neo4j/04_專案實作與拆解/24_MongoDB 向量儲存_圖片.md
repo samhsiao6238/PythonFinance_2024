@@ -202,7 +202,7 @@ _以處理圖片為例_
 
     # 檢查集合是否為空，若為空則初始化資料
     if atlas_collection.count_documents({}) == 0:
-        print("初始化資料並創建向量儲存...")
+        print("初始化資料並建立向量儲存...")
         initialize_data(image_folder)
     else:
         print("載入現有向量儲存...")
@@ -344,7 +344,7 @@ _添加評分_
 
     # 檢查集合是否為空，若為空則初始化資料
     if atlas_collection.count_documents({}) == 0:
-        print("初始化資料並創建向量儲存...")
+        print("初始化資料並建立向量儲存...")
         initialize_data(image_folder)
     else:
         print("載入現有向量儲存...")
@@ -506,7 +506,7 @@ _展示出圖片_
 
     # 檢查集合是否為空，若為空則初始化資料
     if atlas_collection.count_documents({}) == 0:
-        print("初始化資料並創建向量儲存...")
+        print("初始化資料並建立向量儲存...")
         initialize_data(image_folder)
     else:
         print("載入現有向量儲存...")
@@ -740,7 +740,7 @@ _展示出圖片_
 
     # 檢查集合是否為空，若為空則初始化資料
     if atlas_collection.count_documents({}) == 0:
-        print("初始化資料並創建向量儲存...")
+        print("初始化資料並建立向量儲存...")
         initialize_data(image_folder)
     else:
         print("載入現有向量儲存...")
@@ -891,7 +891,7 @@ _展示出圖片_
 
     # 檢查集合是否為空，若為空則初始化資料
     if atlas_collection.count_documents({}) == 0:
-        st.write("初始化資料並創建向量儲存...")
+        st.write("初始化資料並建立向量儲存...")
         initialize_data(image_folder)
     else:
         st.write("載入現有向量儲存...")
@@ -1003,7 +1003,7 @@ _展示出圖片_
     if not st.session_state["data_deleted"]:
         # 檢查集合是否為空，若為空則初始化資料
         if atlas_collection.count_documents({}) == 0:
-            st.write("初始化資料並創建向量儲存...")
+            st.write("初始化資料並建立向量儲存...")
             initialize_data(image_folder)
         else:
             st.write("載入現有向量儲存...")
@@ -1215,7 +1215,7 @@ _展示出圖片_
 
     # 檢查集合是否為空，若為空則初始化資料
     if atlas_collection.count_documents({}) == 0:
-        st.write("初始化資料並創建向量儲存...")
+        st.write("初始化資料並建立向量儲存...")
         initialize_data(image_folder)
     else:
         st.write("載入現有向量儲存...")
@@ -1241,7 +1241,7 @@ _展示出圖片_
     if not st.session_state["data_deleted"]:
         # 檢查集合是否為空，若為空則初始化資料
         if atlas_collection.count_documents({}) == 0:
-            st.write("初始化資料並創建向量儲存...")
+            st.write("初始化資料並建立向量儲存...")
             initialize_data(image_folder)
         else:
             st.write("載入現有向量儲存...")
@@ -1282,7 +1282,7 @@ _展示出圖片_
     ```python
     # 檢查集合是否為空，若為空且未刪除則初始化資料
     if atlas_collection.count_documents({}) == 0 and not st.session_state.get("data_deleted", False):
-        st.write("初始化資料並創建向量儲存...")
+        st.write("初始化資料並建立向量儲存...")
         initialize_data(image_folder)
         st.session_state["data_initialized"] = True
     else:
@@ -1298,7 +1298,7 @@ _展示出圖片_
     if not st.session_state["data_deleted"]:
         # 檢查集合是否為空，若為空則初始化資料
         if atlas_collection.count_documents({}) == 0:
-            st.write("初始化資料並創建向量儲存...")
+            st.write("初始化資料並建立向量儲存...")
             initialize_data(image_folder)
             # 添加狀態的設定
             st.session_state["data_initialized"] = True
@@ -1455,7 +1455,7 @@ _展示出圖片_
 
     # 檢查集合是否為空，若為空且未刪除則初始化資料
     if atlas_collection.count_documents({}) == 0 and not st.session_state.get("data_deleted", False):
-        st.write("初始化資料並創建向量儲存...")
+        st.write("初始化資料並建立向量儲存...")
         initialize_data(image_folder)
         st.session_state["data_initialized"] = True
     else:
@@ -1475,7 +1475,7 @@ _展示出圖片_
     if not st.session_state["data_deleted"]:
         # 檢查集合是否為空，若為空則初始化資料
         if atlas_collection.count_documents({}) == 0:
-            st.write("初始化資料並創建向量儲存...")
+            st.write("初始化資料並建立向量儲存...")
             initialize_data(image_folder)
             # 添加狀態的設定
             st.session_state["data_initialized"] = True

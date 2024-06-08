@@ -1,6 +1,6 @@
 # 在雲端建立 PostgreSQL 資料庫
 
-_使用 Amazon RDS 創建 PostgreSQL 資料庫_
+_使用 Amazon RDS 建立 PostgreSQL 資料庫_
 
 <br>
 
@@ -12,7 +12,7 @@ _使用 Amazon RDS 創建 PostgreSQL 資料庫_
 
 <br>
 
-## 創建資料庫
+## 建立資料庫
 
 1. 選擇 `Create database`。
 
@@ -26,7 +26,7 @@ _使用 Amazon RDS 創建 PostgreSQL 資料庫_
 
 6. 配置 VPC、安全組等網絡設置。
 
-7. 創建資料庫。
+7. 建立資料庫。
 
 8. 連接到雲端 PostgreSQL 資料庫：使用提供的資料庫終端點、用戶名和密碼來連接資料庫。
 

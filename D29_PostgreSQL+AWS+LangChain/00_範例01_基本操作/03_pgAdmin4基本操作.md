@@ -100,7 +100,7 @@ _若發生端口衝突_
 
 <br>
 
-## PostgreSQL 創建用戶和資料庫
+## PostgreSQL 建立用戶和資料庫
 
 1. 確認已經啟動 PostgreSQL 了服務器。
 
@@ -118,7 +118,7 @@ _若發生端口衝突_
 
 <br>
 
-3. 創建一個新的資料庫用戶同時設定密碼，這裡示範名稱是 `sam6238`、密碼是 `Sam112233`。
+3. 建立一個新的資料庫用戶同時設定密碼，這裡示範名稱是 `sam6238`、密碼是 `Sam112233`。
 
     ```sql
     CREATE USER sam6238 WITH PASSWORD 'Sam112233';
@@ -126,7 +126,7 @@ _若發生端口衝突_
 
 <br>
 
-4. 創建一個新的資料庫 `mydatabase`，可同時指定擁有者為前一個步驟新增的用戶 `sam6238`。
+4. 建立一個新的資料庫 `mydatabase`，可同時指定擁有者為前一個步驟新增的用戶 `sam6238`。
 
     ```sql
     CREATE DATABASE mydatabase OWNER sam6238;
@@ -168,7 +168,7 @@ _若發生端口衝突_
 
 <br>
 
-2. 在 PostgreSQL 命令行中創建 pgvector 擴展。
+2. 在 PostgreSQL 命令行中建立 pgvector 擴展。
 
     ```sql
     CREATE EXTENSION vector;

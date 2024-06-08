@@ -65,7 +65,7 @@ _已經在 NAS 上架設好容器_
 3. 使用 `MongoClient` 進行連接：
 
     ```python
-    # 創建了一個 `MongoClient` 對象
+    # 建立了一個 `MongoClient` 對象
     client = MongoClient(MONGODB_URI)
     ```
 

@@ -216,13 +216,13 @@ _重寫前一個範例，用於儲存和管理用戶活動日誌（Activity Logs
 
 ## 設置 Firebase
 
-_在 Firebase 控制台創建一個項目，並生成服務帳戶密鑰文件。_
+_在 Firebase 控制台建立一個項目，並生成服務帳戶密鑰文件。_
 
 <br>
 
 ## 敏感資訊
 
-1. 創建 secrets.toml 文件
+1. 建立 secrets.toml 文件
 
    ```toml
    [secrets]

@@ -216,7 +216,7 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
     # 假設 my_data 是一個包含 1000 筆文本數據的列表
     my_data = [f"My example {i}" for i in range(1000)]
 
-    # 創建 GPT-2 文本生成 pipeline
+    # 建立 GPT-2 文本生成 pipeline
     pipe = pipeline(model="openai-community/gpt2")
 
     # 定義數據生成器
@@ -245,7 +245,7 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
     # 假設 my_data 是一個包含 1000 筆文本數據的列表
     my_data = [f"My example {i}" for i in range(1000)]
 
-    # 創建 GPT-2 文本生成 pipeline
+    # 建立 GPT-2 文本生成 pipeline
     pipe = pipeline(model="openai-community/gpt2")
 
     # 定義數據生成器
@@ -360,7 +360,7 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
     total_width = target_size * len(images)
     max_height = target_size
 
-    # 創建一個新的空白圖像（考慮到標註文字的高度）
+    # 建立一個新的空白圖像（考慮到標註文字的高度）
     combined_image = Image.new(
         'RGB',
         (total_width, max_height + 30),
@@ -400,7 +400,7 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
     ```python
     from transformers import pipeline
 
-    # 創建圖像分類的 pipeline
+    # 建立圖像分類的 pipeline
     vision_classifier = pipeline(model="google/vit-base-patch16-224")
 
     # 處理多張圖像
@@ -548,7 +548,7 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
     # 確保你已經安裝了 pytesseract
     import pytesseract
 
-    # 創建文件問答的 pipeline
+    # 建立文件問答的 pipeline
     vqa = pipeline(model="impira/layoutlm-document-qa")
 
     # 處理圖片並提出問題
@@ -593,7 +593,7 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
     # 確保你已經安裝了 pytesseract
     import pytesseract
 
-    # 創建文件問答的 pipeline
+    # 建立文件問答的 pipeline
     vqa = pipeline(model="impira/layoutlm-document-qa")
 
     # 定義圖片和問題組
@@ -660,7 +660,7 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
 
 <br>
 
-## 在 Gradio 上創建 Web 應用
+## 在 Gradio 上建立 Web 應用
 
 1. 安裝包。
 
@@ -670,7 +670,7 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
 
 <br>
 
-2. 使用 Gradio 創建網頁應用。
+2. 使用 Gradio 建立網頁應用。
 
     ```python
     import gradio as gr

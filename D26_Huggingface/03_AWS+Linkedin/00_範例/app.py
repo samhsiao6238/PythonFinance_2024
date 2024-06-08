@@ -39,7 +39,7 @@ def ice_break_with(name: str):
         return "未能抓取該人的 LinkedIn 資料。"
 
     summary_template = """
-    鑑於有關某人的 LinkedIn 資訊 {information}，請創建以下內容，並用繁體中文回答：
+    鑑於有關某人的 LinkedIn 資訊 {information}，請建立以下內容，並用繁體中文回答：
     1. 先介紹他的名字
     2. 簡短總結
     2. 關於他的兩個有趣的事實

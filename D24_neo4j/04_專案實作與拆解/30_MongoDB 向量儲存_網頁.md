@@ -26,7 +26,7 @@ _以下步驟涵蓋了新聞爬取、嵌入向量生成、儲存到 MongoDB、�
         soup = BeautifulSoup(response.text, 'html.parser')
         articles = []
         
-        # 查找新聞標題和鏈接
+        # 搜尋新聞標題和鏈接
         for item in soup.select('li[class*="StreamMegaItem"]'):
             title_element = item.select_one('h3[class*="Mb"] a[class*="Fw"]')
             if title_element:

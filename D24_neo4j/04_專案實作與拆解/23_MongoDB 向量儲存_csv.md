@@ -140,7 +140,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
 
     # 檢查集合是否為空，若為空則初始化資料
     if atlas_collection.count_documents({}) == 0 or not os.path.exists("tfidf_vocabulary.json"):
-        print("初始化資料並創建向量儲存...")
+        print("初始化資料並建立向量儲存...")
         initialize_data("台股大盤2015_2024.csv")
     else:
         print("載入現有向量儲存...")

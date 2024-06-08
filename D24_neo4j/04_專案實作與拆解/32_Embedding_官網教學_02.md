@@ -161,7 +161,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 ## 繼續編輯
 
-1. 創建參考文件塊：將長的參考文本拆分成較小的塊以便於檢索，這可使用 `LangChain` 的 `RecursiveCharacterTextSplitter` 來完成的。
+1. 建立參考文件塊：將長的參考文本拆分成較小的塊以便於檢索，這可使用 `LangChain` 的 `RecursiveCharacterTextSplitter` 來完成的。
 
     ```python
     # 切割文件
@@ -264,7 +264,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 <br>
 
-## 在 MongoDB Atlas UI 中為每個集合創建向量索引
+## 在 MongoDB Atlas UI 中為每個集合建立向量索引
 
 1. 這段代碼是使用 `LangChain` 與 `OpenAI` 生成 `嵌入向量`，並將這些嵌入向量儲存到 `MongoDB Atlas`，然後進行檢索和評估。具體來說，該代碼定義了一個 `檢索器 (retriever) 函數`，用於根據指定的模型和參數從 MongoDB Atlas 中檢索嵌入向量，並從資料集中提取問題和正確答案，最後使用 `ragas 庫` 評估不同嵌入模型在檢索上的表現。
 
@@ -301,9 +301,9 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
     # 定義獲取檢索器的函數
     def get_retriever(model, k):
-        # 創建嵌入模型對象
+        # 建立嵌入模型對象
         embeddings = OpenAIEmbeddings(model=model)
-        # 創建 MongoDB 向量檢索對象
+        # 建立 MongoDB 向量檢索對象
         vector_store = MongoDBAtlasVectorSearch.from_connection_string(
             connection_string=ATLAS_CONNECTION_STRING,
             # 指定命名空間（資料庫和集合）
@@ -473,7 +473,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 <br>
 
-4. 追蹤性能變化：在 MongoDB Atlas 中記錄評估結果，並使用 Atlas Charts 來追蹤和可視化性能，這樣可以在 MongoDB Atlas 中創建儀表板來可視化評估結果。。
+4. 追蹤性能變化：在 MongoDB Atlas 中記錄評估結果，並使用 Atlas Charts 來追蹤和可視化性能，這樣可以在 MongoDB Atlas 中建立儀表板來可視化評估結果。。
 
     ```python
     from datetime import datetime
