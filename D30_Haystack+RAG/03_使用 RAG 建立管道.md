@@ -234,7 +234,7 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
 10. 輸出以下訊息，這裡逐行說明一下詳細內容。
 
     ```bash
-    # 這是一個 Pipeline 對象
+    # 這是一個 Pipeline 對象，記憶體位置在 0x377e1a8c0，這位置不重要
     <haystack.core.pipeline.pipeline.Pipeline object at 0x377e1a8c0>
     # 組件
     🚅 Components
