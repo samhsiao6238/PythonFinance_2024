@@ -1,6 +1,6 @@
 # Gradio 
 
-_可參考 [官方文檔](https://gradio.app/)_
+_可參考 [官方文件](https://gradio.app/)_
 
 <br>
 

@@ -1,6 +1,6 @@
 # pipeline
 
-_更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Transformers 文檔](https://huggingface.co/transformers/main_classes/pipelines.html) 。_
+_更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Transformers 文件](https://huggingface.co/transformers/main_classes/pipelines.html) 。_
 
 <br>
 

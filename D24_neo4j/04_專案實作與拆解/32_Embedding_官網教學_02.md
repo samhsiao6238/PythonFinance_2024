@@ -161,7 +161,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 ## 繼續編輯
 
-1. 創建參考文檔塊：將長的參考文本拆分成較小的塊以便於檢索，這可使用 `LangChain` 的 `RecursiveCharacterTextSplitter` 來完成的。
+1. 創建參考文件塊：將長的參考文本拆分成較小的塊以便於檢索，這可使用 `LangChain` 的 `RecursiveCharacterTextSplitter` 來完成的。
 
     ```python
     # 切割文件
@@ -232,13 +232,13 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 
     # 處理每個模型
-    # 遍歷文本文檔 (docs) 的批次，生成嵌入向量
-    # 並將嵌入向量和文本文檔一起存儲在 MongoDB 中
+    # 遍歷文本文件 (docs) 的批次，生成嵌入向量
+    # 並將嵌入向量和文本文件一起存儲在 MongoDB 中
     for model in EVAL_EMBEDDING_MODELS:
         embedded_docs = []
         print(f"Getting embeddings for the {model} model")
         # tqdm 用於顯示進度條
-        # 將嵌入向量和文本文檔存儲在 MongoDB 的集合，集合名稱與模型名稱相同
+        # 將嵌入向量和文本文件存儲在 MongoDB 的集合，集合名稱與模型名稱相同
         for i in tqdm(range(0, len(docs), batch_size)):
             end = min(len(docs), i + batch_size)
             batch = docs[i:end]

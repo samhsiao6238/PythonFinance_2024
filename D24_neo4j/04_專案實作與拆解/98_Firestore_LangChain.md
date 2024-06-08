@@ -122,7 +122,7 @@ _尚未實測_
 
 <br>
 
-7. 將消息列表更新到 Firestore 文檔中。
+7. 將消息列表更新到 Firestore 文件中。
 
     ```python
         def upsert_messages(self, new_message: Optional[BaseMessage] = None) -> None:
@@ -139,7 +139,7 @@ _尚未實測_
 
 <br>
 
-8. 除聊天記錄，並從 Firestore 刪除相應的文檔。
+8. 除聊天記錄，並從 Firestore 刪除相應的文件。
 
     ```python
         def clear(self) -> None:

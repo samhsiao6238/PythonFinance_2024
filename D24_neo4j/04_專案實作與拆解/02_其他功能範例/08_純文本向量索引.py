@@ -56,7 +56,7 @@ else:
     )
 
 # 標題
-st.title("文檔問答系統")
+st.title("文件問答系統")
 
 # 發問
 question = st.text_input("請輸入您的問題：", "請簡述這個文本的主要內容")
@@ -95,10 +95,10 @@ if st.button("提交問題"):
     st.write(answer)
 
     # 顯示結果
-    # st.subheader("相關文檔：")
+    # st.subheader("相關文件：")
     # for doc in documents:
     #     st.write(doc.page_content)
 
-    # # 可顯示原文檔案
-    # with st.expander("查看源文檔"):
+    # # 可顯示原文件案
+    # with st.expander("查看源文件"):
     #     pprint.pprint(documents)

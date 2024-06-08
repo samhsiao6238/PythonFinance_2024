@@ -74,7 +74,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
 
 <br>
 
-3. `delete_existing_data` 函數會刪除集合中的所有文檔，確保在初始化新數據時不會超過空間配額，`perform_vector_search` 函數會根據輸入的查詢進行向量搜索，並返回最相似的前5個文檔。
+3. `delete_existing_data` 函數會刪除集合中的所有文件，確保在初始化新數據時不會超過空間配額，`perform_vector_search` 函數會根據輸入的查詢進行向量搜索，並返回最相似的前5個文件。
 
 <br>
 
@@ -166,7 +166,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
         similarity_scores = cosine_similarity(query_vector, embeddings).flatten()
         sorted_indices = similarity_scores.argsort()[::-1]  # 按降序排列
 
-        # 獲取前 top_k 個相似的文檔
+        # 獲取前 top_k 個相似的文件
         top_documents = [descriptions[i] for i in sorted_indices[:top_k]]
         return top_documents
 
@@ -181,7 +181,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
     # 問題
     question = "請簡述台股在2024年全年度截至目前為止的市場表現"
 
-    # 獲取相關文檔
+    # 獲取相關文件
     top_documents = perform_vector_search(question)
 
     # 生成回答

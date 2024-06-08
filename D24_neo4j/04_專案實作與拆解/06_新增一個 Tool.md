@@ -275,7 +275,7 @@
     ```python
     # 測試代碼
     print('== 進行測試 ==')
-    prompt = "查詢產品名稱為可口可樂的所有文檔"
+    prompt = "查詢產品名稱為可口可樂的所有文件"
     response = generate_response(prompt)
     print(response)
     ```

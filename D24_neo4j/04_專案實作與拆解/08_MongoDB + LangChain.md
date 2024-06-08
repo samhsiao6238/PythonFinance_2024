@@ -42,11 +42,11 @@ _使用 LangChain 整合 MongoDB Atlas 建立 `向量索引` 並進行 `向量�
 
 <br>
 
-3. 在 `檢索增強生成（RAG）` 應用中，向量搜索能夠從資料庫中檢索出與查詢語句語義相似的文檔，提供更豐富的上下文給生成模型（如 GPT-4），從而生成更準確和相關的回答。
+3. 在 `檢索增強生成（RAG）` 應用中，向量搜索能夠從資料庫中檢索出與查詢語句語義相似的文件，提供更豐富的上下文給生成模型（如 GPT-4），從而生成更準確和相關的回答。
 
 <br>
 
-4. 向量搜索廣泛應用於推薦系統、相似圖片查找、自然語言處理（NLP）中的文檔檢索等領域。
+4. 向量搜索廣泛應用於推薦系統、相似圖片查找、自然語言處理（NLP）中的文件檢索等領域。
 
 <br>
 
@@ -76,19 +76,19 @@ _這個範例的功能是使用 Atlas Vector Search 和 LangChain 來實現基�
 
 <br>
 
-1. 實例化檢索器：將 `Atlas Vector Search` 實例化為 `檢索器`，用於根據相似度搜索來查找相關文檔。
+1. 實例化檢索器：將 `Atlas Vector Search` 實例化為 `檢索器`，用於根據相似度搜索來查找相關文件。
 
 2. 定義提示模板：建立一個提示模板，指導模型如何回答問題。
 
 3. 建立 OpenAI 聊天模型：使用 OpenAI 的 ChatGPT 模型來生成回答。
 
-4. 格式化文檔：定義一個函數，用於將文檔內容格式化為字串。
+4. 格式化文件：定義一個函數，用於將文件內容格式化為字串。
 
 5. 建立問答鏈：通過結合檢索器、提示模板和聊天模型，建立一個處理問答的鏈。
 
 6. 提出問題並獲取回答：向這個鏈提出一個問題，並獲取回答。
 
-7. 打印源文檔：最後，查找並打印與問題相關的源文檔。
+7. 打印源文件：最後，查找並打印與問題相關的源文件。
 
 <br>
 
@@ -171,7 +171,7 @@ _將自定義數據加載到 Atlas 並實例化為向量資料庫。_
 
 <br>
 
-2. 加載範例數據：使用以下代碼從指定的 URL 檢索 PDF 並加載原始文本數據，然後使用文本拆分器將數據拆分為較小的文檔。
+2. 加載範例數據：使用以下代碼從指定的 URL 檢索 PDF 並加載原始文本數據，然後使用文本拆分器將數據拆分為較小的文件。
 
     ```python
     # 載入 PDF
@@ -195,7 +195,7 @@ _將自定義數據加載到 Atlas 並實例化為向量資料庫。_
 
 <br>
 
-4. 實例化向量儲存：使用以下代碼從範例文檔建立一個名為 `vector_search` 的向量儲存，過程為 `from_documents` 方法 `接收文本文件（docs）` 並將其 `轉換為向量嵌入（embedding）` ，然後將這些向量嵌入`儲存在指定的資料庫集合（atlas_collection）` 中。
+4. 實例化向量儲存：使用以下代碼從範例文件建立一個名為 `vector_search` 的向量儲存，過程為 `from_documents` 方法 `接收文本文件（docs）` 並將其 `轉換為向量嵌入（embedding）` ，然後將這些向量嵌入`儲存在指定的資料庫集合（atlas_collection）` 中。
 
     ```python
     # 建立向量儲存
@@ -354,7 +354,7 @@ _索引構建完成後，返回運行向量搜索查詢_
     retriever = vector_search.as_retriever(
         # 指定搜索類型為相似度搜索
         search_type="similarity",
-        # 設定查詢時僅返回前 10 個相關性最高的文檔，並且只使用分數高於 0.75 的文檔
+        # 設定查詢時僅返回前 10 個相關性最高的文件，並且只使用分數高於 0.75 的文件
         search_kwargs={"k": 10, "score_threshold": 0.75},
     )
     # 定義提示模板
@@ -377,7 +377,7 @@ _索引構建完成後，返回運行向量搜索查詢_
     llm = ChatOpenAI()
 
 
-    # 定義格式化文檔的函數
+    # 定義格式化文件的函數
     def format_docs(docs):
         return "\n\n".join(doc.page_content for doc in docs)
 
@@ -399,7 +399,7 @@ _索引構建完成後，返回運行向量搜索查詢_
     print("Question: " + question)
     print("Answer: " + answer)
 
-    # 返回源文檔，獲取與問題相關的文檔
+    # 返回源文件，獲取與問題相關的文件
     documents = retriever.get_relevant_documents(question)
     print("\nSource documents:")
     pprint.pprint(documents)
@@ -420,7 +420,7 @@ _索引構建完成後，返回運行向量搜索查詢_
     ```python
     # 提取存儲在指定集合中的向量
     def retrieve_vectors(collection):
-        # 僅提取嵌入向量，過濾掉不包含 'embedding' 鍵的文檔
+        # 僅提取嵌入向量，過濾掉不包含 'embedding' 鍵的文件
         vectors = collection.find({"embedding": {"$exists": True}}, {"embedding": 1, "_id": 0})
         return list(vectors)
 

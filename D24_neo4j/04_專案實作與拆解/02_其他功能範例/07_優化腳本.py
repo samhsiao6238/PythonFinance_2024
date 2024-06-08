@@ -34,7 +34,7 @@ st.set_page_config(
 )
 
 # 側邊導覽欄
-st.sidebar.title("文檔問答系統")
+st.sidebar.title("文件問答系統")
 st.sidebar.write("讀取文件：論文01.pdf")
 
 
@@ -71,7 +71,7 @@ else:
     )
 
 # Main interface
-st.title("文檔問答系統")
+st.title("文件問答系統")
 
 # User input for question
 question = st.text_input("請輸入您的問題：", "簡述這篇論文的研究方法")
@@ -107,7 +107,7 @@ if st.button("提交問題"):
     answer = rag_chain.invoke(question)
 
     # Display results
-    st.subheader("相關文檔：")
+    st.subheader("相關文件：")
     for doc in documents:
         st.write(doc.page_content)
 
@@ -115,5 +115,5 @@ if st.button("提交問題"):
     st.write(answer)
 
     # Optionally display source documents
-    with st.expander("查看源文檔"):
+    with st.expander("查看源文件"):
         pprint.pprint(documents)

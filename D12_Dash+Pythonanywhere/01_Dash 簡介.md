@@ -38,7 +38,7 @@ _Python 的數據可視化框架，可參考 [Ployly 官網](https://dash.plotly
 
 <br>
 
-4. 建立專案資料夾與專案文檔，這裡先建立在桌面。
+4. 建立專案資料夾與專案文件，這裡先建立在桌面。
 
     ```bash
     cd ~/Desktop && mkdir exDash && cd exDash && touch app.py && code .

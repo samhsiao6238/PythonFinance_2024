@@ -74,7 +74,7 @@ _讀取 PDF 並建立向量索引系統_
     retriever = vector_search.as_retriever(
         # 指定搜索類型為相似度搜索
         search_type="similarity",
-        # 設定查詢時僅返回前 10 個相關性最高的文檔，並且只使用分數高於 0.75 的文檔
+        # 設定查詢時僅返回前 10 個相關性最高的文件，並且只使用分數高於 0.75 的文件
         search_kwargs={"k": 10, "score_threshold": 0.75},
     )
     # 定義提示模板
@@ -91,7 +91,7 @@ _讀取 PDF 並建立向量索引系統_
     llm = ChatOpenAI()
 
 
-    # 定義格式化文檔的函數
+    # 定義格式化文件的函數
     def format_docs(docs):
         return "\n\n".join(doc.page_content for doc in docs)
 
@@ -107,8 +107,8 @@ _讀取 PDF 並建立向量索引系統_
     # 問題
     question = "簡述這篇論文的研究方法"
 
-    # 獲取與問題相關的文檔
-    print("\n相關文檔：")
+    # 獲取與問題相關的文件
+    print("\n相關文件：")
     documents = retriever.get_relevant_documents(question)
     # print("\nSource documents:")
     pprint.pprint(documents)
@@ -179,18 +179,18 @@ _可參考前面章節的 `刪除指定資料庫對象`_
 
     # Delete all documents
     deleted_count = delete_all_documents()
-    print(f"已刪除 {deleted_count} 筆文檔。")
+    print(f"已刪除 {deleted_count} 筆文件。")
 
     # Check if the collection is empty
     is_empty = check_collection_empty()
     if is_empty:
-        print("文檔已清空。")
+        print("文件已清空。")
     else:
-        print("文檔仍存在於資料庫中。")
+        print("文件仍存在於資料庫中。")
 
     # Display current document count
     current_count = atlas_collection.count_documents({})
-    print(f"目前文檔數量：{current_count}")
+    print(f"目前文件數量：{current_count}")
     ```
 
 <br>
@@ -265,7 +265,7 @@ _優化腳本_
         )
 
     # Streamlit interface
-    st.title("文檔問答系統")
+    st.title("文件問答系統")
 
     # User input for question
     question = st.text_input("請輸入您的問題：", "簡述這篇論文的研究方法")
@@ -301,7 +301,7 @@ _優化腳本_
         answer = rag_chain.invoke(question)
 
         # Display results
-        st.subheader("相關文檔：")
+        st.subheader("相關文件：")
         for doc in documents:
             st.write(doc.page_content)
 
@@ -309,7 +309,7 @@ _優化腳本_
         st.write(answer)
 
         # Optionally display source documents
-        with st.expander("查看源文檔"):
+        with st.expander("查看源文件"):
             pprint.pprint(documents)
     ```
 
@@ -341,7 +341,7 @@ _優化腳本_
 
     ```python
     # 側邊導覽欄
-    st.sidebar.title("文檔問答系統")
+    st.sidebar.title("文件問答系統")
     st.sidebar.write("讀取文件：論文01.pdf")
     ```
 
@@ -365,17 +365,17 @@ _優化腳本_
 
 <br>
 
-2. 這腳本的目的是創建一個 `處理問答的流程鏈`，該鏈條將用於基於語義相似度從文檔中檢索相關內容並生成回答。
+2. 這腳本的目的是創建一個 `處理問答的流程鏈`，該鏈條將用於基於語義相似度從文件中檢索相關內容並生成回答。
 
 <br>
 
 3. `retriever | format_docs`
 
-    - `retriever`：這是由 `vector_search.as_retriever()` 創建的檢索器。它負責基於相似度從向量儲存中檢索相關文檔。
+    - `retriever`：這是由 `vector_search.as_retriever()` 創建的檢索器。它負責基於相似度從向量儲存中檢索相關文件。
 
-    - `format_docs`：這是一個函數，用於將檢索到的文檔格式化為字串。
+    - `format_docs`：這是一個函數，用於將檢索到的文件格式化為字串。
 
-    - `retriever | format_docs`：這是管道運算子（`|`），它將 `retriever` 的輸出直接傳遞給 `format_docs` 函數。換句話說，從 `retriever` 檢索到的文檔會被傳遞給 `format_docs` 函數進行格式化。
+    - `retriever | format_docs`：這是管道運算子（`|`），它將 `retriever` 的輸出直接傳遞給 `format_docs` 函數。換句話說，從 `retriever` 檢索到的文件會被傳遞給 `format_docs` 函數進行格式化。
 
 <br>
 
@@ -447,7 +447,7 @@ _優化腳本_
     )
 
     # 側邊導覽欄
-    st.sidebar.title("文檔問答系統")
+    st.sidebar.title("文件問答系統")
     st.sidebar.write("讀取文件：論文01.pdf")
 
 
@@ -486,7 +486,7 @@ _優化腳本_
         )
 
     # 主標題
-    st.title("文檔問答系統")
+    st.title("文件問答系統")
 
     # 文字輸入框，用於查詢
     question = st.text_input("請輸入您的問題：", "簡述這篇論文的研究方法")
@@ -526,7 +526,7 @@ _優化腳本_
         answer = rag_chain.invoke(question)
 
         # Display results
-        st.subheader("相關文檔：")
+        st.subheader("相關文件：")
         for doc in documents:
             st.write(doc.page_content)
 
@@ -534,7 +534,7 @@ _優化腳本_
         st.write(answer)
 
         # Optionally display source documents
-        with st.expander("查看源文檔"):
+        with st.expander("查看源文件"):
             pprint.pprint(documents)
     ```
 

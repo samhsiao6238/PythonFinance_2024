@@ -48,7 +48,7 @@ _讀取 Firebase 節點上的資料，然後寫入 MongoDB_
         # 將數據儲存到MongoDB
         try:
             result = collection.insert_many([{'product_name': key, **value} for key, value in momo_data.items()])
-            print(f"成功將資料儲存到MongoDB, 插入的文檔ID: {result.inserted_ids}")
+            print(f"成功將資料儲存到MongoDB, 插入的文件ID: {result.inserted_ids}")
         except Exception as e:
             print(f"將數據儲存到MongoDB時發生錯誤: {e}")
     else:
@@ -60,7 +60,7 @@ _讀取 Firebase 節點上的資料，然後寫入 MongoDB_
 
 <br>
 
-4. 複製以上腳本，貼在 `Jupyter NB` 運行後，可顯示以下訊息，其中 `Objectid` 就是寫入資料庫的文檔 ID。
+4. 複製以上腳本，貼在 `Jupyter NB` 運行後，可顯示以下訊息，其中 `Objectid` 就是寫入資料庫的文件 ID。
 
     ![](images/img_82.png)
 

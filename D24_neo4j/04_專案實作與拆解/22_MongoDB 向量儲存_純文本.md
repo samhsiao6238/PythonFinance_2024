@@ -83,7 +83,7 @@ _讀取純文本文件_
         )
 
     # 標題
-    st.title("文檔問答系統")
+    st.title("文件問答系統")
 
     # 發問
     question = st.text_input("請輸入您的問題：", "請簡述這個文本的主要內容")
@@ -123,13 +123,13 @@ _讀取純文本文件_
         st.subheader("回答：")
         st.write(answer)
 
-        # 相關文檔 
-        # st.subheader("相關文檔：")
+        # 相關文件 
+        # st.subheader("相關文件：")
         # for doc in documents:
         #     st.write(doc.page_content)
 
-        # 可顯示原文檔案
-        # with st.expander("查看源文檔"):
+        # 可顯示原文件案
+        # with st.expander("查看源文件"):
         #     pprint.pprint(documents)
     ```
 

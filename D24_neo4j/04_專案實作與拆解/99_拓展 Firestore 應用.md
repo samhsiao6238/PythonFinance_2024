@@ -208,8 +208,8 @@ _重寫前一個範例，用於儲存和管理用戶活動日誌（Activity Logs
    - `prepare_firestore()` 準備 Firestore 客戶端並加載現有的活動記錄。
    - `load_logs()` 從 Firestore 加載活動記錄。
    - `add_log()` 將新活動記錄添加到列表中並更新 Firestore。
-   - `upsert_logs()` 將活動記錄列表更新到 Firestore 文檔中。
-   - `clear()` 清除活動記錄，並從 Firestore 刪除相應的文檔。
+   - `upsert_logs()` 將活動記錄列表更新到 Firestore 文件中。
+   - `clear()` 清除活動記錄，並從 Firestore 刪除相應的文件。
 
 <br>
 

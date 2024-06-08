@@ -18,14 +18,14 @@
 
 <br>
 
-3. 建立專案所需資料夾與文檔。
+3. 建立專案所需資料夾與文件。
 
     ```bash
     # 建立並進入專案資料夾
     mkdir earthquakesInfo && cd earthquakesInfo
-    # 建立文檔
+    # 建立文件
     touch home.py
-    # 建立分頁資料夾與文檔
+    # 建立分頁資料夾與文件
     mkdir pages && touch pages/stats.py && touch pages/map.py
     ```
 
