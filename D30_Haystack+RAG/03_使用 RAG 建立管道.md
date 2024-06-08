@@ -269,7 +269,7 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
 
 <br>
 
-11. 提問：使用管道的 `run()` 方法。確保為 `text_embedder` 和 `prompt_builder` 提供問題。這確保了模板提示中的 `{{question}}` 變量被替換為的具體問題。
+11. 使用管道的 `run()` 方法進行提問，在 `text_embedder` 和 `prompt_builder` 參數中會依據模板提示中的 `question` 變量進行提問。
 
     ```python
     # 提問
