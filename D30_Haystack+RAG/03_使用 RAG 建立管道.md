@@ -87,13 +87,27 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
 
 <br>
 
-4. 將文件寫入 DocumentStore：運行 `doc_embedder` 與文件，嵌入器將為每個文件創建嵌入並將這些嵌入儲存在文件對象的 `embedding` 字段中。然後使用 `write_documents()` 方法將文件寫入 DocumentStore。
+4. 運行後會顯示提示，表明這個擴充功能要求電腦必須安裝以下工具，而這些工具是不能透過擴充功能直接安裝的，如果下方有尚未安裝的工具，可點擊下面的連結進入下載頁面。
+
+    ![](images/img_11.png)
+
+<br>
+
+5. 除此還包含了版本過舊的插件，其中已經安裝的會呈現反白，接著可分別點擊進行安裝，安裝了即便用不上也不影響 VSCode 運作，可放心安裝。
+
+    ![](images/img_12.png)
+
+<br>
+
+6. 將文件寫入 DocumentStore：運行 `doc_embedder` 與文件，嵌入器將為每個文件創建嵌入並將這些嵌入儲存在文件對象的 `embedding` 字段中。然後使用 `write_documents()` 方法將文件寫入 DocumentStore。
 
     ```python
     # 創建文件嵌入並寫入文件儲存
     docs_with_embeddings = doc_embedder.run(docs)
     document_store.write_documents(docs_with_embeddings["documents"])
     ```
+
+    ![](images/img_13.png)
 
 <br>
 
