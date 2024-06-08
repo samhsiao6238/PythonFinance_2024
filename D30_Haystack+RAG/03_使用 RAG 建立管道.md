@@ -34,7 +34,7 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
 
 <br>
 
-3. 安裝 Haystack 2.0 和其他所需的套件。
+3. 安裝 Haystack 2.0 和其他所需的套件，並透過條件指定版本。
 
     ```bash
     pip install haystack-ai "datasets>=2.6.1" "sentence-transformers>=2.2.0"
@@ -62,8 +62,13 @@ _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成�
     from haystack import Document
 
     # 加載數據集
-    dataset = load_dataset("bilgeyucel/seven-wonders", split="train")
-    docs = [Document(content=doc["content"], meta=doc["meta"]) for doc in dataset]
+    dataset = load_dataset(
+        "bilgeyucel/seven-wonders", split="train"
+    )
+    docs = [
+        Document(content=doc["content"],
+        meta=doc["meta"]) for doc in dataset
+    ]
     ```
 
 <br>
