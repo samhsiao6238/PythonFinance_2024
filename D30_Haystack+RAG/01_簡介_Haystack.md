@@ -6,7 +6,7 @@ _[Haystack 官網](https://haystack.deepset.ai/)、[deepset 官網](https://www.
 
 ## 簡介
 
-1. `Haystack` 是由 `deepset GmbH` 開發的開源框架，而 `deepset` 成立於 2018 年，是一家專注於建立和推動自然語言處理（NLP）技術的公司，主要產品有 `Haystack`、`deepset Cloud`，其中 `Haystack` 是一個在開源社區很受歡迎的 NLP 工具，。
+1. `Haystack` 是由 `deepset GmbH` 開發的開源框架，而 `deepset` 成立於 2018 年，是一家專注於建立和推動自然語言處理（NLP）技術的公司，主要產品有 `Haystack`、`deepset Cloud`，其中 `Haystack` 是一個在開源社區很受歡迎的 NLP 工具。
 
 2. `Haystack` 用於建立基於 `搜索` 和 `問答` 的應用程序，允許開發者建立和部署 `端到端` 的自然語言處理（NLP）管道，特別適合處理大型文件集合，並在這些文件中找到準確答案。
 
@@ -14,7 +14,7 @@ _[Haystack 官網](https://haystack.deepset.ai/)、[deepset 官網](https://www.
 
 ## 主要功能
 
-1. 文件檢索 (Document Retrieval)
+1. 文件檢索 (Document Retrieval)。
 
    - 使用向量搜索和 `BM25` 這樣的傳統方法進行高效的文件檢索。
 
@@ -22,7 +22,7 @@ _[Haystack 官網](https://haystack.deepset.ai/)、[deepset 官網](https://www.
 
 <br>
 
-2. 問答系統 (Question Answering)
+2. 問答系統 (Question Answering)。
 
    - 支持基於 transformer 模型的問答系統，如 BERT、RoBERTa 和其他 Hugging Face 模型。
 
@@ -30,13 +30,13 @@ _[Haystack 官網](https://haystack.deepset.ai/)、[deepset 官網](https://www.
 
 <br>
 
-3. 生成回答 (Answer Generation)
+3. 生成回答 (Answer Generation)。
 
    - 使用生成模型（如 GPT-4-turbo）來生成更加自然的回答。
 
 <br>
 
-4. 管道組裝 (Pipeline Assembly)
+4. 管道組裝 (Pipeline Assembly)。
 
    - 使用靈活的管道架構，可以組裝和配置不同的模組以滿足具體需求。
 
@@ -44,7 +44,7 @@ _[Haystack 官網](https://haystack.deepset.ai/)、[deepset 官網](https://www.
 
 <br>
 
-5. 多語言支持
+5. 多語言支持。
 
    - 支持多語言文件處理和查詢。
 
@@ -52,19 +52,19 @@ _[Haystack 官網](https://haystack.deepset.ai/)、[deepset 官網](https://www.
 
 ## 優勢
 
-1. 開源和靈活性
+1. 開源和靈活性。
 
    - 作為開源框架，Haystack 提供了高度的靈活性和可擴展性，可以根據需求進行定制。
 
 <br>
 
-2. 端到端的解決方案
+2. 端到端的解決方案。
 
    - Haystack 提供了從文件檢索到答案生成的完整解決方案，適合建立各種信息檢索和問答系統。
 
 <br>
 
-3. 社區支持和文件
+3. 社區支持和文件。
 
    - 擁有活躍的開發者社區和詳細的文件，使得上手和使用更加簡單。
 
