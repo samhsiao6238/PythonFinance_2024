@@ -8,11 +8,19 @@
 
 1. 這是官方在 `2024/04/25` 發佈的 [官方範例](https://haystack.deepset.ai/tutorials/29_serializing_pipelines)。
 
+<br>
+
 2. 使用的組件包含 `HuggingFaceLocalGenerator`、`PromptBuilder`。
+
+<br>
 
 3. 本範例目標是在 `YAML` 和 `Python 代碼` 之間進行 `序列化` 和 `反序列化`。
 
+<br>
+
 4. `序列化` 是將 `管道` 轉換為可以保存到磁碟或其他存儲介質的格式，以便之後可以再次加載和使用。
+
+<br>
 
 5. `Haystack` 支持將管道直接序列化為 `YAML` 格式，如此便可輕鬆地進行更改，這個範例將建立一個簡單的 Python 管道，將其序列化為 `YAML`，進行修改後再反序列化回 `Haystack` 管道。
 
@@ -131,6 +139,8 @@
 
 1. `YAML` 是一種人類可讀的 `數據序列化語言`，通常用於 `配置文件` 和 `數據交換`，而 `序列化管道 YAML` 是指將一個複雜的對象或數據結構轉換為一種可以保存到文件、傳輸或存儲的 `文本格式`，這種 `文本格式` 可以是 `YAML`。
 
+<br>
+
 2. `Haystack` 內置支持 `YAML`，並使用 `dumps()` 方法將 `管道` 轉換為 `YAML`。
 
     ```python
@@ -141,7 +151,7 @@
 
 <br>
 
-2. 會得到如下所示的序列化後的管道 `YAML` 文件。
+3. 會得到如下所示的序列化後的管道 `YAML` 文件。
 
     ```yaml
     管道的 YAML 表示：
@@ -186,7 +196,11 @@
 
 ## 編輯 YAML 中的管道
 
-1. 修改序列化的管道文件 YAML，例如修改 `promptbuilder` 的模板，將提供的句子翻譯為法語。
+1. 特別注意， `YAML` 文件對於縮排格式要求非常嚴謹，任何的格式錯誤都將導致解析失敗。
+
+<br>
+
+2. 修改序列化的管道文件 YAML，例如修改其中 `promptbuilder` 的模板，將提供的句子翻譯為法語。
 
     ```yaml
     yaml_pipeline = """
@@ -234,23 +248,37 @@
 
 <br>
 
-## 實務應用與拓展說明
+2. 成功翻譯會得到以下結果。
 
-實務應用：
+    ![](images/img_51.png)
+
+<br>
+
+## 實務應用
 
 1. 自動化內容生成：在實際業務中，這種管道可以用於自動生成內容，如新聞摘要、產品描述等。
 
+<br>
+
 2. 翻譯服務：可以配置不同的模型和模板，實現多語種翻譯和語言處理服務。
+
+<br>
 
 3. 知識管理：在企業知識庫中，序列化的管道可以用於文檔分類、信息抽取等任務，提高知識管理效率。
 
-拓展說明：
+<br>
+
+## 拓展說明
 
 1. 使用更強大的模型：可以替換 `google/flan-t5-large` 為其他更強大的模型，根據業務需求進行調整。
-2. 擴展到多模態數據：不僅限於文本數據，可以加入圖像、語音等多模態數據的處理。
-3. 集成其他服務：可以與其他機器學習或深度學習框架集成，實現更複雜的數據處理和分析。
 
-這樣的管道設計不僅靈活，而且便於維護和擴展，適合多種業務場景的應用。希望這些說明能幫助您更好地理解和應用這些技術。
+<br>
+
+2. 擴展到多模態數據：不僅限於文本數據，可以加入圖像、語音等多模態數據的處理。
+
+<br>
+
+3. 集成其他服務：可以與其他機器學習或深度學習框架集成，實現更複雜的數據處理和分析。
 
 <br>
 
@@ -258,101 +286,141 @@
 
 _[官方文件](https://docs.haystack.deepset.ai/docs/huggingfacelocalgenerator)_
 
+<br>
+
 1. 常見於 `PromptBuilder` 之後，輸入 `"prompt"` 作為對 LLM 的提示字串，輸出的 `"replies"` 是由 LLM 生成的字串列表。
+
+<br>
 
 2. `HuggingFaceLocalGenerator` 是一個接口，允許使用本地運行的 `Hugging Face` 模型來生成文本，當 `LLM` 在本地運行時，可能需要強大的機器，這取決於所選模型及其參數數量。
 
+<br>
+
 3. 此組件設計用於 `文本生成`，而不是 `聊天`，如果需要使用 `Hugging Face LLM` 進行聊天，請使用 `HuggingFaceLocalChatGenerator`。
 
-- 對於遠程文件授權，此組件默認使用 `HF_API_TOKEN` 環境變量。或者，可以在初始化時傳遞 Hugging Face API 令牌：
-  ```python
-  local_generator = HuggingFaceLocalGenerator(token=Secret.from_token("<your-api-key>"))
-  ```
+<br>
 
-4. 獨立使用
+4. 對於遠程文件授權，此組件默認使用 `HF_API_TOKEN` 環境變量。或者，可以在初始化時傳遞 Hugging Face API 令牌。
+
+    ```python
+    local_generator = HuggingFaceLocalGenerator(
+        token=Secret.from_token("<輸入自己的令牌>")
+    )
+    ```
+
+<br>
+
+5. 獨立使用。
+
+    ```python
+    from haystack.components.generators import HuggingFaceLocalGenerator
+
+    # 初始化本地生成器，設置模型和生成參數
+    generator = HuggingFaceLocalGenerator(
+        model="google/flan-t5-large",
+        task="text2text-generation",
+        generation_kwargs={
+            "max_new_tokens": 100,
+            "temperature": 0.9,
+        }
+    )
+
+    # 預熱生成器
+    generator.warm_up()
+
+    # 運行生成器，輸出結果
+    # 美國現任總統是誰
+    _answer= generator.run(
+        "Who is the current president of the United States?"
+    )
+    print(_answer)
+    ```
+
+<br>
+
+6. 這答案也差太多了點。
+
+    ```python
+    {'replies': ['dwight eisenhower']}
+    ```
+
+<br>
+
+7. 在管道中使用。
+
+    ```python
+    from haystack import Pipeline
+    from haystack.components.retrievers.in_memory import InMemoryBM25Retriever
+    from haystack.components.builders.prompt_builder import PromptBuilder
+    from haystack.components.generators import HuggingFaceLocalGenerator
+    from haystack.document_stores.in_memory import InMemoryDocumentStore
+    from haystack import Document
+
+    # 初始化內存文檔存儲，並寫入文檔
+    docstore = InMemoryDocumentStore()
+    docstore.write_documents([
+        Document(content="Rome is the capital of Italy"),
+        Document(content="Paris is the capital of France")
+    ])
+
+    # 初始化本地生成器
+    generator = HuggingFaceLocalGenerator(
+        model="google/flan-t5-large",
+        task="text2text-generation",
+        generation_kwargs={
+            "max_new_tokens": 100,
+            "temperature": 0.9,
+        }
+    )
+
+    # 查詢問題
+    query = "What is the capital of France?"
+
+    # 定義模板
+    template = """
+    Given the following information, answer the question.
+
+    Context:
+    {% for document in documents %}
+        {{ document.content }}
+    {% endfor %}
+
+    Question: {{ query }}?
+    """
+
+    # 初始化管道，添加組件
+    pipe = Pipeline()
+    pipe.add_component("retriever", InMemoryBM25Retriever(document_store=docstore))
+    pipe.add_component("prompt_builder", PromptBuilder(template=template))
+    pipe.add_component("llm", generator)
+
+    # 連接管道中的組件
+    pipe.connect("retriever", "prompt_builder.documents")
+    pipe.connect("prompt_builder", "llm")
+
+    # 運行管道，輸出結果
+    res = pipe.run({
+        "prompt_builder": {
+            "query": query
+        },
+        "retriever": {
+            "query": query
+        }
+    })
+
+    print(res)
+    ```
+
+<br>
+
+8. 這答案還差不多。
 
 ```python
-from haystack.components.generators import HuggingFaceLocalGenerator
-
-# 初始化本地生成器，設置模型和生成參數
-generator = HuggingFaceLocalGenerator(
-    model="google/flan-t5-large",
-    task="text2text-generation",
-    generation_kwargs={
-        "max_new_tokens": 100,
-        "temperature": 0.9,
-    }
-)
-
-# 預熱生成器
-generator.warm_up()
-
-# 運行生成器，輸出結果
-print(generator.run("Who is the best American actor?"))
-# {'replies': ['john wayne']}
+{'llm': {'replies': ['Paris']}}
 ```
 
-5. 在管道中使用
+<br>
 
-```python
-from haystack import Pipeline
-from haystack.components.retrievers.in_memory import InMemoryBM25Retriever
-from haystack.components.builders.prompt_builder import PromptBuilder
-from haystack.components.generators import HuggingFaceLocalGenerator
-from haystack.document_stores.in_memory import InMemoryDocumentStore
-from haystack import Document
+___
 
-# 初始化內存文檔存儲，並寫入文檔
-docstore = InMemoryDocumentStore()
-docstore.write_documents([
-    Document(content="Rome is the capital of Italy"),
-    Document(content="Paris is the capital of France")
-])
-
-# 初始化本地生成器
-generator = HuggingFaceLocalGenerator(
-    model="google/flan-t5-large",
-    task="text2text-generation",
-    generation_kwargs={
-        "max_new_tokens": 100,
-        "temperature": 0.9,
-    }
-)
-
-# 查詢問題
-query = "What is the capital of France?"
-
-# 定義模板
-template = """
-Given the following information, answer the question.
-
-Context:
-{% for document in documents %}
-    {{ document.content }}
-{% endfor %}
-
-Question: {{ query }}?
-"""
-
-# 初始化管道，添加組件
-pipe = Pipeline()
-pipe.add_component("retriever", InMemoryBM25Retriever(document_store=docstore))
-pipe.add_component("prompt_builder", PromptBuilder(template=template))
-pipe.add_component("llm", generator)
-
-# 連接管道中的組件
-pipe.connect("retriever", "prompt_builder.documents")
-pipe.connect("prompt_builder", "llm")
-
-# 運行管道，輸出結果
-res = pipe.run({
-    "prompt_builder": {
-        "query": query
-    },
-    "retriever": {
-        "query": query
-    }
-})
-
-print(res)
-```
+_END_
