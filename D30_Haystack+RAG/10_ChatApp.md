@@ -56,13 +56,13 @@
 
 <br>
 
-2. 實作上，使用 `ChatMessage.from_system()` 創建一個具有 `SYSTEM` 角色的 `ChatMessage` 對象，然後使用 `ChatMessage.from_user()` 創建另一個具有 `USER` 角色的 `ChatMessage`。接著，將這些消息列表傳遞給 `OpenAIChatGenerator` 並運行。
+2. 實作上，使用 `ChatMessage.from_system()` 建立一個具有 `SYSTEM` 角色的 `ChatMessage` 對象，然後使用 `ChatMessage.from_user()` 建立另一個具有 `USER` 角色的 `ChatMessage`。接著，將這些消息列表傳遞給 `OpenAIChatGenerator` 並運行。
 
     ```python
     from haystack.dataclasses import ChatMessage
     from haystack.components.generators.chat import OpenAIChatGenerator
 
-    # 創建系統消息和用戶消息的 ChatMessage 對象
+    # 建立系統消息和用戶消息的 ChatMessage 對象
     messages = [
         ChatMessage.from_system(
             "即使某些輸入資料採用其他語言，也始終以繁體中文回應。"
@@ -126,13 +126,13 @@
 
 <br>
 
-## 從 Haystack 管道創建函數調用工具
+## 從 Haystack 管道建立函數調用工具
 
 1. 要使用 `OpenAI` 的 `函數調用功能`，需要通過 `generation_kwargs` 參數將工具介紹給 `OpenAIChatGenerator`，本範例使用 `Haystack RAG` 管道作為工具之一，因此需要將文件索引到文件儲存中，然後在其上構建 RAG 管道。
 
 <br>
 
-2. 創建一個管道，將範例數據集儲存到 `InMemoryDocumentStore` 中，並使用 `SentenceTransformersDocumentEmbedder` 來生成文件的嵌入，然後使用 `DocumentWriter` 將它們寫入 `文件儲存`中，將這些組件添加到管道後，將它們連接並運行管道。
+2. 建立一個管道，將範例數據集儲存到 `InMemoryDocumentStore` 中，並使用 `SentenceTransformersDocumentEmbedder` 來生成文件的嵌入，然後使用 `DocumentWriter` 將它們寫入 `文件儲存`中，將這些組件添加到管道後，將它們連接並運行管道。
 
     ```python
     from haystack import Pipeline, Document
@@ -140,7 +140,7 @@
     from haystack.components.writers import DocumentWriter
     from haystack.components.embedders import SentenceTransformersDocumentEmbedder
 
-    # 創建文件
+    # 建立文件
     documents = [
         Document(content="我的名字是 Jean，我住在 Paris。"),
         Document(content="我的名字是 Mark，我住在 Berlin。"),
@@ -152,7 +152,7 @@
     # 初始化內存文件儲存
     document_store = InMemoryDocumentStore()
 
-    # 創建索引管道
+    # 建立索引管道
     indexing_pipeline = Pipeline()
     indexing_pipeline.add_component(
         instance=SentenceTransformersDocumentEmbedder(model="sentence-transformers/all-MiniLM-L6-v2"), name="doc_embedder"
@@ -204,7 +204,7 @@
     答案:
     """
 
-    # 創建 RAG 管道
+    # 建立 RAG 管道
     rag_pipe = Pipeline()
     rag_pipe.add_component(
         "embedder",
@@ -300,9 +300,9 @@
 
 <br>
 
-## 創建工具列表
+## 建立工具列表
 
-1. 除了 `rag_pipeline_func` 工具外，還創建一個名為 `get_current_weather` 的新工具，用於獲取 `城市的天氣信息`，以下函數中使用硬編碼的數據來展示功能。
+1. 除了 `rag_pipeline_func` 工具外，還建立一個名為 `get_current_weather` 的新工具，用於獲取 `城市的天氣信息`，以下函數中使用硬編碼的數據來展示功能。
 
     ```python
     WEATHER_INFO = {
@@ -389,7 +389,7 @@
     from haystack.components.generators.chat import OpenAIChatGenerator
     from haystack.components.generators.utils import print_streaming_chunk
 
-    # 創建消息列表，包含系統消息和用戶查詢
+    # 建立消息列表，包含系統消息和用戶查詢
     messages = [
         ChatMessage.from_system(
             "不要假設將哪些值插入函數中。如果用戶要求不明確，請要求澄清。"
@@ -509,7 +509,7 @@
     ```python
     from haystack.dataclasses import ChatMessage
 
-    # 創建函數回應消息
+    # 建立函數回應消息
     function_message = ChatMessage.from_function(
         content=json.dumps(function_response),
         name=function_name
@@ -611,7 +611,7 @@
                 break
         return response["replies"][0].content
 
-    # 創建聊天界面
+    # 建立聊天界面
     demo = gr.ChatInterface(
         fn=chatbot_with_fc,
         # 顯示在下方的範例欄位
