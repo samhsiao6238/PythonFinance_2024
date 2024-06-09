@@ -77,7 +77,7 @@
 
     # 建立 PromptBuilder，使用定義的模板
     builder = PromptBuilder(template=template)
-    logging.info("PromptBuilder 已創建。")
+    logging.info("PromptBuilder 已建立。")
 
     # 建立 HuggingFaceLocalGenerator，指定使用的模型和生成的參數
     logging.info("開始加載模型，這可能需要一些時間。")
@@ -86,7 +86,7 @@
         task="text2text-generation",
         generation_kwargs={"max_new_tokens": 300, "temperature": 0.7},
     )
-    logging.info("HuggingFaceLocalGenerator 已創建並初始化。")
+    logging.info("HuggingFaceLocalGenerator 已建立並初始化。")
 
     # 建立管道
     pipeline = Pipeline()
@@ -264,7 +264,7 @@
 
 <br>
 
-3. 知識管理：在企業知識庫中，序列化的管道可以用於文檔分類、信息抽取等任務，提高知識管理效率。
+3. 知識管理：在企業知識庫中，序列化的管道可以用於文件分類、信息抽取等任務，提高知識管理效率。
 
 <br>
 
@@ -356,7 +356,7 @@ _[官方文件](https://docs.haystack.deepset.ai/docs/huggingfacelocalgenerator)
     from haystack.document_stores.in_memory import InMemoryDocumentStore
     from haystack import Document
 
-    # 初始化內存文檔存儲，並寫入文檔
+    # 初始化內存文件存儲，並寫入文件
     docstore = InMemoryDocumentStore()
     docstore.write_documents([
         Document(content="Rome is the capital of Italy"),
