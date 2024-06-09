@@ -188,31 +188,31 @@
 
 1. 修改序列化的管道文件 YAML，例如修改 `promptbuilder` 的模板，將提供的句子翻譯為法語。
 
-```yaml
-yaml_pipeline = """
-components:
-  builder:
-    init_parameters:
-      template: "\nPlease translate the following to French: \n{{ sentence }}\n"
-    type: haystack.components.builders.prompt_builder.PromptBuilder
-  llm:
-    init_parameters:
-      generation_kwargs:
-        max_new_tokens: 150
-      huggingface_pipeline_kwargs:
-        device: cpu
-        model: google/flan-t5-large
-        task: text2text-generation
-        token: null
-      stop_words: null
-    type: haystack.components.generators.hugging_face_local.HuggingFaceLocalGenerator
-connections:
-- receiver: llm.prompt
-  sender: builder.prompt
-max_loops_allowed: 100
-metadata: {}
-"""
-```
+    ```yaml
+    yaml_pipeline = """
+    components:
+      builder:
+        init_parameters:
+          template: "\nPlease translate the following to French: \n{{ sentence }}\n"
+        type: haystack.components.builders.prompt_builder.PromptBuilder
+      llm:
+        init_parameters:
+          generation_kwargs:
+            max_new_tokens: 150
+          huggingface_pipeline_kwargs:
+            device: cpu
+            model: google/flan-t5-large
+            task: text2text-generation
+            token: null
+          stop_words: null
+        type: haystack.components.generators.hugging_face_local.HuggingFaceLocalGenerator
+    connections:
+    - receiver: llm.prompt
+      sender: builder.prompt
+    max_loops_allowed: 100
+    metadata: {}
+    """
+    ```
 
 <br>
 
