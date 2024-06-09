@@ -16,4 +16,8 @@
         // 要取消的其他項目代碼，以逗號相隔即可
         // "--ignore=E501, E402"
     ],
+    "[yaml]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
+
