@@ -492,13 +492,76 @@ _在 Haystack 的最新官方文件中並無刪除或斷開組件連接得方法
 
 <br>
 
-6. 查看管道。
+6. 輸出如下。
+
+    ```bash
+    <haystack.core.pipeline.pipeline.Pipeline object at 0x391b3a470>
+
+    🚅 Components
+        - multi_language_embedder: SentenceTransformersTextEmbedder
+        - retriever: InMemoryEmbeddingRetriever
+        - prompt_builder: PromptBuilder
+        - generator: OpenAIGenerator
+        - answer_builder: AnswerBuilder
+
+    🛤️ Connections
+        - multi_language_embedder.embedding -> retriever.query_embedding (List[float])
+        - retriever.documents -> prompt_builder.documents (List[Document])
+        - retriever.documents -> answer_builder.documents (List[Document])
+        - prompt_builder.prompt -> generator.prompt (str)
+        - generator.replies -> answer_builder.replies (List[str])
+        - generator.meta -> answer_builder.meta (List[Dict[str, Any]])
+    ```
+
+7. 查看管道。
+
+    ```python
+    new_rag_pipeline.draw('new_rag_pipeline.png')
+    ```
 
     ![](images/img_65.png)
 
 <br>
 
-7. 使用中文進行提問。
+## 自定義輸出圖片函數
+
+1. 建立一個資料夾 `utils`，添加一個模組 `draw_pipeline.py`，編輯內容如下。
+
+    ```python
+    # 導入需要的函數和模組
+    from IPython.display import Image, display  # 用於顯示圖片的 IPython 函數
+
+
+    # 定義擴展的 draw 函數
+    def draw_and_display(pipeline, image_path):
+        """
+        擴展 draw 函數，生成圖片後直接在 Jupyter Notebook 中顯示。
+
+        :param pipeline: 要繪製的管道對象
+        :param image_path: 保存圖片的路徑
+        """
+        # 生成並保存管道圖片
+        pipeline.draw(image_path)
+
+        # 讀取並顯示圖片
+        display(Image(filename=image_path))
+    ```
+
+<br>
+
+2. 在 `JupyterNotebook` 中調用。
+
+    ```python
+    from utils.draw_pipeline import draw_and_display
+
+    draw_and_display(new_rag_pipeline, 'new_rag_pipeline.png')
+    ```
+
+<br>
+
+## 使用中文進行提問
+
+1. 使用中文進行提問。
 
     ```python
     # 問題
@@ -519,7 +582,7 @@ _在 Haystack 的最新官方文件中並無刪除或斷開組件連接得方法
 
 <br>
 
-7. 結果。
+2. 結果。
 
     ```bash
     是的，小兒肝移植術後早期降鈣素原（PCT）水平升高與多種不良後果相關。根據上文中的研究，手術後第二天PCT水平高的患者在手術後第五天出現更高的國際標準化比率（INR）值，並且更容易出現原發性移植物功能不全的情況。這些患者還需要在兒科重症監護單元停留的時間更長，並且需要更長時間的機械通氣。因此，術後早期PCT水平的升高似乎是小兒肝移植後不良預後的指標。
