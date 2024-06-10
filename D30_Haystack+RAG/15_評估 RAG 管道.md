@@ -412,7 +412,7 @@ Yes, high levels of procalcitonin in the early phase after pediatric liver trans
 
 ## 使用中文提問
 
-_若要使用中文_
+_在 Haystack 的最新官方文件中並無刪除或斷開組件連接得方法，若要使用中文，就必須重建管道。_
 
 <br>
 
@@ -420,23 +420,24 @@ _若要使用中文_
 
 <br>
 
-2. 改用支持多語言的嵌入模型和生成模型 `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`，這個模型能夠更好地處理多語言文本，特別注意要為組件重新命名，因為組件名稱在管道中必須是唯一的，這裡重新命名為 `multi_language_embedder`。
+2. 改用支持多語言的嵌入模型和生成模型 `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`，這個模型能夠更好地處理多語言文本，特別注意，雖然組件名稱在管道中必須是唯一的，但這裡因為會建立新的管道，所以名稱沿用無妨，唯獨嵌入模型部分重新命名為 `multi_language_embedder`。
 
 <br>
 
-3. 改寫嵌入模型選取的代碼片段。
+3. 建立新的管道。
 
     ```python
-    # 這是原本的代碼，便於識別所以使用註解的方式保留
-    # rag_pipeline.add_component(
-    #     "query_embedder", 
-    #     SentenceTransformersTextEmbedder(
-    #         model="sentence-transformers/all-MiniLM-L6-v2"
-    #     )
-    # )
+    # 建立 RAG 管道
+    new_rag_pipeline = Pipeline()
+    ```
 
+<br>
+
+4. 改用新的嵌入模型。
+
+    ```python
     # 改用支持多語言的嵌入模型
-    rag_pipeline.add_component(
+    new_rag_pipeline.add_component(
         # 這是新的嵌入模型名稱
         "multi_language_embedder",
         SentenceTransformersTextEmbedder(
@@ -444,24 +445,63 @@ _若要使用中文_
             model="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
         )
     )
+    # 其餘組件設定維持不便
+    new_rag_pipeline.add_component(
+        "retriever",
+        InMemoryEmbeddingRetriever(document_store, top_k=3)
+    )
+    new_rag_pipeline.add_component(
+        "prompt_builder",
+        PromptBuilder(template=template)
+    )
+    new_rag_pipeline.add_component(
+        "generator",
+        OpenAIGenerator(model="gpt-4-turbo")
+    )
+    new_rag_pipeline.add_component(
+        "answer_builder",
+        AnswerBuilder()
+    )
     ```
 
 <br>
 
-4. 使用中文進行提問。
+5. 連接組件。
+
+    ```python
+    # 連接管道的組件
+    new_rag_pipeline.connect(
+        "multi_language_embedder", "retriever.query_embedding"
+    )
+    new_rag_pipeline.connect(
+        "retriever", "prompt_builder.documents"
+    )
+    new_rag_pipeline.connect(
+        "prompt_builder", "generator"
+    )
+    new_rag_pipeline.connect(
+        "generator.replies", "answer_builder.replies"
+    )
+    new_rag_pipeline.connect(
+        "generator.meta", "answer_builder.meta"
+    )
+    new_rag_pipeline.connect(
+        "retriever", "answer_builder.documents"
+    )
+    ```
+
+<br>
+
+6. 使用中文進行提問。
 
     ```python
     # 問題
-    # question = "Do high levels of procalcitonin in the early phase after"
-    # " pediatric liver transplantation indicate poor postoperative outcome?"
     question = "小兒肝移植術後早期降鈣素原高是否表示術後效果不佳？"
 
     # 運行管道
     response = rag_pipeline.run(
         {
-            # 註解原本使用的嵌入模型
-            # "query_embedder": {"text": question},
-            # 改用新的嵌入模型 `multi_language_embedder`
+            # 使用新的嵌入模型 `multi_language_embedder`
             "multi_language_embedder": {"text": question},
             "prompt_builder": {"question": question},
             "answer_builder": {"query": question}
@@ -473,7 +513,7 @@ _若要使用中文_
 
 <br>
 
-5. 結果。
+7. 結果。
 
     ```bash
     是的，小兒肝移植術後早期降鈣素原（PCT）水平升高與多種不良後果相關。根據上文中的研究，手術後第二天PCT水平高的患者在手術後第五天出現更高的國際標準化比率（INR）值，並且更容易出現原發性移植物功能不全的情況。這些患者還需要在兒科重症監護單元停留的時間更長，並且需要更長時間的機械通氣。因此，術後早期PCT水平的升高似乎是小兒肝移植後不良預後的指標。
