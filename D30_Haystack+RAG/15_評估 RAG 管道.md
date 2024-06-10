@@ -381,7 +381,7 @@ rag_pipeline.connect(
 
 ```python
 # 問題：小兒肝移植術後早期降鈣素原高是否表示術後效果不佳？
-question = "Do high levels of procalcitonin in the early phase after"
+question = "Do high levels of procalcitonin in the early phase after?"
 
 # 運行管道
 response = rag_pipeline.run(
