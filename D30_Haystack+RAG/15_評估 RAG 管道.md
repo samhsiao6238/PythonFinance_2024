@@ -70,36 +70,47 @@ pip install haystack-ai "datasets>=2.6.1" sentence-transformers>=2.2.0
 
 <br>
 
-2. 建立 RAG 管道並進行評估：本教程中，我們將使用一個帶有問題、上下文和答案的標註 PubMed 數據集。這樣，我們可以將上下文作為文件，並且有需要的一些評估指標所需的標註數據。
+## 下載數據
+
+_建立管道並評估之前，將使用一個帶有問題、上下文和答案標註的 `PubMed` 數據集。_
+
+1. 下載數據。
 
 ```python
 # 載入數據集
 from datasets import load_dataset
 from haystack import Document
 
-# 加載 PubMedQA 數據集，取前 1000 條數據
+# 加載 PubMedQA 數據集
 dataset = load_dataset(
     "vblagoje/PubMedQA_instruction",
     split="train"
 )
+# 僅取前 1000 條數據
 dataset = dataset.select(range(1000))
 
-# 提取文件
+# 提取其中的 `context` 作為文件
 all_documents = [
     Document(content=doc["context"])
     for doc in dataset
 ]
-# 提取問題
+# 提取 `instruction` 作為問題
 all_questions = [
     doc["instruction"]
     for doc in dataset
 ]
-# 提取真實答案
+# 提取 `response` 作為真實答案
 all_ground_truth_answers = [
     doc["response"]
     for doc in dataset
 ]
 ```
+
+<br>
+
+2. 會進行下載。
+
+    ![](images/img_62.png)
 
 <br>
 
@@ -109,7 +120,7 @@ _建立索引管道，並使用 `InMemoryDocumentStore` 將文件寫入 `Documen
 
 <br>
 
-1. 導入組間。
+1. 導入組件。
 
 ```python
 from typing import List
