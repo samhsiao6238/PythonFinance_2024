@@ -380,8 +380,9 @@ rag_pipeline.connect(
 1. 使用管道的 `run()` 方法可進行 `提問`，要確保將問題提供給所有需要它的組件作為輸入，這些組件包括 `query_embedder`、`prompt_builder` 和 `answer_builder`。
 
 ```python
-# 問題
-question = "小兒肝移植術後早期降鈣素原高是否表示術後效果不佳？"
+# 問題：小兒肝移植術後早期降鈣素原高是否表示術後效果不佳？
+question = "Do high levels of procalcitonin in the early phase after"
+
 # 運行管道
 response = rag_pipeline.run(
     {
@@ -393,6 +394,85 @@ response = rag_pipeline.run(
 # 輸出
 print(response["answer_builder"]["answers"][0].data)
 ```
+
+<br>
+
+2. 結果。
+
+```bash
+Batches: 100%|██████████| 1/1 [00:00<00:00, 11.75it/s]
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+Yes, high levels of procalcitonin in the early phase after pediatric liver transplantation indicate a poor postoperative outcome. Patients with high procalcitonin levels on postoperative day 2 were observed to have higher International Normalized Ratio values on postoperative day 5 and suffered more often from primary graft non-function. Additionally, these patients experienced longer stays in the pediatric intensive care unit and required prolonged mechanical ventilation. These indications collectively suggest a correlation between early postoperative elevations in procalcitonin and compromised postoperative recovery.
+```
+
+<br>
+
+## 使用中文提問
+
+_若要使用中文_
+
+<br>
+
+1. 原本使用的模型是 `sentence-transformers/all-MiniLM-L6-v2`，這模型是針對英文文本進行訓練的，對於中文文本的支持可能有限，因此在處理中文查詢時無法生成高質量的嵌入，導致檢索和生成的結果不理想。
+
+<br>
+
+2. 改用支持多語言的嵌入模型和生成模型 `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`，這個模型能夠更好地處理多語言文本。
+
+<br>
+
+3. 改寫嵌入模型選取的代碼片段。
+
+    ```python
+    # 註解原本代碼
+    # rag_pipeline.add_component(
+    #     "query_embedder", 
+    #     SentenceTransformersTextEmbedder(
+    #         model="sentence-transformers/all-MiniLM-L6-v2"
+    #     )
+    # )
+
+    # 改用多語言支持的嵌入模型
+    rag_pipeline.add_component(
+        "query_embedder",
+        SentenceTransformersTextEmbedder(
+            model="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+        )
+    )
+    ```
+
+<br>
+
+4. 使用中文進行提問。
+
+    ```python
+    # 問題
+    # question = "Do high levels of procalcitonin in the early phase after"
+    # " pediatric liver transplantation indicate poor postoperative outcome?"
+    question = "小兒肝移植術後早期降鈣素原高是否表示術後效果不佳？"
+
+    # 運行管道
+    response = rag_pipeline.run(
+        {
+            "query_embedder": {"text": question},
+            "prompt_builder": {"question": question},
+            "answer_builder": {"query": question}
+        }
+    )
+    # 輸出
+    print(response["answer_builder"]["answers"][0].data)
+    ```
+
+<br>
+
+5. 結果。
+
+    ```bash
+    是的，小兒肝移植術後早期降鈣素原（PCT）水平升高與多種不良後果相關。根據上文中的研究，手術後第二天PCT水平高的患者在手術後第五天出現更高的國際標準化比率（INR）值，並且更容易出現原發性移植物功能不全的情況。這些患者還需要在兒科重症監護單元停留的時間更長，並且需要更長時間的機械通氣。因此，術後早期PCT水平的升高似乎是小兒肝移植後不良預後的指標。
+    ```
 
 <br>
 
