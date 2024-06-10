@@ -420,14 +420,14 @@ _若要使用中文_
 
 <br>
 
-2. 改用支持多語言的嵌入模型和生成模型 `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`，這個模型能夠更好地處理多語言文本。
+2. 改用支持多語言的嵌入模型和生成模型 `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`，這個模型能夠更好地處理多語言文本，特別注意要為組件重新命名，因為組件名稱在管道中必須是唯一的，這裡重新命名為 `multi_language_embedder`。
 
 <br>
 
 3. 改寫嵌入模型選取的代碼片段。
 
     ```python
-    # 註解原本代碼
+    # 這是原本的代碼，便於識別所以使用註解的方式保留
     # rag_pipeline.add_component(
     #     "query_embedder", 
     #     SentenceTransformersTextEmbedder(
@@ -435,10 +435,12 @@ _若要使用中文_
     #     )
     # )
 
-    # 改用多語言支持的嵌入模型
+    # 改用支持多語言的嵌入模型
     rag_pipeline.add_component(
-        "query_embedder",
+        # 這是新的嵌入模型名稱
+        "multi_language_embedder",
         SentenceTransformersTextEmbedder(
+            # 使用新的嵌入模型
             model="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
         )
     )
@@ -457,7 +459,10 @@ _若要使用中文_
     # 運行管道
     response = rag_pipeline.run(
         {
-            "query_embedder": {"text": question},
+            # 註解原本使用的嵌入模型
+            # "query_embedder": {"text": question},
+            # 改用新的嵌入模型 `multi_language_embedder`
+            "multi_language_embedder": {"text": question},
             "prompt_builder": {"question": question},
             "answer_builder": {"query": question}
         }
