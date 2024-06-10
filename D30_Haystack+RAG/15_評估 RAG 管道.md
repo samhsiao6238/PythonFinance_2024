@@ -492,14 +492,20 @@ _在 Haystack 的最新官方文件中並無刪除或斷開組件連接得方法
 
 <br>
 
-6. 使用中文進行提問。
+6. 查看管道。
+
+    ![](images/img_65.png)
+
+<br>
+
+7. 使用中文進行提問。
 
     ```python
     # 問題
     question = "小兒肝移植術後早期降鈣素原高是否表示術後效果不佳？"
 
     # 運行管道
-    response = rag_pipeline.run(
+    response = new_rag_pipeline.run(
         {
             # 使用新的嵌入模型 `multi_language_embedder`
             "multi_language_embedder": {"text": question},
