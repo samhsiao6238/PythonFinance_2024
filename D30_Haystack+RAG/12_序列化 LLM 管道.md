@@ -18,7 +18,7 @@
 
 <br>
 
-4. `序列化` 是將 `管道` 轉換為可以保存到磁碟或其他存儲介質的格式，以便之後可以再次加載和使用。
+4. `序列化` 是將 `管道` 轉換為可以保存到磁碟或其他儲存介質的格式，以便之後可以再次加載和使用。
 
 <br>
 
@@ -137,7 +137,7 @@
 
 ## 將管道序列化為 YAML
 
-1. `YAML` 是一種人類可讀的 `數據序列化語言`，通常用於 `配置文件` 和 `數據交換`，而 `序列化管道 YAML` 是指將一個複雜的對象或數據結構轉換為一種可以保存到文件、傳輸或存儲的 `文本格式`，這種 `文本格式` 可以是 `YAML`。
+1. `YAML` 是一種人類可讀的 `數據序列化語言`，通常用於 `配置文件` 和 `數據交換`，而 `序列化管道 YAML` 是指將一個複雜的對象或數據結構轉換為一種可以保存到文件、傳輸或儲存的 `文本格式`，這種 `文本格式` 可以是 `YAML`。
 
 <br>
 
@@ -356,7 +356,7 @@ _[官方文件](https://docs.haystack.deepset.ai/docs/huggingfacelocalgenerator)
     from haystack.document_stores.in_memory import InMemoryDocumentStore
     from haystack import Document
 
-    # 初始化內存文件存儲，並寫入文件
+    # 初始化內存文件儲存，並寫入文件
     docstore = InMemoryDocumentStore()
     docstore.write_documents([
         Document(content="Rome is the capital of Italy"),
