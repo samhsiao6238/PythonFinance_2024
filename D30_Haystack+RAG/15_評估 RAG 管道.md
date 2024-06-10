@@ -633,34 +633,36 @@ _使用以下指標來評估管道_
 
 2. 運行管道並記錄其返回的答案和檢索到的文件。
 
-```python
-# 返回的答案
-rag_answers = []
-# 索引到的文件
-retrieved_docs = []
-# 遍歷問題
-for question in list(questions):
-    # 運行管道
-    response = new_rag_pipeline.run({
-        "multi_language_embedder": {"text": question},
-        "prompt_builder": {"question": question},
-        "answer_builder": {"query": question}
-    })
-    # 輸出
-    print(f"Question: {question}")
-    print("Answer from pipeline:")
-    print(response["answer_builder"]["answers"][0].data)
-    print("\n-----------------------------------\n")
+    ```python
+    # 返回的答案
+    rag_answers = []
+    # 索引到的文件
+    retrieved_docs = []
+    # 遍歷問題
+    for question in list(questions):
+        # 運行管道
+        response = new_rag_pipeline.run({
+            "multi_language_embedder": {"text": question},
+            "prompt_builder": {"question": question},
+            "answer_builder": {"query": question}
+        })
+        # 輸出
+        print(f"Question: {question}")
+        print("Answer from pipeline:")
+        print(response["answer_builder"]["answers"][0].data)
+        print("\n-----------------------------------\n")
 
-    # 記錄答案
-    rag_answers.append(
-        response["answer_builder"]["answers"][0].data
-    )
-    # 紀錄檢索到的文件
-    retrieved_docs.append(
-        response["answer_builder"]["answers"][0].documents
-    )
-```
+        # 記錄答案
+        rag_answers.append(
+            response["answer_builder"]["answers"][0].data
+        )
+        # 紀錄檢索到的文件
+        retrieved_docs.append(
+            response["answer_builder"]["answers"][0].documents
+        )
+    ```
+
+<br>
 
 3. 以上代碼是用來測試和驗證多語言支持的 RAG 管道，隨機抽取了一些問題，並使用管道生成答案，然後檢查這些答案的正確性，以下以輸出結果的第一個為例。具體說，每個問題的答案都應該是基於上下文中的信息生成的，並且能夠回答具體的問題。
 
