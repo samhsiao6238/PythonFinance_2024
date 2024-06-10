@@ -352,6 +352,29 @@ rag_pipeline.connect(
 
 <br>
 
+7. 輸出如下。
+
+    ```bash
+    <haystack.core.pipeline.pipeline.Pipeline object at 0x38bad2230>
+    
+    🚅 Components
+        - query_embedder: SentenceTransformersTextEmbedder
+        - retriever: InMemoryEmbeddingRetriever
+        - prompt_builder: PromptBuilder
+        - generator: OpenAIGenerator
+        - answer_builder: AnswerBuilder
+    
+    🛤️ Connections
+        - query_embedder.embedding -> retriever.query_embedding (List[float])
+        - retriever.documents -> prompt_builder.documents (List[Document])
+        - retriever.documents -> answer_builder.documents (List[Document])
+        - prompt_builder.prompt -> generator.prompt (str)
+        - generator.replies -> answer_builder.replies (List[str])
+        - generator.meta -> answer_builder.meta (List[Dict[str, Any]])
+    ```
+
+<br>
+
 ## 提問
 
 1. 使用管道的 `run()` 方法可進行 `提問`，要確保將問題提供給所有需要它的組件作為輸入，這些組件包括 `query_embedder`、`prompt_builder` 和 `answer_builder`。
