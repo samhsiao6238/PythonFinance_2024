@@ -191,7 +191,20 @@ indexing.connect(
 
 <br>
 
-5. 運行索引管道 `indexing`。
+5. 可觀察輸出。
+
+    ```bash
+    <haystack.core.pipeline.pipeline.Pipeline object at 0x33a517550>
+    🚅 Components
+    - document_embedder: SentenceTransformersDocumentEmbedder
+    - document_writer: DocumentWriter
+    🛤️ Connections
+    - document_embedder.documents -> document_writer.documents (List[Document])
+    ```
+
+<br>
+
+6. 運行索引管道 `indexing`。
 
 ```python
 # 執行索引管道
@@ -199,6 +212,26 @@ indexing.run(
     {"document_embedder": {"documents": all_documents}}
 )
 ```
+
+<br>
+
+7. 輸出如下。
+
+    ![](images/img_63.png)
+
+<br>
+
+8. 出圖查看管道。
+
+```python
+indexing.draw('ex15-1.png')
+```
+
+<br>
+
+9. 圖形如下。
+
+    ![](images/img_64.png)
 
 <br>
 
