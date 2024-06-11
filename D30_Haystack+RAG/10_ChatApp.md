@@ -692,6 +692,19 @@ _建立基本的 RAG 管道_
     from haystack.dataclasses import ChatMessage
     from haystack.components.generators.chat import OpenAIChatGenerator
 
+    # 定義工具函數
+    def rag_pipeline_func(query: str):
+        return {"reply": f"Giorgio 住在 Berlin, query was: {query}"}
+
+    def get_current_weather(location: str):
+        return {"weather": "sunny", "temperature": 20, "location": location}
+
+    # 可用函數字典
+    available_functions = {
+        "rag_pipeline_func": rag_pipeline_func,
+        "get_current_weather": get_current_weather
+    }
+
     chat_generator = OpenAIChatGenerator(model="gpt-3.5-turbo")
     response = None
     messages = [
@@ -709,33 +722,47 @@ _建立基本的 RAG 管道_
         while True:
             # 如果 OpenAI 回應是一個工具調用
             if response and response["replies"][0].meta["finish_reason"] == "tool_calls":
-                function_calls = json.loads(response["replies"][0].content)
+                try:
+                    function_calls = json.loads(response["replies"][0].content)
+                except json.JSONDecodeError as e:
+                    print(f"解析 JSON 發生錯誤：{e}")
+                    break
+
                 print(response["replies"][0])
                 for function_call in function_calls:
                     # 解析函數調用信息
                     function_name = function_call["function"]["name"]
                     function_args = json.loads(function_call["function"]["arguments"])
 
-                    # 搜尋相應的函數並使用給定的參數調用它
-                    function_to_call = available_functions[function_name]
-                    function_response = function_to_call(function_args)
+                    # 檢查函數是否存在
+                    if function_name in available_functions:
+                        function_to_call = available_functions[function_name]
+                        try:
+                            # 使用解包操作將參數傳遞給函數
+                            function_response = function_to_call(**function_args)
+                        except TypeError as te:
+                            print(f"函數調用錯誤：{te}")
+                            continue
 
-                    # 使用 `ChatMessage.from_function` 將函數回應添加到消息列表
-                    messages.append(ChatMessage.from_function(content=json.dumps(function_response), name=function_name))
-                    response = chat_generator.run(messages=messages, generation_kwargs={"tools": tools})
-
-            # 常規對話
+                        # 使用 `ChatMessage.from_function` 將函數回應添加到消息列表
+                        messages.append(ChatMessage.from_function(content=json.dumps(function_response), name=function_name))
+                        response = chat_generator.run(messages=messages, generation_kwargs={"tools": tools})
+                    else:
+                        print(f"函數 {function_name} 未找到")
+                        continue
             else:
-                messages.append(response["replies"][0])
+                if response:
+                    messages.append(response["replies"][0])
                 break
-        return response["replies"][0].content
+        return response["replies"][0].content if response else "No response generated."
 
     # 建立聊天界面
     demo = gr.ChatInterface(
         fn=chatbot_with_fc,
-        # 顯示在下方的範例欄位
         examples=[
+            "瑞典的首都是什麼？",
             "你能告訴我 Giorgio 住在哪裡嗎？",
+            "馬德里的天氣怎麼樣？",
             "Madrid 的天氣怎麼樣？",
             "誰住在 London?",
             "Mark 住的地方的天氣怎麼樣？",
@@ -766,7 +793,8 @@ _建立基本的 RAG 管道_
     ```bash
     "瑞典的首都是什麼？"：一個基本的查詢，沒有任何函數調用。
     "你能告訴我 Giorgio 住在哪裡嗎？"：一個基本的查詢，帶有一次函數調用。
-    "馬德里的天氣怎麼樣？"、"那裡現在是晴天嗎？"：查看消息是否被記錄並發送。
+    "馬德里的天氣怎麼樣？"
+    "那裡現在是晴天嗎？"：查看消息是否被記錄並發送。
     "Jean 住的地方天氣怎麼樣？"：強制調用兩次函數。
     "今天的天氣怎麼樣？"：強制 OpenAI 詢問更多澄清問題。
     ```
