@@ -73,7 +73,10 @@ _先簡介兩者差異_
     # 初始化 OpenAIChatGenerator
     chat_generator = OpenAIChatGenerator(model="gpt-4-turbo")
     # 傳入消息並運行
-    chat_generator.run(messages=messages)
+    response = chat_generator.run(messages=messages)
+    # 優化輸出結果
+    for msg in response['replies']:
+        print(f"{msg.role.value}: {msg.content}")
     ```
 
 <br>
