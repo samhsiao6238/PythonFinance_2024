@@ -6,11 +6,11 @@
 
 ## 說明
 
-1. 這是官方在 `2024/05/10` 發佈的 [官方教程](https://haystack.deepset.ai/tutorials/37_simplifying_pipeline_inputs_with_multiplexer)，另外需要搭配 `Hugging Face API Key` 使用，整體目標是使用 Multiplexer 簡化 `RAG 管道` 中的 `Pipeline.run()` 的輸入。
+1. 這是官方在 `2024/05/10` 發佈的 [官方教程](https://haystack.deepset.ai/tutorials/37_simplifying_pipeline_inputs_with_multiplexer)，另外需要搭配 `Hugging Face API Key` 使用，整體目標是使用 `Multiplexer` 來簡化 `RAG 管道` 中 `Pipeline.run()` 的輸入。
 
 <br>
 
-2. 在建立超過 3 或 4 個組件的 Haystack 管道時，可注意到傳遞給 `Pipeline.run()` 方法的輸入數量會無限增長，新的組件會從管道中的其他組件接收一些輸入，但許多組件也需要來自用戶的額外輸入，因此 `Pipeline.run()` 的數據輸入會變得非常重複，這個狀況可透過 `Multiplexer` 有效地管理這些重複。
+2. 在建立超過 3、4 個組件的 `Haystack` 管道時，傳遞給 `Pipeline.run()` 方法的輸入數量會無限增長，新的組件會從管道中的其他組件接收一些輸入，但許多組件也需要來自用戶的額外輸入，因此 `Pipeline.run()` 的數據輸入會變得非常複雜，這個狀況可透過使用 `Multiplexer` 有效地簡化這些重複。
 
 <br>
 
