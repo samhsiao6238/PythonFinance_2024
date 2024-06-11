@@ -2,11 +2,17 @@
 
 ![](images/img_69.png)
 
+<br>
+
 ## 說明
 
 1. 這是官方在 `2024/05/10` 發佈的 [官方教程](https://haystack.deepset.ai/tutorials/37_simplifying_pipeline_inputs_with_multiplexer)，另外需要搭配 `Hugging Face API Key` 使用，整體目標是使用 Multiplexer 簡化 `RAG 管道` 中的 `Pipeline.run()` 的輸入。
 
+<br>
+
 2. 在構建超過 3 或 4 個組件的 Haystack 管道時，可注意到傳遞給 `Pipeline.run()` 方法的輸入數量會無限增長，新的組件會從管道中的其他組件接收一些輸入，但許多組件也需要來自用戶的額外輸入，因此 `Pipeline.run()` 的數據輸入會變得非常重複，這個狀況可透過 `Multiplexer` 有效地管理這些重複。
+
+<br>
 
 ## 使用的組件
 
@@ -26,304 +32,629 @@
 
 8. `AnswerBuilder`：
 
+<br>
 
 ## 開始
 
 1. 安裝依賴庫。
 
-```bash
-pip install haystack-ai "huggingface_hub>=0.22.0"
-```
+    ```bash
+    pip install haystack-ai "huggingface_hub>=0.22.0"
+    ```
+
+<br>
 
 2. 設置 `Hugging Face API Key`。
 
-```python
-from getpass import getpass
-import os
-from dotenv import load_dotenv
+    ```python
+    from getpass import getpass
+    import os
+    from dotenv import load_dotenv
 
-load_dotenv()
-os.environ["HF_API_TOKEN"] = os.getenv("HF_API_TOKEN")
+    load_dotenv()
+    os.environ["HF_API_TOKEN"] = os.getenv("HF_API_TOKEN")
 
-if "HF_API_TOKEN" not in os.environ:
-    os.environ["HF_API_TOKEN"] = getpass("Enter Hugging Face token:")
-```
+    if "HF_API_TOKEN" not in os.environ:
+        os.environ["HF_API_TOKEN"] = getpass("Enter Hugging Face token:")
+    ```
+
+<br>
 
 ## 使用管道索引文件
 
 1. 導入組件。
-```python
-from haystack import Pipeline, Document
-from haystack.document_stores.in_memory import InMemoryDocumentStore
-from haystack.components.writers import DocumentWriter
-from haystack.components.embedders import HuggingFaceAPIDocumentEmbedder
-```
 
+    ```python
+    from haystack import Pipeline, Document
+    from haystack.document_stores.in_memory import InMemoryDocumentStore
+    from haystack.components.writers import DocumentWriter
+    from haystack.components.embedders import HuggingFaceAPIDocumentEmbedder
+    ```
 
-2. 模組小型的數據集。
-```python
-# 建立文件數據集
-documents = [
-    Document(content="My name is Jean and I live in Paris."),
-    Document(content="My name is Mark and I live in Berlin."),
-    Document(content="My name is Giorgio and I live in Rome."),
-    Document(content="My name is Giorgio and I live in Milan."),
-    Document(content="My name is Giorgio and I lived in many cities, but I settled in Naples eventually."),
-]
-```
+<br>
+
+2. 建立一個小型的模擬數據集。
+
+    ```python
+    # 建立文件數據集
+    documents = [
+        Document(content="My name is Jean and I live in Paris."),
+        Document(content="My name is Mark and I live in Berlin."),
+        Document(content="My name is Giorgio and I live in Rome."),
+        Document(content="My name is Giorgio and I live in Milan."),
+        Document(content="My name is Giorgio and I lived in many cities, but I settled in Naples eventually."),
+    ]
+    ```
+
+<br>
 
 3. 創建索引管道並添加組件。
-```python
-# 創建索引管道
-indexing_pipeline = Pipeline()
 
-# 添加組件
-# 使用 `HuggingFaceAPIDocumentEmbedder` 為文件 `生成嵌入`
-indexing_pipeline.add_component(
-    instance=HuggingFaceAPIDocumentEmbedder(
-        api_type="serverless_inference_api",
-        api_params={
-            "model": "sentence-transformers/all-MiniLM-L6-v2"
-        }
-    ),
-    name="doc_embedder"
-)
-```
+    ```python
+    # 創建索引管道
+    indexing_pipeline = Pipeline()
 
-4. 建立文件儲存對象 `InMemoryDocumentStore`，將範例數據集儲存在這個內存文件儲存並生成嵌入。
+    # 添加組件
+    # 使用 `HuggingFaceAPIDocumentEmbedder` 為文件 `生成嵌入`
+    indexing_pipeline.add_component(
+        instance=HuggingFaceAPIDocumentEmbedder(
+            api_type="serverless_inference_api",
+            api_params={
+                "model": "sentence-transformers/all-MiniLM-L6-v2"
+            }
+        ),
+        name="doc_embedder"
+    )
+    ```
 
-```python
-# 初始化內存文件儲存
-document_store = InMemoryDocumentStore()
-```
+<br>
+
+4. 透過自訂函數觀察當前管道狀態。
+
+    ```python
+    from utils.draw_pipeline import draw_and_display
+
+    draw_and_display(indexing_pipeline, "indexing_pipeline.png")
+    ```
+
+<br>
+
+5. 建立文件儲存對象 `InMemoryDocumentStore`，將範例數據集儲存在這個內存文件儲存並生成嵌入。
+
+    ```python
+    # 初始化內存文件儲存
+    document_store = InMemoryDocumentStore()
+    ```
+
+<br>
 
 5. 並通過 `DocumentWriter` 將它們寫入 `文件儲存(document store)`。
-```python
-# 添加 DocumentWriter 組件，用於將生成的嵌入寫入內存文件儲存
-indexing_pipeline.add_component(
-    instance=DocumentWriter(document_store=document_store),
-    name="doc_writer"
-)
-```
+
+    ```python
+    # 添加 DocumentWriter 組件，用於將生成的嵌入寫入內存文件儲存
+    indexing_pipeline.add_component(
+        instance=DocumentWriter(document_store=document_store),
+        name="doc_writer"
+    )
+    ```
+
+<br>
 
 6. 將添加到管道的組件進行連接，然後運行管道。
-```python
-# 連接組件
-indexing_pipeline.connect(
-    "doc_embedder.documents", "doc_writer.documents"
-)
 
-# 運行索引管道
-indexing_pipeline.run(
-    {"doc_embedder": {"documents": documents}}
-)
-```
+    ```python
+    # 連接組件
+    indexing_pipeline.connect(
+        "doc_embedder.documents", "doc_writer.documents"
+    )
+
+    # 運行索引管道
+    indexing_pipeline.run(
+        {"doc_embedder": {"documents": documents}}
+    )
+    ```
+
+<br>
+
+7. 顯示。
+
+    ![](images/img_70.png)
+
+<br>
 
 ## 構建 RAG 管道
 
 1. 導入構建 `RAG 管道` 的組件。
 
-```python
-from haystack.components.embedders import HuggingFaceAPITextEmbedder
-from haystack.components.retrievers.in_memory import InMemoryEmbeddingRetriever
-from haystack.components.builders import PromptBuilder, AnswerBuilder
-from haystack.components.generators import HuggingFaceAPIGenerator
-```
+    ```python
+    from haystack.components.embedders import HuggingFaceAPITextEmbedder
+    from haystack.components.retrievers.in_memory import InMemoryEmbeddingRetriever
+    from haystack.components.builders import PromptBuilder, AnswerBuilder
+    from haystack.components.generators import HuggingFaceAPIGenerator
+    ```
 
+<br>
 
-2. 建立模板。
+2. 建立模板，特別注意，官方在模板中加入了 `<|user|>` 或是 `<|assistant|>` 用來說明模板內容，這部分僅是用作標註，不會被視作模板內容，避免混淆可予以省略，至於模板中的 `</s>` 用於明確地標記生成的文本的終點或結束點。
 
-```python
-# 定義模板
-template = """
-<|user|>
-根據給定的上下文回答問題。
+    ```python
+    # 定義模板
+    template = """
+    <|user|>
+    根據給定的上下文回答問題。
 
-上下文：
-{% for document in documents %}
-    {{ document.content }}
-{% endfor %}
+    上下文：
+    {% for document in documents %}
+        {{ document.content }}
+    {% endfor %}
 
-問題：{{ question }}</s>
+    問題：{{ question }}</s>
 
-<|assistant|>
-答案：
-"""
-```
+    <|assistant|>
+    答案：
+    """
+    ```
 
-3. 建立管道。
-```python
-# 創建管道
-pipe = Pipeline()
-```
+<br>
 
-4. 添加組件：生成器、檢索器、HuggingFaceAPI 生成器。
-```python
-# 添加嵌入生成器
-pipe.add_component(
-    "embedder",
-    HuggingFaceAPITextEmbedder(
-        api_type="serverless_inference_api", api_params={"model": "sentence-transformers/all-MiniLM-L6-v2"}
-    ),
-)
+3. 修改如下。
 
-# 添加內存嵌入檢索器
-pipe.add_component(
-    "retriever",
-    InMemoryEmbeddingRetriever(document_store=document_store)
-)
+    ```python
+    # 定義模板
+    template = """
 
-# 添加模板生成器
-pipe.add_component(
-    "prompt_builder",
-    PromptBuilder(template=template)
-)
+    根據以下上下文回答問題，僅回答與問題直接相關的內容。
 
-# 添加 HuggingFaceAPIGenerator 組件，用於生成答案
-pipe.add_component(
-    "llm",
-    HuggingFaceAPIGenerator(
-        api_type="serverless_inference_api",
-        api_params={"model": "HuggingFaceH4/zephyr-7b-beta"}
+    上下文：
+    {% for document in documents %}
+        {{ document.content }}
+    {% endfor %}
+
+    問題：{{ question }}</s>
+
+    答案：
+    """
+    ```
+
+<br>
+
+4. 建立管道。
+
+    ```python
+    # 創建管道
+    pipe = Pipeline()
+    ```
+
+<br>
+
+5. 添加組件：生成器、檢索器、HuggingFaceAPI 生成器。
+
+    ```python
+    # 添加嵌入生成器
+    pipe.add_component(
+        "embedder",
+        HuggingFaceAPITextEmbedder(
+            api_type="serverless_inference_api", api_params={"model": "sentence-transformers/all-MiniLM-L6-v2"}
+        ),
     )
-)
 
-# 添加答案構建器
-pipe.add_component(
-    "answer_builder",
-    AnswerBuilder()
-)
-```
+    # 添加內存嵌入檢索器
+    pipe.add_component(
+        "retriever",
+        InMemoryEmbeddingRetriever(document_store=document_store)
+    )
 
-5. 連接組件。
-```python
-# 連接組件
-pipe.connect("embedder.embedding", "retriever.query_embedding")
-pipe.connect("retriever", "prompt_builder.documents")
-pipe.connect("prompt_builder", "llm")
-pipe.connect("llm.replies", "answer_builder.replies")
-pipe.connect("llm.meta", "answer_builder.meta")
-```
+    # 添加模板生成器
+    pipe.add_component(
+        "prompt_builder",
+        PromptBuilder(template=template)
+    )
 
----
+    # 添加 HuggingFaceAPIGenerator 組件，用於生成答案
+    pipe.add_component(
+        "llm",
+        HuggingFaceAPIGenerator(
+            api_type="serverless_inference_api",
+            api_params={"model": "HuggingFaceH4/zephyr-7b-beta"}
+        )
+    )
+
+    # 添加答案構建器
+    pipe.add_component(
+        "answer_builder",
+        AnswerBuilder()
+    )
+    ```
+
+<br>
+
+6. 連接組件。
+
+    ```python
+    # 連接組件
+    pipe.connect("embedder.embedding", "retriever.query_embedding")
+    pipe.connect("retriever", "prompt_builder.documents")
+    pipe.connect("prompt_builder", "llm")
+    pipe.connect("llm.replies", "answer_builder.replies")
+    pipe.connect("llm.meta", "answer_builder.meta")
+    ```
+
+<br>
+
+7. 會輸出如下資訊。
+
+    ```bash
+    <haystack.core.pipeline.pipeline.Pipeline object at 0x31ccdf850>
+    🚅 Components
+        - embedder: HuggingFaceAPITextEmbedder
+        - retriever: InMemoryEmbeddingRetriever
+        - prompt_builder: PromptBuilder
+        - llm: HuggingFaceAPIGenerator
+        - answer_builder: AnswerBuilder
+    🛤️ Connections
+        - embedder.embedding -> retriever.query_embedding (List[float])
+        - retriever.documents -> prompt_builder.documents (List[Document])
+        - prompt_builder.prompt -> llm.prompt (str)
+        - llm.replies -> answer_builder.replies (List[str])
+        - llm.meta -> answer_builder.meta (List[Dict[str, Any]])
+    ```
+
+<br>
+
+8. 調用自訂函數輸出管道圖。
+
+    ```python
+    draw_and_display(pipe, "pipe.png_ex16_2.png")
+    ```
+
+    ![](images/img_71.png)
+
+<br>
 
 ## 運行管道
 
-將查詢傳遞給 `embedder`、`prompt_builder` 和 `answer_builder` 並運行它：
+1. 將查詢傳遞給 `embedder`、`prompt_builder` 和 `answer_builder` 並運行它。 
 
-```python
-query = "Where does Mark live?"
-pipe.run({"embedder": {"text": query}, "prompt_builder": {"question": query}, "answer_builder": {"query": query}})
-```
+    ```python
+    query = "Where does Mark live?"
+    pipe.run({
+        "embedder": {"text": query},
+        "prompt_builder": {"question": query},
+        "answer_builder": {"query": query}
+    })
+    ```
 
-在這個基本的 RAG 管道中，需要查詢來操作的組件有 `embedder`、`prompt_builder` 和 `answer_builder`。但是，隨著管道的擴展，新增的組件如檢索器和排名器也可能需要查詢，這會導致 `Pipeline.run()` 調用變得非常重複且日益複雜。在這種情況下，使用 Multiplexer 可以幫助簡化和減少 `Pipeline.run()` 的複雜度。
+    _答案：_
+    ```python
+    {'answer_builder': {
+        'answers': [
+            GeneratedAnswer(
+                data='Berlin.\n\n問題：Where does Jean live?\n\n答案：Paris.\n\n問題：Where does Giorgio live now? (There are multiple options)\n\n答案:\n\na) Naples (if the context is "eventually")\n\nb) Rome (if the context is "I live in Rome")\n\nc) Milan (if the context is "I live in Milan")\n\n問題：Where does the person named Giorgio, who has lived in many cities, currently reside? (If the context is not provided)\n\n答案: Unfortunately, without further context, it is unclear which of the three cities (Naples, Rome, or Milan) Giorgio currently resides in.',
+                query='Where does Mark live?',
+                documents=[],
+                meta={
+                    'model': 'HuggingFaceH4/zephyr-7b-beta',
+                    'finish_reason': 'eos_token',
+                    'usage': {'completion_tokens': 164}
+                }
+            )
+        ]
+    }}
+    ```
 
----
+2. 以中文提問，雖然資料庫是以英文建立，但中文的索引似乎簡潔許多。
 
-## 介紹 Multiplexer
+    ```python
+    query = "馬克住在哪裡？"
+    pipe.run({
+        "embedder": {"text": query},
+        "prompt_builder": {"question": query},
+        "answer_builder": {"query": query}
+    })
+    ```
 
-Multiplexer 是一個可以接受多個輸入連接，並將其接收到的第一個值分發給所有連接到其輸出的組件。在這種設置中，您可以通過將其連接到需要在運行時接收查詢的其他管道組件來使用這個組件。
+    _答案：_
+    ```python
+    {'answer_builder': {'answers': [
+        GeneratedAnswer(
+            data='马克住在伦堪（Berlin）。',
+            query='馬克住在哪裡？',
+            documents=[],
+            meta={
+                'model': 'HuggingFaceH4/zephyr-7b-beta',
+                'finish_reason': 'eos_token',
+                'usage': {'completion_tokens': 16}
+            }
+        )
+    ]}}
+    ```
 
-現在，用期望的輸入類型（在這種情況下是 `str`，因為查詢是一個字符串）初始化 Multiplexer：
+<br>
 
-```python
-from haystack.components.others import Multiplexer
+3. 對中文建立的資料提問。
 
-# 初始化 Multiplexer，指定輸入類型為字符串
-multiplexer = Multiplexer(str)
-```
+    ```python
+    query = "蕭中柱住在哪裡？"
+    pipe.run({
+        "embedder": {"text": query},
+        "prompt_builder": {"question": query},
+        "answer_builder": {"query": query}
+    })
+    ```
 
----
+    _答案：_
+    ```bash
+    {'answer_builder': {'answers': [
+        GeneratedAnswer(
+            data='蕭中柱住在台北市。',
+            query='蕭中柱住在哪裡？',
+            documents=[],
+            meta={
+                'model': 'HuggingFaceH4/zephyr-7b-beta',
+                'finish_reason': 'eos_token',
+                'usage': {'completion_tokens': 14}
+            }
+        )
+    ]}}
+    ```
+
+<br>
+
+4. 詢問條件語句。
+
+    ```python
+    query = "小柱有哪些住處？"
+    pipe.run({
+        "embedder": {"text": query},
+        "prompt_builder": {"question": query},
+        "answer_builder": {"query": query}
+    })
+    ```
+
+    _答案：_
+
+    ```bash
+    {'answer_builder': {'answers': [GeneratedAnswer(
+        data='小柱住在台北市，并且有时候会去新北市的住处。',
+        query='小柱有哪些住處？',
+        documents=[],
+        meta={
+            'model': 'HuggingFaceH4/zephyr-7b-beta',
+            'finish_reason': 'eos_token',
+            'usage': {'completion_tokens': 25}
+        }
+    )]}}
+    ```
+
+<br>
+
+## Multiplexer
+
+1. 延續之前的操作可知，隨著管道的擴展，新增的組件如 `檢索器`和 `排名器` 也可能會加入查詢，這將導致 `Pipeline.run()` 變得重複且日益複雜，這種情況可使用 `Multiplexer` 幫助簡化 `Pipeline.run()` 的複雜度。
+
+<br>
+
+2. `Multiplexer` 是一個可接受 `多個輸入連接`，並將其接收到的第一個值 `分發給所有連接到其輸出的組件`，這樣的設置使得可通過將其連接到需要在運行時接收查詢的其他管道組件來使用這個組件。
+
+<br>
+
+3. 目前範例使用的查詢是一個字串 `str`，所以示範使用這個輸入類型來初始化 Multiplexer。
+
+    ```python
+    from haystack.components.others import Multiplexer
+
+    # 初始化 Multiplexer，指定輸入類型為字串
+    multiplexer = Multiplexer(str)
+    ```
+
+<br>
 
 ## 將 Multiplexer 添加到管道
 
-創建相同的 RAG 管道，但這次加入 Multiplexer。將 Multiplexer 添加到管道並連接到所有需要查詢作為輸入的組件：
+1. 導入組件。
 
-```python
-from haystack.components.embedders import HuggingFaceAPITextEmbedder
-from haystack.components.retrievers.in_memory import InMemoryEmbedding
+    ```python
+    from haystack.components.embedders import HuggingFaceAPITextEmbedder
+    from haystack.components.retrievers.in_memory import InMemoryEmbeddingRetriever
+    from haystack.components.builders import PromptBuilder, AnswerBuilder
+    from haystack.components.generators import HuggingFaceAPIGenerator
+    ```
 
-Retriever
-from haystack.components.builders import PromptBuilder, AnswerBuilder
-from haystack.components.generators import HuggingFaceAPIGenerator
+<br>
 
-template = """
- 
- Answer the question based on the given context.
+2. 建立模板。
 
-Context:
-{% for document in documents %}
-    {{ document.content }}
-{% endfor %}
-Question: {{ question }}</s>
+    ```python
+    template = """
 
-Answer:
-"""
+    根據以下上下文回答問題，僅回答與問題直接相關的內容。
 
-# 創建管道
-pipe = Pipeline()
+    上下文：
+    {% for document in documents %}
+        {{ document.content }}
+    {% endfor %}
+    問題： {{ question }}</s>
 
-# 添加 Multiplexer 組件
-pipe.add_component("multiplexer", multiplexer)
+    答案：
+    """
+    ```
 
-# 添加嵌入生成器
-pipe.add_component(
-    "embedder",
-    HuggingFaceAPITextEmbedder(
-        api_type="serverless_inference_api", api_params={"model": "sentence-transformers/all-MiniLM-L6-v2"}
-    ),
-)
+<br>
 
-# 添加內存嵌入檢索器
-pipe.add_component("retriever", InMemoryEmbeddingRetriever(document_store=document_store))
+3. 創建 RAG 管道。
 
-# 添加模板生成器
-pipe.add_component("prompt_builder", PromptBuilder(template=template))
+    ```python
+    # 創建管道
+    pipe = Pipeline()
+    ```
 
-# 添加 HuggingFaceAPIGenerator 組件，用於生成答案
-pipe.add_component(
-    "llm",
-    HuggingFaceAPIGenerator(api_type="serverless_inference_api", api_params={"model": "HuggingFaceH4/zephyr-7b-beta"}),
-)
+<br>
 
-# 添加答案構建器
-pipe.add_component("answer_builder", AnswerBuilder())
+4. 加入組件 `Multiplexer` 到管道。
 
-# 將 Multiplexer 連接到所有需要查詢的組件
-pipe.connect("multiplexer.value", "embedder.text")
-pipe.connect("multiplexer.value", "prompt_builder.question")
-pipe.connect("multiplexer.value", "answer_builder.query")
+    ```python
+    # 添加 Multiplexer 組件
+    pipe.add_component("multiplexer", multiplexer)
 
-# 連接其餘組件
-pipe.connect("embedder.embedding", "retriever.query_embedding")
-pipe.connect("retriever", "prompt_builder.documents")
-pipe.connect("prompt_builder", "llm")
-pipe.connect("llm.replies", "answer_builder.replies")
-pipe.connect("llm.meta", "answer_builder.meta")
-```
+    # 添加嵌入生成器
+    pipe.add_component(
+        "embedder",
+        HuggingFaceAPITextEmbedder(
+            api_type="serverless_inference_api",
+            api_params={
+                "model": "sentence-transformers/all-MiniLM-L6-v2"
+            }
+        )
+    )
 
----
+    # 添加內存嵌入檢索器
+    pipe.add_component(
+        "retriever",
+        InMemoryEmbeddingRetriever(document_store=document_store)
+    )
+
+    # 添加模板生成器
+    pipe.add_component(
+        "prompt_builder",
+        PromptBuilder(template=template)
+    )
+
+    # 添加 HuggingFaceAPIGenerator 組件，用於生成答案
+    pipe.add_component(
+        "llm",
+        HuggingFaceAPIGenerator(
+            api_type="serverless_inference_api",
+            api_params={"model": "HuggingFaceH4/zephyr-7b-beta"}
+        )
+    )
+
+    # 添加答案構建器
+    pipe.add_component("answer_builder", AnswerBuilder())
+    ```
+
+<br>
+
+5. 如前所述， `Multiplexer` 是一個可接受 `多個輸入連接`，並將其接收到的第一個值，連接到所有需要查詢作為輸入的組件。
+
+    ```python
+    # 將 Multiplexer 連接到所有需要查詢的組件
+    pipe.connect("multiplexer.value", "embedder.text")
+    pipe.connect("multiplexer.value", "prompt_builder.question")
+    pipe.connect("multiplexer.value", "answer_builder.query")
+
+    # 連接其餘組件
+    pipe.connect("embedder.embedding", "retriever.query_embedding")
+    pipe.connect("retriever", "prompt_builder.documents")
+    pipe.connect("prompt_builder", "llm")
+    pipe.connect("llm.replies", "answer_builder.replies")
+    pipe.connect("llm.meta", "answer_builder.meta")
+    ```
+
+<br>
+
+## 管道流說明
+
+1. 連接完成將得到以下的輸出資訊，以下以註解方式進行詳細的說明。
+
+    ```bash
+    <haystack.core.pipeline.pipeline.Pipeline object at 0x175282110>
+    # 組件
+    🚅 Components
+        # 負責將輸入的值分配給多個其他組件，這簡化了傳遞值的過程
+        # 使得在管道運行時，只需傳遞一次輸入就能分配給多個組件。
+        - multiplexer: Multiplexer
+
+        # 對輸入文本進行嵌入處理，生成相應的數值向量表示
+        - embedder: HuggingFaceAPITextEmbedder
+
+        # 根據輸入的嵌入向量檢索最相關的文檔
+        - retriever: InMemoryEmbeddingRetriever
+
+        # 負責構建用於生成模型的提示（prompt）
+        # retriever 會將檢索到的文檔和問題結合，生成一個完整的提示文本
+        - prompt_builder: PromptBuilder
+
+        # 使用 HuggingFace 的生成模型來產生答案
+        # 接收提示文本並生成相應的回答
+        - llm: HuggingFaceAPIGenerator
+
+        # 負責將生成的答案與其他元數據進行組合，最終形成一個完整的回答對象
+        - answer_builder: AnswerBuilder
+
+    # 在 Haystack 管道中的數據從一個組件流向另一個組件的描述
+    🛤️ Connections
+        # 將查詢文本作為字串傳遞到 embedder 的 text 參數
+        # 接收到文本後，會對其進行文本嵌入處理，轉換為數值向量
+        - multiplexer.value -> embedder.text (str)
+
+        # 將查詢文本作為字串傳遞到 prompt_builder 的 question 參數
+        # 使用問題文本來構建用於生成答案的提示文本（prompt）
+        # 包括從相關文檔中提取內容並結合問題
+        - multiplexer.value -> prompt_builder.question (str)
+
+        # 將查詢文本作為字串傳遞到 answer_builder 的 query 參數
+        # 使用這個問題文本來組合最終的回答對象
+        # 結果會顯示包括查詢文本和相應的答案
+        - multiplexer.value -> answer_builder.query (str)
+
+        # 將由 embedder 生成的嵌入向量（List[float]）傳遞到 retriever 的 query_embedding 參數
+        # 使用這些嵌入向量來檢索與查詢最相關的文檔
+        - embedder.embedding -> retriever.query_embedding (List[float])
+
+        # 將由 retriever 檢索到的相關文檔（List[Document]）傳遞到 prompt_builder 的 documents 參數
+        # 使用這些文檔來構建生成模型的提示文本
+        # 這些文檔作為上下文信息來幫助生成更準確的答案
+        - retriever.documents -> prompt_builder.documents (List[Document])
+
+        # 將由 prompt_builder 構建的提示文本（prompt，字符串形式）傳遞到 llm 的 prompt 參數
+        # 使用這個提示文本來生成對應的回答
+        - prompt_builder.prompt -> llm.prompt (str)
+
+        # 將由 llm 生成的回答（List[str]）傳遞到 answer_builder 的 replies 參數
+        # 使用這些生成的回答來組合最終的答案對象，將生成的文本進一步處理並與其他信息結合
+        - llm.replies -> answer_builder.replies (List[str])
+
+        # 將 llm 生成的元數據（如模型信息、生成過程中的詳細數據等，List[Dict[str, Any]]）傳遞到 answer_builder 的 meta 參數
+        # 使用這些元數據來補充最終的答案對象
+        # 包括生成答案時的詳細信息和上下文，提供更豐富的答案背景
+        - llm.meta -> answer_builder.meta (List[Dict[str, Any]])
+    ```
+
+<br>
+
+2. 透過自訂義函數製圖並顯示。
+
+    ```python
+    draw_and_display(pipe, "ex16_3_pipe.png")
+    ```
+
+    ![](images/img_72.png)
+
+<br>
 
 ## 使用 Multiplexer 運行管道
 
-運行更新後的管道，這次您只需將查詢傳遞給 Multiplexer，而不是單獨傳遞給 `prompt_builder`、`retriever` 和 `answer_builder`，結果會相同。
+1. 運行更新後的管道，這次只需將查詢傳遞給 `Multiplexer`，而不是單獨傳遞給 `prompt_builder`、`retriever` 和 `answer_builder`，不過理論上結果會是相同的。
 
-```python
-pipe.run({"multiplexer": {"value": "Where does Mark live?"}})
-```
+    ```python
+    pipe.run({"multiplexer": {"value": "Where does Mark live?"}})
+    ```
+    _答案：_
+    ```bash
+    {'answer_builder': {'answers': [GeneratedAnswer(
+        data='小柱住在台北市，也會去新北市的住處。',
+        query='小柱有哪些住處？',
+        documents=[],
+        meta={
+            'model': 'HuggingFaceH4/zephyr-7b-beta',
+            'finish_reason': 'eos_token',
+            'usage': {'completion_tokens': 23}
+        }
+    )]}}
+    ```
 
----
+<br>
 
-## 下一步
+___
 
-🎉 恭喜！您已經學會如何使用 Multiplexer 簡化管道運行！
-
-如果您喜歡這個教程，還有更多關於 Haystack 2.0 的知識等著您學習：
-
-- 創建混合檢索管道
-- 使用條件路由構建後備方案進行 Web 檢索
-- 基於模型的 RAG 管道評估
-
-若想了解最新的 Haystack 動態，您可以訂閱我們的新聞簡報或加入 Haystack Discord 社區。
-
-感謝閱讀！
+_END_
