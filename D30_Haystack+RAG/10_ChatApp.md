@@ -239,7 +239,22 @@ _先簡介兩者差異_
 
 <br>
 
-7. 運行管道。
+7. 輸出。
+
+    ```bash
+    <haystack.core.pipeline.pipeline.Pipeline object at 0x317e07d60>
+    
+    🚅 Components
+        - doc_embedder: SentenceTransformersDocumentEmbedder
+        - doc_writer: DocumentWriter
+    
+    🛤️ Connections
+        - doc_embedder.documents -> doc_writer.documents (List[Document])
+    ```
+
+<br>
+
+8. 運行管道。
 
     ```python
     # 運行管道
@@ -250,7 +265,7 @@ _先簡介兩者差異_
 
 <br>
 
-8. 運行後顯示。
+9. 運行後顯示。
 
     ![](images/img_36.png)
 
