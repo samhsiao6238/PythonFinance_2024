@@ -742,7 +742,15 @@ _簡單說明每個組件提供的功能_
     _答案：_
 
     ```bash
-    {'answer_builder': {'answers': [GeneratedAnswer(data=' 蕭中柱、蔣萬安、柯文哲（下一屆中華民國的總統選舉期間可能會回到台北市）。', query='有哪些人可能住在台北市？', documents=[], meta={'model': 'HuggingFaceH4/zephyr-7b-beta', 'finish_reason': 'eos_token', 'usage': {'completion_tokens': 54}})]}}
+    {'answer_builder': {'answers': [GeneratedAnswer(
+        data=' 蕭中柱、蔣萬安、柯文哲（下一屆中華民國的總統選舉期間可能會回到台北市）。', query='有哪些人可能住在台北市？',
+        documents=[],
+        meta={
+            'model': 'HuggingFaceH4/zephyr-7b-beta',
+            'finish_reason': 'eos_token',
+            'usage': {'completion_tokens': 54}
+        }
+    )]}}
     ```
 
 <br>
