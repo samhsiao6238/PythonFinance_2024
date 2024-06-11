@@ -22,17 +22,31 @@ _簡單說明每個組件提供的功能_
 
 1. `Multiplexer`：用於接收 `一個輸入` 並將其分發給 `多個組件`，從而簡化管道的數據流處理，換句話說就是將 `單一輸入` 如查詢文本同時發送到 `多個需要該輸入的組件`。
 
+<br>
+
 2. `InMemoryDocumentStore`：在內存中存儲和管理文件數據，便於快速檢索和查詢操作，適合小型數據集的開發情境。
+
+<br>
 
 3. `HuggingFaceAPIDocumentEmbedder`：使用 `Hugging Face` 的 API 將 `文件內容` 轉換為 `嵌入向量`，以便後續的檢索和分析，這種嵌入表示 _捕捉了文件的語義信息_。
 
+<br>
+
 4. `HuggingFaceAPITextEmbedder`：使用 `Hugging Face` 的 API 將 `文本查詢` 轉換為 `嵌入向量`，用於與文件的嵌入向量進行 `比較`，以實現相關文件的檢索。
+
+<br>
 
 5. `InMemoryEmbeddingRetriever`：基於 `嵌入向量` 進行檢索，根據查詢的嵌入向量搜尋與之最相關的文件嵌入向量，並返回相應的文件。
 
+<br>
+
 6. `PromptBuilder`：用於建立生成模型所需的提示（prompt），將檢索到的文件內容和用戶的問題組合成一個完整的提示，供生成模型使用。
 
+<br>
+
 7. `HuggingFaceAPIGenerator`：使用 `Hugging Face` 的 API 進行文本生成，根據提示生成自然語言回答或文本，通常用於生成答案或續寫文本。
+
+<br>
 
 8. `AnswerBuilder`：組合生成的答案與原始問題、檢索到的相關文件和模型的元數據，以便提供更加完整和有用的回答。
 
