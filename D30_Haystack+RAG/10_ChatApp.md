@@ -2,6 +2,8 @@
 
 ![](images/img_35.png)
 
+_Building a Chat Application with Function Calling_
+
 <br>
 
 ## 說明
