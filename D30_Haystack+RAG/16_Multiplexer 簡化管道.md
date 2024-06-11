@@ -54,7 +54,7 @@ _簡單說明每個組件提供的功能_
 
 ## 開始
 
-1. 安裝依賴庫。
+1. 安裝依賴庫：版本中帶有運算子時要加入引號作為識別。
 
     ```bash
     pip install haystack-ai "huggingface_hub>=0.22.0"
@@ -62,7 +62,7 @@ _簡單說明每個組件提供的功能_
 
 <br>
 
-2. 設置 `Hugging Face API Key`。
+2. 設置 `Hugging Face API Key`：關於申請作業這裡不再贅述。
 
     ```python
     from getpass import getpass
@@ -80,7 +80,7 @@ _簡單說明每個組件提供的功能_
 
 ## 使用管道索引文件
 
-1. 導入組件。
+1. 導入套件中的組件。
 
     ```python
     from haystack import Pipeline, Document
@@ -91,7 +91,7 @@ _簡單說明每個組件提供的功能_
 
 <br>
 
-2. 建立一個小型的模擬數據集。
+2. 自定義一個小型的模擬數據集，並在最後添加一個中文的數據。
 
     ```python
     # 建立文件數據集
@@ -101,12 +101,13 @@ _簡單說明每個組件提供的功能_
         Document(content="My name is Giorgio and I live in Rome."),
         Document(content="My name is Giorgio and I live in Milan."),
         Document(content="My name is Giorgio and I lived in many cities, but I settled in Naples eventually."),
+        Document(content="我的名字叫做蕭中柱，綽號是小柱，我住在台北市，但有時候我也會去到新北市的住處。")
     ]
     ```
 
 <br>
 
-3. 創建索引管道並添加組件。
+3. 創建索引管道 `indexing_pipeline` 並添加組件 `HuggingFaceAPIDocumentEmbedder`。
 
     ```python
     # 創建索引管道
@@ -132,8 +133,10 @@ _簡單說明每個組件提供的功能_
     ```python
     from utils.draw_pipeline import draw_and_display
 
-    draw_and_display(indexing_pipeline, "indexing_pipeline.png")
+    draw_and_display(indexing_pipeline, "ex16_1_pipe.png")
     ```
+
+    ![](images/img_73.png)
 
 <br>
 
