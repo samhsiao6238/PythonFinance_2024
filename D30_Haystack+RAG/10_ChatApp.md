@@ -61,6 +61,8 @@ _先簡介兩者差異_
     from haystack.components.generators.chat import OpenAIChatGenerator
 
     # 建立系統消息和用戶消息的 ChatMessage 對象
+    # 系統消息提示生成的回應應該始終使用繁體中文，即使輸入是其他語言
+    # 用戶消息則是提問 "什麼是自然語言處理？要簡潔。"。
     messages = [
         ChatMessage.from_system(
             "即使某些輸入資料採用其他語言，也始終以繁體中文回應。"
@@ -72,11 +74,19 @@ _先簡介兩者差異_
 
     # 初始化 OpenAIChatGenerator
     chat_generator = OpenAIChatGenerator(model="gpt-4-turbo")
-    # 傳入消息並運行
+    # 傳入消息並運行生成對話
     response = chat_generator.run(messages=messages)
-    # 優化輸出結果
-    for msg in response['replies']:
-        print(f"{msg.role.value}: {msg.content}")
+
+    # 優化輸出結果，包含用戶消息
+    for idx, msg in enumerate(messages):
+        if msg.role == ChatMessage.Role.USER:
+            print(f"用戶: {msg.content}")
+        elif msg.role == ChatMessage.Role.SYSTEM:
+            print(f"系統: {msg.content}")
+
+    # 打印生成的回應
+    for reply in response['replies']:
+        print(f"助理: {reply.content}")
     ```
 
 <br>
