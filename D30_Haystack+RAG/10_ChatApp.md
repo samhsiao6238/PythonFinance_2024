@@ -395,6 +395,16 @@ _建立基本的 RAG 管道_
 
 <br>
 
+7. 輸出管道圖。
+
+    ```python
+    draw_and_display(rag_pipe, "ex10_2_pipe.png")
+    ```
+
+    ![](images/img_76.png)
+
+<br>
+
 ## 運行管道
 
 1. 使用一個查詢來測試管道，並確保它按照預期工作，然後再將其用作函數調用工具。
