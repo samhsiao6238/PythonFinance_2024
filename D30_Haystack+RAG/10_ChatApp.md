@@ -279,6 +279,8 @@ _先簡介兩者差異_
     draw_and_display(indexing_pipeline, "ex10_1_pipe.png")
     ```
 
+    ![](images/img_75.png)
+
 <br>
 
 ## 建立管道
