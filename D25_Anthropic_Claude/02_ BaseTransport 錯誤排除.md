@@ -4,7 +4,7 @@
 
 ## 說明
 
-1. 這個錯誤 `ImportError: cannot import name 'BaseTransport' from 'httpx'` 表示 `httpx` 庫中缺少 `BaseTransport` 模塊，這可能是由於 `httpx` 版本不兼容造成的。
+1. 這個錯誤 `ImportError: cannot import name 'BaseTransport' from 'httpx'` 表示 `httpx` 庫中缺少 `BaseTransport` 模組，這可能是由於 `httpx` 版本不兼容造成的。
 
 <br>
 
