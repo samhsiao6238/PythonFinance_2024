@@ -759,7 +759,7 @@ _簡單說明每個組件提供的功能_
 
     ```python
     pipe.run({
-        "multiplexer": {"value": "哪些人住在台北市的人可能參選下一屆總統選舉？"}
+        "multiplexer": {"value": "哪些住在台北市的人可能參選下一屆總統選舉？"}
     })
     ```
 
@@ -768,7 +768,7 @@ _簡單說明每個組件提供的功能_
     ```bash
     {'answer_builder': {'answers': [GeneratedAnswer(
         data=' 蔣萬安和柯文哲，前者是當前的台北市長和國民黨下一屆總統候選人的熱門人選，後者是前一任的台北市長和民眾黨的黨主席，下一屆中華民國的總統選舉預計也不會缺席。',
-        query='哪些人住在台北市的人可能參選下一屆總統選舉？',
+        query='哪些住在台北市的人可能參選下一屆總統選舉？',
         documents=[],
         meta={
             'model': 'HuggingFaceH4/zephyr-7b-beta',
