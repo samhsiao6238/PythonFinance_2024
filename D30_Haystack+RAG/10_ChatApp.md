@@ -142,11 +142,11 @@
 
     # 建立文件
     documents = [
-        Document(content="我的名字是 Jean，我住在 Paris。"),
-        Document(content="我的名字是 Mark，我住在 Berlin。"),
-        Document(content="我的名字是 Giorgio，我住在 Rome。"),
-        Document(content="我的名字是 Marta，我住在 Madrid。"),
-        Document(content="我的名字是 Harry，我住在 London。"),
+        Document(content="My name is Jean and I live in Paris."),
+        Document(content="My name is Mark and I live in Berlin."),
+        Document(content="My name is Giorgio and I live in Rome."),
+        Document(content="My name is Marta and I live in Madrid."),
+        Document(content="My name is Harry and I live in London."),
     ]
 
     # 初始化內存文件儲存
@@ -463,15 +463,6 @@
     # 打印函數名稱和參數
     print("Function Name:", function_name)
     print("Function Arguments:", function_args)
-
-    # 定義可用的函數
-    def rag_pipeline_func(query: str):
-        # 這裡假設你的 `rag_pipeline_func` 函數定義
-        return {"reply": f"Mark lives in Berlin, query was: {query}"}
-
-    def get_current_weather(location: str):
-        # 這裡假設你的 `get_current_weather` 函數定義
-        return {"weather": "sunny", "temperature": 20, "location": location}
 
     # 可用函數字典
     available_functions = {
