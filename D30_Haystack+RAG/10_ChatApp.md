@@ -22,9 +22,9 @@
 
 <br>
 
-## 進行開發
+## 開發之前
 
-1. 安裝 Haystack 2.0 和 `sentence-transformers`。
+1. 安裝 `Haystack 2.0` 和 `sentence-transformers`：這是官方範例指定的版本。
 
     ```bash
     pip install haystack-ai "sentence-transformers>=2.2.0"
@@ -32,31 +32,29 @@
 
 <br>
 
-2. 保存 OpenAI API Key 為環境變量。
-
-    ```python
-    from getpass import getpass
-    import os
-    from dotenv import load_dotenv
-
-    # 載入環境變數
-    load_dotenv()
-    # 兩個 API 的密鑰
-    os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
-
-    if "OPENAI_API_KEY" not in os.environ:
-        os.environ["OPENAI_API_KEY"] = getpass("Enter OpenAI API key:")
-    ```
-
-<br>
-
 ## OpenAIChatGenerator vs OpenAIGenerator
 
-1. `OpenAIChatGenerator` 是支持通過 `Chat Completion API` 使用 `OpenAI` 的函數調用功能的組件，與 `OpenAIGenerator` 不同，`OpenAIChatGenerator` 是通過 `ChatMessage` 列表來進行通信的。
+_先簡介兩者差異_
 
 <br>
 
-2. 實作上，使用 `ChatMessage.from_system()` 建立一個具有 `SYSTEM` 角色的 `ChatMessage` 對象，然後使用 `ChatMessage.from_user()` 建立另一個具有 `USER` 角色的 `ChatMessage`。接著，將這些消息列表傳遞給 `OpenAIChatGenerator` 並運行。
+1. `OpenAIChatGenerator` 和 `OpenAIGenerator` 都是 `Haystack` 框架中的 `組件`，兩者都可使用 `OpenAI API` 進行 `NLP` 任務，但功能和使用場景有所不同。
+
+<br>
+
+2. `OpenAIChatGenerator` 支持調用 `OpenAI` 的函數調用功能，是專門設計用來與 `OpenAI` 的 `Chat Completion API` 交互，支持複雜對話的上下文管理和多輪對話，適合構建聊天機器人或需要上下文理解的應用。
+
+<br>
+
+3. `OpenAIChatGenerator` 使用 `ChatMessage` 列表進行通信，每個 `ChatMessage` 對象可以表示一條用戶或系統消息，並包含消息的角色和具體的文本內容，角色則可以是用戶或助手。
+
+<br>
+
+4. 在 `OpenAIGenerator` 部分則與 `OpenAIChatGenerator` 不同， `OpenAIGenerator` 是用來與 `OpenAI` 的 `Completion API` 互動的，主要用於生成 `單輪文本回答`，適合簡單的文本生成任務，如回答問題、文本續寫、翻譯、總結等，並且不支持上下文管理。
+
+<br>
+
+5. 實作上，`OpenAIChatGenerator` 使用 `ChatMessage.from_system()` 建立一個具有 `SYSTEM` 角色的 `ChatMessage` 對象，然後使用 `ChatMessage.from_user()` 建立另一個具有 `USER` 角色的 `ChatMessage`。接著，將這些消息列表傳遞給 `OpenAIChatGenerator` 並運行。
 
     ```python
     from haystack.dataclasses import ChatMessage
@@ -80,7 +78,7 @@
 
 <br>
 
-3. 輸出如下結果。
+6. 輸出如下結果。
 
     ```python
     {
@@ -106,9 +104,7 @@
 
 <br>
 
-## 基本流式處理
-
-1. `OpenAIChatGenerator` 支持流式處理，以下提供一個 `streaming_callback` 函數並重新運行 `chat_generator` 來查看差異。
+6. 簡介流式處理： `OpenAIChatGenerator` 支持流式處理，以下提供一個 `streaming_callback` 函數並重新運行 `chat_generator` 來查看差異。
 
     ```python
     from haystack.dataclasses import ChatMessage
@@ -126,20 +122,40 @@
 
 <br>
 
-## 從 Haystack 管道建立函數調用工具
+## 進行開發
 
-1. 要使用 `OpenAI` 的 `函數調用功能`，需要通過 `generation_kwargs` 參數將工具介紹給 `OpenAIChatGenerator`，本範例使用 `Haystack RAG` 管道作為工具之一，因此需要將文件索引到文件儲存中，然後在其上建立 RAG 管道。
+1. 建立環境變量。
+
+    ```python
+    from getpass import getpass
+    import os
+    from dotenv import load_dotenv
+
+    # 載入環境變數
+    load_dotenv()
+    # 兩個 API 的密鑰
+    os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+
+    if "OPENAI_API_KEY" not in os.environ:
+        os.environ["OPENAI_API_KEY"] = getpass("Enter OpenAI API key:")
+    ```
 
 <br>
 
-2. 建立一個管道，將範例數據集儲存到 `InMemoryDocumentStore` 中，並使用 `SentenceTransformersDocumentEmbedder` 來生成文件的嵌入，然後使用 `DocumentWriter` 將它們寫入 `文件儲存`中，將這些組件添加到管道後，將它們連接並運行管道。
+2. 導入相關組件套件。
 
     ```python
     from haystack import Pipeline, Document
     from haystack.document_stores.in_memory import InMemoryDocumentStore
     from haystack.components.writers import DocumentWriter
     from haystack.components.embedders import SentenceTransformersDocumentEmbedder
+    ```
 
+<br>
+
+3. 建立簡單的文件數據。
+
+    ```python
     # 建立文件
     documents = [
         Document(content="My name is Jean and I live in Paris."),
@@ -148,26 +164,56 @@
         Document(content="My name is Marta and I live in Madrid."),
         Document(content="My name is Harry and I live in London."),
     ]
+    ```
 
-    # 初始化內存文件儲存
-    document_store = InMemoryDocumentStore()
+<br>
 
+4. 建立索引管道。
+
+    ```python
     # 建立索引管道
     indexing_pipeline = Pipeline()
+    ```
+
+<br>
+
+5. 加入管道組件。
+
+    ```python
+    # 初始化內存文件儲存組件
+    document_store = InMemoryDocumentStore()    
+    # 在管道中加入組件：將文件內容轉換成嵌入向量
     indexing_pipeline.add_component(
-        instance=SentenceTransformersDocumentEmbedder(model="sentence-transformers/all-MiniLM-L6-v2"), name="doc_embedder"
+        instance=SentenceTransformersDocumentEmbedder(
+            model="sentence-transformers/all-MiniLM-L6-v2"
+        ),
+        name="doc_embedder"
     )
+    # 加入組件：將處理後的文件數據寫入到指定的文件存儲
+    # 指定使用 `內存文件儲存`
     indexing_pipeline.add_component(
         instance=DocumentWriter(document_store=document_store),
         name="doc_writer"
     )
+    ```
 
+<br>
+
+6. 連接組件。
+
+    ```python
     # 連接嵌入器和文件寫入器
     indexing_pipeline.connect(
         "doc_embedder.documents",
         "doc_writer.documents"
     )
+    ```
 
+<br>
+
+7. 運行管道。
+
+    ```python
     # 運行管道
     indexing_pipeline.run({
         "doc_embedder": {"documents": documents}
@@ -176,22 +222,32 @@
 
 <br>
 
-3. 運行後顯示。
+8. 運行後顯示。
 
     ![](images/img_36.png)
 
 <br>
 
-## 建立 RAG 管道
+## 建立管道
 
-1. 使用 `SentenceTransformersTextEmbedder`、`InMemoryEmbeddingRetriever`、`PromptBuilder` 和 `OpenAIGenerator` 建立基本的檢索增強生成管道。
+_建立基本的 RAG 管道_
+
+<br>
+
+1. 導入相關組件套件。
 
     ```python
     from haystack.components.embedders import SentenceTransformersTextEmbedder
     from haystack.components.retrievers.in_memory import InMemoryEmbeddingRetriever
     from haystack.components.builders import PromptBuilder
     from haystack.components.generators import OpenAIGenerator
+    ```
 
+<br>
+
+2. 定義模板。
+
+    ```python
     # 定義提示模板
     template = """
     根據給定的上下文回答問題。
@@ -203,9 +259,22 @@
     問題: {{ question }}
     答案:
     """
+    ```
 
+<br>
+
+3. 建立管道。
+
+    ```python
     # 建立 RAG 管道
     rag_pipe = Pipeline()
+    ```
+
+<br>
+
+4. 建立組件。
+
+    ```python
     rag_pipe.add_component(
         "embedder",
         SentenceTransformersTextEmbedder(
@@ -228,7 +297,13 @@
         "llm",
         OpenAIGenerator(model="gpt-4-turbo")
     )
+    ```
 
+<br>
+
+5. 連結組件。
+
+    ```python
     # 連接組件
     rag_pipe.connect(
         "embedder.embedding",
@@ -246,7 +321,7 @@
 
 <br>
 
-2. 會輸出以下訊息。
+6. 會輸出以下訊息。
 
     ```bash
     <haystack.core.pipeline.pipeline.Pipeline object at 0x3169ca710>
