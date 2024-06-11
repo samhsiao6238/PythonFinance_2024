@@ -54,7 +54,7 @@ _先簡介兩者差異_
 
 <br>
 
-5. 實作上，`OpenAIChatGenerator` 使用 `ChatMessage.from_system()` 建立一個具有 `SYSTEM` 角色的 `ChatMessage` 對象，然後使用 `ChatMessage.from_user()` 建立另一個具有 `USER` 角色的 `ChatMessage`。接著，將這些消息列表傳遞給 `OpenAIChatGenerator` 並運行。
+5. 以下代碼展示如何使用 `haystack` 的 `OpenAIChatGenerator` 來生成一個對話系統，這裡會使用 `OpenAI API`，建立環境變數部分請參考後續步驟，這裡不贅述。
 
     ```python
     from haystack.dataclasses import ChatMessage
