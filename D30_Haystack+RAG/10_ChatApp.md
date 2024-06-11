@@ -76,17 +76,8 @@ _先簡介兩者差異_
     chat_generator = OpenAIChatGenerator(model="gpt-4-turbo")
     # 傳入消息並運行生成對話
     response = chat_generator.run(messages=messages)
-
-    # 優化輸出結果，包含用戶消息
-    for idx, msg in enumerate(messages):
-        if msg.role == ChatMessage.Role.USER:
-            print(f"用戶: {msg.content}")
-        elif msg.role == ChatMessage.Role.SYSTEM:
-            print(f"系統: {msg.content}")
-
-    # 打印生成的回應
-    for reply in response['replies']:
-        print(f"助理: {reply.content}")
+    # 輸出查看
+    print(response)
     ```
 
 <br>
@@ -117,7 +108,31 @@ _先簡介兩者差異_
 
 <br>
 
-6. 簡介流式處理： `OpenAIChatGenerator` 支持流式處理，以下提供一個 `streaming_callback` 函數並重新運行 `chat_generator` 來查看差異。
+7. 優化輸出。
+
+    ```python
+    # 優化輸出結果，包含用戶消息
+    for msg in messages:
+        if msg.role == 'user':
+            print(f"用戶: {msg.content}")
+        elif msg.role == 'system':
+            print(f"系統: {msg.content}")
+
+    # 打印生成的回應
+    for reply in response['replies']:
+        print(f"助理: {reply.content}")
+    ```
+
+    _結果：_
+    ```bash
+    系統: 即使某些輸入資料採用其他語言，也始終以繁體中文回應。
+    用戶: 什麼是自然語言處理？要簡潔。
+    助理: 自然語言處理（NLP）是人工智能的一個分支，專注於讓計算機理解、解釋、並生成人類語言的技術。其目的是讓機器能夠處理和回應語言數據，以支持各種應用，如語音識別、機器翻譯和情感分析等。
+    ```
+
+<br>
+
+8. 簡介流式處理： `OpenAIChatGenerator` 支持流式處理，以下提供一個 `streaming_callback` 函數並重新運行 `chat_generator` 來查看差異。
 
     ```python
     from haystack.dataclasses import ChatMessage
