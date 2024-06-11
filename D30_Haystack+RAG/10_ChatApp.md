@@ -271,6 +271,16 @@ _先簡介兩者差異_
 
 <br>
 
+10. 調用自訂函數。
+
+    ```python
+    from utils.draw_pipeline import draw_and_display
+
+    draw_and_display(indexing_pipeline, "ex10_1_pipe.png")
+    ```
+
+<br>
+
 ## 建立管道
 
 _建立基本的 RAG 管道_
