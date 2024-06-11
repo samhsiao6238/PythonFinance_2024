@@ -33,7 +33,7 @@ _方法說明_
     # 初始化 Ollama 模型
     llm_model = Ollama(model="llama3")
 
-    # 構建提示模板
+    # 建立提示模板
     prompt_template = """
     你是一個專門回答問題的聊天機器人，
     你的名字是「歐拉馬柱」，

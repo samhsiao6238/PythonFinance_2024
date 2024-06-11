@@ -334,7 +334,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
     nest_asyncio.apply()
     # 遍歷所有嵌入模型進行評估
     for model in EVAL_EMBEDDING_MODELS:
-        # 構建數據字典
+        # 建立數據字典
         data = {
             # 問題
             "question": [],

@@ -6,7 +6,7 @@ _使用 LangChain 整合 MongoDB Atlas 建立 `向量索引` 並進行 `向量�
 
 ## 說明
 
-1. 本筆記出處 [MongoDB 官方說明](https://www.mongodb.com/docs/atlas/atlas-vector-search/ai-integrations/langchain/)，說明如何使用 `LangChain` 與 `MongoDB Atlas 向量搜索` 來構建 `LLM` 應用程式並實現 `索引增強生成 RAG（Retrieval-Augmented Generation）`。
+1. 本筆記出處 [MongoDB 官方說明](https://www.mongodb.com/docs/atlas/atlas-vector-search/ai-integrations/langchain/)，說明如何使用 `LangChain` 與 `MongoDB Atlas 向量搜索` 來建立 `LLM` 應用程式並實現 `索引增強生成 RAG（Retrieval-Augmented Generation）`。
 
 <br>
 
@@ -20,7 +20,7 @@ _使用 LangChain 整合 MongoDB Atlas 建立 `向量索引` 並進行 `向量�
 
 <br>
 
-2. 在大量數據中，通過構建向量索引可快速地找到與查詢向量相似的數據點，這對於需要實時響應的應用非常重要。
+2. 在大量數據中，通過建立向量索引可快速地找到與查詢向量相似的數據點，這對於需要實時響應的應用非常重要。
 
 <br>
 
@@ -323,7 +323,7 @@ _在 MongoDB 控制板上操作，以 `MyDatabase2024.MyCollection2024` 為例_
 
 <br>
 
-11. 關閉 `You're All Set!` 的窗口，等待索引構建完成。
+11. 關閉 `You're All Set!` 的窗口，等待索引建立完成。
 
     ![](images/img_27.png)
 
@@ -331,7 +331,7 @@ _在 MongoDB 控制板上操作，以 `MyDatabase2024.MyCollection2024` 為例_
 
 ## 運行向量搜索查詢
 
-_索引構建完成後，返回運行向量搜索查詢_
+_索引建立完成後，返回運行向量搜索查詢_
 
 <br>
 

@@ -331,7 +331,7 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
 
 <br>
 
-2. 具體示範如何使用 OpenAI 的 `Chat Completions API` 來實現多輪對話，通過收集用戶和助理之間的對話，並將這些對話傳遞給 API 來實現連續的對話溝通，這可應用於構建智能客服系統、虛擬助手等場景。
+2. 具體示範如何使用 OpenAI 的 `Chat Completions API` 來實現多輪對話，通過收集用戶和助理之間的對話，並將這些對話傳遞給 API 來實現連續的對話溝通，這可應用於建立智能客服系統、虛擬助手等場景。
 
     ```python
     from openai import OpenAI

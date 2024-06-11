@@ -140,7 +140,7 @@ _以下步驟涵蓋了新聞爬取、嵌入向量生成、儲存到 MongoDB、�
 
 <br>
 
-7. 從 MongoDB 載入文件，並使用這些文件構建 `向量搜索索引`。
+7. 從 MongoDB 載入文件，並使用這些文件建立 `向量搜索索引`。
 
     ```python
     from langchain_mongodb import MongoDBAtlasVectorSearch

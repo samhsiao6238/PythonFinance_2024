@@ -10,27 +10,31 @@
 
 <br>
 
-2. 在構建超過 3 或 4 個組件的 Haystack 管道時，可注意到傳遞給 `Pipeline.run()` 方法的輸入數量會無限增長，新的組件會從管道中的其他組件接收一些輸入，但許多組件也需要來自用戶的額外輸入，因此 `Pipeline.run()` 的數據輸入會變得非常重複，這個狀況可透過 `Multiplexer` 有效地管理這些重複。
+2. 在建立超過 3 或 4 個組件的 Haystack 管道時，可注意到傳遞給 `Pipeline.run()` 方法的輸入數量會無限增長，新的組件會從管道中的其他組件接收一些輸入，但許多組件也需要來自用戶的額外輸入，因此 `Pipeline.run()` 的數據輸入會變得非常重複，這個狀況可透過 `Multiplexer` 有效地管理這些重複。
 
 <br>
 
 ## 使用的組件
 
-1. `Multiplexer`：
+_簡單說明每個組件提供的功能_
 
-2. `InMemoryDocumentStore`：
+<br>
 
-3. `HuggingFaceAPIDocumentEmbedder`：
+1. `Multiplexer`：用於接收 `一個輸入` 並將其分發給 `多個組件`，從而簡化管道的數據流處理，換句話說就是將 `單一輸入` 如查詢文本同時發送到 `多個需要該輸入的組件`。
 
-4. `HuggingFaceAPITextEmbedder`：
+2. `InMemoryDocumentStore`：在內存中存儲和管理文件數據，便於快速檢索和查詢操作，適合小型數據集的開發情境。
 
-5. `InMemoryEmbeddingRetriever`：
+3. `HuggingFaceAPIDocumentEmbedder`：使用 `Hugging Face` 的 API 將 `文件內容` 轉換為 `嵌入向量`，以便後續的檢索和分析，這種嵌入表示 _捕捉了文件的語義信息_。
 
-6. `PromptBuilder`：
+4. `HuggingFaceAPITextEmbedder`：使用 `Hugging Face` 的 API 將 `文本查詢` 轉換為 `嵌入向量`，用於與文件的嵌入向量進行 `比較`，以實現相關文件的檢索。
 
-7. `HuggingFaceAPIGenerator`：
+5. `InMemoryEmbeddingRetriever`：基於 `嵌入向量` 進行檢索，根據查詢的嵌入向量搜尋與之最相關的文件嵌入向量，並返回相應的文件。
 
-8. `AnswerBuilder`：
+6. `PromptBuilder`：用於建立生成模型所需的提示（prompt），將檢索到的文件內容和用戶的問題組合成一個完整的提示，供生成模型使用。
+
+7. `HuggingFaceAPIGenerator`：使用 `Hugging Face` 的 API 進行文本生成，根據提示生成自然語言回答或文本，通常用於生成答案或續寫文本。
+
+8. `AnswerBuilder`：組合生成的答案與原始問題、檢索到的相關文件和模型的元數據，以便提供更加完整和有用的回答。
 
 <br>
 
@@ -162,9 +166,9 @@
 
 <br>
 
-## 構建 RAG 管道
+## 建立 RAG 管道
 
-1. 導入構建 `RAG 管道` 的組件。
+1. 導入建立 `RAG 管道` 的組件。
 
     ```python
     from haystack.components.embedders import HuggingFaceAPITextEmbedder
@@ -259,7 +263,7 @@
         )
     )
 
-    # 添加答案構建器
+    # 添加答案建立器
     pipe.add_component(
         "answer_builder",
         AnswerBuilder()
@@ -528,7 +532,7 @@
         )
     )
 
-    # 添加答案構建器
+    # 添加答案建立器
     pipe.add_component("answer_builder", AnswerBuilder())
     ```
 
@@ -567,11 +571,11 @@
         # 對輸入文本進行嵌入處理，生成相應的數值向量表示
         - embedder: HuggingFaceAPITextEmbedder
 
-        # 根據輸入的嵌入向量檢索最相關的文檔
+        # 根據輸入的嵌入向量檢索最相關的文件
         - retriever: InMemoryEmbeddingRetriever
 
-        # 負責構建用於生成模型的提示（prompt）
-        # retriever 會將檢索到的文檔和問題結合，生成一個完整的提示文本
+        # 負責建立用於生成模型的提示（prompt）
+        # retriever 會將檢索到的文件和問題結合，生成一個完整的提示文本
         - prompt_builder: PromptBuilder
 
         # 使用 HuggingFace 的生成模型來產生答案
@@ -588,8 +592,8 @@
         - multiplexer.value -> embedder.text (str)
 
         # 將查詢文本作為字串傳遞到 prompt_builder 的 question 參數
-        # 使用問題文本來構建用於生成答案的提示文本（prompt）
-        # 包括從相關文檔中提取內容並結合問題
+        # 使用問題文本來建立用於生成答案的提示文本（prompt）
+        # 包括從相關文件中提取內容並結合問題
         - multiplexer.value -> prompt_builder.question (str)
 
         # 將查詢文本作為字串傳遞到 answer_builder 的 query 參數
@@ -598,15 +602,15 @@
         - multiplexer.value -> answer_builder.query (str)
 
         # 將由 embedder 生成的嵌入向量（List[float]）傳遞到 retriever 的 query_embedding 參數
-        # 使用這些嵌入向量來檢索與查詢最相關的文檔
+        # 使用這些嵌入向量來檢索與查詢最相關的文件
         - embedder.embedding -> retriever.query_embedding (List[float])
 
-        # 將由 retriever 檢索到的相關文檔（List[Document]）傳遞到 prompt_builder 的 documents 參數
-        # 使用這些文檔來構建生成模型的提示文本
-        # 這些文檔作為上下文信息來幫助生成更準確的答案
+        # 將由 retriever 檢索到的相關文件（List[Document]）傳遞到 prompt_builder 的 documents 參數
+        # 使用這些文件來建立生成模型的提示文本
+        # 這些文件作為上下文信息來幫助生成更準確的答案
         - retriever.documents -> prompt_builder.documents (List[Document])
 
-        # 將由 prompt_builder 構建的提示文本（prompt，字符串形式）傳遞到 llm 的 prompt 參數
+        # 將由 prompt_builder 建立的提示文本（prompt，字符串形式）傳遞到 llm 的 prompt 參數
         # 使用這個提示文本來生成對應的回答
         - prompt_builder.prompt -> llm.prompt (str)
 

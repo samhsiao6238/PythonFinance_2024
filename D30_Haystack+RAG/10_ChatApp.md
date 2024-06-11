@@ -6,7 +6,7 @@
 
 ## 說明
 
-1. 這是官方在 `2024/04/25` 發布的 [官方教程](https://haystack.deepset.ai/tutorials/40_building_chat_application_with_function_calling)，構建一個具有 `函數調用` 功能的 `聊天應用程序` 。
+1. 這是官方在 `2024/04/25` 發布的 [官方教程](https://haystack.deepset.ai/tutorials/40_building_chat_application_with_function_calling)，建立一個具有 `函數調用` 功能的 `聊天應用程序` 。
 
 <br>
 
@@ -14,11 +14,11 @@
 
 <br>
 
-3. 這個範例的目的是使用 `OpenAI` 的 `函數調用功能 `來構建具備 `類代理行為` 的聊天應用程序，將 Haystack 管道轉換為函數調用工具，以及使用 OpenAI 的 Chat Completion API 通過 OpenAIChatGenerator 來實現類代理行為的應用程序。相關文件可參考 Haystack 的 [OpenAIChatGenerator 文件](https://docs.haystack.deepset.ai/docs/openaichatgenerator)。
+3. 這個範例的目的是使用 `OpenAI` 的 `函數調用功能 `來建立具備 `類代理行為` 的聊天應用程序，將 Haystack 管道轉換為函數調用工具，以及使用 OpenAI 的 Chat Completion API 通過 OpenAIChatGenerator 來實現類代理行為的應用程序。相關文件可參考 Haystack 的 [OpenAIChatGenerator 文件](https://docs.haystack.deepset.ai/docs/openaichatgenerator)。
 
 <br>
 
-4. OpenAI 的 `函數調用功能` 將 `LLM` 連接到外部工具，通過向 `OpenAI API` 調用提供函數列表及其規範可輕鬆構建聊天助手，這些助手可以通過調用外部 API 來回答問題或從文本中提取結構化信息。
+4. OpenAI 的 `函數調用功能` 將 `LLM` 連接到外部工具，通過向 `OpenAI API` 調用提供函數列表及其規範可輕鬆建立聊天助手，這些助手可以通過調用外部 API 來回答問題或從文本中提取結構化信息。
 
 <br>
 
@@ -128,7 +128,7 @@
 
 ## 從 Haystack 管道建立函數調用工具
 
-1. 要使用 `OpenAI` 的 `函數調用功能`，需要通過 `generation_kwargs` 參數將工具介紹給 `OpenAIChatGenerator`，本範例使用 `Haystack RAG` 管道作為工具之一，因此需要將文件索引到文件儲存中，然後在其上構建 RAG 管道。
+1. 要使用 `OpenAI` 的 `函數調用功能`，需要通過 `generation_kwargs` 參數將工具介紹給 `OpenAIChatGenerator`，本範例使用 `Haystack RAG` 管道作為工具之一，因此需要將文件索引到文件儲存中，然後在其上建立 RAG 管道。
 
 <br>
 
@@ -182,9 +182,9 @@
 
 <br>
 
-## 構建 RAG 管道
+## 建立 RAG 管道
 
-1. 使用 `SentenceTransformersTextEmbedder`、`InMemoryEmbeddingRetriever`、`PromptBuilder` 和 `OpenAIGenerator` 構建基本的檢索增強生成管道。
+1. 使用 `SentenceTransformersTextEmbedder`、`InMemoryEmbeddingRetriever`、`PromptBuilder` 和 `OpenAIGenerator` 建立基本的檢索增強生成管道。
 
     ```python
     from haystack.components.embedders import SentenceTransformersTextEmbedder
@@ -479,7 +479,7 @@
         "get_current_weather": get_current_weather
     }
 
-    # 查找相應的函數並使用給定的參數調用它
+    # 搜尋相應的函數並使用給定的參數調用它
     if function_name in available_functions:
         # 根據函數名稱找到對應的函數
         function_to_call = available_functions[function_name]
@@ -532,13 +532,13 @@
 
 <br>
 
-## 構建聊天應用程序
+## 建立聊天應用程序
 
-1. `OpenAI Chat Completions API` 並不會直接調用函數；相反，模型會生成可以在代碼中調用的 JSON。因此，為了構建 `端到端` 的聊天應用程序，需要在每次消息中檢查 `OpenAI` 回應是否為 `工具調用`。如果是，需要使用提供的參數調用相應的函數，並將函數回應發送回 OpenAI。否則，將用戶和消息都附加到消息列表中，與模型進行常規對話。
+1. `OpenAI Chat Completions API` 並不會直接調用函數；相反，模型會生成可以在代碼中調用的 JSON。因此，為了建立 `端到端` 的聊天應用程序，需要在每次消息中檢查 `OpenAI` 回應是否為 `工具調用`。如果是，需要使用提供的參數調用相應的函數，並將函數回應發送回 OpenAI。否則，將用戶和消息都附加到消息列表中，與模型進行常規對話。
 
 <br>
 
-2. 要為應用程序構建一個漂亮的用戶界面，可以使用帶有聊天界面的 `Gradio`。安裝 `gradio`，運行下面的代碼單元，並使用輸入框與具有訪問權限的聊天應用程序進行交互。
+2. 要為應用程序建立一個漂亮的用戶界面，可以使用帶有聊天界面的 `Gradio`。安裝 `gradio`，運行下面的代碼單元，並使用輸入框與具有訪問權限的聊天應用程序進行交互。
 
     ```bash
     pip install gradio
@@ -597,7 +597,7 @@
                     function_name = function_call["function"]["name"]
                     function_args = json.loads(function_call["function"]["arguments"])
 
-                    # 查找相應的函數並使用給定的參數調用它
+                    # 搜尋相應的函數並使用給定的參數調用它
                     function_to_call = available_functions[function_name]
                     function_response = function_to_call(function_args)
 
