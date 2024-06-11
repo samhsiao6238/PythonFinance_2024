@@ -183,7 +183,7 @@ _簡單說明每個組件提供的功能_
 
 <br>
 
-9. 再次觀察管道。
+9. 再次觀察管道，以將 `doc_writer` 加入管道中。
 
     ```python
     draw_and_display(indexing_pipeline, "ex16_11_pipe.png")
@@ -372,6 +372,8 @@ _簡單說明每個組件提供的功能_
         ]
     }}
     ```
+
+<br>
 
 2. 以中文提問，雖然資料庫是以英文建立，但中文的索引似乎簡潔許多。
 
@@ -680,6 +682,115 @@ _簡單說明每個組件提供的功能_
             'model': 'HuggingFaceH4/zephyr-7b-beta',
             'finish_reason': 'eos_token',
             'usage': {'completion_tokens': 23}
+        }
+    )]}}
+    ```
+
+<br>
+
+2. 模糊提問。
+
+    ```python
+    pipe.run({
+        "multiplexer": {"value": "小柱是哪裡人？"}
+    })
+    ```
+    _答案：_
+    ```bash
+    {'answer_builder': {'answers': [GeneratedAnswer(
+        data='小柱是台北人，因為他的名字叫做蕭中柱，並且在問題中提到他住在台北市。',
+        query='小柱是哪裡人？',
+        documents=[],
+        meta={
+            'model': 'HuggingFaceH4/zephyr-7b-beta',
+            'finish_reason': 'eos_token',
+            'usage': {'completion_tokens': 41}
+        }
+    )]}}
+    ```
+
+<br>
+
+## 擴充資料
+
+1. 擴充資料。
+
+    ```python
+    documents = [
+        Document(content="My name is Jean and I live in Paris."),
+        Document(content="My name is Mark and I live in Berlin."),
+        Document(content="My name is Giorgio and I live in Rome."),
+        Document(content="My name is Giorgio and I live in Milan."),
+        Document(content="My name is Giorgio and I lived in many cities, but I settled in Naples eventually."),
+        Document(content="我的名字叫做蕭中柱，綽號是小柱子，我住在台北市，但有時候我也會去到新北市的住處。"),
+        Document(content="台北市長叫做蔣萬安，他是國民黨籍的政治人物，由於他是台北市長所以肯定住在台北市，他是國民黨下一屆總統候選人的熱門人選。"),
+        Document(content="前一任的台北市長叫做柯文哲，他住在台北市，目前是民眾黨的黨主席，下一屆中華民國的總統選舉預計也不會缺席。"),
+        Document(content="當前中華民國總統是賴清德，他是台南市人，他是民進黨籍的政治人物，可預期仍然會是民進黨下一屆的總統候選人。")
+    ]
+    
+<br>
+```
+
+2. 條件式提問。
+
+    ```python
+    pipe.run({
+        "multiplexer": {"value": "有哪些人可能住在台北市？"}
+    })
+    ```
+
+    _答案：_
+
+    ```bash
+    {'answer_builder': {'answers': [GeneratedAnswer(data=' 蕭中柱、蔣萬安、柯文哲（下一屆中華民國的總統選舉期間可能會回到台北市）。', query='有哪些人可能住在台北市？', documents=[], meta={'model': 'HuggingFaceH4/zephyr-7b-beta', 'finish_reason': 'eos_token', 'usage': {'completion_tokens': 54}})]}}
+    ```
+
+<br>
+
+3. 雙重條件提問。
+
+    ```python
+    pipe.run({
+        "multiplexer": {"value": "哪些人住在台北市的人可能參選下一屆總統選舉？"}
+    })
+    ```
+
+    _答案：_
+
+    ```bash
+    {'answer_builder': {'answers': [GeneratedAnswer(
+        data=' 蔣萬安和柯文哲，前者是當前的台北市長和國民黨下一屆總統候選人的熱門人選，後者是前一任的台北市長和民眾黨的黨主席，下一屆中華民國的總統選舉預計也不會缺席。',
+        query='哪些人住在台北市的人可能參選下一屆總統選舉？',
+        documents=[],
+        meta={
+            'model': 'HuggingFaceH4/zephyr-7b-beta',
+            'finish_reason': 'eos_token',
+            'usage': {'completion_tokens': 106}
+        }
+    )]}}
+    ```
+
+<br>
+
+4. 模糊提問。
+
+    ```python
+    pipe.run({
+        "multiplexer": {"value": "哪些政黨將推派人選參選下一屆總統選舉？"}
+    })
+    ```
+
+    _答案：_
+
+    ```bash
+    {'answer_builder': {'answers': [GeneratedAnswer(
+        data=' 民進黨和國民黨將推派人選參選下一屆總統選舉。 賴清德和蔣萬安都是兩個政黨的重要人選。 柯文哲也可能參選，但他目前是民眾黨的黨主席，所以這點需要觀察。',
+        query='哪些政黨將推派人選參選下一屆總統選舉？',
+        documents=[],
+        meta={
+            'model': 'HuggingFaceH4/zephyr-7b-beta',
+            'finish_reason': 'eos_token',
+            'usage': {'completion_tokens': 108}
         }
     )]}}
     ```
