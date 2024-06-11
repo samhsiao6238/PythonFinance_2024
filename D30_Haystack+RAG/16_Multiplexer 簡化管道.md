@@ -128,7 +128,7 @@ _簡單說明每個組件提供的功能_
 
 <br>
 
-4. 透過自訂函數觀察當前管道狀態。
+4. 透過自訂函數觀察當前管道狀態，是一個很單純的數據流。
 
     ```python
     from utils.draw_pipeline import draw_and_display
@@ -149,7 +149,7 @@ _簡單說明每個組件提供的功能_
 
 <br>
 
-5. 並通過 `DocumentWriter` 將它們寫入 `文件儲存(document store)`。
+6. 並通過 `DocumentWriter` 將它們寫入 `文件儲存(document store)`。
 
     ```python
     # 添加 DocumentWriter 組件，用於將生成的嵌入寫入內存文件儲存
@@ -161,7 +161,7 @@ _簡單說明每個組件提供的功能_
 
 <br>
 
-6. 將添加到管道的組件進行連接，然後運行管道。
+7. 將添加到管道的組件進行連接，然後運行管道。
 
     ```python
     # 連接組件
@@ -177,9 +177,19 @@ _簡單說明每個組件提供的功能_
 
 <br>
 
-7. 顯示。
+8. 顯示。
 
     ![](images/img_70.png)
+
+<br>
+
+9. 再次觀察管道。
+
+    ```python
+    draw_and_display(indexing_pipeline, "ex16_11_pipe.png")
+    ```
+
+    ![](images/img_74.png)
 
 <br>
 
