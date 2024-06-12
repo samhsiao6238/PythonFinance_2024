@@ -70,7 +70,7 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 ## 建立資料集
 
-1. 抓取數據：使用 `七大奇蹟` 的維基百科頁面作為文件，範例已經預處理數據並上傳到 `Hugging Face Space：Seven Wonders`，因此無需進行任何額外的清理或分割。
+1. 抓取數據：使用 `七大奇蹟` 的維基百科頁面作為文件，這個數據是已經預處理並上傳到 `Hugging Face Space：Seven Wonders` 的數據，所以下載後不需進行任何額外的清理或分割。
 
     ```python
     from datasets import load_dataset
@@ -90,7 +90,7 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 ## 建立儲存
 
-1. 將下載的數據 `嵌入索引` 到 `DocumentStore`，並使用 `InMemoryDocumentStore` 的 `內存文件儲存` 對象作為 `文件儲存`。
+1. 將下載的數據 `嵌入索引` 到 `DocumentStore`，這裡使用 `內存文件儲存` 對象 `InMemoryDocumentStore` 作為 `文件儲存`。
 
     ```python
     from haystack.document_stores.in_memory import InMemoryDocumentStore
@@ -101,7 +101,7 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-2. 初始化 `文件嵌入器`：要將數據儲存在帶有嵌入的 DocumentStore 中，使用模型名稱初始化一個 `SentenceTransformersDocumentEmbedder` 並調用 `warm_up()` 來下載嵌入模型。
+2. 建立 `文件嵌入器`：在文件嵌入器中指定模型，並透過嵌入器將數據儲存在 `DocumentStore` 中， 建議在實體建立後先調用 `warm_up()` 來下載嵌入模型，如此可加速後續管道的相關作業效率。
 
     ```python
     from haystack.components.embedders import SentenceTransformersDocumentEmbedder
