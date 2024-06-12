@@ -71,6 +71,16 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
+3. 禁用 `tokenizers` 的 `並行處理` 以 `避免死鎖`，詳最後面說明。
+
+    ```python
+    import os
+    # 禁用 tokenizers 的並行處理，詳最後面的說明
+    os.environ["TOKENIZERS_PARALLELISM"] = "false"
+    ```
+
+<br>
+
 ## 建立資料集
 
 1. 抓取數據：使用 `七大奇蹟` 的維基百科頁面作為文件，這個數據是已經預處理並上傳到 `Hugging Face Space：Seven Wonders` 的數據，所以下載後不需進行任何額外的清理或分割。
@@ -399,15 +409,13 @@ _模板使用的是 `Jinja2` 循環語法_
 
 <br>
 
-3. 可嘗試的代碼中禁用 tokenizers 的並行處理避免死鎖，可詳見最後面的說明。
+3. 可嘗試在代碼最前面設定環境變數來禁用 `tokenizers` 的 `並行處理` 避免死鎖。
 
     ```python
     import os
     # 禁用 tokenizers 的並行處理
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
     ```
-
-    
 
 <br>
 
