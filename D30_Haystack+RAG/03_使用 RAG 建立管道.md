@@ -128,6 +128,8 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
     )
     ```
 
+    ![](images/img_13.png)
+
 <br>
 
 3. 出現兩個警告，這兩個都是版本棄用提醒，但都是由函數內建調用所引發，所以無法處理也無須理會。
@@ -163,8 +165,6 @@ _回到範例操作_
     docs_with_embeddings = doc_embedder.run(docs)
     document_store.write_documents(docs_with_embeddings["documents"])
     ```
-
-    ![](images/img_13.png)
 
 <br>
 
