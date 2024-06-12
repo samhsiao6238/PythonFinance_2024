@@ -350,7 +350,7 @@ _模板使用的是 `Jinja2` 循環語法_
 
 <br>
 
-6. 運行管道 `run()` 有兩個參數，這兩個參數皆使用提示模板的 `question` 作為傳入值。
+6. 運行管道 `run()`，管道中有兩個參數且兩個參數皆使用提示模板的 `question` 作為傳入值。
 
     ```python
     response = basic_rag_pipeline.run({
