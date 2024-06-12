@@ -327,6 +327,8 @@ _模板使用的是 `Jinja2` 循環語法_
     draw_and_display(basic_rag_pipeline, "ex03_1_pipe.png")
     ```
 
+    ![](images/img_80.png)
+
 <br>
 
 6. 提問。
