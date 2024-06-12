@@ -639,7 +639,7 @@ _簡單說明每個組件提供的功能_
         # 這些文件作為上下文信息來幫助生成更準確的答案
         - retriever.documents -> prompt_builder.documents (List[Document])
 
-        # 將由 prompt_builder 建立的提示文本（prompt，字符串形式）傳遞到 llm 的 prompt 參數
+        # 將由 prompt_builder 建立的提示文本（prompt，字串形式）傳遞到 llm 的 prompt 參數
         # 使用這個提示文本來生成對應的回答
         - prompt_builder.prompt -> llm.prompt (str)
 

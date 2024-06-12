@@ -158,7 +158,7 @@ _回到範例操作_
 
 <br>
 
-1. 運行 `文件嵌入器 doc_embedder` 將每個文件 `建立嵌入` 並 `嵌入儲存` 在文件對象的 `embedding` 字段中。然後使用 `write_documents()` 方法將文件寫入 DocumentStore。
+1. 運行 `文件嵌入器 doc_embedder` 將每個文件 `建立嵌入` 並 `嵌入儲存` 在文件對象的 `embedding` 欄位中。然後使用 `write_documents()` 方法將文件寫入 DocumentStore。
 
     ```python
     # 將文檔轉換成嵌入表示
