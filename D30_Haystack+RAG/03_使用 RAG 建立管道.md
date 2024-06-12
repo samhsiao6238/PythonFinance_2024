@@ -57,11 +57,14 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 2. 建立環境變量：這個範例在後續會使用到 `OpenAI API` 來建立生成器 `OpenAIGenerator`。
 
     ```python
-    import os
     from getpass import getpass
-    from haystack.components.generators import OpenAIGenerator
+    import os
+    from dotenv import load_dotenv
 
-    # 設置 OpenAI API Key
+    # 載入環境變數
+    load_dotenv()
+    os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+    # 假如沒有找到環境變數就手動輸入
     if "OPENAI_API_KEY" not in os.environ:
         os.environ["OPENAI_API_KEY"] = getpass("Enter OpenAI API key:")
     ```
@@ -190,6 +193,8 @@ _以下是一個建立管道的流程_
 3. 建立 `生成器`：`生成器` 可與 LLM 進行互動，預設會讀取環境變數中的 `OPENAI_API_KEY` 變量值，這在前面步驟已進行寫入。
 
     ```python
+    from haystack.components.generators import OpenAIGenerator
+
     # 初始化 OpenAI 生成器
     generator = OpenAIGenerator(model="gpt-4-turbo")
     ```
