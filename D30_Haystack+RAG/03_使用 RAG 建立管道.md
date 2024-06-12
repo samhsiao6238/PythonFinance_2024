@@ -319,7 +319,17 @@ _模板使用的是 `Jinja2` 循環語法_
 
 <br>
 
-5. 提問。
+5. 可透過自訂義模組觀察並輸出管道現況圖。
+
+    ```python
+    from utils.draw_pipeline import draw_and_display
+
+    draw_and_display(basic_rag_pipeline, "ex03_1_pipe.png")
+    ```
+
+<br>
+
+6. 提問。
 
     ```python
     # 這僅僅是提問的範例供作參考
