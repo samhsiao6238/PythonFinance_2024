@@ -10,41 +10,43 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 ## 說明
 
-1. 這個範例是官方在 `2024/04/25` 發佈的 [官方教程](https://haystack.deepset.ai/tutorials/27_first_rag_pipeline)。
+1. 這個範例是官方在 `2024/04/25` 發佈的 [官方教程](https://haystack.deepset.ai/tutorials/27_first_rag_pipeline)，使用 `Haystack 2.0` 建立 RAG 的生成問答管道，並會使用 `OpenAI API`。
 
 <br>
 
+2. 將使用 `七大奇蹟` 的維基百科頁面作為文件，也可自行替換為任何文本。
+
+<br>
 
 ## 使用組件
-2. 使用 Haystack 2.0 來建立使用檢索增強 (RAG) 方法的生成問答管道，包含以下主要模組及 `OpenAI API`。
 
-    ```bash
-    # 用於儲存和管理文件
-    InMemoryDocumentStore
-
-    # 用於將文件轉換為嵌入向量
-    SentenceTransformersDocumentEmbedder
-    
-    # 將用戶的查詢轉換為嵌入向量
-    SentenceTransformersTextEmbedder
-    
-    # 用於根據嵌入向量在內存中檢索相關文件
-    InMemoryEmbeddingRetriever
-    
-    # 用於建立模板提示
-    PromptBuilder
-    
-    # 使用 OpenAI 的生成模型來生成文本的模組
-    OpenAIGenerator  
-    ```
+1. InMemoryDocumentStore：用於儲存和管理文件。
 
 <br>
 
-2. 將使用 `七大奇蹟` 的維基百科頁面作為文件，也可替換為任何文本。
+2. SentenceTransformersDocumentEmbedder：用於將文件轉換為嵌入向量。
 
 <br>
 
-3. 安裝 Haystack 2.0 和其他所需的套件，並透過條件指定版本。
+3. SentenceTransformersTextEmbedder：將用戶的查詢轉換為嵌入向量。
+
+<br>
+
+4. InMemoryEmbeddingRetriever：用於根據嵌入向量在內存中檢索相關文件。
+
+<br>
+
+5. PromptBuilder：用於建立模板提示。
+
+<br>
+
+6. OpenAIGenerator：使用 OpenAI 的生成模型來生成文本的模組。
+
+<br>
+
+## 開始進行
+
+1. 安裝 Haystack 2.0 和其他所需的套件，並透過條件指定版本。
 
     ```bash
     pip install haystack-ai "datasets>=2.6.1" "sentence-transformers>=2.2.0"
@@ -52,20 +54,9 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-## 範例說明
+## 建立資料集
 
-1. 索引文件：通過下載數據並將其嵌入索引到 `DocumentStore` 來建立問答系統，使用 `InMemoryDocumentStore` 來初始化 DocumentStore 以儲存問答系統用於搜尋答案的文件。
-
-    ```python
-    from haystack.document_stores.in_memory import InMemoryDocumentStore
-
-    # 初始化內存文件儲存
-    document_store = InMemoryDocumentStore()
-    ```
-
-<br>
-
-2. 抓取數據：使用 `七大奇蹟` 的維基百科頁面作為文件，範例已經預處理數據並上傳到 Hugging Face Space：Seven Wonders，因此無需進行任何額外的清理或分割。
+1. 抓取數據：使用 `七大奇蹟` 的維基百科頁面作為文件，範例已經預處理數據並上傳到 `Hugging Face Space：Seven Wonders`，因此無需進行任何額外的清理或分割。
 
     ```python
     from datasets import load_dataset
@@ -83,7 +74,20 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-3. 初始化文件嵌入器：要將數據儲存在帶有嵌入的 DocumentStore 中，使用模型名稱初始化一個 `SentenceTransformersDocumentEmbedder` 並調用 `warm_up()` 來下載嵌入模型。
+## 建立儲存
+
+1. 將下載的數據 `嵌入索引` 到 `DocumentStore`，並使用 `InMemoryDocumentStore` 的 `內存文件儲存` 對象作為 `文件儲存`。
+
+    ```python
+    from haystack.document_stores.in_memory import InMemoryDocumentStore
+
+    # 初始化內存文件儲存
+    document_store = InMemoryDocumentStore()
+    ```
+
+<br>
+
+2. 初始化文件嵌入器：要將數據儲存在帶有嵌入的 DocumentStore 中，使用模型名稱初始化一個 `SentenceTransformersDocumentEmbedder` 並調用 `warm_up()` 來下載嵌入模型。
 
     ```python
     from haystack.components.embedders import SentenceTransformersDocumentEmbedder
@@ -92,24 +96,31 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
     doc_embedder = SentenceTransformersDocumentEmbedder(
         model="sentence-transformers/all-MiniLM-L6-v2"
     )
+    # 加載嵌入器，這是一種優化手段，用於預先加載和初始化資源密集型組件
+    # 可確保系統在運行時能迅速響應並保持高效的運行狀態
+    # 可有效避免首次運行的延遲問題，提升整體系統的性能和穩定性
     doc_embedder.warm_up()
     ```
 
 <br>
 
-4. 運行後會顯示提示，表明這個擴充功能要求電腦必須安裝以下工具，而這些工具是不能透過擴充功能直接安裝的，如果下方有尚未安裝的工具，可點擊下面的連結進入下載頁面。
+## 關於開發環境
+
+1. 在 VSCode 中運行後會顯示提示，表明這個擴充功能要求在 VSCode 環境中必須安裝以下工具，而這些工具是不能透過擴充功能直接安裝的，如果下方有尚未安裝的工具，可點擊下面的連結進入下載頁面。
 
     ![](images/img_11.png)
 
 <br>
 
-5. 除此還包含了版本過舊的插件，其中已經安裝的會呈現反白，接著可分別點擊進行安裝，安裝了即便用不上也不影響 VSCode 運作，可放心安裝。
+2. 除此還包含了版本過舊的插件，其中已經安裝的會呈現反白，接著可分別點擊進行安裝，安裝了即便用不上也不影響 VSCode 運作，可放心安裝。
 
     ![](images/img_12.png)
 
 <br>
 
-6. 將文件寫入 DocumentStore：運行 `doc_embedder` 與文件，嵌入器將為每個文件建立嵌入並將這些嵌入儲存在文件對象的 `embedding` 字段中。然後使用 `write_documents()` 方法將文件寫入 DocumentStore。
+##  寫入文件
+
+1. 運行嵌入器 `doc_embedder` 將每個文件 `建立嵌入` 並 `嵌入儲存` 在文件對象的 `embedding` 字段中。然後使用 `write_documents()` 方法將文件寫入 DocumentStore。
 
     ```python
     # 建立文件嵌入並寫入文件儲存
