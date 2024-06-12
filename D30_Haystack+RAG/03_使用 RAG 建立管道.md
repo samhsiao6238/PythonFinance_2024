@@ -118,6 +118,14 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
     # 可確保系統在運行時能迅速響應並保持高效的運行狀態
     # 可有效避免首次運行的延遲問題，提升整體系統的性能和穩定性
     doc_embedder.warm_up()
+    # 將文檔轉換成嵌入表示
+    # 這裡的嵌入是將每個文檔的文本轉換成對應的向量，捕捉其語義信息
+    docs_with_embeddings = doc_embedder.run(docs)
+    # 將包含嵌入的文檔寫入到 document_store 中
+    # 這一步將文檔及其對應的嵌入向量保存到內存中的 document_store
+    document_store.write_documents(
+        docs_with_embeddings["documents"]
+    )
     ```
 
 <br>
