@@ -235,7 +235,7 @@ _先簡介兩者差異_
         ),
         name="doc_embedder"
     )
-    # 加入組件：將處理後的文件數據寫入到指定的文件存儲
+    # 加入組件：將處理後的文件數據寫入到指定的文件儲存
     # 指定使用 `內存文件儲存`
     indexing_pipeline.add_component(
         instance=DocumentWriter(document_store=document_store),

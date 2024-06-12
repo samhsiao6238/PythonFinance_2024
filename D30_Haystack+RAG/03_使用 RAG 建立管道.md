@@ -120,7 +120,7 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
     from haystack.components.embedders import SentenceTransformersDocumentEmbedder
 
     # 初始化 `文件嵌入器`
-    # 將整個文檔嵌入到一個向量表示中，以捕捉文檔整體的語義信息
+    # 將整個文件嵌入到一個向量表示中，以捕捉文件整體的語義信息
     doc_embedder = SentenceTransformersDocumentEmbedder(
         model="sentence-transformers/all-MiniLM-L6-v2"
     )
@@ -161,11 +161,11 @@ _回到範例操作_
 1. 運行 `文件嵌入器 doc_embedder` 將每個文件 `建立嵌入` 並 `嵌入儲存` 在文件對象的 `embedding` 欄位中。然後使用 `write_documents()` 方法將文件寫入 DocumentStore。
 
     ```python
-    # 將文檔轉換成嵌入表示
-    # 這裡的嵌入是將每個文檔的文本轉換成對應的向量，捕捉其語義信息
+    # 將文件轉換成嵌入表示
+    # 這裡的嵌入是將每個文件的文本轉換成對應的向量，捕捉其語義信息
     docs_with_embeddings = doc_embedder.run(docs)
-    # 將包含嵌入的文檔寫入到 document_store 中
-    # 這一步將文檔及其對應的嵌入向量保存到內存中的 document_store
+    # 將包含嵌入的文件寫入到 document_store 中
+    # 這一步將文件及其對應的嵌入向量保存到內存中的 document_store
     document_store.write_documents(
         docs_with_embeddings["documents"]
     )
