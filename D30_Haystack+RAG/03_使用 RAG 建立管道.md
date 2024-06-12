@@ -119,6 +119,12 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
+3. 出現兩個警告，這兩個都是版本棄用提醒，但都是由函數內建調用所引發，所以無法處理也無須理會。
+
+    ![](images/img_79.png)
+
+<br>
+
 ## 關於開發環境
 
 1. 在 VSCode 中運行後會顯示提示，表明這個擴充功能要求在 VSCode 環境中必須安裝以下工具，而這些工具是不能透過擴充功能直接安裝的，如果下方有尚未安裝的工具，可點擊下面的連結進入下載頁面。
