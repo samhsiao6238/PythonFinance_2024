@@ -382,6 +382,33 @@ _模板使用的是 `Jinja2` 循環語法_
 
 <br>
 
+## 其他警告
+
+1. 假如在回答中出現以下警告提示。
+
+    ```bash
+    huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+    To disable this warning, you can either:
+        - Avoid using `tokenizers` before the fork if possible
+        - Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+    ```
+
+<br>
+
+2. 這個警告訊息是由於 `huggingface` 的 `tokenizers 庫` 在進行 `文本分詞` 時使用了 `多線程並行` 處理，而這個 `並行處理` 可能在 `進程分叉（fork）` 後導致 `死鎖`。具體來說，_這與 `tokenizers` 的內部實現有關_，是因為 `OpenAIGenerator` 或 `SentenceTransformers` 模型在加載和處理數據時使用了多線程操作的關係，並非導因於任何顯性在代碼中進行的操作。
+
+<br>
+
+3. 可嘗試的代碼中禁用 tokenizers 的並行處理避免死鎖，可詳見最後面的說明。
+
+    ```python
+    import os
+    # 禁用 tokenizers 的並行處理
+    os.environ["TOKENIZERS_PARALLELISM"] = "false"
+    ```
+
+<br>
+
 ___
 
 _END_
