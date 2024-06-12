@@ -2,11 +2,21 @@
 
 _使用 PromptBuilder 和 OpenAIGenerator 來建立帶有檢索增強的生成問答管道。_
 
+![](images/img_77.png)
+
+_Creating Your First QA Pipeline with Retrieval-Augmentation_
+
 <br>
 
 ## 說明
 
-1. 使用 Haystack 2.0 來建立使用檢索增強 (RAG) 方法的生成問答管道，包含以下主要模組及 `OpenAI API`。
+1. 這個範例是官方在 `2024/04/25` 發佈的 [官方教程](https://haystack.deepset.ai/tutorials/27_first_rag_pipeline)。
+
+<br>
+
+
+## 使用組件
+2. 使用 Haystack 2.0 來建立使用檢索增強 (RAG) 方法的生成問答管道，包含以下主要模組及 `OpenAI API`。
 
     ```bash
     # 用於儲存和管理文件
