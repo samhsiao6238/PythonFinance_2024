@@ -54,6 +54,20 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
+2. 建立環境變量：這個範例在後續會使用到 `OpenAI API` 來建立生成器 `OpenAIGenerator`。
+
+    ```python
+    import os
+    from getpass import getpass
+    from haystack.components.generators import OpenAIGenerator
+
+    # 設置 OpenAI API Key
+    if "OPENAI_API_KEY" not in os.environ:
+        os.environ["OPENAI_API_KEY"] = getpass("Enter OpenAI API key:")
+    ```
+
+<br>
+
 ## 建立資料集
 
 1. 抓取數據：使用 `七大奇蹟` 的維基百科頁面作為文件，範例已經預處理數據並上傳到 `Hugging Face Space：Seven Wonders`，因此無需進行任何額外的清理或分割。
@@ -87,12 +101,13 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-2. 初始化文件嵌入器：要將數據儲存在帶有嵌入的 DocumentStore 中，使用模型名稱初始化一個 `SentenceTransformersDocumentEmbedder` 並調用 `warm_up()` 來下載嵌入模型。
+2. 初始化 `文件嵌入器`：要將數據儲存在帶有嵌入的 DocumentStore 中，使用模型名稱初始化一個 `SentenceTransformersDocumentEmbedder` 並調用 `warm_up()` 來下載嵌入模型。
 
     ```python
     from haystack.components.embedders import SentenceTransformersDocumentEmbedder
 
-    # 初始化文件嵌入器
+    # 初始化 `文件嵌入器`
+    # 將整個文檔嵌入到一個向量表示中，以捕捉文檔整體的語義信息
     doc_embedder = SentenceTransformersDocumentEmbedder(
         model="sentence-transformers/all-MiniLM-L6-v2"
     )
@@ -118,9 +133,9 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-##  寫入文件
+## 寫入文件
 
-1. 運行嵌入器 `doc_embedder` 將每個文件 `建立嵌入` 並 `嵌入儲存` 在文件對象的 `embedding` 字段中。然後使用 `write_documents()` 方法將文件寫入 DocumentStore。
+1. 運行 `文件嵌入器 doc_embedder` 將每個文件 `建立嵌入` 並 `嵌入儲存` 在文件對象的 `embedding` 字段中。然後使用 `write_documents()` 方法將文件寫入 DocumentStore。
 
     ```python
     # 建立文件嵌入並寫入文件儲存
@@ -132,12 +147,18 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-5. 建立 RAG 管道：首先需要初始化文本嵌入器來為用戶查詢建立嵌入，建立的嵌入將由檢索器用來從 DocumentStore 中檢索相關文件。_請注意_，之前使用 `sentence-transformers/all-MiniLM-L6-v2` 模型建立了文件的嵌入，這裡需要使用相同的模型來嵌入用戶查詢。
+## 建立管道的文本嵌入器、索引器、生成器
+
+_以下是一個建立管道的流程_
+
+<br>
+
+1. 建立 `文本嵌入器`：與前一個步驟的 `文件嵌入器` 有所不同， `文本嵌入器` 用於處理較短的文本數據，適用於需要比較文本語義的情境，而建立的嵌入可由 `檢索器` 從 `DocumentStore` 進行檢索。_請注意_，在模型的選用上，需與之前 `文件嵌入器` 相同。
 
     ```python
     from haystack.components.embedders import SentenceTransformersTextEmbedder
 
-    # 初始化文本嵌入器
+    # 建立 `文本` 嵌入器
     text_embedder = SentenceTransformersTextEmbedder(
         model="sentence-transformers/all-MiniLM-L6-v2"
     )
@@ -145,42 +166,33 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-6. 初始化檢索器：初始化一個 `InMemoryEmbeddingRetriever` 並讓其使用之前初始化的 `InMemoryDocumentStore`，這個檢索器將獲取與查詢相關的文件。
+2. 建立 `檢索器`：這是一個嵌入索引器，透過內存嵌入索引器對象 `InMemoryEmbeddingRetriever` 來使用之前透過內存文件儲存器對象  `InMemoryDocumentStore` 所嵌入的文件進行檢索。
 
     ```python
     from haystack.components.retrievers.in_memory import InMemoryEmbeddingRetriever
 
-    # 初始化內存嵌入檢索器
+    # 建立 `內存嵌入檢索器`
     retriever = InMemoryEmbeddingRetriever(document_store)
     ```
 
 <br>
 
-7. 建立一個自定義提示，用於使用 RAG 方法進行生成問答任務。提示應該接受兩個參數：從文件儲存檢索到的文件和用戶的問題。使用 `Jinja2` 循環語法將檢索到的文件內容組合到提示中。接著使用提示模板初始化一個 `PromptBuilder` 實例。當給定必要的值時，`PromptBuilder` 將自動填充變量值並生成完整的提示。這種方法允許更具針對性和有效的問答體驗。
+3. 建立 `生成器`：`生成器` 可與 LLM 進行互動，預設會讀取環境變數中的 `OPENAI_API_KEY` 變量值，這在前面步驟已進行寫入。
 
     ```python
-    from haystack.components.builders import PromptBuilder
-
-    # 定義模板提示
-    template = """
-    Given the following information, answer the question.
-
-    Context:
-    {% for document in documents %}
-        {{ document.content }}
-    {% endfor %}
-
-    Question: {{question}}
-    Answer:
-    """
-
-    # 初始化提示生成器
-    prompt_builder = PromptBuilder(template=template)
+    # 初始化 OpenAI 生成器
+    generator = OpenAIGenerator(model="gpt-4-turbo")
     ```
 
 <br>
 
-8. 可將提示改為繁體中文。
+## 定義提示模板
+
+_模板使用的是 `Jinja2` 循環語法_
+
+<br>
+
+1. 自定義提示模板用於在 RAG 中進行生成問答任務，`提示 Prompt` 應該接受 `兩個參數`，分別從文件儲存檢索到的文件上下文 `document.content` 以及用戶的問題 `question`，並使用 `Jinja2` 循環語法將檢索到的文件內容組合到提示中。
 
     ```python
     from haystack.components.builders import PromptBuilder
@@ -197,53 +209,58 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
     問題: {{question}}
     答案:
     """
+    ```
 
+<br>
+
+
+2. 建立提示建構器 `PromptBuilder` 對象，對模板變量進行填充並生成完整的提示，這可生成更具針對性和有效的問答體驗
+
+    ```python
     # 初始化提示生成器
     prompt_builder = PromptBuilder(template=template)
     ```
 
 <br>
 
-9. 初始化生成器：生成器是與大型語言模型 (LLMs) 互動的模組，同時需要設置 `OPENAI_API_KEY` 環境變量，並初始化可與 OpenAI GPT 模型通信的 `OpenAIGenerator`。初始化時需指定模型名稱。
+## 建立管道
 
-    ```python
-    import os
-    from getpass import getpass
-    from haystack.components.generators import OpenAIGenerator
 
-    # 設置 OpenAI API Key
-    if "OPENAI_API_KEY" not in os.environ:
-        os.environ["OPENAI_API_KEY"] = getpass("Enter OpenAI API key:")
-
-    # 初始化 OpenAI 生成器
-    generator = OpenAIGenerator(model="gpt-4-turbo")
-    ```
-
-<br>
-
-9. 建立管道：將所有模組添加到管道中並連接它們。將 `text_embedder` 的 `embedding` 輸出連接到 `retriever` 的 `query_embedding` 輸入，將 `retriever` 連接到 `prompt_builder`，並將 `prompt_builder` 連接到 `llm`。顯式連接 `retriever` 的輸出與 `prompt_builder` 的 `documents` 輸入，以使連接明顯，因為 `prompt_builder` 有兩個輸入（`documents` 和 `question`）。
+1. 建立管道。
 
     ```python
     from haystack import Pipeline
 
     # 初始化管道
     basic_rag_pipeline = Pipeline()
+    ```
 
-    # 添加模組到管道
+2. 添加組件到管道。
+
+    ```python
+    # 添加組件到管道
     basic_rag_pipeline.add_component("text_embedder", text_embedder)
     basic_rag_pipeline.add_component("retriever", retriever)
     basic_rag_pipeline.add_component("prompt_builder", prompt_builder)
     basic_rag_pipeline.add_component("llm", generator)
+    ```
+    
+3. 連接組件。
 
-    # 連接模組
+    ```python
+    # 連接組件
+    # 將 `text_embedder` 的 `embedding` 輸出連接到 `retriever` 的 `query_embedding` 輸入
     basic_rag_pipeline.connect(
         "text_embedder.embedding",
         "retriever.query_embedding"
     )
+    # 因為 `prompt_builder` 有兩個輸入 `documents` 和 `question`
+    # 而這裡顯式連接了 `retriever` 到 `prompt_builder` 的 `documents`
     basic_rag_pipeline.connect(
         "retriever",
         "prompt_builder.documents"
     )
+    # 將 `prompt_builder` 連接到 `llm`
     basic_rag_pipeline.connect(
         "prompt_builder",
         "llm"
@@ -252,7 +269,7 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-10. 輸出以下訊息，這裡逐行說明一下詳細內容。
+4. 組件完成連接時會輸出以下訊息，這裡逐行說明一下詳細內容。
 
     ```bash
     # 這是一個 Pipeline 對象，記憶體位置在 0x377e1a8c0，這位置不重要
@@ -290,10 +307,10 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-11. 使用管道的 `run()` 方法進行提問，在 `text_embedder` 和 `prompt_builder` 參數中會依據模板提示中的 `question` 變量進行提問。
+5. 提問。
 
     ```python
-    # 提問
+    # 這僅僅是提問的範例供作參考
     '''
     Rhodes 雕像是什麼樣子的？
     巴比倫花園在哪裡？
@@ -303,8 +320,15 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
     摩索拉斯墓發生了什麼事？
     羅德島巨像是怎麼崩潰的？
     '''
+    # 提問
     question = "人們為什麼參觀阿耳忒彌斯神殿？"
+    ```
 
+<br>
+
+6. 運行管道 `run()` 有兩個參數，這兩個參數皆使用提示模板的 `question` 作為傳入值。
+
+    ```python
     response = basic_rag_pipeline.run({
         "text_embedder": {"text": question},
         "prompt_builder": {"question": question}
