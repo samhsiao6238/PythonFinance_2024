@@ -152,6 +152,22 @@ _先簡介兩者差異_
 
 <br>
 
+## 警告排除
+
+1. 運行中，假如出現如下的錯誤訊息 `TqdmWarning: IProgress not found. Please update jupyter and ipywidgets.`，這是提示了一個與 `tqdm` 和 `Jupyter` 或 `ipywidgets` 有關的問題。
+
+    ![](images/img_78.png)
+
+<br>
+
+2. 這只是一個功能性問題所以不加贅述，可透過以下指令進行排除。
+
+    ```bash
+    pip install --upgrade jupyter ipywidgets
+    ```
+
+<br>
+
 ## 進行開發
 
 1. 建立環境變量。
