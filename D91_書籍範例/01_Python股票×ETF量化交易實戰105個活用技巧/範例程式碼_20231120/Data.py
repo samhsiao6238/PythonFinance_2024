@@ -759,7 +759,7 @@ def getPriceAndRevenueAndInstInvest(prod, st, en):
     return a
 
 
-# 取得所有股票商品代碼
+# 取得所有股票商品程式碼
 def getStockList():
     # 備份檔名
     bakfile = f"{datapath}\\TSE_StockList.csv"

@@ -24,7 +24,7 @@ import logging
 # 載入環境變數
 load_dotenv()
 # 注意，`environ.get` 或 `os.getenv` 兩者在本質上是有差異的
-# 但我偏向代碼整潔，所以在程序一開始之處就載入 `load_dotenv()`
+# 但我偏向程式碼整潔，所以在程序一開始之處就載入 `load_dotenv()`
 # 這樣的載入方式使用 `environ.get` 或 `os.getenv` 並無差異
 PGVECTOR_DRIVER = os.getenv("PGVECTOR_DRIVER")
 PGVECTOR_USER = os.getenv("PGVECTOR_USER")

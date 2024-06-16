@@ -55,7 +55,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
 
-    '''添加以下代碼'''
+    '''添加以下程式碼'''
     _text = ""
     if event.message.type != "text":
         _text = "我只能接收文字訊息 > <"
@@ -67,7 +67,7 @@ def handle_message(event):
         _text = "我不明你想表達什麼 > <"
 
     # 建立了一個 API client 實例，使用在 configuration 中定義的配置。
-    # with 語句確保在該代碼區塊執行結束後可釋放資源。
+    # with 語句確保在該程式碼區塊執行結束後可釋放資源。
     with ApiClient(configuration) as api_client:
         # 使用客戶端實例初始化一個 MessagingApi 物件，用於後續的消息操作。
         line_bot_api = MessagingApi(api_client)

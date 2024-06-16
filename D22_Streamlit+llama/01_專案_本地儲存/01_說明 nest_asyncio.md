@@ -16,7 +16,7 @@
 
 ## 主要用途
 
-1. 在 Jupyter Notebook 中，同時運行異步代碼和同步代碼時，可能會遇到事件循環相關的問題。使用 `nest_asyncio.apply()` 可以解決這些問題，使得異步代碼能夠正常運行。
+1. 在 Jupyter Notebook 中，同時運行異步程式碼和同步程式碼時，可能會遇到事件循環相關的問題。使用 `nest_asyncio.apply()` 可以解決這些問題，使得異步程式碼能夠正常運行。
 
 <br>
 
@@ -59,7 +59,7 @@
     nest_asyncio.apply()
 
     st.title("UBER 10-K Chatbot")
-    # ... 其他代碼 ...
+    # ... 其他程式碼 ...
     ```
 
 <br>

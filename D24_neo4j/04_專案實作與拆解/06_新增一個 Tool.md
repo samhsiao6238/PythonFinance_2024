@@ -270,10 +270,10 @@
 
 <br>
 
-3. 在代理腳本 `agent.py` 最後加入以下測試代碼。
+3. 在代理腳本 `agent.py` 最後加入以下測試程式碼。
 
     ```python
-    # 測試代碼
+    # 測試程式碼
     print('== 進行測試 ==')
     prompt = "查詢產品名稱為可口可樂的所有文件"
     response = generate_response(prompt)

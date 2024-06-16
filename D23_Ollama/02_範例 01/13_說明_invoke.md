@@ -25,7 +25,7 @@ _方法說明_
 
 <br>
 
-4. 本範例部分代碼。
+4. 本範例部分程式碼。
 
     ```python
     from langchain_community.llms import Ollama

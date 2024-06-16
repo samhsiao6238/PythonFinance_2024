@@ -6,7 +6,7 @@ from dash import Dash, dcc, html
 # 禁用 SSL 驗證
 ssl._create_default_https_context = ssl._create_unverified_context
 
-# 地圖代碼
+# 地圖程式碼
 df = pd.read_csv(
     "https://raw.githubusercontent.com/plotly/datasets/master/2014_ebola.csv"
 )
@@ -87,7 +87,7 @@ Source: <a href="https://data.hdx.rwlabs.org/dataset/rowca-ebola-cases">HDX</a>'
     legend_traceorder="reversed",
 )
 
-# Dash 應用程序代碼
+# Dash 應用程序程式碼
 app = Dash()
 app.layout = html.Div([dcc.Graph(figure=fig)])
 

@@ -50,6 +50,6 @@ rsdf = rsdf[rsdf["年化風險"] < 1]
 # 繪製scatter 點圖
 ax = rsdf.plot.scatter(x="年化風險", y="年化報酬", c="夏普比率", colormap="viridis")
 
-# 將商品代碼文字加上去圖表
+# 將商品程式碼文字加上去圖表
 for i, txt in enumerate(rsdf.transpose()):
     ax.annotate(txt, (rsdf["年化風險"].iloc[i] + 0.001, rsdf["年化報酬"].iloc[i]))

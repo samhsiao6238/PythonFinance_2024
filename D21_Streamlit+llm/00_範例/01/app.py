@@ -14,7 +14,7 @@ OPENAI_API_MODEL = os.getenv("OPENAI_API_MODEL")
 
 # 使用側邊欄
 with st.sidebar:
-    "[查看源代碼](https://github.com/streamlit/llm-examples/blob/main/Chatbot.py)"
+    "[查看源程式碼](https://github.com/streamlit/llm-examples/blob/main/Chatbot.py)"
     "[其他參考資料 ...]()"
 
 # 標題

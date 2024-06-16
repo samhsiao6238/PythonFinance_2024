@@ -266,7 +266,7 @@ _測試 AWS Bedrock 是否完成設置_
 
 <br>
 
-2. 透過代碼檢查。
+2. 透過程式碼檢查。
 
     ```python
     import os

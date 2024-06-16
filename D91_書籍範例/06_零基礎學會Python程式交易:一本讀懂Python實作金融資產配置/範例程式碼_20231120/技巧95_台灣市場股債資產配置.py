@@ -37,7 +37,7 @@ USD_list = USD_dataframe["stock_id"].to_list()
 
 # 抓到所有歷史報酬率
 ret_dataframe = getMultipleReturn(getDataFM, ETF_list + USD_list, "adj close")
-# 將商品代碼換成商品名稱
+# 將商品程式碼換成商品名稱
 ETF_name_list = (ETF_dataframe["stock_id"] + ETF_dataframe["stock_name"]).to_list()
 USD_name_list = (USD_dataframe["stock_id"] + USD_dataframe["stock_name"]).to_list()
 ret_dataframe.columns = ETF_name_list + USD_name_list

@@ -18,7 +18,7 @@
 
 ## 特點
 
-1. 無伺服器：無需自行管理伺服器基礎設施，僅需專注於代碼邏輯。
+1. 無伺服器：無需自行管理伺服器基礎設施，僅需專注於程式碼邏輯。
 
 2. 事件驅動：函數會在指定事件發生時自動執行。
 
@@ -82,7 +82,21 @@ _簡單的 Python Cloud Function 範例，可回應一個 HTTP 請求並返回 "
 
 <br>
 
-1. 程式碼：`main.py`。
+1. 建立本地資料夾。
+
+
+    ```bash
+    mkdir python-cloud-function
+    cd python-cloud-function
+    ```
+
+2. 編輯 `requirements.txt`。
+
+    ```plaintext
+    # 此文件可以是空的，或列出需要的 Python 包
+    ```
+
+3. 編寫 `main.py`。
 
     ```python
     def hello_world(request):
@@ -98,19 +112,71 @@ _簡單的 Python Cloud Function 範例，可回應一個 HTTP 請求並返回 "
 
 <br>
 
-2. 必要文件 `requirements.txt`：列出需要的 Python 包，若無則保留空的文件內容。
+## 登錄 Google Cloud Console
 
-    ```plaintext
-    # 空的或列出需要的 Python 包
-    ```
+1. 前往 [Google Cloud Console](https://console.cloud.google.com/)。
 
 <br>
 
-3. 部署指令。
+2. 選擇或創建一個新的 Google Cloud 專案。
 
-    ```bash
-    gcloud functions deploy hello_world --runtime python311 --trigger-http --allow-unauthenticated
-    ```
+<br>
+
+3. 搜尋並啟用 `Cloud Functions API`。
+
+<br>
+
+4. 導航到 `Cloud Functions`，點擊「Create Function」。
+
+<br>
+
+5. 設定 Cloud Function：函數名稱：`hello-world-function`、區域選擇靠近的區域即可、觸發器選擇 `HTTPS`，允許未經身份驗證的請求。
+
+<br>
+
+6. 設置運行環境 Runtime：選擇 `Python 3.11`。
+
+<br>
+
+7. 上傳 `requirements.txt`（如果有依賴包）。
+
+8. 貼上 `main.py` 程式碼。
+
+```python
+def hello_world(request):
+    """HTTP Cloud Function.
+    Args:
+        request (flask.Request): The request object.
+        Returns:
+        The response text, or any set of values that can be turned into a
+        Response object using `make_response`.
+    """
+    return 'Hello, World!'
+```
+
+<br>
+
+9. 設置進入點：在「Function to execute」字段中輸入 `hello_world`。
+
+<br>
+
+10. 部署 Cloud Function：點擊「Deploy」來部署函數。
+
+<br>
+
+# 測試 Cloud Function
+
+1. 部署完成後，記錄下生成的 URL（例如 `https://<your-region>-<your-project-id>.cloudfunctions.net/hello-world-function`）。
+
+2. 在瀏覽器中訪問該 URL，應看到返回的 "Hello, World!" 字樣。
+
+<br>
+
+## 特別注意
+
+1. 確保定期檢查和管理已部署的 Cloud Functions，避免產生不必要的費用。
+
+2. 可以刪除不再使用的函數，避免浪費資源。
 
 <br>
 

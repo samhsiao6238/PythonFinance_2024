@@ -534,18 +534,18 @@ _展示出圖片_
 
 <br>
 
-4. 假如在 Jupyter Notebook 中執行此腳本，需導入 `IPython.display` 函式庫，並在原本顯示圖片的函數 `display_images` 添加以下代碼。
+4. 假如在 Jupyter Notebook 中執行此腳本，需導入 `IPython.display` 函式庫，並在原本顯示圖片的函數 `display_images` 添加以下程式碼。
 
     ```python
     # 新增導入庫
     from IPython.display import display, Image as IPImage
 
-    # 修改函數，添加最下方的代碼
+    # 修改函數，添加最下方的程式碼
     def display_images(query_img_path, similar_images, image_folder):
 
-        # 以上代碼不變 ...    
+        # 以上程式碼不變 ...    
         plt.show()
-        # 添加以下代碼
+        # 添加以下程式碼
 
         # 在 Jupyter Notebook 中顯示圖片
         display(IPImage(query_img_path))
@@ -992,7 +992,7 @@ _展示出圖片_
 
 <br>
 
-4. 在刪除按鈕之後要添加檢查 `session_state["data_deleted"]` 狀態的代碼。
+4. 在刪除按鈕之後要添加檢查 `session_state["data_deleted"]` 狀態的程式碼。
 
     ```python
     # 檢查 session state 中的刪除狀態
@@ -1308,7 +1308,7 @@ _展示出圖片_
 
 <br>
 
-4. 在導入庫完成之後、設置環境變數之前，添加以下代碼，避免 `Keras` 模型初始化時的名稱衝突問題。
+4. 在導入庫完成之後、設置環境變數之前，添加以下程式碼，避免 `Keras` 模型初始化時的名稱衝突問題。
 
     ```python
     import tensorflow as tf

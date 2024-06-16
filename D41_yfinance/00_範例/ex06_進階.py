@@ -16,7 +16,7 @@ from plotly.subplots import make_subplots
 yf.pdr_override()
 
 # 輸入股票代號進行查詢
-stock = input("輸入股票代碼（台股請輸入股票代碼.TW）：")
+stock = input("輸入股票程式碼（台股請輸入股票程式碼.TW）：")
 
 # 從 yfinance API 獲取股票數據
 df = yf.download(

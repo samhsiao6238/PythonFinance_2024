@@ -14,7 +14,7 @@ OPENAI_API_MODEL = st.secrets["OPENAI_API_MODEL"]
 # 側邊欄
 with st.sidebar:
     "[取得 OpenAI API 金鑰](https://platform.openai.com/account/api-keys)"
-    "[查看源代碼](https://github.com/streamlit/llm-examples/blob/main/pages/5_Chat_with_user_feedback.py)"
+    "[查看源程式碼](https://github.com/streamlit/llm-examples/blob/main/pages/5_Chat_with_user_feedback.py)"
 
 # 設置應用的標題
 st.title("📝 Chat with feedback (Trubrics)")

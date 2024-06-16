@@ -92,7 +92,7 @@ def MultipleReturnRegularFixedInvestment(
 ):
 
     for symbol in symbols:
-        print(f"商品代碼 {symbol}")
+        print(f"商品程式碼 {symbol}")
         ReturnRegularFixedInvestment(
             getDataFunction, symbol, price_column, once_amount)
         plt.show()

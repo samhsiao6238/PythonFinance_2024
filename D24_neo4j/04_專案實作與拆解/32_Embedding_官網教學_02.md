@@ -42,7 +42,7 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線數據�
 
 <br>
 
-## 撰寫代碼
+## 撰寫程式碼
 
 1. 設置敏感資訊處理模式：官網使用 `getpass`，這裡我改用 `toml`，使用語法如下。
 
@@ -266,7 +266,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 ## 在 MongoDB Atlas UI 中為每個集合建立向量索引
 
-1. 這段代碼是使用 `LangChain` 與 `OpenAI` 生成 `嵌入向量`，並將這些嵌入向量儲存到 `MongoDB Atlas`，然後進行檢索和評估。具體來說，該代碼定義了一個 `檢索器 (retriever) 函數`，用於根據指定的模型和參數從 MongoDB Atlas 中檢索嵌入向量，並從資料集中提取問題和正確答案，最後使用 `ragas 庫` 評估不同嵌入模型在檢索上的表現。
+1. 這段程式碼是使用 `LangChain` 與 `OpenAI` 生成 `嵌入向量`，並將這些嵌入向量儲存到 `MongoDB Atlas`，然後進行檢索和評估。具體來說，該程式碼定義了一個 `檢索器 (retriever) 函數`，用於根據指定的模型和參數從 MongoDB Atlas 中檢索嵌入向量，並從資料集中提取問題和正確答案，最後使用 `ragas 庫` 評估不同嵌入模型在檢索上的表現。
 
     ```python
     from langchain_openai import OpenAIEmbeddings
@@ -369,7 +369,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
 
 <br>
 
-2. 以上代碼是使用 certifi 提供的 CA 證書，倘若仍舊出現錯誤 `ServerSelectionTimeoutError`，可嘗試暫時禁用 SSL 驗證，但要注意這僅適用於測試環境，不建議在生產環境中使用。
+2. 以上程式碼是使用 certifi 提供的 CA 證書，倘若仍舊出現錯誤 `ServerSelectionTimeoutError`，可嘗試暫時禁用 SSL 驗證，但要注意這僅適用於測試環境，不建議在生產環境中使用。
 
     ```python
     client = MongoClient(

@@ -208,7 +208,7 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
 
 <br>
 
-2. 代碼。
+2. 程式碼。
 
     ```python
     from transformers import pipeline

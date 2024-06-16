@@ -6,7 +6,7 @@ import yfinance as yf
 from ta.trend import MACD
 from ta.momentum import StochasticOscillator
 
-# 股票代碼
+# 股票程式碼
 stock = "2331.TW"
 
 # 下載資料

@@ -101,7 +101,7 @@ def dynamic_response_tabs(i):
             st.write(st.session_state["generated"][i])
         if len(selected_tabs) > 1:
             with selected_tabs[1]:
-                # 展示 Cypher 查詢代碼
+                # 展示 Cypher 查詢程式碼
                 st.code(st.session_state["cypher"][i], language="cypher")
         if len(selected_tabs) > 2:
             with selected_tabs[2]:

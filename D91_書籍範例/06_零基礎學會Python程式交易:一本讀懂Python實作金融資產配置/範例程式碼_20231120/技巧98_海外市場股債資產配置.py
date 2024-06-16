@@ -27,12 +27,12 @@ url = "https://www.moneydj.com/etf/eb/ET305001list.djhtm?A=22&B=&C=4&D=&E=&F=&G=
 response = requests.get(url)
 df = pd.read_html(response.text)[0]
 stock_df = df[(df["幣別"] == "美元") & (df["管理費(%)"] < 0.2)]
-stock_list = stock_df["代碼"].to_list()
+stock_list = stock_df["程式碼"].to_list()
 
 # 抓到所有歷史報酬率
 ret_dataframe = getMultipleReturn(getDataYF, ["UUP"] + stock_list, "adj close")
-# 將商品代碼換成商品名稱
-stock_name_list = (stock_df["代碼"] + stock_df["ETF名稱"]).to_list()
+# 將商品程式碼換成商品名稱
+stock_name_list = (stock_df["程式碼"] + stock_df["ETF名稱"]).to_list()
 ret_dataframe.columns = ["UUP"] + stock_name_list
 
 # 計算相關性

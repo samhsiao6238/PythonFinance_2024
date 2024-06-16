@@ -29,12 +29,12 @@ response = requests.get(url)
 df = pd.read_html(response.text)[0]
 bond_df = df[(df["幣別"] == "美元") & (df["管理費(%)"] < 0.1)]
 
-bond_list = bond_df["代碼"].to_list()
+bond_list = bond_df["程式碼"].to_list()
 
 # 抓到所有歷史報酬率
 ret_dataframe = getMultipleReturn(getDataYF, ["QQQ"] + bond_list, "adj close")
-# 將商品代碼換成商品名稱
-bond_name_list = (bond_df["代碼"] + bond_df["ETF名稱"]).to_list()
+# 將商品程式碼換成商品名稱
+bond_name_list = (bond_df["程式碼"] + bond_df["ETF名稱"]).to_list()
 ret_dataframe.columns = ["QQQ"] + bond_name_list
 
 # 計算相關性

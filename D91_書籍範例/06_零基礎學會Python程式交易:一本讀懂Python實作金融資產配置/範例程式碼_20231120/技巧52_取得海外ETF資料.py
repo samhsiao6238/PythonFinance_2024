@@ -16,7 +16,7 @@ ETF_info = web_data[1]
 ETF_info_vanguard = ETF_info[ETF_info["ETF名稱"].str.contains("Vanguard")]
 
 # 取得海外ETF資料
-prod = ETF_info_vanguard.loc[1, "代碼"]
+prod = ETF_info_vanguard.loc[1, "程式碼"]
 data = getDataYF(prod)
 
 # 繪製海外ETF走勢圖

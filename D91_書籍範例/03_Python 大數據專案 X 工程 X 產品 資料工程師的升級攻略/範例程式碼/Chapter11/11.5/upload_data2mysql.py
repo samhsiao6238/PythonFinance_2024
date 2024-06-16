@@ -69,7 +69,7 @@ def create_taiwan_stock_institutional_investors_sql():
 def create_taiwan_stock_margin_purchase_short_sale_sql():
     return """
         CREATE TABLE `taiwan_stock_margin_purchase_short_sale`(
-            `stock_id` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '股票代碼',
+            `stock_id` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '股票程式碼',
             `MarginPurchaseBuy` BIGINT NOT NULL COMMENT '融資買進',
             `MarginPurchaseSell` BIGINT NOT NULL COMMENT '融資賣出',
             `MarginPurchaseCashRepayment` BIGINT NOT NULL COMMENT '融資現金償還',

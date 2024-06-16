@@ -10,7 +10,7 @@ _先簡介主要套件 OpenAI_
 
 <br>
 
-2. 在官方 GitHub 上提到 `api_key` 預設是讀取環境參數中 `OPENAI_API_KEY` 的鍵值，所以可透過寫入環境參數來進行設定，如此在代碼中可以不用再寫。
+2. 在官方 GitHub 上提到 `api_key` 預設是讀取環境參數中 `OPENAI_API_KEY` 的鍵值，所以可透過寫入環境參數來進行設定，如此在程式碼中可以不用再寫。
 
     ```python
     client = OpenAI(
