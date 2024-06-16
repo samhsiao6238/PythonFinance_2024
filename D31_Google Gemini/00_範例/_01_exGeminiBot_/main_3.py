@@ -5,16 +5,21 @@ import os
 from firebase import firebase
 import google.generativeai as genai
 from PIL import Image
+from google.cloud import storage
 
 # 使用環境變量讀取憑證
 token = os.getenv("LINE_BOT_TOKEN")
 secret = os.getenv("LINE_BOT_SECRET")
 firebase_url = os.getenv("FIREBASE_URL")
 gemini_key = os.getenv("GEMINI_API_KEY")
-
+storage_bucket = os.getenv("STORAGE_BUCKET")
 
 # 初始化 Gemini Pro API
 genai.configure(api_key=gemini_key)
+
+# 初始化 Google Cloud Storage 客戶端
+storage_client = storage.Client()
+bucket = storage_client.bucket(storage_bucket)
 
 
 def linebot(request):
@@ -43,8 +48,6 @@ def linebot(request):
         fdb = firebase.FirebaseApplication(firebase_url, None)
         # 定義用戶聊天記錄的路徑
         user_chat_path = f"chat/{user_id}"
-        # 註釋掉的用戶聊天狀態路徑
-        # chat_state_path = f"state/{user_id}"
         # 從 Firebase 獲取用戶的聊天記錄
         chatgpt = fdb.get(user_chat_path, None)
 
@@ -60,11 +63,16 @@ def linebot(request):
                 # 否則，使用已有的聊天記錄
                 messages = chatgpt
 
-            if msg == "!清空":
+            # 檢查是否為 "!清空" 或全形 "！清空"
+            if msg.replace("！", "!") == "!清空":
                 # 如果消息是 "!清空"，回覆清空提示
                 reply_msg = TextSendMessage(text="對話歷史紀錄已經清空！")
                 # 刪除用戶的聊天記錄
                 fdb.delete(user_chat_path, None)
+                # 刪除 Google Cloud Storage 中相關圖片
+                blobs = bucket.list_blobs(prefix=f"images/{user_id}/")
+                for blob in blobs:
+                    blob.delete()  # 刪除圖片
             else:
                 # 創建 Gemini Pro 模型
                 model = genai.GenerativeModel("gemini-pro")
@@ -73,13 +81,10 @@ def linebot(request):
                 # 使用 Gemini Pro 生成回覆
                 response = model.generate_content(messages)
                 # 將模型回覆加入聊天記錄
-                messages.append({
-                    "role": "model",
-                    "parts": [response.text]
-                })
+                messages.append({"role": "model", "parts": [response.text]})
                 # 將模型回覆轉換為 LINE 消息
                 reply_msg = TextSendMessage(text=response.text)
-                # 更新firebase中的對話紀錄
+                # 更新 Firebase 中的對話紀錄
                 fdb.put_async(user_chat_path, None, messages)
             # 使用 LINE Bot API 發送回覆消息
             line_bot_api.reply_message(tk, reply_msg)
@@ -92,32 +97,46 @@ def linebot(request):
             # 獲取圖片內容
             message_content = line_bot_api.get_message_content(message_id)
 
-            with open(f"{message_id}.jpg", "wb") as fd:
+            with open(f"/tmp/{message_id}.jpg", "wb") as fd:
                 # 將圖片內容寫入文件
                 fd.write(message_content.content)
 
             # 打開圖片並轉換為 PIL 格式
-            img = Image.open(f"{message_id}.jpg")
+            img = Image.open(f"/tmp/{message_id}.jpg")
+
+            # 上傳圖片到 Firebase Storage
+            storage_path = f"images/{user_id}/{message_id}.jpg"
+            blob = bucket.blob(storage_path)
+            blob.upload_from_filename(
+                f"/tmp/{message_id}.jpg", content_type="image/jpeg"
+            )
+            blob.make_public()
+            image_url = blob.public_url
+
+            # 將圖片 URL 存入 Firebase
+            if chatgpt is None:
+                messages = []
+            else:
+                messages = chatgpt
+            # 添加圖片消息記錄
+            messages.append({"role": "user", "type": "image", "url": image_url})
+            # 更新 Firebase 中的對話紀錄
+            fdb.put_async(user_chat_path, None, messages)
 
             # 定義生成圖片描述的提示
-            # 英文
-            # prompt = "Please describe the image below:"
-            # 中文
-            prompt = """
-            你是一個專業的攝影師，請對以下圖片進行描述與解說：
-            """
+            prompt = "你是一個專業的攝影師，請對以下圖片進行描述與解說："
             # 創建 Gemini Pro Vision 模型
             model = genai.GenerativeModel("gemini-pro-vision")
             # 生成圖片描述
-            response = model.generate_content(
-                [prompt, img],
-                stream=True
-            )
-            # 解決流式輸出
+            response = model.generate_content([prompt, img], stream=True)
             response.resolve()
 
             # 將生成的圖片描述轉換為 LINE 消息
             reply_msg = TextSendMessage(text=response.text)
+
+            # 將機器人的描述消息也添加到 Firebase
+            messages.append({"role": "model", "parts": [response.text]})
+            fdb.put_async(user_chat_path, None, messages)
 
             # 發送回覆訊息
             line_bot_api.reply_message(tk, reply_msg)
