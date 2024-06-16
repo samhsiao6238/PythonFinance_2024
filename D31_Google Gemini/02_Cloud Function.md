@@ -179,7 +179,7 @@ _可使用 `Google Cloud Console` 或 `gcloud CLI` 建立並部署 `Cloud Functi
 
 4. 為了實測環境的設置，接著對 `main.py` 略作修改，將預設的函數名稱修改為 `hello_world`，接著在上方 `進入點` 中填入這個更改過的函數名，預設是 `hello_http`，務必記得修改。
 
-    ![](images/img11.png)
+    ![](images/img_11.png)
 
 <br>
 
