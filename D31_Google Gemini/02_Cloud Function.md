@@ -1,4 +1,4 @@
-# Python Cloud Function 概述
+# Google Cloud Function
 
 <br>
 
@@ -8,11 +8,11 @@
 
 <br>
 
-2. 這些函數會在特定的事件發生時被觸發執行，例如 `HTTP 請求`、`數據庫變更`、`Cloud Pub/Sub 消息` 等。
+2. 這些函數會在特定的事件發生時被觸發執行，例如 `HTTPS 請求`、`數據庫變更`、`Cloud Pub/Sub 消息` 等。
 
 <br>
 
-3. 主要雲端服務提供商如 Google Cloud、AWS、Azure 都支持以 Python 編寫的 Cloud Functions。
+3. 主要雲端服務提供商如 `Google Cloud`、`AWS`、`Azure` 都支持以 `Python` 編寫的 Cloud Functions，這個範例會使用 `Google Cloud Function API`。
 
 <br>
 
@@ -50,64 +50,51 @@
 
 ## 核心概念
 
-1. 函數入口：函數的主邏輯。對於 HTTP 觸發器，它通常是一個處理 HTTP 請求的函數。
+_簡單介紹幾個重要的環節，將在後續實作中進行詳解。_
 
 <br>
 
-2. 事件驅動：函數會根據特定事件被觸發執行。事件來源包括 HTTP 請求、Pub/Sub 消息、Cloud Storage 變更等。
+1. 函數入口：也就是 `Cloud Function` 的主邏輯，對於 `HTTP 觸發器` 來說，通常是一個處理 `HTTP 請求` 的函數。
 
 <br>
 
-3. 環境變數：可以通過環境變數配置函數的運行時參數，如 API 金鑰、資料庫 URL 等。
+2. 事件驅動：函數會根據特定事件被觸發執行，事件來源包括 `HTTP 請求`、`Pub/Sub 消息`、`Cloud Storage 變更` 等。
+
+<br>
+
+3. 環境變數：可以通過 `環境變數` 配置函數運行時所需的參數，如 `API Key`、`資料庫 URL` 等。
+
+<br>
+
+## 開始範例操作
+
+_可使用 `Google Cloud Console` 或 `gcloud CLI` 建立並部署 `Cloud Function`，以下使用 `Console` 建立一個簡單的範例，可回應一個 HTTP 請求並返回指定的字串。_
 
 <br>
 
 ## 建立與部署
 
-1. 建立 Cloud Function：使用 Google Cloud Console 或 gcloud CLI 建立 Cloud Function，設定函數觸發方式（例如：HTTP、Pub/Sub）。
-
-<br>
-
-2. 編寫 Python 程式碼：在本地撰寫 Python 程式碼，並包含必要的函數入口。確保包括所有依賴包在 `requirements.txt` 中。
-
-<br>
-
-3. 部署到 Google Cloud：使用 Google Cloud Console 或 gcloud CLI 部署程式碼。
-
-<br>
-
-## 範例
-
-_簡單的 Python Cloud Function 範例，可回應一個 HTTP 請求並返回 "Hello, World!"_
-
-<br>
-
-1. 建立本地資料夾。
-
+1. 建立本地資料夾，特別注意，在這個簡單的範例中可不用建立本地的文件，相關範例腳本在 Console 中會自動生成，但基於未來正式流程的建立，這裡還是從這個步驟開始。
 
     ```bash
-    mkdir python-cloud-function
-    cd python-cloud-function
+    mkdir _exGeminiBot_ && cd _exGeminiBot_
     ```
 
-2. 編輯 `requirements.txt`。
+<br>
 
-    ```plaintext
-    # 此文件可以是空的，或列出需要的 Python 包
+2. 編輯 `requirements.txt`，用於編輯需要安裝的套件。
+
+    ```json
+    # 目前先保留空的
     ```
 
-3. 編寫 `main.py`。
+<br>
+
+3. 編寫主腳本 `main.py`：這個範例是一個可訪問的 HTTP。
 
     ```python
     def hello_world(request):
-        """HTTP Cloud Function.
-        Args:
-            request (flask.Request): The request object.
-            Returns:
-            The response text, or any set of values that can be turned into a
-            Response object using `make_response`.
-        """
-        return 'Hello, World!'
+        return '你好，這是我測試 Cloud Function 的函數。'
     ```
 
 <br>
@@ -118,57 +105,155 @@ _簡單的 Python Cloud Function 範例，可回應一個 HTTP 請求並返回 "
 
 <br>
 
-2. 選擇或創建一個新的 Google Cloud 專案。
+2. 選擇或創建一個新的 `Google Cloud 專案`。
 
 <br>
 
 3. 搜尋並啟用 `Cloud Functions API`。
 
-<br>
-
-4. 導航到 `Cloud Functions`，點擊「Create Function」。
+    ![](images/img_01.png)
 
 <br>
 
-5. 設定 Cloud Function：函數名稱：`hello-world-function`、區域選擇靠近的區域即可、觸發器選擇 `HTTPS`，允許未經身份驗證的請求。
+4. 進入 `Cloud Functions` 後點擊 `建立函式`。
+
+    ![](images/img_02.png)
 
 <br>
 
-6. 設置運行環境 Runtime：選擇 `Python 3.11`。
+## 進行 Cloud Function 基本設定
+
+1. `環境` 選擇官方推薦的 `第 2 代`，特別注意 `第 2 代` 是基於 `Cloud Run` 的，所以與 `Cloud Run` 共享資源配額和限制，其餘對於兩代差異的說明彙整如下表。
+
+    ![](images/img_03.png)
 
 <br>
 
-7. 上傳 `requirements.txt`（如果有依賴包）。
+2. 函數名稱可自己定義，這裡示範填入 `my_hello_world`，特別注意這個並非是腳本中的函數名稱，而是 `Cloud Function` 的名稱。
 
-8. 貼上 `main.py` 程式碼。
+    ![](images/img_04.png)
 
-```python
-def hello_world(request):
-    """HTTP Cloud Function.
-    Args:
-        request (flask.Request): The request object.
+<br>
+
+3. 區域選擇基本上以靠近的區域為佳，按規則說明只能建立在專案設定時的區域，但實務上似乎不會出錯，所以這裡設定為台灣 `asia-east1`。
+
+    ![](images/img_05.png)
+
+<br>
+
+4. 觸發器選擇 `HTTPS`。
+
+    ![](images/img_06.png)
+
+<br>
+
+5. 當前僅進行測試，所以選取 `允許未經身份驗證的叫用要求`。
+
+    ![](images/img_07.png)
+
+<br>
+
+6. 下方還有 `環境變數` 的設置，這裡先略過，進入 `下一步`。
+
+    ![](images/img_08.png)
+
+<br>
+
+## 程式碼頁面
+
+1. 執行階段 `Run Time` 選擇對應的 `Python` 版本如 `Python 3.11`。
+
+    ![](images/img_09.png)
+
+<br>
+
+2. 接著先使用雲端編輯器，所以在 `原始碼` 部分選擇 `內嵌編輯器`，此時下方會依據選擇環境出現兩個預設的腳本 `main.py`、`requirements.txt`。
+
+    ![](images/img_10.png)
+
+<br>
+
+3. 如果有相關的套件則需對 `requirements.txt` 進行編輯。
+
+<br>
+
+4. 為了實測環境的設置，接著對 `main.py` 略作修改，將預設的函數名稱修改為 `hello_world`，接著在上方 `進入點` 中填入這個更改過的函數名，預設是 `hello_http`，務必記得修改。
+
+    ![](images/img11.png)
+
+<br>
+
+5. 腳本內容就依據官方範例，返回值部分可以稍做修改以利觀察。
+
+    ```python
+    import functions_framework
+
+    @functions_framework.http
+    def hello_world(request):
+        """HTTP Cloud Function.
+        Args:
+            request (flask.Request): The request object.
+            <https://flask.palletsprojects.com/en/1.1.x/api/#incoming-request-data>
         Returns:
-        The response text, or any set of values that can be turned into a
-        Response object using `make_response`.
-    """
-    return 'Hello, World!'
-```
+            The response text, or any set of values that can be turned into a
+            Response object using `make_response`
+            <https://flask.palletsprojects.com/en/1.1.x/api/#flask.make_response>.
+        """
+        request_json = request.get_json(silent=True)
+        request_args = request.args
+
+        if request_json and 'name' in request_json:
+            name = request_json['name']
+        elif request_args and 'name' in request_args:
+            name = request_args['name']
+        else:
+            name = 'World'
+        return '我是小柱， {} 你好!'.format(name)
+    ```
 
 <br>
 
-9. 設置進入點：在「Function to execute」字段中輸入 `hello_world`。
+6. 部署前可先進行測試，點擊 `開始測試`。
+
+    ![](images/img_12.png)
 
 <br>
 
-10. 部署 Cloud Function：點擊「Deploy」來部署函數。
+7. 點擊 `授權`。
+
+    ![](images/img_13.png)
 
 <br>
 
-# 測試 Cloud Function
+8. 環境建置完成會顯示 `Function is ready to test`，點擊 `執行測試` 會顯示預期中的結果，也就是返回字串。
 
-1. 部署完成後，記錄下生成的 URL（例如 `https://<your-region>-<your-project-id>.cloudfunctions.net/hello-world-function`）。
+    ![](images/img_14.png)
 
-2. 在瀏覽器中訪問該 URL，應看到返回的 "Hello, World!" 字樣。
+<br>
+
+## 部署 Cloud Function
+
+1. 點擊 `Deploy` 來部署函數。
+
+    ![](images/img_15.png)
+
+<br>
+
+2. 部署過成功，右上方的鬧鐘圖標會顯示紅色並且圍繞環狀進度條。
+
+    ![](images/img_16.png)
+
+<br>
+
+3. 完成時，複製左上方的網址進行訪問。
+
+    ![](images/img_17.png)
+
+<br>
+
+4. 每次刷新網頁就會觸發這個函數並返回值。
+
+    ![](images/img_18.png)
 
 <br>
 
