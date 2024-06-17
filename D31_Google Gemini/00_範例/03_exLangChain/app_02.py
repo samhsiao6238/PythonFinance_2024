@@ -22,9 +22,11 @@ GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 # 確保環境變量設置正確
 os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
 # 設置 HTTP 請求的 USER_AGENT
-USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
-" AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114"
-" Safari/537.36"
+USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 "
+    "Safari/537.36"
+)
 
 # 檢查是否設置 API 金鑰
 if GEMINI_API_KEY is None:
