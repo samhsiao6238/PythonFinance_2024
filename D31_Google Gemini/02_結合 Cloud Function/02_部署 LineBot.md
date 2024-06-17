@@ -106,7 +106,7 @@ _先建立本地專案，如此若有敏感資訊也可以先寫入 .env 文件�
         # 將文本數據轉換為 JSON 格式
         json_data = json.loads(body)
         try:
-            # 建立 LineBotApi 實例以便與 LINE 平台交互
+            # 建立 LineBotApi 實例以便與 LINE 平台互動
             line_bot_api = LineBotApi(token)
             # 建立 WebhookHandler 實例以處理 LINE 消息
             handler = WebhookHandler(secret)
