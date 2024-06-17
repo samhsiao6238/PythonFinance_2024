@@ -36,7 +36,7 @@ _已經在 NAS 上架設好容器_
         db = client.admin.command('ping')
         print("MongoDB 連接成功:", db)
     except Exception as e:
-        # 如果連接失敗，捕獲並打印異常信息
+        # 如果連接失敗，捕獲並輸出異常信息
         print("MongoDB 連接失敗:", e)
     ```
 

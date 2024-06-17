@@ -94,7 +94,7 @@ _先簡介主要套件 OpenAI_
     for chunk in stream:
         # 檢查 delta.content 是否為 None
         if chunk.choices[0].delta.content is not None:
-            # 打印每個數據塊的內容
+            # 輸出每個數據塊的內容
             print(chunk.choices[0].delta.content, end="")
     ```
 

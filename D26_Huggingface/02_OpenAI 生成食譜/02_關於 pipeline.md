@@ -81,7 +81,7 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
     results = transcriber(
         ["demo.wav", "demo.flac"]
     )
-    # 遍歷結果並打印
+    # 遍歷結果並輸出
     for result in results:
         print(result['text'])
     ```
@@ -492,7 +492,7 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
             reverse=True
         )
 
-        # 打印格式化的結果
+        # 輸出格式化的結果
         print("分類結果：")
         for res in formatted_results:
             print(f"Label: {res['label']}, Score: {res['score']}")

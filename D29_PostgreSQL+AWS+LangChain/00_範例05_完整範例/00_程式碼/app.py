@@ -39,7 +39,7 @@ logging.getLogger("botocore").setLevel(logging.ERROR)
 def debug_01():
     # 檢查資料庫的 URI 是否正確
     CONNECTION_STRING = f"://{PGVECTOR_USER}:{PGVECTOR_PASSWORD}@{PGVECTOR_HOST}:{PGVECTOR_PORT}/{PGVECTOR_DATABASE}"
-    # 確保正確打印連接字串，便於檢查
+    # 確保正確輸出連接字串，便於檢查
     print(f"CONNECTION_STRING: {CONNECTION_STRING}")
 
 

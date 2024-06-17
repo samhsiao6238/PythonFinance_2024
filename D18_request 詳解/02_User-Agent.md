@@ -34,7 +34,7 @@
 
 <br>
 
-2. 執行後，打印 `soup` 的部分會出現。
+2. 執行後，輸出 `soup` 的部分會出現。
 
     ```html
     <h2>403 - Forbidden: Access is denied.</h2>
@@ -45,7 +45,7 @@
 
 <br>
 
-3. 最終打印 `product` 結果是空的 `[]`。
+3. 最終輸出 `product` 結果是空的 `[]`。
 
     ![](images/img_02.png)
 

@@ -120,7 +120,7 @@ _先簡介兩者差異_
         elif msg.role == 'system':
             print(f"系統: {msg.content}")
 
-    # 打印生成的回應
+    # 輸出生成的回應
     for reply in response['replies']:
         print(f"助理: {reply.content}")
     ```
@@ -618,7 +618,7 @@ _建立基本的 RAG 管道_
     # 將參數解析為字典格式
     function_args = json.loads(function_call['function']['arguments'])
 
-    # 打印函數名稱和參數
+    # 輸出函數名稱和參數
     print("Function Name:", function_name)
     print("Function Arguments:", function_args)
 
@@ -634,10 +634,10 @@ _建立基本的 RAG 管道_
         function_to_call = available_functions[function_name]
         # 使用解包操作將參數傳遞給函數
         function_response = function_to_call(**function_args)
-        # 打印函數的返回值
+        # 輸出函數的返回值
         print("Function Response:", function_response)
     else:
-        # 如果函數名稱未找到，打印錯誤訊息
+        # 如果函數名稱未找到，輸出錯誤訊息
         print(f"Function {function_name} not found.")
     ```
 

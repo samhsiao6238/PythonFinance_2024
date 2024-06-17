@@ -128,7 +128,7 @@ if response.status_code == 200:
     last_updated_date = transform_date(last_updated_date)
 
 
-    # 打印結果
+    # 輸出結果
     print(f'Bid Price: {bid_price}')
     print(f'Offer Price: {offer_price}')
     print(f'Last Updated Date: {last_updated_date}')

@@ -8,7 +8,7 @@
 
 3. 回調處理器 `Callback Handler` 是實現特定行為的函數，這些行為包括但不限於模型輸出新數據、處理結束、出現錯誤等，會在特定事件發生時被觸發。
 
-4. `StreamingStdOutCallbackHandler` 是一個回調處理器，它的作用是將模型的輸出實時地打印到終端，這在需要監控或調試模型輸出時非常有用。
+4. `StreamingStdOutCallbackHandler` 是一個回調處理器，它的作用是將模型的輸出實時地輸出到終端，這在需要監控或調試模型輸出時非常有用。
 
 <br>
 
@@ -45,7 +45,7 @@
 
 2. StreamingStdOutCallbackHandler:
 
-   - `StreamingStdOutCallbackHandler` 是一個特定的回調處理器，它的作用是將模型的輸出實時地打印到終端機中。
+   - `StreamingStdOutCallbackHandler` 是一個特定的回調處理器，它的作用是將模型的輸出實時地輸出到終端機中。
 
 <br>
 

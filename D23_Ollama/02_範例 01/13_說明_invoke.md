@@ -45,7 +45,7 @@ _方法說明_
     # 使用 invoke 方法生成響應
     response = llm_model.invoke(prompt_template)
 
-    # 打印響應
+    # 輸出響應
     print(response)
     ```
 
