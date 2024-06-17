@@ -10,7 +10,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
 
 2. 易於檢索和分析：可以通過 SQL 查詢、數據分析工具等輕鬆檢索和分析。
 
-3. 常見形式：關係數據庫表格、電子表格（如 Excel）、CSV 文件等。
+3. 常見形式：關係資料庫表格、電子表格（如 Excel）、CSV 文件等。
 
 <br>
 
@@ -155,7 +155,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
         vectorizer = TfidfVectorizer(vocabulary=vocabulary)
         query_vector = vectorizer.fit_transform([query]).toarray()
 
-        # 獲取所有已儲存的向量
+        # 取得所有已儲存的向量
         stored_vectors = list(
             atlas_collection.find({}, {"embedding": 1, "description": 1, "_id": 0})
         )
@@ -166,7 +166,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
         similarity_scores = cosine_similarity(query_vector, embeddings).flatten()
         sorted_indices = similarity_scores.argsort()[::-1]  # 按降序排列
 
-        # 獲取前 top_k 個相似的文件
+        # 取得前 top_k 個相似的文件
         top_documents = [descriptions[i] for i in sorted_indices[:top_k]]
         return top_documents
 
@@ -181,7 +181,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
     # 問題
     question = "請簡述台股在2024年全年度截至目前為止的市場表現"
 
-    # 獲取相關文件
+    # 取得相關文件
     top_documents = perform_vector_search(question)
 
     # 生成回答

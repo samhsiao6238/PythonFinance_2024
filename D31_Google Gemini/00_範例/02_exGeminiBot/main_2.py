@@ -23,7 +23,7 @@ bucket = storage_client.bucket(storage_bucket)
 
 
 def linebot(request):
-    # 獲取請求的原始數據並轉換為文本
+    # 取得請求的原始數據並轉換為文本
     body = request.get_data(as_text=True)
     # 將文本數據轉換為 JSON 格式
     json_data = json.loads(body)
@@ -32,28 +32,28 @@ def linebot(request):
         line_bot_api = LineBotApi(token)
         # 建立 WebhookHandler 實例以處理 LINE 消息
         handler = WebhookHandler(secret)
-        # 獲取請求頭中的簽名
+        # 取得請求頭中的簽名
         signature = request.headers["X-Line-Signature"]
         # 驗證請求並處理消息
         handler.handle(body, signature)
-        # 獲取消息事件的第一個事件
+        # 取得消息事件的第一個事件
         event = json_data["events"][0]
-        # 獲取回覆令牌
+        # 取得回覆令牌
         tk = event["replyToken"]
-        # 獲取發送消息的用戶 ID
+        # 取得發送消息的用戶 ID
         user_id = event["source"]["userId"]
-        # 獲取消息類型
+        # 取得消息類型
         msg_type = event["message"]["type"]
         # 建立 Firebase 應用實例
         fdb = firebase.FirebaseApplication(firebase_url, None)
         # 定義用戶聊天記錄的路徑
         user_chat_path = f"chat/{user_id}"
-        # 從 Firebase 獲取用戶的聊天記錄
+        # 從 Firebase 取得用戶的聊天記錄
         chatgpt = fdb.get(user_chat_path, None)
 
         # 假如是文本訊息
         if msg_type == "text":
-            # 獲取文字消息的文本內容
+            # 取得文字消息的文本內容
             msg = event["message"]["text"]
 
             if chatgpt is None:
@@ -87,9 +87,9 @@ def linebot(request):
         elif msg_type == "image":
             # 接收到圖片消息
             print("接收到圖片消息")
-            # 獲取圖片消息的 ID
+            # 取得圖片消息的 ID
             message_id = event["message"]["id"]
-            # 獲取圖片內容
+            # 取得圖片內容
             message_content = line_bot_api.get_message_content(message_id)
 
             with open(f"/tmp/{message_id}.jpg", "wb") as fd:

@@ -8,7 +8,7 @@ _本節將介紹在 VSCode 中使用 devcontainer，所以先介紹一下它與 
 
 1. 在 VSCode 中，`Devcontainer` 是一種 `開發環境配置方法`，而 `Docker` 是一個廣泛使用的 `容器化平台`，兩者關係密切但卻是 `不同的工具`。
 
-2. Devcontainer 和 Docker 是不同的工具，但 Devcontainer 依賴 Docker 來建立和管理開發環境的容器，故可將 Devcontainer 看作是 Docker 功能的一個特定應用，旨在改善和簡化開發流程，特別是在多人協作和需要快速建立開發環境的場景中，透過使用 Devcontainer，開發者可以輕鬆地在任何機器上複製完整的開發環境，有效提高開發效率和專案的可移植性。 
+2. Devcontainer 和 Docker 是不同的工具，但 Devcontainer 依賴 Docker 來建立和管理開發環境的容器，故可將 Devcontainer 看作是 Docker 功能的一個特定應用，可改善和簡化開發流程，特別是在多人協作和需要快速建立開發環境的場景中，透過使用 Devcontainer，開發者可以輕鬆地在任何機器上複製完整的開發環境，有效提高開發效率和專案的可移植性。 
 
 <br>
 

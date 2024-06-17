@@ -86,7 +86,7 @@ _這個範例的功能是使用 Atlas Vector Search 和 LangChain 來實現基�
 
 5. 建立問答鏈：通過結合檢索器、提示模板和聊天模型，建立一個處理問答的鏈。
 
-6. 提出問題並獲取回答：向這個鏈提出一個問題，並獲取回答。
+6. 提出問題並取得回答：向這個鏈提出一個問題，並取得回答。
 
 7. 輸出源文件：最後，搜尋並輸出與問題相關的源文件。
 
@@ -394,12 +394,12 @@ _索引建立完成後，返回運行向量搜索查詢_
     # question = "How can I secure my MongoDB Atlas cluster?"
     question = "如何保障我的 MongoDB Atlas 集群的安全？"
 
-    # 執行查詢，獲取回答
+    # 執行查詢，取得回答
     answer = rag_chain.invoke(question)
     print("Question: " + question)
     print("Answer: " + answer)
 
-    # 返回源文件，獲取與問題相關的文件
+    # 返回源文件，取得與問題相關的文件
     documents = retriever.get_relevant_documents(question)
     print("\nSource documents:")
     pprint.pprint(documents)

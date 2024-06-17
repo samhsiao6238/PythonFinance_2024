@@ -129,7 +129,7 @@ _以下說明如何查詢文件_
             # 遍歷除了 _id 和 product_name 之外的所有鍵
             for key in document.keys():
                 if key not in ['_id', 'product_name']:
-                    # 獲取價格和日期
+                    # 取得價格和日期
                     price_info = document[key]['price']
                     # key 是日期、value 是價格
                     for date, price in price_info.items():

@@ -56,7 +56,7 @@ _LangChain 於 2021 年發布_
 
 <br>
 
-4. 差異：這個 `OpenAI` 是 LangChain 封裝的接口，旨在簡化在 LangChain 框架內與 OpenAI 模型的互動。
+4. 差異：這個 `OpenAI` 是 LangChain 封裝的接口，可簡化在 LangChain 框架內與 OpenAI 模型的互動。
 
 <br>
 

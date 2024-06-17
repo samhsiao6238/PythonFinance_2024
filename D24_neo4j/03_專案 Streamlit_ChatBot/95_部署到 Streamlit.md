@@ -144,10 +144,10 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
     # 新增判斷函數
     def get_secret(key):
         try:
-            # 嘗試從 Streamlit secrets 獲取敏感資訊
+            # 嘗試從 Streamlit secrets 取得敏感資訊
             return st.secrets[key]
         except AttributeError:
-            # 如果 st.secrets 沒有該鍵或 st.secrets 未被設定，則從環境變數中獲取
+            # 如果 st.secrets 沒有該鍵或 st.secrets 未被設定，則從環境變數中取得
             return os.getenv(key)
     ```
 

@@ -242,7 +242,7 @@
             # 回應
             response = agent_executor.invoke({"input": prompt})
             print(f'=> response -> {response}')
-            # 獲取回應中的 'output' 欄位，如果不存在則為 None
+            # 取得回應中的 'output' 欄位，如果不存在則為 None
             output = response.get('output', None)
             if output is None:
                 return "=> 回應 `response` 中沒有結果 `output`。"

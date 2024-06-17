@@ -52,7 +52,7 @@
 
 <br>
 
-3. 數據庫對象：在 ORM（對象關係映射）中，Pydantic 模型可以用來定義數據庫表結構和驗證數據庫記錄。
+3. 資料庫對象：在 ORM（對象關係映射）中，Pydantic 模型可以用來定義資料庫表結構和驗證資料庫記錄。
 
 <br>
 
@@ -75,7 +75,7 @@
         birthdate: Optional[date]
         interests: List[str] = []
 
-    # 構建 User 對象
+    # 建立 User 對象
     user_data = {
         "username": "john_doe",
         "email": "john.doe@example.com",

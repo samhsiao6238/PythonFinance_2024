@@ -94,7 +94,7 @@ _除了 `max_tokens`，還可以使用其他參數來最佳化和控制費用_
     from langchain_openai import OpenAIEmbeddings
 
     # OpenAIEmbeddings 是用來生成和處理嵌入向量（embeddings）
-    # 這些嵌入向量是從使用 OpenAI 模型（如 GPT-4）生成的文本中獲取的
+    # 這些嵌入向量是從使用 OpenAI 模型（如 GPT-4）生成的文本中取得的
     embeddings = OpenAIEmbeddings(
         openai_api_key=st.secrets["OPENAI_API_KEY"]
     )

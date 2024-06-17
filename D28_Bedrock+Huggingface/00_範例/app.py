@@ -17,7 +17,7 @@ load_dotenv()
 translator = Translator()
 
 
-# 定義函數以獲取大語言模型
+# 定義函數以取得大語言模型
 def get_llm():
     bedrock_llm = BedrockLLM(
         model_id="anthropic.claude-v2",
@@ -36,7 +36,7 @@ def image_to_text(url):
             model="Salesforce/blip-image-captioning-large",
             max_new_tokens=1000,
         )
-        # 獲取圖像生成的文字
+        # 取得圖像生成的文字
         text = pipe(url)[0]["generated_text"]
     # 返回生成的文字
     return text

@@ -6,7 +6,7 @@ _之前範例並未儲存圖片訊息中的圖片_
 
 ## 說明
 
-1. 若要保存訊息中的圖片，使用 `Firebase Storage` 存儲圖片，並在 `Firebase Realtime Database` 中保存圖片的 `URL` 是一種最佳實踐，因為 `Storage` 適合存儲大文件，如圖片和視頻，而 `Realtime Database` 適合存儲結構化數據，包含圖片的 `URL`，尤其它支持實時數據同步，非常適合快速查詢和顯示。
+1. 若要保存訊息中的圖片，使用 `Firebase Storage` 儲存圖片，並在 `Firebase Realtime Database` 中保存圖片的 `URL` 是一種最佳實踐，因為 `Storage` 適合儲存大文件，如圖片和視頻，而 `Realtime Database` 適合儲存結構化數據，包含圖片的 `URL`，尤其它支持實時數據同步，非常適合快速查詢和顯示。
 
 <br>
 
@@ -116,7 +116,7 @@ _之前範例並未儲存圖片訊息中的圖片_
 
 
     def linebot(request):
-        # 獲取請求的原始數據並轉換為文本
+        # 取得請求的原始數據並轉換為文本
         body = request.get_data(as_text=True)
         # 將文本數據轉換為 JSON 格式
         json_data = json.loads(body)
@@ -125,28 +125,28 @@ _之前範例並未儲存圖片訊息中的圖片_
             line_bot_api = LineBotApi(token)
             # 建立 WebhookHandler 實例以處理 LINE 消息
             handler = WebhookHandler(secret)
-            # 獲取請求頭中的簽名
+            # 取得請求頭中的簽名
             signature = request.headers["X-Line-Signature"]
             # 驗證請求並處理消息
             handler.handle(body, signature)
-            # 獲取消息事件的第一個事件
+            # 取得消息事件的第一個事件
             event = json_data["events"][0]
-            # 獲取回覆令牌
+            # 取得回覆令牌
             tk = event["replyToken"]
-            # 獲取發送消息的用戶 ID
+            # 取得發送消息的用戶 ID
             user_id = event["source"]["userId"]
-            # 獲取消息類型
+            # 取得消息類型
             msg_type = event["message"]["type"]
             # 建立 Firebase 應用實例
             fdb = firebase.FirebaseApplication(firebase_url, None)
             # 定義用戶聊天記錄的路徑
             user_chat_path = f"chat/{user_id}"
-            # 從 Firebase 獲取用戶的聊天記錄
+            # 從 Firebase 取得用戶的聊天記錄
             chatgpt = fdb.get(user_chat_path, None)
 
             # 假如是文本訊息
             if msg_type == "text":
-                # 獲取文字消息的文本內容
+                # 取得文字消息的文本內容
                 msg = event["message"]["text"]
 
                 if chatgpt is None:
@@ -185,9 +185,9 @@ _之前範例並未儲存圖片訊息中的圖片_
             elif msg_type == "image":
                 # 接收到圖片消息
                 print("接收到圖片消息")
-                # 獲取圖片消息的 ID
+                # 取得圖片消息的 ID
                 message_id = event["message"]["id"]
-                # 獲取圖片內容
+                # 取得圖片內容
                 message_content = line_bot_api.get_message_content(message_id)
 
                 with open(f"/tmp/{message_id}.jpg", "wb") as fd:

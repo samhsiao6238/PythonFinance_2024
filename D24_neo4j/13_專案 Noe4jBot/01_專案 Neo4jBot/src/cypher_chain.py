@@ -235,7 +235,7 @@ class CustomCypherChain(GraphCypherQAChain):
             relevant_entities[entity] = self.find_entity_match(entity)
         print(f"=>輸出：relevant_entities ={relevant_entities}", '\n')
 
-        # 使用向量搜尋獲取 `few-shot`` 範例
+        # 使用向量搜尋取得 `few-shot`` 範例
         fewshots = self.get_fewshot_examples(question)
 
         system = self.generate_system_message(str(relevant_entities), fewshots)

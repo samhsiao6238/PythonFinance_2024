@@ -44,7 +44,7 @@ _先簡介兩者差異_
 
 <br>
 
-2. `OpenAIChatGenerator` 支持調用 `OpenAI` 的函數調用功能，是專門設計用來與 `OpenAI` 的 `Chat Completion API` 交互，支持複雜對話的上下文管理和多輪對話，適合構建聊天機器人或需要上下文理解的應用。
+2. `OpenAIChatGenerator` 支持調用 `OpenAI` 的函數調用功能，是專門設計用來與 `OpenAI` 的 `Chat Completion API` 交互，支持複雜對話的上下文管理和多輪對話，適合建立聊天機器人或需要上下文理解的應用。
 
 <br>
 
@@ -460,7 +460,7 @@ _建立基本的 RAG 管道_
 
 ## 建立工具列表
 
-1. 除了 `rag_pipeline_func` 工具外，還建立一個名為 `get_current_weather` 的新工具，用於獲取 `城市的天氣信息`，以下函數中使用硬編碼的數據來展示功能。
+1. 除了 `rag_pipeline_func` 工具外，還建立一個名為 `get_current_weather` 的新工具，用於取得 `城市的天氣信息`，以下函數中使用硬編碼的數據來展示功能。
 
     ```python
     WEATHER_INFO = {
@@ -503,7 +503,7 @@ _建立基本的 RAG 管道_
             "type": "function",
             "function": {
                 "name": "rag_pipeline_func",
-                "description": "獲取有關人們居住地點的信息",
+                "description": "取得有關人們居住地點的信息",
                 "parameters": {
                     "type": "object",
                     "properties": {
@@ -610,8 +610,8 @@ _建立基本的 RAG 管道_
     # 提取函數調用列表中的第一個元素
     function_call = function_calls[0]
 
-    # 獲取函數名稱
-    # 獲取函數名稱，這是我們需要調用的函數
+    # 取得函數名稱
+    # 取得函數名稱，這是我們需要調用的函數
     function_name = function_call['function']['name']
 
     # 解析函數參數

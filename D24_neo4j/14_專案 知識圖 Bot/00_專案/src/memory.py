@@ -24,7 +24,7 @@ class ConversationEntityKGMemory(ConversationKGMemory):
             #    human_prefix=self.human_prefix,
             #    ai_prefix=self.ai_prefix,
             # )
-            # 當 return_messages 為 False 時，獲取消息的字串
+            # 當 return_messages 為 False 時，取得消息的字串
             buffer_string = get_buffer_string(
                 self.chat_memory.messages[-self.k * 2:],
                 human_prefix=self.human_prefix,

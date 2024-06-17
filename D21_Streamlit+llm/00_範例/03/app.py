@@ -67,7 +67,7 @@ if prompt := st.chat_input(placeholder="Who won the Women's U.S. Open in 2018?")
             st.container(),
             expand_new_thoughts=False
         )
-        # 執行搜索代理並獲取回應
+        # 執行搜索代理並取得回應
         response = search_agent.run(
             st.session_state.messages,
             callbacks=[st_cb]

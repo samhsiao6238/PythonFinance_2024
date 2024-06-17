@@ -35,7 +35,7 @@ _測試 AWS Bedrock 是否完成設置_
     load_dotenv()
 
     def check_model_access():
-        # 獲取密鑰
+        # 取得密鑰
         aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
         aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
         region_name = os.getenv("AWS_REGION")
@@ -279,7 +279,7 @@ _測試 AWS Bedrock 是否完成設置_
     load_dotenv()
 
     def check_model_access():
-        # 獲取密鑰
+        # 取得密鑰
         aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
         aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
         region_name = os.getenv("AWS_REGION")

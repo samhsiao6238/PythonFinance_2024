@@ -6,7 +6,7 @@ _尚未完成_
 
 [Part 2](https://www.mongodb.com/developer/products/atlas/evaluate-llm-applications-rag/)
 
-_以下官方教程從安裝必要的工具開始，接著設置與連線數據庫、使用 API 密鑰、下載和處理數據集、生成嵌入並儲存到 MongoDB 中，然後使用這些 `嵌入` 來進行 `檢索和生成，最後評估整體系統的性能並追蹤變化。這些步驟確保了我們能夠高效地評估和改進我們的 LLM 應用。_
+_以下官方教程從安裝必要的工具開始，接著設置與連線資料庫、使用 API 密鑰、下載和處理數據集、生成嵌入並儲存到 MongoDB 中，然後使用這些 `嵌入` 來進行 `檢索和生成，最後評估整體系統的性能並追蹤變化。這些步驟確保了我們能夠高效地評估和改進我們的 LLM 應用。_
 
 <br>
 
@@ -18,7 +18,7 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線數據�
     pip install -qU toml datasets ragas langchain langchain-mongodb langchain-openai pymongo pandas tqdm matplotlib seaborn
     ```
 
-   - `datasets`：從 Hugging Face Hub 獲取數據集。
+   - `datasets`：從 Hugging Face Hub 取得數據集。
 
    - `ragas`：RAGAS 框架，用於評估 RAG 應用。
 
@@ -113,7 +113,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
     # 載入數據集
     dataset = load_dataset("explodinggradients/ragas-wikiqa", split="train")
 
-    # 獲取數據集的本地路徑
+    # 取得數據集的本地路徑
     dataset_path = dataset.cache_files[0]['filename']
     print(dataset_path)
     ```
@@ -299,7 +299,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
     ]
 
 
-    # 定義獲取檢索器的函數
+    # 定義取得檢索器的函數
     def get_retriever(model, k):
         # 建立嵌入模型對象
         embeddings = OpenAIEmbeddings(model=model)
@@ -345,7 +345,7 @@ _專案部分延續之前的腳本繼續編輯，功能部分新建腳本運行_
         }
         data["question"] = QUESTIONS
         data["ground_truth"] = GROUND_TRUTH
-        # 獲取檢索器
+        # 取得檢索器
         retriever = get_retriever(model, 2)
         # 遍歷所有問題進行檢索
         for i in tqdm(range(0, len(QUESTIONS))):

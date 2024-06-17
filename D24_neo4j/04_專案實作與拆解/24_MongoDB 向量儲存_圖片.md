@@ -29,7 +29,7 @@ _以處理圖片為例_
 
 <br>
 
-4. 初始化模型：這裡使用預訓練的 VGG16 模型，並去除最後一層，以獲取圖片的特徵嵌入。
+4. 初始化模型：這裡使用預訓練的 VGG16 模型，並去除最後一層，以取得圖片的特徵嵌入。
 
 <br>
 
@@ -184,7 +184,7 @@ _以處理圖片為例_
     def search_similar_images(query_img_path):
         query_embedding = get_image_embedding(query_img_path)
         
-        # 獲取所有已儲存的向量
+        # 取得所有已儲存的向量
         stored_images = list(atlas_collection.find({}, {"embedding": 1, "image_name": 1, "_id": 0}))
         embeddings = np.array([img["embedding"] for img in stored_images])
         image_names = [img["image_name"] for img in stored_images]
@@ -193,7 +193,7 @@ _以處理圖片為例_
         similarity_scores = cosine_similarity([query_embedding], embeddings).flatten()
         sorted_indices = similarity_scores.argsort()[::-1]  # 按降序排列
         
-        # 獲取前5個相似的圖片
+        # 取得前5個相似的圖片
         top_images = [image_names[i] for i in sorted_indices[:5]]
         return top_images
 
@@ -326,7 +326,7 @@ _添加評分_
     def search_similar_images(query_img_path):
         query_embedding = get_image_embedding(query_img_path)
         
-        # 獲取所有已儲存的向量
+        # 取得所有已儲存的向量
         stored_images = list(atlas_collection.find({}, {"embedding": 1, "image_name": 1, "_id": 0}))
         embeddings = np.array([img["embedding"] for img in stored_images])
         image_names = [img["image_name"] for img in stored_images]
@@ -335,7 +335,7 @@ _添加評分_
         similarity_scores = cosine_similarity([query_embedding], embeddings).flatten()
         sorted_indices = similarity_scores.argsort()[::-1]  # 按降序排列
         
-        # 獲取前5個相似的圖片及其相似度
+        # 取得前5個相似的圖片及其相似度
         top_images = [(image_names[i], similarity_scores[i]) for i in sorted_indices[:5]]
         return top_images
 
@@ -464,7 +464,7 @@ _展示出圖片_
     def search_similar_images(query_img_path):
         query_embedding = get_image_embedding(query_img_path)
 
-        # 獲取所有已儲存的向量
+        # 取得所有已儲存的向量
         stored_images = list(
             atlas_collection.find({}, {"embedding": 1, "image_name": 1, "_id": 0})
         )
@@ -475,7 +475,7 @@ _展示出圖片_
         similarity_scores = cosine_similarity([query_embedding], embeddings).flatten()
         sorted_indices = similarity_scores.argsort()[::-1]  # 按降序排列
 
-        # 獲取前5個相似的圖片及其相似度
+        # 取得前5個相似的圖片及其相似度
         top_images = [(image_names[i], similarity_scores[i]) for i in sorted_indices[:5]]
         return top_images
 
@@ -687,7 +687,7 @@ _展示出圖片_
     def search_similar_images(query_img_path):
         query_embedding = get_image_embedding(query_img_path)
 
-        # 獲取所有已儲存的向量
+        # 取得所有已儲存的向量
         stored_images = list(
             atlas_collection.find({}, {"embedding": 1, "image_name": 1, "_id": 0})
         )
@@ -699,7 +699,7 @@ _展示出圖片_
         # 按降序排列
         sorted_indices = similarity_scores.argsort()[::-1]
 
-        # 獲取前5個相似的圖片及其相似度
+        # 取得前5個相似的圖片及其相似度
         top_images = [(image_names[i], similarity_scores[i]) for i in sorted_indices[:5]]
         return top_images
 
@@ -855,7 +855,7 @@ _展示出圖片_
     def search_similar_images(query_img_path):
         query_embedding = get_image_embedding(query_img_path)
 
-        # 獲取所有已儲存的向量
+        # 取得所有已儲存的向量
         stored_images = list(
             atlas_collection.find({}, {"embedding": 1, "image_name": 1, "_id": 0})
         )
@@ -867,7 +867,7 @@ _展示出圖片_
         # 按降序排列
         sorted_indices = similarity_scores.argsort()[::-1]
 
-        # 獲取前5個相似的圖片及其相似度
+        # 取得前5個相似的圖片及其相似度
         top_images = [(image_names[i], similarity_scores[i]) for i in sorted_indices[:5]]
         return top_images
 
@@ -1061,7 +1061,7 @@ _展示出圖片_
     def search_similar_images(query_img_path):
         query_embedding = get_image_embedding(query_img_path)
 
-        # 獲取所有已儲存的向量
+        # 取得所有已儲存的向量
         stored_images = list(
             atlas_collection.find({}, {"embedding": 1, "image_name": 1, "_id": 0})
         )
@@ -1078,7 +1078,7 @@ _展示出圖片_
         # 按降序排列
         sorted_indices = similarity_scores.argsort()[::-1]
 
-        # 獲取前5個相似的圖片及其相似度
+        # 取得前5個相似的圖片及其相似度
         top_images = [(image_names[i], similarity_scores[i]) for i in sorted_indices[:5]]
         return top_images
     ```
@@ -1174,7 +1174,7 @@ _展示出圖片_
     def search_similar_images(query_img_path):
         query_embedding = get_image_embedding(query_img_path)
 
-        # 獲取所有已儲存的向量
+        # 取得所有已儲存的向量
         stored_images = list(
             atlas_collection.find({}, {"embedding": 1, "image_name": 1, "_id": 0})
         )
@@ -1191,7 +1191,7 @@ _展示出圖片_
         # 按降序排列
         sorted_indices = similarity_scores.argsort()[::-1]
 
-        # 獲取前5個相似的圖片及其相似度
+        # 取得前5個相似的圖片及其相似度
         top_images = [(image_names[i], similarity_scores[i]) for i in sorted_indices[:5]]
         return top_images
 
@@ -1414,7 +1414,7 @@ _展示出圖片_
     def search_similar_images(query_img_path):
         query_embedding = get_image_embedding(query_img_path)
 
-        # 獲取所有已儲存的向量
+        # 取得所有已儲存的向量
         stored_images = list(
             atlas_collection.find({}, {"embedding": 1, "image_name": 1, "_id": 0})
         )
@@ -1431,7 +1431,7 @@ _展示出圖片_
         # 按降序排列
         sorted_indices = similarity_scores.argsort()[::-1]
 
-        # 獲取前5個相似的圖片及其相似度
+        # 取得前5個相似的圖片及其相似度
         top_images = [(image_names[i], similarity_scores[i]) for i in sorted_indices[:5]]
         return top_images
 

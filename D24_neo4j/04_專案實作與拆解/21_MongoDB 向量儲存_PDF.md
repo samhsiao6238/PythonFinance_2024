@@ -107,7 +107,7 @@ _讀取 PDF 並建立向量索引系統_
     # 問題
     question = "簡述這篇論文的研究方法"
 
-    # 獲取與問題相關的文件
+    # 取得與問題相關的文件
     print("\n相關文件：")
     documents = retriever.get_relevant_documents(question)
     # print("\nSource documents:")

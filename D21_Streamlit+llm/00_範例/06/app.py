@@ -35,7 +35,7 @@ if "messages" not in st.session_state:
 if "response" not in st.session_state:
     st.session_state["response"] = None
 
-# 從會話狀態中獲取消息列表
+# 從會話狀態中取得消息列表
 messages = st.session_state.messages
 # 遍歷消息列表並顯示每條消息
 for msg in messages:

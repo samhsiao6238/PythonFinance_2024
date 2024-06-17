@@ -55,7 +55,7 @@ if prompt := st.chat_input():
 
     # 回應之前要處理的工作寫在這裡...
 
-    # 向 OpenAI API 發送請求，獲取助手回應
+    # 向 OpenAI API 發送請求，取得助手回應
     # 可添加 `temperature` 參數
     response = client.chat.completions.create(
         # 指定使用的模型
@@ -66,7 +66,7 @@ if prompt := st.chat_input():
         # `temperature` 範圍通常為 0.0 到 2.0 之間，超過 1.0 之後就相對隨機
         temperature=1.0
     )
-    # 獲取API返回的回應內容
+    # 取得API返回的回應內容
     msg = response.choices[0].message.content
     # 將助手回應添加到聊天記錄中
     st.session_state.messages.append({"role": "assistant", "content": msg})

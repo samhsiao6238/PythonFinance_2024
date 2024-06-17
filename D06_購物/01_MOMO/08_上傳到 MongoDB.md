@@ -42,7 +42,7 @@ _讀取 Firebase 節點上的資料，然後寫入 MongoDB_
     ref = db.reference('momo')
     momo_data = ref.get()
 
-    # 檢查是否成功獲取數據
+    # 檢查是否成功取得數據
     if momo_data:
         print("成功從Firebase讀取數據.")
         # 將數據儲存到MongoDB

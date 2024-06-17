@@ -67,7 +67,7 @@ _實作：本實作會以建立 LineBot 為例介紹 Vercel 與 GitHub 整合。
 
    import os  # 導入 os 模組
 
-   # 從環境變數中獲取 LineBot 的設置
+   # 從環境變數中取得 LineBot 的設置
    line_bot_api = LineBotApi(os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
    line_handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
    # 建立 Flask 應用
@@ -84,9 +84,9 @@ _實作：本實作會以建立 LineBot 為例介紹 Vercel 與 GitHub 整合。
    # 定義 webhook 路由
    @app.route("/webhook", methods=["POST"])
    def callback():
-       # 獲取 X-Line-Signature 標頭值
+       # 取得 X-Line-Signature 標頭值
        signature = request.headers["X-Line-Signature"]
-       # 獲取請求主體
+       # 取得請求主體
        body = request.get_data(as_text=True)
        # 記錄請求主體
        app.logger.info("Request body: " + body)

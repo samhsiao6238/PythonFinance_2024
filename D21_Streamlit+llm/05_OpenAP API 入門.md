@@ -242,7 +242,7 @@ _[Speech-to-text 語音轉文字](https://platform.openai.com/docs/guides/speech
     # 載入環境變數
     load_dotenv()
 
-    # 從環境變數中獲取 API 密鑰
+    # 從環境變數中取得 API 密鑰
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
     # 初始化 OpenAI 客戶端
@@ -349,7 +349,7 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
     # 添加用戶消息到對話列表
     messages.append({"role": "user", "content": user_input})
 
-    # 調用 API 獲取助理回應
+    # 調用 API 取得助理回應
     response = client.chat.completions.create(
         # 指定使用的模型
         model="gpt-4-turbo",
@@ -368,7 +368,7 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
     user_input = "Where was it played?"
     messages.append({"role": "user", "content": user_input})  # 添加用戶消息到對話列表
 
-    # 再次調用 API 獲取助理回應
+    # 再次調用 API 取得助理回應
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages
@@ -420,11 +420,11 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
 
 <br>
 
-3. 使用 OpenAI 提供的 API 獲取文本嵌入，並將嵌入結果保存到文件或數據框中以便進行後續分析，這些技術和工具可以幫助開發者更好地理解和處理自然語言數據，實現各種智能應用。
+3. 使用 OpenAI 提供的 API 取得文本嵌入，並將嵌入結果保存到文件或數據框中以便進行後續分析，這些技術和工具可以幫助開發者更好地理解和處理自然語言數據，實現各種智能應用。
 
 <br>
 
-4. 範例：具體展示獲取文本嵌入
+4. 範例：具體展示取得文本嵌入
 
     ```python
     from openai import OpenAI
@@ -436,7 +436,7 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
     # 載入環境變數
     load_dotenv()
 
-    # 從環境變數中獲取 API 密鑰
+    # 從環境變數中取得 API 密鑰
     api_key = os.getenv("OPENAI_API_KEY")
     client = OpenAI(api_key=api_key)
 
@@ -635,7 +635,7 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
     # 載入環境變數
     load_dotenv()
 
-    # 從環境變數中獲取 API 密鑰
+    # 從環境變數中取得 API 密鑰
     api_key = os.getenv("OPENAI_API_KEY")
     client = OpenAI(api_key=api_key)
 

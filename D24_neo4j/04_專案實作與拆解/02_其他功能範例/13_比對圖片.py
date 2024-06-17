@@ -83,7 +83,7 @@ def initialize_data(image_folder):
 def search_similar_images(query_img_path):
     query_embedding = get_image_embedding(query_img_path)
 
-    # 獲取所有已儲存的向量
+    # 取得所有已儲存的向量
     stored_images = list(
         atlas_collection.find({}, {"embedding": 1, "image_name": 1, "_id": 0})
     )
@@ -95,7 +95,7 @@ def search_similar_images(query_img_path):
     # 按降序排列
     sorted_indices = similarity_scores.argsort()[::-1]
 
-    # 獲取前5個相似的圖片及其相似度
+    # 取得前5個相似的圖片及其相似度
     top_images = [(image_names[i], similarity_scores[i]) for i in sorted_indices[:5]]
     return top_images
 

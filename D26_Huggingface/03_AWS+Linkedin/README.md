@@ -24,7 +24,7 @@ _我個人覺得這個專案很雞肋，實用性、可用性都極低，但其�
 
 ## 取得 Proxycurl API Key
 
-_Proxycurl 是一個專門用於獲取 LinkedIn 資料的 API_
+_Proxycurl 是一個專門用於取得 LinkedIn 資料的 API_
 
 <br>
 

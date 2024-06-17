@@ -1,6 +1,6 @@
 """
 這是一個完整的 Streamlit 和 Langchain 的集成腳本；
-旨在利用 OpenAI 的語言模型和 Neo4j 圖形資料庫進行對話。
+可利用 OpenAI 的語言模型和 Neo4j 圖形資料庫進行對話。
 """
 
 #

@@ -112,7 +112,7 @@ _官方的持久化資料庫，與沙箱略有不同_
     # 連接到Neo4j資料庫
     driver = GraphDatabase.driver(URI, auth=AUTH)
 
-    # 執行查詢，獲取第一條 Person 節點的完整內容
+    # 執行查詢，取得第一條 Person 節點的完整內容
     def get_first_person():
         with driver.session(database="neo4j") as session:
             result = session.run("MATCH (p:Person) RETURN p LIMIT 1")
@@ -123,7 +123,7 @@ _官方的持久化資料庫，與沙箱略有不同_
             else:
                 return None
 
-    # 獲取第一條 Person 節點的內容並輸出
+    # 取得第一條 Person 節點的內容並輸出
     first_person = get_first_person()
     if first_person:
         print("First person node data:", first_person)
@@ -150,7 +150,7 @@ _官方的持久化資料庫，與沙箱略有不同_
     # 連接到Neo4j資料庫
     driver = GraphDatabase.driver(URI, auth=AUTH)
 
-    # 執行查詢，獲取資料庫中的第一個節點的完整內容
+    # 執行查詢，取得資料庫中的第一個節點的完整內容
     def get_first_node():
         with driver.session(database="neo4j") as session:
             result = session.run("MATCH (n) RETURN n LIMIT 1")
@@ -161,7 +161,7 @@ _官方的持久化資料庫，與沙箱略有不同_
             else:
                 return None
 
-    # 獲取第一個節點的內容並輸出
+    # 取得第一個節點的內容並輸出
     first_node = get_first_node()
     if first_node:
         print("第一個節點：", first_node)
@@ -197,7 +197,7 @@ _官方的持久化資料庫，與沙箱略有不同_
     # 插入測試資料
     insert_test_data()
 
-    # 再次獲取第一個節點的內容並輸出
+    # 再次取得第一個節點的內容並輸出
     first_node = get_first_node()
     if first_node:
         print("第一個節點資料: ", first_node)
@@ -261,7 +261,7 @@ _交易_
                 for i in range(100):
                     # 生成員工名稱，這裡以 `Thor` 最為前綴、序號作為後綴
                     name = f"Thor{i}"
-                    # 執行寫入交易，添加員工並獲取組織 ID
+                    # 執行寫入交易，添加員工並取得組織 ID
                     org_id = session.execute_write(employ_person_tx, name)
                     # 輸出結果
                     print(f"將員工 {name} 加入組織 {org_id}")
@@ -276,7 +276,7 @@ _交易_
             """, name=name
         )
 
-        # 獲取最近建立的組織 ID 及其相關聯的員工數量
+        # 取得最近建立的組織 ID 及其相關聯的員工數量
         result = tx.run("""
             MATCH (o:Organization)
             RETURN o.id AS id, COUNT{(p:Person)-[r:WORKS_FOR]->(o)} AS employees_n
