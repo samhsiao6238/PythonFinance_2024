@@ -18,9 +18,9 @@ pip install llama-index-llms-openai
 pip install nest_asyncio
 ```
 
-### 第二步：設置環境變量和啟動環境
+### 第二步：設置環境變數和啟動環境
 
-將您的OpenAI API密鑰設置為環境變量，並確保在Jupyter Notebook中正確顯示輸出。
+將您的OpenAI API密鑰設置為環境變數，並確保在Jupyter Notebook中正確顯示輸出。
 
 ```python
 import os
@@ -200,7 +200,7 @@ from llama_index.core.tools import QueryEngineTool, ToolMetadata
 from llama_index.core.query_engine import SubQuestionQueryEngine
 from llama_index.agent.openai import OpenAIAgent
 
-# 設置環境變量
+# 設置環境變數
 os.environ["OPENAI_API_KEY"] = "sk-..."  # 替換為您的OpenAI API密鑰
 nest_asyncio.apply()
 

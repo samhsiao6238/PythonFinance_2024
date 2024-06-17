@@ -81,7 +81,7 @@ _建立管道並評估之前，將使用一個帶有問題、上下文和答案�
     from datasets import load_dataset
     from haystack import Document
 
-    # 加載 PubMedQA 數據集
+    # 載入 PubMedQA 數據集
     dataset = load_dataset(
         "vblagoje/PubMedQA_instruction",
         split="train"

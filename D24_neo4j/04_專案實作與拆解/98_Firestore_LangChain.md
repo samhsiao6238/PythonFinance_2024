@@ -85,7 +85,7 @@ _尚未實測_
 
 <br>
 
-4. 準備工作：準備 Firestore 客戶端，並加載現有的聊天記錄。
+4. 準備工作：準備 Firestore 客戶端，並載入現有的聊天記錄。
 
     ```python
         def prepare_firestore(self) -> None:
@@ -97,7 +97,7 @@ _尚未實測_
 
 <br>
 
-5. 從 Firestore 加載消息。
+5. 從 Firestore 載入消息。
 
     ```python
         def load_messages(self) -> None:
@@ -205,7 +205,7 @@ _尚未實測_
         message = BaseMessage(content="Hello, this is a test message.")
         chat_history.add_message(message)
         
-        # 加載消息
+        # 載入消息
         chat_history.load_messages()
         for msg in chat_history.messages:
             print(msg.content)

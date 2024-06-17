@@ -293,14 +293,14 @@ _後補_
 
 <br>
 
-2. **從 CSV 加載數據**
+2. **從 CSV 載入數據**
 
    ```cypher
    LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/tomasonjo/streamlit-neo4j-hackathon/main/fewshot.csv" AS row
    MERGE (f:Fewshot {id:linenumber()})
    SET f += row;
    ```
-   - 這部分從給定的 URL 加載 CSV 文件中的數據，CSV 文件的每一行都作為一個帶有標頭的映射(`row`)載入。
+   - 這部分從給定的 URL 載入 CSV 文件中的數據，CSV 文件的每一行都作為一個帶有標頭的映射(`row`)載入。
    
    - 使用 `MERGE` 確保從 CSV 文件的每一條目建立圖中的唯一節點，或匹配現有節點而不建立重複項，這裡使用 `linenumber()` 作為 `Fewshot` 節點的標識符。
    

@@ -27,7 +27,7 @@ _官方入門範例和 API 總覽的內容進行篩選和補充，這個部分�
     # 初始化模型，這裡使用 'gemini-1.5-flash'
     model = genai.GenerativeModel('gemini-1.5-flash')
 
-    # 讀取圖片文件並創建一個 PIL Image 對象
+    # 讀取圖片文件並建立一個 PIL Image 對象
     image_path = 'cookie.png'
     image = PIL.Image.open(image_path)
 

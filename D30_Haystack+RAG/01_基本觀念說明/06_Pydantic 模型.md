@@ -89,7 +89,7 @@
 
 <br>
 
-2. 在以上範例中，`User` 是一個 Pydantic 模型，它包含了 `username`、`email`、`birthdate` 和 `interests` 等欄位。當創建 `User` 對象時，Pydantic 會自動驗證並轉換輸入數據。
+2. 在以上範例中，`User` 是一個 Pydantic 模型，它包含了 `username`、`email`、`birthdate` 和 `interests` 等欄位。當建立 `User` 對象時，Pydantic 會自動驗證並轉換輸入數據。
 
 <br>
 

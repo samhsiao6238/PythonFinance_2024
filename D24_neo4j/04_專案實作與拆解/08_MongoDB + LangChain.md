@@ -107,7 +107,7 @@ _這個範例的功能是使用 Atlas Vector Search 和 LangChain 來實現基�
     ```python
     # getpass：安全地提示用戶輸入密碼或其他敏感信息
     import getpass, os, pymongo, pprint
-    # PyPDFLoader：加載 PDF 文件並將其內容轉換為可處理的文本或數據結構
+    # PyPDFLoader：載入 PDF 文件並將其內容轉換為可處理的文本或數據結構
     from langchain_community.document_loaders import PyPDFLoader
     # StrOutputParser：將模型生成的輸出解析為字串
     from langchain_core.output_parsers import StrOutputParser
@@ -130,7 +130,7 @@ _這個範例的功能是使用 Atlas Vector Search 和 LangChain 來實現基�
 
 <br>
 
-3. 設置環境變量：執行以下程式碼會提示用戶輸入 OpenAI API Key 和 Atlas 集群的 SRV 超連結。
+3. 設置環境變數：執行以下程式碼會提示用戶輸入 OpenAI API Key 和 Atlas 集群的 SRV 超連結。
 
     ```python
     # 輸入後會保存在環境變數以及變數中
@@ -150,7 +150,7 @@ _這個範例的功能是使用 Atlas Vector Search 和 LangChain 來實現基�
 
 ## 使用 Atlas 作為向量儲存
 
-_將自定義數據加載到 Atlas 並實例化為向量資料庫。_
+_將自定義數據載入到 Atlas 並實例化為向量資料庫。_
 
 <br>
 
@@ -171,7 +171,7 @@ _將自定義數據加載到 Atlas 並實例化為向量資料庫。_
 
 <br>
 
-2. 加載範例數據：使用以下程式碼從指定的 URL 檢索 PDF 並加載原始文本數據，然後使用文本拆分器將數據拆分為較小的文件。
+2. 載入範例數據：使用以下程式碼從指定的 URL 檢索 PDF 並載入原始文本數據，然後使用文本拆分器將數據拆分為較小的文件。
 
     ```python
     # 載入 PDF

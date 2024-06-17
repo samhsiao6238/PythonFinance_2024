@@ -5,7 +5,7 @@ from openai import OpenAI
 # 用於讀取敏感資訊
 import os
 from dotenv import load_dotenv
-# 加載環境變數
+# 載入環境變數
 load_dotenv()
 
 # API密鑰和模型名稱

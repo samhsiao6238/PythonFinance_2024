@@ -129,7 +129,7 @@ _測試 AWS Bedrock 是否完成設置_
         region_name = os.getenv("AWS_REGION")
 
         if not all([aws_access_key_id, aws_secret_access_key, region_name]):
-            print("錯誤：環境變量中並未設置 AWS 憑證或是區域。")
+            print("錯誤：環境變數中並未設置 AWS 憑證或是區域。")
             return
 
         # 建立 AWS Bedrock 客户端物件

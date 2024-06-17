@@ -105,7 +105,7 @@ _可使用 `Google Cloud Console` 或 `gcloud CLI` 建立並部署 `Cloud Functi
 
 <br>
 
-2. 選擇或創建一個新的 `Google Cloud 專案`。
+2. 選擇或建立一個新的 `Google Cloud 專案`。
 
 <br>
 

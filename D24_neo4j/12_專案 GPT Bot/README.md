@@ -378,7 +378,7 @@ _包含了容器的重建_
   user_input = st.chat_input("Who is the CEO of Neo4j?")
 
   if user_input:
-      # 顯示加載動畫
+      # 顯示載入動畫
       with st.spinner("Processing"):
           # 生成對話上下文
           context = generate_context(user_input)

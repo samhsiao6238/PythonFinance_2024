@@ -170,7 +170,7 @@ _先簡介兩者差異_
 
 ## 進行開發
 
-1. 建立環境變量。
+1. 建立環境變數。
 
     ```python
     from getpass import getpass

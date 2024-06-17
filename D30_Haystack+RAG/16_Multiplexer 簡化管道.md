@@ -107,10 +107,10 @@ _簡單說明每個組件提供的功能_
 
 <br>
 
-3. 創建索引管道 `indexing_pipeline` 並添加組件 `HuggingFaceAPIDocumentEmbedder`。
+3. 建立索引管道 `indexing_pipeline` 並添加組件 `HuggingFaceAPIDocumentEmbedder`。
 
     ```python
-    # 創建索引管道
+    # 建立索引管道
     indexing_pipeline = Pipeline()
 
     # 添加組件
@@ -252,7 +252,7 @@ _簡單說明每個組件提供的功能_
 4. 建立管道。
 
     ```python
-    # 創建管道
+    # 建立管道
     pipe = Pipeline()
     ```
 
@@ -514,10 +514,10 @@ _簡單說明每個組件提供的功能_
 
 <br>
 
-3. 創建 RAG 管道。
+3. 建立 RAG 管道。
 
     ```python
-    # 創建管道
+    # 建立管道
     pipe = Pipeline()
     ```
 

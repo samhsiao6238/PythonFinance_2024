@@ -6,7 +6,7 @@ from firebase import firebase
 import google.generativeai as genai
 from PIL import Image
 
-# 使用環境變量讀取憑證
+# 使用環境變數讀取憑證
 token = os.getenv("LINE_BOT_TOKEN")
 secret = os.getenv("LINE_BOT_SECRET")
 firebase_url = os.getenv("FIREBASE_URL")
@@ -23,9 +23,9 @@ def linebot(request):
     # 將文本數據轉換為 JSON 格式
     json_data = json.loads(body)
     try:
-        # 創建 LineBotApi 實例以便與 LINE 平台交互
+        # 建立 LineBotApi 實例以便與 LINE 平台交互
         line_bot_api = LineBotApi(token)
-        # 創建 WebhookHandler 實例以處理 LINE 消息
+        # 建立 WebhookHandler 實例以處理 LINE 消息
         handler = WebhookHandler(secret)
         # 獲取請求頭中的簽名
         signature = request.headers["X-Line-Signature"]
@@ -39,7 +39,7 @@ def linebot(request):
         user_id = event["source"]["userId"]
         # 獲取消息類型
         msg_type = event["message"]["type"]
-        # 創建 Firebase 應用實例
+        # 建立 Firebase 應用實例
         fdb = firebase.FirebaseApplication(firebase_url, None)
         # 定義用戶聊天記錄的路徑
         user_chat_path = f"chat/{user_id}"
@@ -54,7 +54,7 @@ def linebot(request):
             msg = event["message"]["text"]
 
             if chatgpt is None:
-                # 如果沒有聊天記錄，創建空列表
+                # 如果沒有聊天記錄，建立空列表
                 messages = []
             else:
                 # 否則，使用已有的聊天記錄
@@ -66,7 +66,7 @@ def linebot(request):
                 # 刪除用戶的聊天記錄
                 fdb.delete(user_chat_path, None)
             else:
-                # 創建 Gemini Pro 模型
+                # 建立 Gemini Pro 模型
                 model = genai.GenerativeModel("gemini-pro")
                 # 將用戶消息加入聊天記錄
                 messages.append({"role": "user", "parts": [msg]})
@@ -106,7 +106,7 @@ def linebot(request):
             prompt = """
             你是一個專業的攝影師，請對以下圖片進行描述與解說：
             """
-            # 創建 Gemini Pro Vision 模型
+            # 建立 Gemini Pro Vision 模型
             model = genai.GenerativeModel("gemini-pro-vision")
             # 生成圖片描述
             response = model.generate_content(

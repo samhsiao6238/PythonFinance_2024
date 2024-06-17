@@ -1,13 +1,13 @@
 '''
 執行這個腳本的目的是在 Neo4j 資料庫中建立兩種索引：文字索引和全文索引。
 '''
-# 引入os模組，用於作業系統功能，如環境變量
+# 引入os模組，用於作業系統功能，如環境變數
 import os
 # 從neo4j模組引入GraphDatabase，用於連接和操作Neo4j資料庫
 from neo4j import GraphDatabase
-# 從dotenv模組引入load_dotenv，用於載入.env檔案中的環境變量
+# 從dotenv模組引入load_dotenv，用於載入.env檔案中的環境變數
 from dotenv import load_dotenv
-# 從.env檔案載入環境變量
+# 從.env檔案載入環境變數
 load_dotenv()
 
 

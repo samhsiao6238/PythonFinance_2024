@@ -18,7 +18,7 @@
 
 <br>
 
-4. `序列化` 是將 `管道` 轉換為可以保存到磁碟或其他儲存介質的格式，以便之後可以再次加載和使用。
+4. `序列化` 是將 `管道` 轉換為可以保存到磁碟或其他儲存介質的格式，以便之後可以再次載入和使用。
 
 <br>
 
@@ -80,7 +80,7 @@
     logging.info("PromptBuilder 已建立。")
 
     # 建立 HuggingFaceLocalGenerator，指定使用的模型和生成的參數
-    logging.info("開始加載模型，這可能需要一些時間。")
+    logging.info("開始載入模型，這可能需要一些時間。")
     llm = HuggingFaceLocalGenerator(
         model="google/flan-t5-large",
         task="text2text-generation",
@@ -116,7 +116,7 @@
 
 <br>
 
-2. 初次使用時相當耗時，因為模型要從 Hugging Face 的伺服器下載，加載完模型後，還需要一些時間初始化模型，並將其載入記憶體並進行配置。
+2. 初次使用時相當耗時，因為模型要從 Hugging Face 的伺服器下載，載入完模型後，還需要一些時間初始化模型，並將其載入記憶體並進行配置。
 
     ![](images/img_50.png)
 
@@ -235,8 +235,8 @@
 1. 通過調用 `loads()` 方法將管道反序列化。以下將反序列化編輯過的 `yaml_pipeline`。
 
     ```python
-    # 將 YAML 管道加載為 Python 管道
-    logging.info("正在從 YAML 加載新的管道...")
+    # 將 YAML 管道載入為 Python 管道
+    logging.info("正在從 YAML 載入新的管道...")
     new_pipeline = Pipeline.loads(yaml_pipeline)
 
     # 運行新管道，將句子翻譯為法語
@@ -300,7 +300,7 @@ _[官方文件](https://docs.haystack.deepset.ai/docs/huggingfacelocalgenerator)
 
 <br>
 
-4. 對於遠程文件授權，此組件默認使用 `HF_API_TOKEN` 環境變量。或者，可以在初始化時傳遞 Hugging Face API 令牌。
+4. 對於遠程文件授權，此組件默認使用 `HF_API_TOKEN` 環境變數。或者，可以在初始化時傳遞 Hugging Face API 令牌。
 
     ```python
     local_generator = HuggingFaceLocalGenerator(

@@ -32,7 +32,7 @@ st.sidebar.markdown("### 👨‍💻 *Gaurav Kabra*")
 st.sidebar.title("Options")
 
 
-# 自訂函數：加載數據
+# 自訂函數：載入數據
 # Caching data once loaded using decorator
 # Makes sense since this data not updated in file
 # May clear cache in top-right corner
@@ -44,7 +44,7 @@ def load_data():
     return data
 
 
-# 調用加載數據的函數
+# 調用載入數據的函數
 data = load_data()
 
 # 假如想查看資料內容

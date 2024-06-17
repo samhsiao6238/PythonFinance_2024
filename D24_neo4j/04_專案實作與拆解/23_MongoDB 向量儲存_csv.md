@@ -42,7 +42,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
     import pandas as pd
     import streamlit as st
 
-    # 加載 CSV 文件
+    # 載入 CSV 文件
     def load_data(file_path):
         df = pd.read_csv(file_path)
         return df
@@ -50,7 +50,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
     # Streamlit 介面
     st.title("檢查 CSV 文件結構和內容")
 
-    # 加載數據
+    # 載入數據
     file_path = "台股大盤1997_2024.csv"
     df = load_data(file_path)
 
@@ -66,7 +66,7 @@ _讀取 CSV 並建立向量索引系統，這是 `結構化` 數據的範疇_
 
 ## 建立向量儲存和查詢應用
 
-1. 這段程式碼從一個名為 `taiwan_stock_data.csv` 的文件中加載台股數據，將其轉換為向量表示並儲存到MongoDB Atlas中，其中使用 `TfidfVectorizer` 將文本數據轉換為向量，並以 Streamlit 建立網頁進行用戶互動，允許用戶輸入問題並觸發查詢。
+1. 這段程式碼從一個名為 `taiwan_stock_data.csv` 的文件中載入台股數據，將其轉換為向量表示並儲存到MongoDB Atlas中，其中使用 `TfidfVectorizer` 將文本數據轉換為向量，並以 Streamlit 建立網頁進行用戶互動，允許用戶輸入問題並觸發查詢。
 
 <br>
 

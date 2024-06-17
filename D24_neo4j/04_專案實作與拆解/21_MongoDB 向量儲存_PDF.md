@@ -11,7 +11,7 @@ _讀取 PDF 並建立向量索引系統_
     ```python
     # getpass：安全地提示用戶輸入密碼或其他敏感信息
     import getpass, os, pymongo, pprint
-    # PyPDFLoader：加載 PDF 文件並將其內容轉換為可處理的文本或數據結構
+    # PyPDFLoader：載入 PDF 文件並將其內容轉換為可處理的文本或數據結構
     from langchain_community.document_loaders import PyPDFLoader
     # StrOutputParser：將模型生成的輸出解析為字串
     from langchain_core.output_parsers import StrOutputParser

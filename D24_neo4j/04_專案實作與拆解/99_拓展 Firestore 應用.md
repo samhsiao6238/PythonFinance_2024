@@ -133,7 +133,7 @@ _重寫前一個範例，用於儲存和管理用戶活動日誌（Activity Logs
         log = BaseLog(content="User logged in.")
         activity_log.add_log(log)
 
-        # 加載活動記錄
+        # 載入活動記錄
         activity_log.load_logs()
         for log in activity_log.logs:
             print(log.content)
@@ -205,8 +205,8 @@ _重寫前一個範例，用於儲存和管理用戶活動日誌（Activity Logs
 4. FirestoreActivityLog 類：用於管理活動記錄的類，繼承自 `BaseActivityLog`。
 
    - `__init__` 初始化類實例並設置必要的參數。
-   - `prepare_firestore()` 準備 Firestore 客戶端並加載現有的活動記錄。
-   - `load_logs()` 從 Firestore 加載活動記錄。
+   - `prepare_firestore()` 準備 Firestore 客戶端並載入現有的活動記錄。
+   - `load_logs()` 從 Firestore 載入活動記錄。
    - `add_log()` 將新活動記錄添加到列表中並更新 Firestore。
    - `upsert_logs()` 將活動記錄列表更新到 Firestore 文件中。
    - `clear()` 清除活動記錄，並從 Firestore 刪除相應的文件。
@@ -356,7 +356,7 @@ _在 Firebase 控制台建立一個項目，並生成服務帳戶密鑰文件。
         log = BaseLog(content="User logged in.")
         activity_log.add_log(log)
 
-        # 加載活動記錄
+        # 載入活動記錄
         activity_log.load_logs()
         for log in activity_log.logs:
             print(log.content)

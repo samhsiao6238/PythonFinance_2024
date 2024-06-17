@@ -152,7 +152,7 @@ _修改後的_
     # 導入自訂庫中的 lookup，並使用別名 lookup_agent
     from agents.linkedin_lookup_agent import lookup as lookup_agent
 
-    # 加載環境變量
+    # 載入環境變數
     load_dotenv()
 
 

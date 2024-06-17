@@ -147,7 +147,7 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
             # 嘗試從 Streamlit secrets 獲取敏感資訊
             return st.secrets[key]
         except AttributeError:
-            # 如果 st.secrets 沒有該鍵或 st.secrets 未被設定，則從環境變量中獲取
+            # 如果 st.secrets 沒有該鍵或 st.secrets 未被設定，則從環境變數中獲取
             return os.getenv(key)
     ```
 
@@ -201,7 +201,7 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
 
     # 改寫
     def get_secret(key):
-        # 檢查是否在 Streamlit 雲端環境中運行，Streamlit 雲端環境會設置特定的環境變量
+        # 檢查是否在 Streamlit 雲端環境中運行，Streamlit 雲端環境會設置特定的環境變數
         if 'STREAMLIT_SHARING_MODE' in os.environ:
             # 在 Streamlit 雲端，使用 st.secrets 讀取配置
             try:
@@ -211,7 +211,7 @@ _到這為止，與前面點擊 `Advanced settings...` 的步驟同步。_
         else:
             # 在本機環境，嘗試從 .env 文件讀取配置
             from dotenv import load_dotenv
-            load_dotenv()  # 讀取 .env 文件中的環境變量
+            load_dotenv()  # 讀取 .env 文件中的環境變數
             secret_value = os.getenv(key)
             if secret_value is not None:
                 return secret_value

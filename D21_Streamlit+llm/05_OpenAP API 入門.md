@@ -239,7 +239,7 @@ _[Speech-to-text 語音轉文字](https://platform.openai.com/docs/guides/speech
     # 環境變數
     import os
     from dotenv import load_dotenv
-    # 加載環境變數
+    # 載入環境變數
     load_dotenv()
 
     # 從環境變數中獲取 API 密鑰
@@ -433,10 +433,10 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
     from dotenv import load_dotenv
     import os
 
-    # 加載環境變量
+    # 載入環境變數
     load_dotenv()
 
-    # 從環境變量中獲取 API 密鑰
+    # 從環境變數中獲取 API 密鑰
     api_key = os.getenv("OPENAI_API_KEY")
     client = OpenAI(api_key=api_key)
 
@@ -461,7 +461,7 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
     # 保存結果到 CSV 文件
     df.to_csv('output/embedded_reviews.csv', index=False)
 
-    # 從保存的文件中加載嵌入數據
+    # 從保存的文件中載入嵌入數據
     df = pd.read_csv('output/embedded_reviews.csv')
     df['embedding'] = df.embedding.apply(eval).apply(np.array)
 
@@ -632,10 +632,10 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
     from sklearn.linear_model import LogisticRegression
     from sklearn.metrics import classification_report
 
-    # 加載環境變量
+    # 載入環境變數
     load_dotenv()
 
-    # 從環境變量中獲取 API 密鑰
+    # 從環境變數中獲取 API 密鑰
     api_key = os.getenv("OPENAI_API_KEY")
     client = OpenAI(api_key=api_key)
 

@@ -54,7 +54,7 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-2. 建立環境變量：這個範例在後續會使用到 `OpenAI API` 來建立生成器 `OpenAIGenerator`。
+2. 建立環境變數：這個範例在後續會使用到 `OpenAI API` 來建立生成器 `OpenAIGenerator`。
 
     ```python
     from getpass import getpass
@@ -89,7 +89,7 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
     from datasets import load_dataset
     from haystack import Document
 
-    # 加載數據集
+    # 載入數據集
     dataset = load_dataset(
         "bilgeyucel/seven-wonders", split="train"
     )
@@ -124,7 +124,7 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
     doc_embedder = SentenceTransformersDocumentEmbedder(
         model="sentence-transformers/all-MiniLM-L6-v2"
     )
-    # 加載嵌入器，這是一種優化手段，用於預先加載和初始化資源密集型組件
+    # 載入嵌入器，這是一種優化手段，用於預先載入和初始化資源密集型組件
     # 可確保系統在運行時能迅速響應並保持高效的運行狀態
     # 可有效避免首次運行的延遲問題，提升整體系統的性能和穩定性
     doc_embedder.warm_up()
@@ -405,7 +405,7 @@ _模板使用的是 `Jinja2` 循環語法_
 
 <br>
 
-2. 這個警告訊息是由於 `huggingface` 的 `tokenizers 庫` 在進行 `文本分詞` 時使用了 `多線程並行` 處理，而這個 `並行處理` 可能在 `進程分叉（fork）` 後導致 `死鎖`。具體來說，_這與 `tokenizers` 的內部實現有關_，是因為 `OpenAIGenerator` 或 `SentenceTransformers` 模型在加載和處理數據時使用了多線程操作的關係，並非導因於任何顯性在程式碼中進行的操作。
+2. 這個警告訊息是由於 `huggingface` 的 `tokenizers 庫` 在進行 `文本分詞` 時使用了 `多線程並行` 處理，而這個 `並行處理` 可能在 `進程分叉（fork）` 後導致 `死鎖`。具體來說，_這與 `tokenizers` 的內部實現有關_，是因為 `OpenAIGenerator` 或 `SentenceTransformers` 模型在載入和處理數據時使用了多線程操作的關係，並非導因於任何顯性在程式碼中進行的操作。
 
 <br>
 
