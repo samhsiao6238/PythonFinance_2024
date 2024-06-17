@@ -296,9 +296,15 @@ _延續之前步驟，服務已經啟用了_
 
 1. `GEMINI_API_KEY`：這是 [Google AI Studio](https://aistudio.google.com/app/apikey) 的 `API Key`。
 
+<br>
+
 2. `LINE_BOT_TOKEN`、`LINE_BOT_SECRET`：這是 [LINE Developers](https://developers.line.biz/console/channel) 的 `Channel access token` 與 `Channel secret`。
 
+<br>
+
 3. `FIREBASE_URL`：這是 [Firebase Realtime Database](https://console.firebase.google.com/) 的 `URL`。
+
+<br>
 
 4. 其中 `CLOUD_FUNCTION_URL` 是要寫入 `Line Develops` 的 `Webhook`，這裡可省略。
 
@@ -311,6 +317,8 @@ _延續之前步驟，服務已經啟用了_
 1. 接著點擊 `下一步` 進入設定畫面，先切換 `執行階段` 為 `Python 3.11`。
 
     ![](images/img_27.png)
+
+<br>
 
 2. 修改 `requirements.txt`，將紀錄在本地文件的內容寫入。
 
@@ -334,13 +342,19 @@ _延續之前步驟，服務已經啟用了_
 
     ![](images/img_29.png)
 
+<br>
+
 4. 左下角的終端畫面中會顯示準備及建置。
 
     ![](images/img_30.png)
 
+<br>
+
 5. 過一陣子會顯示 `無法正常運作`。
 
     ![](images/img_32.png)
+
+<br>
 
 ## 設定 Webhook
 
@@ -350,7 +364,7 @@ _再次測試之前，先設定 Webhook_
 
 1. 回到 [LINE Developers](https://developers.line.biz/console/) 的  Console，在 `Messaging API` 頁籤中，將 `Webhook URL` 設為剛剛記錄的 `Cloud Function URL`。
 
-![](images/img_33.png)
+    ![](images/img_33.png)
 
 <br>
 
@@ -368,19 +382,19 @@ _再次測試之前，先設定 Webhook_
 
 <br>
 
-4. 點擊 `部署`。
+3. 點擊 `部署`。
 
     ![](images/img_35.png)
 
 <br>
 
-5. 自動跳回主控台，通知會顯示環狀進度條。
+4. 自動跳回主控台，通知會顯示環狀進度條。
 
     ![](images/img_36.png)
 
 <br>
 
-6. 等候部署完成會顯示。
+5. 等候部署完成會顯示。
 
     ![](images/img_37.png)
 
