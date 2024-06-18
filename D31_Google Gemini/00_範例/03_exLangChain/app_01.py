@@ -1,4 +1,4 @@
-# 範例一
+# 範例一：這是一個 Streamlit 的範例
 import streamlit as st
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import HumanMessage
