@@ -221,7 +221,15 @@ _官方入門範例和 API 總覽的內容進行篩選和補充，這個部分�
 
 <br>
 
-6. 使用受控生成進行 JSON 返回。
+## 受控生成 / 約束解碼
+
+_controlled generation、constrained decoding_
+
+1. `Gemini 1.5 Flash` 和 `Gemini 1.5 Pro` 模型在處理 JSON Schema 的方法不同，`Gemini 1.5 Flash` 僅接受 `JSON Schema 的文本描述`；而 `Gemini 1.5 Pro` 模型允許傳遞一個 `JSON Schema 對象` 或 `Python 類`，並且模型輸出將嚴格遵循該 Schema，這稱為 `受控生成（controlled generation）`或 `約束解碼（constrained decoding）`，這是一種根據特定的結構和格式生成內容，確保生成的結果符合預定的規範。
+
+<br>
+
+2. 使用 `受控生成` 進行 JSON 返回。
 
     ```python
     # 導入 typing_extensions 用於定義型別
@@ -232,7 +240,7 @@ _官方入門範例和 API 總覽的內容進行篩選和補充，這個部分�
         # 定義食譜名稱字段
         recipe_name: str
 
-    # 初始化高級模型
+    # 初始化模型：必須使用 `gemini-1.5-pro`
     model = genai.GenerativeModel(
         model_name="models/gemini-1.5-pro"
     )
@@ -266,16 +274,44 @@ _官方入門範例和 API 總覽的內容進行篩選和補充，這個部分�
 
     _輸出_
 
-    ```bash
-    [{
-        "recipe_name": "巧克力碎片餅乾🍪🍫🍪🍫🍪🍫🍪🍫🍪
+```bash
+[
+    {
+        "recipe_name": "經典巧克力豆餅乾🍪 (無敵美味！😋😋😋！)  🔥最受歡迎的餅乾食譜！🔥  🍪🍪🍪  試試看，你會愛上它！ 💖 💖 💖 💖 💖  #餅乾 #巧克力 #食譜  https://www.example.com/chocolate-chip-cookies"
+    },
+    {
+        "recipe_name": "酥脆燕麥葡萄乾餅乾 🍇  ✨簡單又美味！✨  💪健康又營養！💪  #餅乾 #燕麥 #葡萄乾 #食譜  https://www.example.com/oatmeal-raisin-cookies"
+    },
+    {
+        "recipe_name": "奶油花生醬餅乾 🥜  🥜🥜🥜  經典美式風味！🇺🇸  保證讓你一口接一口！😋  #餅乾 #花生醬 #食譜  https://www.example.com/peanut-butter-cookies"
+    },
+    {
+        "recipe_name": "雙重巧克力餅乾 🍫🍫  🍫🍫🍫  巧克力愛好者的最愛！💖  濃郁的巧克力風味！🤤  #餅乾 #巧克力 #食譜  https://www.example.com/double-chocolate-cookies"
+    },
+    {
+        "recipe_name": "抹茶白巧克力餅乾 💚🤍  🌿🍵  獨特的日式風味！🇯🇵  香濃的抹茶與香甜的白巧克力完美結合！😍  #餅乾 #抹茶 #白巧克力 #食譜  https://www.example.com/matcha-white-chocolate-cookies"
+    }
+] 
 
-    ...（不知道為何輸出一堆餅乾）
-
-    🍫🍪🍫🍪🍫🍪🍫🍪🍫🍪🍫🍪🍫🍪
-
-    無法解析 JSON: Unterminated string starting at: line 1 column 18 (char 17)
-    ```
+格式化後的 JSON 數據:
+[
+    {
+        "recipe_name": "經典巧克力豆餅乾🍪 (無敵美味！😋😋😋！)  🔥最受歡迎的餅乾食譜！🔥  🍪🍪🍪  試試看，你會愛上它！ 💖 💖 💖 💖 💖  #餅乾 #巧克力 #食譜  https://www.example.com/chocolate-chip-cookies"
+    },
+    {
+        "recipe_name": "酥脆燕麥葡萄乾餅乾 🍇  ✨簡單又美味！✨  💪健康又營養！💪  #餅乾 #燕麥 #葡萄乾 #食譜  https://www.example.com/oatmeal-raisin-cookies"
+    },
+    {
+        "recipe_name": "奶油花生醬餅乾 🥜  🥜🥜🥜  經典美式風味！🇺🇸  保證讓你一口接一口！😋  #餅乾 #花生醬 #食譜  https://www.example.com/peanut-butter-cookies"
+    },
+    {
+        "recipe_name": "雙重巧克力餅乾 🍫🍫  🍫🍫🍫  巧克力愛好者的最愛！💖  濃郁的巧克力風味！🤤  #餅乾 #巧克力 #食譜  https://www.example.com/double-chocolate-cookies"
+    },
+    {
+        "recipe_name": "抹茶白巧克力餅乾 💚🤍  🌿🍵  獨特的日式風味！🇯🇵  香濃的抹茶與香甜的白巧克力完美結合！😍  #餅乾 #抹茶 #白巧克力 #食譜  https://www.example.com/matcha-white-chocolate-cookies"
+    }
+]
+```
 
 <br>
 
