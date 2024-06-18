@@ -8,7 +8,7 @@ _官方入門範例和 API 總覽的內容進行篩選和補充，這個部分�
 
 1. 使用一張圖片 `cookie.png` 並對模型提問 `這些看起來是買來的還是自製的？`。
 
-    ![](images/img_05.png)
+    <img src="images/img_05.png" width="300px" />
 
 <br>
 
