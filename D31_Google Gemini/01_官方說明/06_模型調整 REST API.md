@@ -28,7 +28,7 @@ _使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `
 
 <br>
 
-## 驗證
+## 通過 Google Cloud 進行驗證
 
 1. 執行以下腳本，會開啟瀏覽器。
 
@@ -78,7 +78,15 @@ _使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `
 
 <br>
 
-## 如果在本地機器上運行
+6. 可在終端機中進行檢查。
+
+    ```bash
+    ls ~/.config/gcloud/application_default_credentials.json
+    ```
+
+<br>
+
+## 透過自動化腳本進行驗證
 
 1. 查看 `client_secret.json` 文件，其中的 `client_id` 會使用在後續指令中。
 
@@ -158,7 +166,7 @@ _使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `
 
 <br>
 
-3. 執行後複製輸出。
+3. 執行後生成終端機指令，進行複製。
 
     ![](images/img_52.png)
 
@@ -167,6 +175,10 @@ _使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `
 4. 在終端機中運行，會顯示安全提示，輸入 `Y`。
 
     ![](images/img_53.png)
+
+<br>
+
+_以下步驟與前一個方法相同_
 
 <br>
 
@@ -188,7 +200,15 @@ _使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `
 
 <br>
 
-8. 完成後執行指令確認完成認證並獲得 `令牌 access token`，可用於訪問 Google Cloud 服務與資源。
+8. 瀏覽器會顯示已經通過驗證，可關閉瀏覽器。
+
+    ![](images/img_66.png)
+
+<br>
+
+## 檢查驗證狀態
+
+1. 完成後執行指令確認完成認證並獲得 `令牌 access token`，可用於訪問 Google Cloud 服務與資源。
 
     ```bash
     gcloud auth application-default print-access-token
@@ -196,7 +216,7 @@ _使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `
 
 <br>
 
-9. 憑證會被保存到 `~/.config/gcloud/application_default_credentials.json`，可進行查看。
+2. 憑證會被保存到 `~/.config/gcloud/application_default_credentials.json`，可進行查看。
 
     ```bash
     ls ~/.config/gcloud/application_default_credentials.json
