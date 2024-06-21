@@ -98,6 +98,47 @@ _以上完成安裝_
 
 <br>
 
+## 開始之前
+
+1. 先查詢已經存在的配置。
+
+```bash
+gcloud config configurations list
+```
+
+![](images/img_37.png)
+
+2. 假如要刪除本地 `IS_ACTIVE` 狀態為 `False` 的指定配置。
+
+```bash
+gcloud config configurations delete default
+```
+
+![](images/img_38.png)
+
+3. 若要刪除 `IS_ACTIVE` 狀態為 `True` 的配置為 `myproject0619`，必須先切換到其他配置，但若該配置為當前唯一配置，就必須先建立一個臨時的配置如 `tempconfig`。
+```bash
+gcloud config configurations create tempconfig
+```
+
+![](images/img_39.png)
+
+4. 若有其他配置，則透過手動切換到另一個配置，並可透過指令確認切換後的狀態。
+
+```bash
+gcloud config configurations activate tempconfig
+```
+![](images/img_40.png)
+
+5. 刪除指定的閒置設置。
+
+```bash
+gcloud config configurations delete myproject0619
+```
+
+![](images/img_41.png)
+
+
 ## 初始化 Google Cloud SDK
 
 1. 安裝完成後，打開終端運行以下命令可初始化 SDK。
@@ -108,43 +149,31 @@ _以上完成安裝_
 
 <br>
 
-2. 假如已有設置就會看到如下畫面，輸入 `2` 執行 `Create a new configuration`。
+2. 輸入 `2` 執行 `Create a new configuration`。
 
     ![](images/img_19.png)
 
 <br>
 
-3. 為設置 `configuration` 命名，這裡假設是 `myproject0619`，切記只可以有 _小寫字母、數字、`-`，並以小寫字母開頭_。
+3. 為設置 `configuration` 命名，這裡假設是 `myproject0621`，切記只可以有 _小寫字母、數字、`-`，並以小寫字母開頭_。
 
     ![](images/img_20.png)
 
 <br>
 
-4. 若原本已有登入帳號，可直接輸入 `[1]` 選取帳號，或輸入 `[2] Log in with a new account`，假如已登入過更多帳號，這個選項號會往後遞增；點擊 `Log in with a new account` 後會開啟瀏覽器選擇 `Google` 帳號，進行授權的確認。
+4. 接著選擇登入帳號，若要登入既有帳號可輸入對應的數字，如截圖中 `[1] ~ [3]`，或輸入 `[4] Log in with a new account`，若點擊 `Log in with a new account` 後會開啟瀏覽器選擇 `Google` 帳號進行授權的確認。
 
     ![](images/img_21.png)
 
 <br>
 
-_完成後會回到終端機繼續_
+5. 否則進入下一步選擇專案。
+
+    ![](images/img_42.png)
 
 <br>
 
-## 繼續設定
-
-1. 選擇專案，這裏就選一個現有的 Google Cloud 專案。
-
-    ![](images/img_23.png)
-
-<br>
-
-2. 這個專案在 `Google Cloud 主控台` 中可以看到。
-
-    ![](images/img_24.png)
-
-<br>
-
-3. 完成時，畫面會顯示其他可執行指令。
+6. 完成時，畫面會顯示其他可執行指令。
 
     ```bash
     # 了解如何更改個別設置
@@ -157,19 +186,33 @@ _完成後會回到終端機繼續_
 
 <br>
 
-## 創建 OAuth 憑證
+## 進入 [主控台](https://cloud.google.com/?hl=zh_tw)
 
-1. 進行 `模型調整` 時，使用 `OAuth 驗證` 是必須的，而僅有 `API Key` 是不夠的，這是因為模型調整涉及敏感數據和高級操作，需要更高級別的安全性和權限管理。
+1. 點擊 `專案下拉選單`，可看到並切換到指定的專案。
+
+    ![](images/img_23.png)
 
 <br>
 
-2. 打開 [Google Cloud 資訊主頁](https://console.cloud.google.com/) 並選取專案，展開左側導覽中的 `API 與服務` 並點擊 `憑證`。
+2. 點擊 [Google Cloud 資訊主頁](https://console.cloud.google.com/) ，可進入指定專案中；以上兩個步驟可以互換，就是先在導覽中切換到資訊主頁，再選擇指定專案。
+
+    ![](images/img_24.png)
+
+<br>
+
+## 創建 OAuth 憑證
+
+1. 進行 `模型調整` 時，而僅有 `API Key` 是不夠的，這是因為模型調整涉及敏感數據和高級操作，需要更高級別的安全性和權限管理，所以進行 `OAuth 驗證`，。
+
+<br>
+
+2. 展開導覽選單，滑動到 `API 與服務` 並點擊 `憑證`。
 
     ![](images/img_25.png)
 
 <br>
 
-3. 點擊並展開 `建立憑證`，接著點 `OAuth 客戶端 ID`。
+3. 點擊 `建立憑證` 展開選單，接著點 `OAuth 客戶端 ID`。
 
     ![](images/img_26.png)
 
@@ -181,19 +224,45 @@ _完成後會回到終端機繼續_
 
 <br>
 
-5. 因為是自行開發和學習使用 Google Cloud 服務，建議選擇 `External` 方式。
+5. 因為是自行開發和學習使用 Google Cloud 服務，建議選擇 `External` 方式，接著點擊 `建立`。
 
     ![](images/img_28.png)
 
 <br>
 
-6. 命名為 `Project2024-01`，中間步驟先跳過筆記，待確認成功後再補上，最後點擊 `建立`。
+## 應用程式資訊
+
+1. 命名為 `Project2024-01`，並透過下拉選單選擇電子郵件。
 
     ![](images/img_29.png)
 
 <br>
 
-7. 再跳出來的視窗中先點擊 `下載 JSON`，然後點擊 `確認`。
+2. 輸入開發人員聯絡資訊後點擊 `儲存並繼續`。
+
+![](images/img_43.png)
+
+## Edit app registration
+
+1. 這個步驟設定 `範圍`，依舊點擊 `儲存並繼續`。
+
+![](images/img_44.png)
+
+2. 點擊 `+ ADD USERS`，在跳出的視窗中，輸入要參與的使用者，並點擊 `新增`。
+
+![](images/img_45.png)
+
+3. 點擊 `儲存並繼續`。
+
+![](images/img_46.png)
+
+4. 點擊回到主控台。
+
+![](images/img_47.png)
+
+
+
+4. 再跳出來的視窗中先點擊 `下載 JSON`，然後點擊 `確認`。
 
     ![](images/img_30.png)
 
