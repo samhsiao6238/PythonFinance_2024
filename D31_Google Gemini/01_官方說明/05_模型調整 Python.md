@@ -240,27 +240,55 @@ gcloud config configurations delete myproject0619
 
 2. 輸入開發人員聯絡資訊後點擊 `儲存並繼續`。
 
-![](images/img_43.png)
+    ![](images/img_43.png)
+
+<br>
 
 ## Edit app registration
 
 1. 這個步驟設定 `範圍`，依舊點擊 `儲存並繼續`。
 
-![](images/img_44.png)
+    ![](images/img_44.png)
+
+<br>
 
 2. 點擊 `+ ADD USERS`，在跳出的視窗中，輸入要參與的使用者，並點擊 `新增`。
 
-![](images/img_45.png)
+    ![](images/img_45.png)
+
+<br>
 
 3. 點擊 `儲存並繼續`。
 
-![](images/img_46.png)
+    ![](images/img_46.png)
 
-4. 點擊回到主控台。
+<br>
 
-![](images/img_47.png)
+4. 點擊回到主控台 `BACK TO DASHBOARD`。
 
+    ![](images/img_47.png)
 
+<br>
+
+## 
+
+1. 再次選取 `OAuth 客戶端 ID`。
+
+    ![](images/img_48.png)
+
+<br>
+
+2. 選擇 `電腦版應用程式`。
+
+    ![](images/img_49.png)
+
+<br>
+
+3. 輸入名稱，依照畫面說明 `您的 OAuth 2.0 用戶端名稱。這個名稱只會用於在控制台中識別用戶端，不會向使用者顯示`，然後點擊 `建立`。
+
+    ![](images/img_50.png)
+
+<br>
 
 4. 再跳出來的視窗中先點擊 `下載 JSON`，然後點擊 `確認`。
 
@@ -268,13 +296,13 @@ gcloud config configurations delete myproject0619
 
 <br>
 
-8. 在下載資料夾中會看到這個憑證，這是一個 JSON 文件。
+5. 在下載資料夾中會看到這個憑證，這是一個 `JSON` 文件。
 
     ![](images/img_31.png)
 
 <br>
 
-9. 這個文件預設的名稱太長，可修改為 `client_secret.json`。
+6. 這個文件預設的名稱太長，可修改為 `client_secret.json`。
 
     ![](images/img_32.png)
 
@@ -282,7 +310,9 @@ gcloud config configurations delete myproject0619
 
 ## 使用本地命令進行驗證
 
-在本地環境中，使用 `gcloud` 命令進行驗證：
+_使用 `gcloud` 命令進行驗證_
+
+<br>
 
 1. 進入下載的資料夾中，運行驗證命令。
 
@@ -292,7 +322,7 @@ gcloud config configurations delete myproject0619
 
 <br>
 
-2. 這行指令將啟動瀏覽器，要求登錄 Google 帳戶並授予應用所需的權限，接著點擊 `繼續`。
+2. 這行指令將啟動瀏覽器，要求登錄 `Google` 帳戶並授予應用所需的權限，接著點擊 `繼續`。
 
     ![](images/img_33.png)
 
