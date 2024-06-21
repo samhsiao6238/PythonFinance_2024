@@ -284,6 +284,12 @@ _設定環境變數給 REST API 調用使用_
 
 <br>
 
+7. 會顯示鍵名為 `tunedModels` 的列表，這包含多個調整過的模型，每個模型都有一組詳細的屬性。
+
+    ![](images/img_70.png)
+
+<br>
+
 ## 使用腳本設置環境變數
 
 _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所運行的終端機中有效，所以此時在腳本的筆記本中運行查詢將會無效。_
@@ -418,6 +424,10 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
 
 <br>
 
+2. 結果顯示，並在資料夾中建立了一個 `tunemodel.json` 模型文件。
+
+    ![](images/img_71.png)
+
 ## 取得調整後模型的狀態
 
 1. 可以通過模型的名稱來檢查模型的狀態，使用 Python 解析 JSON 回應。
@@ -435,12 +445,20 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
     _結果_
 
     ```bash
-    tunedModels/number-generator-model-bmz78102l9t6
+    tunedModels/number-generator-model-gyw26dhike7r
     ```
 
 <br>
 
-2. 檢查模型狀態，使用 `curl` 命令。
+2. 透過指令設置模型。
+
+    ```bash
+    export modelname="tunedModels/number-generator-model-gyw26dhike7r"
+    ```
+
+<br>
+
+3. 檢查模型狀態，使用 `curl` 命令。
 
     ```bash
     curl -X GET ${base_url}/v1beta/${modelname} \
