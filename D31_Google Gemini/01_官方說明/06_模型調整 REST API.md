@@ -238,7 +238,7 @@ _設定環境變數給 REST API 調用使用_
 
 <br>
 
-2. 替換 Google Cloud 項目 ID，如此 API 會將請求發送到指定的項目中。
+2. 替換 Google Cloud 項目 ID，如此 API 會將請求發送到指定的項目中，`<project-id>` 可在 JSON 文件中找到。
 
     ```bash
     export project_id=<替換 project-id>
@@ -254,7 +254,27 @@ _設定環境變數給 REST API 調用使用_
 
 <br>
 
+4. 透過 `printenv` 或 `export -p` 指令查詢當前所有的環境變數設定。
+
+    ![](images/img_67.png)
+
+<br>
+
+5. 若要查詢指定的環境變數設定值，可在 `printenv` 指令後加入環境變數鍵名稱。
+
+    ```bash
+    printenv base_url
+    ```
+
+    ![](images/img_68.png)
+
+<br>
+
 ## 使用腳本設置環境變數
+
+_特別注意，透過 `export` 所設定的環境變數是臨時性的，在所運行的終端機中有效，所以此時在腳本的筆記本中運行查詢將會無效。_
+
+<br>
 
 1. 透過以下腳本可完成如同前述的環境變數設置。
 
@@ -281,6 +301,12 @@ _設定環境變數給 REST API 調用使用_
     print("Project ID:", os.environ['project_id'])
     print("Base URL:", os.environ['base_url'])
     ```
+
+<br>
+
+2. 可得到正確的環境變數。
+
+    ![](images/img_69.png)
 
 <br>
 
