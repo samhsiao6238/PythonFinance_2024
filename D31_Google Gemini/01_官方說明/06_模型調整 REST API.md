@@ -469,10 +469,25 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
 
 <br>
 
+4. 顯示 `ACTIVE` 表示已經正常啟動。
+
+    ![](images/img_72.png)
+
+<br>
+
+## 安裝工具
+
+1. 由於 jq 工具未安裝，建議先安裝該工具來更方便地查看和格式化 JSON 輸出。
+
+    ```bash
+    brew install jq
+    ```
+
+<br>
+
 ## 執行推論
 
-當模型調整完成後，可以使用該模型進行推論。這裡是一個例子，使用模型來生成文字：
-
+1. 當模型調整完成後，可以透過以下腳本使用模型來生成文字進行推論。
 ```bash
 curl -X POST $base_url/v1beta/$modelname:generateContent \
     -H 'Content-Type: application/json' \
