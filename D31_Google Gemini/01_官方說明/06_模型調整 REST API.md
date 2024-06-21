@@ -28,7 +28,9 @@ _使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `
 
 <br>
 
-3. 執行以下腳本，會開啟瀏覽器，選取指定的 Google 帳號，相關設定與前一小節相同，這裡不再贅述。
+## 驗證
+
+1. 執行以下腳本，會開啟瀏覽器。
 
     ```python
     import os
@@ -44,6 +46,34 @@ _使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `
     os.system(
         f"gcloud auth application-default login --client-id-file={client_secret_file} --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.tuning'"
     )
+    ```
+
+<br>
+
+2. 選取指定的 Google 帳號後，點擊 `繼續`。
+
+    ![](images/img_64.png)
+
+<br>
+
+3. 點擊 `全選` 後點擊 `繼續`。
+
+    ![](images/img_65.png)
+
+<br>
+
+4. 瀏覽器會顯示已經通過驗證，可關閉瀏覽器。
+
+    ![](images/img_66.png)
+
+<br>
+
+5. 終端機中會顯示以下訊息，其中 `Credentials` 儲存路徑。
+
+    ```bash
+    Credentials saved to file: [/Users/samhsiao/.config/gcloud/application_default_credentials.json]
+
+    These credentials will be used by any library that requests Application Default Credentials (ADC).
     ```
 
 <br>
