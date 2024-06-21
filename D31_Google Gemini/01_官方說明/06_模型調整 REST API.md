@@ -488,9 +488,12 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
 
 _以下未完_
 
+<br>
+
 ## 執行推論
 
 1. 當模型調整完成後，可以透過以下腳本使用模型來生成文字進行推論。
+
 ```bash
 curl -X POST $base_url/v1beta/$modelname:generateContent \
     -H 'Content-Type: application/json' \
@@ -504,6 +507,8 @@ curl -X POST $base_url/v1beta/$modelname:generateContent \
         }]
     }' 2> /dev/null
 ```
+
+<br>
 
 ## 檢查模型輸出
 
@@ -568,6 +573,8 @@ ability": "NEGLIGIBLE"
 }
 ```
 
+<br>
+
 ## 透過 Python 發送 REST API 請求
 
 您可以使用任何支持 HTTP 請求的庫來調用 REST API。以下是使用 Python `requests` 庫來調用 API 的例子。
@@ -586,6 +593,8 @@ access_token = '\n'.join(access_token)
 project = '[輸入您的專案 ID]'
 base_url = "https://generativelanguage.googleapis.com"
 ```
+
+<br>
 
 ## 列出調整過的模型
 
