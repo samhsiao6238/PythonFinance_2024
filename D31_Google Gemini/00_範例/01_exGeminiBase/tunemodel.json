@@ -1,8 +1,0 @@
-{
-  "name": "tunedModels/number-generator-model-bmz78102l9t6/operations/nc8fyyr251nk",
-  "metadata": {
-    "@type": "type.googleapis.com/google.ai.generativelanguage.v1beta.CreateTunedModelMetadata",
-    "totalSteps": 38,
-    "tunedModel": "tunedModels/number-generator-model-bmz78102l9t6"
-  }
-}

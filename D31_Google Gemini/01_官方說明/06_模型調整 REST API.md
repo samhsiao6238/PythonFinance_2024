@@ -233,6 +233,9 @@ _設定環境變數給 REST API 調用使用_
 1. 使用 gcloud 命令行工具來獲取 access_token，並將其設置為環境變數。
 
     ```bash
+    # 確認並更新訪問令牌
+    gcloud auth application-default print-access-token
+    # 將生成的訪問令牌設置到環境變數中
     export access_token=$(gcloud auth application-default print-access-token)
     ```
 
@@ -267,6 +270,17 @@ _設定環境變數給 REST API 調用使用_
     ```
 
     ![](images/img_68.png)
+
+<br>
+
+6. 從 `Google Cloud` 的 `Generative Language API` 獲取經過調整的模型列表，可藉此確認前面設定的正確性。
+
+    ```bash
+    curl -X GET ${base_url}/v1beta/tunedModels \
+        -H "Content-Type: application/json" \
+        -H "Authorization: Bearer ${access_token}" \
+        -H "x-goog-user-project: ${project_id}"
+    ```
 
 <br>
 
