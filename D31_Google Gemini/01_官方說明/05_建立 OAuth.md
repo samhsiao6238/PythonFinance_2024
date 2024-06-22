@@ -166,7 +166,7 @@ _使用 `gcloud` 命令進行驗證_
 
 <br>
 
-1. 進入下載的資料夾中，運行命令將 `client_secret.json 文件` 轉換為應用程式可用的憑證，以下的 `\` 是換行符號，如果在 `Colab` 上執行，擇加上 `--no-browser` 參數。
+1. 進入 `密鑰文件` 所在的資料夾中，命令運行後會將 `client_secret.json 文件` 轉換為應用程式可用的 `憑證 Credentials`：以下指令中的 `\` 是換行符號，如果在 `Colab` 上執行則在指令中加上參數 `--no-browser`。
 
     ```bash
     gcloud auth application-default login \
