@@ -229,14 +229,29 @@ _使用 `curl` 進行測試，使用指定的 `專案 ID` 訪問 `Google API`，
         -H "x-goog-user-project: ${project_id}" | grep '"name"'
     ```
 
+    ![](images/img_83.png)
+
 <br>
 
 ## Python 用戶端測試
 
-1. 安裝 Google 用戶端程式庫。
+_啟用服務並進行測試_
+
+1. 在瀏覽器中訪問 `Generative Language API` 的 [服務啟動頁面](https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=826653416557)，點擊 `啟用`。
+
+    ![](images/img_84.png)
+
+<br>
+
+2. API 下方有關於收費的資訊可以進行閱讀。
+
+    ![](images/img_85.png)
+
+<br>
+
+3. 回到終端機中，安裝 `Google 用戶端函式庫`。
 
     ```bash
-    複製程式碼
     pip install google-generativeai
     ```
 
@@ -247,7 +262,33 @@ _使用 `curl` 進行測試，使用指定的 `專案 ID` 訪問 `Google API`，
     ```python
     import google.generativeai as genai
 
-    print('Available base models:', [m.name for m in genai.list_models()])
+    print('可用的基礎模型：')
+    for m in genai.list_models():
+        print(m.name)
+    ```
+
+    _輸出_
+
+    ```bash
+    可用的基礎模型：
+    models/chat-bison-001
+    models/text-bison-001
+    models/embedding-gecko-001
+    models/gemini-1.0-pro
+    models/gemini-1.0-pro-001
+    models/gemini-1.0-pro-latest
+    models/gemini-1.0-pro-vision-latest
+    models/gemini-1.5-flash
+    models/gemini-1.5-flash-001
+    models/gemini-1.5-flash-latest
+    models/gemini-1.5-pro
+    models/gemini-1.5-pro-001
+    models/gemini-1.5-pro-latest
+    models/gemini-pro
+    models/gemini-pro-vision
+    models/embedding-001
+    models/text-embedding-004
+    models/aqa
     ```
 
 <br>
