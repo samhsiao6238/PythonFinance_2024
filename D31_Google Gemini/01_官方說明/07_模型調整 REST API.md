@@ -213,35 +213,95 @@ _以下步驟與前一個方法相同_
 
 <br>
 
+## 檢查當前設定的專案
+
+1. 檢查 gcloud 當前使用的專案，這個命令會返回當前配置的專案 ID。
+
+    ```bash
+    gcloud config get-value project
+    ```
+
+<br>
+
+2. 顯示的專案並不正確。
+
+    ![](images/img_86.png)
+
+<br>
+
+3. 切換專案。
+
+    ```bash
+    gcloud config set project myproject-20240622
+    ```
+
+<br>
+
+4. 手動指定配額專案，以確保使用的專案是正確的。
+
+    ```bash
+    gcloud auth application-default set-quota-project myproject-20240622
+    ```
+
+<br>
+
+5. 確認憑證文件。
+
+    ```bash
+    cat ~/.config/gcloud/application_default_credentials.json
+    ```
+
+<br>
+
+6. 刪除憑證文件。
+
+    ```bash
+    rm ~/.config/gcloud/application_default_credentials.json
+    ```
+
+<br>
+
+7. 重新授權。
+
+    ```bash
+    gcloud auth application-default login
+    ```
+
+<br>
+
+8. 檢查當前使用的憑證和授權狀態。
+
+    ```bash
+    gcloud auth list
+    ```
+
+<br>
+
+9. 確保在 myproject-20240622 專案中已啟用需要的 API。
+
+    ```bash
+    gcloud services enable generativelanguage.googleapis.com --project=myproject-20240622
+    ```
+
+<br>
+
 ## 返回終端機並再次授權
 
-1. 回到終端機中，會看到生成一個 `gcloud` 指令，可複製貼在終端機中運行。
+1. 回到終端機中，會看到生成一個 `gcloud` 指令，可複製貼在終端機中運行，除非使用的電腦沒有瀏覽器，否則不需要保留參數 `--no-browser`。
 
     ```bash
-    gcloud auth application-default login --no-browser
+    gcloud auth application-default login
     ```
 
 <br>
 
-2. 再次得到一個比之前自動化指令更廣泛的授權，可再次進行。
-
-    ```bash
-    gcloud auth application-default login --remote-bootstrap="https://accounts.google.com/o/oauth2/auth?response_type=code
-    
-    ...（省略中間敏感資訊）
-    
-    code_challenge_method=S256&token_usage=remote"
-    ```
-
-<br>
-
-3. 點擊 `繼續`。
+2. 會再次開啟瀏覽器，選擇所要使用的 Google 帳號，接著點擊 `繼續`。
 
     ![](images/img_74.png)
 
 <br>
 
-4. 點擊 `允許`。
+4. 接著點擊 `允許`。
 
     ![](images/img_75.png)
 
@@ -252,6 +312,8 @@ _以下步驟與前一個方法相同_
     ![](images/img_66.png)
 
 <br>
+
+6. 回到終端機中，可以看到
 
 ## 檢查驗證狀態
 
