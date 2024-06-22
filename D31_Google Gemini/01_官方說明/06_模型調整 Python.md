@@ -102,42 +102,52 @@ _以上完成安裝_
 
 1. 先查詢已經存在的配置。
 
-```bash
-gcloud config configurations list
-```
+    ```bash
+    gcloud config configurations list
+    ```
 
-![](images/img_37.png)
+    ![](images/img_37.png)
+
+<br>
 
 2. 假如要刪除本地 `IS_ACTIVE` 狀態為 `False` 的指定配置。
 
-```bash
-gcloud config configurations delete default
-```
+    ```bash
+    gcloud config configurations delete default
+    ```
 
-![](images/img_38.png)
+    ![](images/img_38.png)
+
+<br>
 
 3. 若要刪除 `IS_ACTIVE` 狀態為 `True` 的配置為 `myproject0619`，必須先切換到其他配置，但若該配置為當前唯一配置，就必須先建立一個臨時的配置如 `tempconfig`。
-```bash
-gcloud config configurations create tempconfig
-```
 
-![](images/img_39.png)
+    ```bash
+    gcloud config configurations create tempconfig
+    ```
+
+    ![](images/img_39.png)
+
+<br>
 
 4. 若有其他配置，則透過手動切換到另一個配置，並可透過指令確認切換後的狀態。
 
-```bash
-gcloud config configurations activate tempconfig
-```
-![](images/img_40.png)
+    ```bash
+    gcloud config configurations activate tempconfig
+    ```
+    ![](images/img_40.png)
+
+<br>
 
 5. 刪除指定的閒置設置。
 
-```bash
-gcloud config configurations delete myproject0619
-```
+    ```bash
+    gcloud config configurations delete myproject0619
+    ```
 
-![](images/img_41.png)
+    ![](images/img_41.png)
 
+<br>
 
 ## 初始化 Google Cloud SDK
 
