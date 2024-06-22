@@ -218,7 +218,11 @@ _以下步驟與前一個方法相同_
 1. 回到終端機中，會看到生成一個 `gcloud` 指令，其中包含比自動化指令更廣泛的授權，可再次進行。
 
     ```bash
-    gcloud auth application-default login --remote-bootstrap="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=764086051850-6qr4p6gpi6hn506pt8ejuq83di341hur.apps.googleusercontent.com&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fsqlservice.login&state=RDqj3hkP60RQsOdZ8ocIJmF39dZMgG&access_type=offline&code_challenge=0qW2hYgHkWS21A7pGzoLfquemOmggt5VOLdhw-wmeig&code_challenge_method=S256&token_usage=remote"
+    gcloud auth application-default login --remote-bootstrap="https://accounts.google.com/o/oauth2/auth?response_type=code
+    
+    ...（省略中間敏感資訊）
+    
+    code_challenge_method=S256&token_usage=remote"
     ```
 
 <br>
@@ -381,7 +385,11 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
 
     ```bash
     base_url="https://generativelanguage.googleapis.com"
-    access_token="ya29.a0AXooCgvxHiKkC8QP0ThlQP0msHrRN7qBrs0J54z3uD2RcGUIZmscyjYGWz1H9bQlOgu3UUFfvhGhhlCJcaU_L16375k6R81JS360EwPcHXLE6Uqd2QXDNRl9-3tIv3Gd6YcT7IARJ2_MKR4_CEHCJJ_y0kcJr5yXNJsWaCgYKAfkSARASFQHGX2Mi3vedmMiUtgURHee9nzyF3A0171"
+    access_token="ya29.a0AXooCgvxHiKkC8QP0T
+    
+    ...（省略中間敏感資訊）
+
+    sWaCgYKAfkSARASFQHGX2Mi3vedmMiUtgURHee9nzyF3A0171"
     project_id="gen-lang-client-0227840303"
 
     curl -X GET "${base_url}/v1beta/tunedModels" \
