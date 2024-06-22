@@ -200,7 +200,7 @@ _使用 `gcloud` 命令進行驗證_
 
 ## 使用 Curl 測試
 
-_使用 `curl` 測試是否正常運作_
+_使用 `curl` 進行測試，使用指定的 `專案 ID` 訪問 `Google API`，並正確進行 `OAuth 認證`，如此便可確認該專案已經啟用指定的 API，並可這執行相關操作。_
 
 <br>
 
@@ -209,6 +209,13 @@ _使用 `curl` 測試是否正常運作_
     ```bash
     access_token=$(gcloud auth application-default print-access-token)
     project_id=<自己的 Project ID>
+    ```
+
+    _替換後_
+    
+    ```bash
+    access_token=$(gcloud auth application-default print-access-token)
+    project_id=myproject-20240622
     ```
 
 <br>
