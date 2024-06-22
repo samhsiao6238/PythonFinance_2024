@@ -387,6 +387,7 @@ _設定環境變數給 REST API 調用使用_
 
     ```bash
     export access_token=$(gcloud auth application-default print-access-token)
+    access_token=$(gcloud auth application-default print-access-token)
     ```
 
 <br>
@@ -467,15 +468,23 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
 
 ## 獲取模型資訊
 
-1. 若有授權問題，可再次執行 `OAuth 2.0 授權流程` 來獲取 `access_toke`。
+1. 若有授權問題，可再次執行 `OAuth 2.0 授權流程` 來獲取 `access_toke`，以下指令透過參數 `--scopes` 指定了 `授權範圍`。
 
     ```bash
-    gcloud auth application-default login
+    gcloud auth application-default login --client-id-file=client_secret.json --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.tuning'
     ```
 
 <br>
 
-2. 從 `Google Cloud` 的 `Generative Language API` 獲取經過調整的模型列表，可藉此確認前面設定的正確性。
+2. 取得令牌。
+
+    ```bash
+    access_token=$(gcloud auth application-default print-access-token)
+    ```
+
+<br>
+
+3. 從 `Google Cloud` 的 `Generative Language API` 獲取經過調整的模型列表，可藉此確認前面設定的正確性。
 
     ```bash
     curl -X GET ${base_url}/v1beta/tunedModels \
@@ -494,15 +503,15 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
 
 ## 列出調整過的模型
 
+_彙整一下上述步驟的筆記_
+
+<br>
+
 1. 列出當前可用的調整模型，驗證您的認證設置。
 
     ```bash
     base_url="https://generativelanguage.googleapis.com"
-    access_token="ya29.a0AXooCgvxHiKkC8QP0T
-    
-    ...（省略中間敏感資訊）
-
-    sWaCgYKAfkSARASFQHGX2Mi3vedmMiUtgURHee9nzyF3A0171"
+    access_token=$(gcloud auth application-default print-access-token)
     project_id="gen-lang-client-0227840303"
 
     curl -X GET "${base_url}/v1beta/tunedModels" \
@@ -510,6 +519,12 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
         -H "Authorization: Bearer ${access_token}" \
         -H "x-goog-user-project: ${project_id}"
     ```
+
+<br>
+
+2. 這時模型列表可能是空的。
+
+    ![](images/img_95.png)
 
 <br>
 
@@ -619,6 +634,8 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
 2. 透過指令設置模型。
 
     ```bash
+    export modelname="<替換前一步驟輸出的模型>"
+    # 在本範例中
     export modelname="tunedModels/number-generator-model-gyw26dhike7r"
     ```
 
@@ -635,7 +652,7 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
 
 <br>
 
-4. 顯示 `ACTIVE` 表示已經正常啟動。
+4. 顯示 `ACTIVE` 表示已經正常啟動，若未顯示，可確認模型名稱是否設置正確。
 
     ![](images/img_72.png)
 
