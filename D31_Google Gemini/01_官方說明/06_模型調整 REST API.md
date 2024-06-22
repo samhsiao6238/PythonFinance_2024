@@ -352,7 +352,13 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
 
 ## 獲取模型資訊
 
-1. 從 `Google Cloud` 的 `Generative Language API` 獲取經過調整的模型列表，可藉此確認前面設定的正確性。
+1. 若有授權問題，可再次執行 `OAuth 2.0 授權流程` 來獲取 `access_toke`。
+
+    ```bash
+    gcloud auth application-default login
+    ```
+
+2. 從 `Google Cloud` 的 `Generative Language API` 獲取經過調整的模型列表，可藉此確認前面設定的正確性。
 
     ```bash
     curl -X GET ${base_url}/v1beta/tunedModels \

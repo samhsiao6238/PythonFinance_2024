@@ -1,8 +1,7 @@
 {
-  "name": "tunedModels/number-generator-model-gyw26dhike7r/operations/9n2gz6t8h91w",
-  "metadata": {
-    "@type": "type.googleapis.com/google.ai.generativelanguage.v1beta.CreateTunedModelMetadata",
-    "totalSteps": 38,
-    "tunedModel": "tunedModels/number-generator-model-gyw26dhike7r"
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
   }
 }
