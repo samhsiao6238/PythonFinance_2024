@@ -179,7 +179,7 @@ _使用 `curl 指令` 或 `Python 代碼` 調整 `Gemini API` 的 `文字生成�
 
 <br>
 
-3. 在終端機中運行，會顯示安全提示，輸入 `Y`。
+1. 複製上一個步驟輸出的指令做全選複製，再貼到終端機中運行，會顯示安全提示，輸入 `Y`。
 
     ![](images/img_53.png)
 
@@ -215,7 +215,7 @@ _以下步驟與前一個方法相同_
 
 ## 返回終端機並再次授權
 
-1. 回到終端機中，會看到生成一個 `gcloud` 指令，可複製貼上在終端機中運行。
+1. 回到終端機中，會看到生成一個 `gcloud` 指令，可複製貼在終端機中運行。
 
     ```bash
     gcloud auth application-default login --no-browser
@@ -223,7 +223,7 @@ _以下步驟與前一個方法相同_
 
 <br>
 
-1. 再次得到一個比之前自動化指令更廣泛的授權，可再次進行。
+2. 再次得到一個比之前自動化指令更廣泛的授權，可再次進行。
 
     ```bash
     gcloud auth application-default login --remote-bootstrap="https://accounts.google.com/o/oauth2/auth?response_type=code
@@ -235,19 +235,19 @@ _以下步驟與前一個方法相同_
 
 <br>
 
-2. 點擊 `繼續`。
+3. 點擊 `繼續`。
 
     ![](images/img_74.png)
 
 <br>
 
-3. 點擊 `允許`。
+4. 點擊 `允許`。
 
     ![](images/img_75.png)
 
 <br>
 
-4. 瀏覽器會顯示已經通過驗證，可關閉瀏覽器。
+5. 瀏覽器會顯示已經通過驗證，可關閉瀏覽器。
 
     ![](images/img_66.png)
 
