@@ -1,6 +1,6 @@
 # OAuth
 
-_官方說明_
+_可參考 [官方說明](https://ai.google.dev/gemini-api/docs/oauth?hl=zh-tw)_
 
 ![](images/img_76.png)
 
