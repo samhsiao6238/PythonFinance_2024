@@ -8,7 +8,7 @@ _可參考 [官方說明](https://ai.google.dev/gemini-api/docs/oauth?hl=zh-tw)_
 
 ## 創建 OAuth 憑證
 
-1. 進行 `模型調整` 時，僅有 `API Key` 是不夠的，因為 `模型調整` 涉及的 `敏感數據` 和高級操作，需要更高級別的 `安全性權限` 管理，所以進行 `OAuth 驗證`，。
+1. 進行 `模型調整` 時，僅有 `API Key` 是不夠的，因為 `模型調整` 涉及的 `敏感數據` 和高級操作，需要更高級別的 `安全性權限` 管理，所以進行 `OAuth 驗證`。
 
 <br>
 
@@ -26,7 +26,7 @@ _可參考 [官方說明](https://ai.google.dev/gemini-api/docs/oauth?hl=zh-tw)_
 
 ## 新增專案
 
-1. 點擊 `新增專案` 後，輸入 `專案名稱`，接著點擊 `建立`。
+1. 點擊 [新增專案](https://developers.google.com/workspace/guides/create-project?hl=zh-tw) 後，輸入 `專案名稱`，接著點擊 `建立`。
 
     ![](images/img_78.png)
 
@@ -38,7 +38,11 @@ _可參考 [官方說明](https://ai.google.dev/gemini-api/docs/oauth?hl=zh-tw)_
 
 <br>
 
-3. 回到 `憑證` 畫面後，務必選取正確的專案再進行後續步驟。
+3. 接著在 Google Cloud 專案中 [啟用 Google Generative Language API](https://console.cloud.google.com/apis/enableflow?apiid=generativelanguage.googleapis.com&hl=zh-tw&project=myproject-20240622)。
+
+<br>
+
+4. 回到 `憑證` 畫面後，務必選取正確的專案再進行後續步驟。
 
     ![](images/img_80.png)
 
@@ -112,7 +116,7 @@ _可參考 [官方說明](https://ai.google.dev/gemini-api/docs/oauth?hl=zh-tw)_
 
 ## 回到憑證頁籤
 
-_完成前一個步驟時會在 `OAuth 同意畫面` 頁籤_
+_完成前一個步驟時會在 [OAuth 同意畫面](https://console.cloud.google.com/apis/credentials/consent?hl=zh-tw&project=myproject-20240622) 頁籤_
 
 <br>
 
