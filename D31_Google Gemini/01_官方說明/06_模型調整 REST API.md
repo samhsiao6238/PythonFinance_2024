@@ -1,22 +1,26 @@
 # REST API 模型調整
 
-_使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `文字生成模型`。_
+_參考 [官方說明](https://ai.google.dev/gemini-api/docs/model-tuning/rest?hl=zh-tw)_
+
+![](images/img_73.png)
+
+_使用 `curl 指令` 或 `Python 代碼` 調整 `Gemini API` 的 `文字生成模型`。_
 
 <br>
 
 ## 說明
 
-1. 前一小節是使用 `Python 客戶端 SDK` 來進行模型調整，驗證方式是 `OAuth 認證`，整合了大部分功能，可以進行全面的操作。
+1. 前一小節是使用 `Python 客戶端 SDK` 來進行模型調整，接下來將使用 `REST API` 和 `curl` 指令進行模型調整，依據服務的規定同樣須為專案設定 `OAuth`，模型部分同樣是使用 `gemini-1.0-pro-001`，因為這是目前僅有提供調整功能的模型。
 
 <br>
 
-2. 接下來將使用 `REST API` 和 `curl` 指令進行模型調整，驗證方式將使用 `gcloud` 和 `REST API` 進行身份驗證，支持 `Python` 的環境中也可以使用，適合對具體功能的精細控制，例如直接構建 HTTP 請求。
+2. 設定了 `OAuth` 後將使用 `gcloud` 和 `REST API` 進行身份驗證，同時也支持 `Python` 代碼進行。
 
 <br>
 
 ## 設定和驗證
 
-1. `Gemini API` 允許基於自己的數據來調整模型，由於這涉及到您的數據和經過調整的模型，因此需要更嚴格的存取控制，以下示範使用 `gcloud 指令` 將 `client_secret.json` 文件轉換為可用來驗證的憑證。
+1. `Gemini API` 可基於自己的數據來調整模型，由於這涉及個人的資料，因此 `存取權控管機制` 比 `API 金鑰` 更嚴格，關於 `OAuth` 設定可以參考 [官方說明](https://ai.google.dev/gemini-api/docs/oauth?hl=zh-tw) 或前一小節筆記；以下筆記中會使用 `gcloud 指令` 將 `client_secret.json` 文件轉換為可用來驗證的憑證。
 
 <br>
 
@@ -30,7 +34,7 @@ _使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `
 
 ## 通過 Google Cloud 進行驗證
 
-1. 執行以下腳本，會開啟瀏覽器。
+1. 執行以下腳本，會自動開啟瀏覽器進入驗證程序。
 
     ```python
     import os
@@ -50,13 +54,13 @@ _使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `
 
 <br>
 
-2. 選取指定的 Google 帳號後，點擊 `繼續`。
+2. 指定的 Google 帳號後（此處跳過這個畫面），顯示以下畫面後，點擊 `繼續`。
 
     ![](images/img_64.png)
 
 <br>
 
-3. 點擊 `全選` 後點擊 `繼續`。
+3. 在 `存取的範圍` 中選擇 `全選`，接著點擊 `繼續`。
 
     ![](images/img_65.png)
 
@@ -68,7 +72,7 @@ _使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `
 
 <br>
 
-5. 終端機中會顯示以下訊息，其中 `Credentials` 儲存路徑。
+5. 終端機中會顯示以下訊息，其中 `Credentials` 在本機上的儲存路徑。
 
     ```bash
     Credentials saved to file: [/Users/samhsiao/.config/gcloud/application_default_credentials.json]
@@ -78,23 +82,26 @@ _使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `
 
 <br>
 
-6. 可在終端機中進行檢查。
+6. 可在終端機中查看路徑中的 `Credentials` 文件。
 
     ```bash
+    # 查看檔案是否存在
     ls ~/.config/gcloud/application_default_credentials.json
+    # 查看文件內容
+    cat ~/.config/gcloud/application_default_credentials.json
     ```
 
 <br>
 
-## 透過自動化腳本進行驗證
-
-1. 查看 `client_secret.json` 文件，其中的 `client_id` 會使用在後續指令中。
+7. 可確認憑證與已儲存的 `client_secret.json` 文件內容是一致的。
 
     ![](images/img_51.png)
 
 <br>
 
-2. 以下是一個自動化 Python 腳本，根據 `client_secret.json` 文件產生用於 `OAuth 認證`的 `gcloud 指令`。腳本中會自動產生 `code_verifier` 和 `code_challenge`，並插入到 `gcloud` 命令中。
+## 透過自動化腳本進行驗證
+
+1. 以下是一個自動化 Python 腳本，根據 `client_secret.json` 文件產生用於 `OAuth 認證` 的 `gcloud 指令`；該腳本會自動產生 `code_verifier` 和 `code_challenge`，並插入到 `gcloud` 命令中。
 
     ```python
     import base64
@@ -160,7 +167,7 @@ _使用 `curl 指令` 或 `Python request` 說明如何調整 `Gemini API` 的 `
     )
 
     # 輸出 gcloud 命令
-    print("Generated gcloud command:")
+    # print("Generated gcloud command:")
     print(gcloud_command)
     ```
 
@@ -201,6 +208,34 @@ _以下步驟與前一個方法相同_
 <br>
 
 8. 瀏覽器會顯示已經通過驗證，可關閉瀏覽器。
+
+    ![](images/img_66.png)
+
+<br>
+
+## 返回終端機並再次授權
+
+1. 回到終端機中，會看到生成一個 `gcloud` 指令，其中包含比自動化指令更廣泛的授權，可再次進行。
+
+    ```bash
+    gcloud auth application-default login --remote-bootstrap="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=764086051850-6qr4p6gpi6hn506pt8ejuq83di341hur.apps.googleusercontent.com&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fsqlservice.login&state=RDqj3hkP60RQsOdZ8ocIJmF39dZMgG&access_type=offline&code_challenge=0qW2hYgHkWS21A7pGzoLfquemOmggt5VOLdhw-wmeig&code_challenge_method=S256&token_usage=remote"
+    ```
+
+<br>
+
+2. 點擊 `繼續`。
+
+    ![](images/img_74.png)
+
+<br>
+
+3. 點擊 `允許`。
+
+    ![](images/img_75.png)
+
+<br>
+
+4. 瀏覽器會顯示已經通過驗證，可關閉瀏覽器。
 
     ![](images/img_66.png)
 
