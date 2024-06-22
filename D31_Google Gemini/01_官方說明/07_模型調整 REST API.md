@@ -18,6 +18,10 @@ _使用 `curl 指令` 或 `Python 代碼` 調整 `Gemini API` 的 `文字生成�
 
 <br>
 
+3. 調整模型可根據不同需求進行個設計以增強模型在特定任務上的表現，無論是使用 `curl` 或 `Python` 都可以進行模型調整和推論。
+
+<br>
+
 ## 設定和驗證
 
 1. `Gemini API` 可基於自己的數據來調整模型，由於這涉及個人的資料，因此 `存取權控管機制` 比 `API 金鑰` 更嚴格，關於 `OAuth` 設定可以參考 [官方說明](https://ai.google.dev/gemini-api/docs/oauth?hl=zh-tw) 或前一小節筆記；以下筆記中會使用 `gcloud 指令` 將 `client_secret.json` 文件轉換為可用來驗證的憑證。
@@ -668,248 +672,395 @@ _彙整一下上述步驟的筆記_
 
 <br>
 
+## 確認設定
 
-_以下未完_
+1. 驗證環境變數。
+
+    ```bash
+    echo $base_url
+    echo $modelname
+    echo $access_token
+    echo $project_id
+    ```
+
+<br>
+
+2. 確認 `API` 的可訪問性。
+
+    ```bash
+    curl -X GET $base_url/v1beta/$modelname \
+        -H "Authorization: Bearer ${access_token}" \
+        -H "x-goog-user-project: ${project_id}"
+    ```
 
 <br>
 
 ## 執行推論
 
-1. 當模型調整完成後，可以透過以下腳本使用模型來生成文字進行推論。
-
-```bash
-curl -X POST $base_url/v1beta/$modelname:generateContent \
-    -H 'Content-Type: application/json' \
-    -H "Authorization: Bearer ${access_token}" \
-    -H "x-goog-user-project: ${project_id}" \
-    -d '{
-        "contents": [{
-        "parts": [{
-            "text": "LXIII"
-            }]
-        }]
-    }' 2> /dev/null
-```
+_未調整的模型_
 
 <br>
 
-## 檢查模型輸出
+1. 可先測試原本模型。
 
-檢查生成的文字，並解析回應內容：
+    ```bash
+    modelname="models/gemini-1.0-pro-001"
+    ```
 
-```json
-{
-  "candidates": [
+<br>
+
+2. 使用模型來生成文字進行推論。
+
+    ```bash
+    curl -X POST "${base_url}/v1beta/${modelname}:generateContent" \
+        -H 'Content-Type: application/json' \
+        -H "Authorization: Bearer ${access_token}" \
+        -H "x-goog-user-project: ${project_id}" \
+        -d '{
+            "contents": [{
+                "parts": [{
+                    "text": "LXIII"
+                }]
+            }]
+        }' 2> /dev/null
+    ```
+
+<br>
+
+3. 結果。
+
+    ![](images/img_96.png)
+
+<br>
+
+## 調整後模型
+
+1. 更換模型，這個模型依據 Python 腳本讀取 `tunemodel.json` 所輸出。
+
+    ```bash
+    modelname="tunedModels/number-generator-model-rmr2mn49025s"
+    ```
+
+<br>
+
+2. 進行推論。
+
+    ```bash
+    curl -X POST "${base_url}/v1beta/${modelname}:generateContent" \
+        -H 'Content-Type: application/json' \
+        -H "Authorization: Bearer ${access_token}" \
+        -H "x-goog-user-project: ${project_id}" \
+        -d '{
+            "contents": [{
+                "parts": [{
+                    "text": "LXIII"
+                }]
+            }]
+        }' 2> /dev/null
+    ```
+
+<br>
+
+3. 得到回應。
+
+    ```json
     {
-      "content": {
-        "parts": [
-          {
-            "text": "LXIV"
-          }
+        "candidates": [
+            {
+            "content": {
+                "parts": [
+                {
+                    "text": "LXIV"
+                }
+                ],
+                "role": "model"
+            },
+            "finishReason": "STOP",
+            "index": 0,
+            "safetyRatings": [
+                {
+                "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                "probability": "NEGLIGIBLE"
+                },
+                {
+                "category": "HARM_CATEGORY_HATE_SPEECH",
+                "probability": "NEGLIGIBLE"
+                },
+                {
+                "category": "HARM_CATEGORY_HARASSMENT",
+                "probability": "NEGLIGIBLE"
+                },
+                {
+                "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                "probability": "NEGLIGIBLE"
+                }
+            ]
+            }
         ],
-        "role": "model"
-      },
-      "finishReason": "STOP",
-      "index": 0,
-      "safetyRatings": [
-        {
-          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-          "probability": "NEGLIGIBLE"
-        },
-        {
-          "category": "HARM_CATEGORY_HATE_SPEECH",
-          "probability": "NEGLIGIBLE"
-        },
-        {
-          "category": "HARM_CATEGORY_HARASSMENT",
-          "probability": "LOW"
-        },
-        {
-          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-          "probability": "NEGLIGIBLE"
+        "usageMetadata": {
+            "promptTokenCount": 2,
+            "candidatesTokenCount": 2,
+            "totalTokenCount": 4
         }
-      ]
     }
-  ],
-  "promptFeedback": {
-    "safetyRatings": [
-      {
-        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-        "probability": "NEGLIGIBLE"
-      },
-      {
-        "category": "HARM_CATEGORY_HATE_SPEECH",
-        "prob
-
-ability": "NEGLIGIBLE"
-      },
-      {
-        "category": "HARM_CATEGORY_HARASSMENT",
-        "probability": "NEGLIGIBLE"
-      },
-      {
-        "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-        "probability": "NEGLIGIBLE"
-      }
-    ]
-  }
-}
-```
+    ```
 
 <br>
 
 ## 透過 Python 發送 REST API 請求
 
-您可以使用任何支持 HTTP 請求的庫來調用 REST API。以下是使用 Python `requests` 庫來調用 API 的例子。
-
-## 設定變數
-
-首先設置變數：
-
-```python
-import requests
-import json
-
-access_token = !gcloud auth application-default print-access-token
-access_token = '\n'.join(access_token)
-
-project = '[輸入您的專案 ID]'
-base_url = "https://generativelanguage.googleapis.com"
-```
+_可使用任何支持 HTTP 請求的庫來調用 REST API，以下使用 `requests` 來調用 API。_
 
 <br>
 
-## 列出調整過的模型
+1. 首先設置變數。
 
-列出當前可用的調整模型，驗證您的認證設置：
+    ```python
+    import requests
+    import json
 
-```python
-headers = {
-    'Authorization': 'Bearer ' + access_token,
-    'Content-Type': 'application/json',
-    'x-goog-user-project': project
-}
+    access_token = !gcloud auth application-default print-access-token
+    access_token = '\n'.join(access_token)
 
-result = requests.get(
-    url=f'{base_url}/v1beta/tunedModels',
-    headers=headers,
-)
+    project = '<專案 ID>'
+    base_url = "https://generativelanguage.googleapis.com"
+    ```
 
-print(result.json())
-```
+<br>
 
-## 建立經過調整的模型
+2. 列出當前可用的調整模型，驗證認證設置。
 
-與 curl 範例相同，使用 `requests.post` 來傳入數據集：
-
-```python
-operation = requests.post(
-    url=f'{base_url}/v1beta/tunedModels',
-    headers=headers,
-    json={
-        "display_name": "number generator",
-        "base_model": "models/gemini-1.0-pro-001",
-        "tuning_task": {
-            "hyperparameters": {
-                "batch_size": 4,
-                "learning_rate": 0.001,
-                "epoch_count": 5
-            },
-            "training_data": {
-                "examples": [
-                    {"text_input": "1", "output": "2"},
-                    {"text_input": "3", "output": "4"},
-                    {"text_input": "-3", "output": "-2"},
-                    {"text_input": "twenty two", "output": "twenty three"},
-                    {"text_input": "two hundred", "output": "two hundred one"},
-                    {"text_input": "ninety nine", "output": "one hundred"},
-                    {"text_input": "8", "output": "9"},
-                    {"text_input": "-98", "output": "-97"},
-                    {"text_input": "1,000", "output": "1,001"},
-                    {"text_input": "10,100,000", "output": "10,100,001"},
-                    {"text_input": "thirteen", "output": "fourteen"},
-                    {"text_input": "eighty", "output": "eighty one"},
-                    {"text_input": "one", "output": "two"},
-                    {"text_input": "three", "output": "four"},
-                    {"text_input": "seven", "output": "eight"}
-                ]
-            }
-        }
+    ```python
+    headers = {
+        'Authorization': 'Bearer ' + access_token,
+        'Content-Type': 'application/json',
+        'x-goog-user-project': project
     }
-)
 
-print(operation.json())
-```
-
-## 取得調整後模型的狀態
-
-使用調整後的模型名稱來檢查模型的狀態：
-
-```python
-name = operation.json()["metadata"]["tunedModel"]
-
-tuned_model = requests.get(
-    url=f'{base_url}/v1beta/{name}',
-    headers=headers,
-)
-
-print(tuned_model.json())
-```
-
-以下是每 5 秒檢查一次狀態，直到狀態不再是 `CREATING` 為止：
-
-```python
-import time
-
-op_json = operation.json()
-response = op_json.get('response')
-error = op_json.get('error')
-
-while response is None and error is None:
-    time.sleep(5)
-    
-    operation = requests.get(
-        url=f'{base_url}/v1/{op_json["name"]}',
+    result = requests.get(
+        url=f'{base_url}/v1beta/tunedModels',
         headers=headers,
     )
+
+    print(result.json())
+    ```
+
+    _結果_
+
+    ```json
+    {
+        "tunedModels": [
+            {
+            "name": "tunedModels/number-generator-model-qw2t2pyfzld1",
+            "baseModel": "models/gemini-1.0-pro-001",
+            "displayName": "number generator model",
+            "state": "ACTIVE",
+            "createTime": "2024-06-22T18:06:02.455154Z",
+            "updateTime": "2024-06-22T18:06:25.523912Z",
+            "tuningTask": {
+                "startTime": "2024-06-22T18:06:02.997496412Z",
+                "completeTime": "2024-06-22T18:06:25.523912Z",
+                "snapshots": [
+                {
+                    "step": 1,
+                    "meanLoss": 11.499258,
+                    "computeTime": "2024-06-22T18:06:04.430337734Z"
+                },
+                {
+                    "step": 2,
+                    "meanLoss": 13.731144,
+                    "computeTime": "2024-06-22T18:06:04.890239450Z"
+                },
+                # ... 中間省略
+                {
+                    "step": 37,
+                    "epoch": 4,
+                    "meanLoss": 0.17460826,
+                    "computeTime": "2024-06-22T18:25:46.157919909Z"
+                },
+                {
+                    "step": 38,
+                    "epoch": 5,
+                    "meanLoss": 0.001868438,
+                    "computeTime": "2024-06-22T18:25:46.628221975Z"
+                }
+                ],
+                "hyperparameters": {
+                "epochCount": 5,
+                "batchSize": 2,
+                "learningRate": 0.001
+                }
+            },
+            "temperature": 0.9,
+            "topP": 1,
+            "topK": 0
+            }
+        ]
+    }
+    ```
+
+<br>
+
+3. 使用 `requests.post` 來傳入數據集。
+
+    ```python
+    operation = requests.post(
+        url=f'{base_url}/v1beta/tunedModels',
+        headers=headers,
+        json={
+            "display_name": "number generator",
+            "base_model": "models/gemini-1.0-pro-001",
+            "tuning_task": {
+                "hyperparameters": {
+                    "batch_size": 4,
+                    "learning_rate": 0.001,
+                    "epoch_count": 5
+                },
+                "training_data": {
+                    "examples": [
+                        {"text_input": "1", "output": "2"},
+                        {"text_input": "3", "output": "4"},
+                        {"text_input": "-3", "output": "-2"},
+                        {"text_input": "twenty two", "output": "twenty three"},
+                        {"text_input": "two hundred", "output": "two hundred one"},
+                        {"text_input": "ninety nine", "output": "one hundred"},
+                        {"text_input": "8", "output": "9"},
+                        {"text_input": "-98", "output": "-97"},
+                        {"text_input": "1,000", "output": "1,001"},
+                        {"text_input": "10,100,000", "output": "10,100,001"},
+                        {"text_input": "thirteen", "output": "fourteen"},
+                        {"text_input": "eighty", "output": "eighty one"},
+                        {"text_input": "one", "output": "two"},
+                        {"text_input": "three", "output": "four"},
+                        {"text_input": "seven", "output": "eight"}
+                    ]
+                }
+            }
+        }
+    )
+
+    print(operation.json())
+    ```
+
+<br>
+
+4. 使用調整後的模型名稱來檢查模型的狀態。
+
+    ```python
+    model_name = operation.json()["metadata"]["tunedModel"]
+
+    tuned_model = requests.get(
+        url=f'{base_url}/v1beta/{model_name}',
+        headers=headers,
+    )
+
+    print(tuned_model.json())
+    ```
+
+<br>
+
+5. 每 5 秒檢查一次狀態，直到狀態不再是 `CREATING` 為止。
+
+    ```python
+    import time
 
     op_json = operation.json()
     response = op_json.get('response')
     error = op_json.get('error')
 
-    percent = op_json['metadata'].get('completedPercent')
-    if percent is not None:
-        print(f"{percent:.2f}% - {op_json['metadata']['snapshots'][-1]}")
-        print()
+    while response is None and error is None:
+        time.sleep(5)
+        
+        operation = requests.get(
+            url=f'{base_url}/v1/{op_json["name"]}',
+            headers=headers,
+        )
 
-if error is not None:
-    raise Exception(error)
-```
+        op_json = operation.json()
+        response = op_json.get('response')
+        error = op_json.get('error')
+
+        percent = op_json['metadata'].get('completedPercent')
+        if percent is not None:
+            print(f"{percent:.2f}% - {op_json['metadata']['snapshots'][-1]}")
+            print()
+
+    if error is not None:
+        raise Exception(error)
+    ```
+
+    _輸出_
+
+    ```bash
+    100.00% - 
+    {
+        'step': 19,
+        'epoch': 5,
+        'meanLoss': 0.9600375,
+        'computeTime': '2024-06-22T19:17:17.506261066Z'
+    }
+    ```
+
+<br>
 
 ## 執行推論
 
-使用調整後的模型進行推論，這裡是使用日文數字進行測試的例子：
+1. 使用 `調整後的模型` 進行推論，這裡是使用中文國字數字進行測試的例子。
 
-```python
-m = requests.post(
-    url=f'{base_url}/v1beta/{name}:generateContent',
-    headers=headers,
-    json={
-        "contents": [{
-            "parts": [{
-                "text": "六"
+    ```python
+    m = requests.post(
+        url=f'{base_url}/v1beta/{name}:generateContent',
+        headers=headers,
+        json={
+            "contents": [{
+                "parts": [{
+                    "text": "六"
+                }]
             }]
-        }]
+        }
+    )
+
+    print(m.json())
+    ```
+
+    _結果_
+
+    ```json
+    {
+        "candidates":[{
+                "content": {
+                    "parts": [{"text": "七"}], "role": "model"},
+                    "finishReason": "STOP",
+                    "index": 0,
+                    "safetyRatings": [
+                        {
+                            "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                            "probability": "NEGLIGIBLE"
+                        },
+                        {
+                            "category": "HARM_CATEGORY_HATE_SPEECH",
+                            "probability": "NEGLIGIBLE"
+                        },
+                        {
+                            "category": "HARM_CATEGORY_HARASSMENT",
+                            "probability": "NEGLIGIBLE"
+                        },
+                        {
+                            "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                            "probability": "NEGLIGIBLE"
+                        }
+                    ]
+        }],
+        "usageMetadata": {
+            "candidatesTokenCount": 1,
+            "promptTokenCount": 1,
+            "totalTokenCount": 2
+        }
     }
-)
+    ```
 
-print(m.json())
-```
+<br>
 
-## 結論
+___
 
-調整模型可以根據不同需求進行個性化設計，增強模型在特定任務上的表現。無論是使用 curl 還是 Python，都可以方便地進行模型調整和推論。
-
-## 後續步驟
-
-如果您想進一步瞭解如何使用 Gemini API 的 Python SDK 進行調整，請參閱相關的快速入門導覽。
+_END_
