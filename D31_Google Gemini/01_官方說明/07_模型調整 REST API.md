@@ -223,13 +223,13 @@ _以下步驟與前一個方法相同_
 
 <br>
 
-2. 顯示的專案並不正確。
+2. 假如顯示的專案並不正確。
 
     ![](images/img_86.png)
 
 <br>
 
-3. 切換專案。
+3. 透過指令切換專案。
 
     ```bash
     gcloud config set project myproject-20240622
@@ -237,7 +237,25 @@ _以下步驟與前一個方法相同_
 
 <br>
 
-4. 手動指定配額專案，以確保使用的專案是正確的。
+4. 再次檢查，其中 `[myproject0621]` 是 `當前 gcloud CLI 使用的配置名稱`，而 `myproject-20240622` 是 `Google Cloud 專案 ID`。
+
+    ![](images/img_87.png)
+
+<br>
+
+5. 查看所有的 gcloud 配置。
+
+    ```bash
+    gcloud config configurations list
+    ```
+
+    ![](images/img_88.png)
+
+<br>
+
+## 設定配額
+
+1. 手動指定配額專案，以確保使用的專案是正確的。
 
     ```bash
     gcloud auth application-default set-quota-project myproject-20240622
@@ -245,15 +263,23 @@ _以下步驟與前一個方法相同_
 
 <br>
 
-5. 確認憑證文件。
+2. 顯示專案 `[myproject-20240622]` 未啟用 `API [cloudresourcemanager.googleapis.com]`，輸入 `Y` 啟用。
+
+    ![](images/img_89.png)
+
+<br>
+
+3. 確認 `憑證 Credentials` 文件中的專案 ID 無誤。
 
     ```bash
     cat ~/.config/gcloud/application_default_credentials.json
     ```
 
+    ![](images/img_90.png)
+
 <br>
 
-6. 刪除憑證文件。
+6. 若要刪除憑證文件進行重設，可透過 `rm` 指令。
 
     ```bash
     rm ~/.config/gcloud/application_default_credentials.json
@@ -261,7 +287,7 @@ _以下步驟與前一個方法相同_
 
 <br>
 
-7. 重新授權。
+7. 重新授權後可再次查看。
 
     ```bash
     gcloud auth application-default login
@@ -275,9 +301,11 @@ _以下步驟與前一個方法相同_
     gcloud auth list
     ```
 
+    ![](images/img_91.png)
+
 <br>
 
-9. 確保在 myproject-20240622 專案中已啟用需要的 API。
+9. 確保在 `myproject-20240622` 專案中已啟用需要的 API。
 
     ```bash
     gcloud services enable generativelanguage.googleapis.com --project=myproject-20240622
@@ -313,11 +341,21 @@ _以下步驟與前一個方法相同_
 
 <br>
 
-6. 回到終端機中，可以看到
+6. 回到終端機中，可以看到幾項資訊，包含憑證儲存位置、憑證可應用被請求、配額專案已新增至 `ADC` 等。
+
+    ```bash
+    Credentials saved to file: [/Users/samhsiao/.config/gcloud/application_default_credentials.json]
+
+    These credentials will be used by any library that requests Application Default Credentials (ADC).
+
+    Quota project "myproject-20240622" was added to ADC which can be used by Google client libraries for billing and quota. Note that some services may still bill the project owning the resource.
+    ```
+
+<br>
 
 ## 檢查驗證狀態
 
-1. 完成後執行指令確認完成認證並獲得 `令牌 access token`，可用於訪問 Google Cloud 服務與資源。
+1. 完成後，執行指令確認完成認證，並獲得可用於訪問 Google Cloud 服務與資源的 `令牌 access token`。
 
     ```bash
     gcloud auth application-default print-access-token
@@ -325,10 +363,10 @@ _以下步驟與前一個方法相同_
 
 <br>
 
-2. 憑證會被保存到 `~/.config/gcloud/application_default_credentials.json`，可進行查看。
+2. 同樣可查看憑證。
 
     ```bash
-    ls ~/.config/gcloud/application_default_credentials.json
+    cat ~/.config/gcloud/application_default_credentials.json
     ```
 
 <br>
@@ -339,12 +377,9 @@ _設定環境變數給 REST API 調用使用_
 
 <br>
 
-1. 使用 gcloud 命令行工具來獲取 access_token，並將其設置為環境變數。
+1. 將 `access_token` 設置為環境變數。
 
     ```bash
-    # 確認並更新訪問令牌
-    gcloud auth application-default print-access-token
-    # 將生成的訪問令牌設置到環境變數中
     export access_token=$(gcloud auth application-default print-access-token)
     ```
 
@@ -355,7 +390,7 @@ _設定環境變數給 REST API 調用使用_
     ```bash
     export project_id=<替換 project-id>
     # 在本範例中是
-    export project_id=gen-lang-client-0227840303
+    export project_id=myproject-20240622
     ```
 
 <br>
