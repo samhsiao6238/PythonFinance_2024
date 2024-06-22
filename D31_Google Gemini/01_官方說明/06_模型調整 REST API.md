@@ -280,6 +280,8 @@ _設定環境變數給 REST API 調用使用_
 
     ```bash
     export project_id=<替換 project-id>
+    # 在本範例中是
+    export project_id=gen-lang-client-0227840303
     ```
 
 <br>
@@ -305,23 +307,6 @@ _設定環境變數給 REST API 調用使用_
     ```
 
     ![](images/img_68.png)
-
-<br>
-
-6. 從 `Google Cloud` 的 `Generative Language API` 獲取經過調整的模型列表，可藉此確認前面設定的正確性。
-
-    ```bash
-    curl -X GET ${base_url}/v1beta/tunedModels \
-        -H "Content-Type: application/json" \
-        -H "Authorization: Bearer ${access_token}" \
-        -H "x-goog-user-project: ${project_id}"
-    ```
-
-<br>
-
-7. 會顯示鍵名為 `tunedModels` 的列表，這包含多個調整過的模型，每個模型都有一組詳細的屬性。
-
-    ![](images/img_70.png)
 
 <br>
 
@@ -362,6 +347,25 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
 2. 可得到正確的環境變數。
 
     ![](images/img_69.png)
+
+<br>
+
+## 獲取模型資訊
+
+1. 從 `Google Cloud` 的 `Generative Language API` 獲取經過調整的模型列表，可藉此確認前面設定的正確性。
+
+    ```bash
+    curl -X GET ${base_url}/v1beta/tunedModels \
+        -H "Content-Type: application/json" \
+        -H "Authorization: Bearer ${access_token}" \
+        -H "x-goog-user-project: ${project_id}"
+    ```
+
+<br>
+
+2. 會顯示鍵名為 `tunedModels` 的列表，這包含多個調整過的模型，每個模型都有一組詳細的屬性。
+
+    ![](images/img_70.png)
 
 <br>
 
