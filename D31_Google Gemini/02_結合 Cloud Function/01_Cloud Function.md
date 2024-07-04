@@ -90,7 +90,15 @@ _可使用 `Google Cloud Console` 或 `gcloud CLI` 建立並部署 `Cloud Functi
 
 <br>
 
-3. 編寫主腳本 `main.py`：這個範例是一個可訪問的 HTTP。
+3. 編寫主腳本 `main.py`。
+
+    ```bash
+    nano main.py
+    ```
+
+<br>
+
+4. 寫入內容，這個範例是一個可訪問的 HTTP；完成後儲存並退出。
 
     ```python
     def hello_world(request):
@@ -107,15 +115,41 @@ _可使用 `Google Cloud Console` 或 `gcloud CLI` 建立並部署 `Cloud Functi
 
 2. 選擇或建立一個新的 `Google Cloud 專案`。
 
+    ![](images/img_54.png)
+
 <br>
 
-3. 搜尋並啟用 `Cloud Functions API`。
+3. 寫入名稱，其餘預設即可。
+
+    ![](images/img_55.png)
+
+<br>
+
+4. 搜尋 `Cloud Functions API`。
 
     ![](images/img_01.png)
 
 <br>
 
-4. 進入 `Cloud Functions` 後點擊 `建立函式`。
+5. 啟用。
+
+    ![](images/img_56.png)
+
+<br>
+
+6. 必須有憑證才能使用，所以先建立憑證。
+
+    ![](images/img_57.png)
+
+<br>
+
+7. 勾選 `使用者資料` 後點擊 `完成`。
+
+    ![](images/img_58.png)
+
+<br>
+
+8. 進入 `Cloud Functions` 後點擊 `建立函式`。
 
     ![](images/img_02.png)
 
