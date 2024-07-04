@@ -119,37 +119,43 @@ _可使用 `Google Cloud Console` 或 `gcloud CLI` 建立並部署 `Cloud Functi
 
 <br>
 
-3. 寫入名稱，其餘預設即可。
+3. 寫入名稱，其餘預設即可，點擊 `建立` 後等待建立完成。
 
     ![](images/img_55.png)
 
 <br>
 
-4. 搜尋 `Cloud Functions API`。
+4. 選取所建立的專案。
+
+    ![](images/img_59.png)
+
+<br>
+
+5. 搜尋 `Cloud Functions API`。
 
     ![](images/img_01.png)
 
 <br>
 
-5. 啟用。
+6. 啟用。
 
     ![](images/img_56.png)
 
 <br>
 
-6. 必須有憑證才能使用，所以先建立憑證。
+7. 必須有憑證才能使用，所以先建立憑證。
 
     ![](images/img_57.png)
 
 <br>
 
-7. 勾選 `使用者資料` 後點擊 `完成`。
+8. 勾選 `使用者資料` 後點擊 `完成`。
 
     ![](images/img_58.png)
 
 <br>
 
-8. 進入 `Cloud Functions` 後點擊 `建立函式`。
+9. 進入 `Cloud Functions` 後點擊 `建立函式`。
 
     ![](images/img_02.png)
 
