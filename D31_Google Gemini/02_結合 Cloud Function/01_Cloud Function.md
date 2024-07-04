@@ -153,7 +153,7 @@ _先建立專案並啟用 Cloud Functions API，這是使用 Cloud Function 的�
 
 <br>
 
-## 建立付費
+## 建立帳單帳戶
 
 1. 點擊 `帳單`。
 
@@ -187,25 +187,31 @@ _先建立專案並啟用 Cloud Functions API，這是使用 Cloud Function 的�
 
 ## 進入 Cloud Function
 
-1. 搜尋 `Cloud Functions`。
+1. 回到所選專案的資訊首頁。
+
+    ![](images/img_67.png)
+
+<br>
+
+2. 搜尋 `Cloud Functions`。
 
     ![](images/img_58.png)
 
 <br>
 
-2. 點擊 `啟用計費功能`。
+3. 點擊 `啟用計費功能`。
 
     ![](images/img_60.png)
 
 <br>
 
-3.  選取 `付費帳單`，接著點擊 `設定帳戶`，這需要一點時間來完成。
+4. 選取 `付費帳單`，接著點擊 `設定帳戶`，這需要一點時間來完成。
 
     ![](images/img_61.png)
 
 <br>
 
-4. 進入 `Cloud Functions` 後點擊 `建立函式`。
+5. 進入 `Cloud Functions` 後點擊 `建立函式`。
 
     ![](images/img_02.png)
 
