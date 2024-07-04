@@ -40,7 +40,7 @@ _先建立本地專案，如此若有敏感資訊也可以先寫入 .env 文件�
 
 <br>
 
-2. 建立四個文件 `requirements.txt`、`main.py`、`.env`、`.gitignore`。
+2. 建立四個文件 `requirements.txt`、`main.py`、`.env`、`.gitignore`；無論是否沿用前小節的資料夾，皆可直接運行以下指令。
 
     ```bash
     touch requirements.txt main.py .env .gitignore
