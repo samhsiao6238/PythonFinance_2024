@@ -211,47 +211,65 @@ _先建立專案並啟用 Cloud Functions API，這是使用 Cloud Function 的�
 
 <br>
 
-5. 進入 `Cloud Functions` 後點擊 `建立函式`。
+5. 完成後點擊歡迎使用 `Cloud Functions` 下方的 `建立函式`。
 
     ![](images/img_02.png)
 
 <br>
 
+6. 啟用必要的 API，接著會進入設置頁面。
+
+    ![](images/img_68.png)
+
+<br>
+
 ## 進行 Cloud Function 基本設定
 
-1. `環境` 選擇官方推薦的 `第 2 代`，特別注意 `第 2 代` 是基於 `Cloud Run` 的，所以與 `Cloud Run` 共享資源配額和限制，其餘對於兩代差異的說明彙整如下表。
+1. `環境` 選擇官方預設的 `第 2 代`。
+
+    ![](images/img_69.png)
+
+<br>
+
+2. 補充說明，上一個步驟所選的 `第 2 代` 是基於 `Cloud Run` 的，所以與 `Cloud Run` 共享資源配額和限制，其餘對於兩代差異的說明彙整如下表。
 
     ![](images/img_03.png)
 
 <br>
 
-2. 函數名稱可自己定義，這裡示範填入 `my_hello_world`，特別注意這個並非是腳本中的函數名稱，而是 `Cloud Function` 的名稱。
+3. 函數名稱可自己定義，這裡示範填入 `my_hello_world`，特別注意這個並非是腳本中的函數名稱，而是 `Cloud Function` 的名稱。
 
     ![](images/img_04.png)
 
 <br>
 
-3. 區域選擇基本上以靠近的區域為佳，按規則說明只能建立在專案設定時的區域，但實務上似乎不會出錯，所以這裡設定為台灣 `asia-east1`。
+4. 區域選擇基本上以靠近的區域為佳，按規則說明只能建立在專案設定時的區域，但實務上似乎不會出錯，所以這裡設定為台灣 `asia-east1`。
 
     ![](images/img_05.png)
 
 <br>
 
-4. 觸發器選擇 `HTTPS`。
+5. 觸發器選擇 `HTTPS`。
 
     ![](images/img_06.png)
 
 <br>
 
-5. 當前僅進行測試，所以選取 `允許未經身份驗證的叫用要求`。
+6. 當前僅進行測試，所以選取 `允許未經身份驗證的叫用要求`。
 
     ![](images/img_07.png)
 
 <br>
 
-6. 下方還有 `環境變數` 的設置，這裡先略過，進入 `下一步`。
+7. 下方還有 `環境變數` 的設置，這裡先略過，進入 `下一步`。
 
     ![](images/img_08.png)
+
+<br>
+
+8. 若還有必要的 API，點擊 `啟用` 即可。
+
+    ![](images/img_70.png)
 
 <br>
 
@@ -269,7 +287,11 @@ _先建立專案並啟用 Cloud Functions API，這是使用 Cloud Function 的�
 
 <br>
 
-3. 如果有相關的套件則需對 `requirements.txt` 進行編輯。
+3. 如果有相關的套件則需對 `requirements.txt` 進行編輯，預設僅有一行。
+
+    ```bash
+    functions-framework==3.*
+    ```
 
 <br>
 
