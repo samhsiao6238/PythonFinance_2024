@@ -109,6 +109,10 @@ _可使用 `Google Cloud Console` 或 `gcloud CLI` 建立並部署 `Cloud Functi
 
 ## 登錄 Google Cloud Console
 
+_先建立專案並啟用 Cloud Functions API，這是使用 Cloud Function 的必要步驟_
+
+<br>
+
 1. 前往 [Google Cloud Console](https://console.cloud.google.com/)。
 
 <br>
@@ -143,31 +147,33 @@ _可使用 `Google Cloud Console` 或 `gcloud CLI` 建立並部署 `Cloud Functi
 
 <br>
 
-7. 必須有憑證才能使用，所以先建立憑證。
+7. 會顯示 `可能需要憑證才能使用`。
 
     ![](images/img_57.png)
 
 <br>
 
-8. 勾選 `使用者資料` 後點擊 `下一步`。
+## 進入 Cloud Function
+
+1. 搜尋 `Cloud Functions`。
 
     ![](images/img_58.png)
 
 <br>
 
-9. 自訂一個服務名稱 `20240705-1`。
+2. 點擊 `啟用計費功能`。
 
     ![](images/img_60.png)
 
 <br>
 
-10. 選取 `擁有者` 然後 `繼續`。
+3.  選取 `付費帳單`，接著點擊 `設定帳戶`，這需要一點時間來完成。
 
     ![](images/img_61.png)
 
 <br>
 
-11. 進入 `Cloud Functions` 後點擊 `建立函式`。
+4. 進入 `Cloud Functions` 後點擊 `建立函式`。
 
     ![](images/img_02.png)
 
