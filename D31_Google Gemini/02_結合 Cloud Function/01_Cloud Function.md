@@ -295,13 +295,13 @@ _先建立專案並啟用 Cloud Functions API，這是使用 Cloud Function 的�
 
 <br>
 
-4. 為了實測環境的設置，接著對 `main.py` 略作修改，將預設的函數名稱修改為 `hello_world`，接著在上方 `進入點` 中填入這個更改過的函數名，預設是 `hello_http`，務必記得修改。
+4. 為了實測環境的設置，接著對 `main.py` 略作修改，將預設的函數名稱修改為 `hello_world`，接著在上方 `進入點` 中填入這個更改過的函數名，也就是將預設的 `hello_http` 改為 `hello_world`。
 
     ![](images/img_11.png)
 
 <br>
 
-5. 腳本內容就依據官方範例，返回值部分可以稍做修改以利觀察。
+5. 腳本內容就依據官方範例，最後一行的返回值部分可稍做修改，將 `'Hello {}!'.format(name)` 改為 `'我是小柱， {} 你好!'.format(name)` 以利觀察。
 
     ```python
     import functions_framework
@@ -331,19 +331,21 @@ _先建立專案並啟用 Cloud Functions API，這是使用 Cloud Function 的�
 
 <br>
 
-6. 部署前可先進行測試，點擊 `開始測試`。
+## 測試
+
+1. 部署前可先進行測試，點擊 `開始測試`；過程中若出現提示要求再次點擊，依指示再次點擊 `進行測試` 即可。
 
     ![](images/img_12.png)
 
 <br>
 
-7. 點擊 `授權`。
+2. 點擊 `授權`。
 
     ![](images/img_13.png)
 
 <br>
 
-8. 環境建置完成會顯示 `Function is ready to test`，點擊 `執行測試` 會顯示預期中的結果，也就是返回字串。
+3. 環境建置完成會顯示 `Function is ready to test`，點擊 `執行測試` 會顯示預期中的結果，也就是返回字串。
 
     ![](images/img_14.png)
 
