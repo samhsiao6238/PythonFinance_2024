@@ -58,6 +58,8 @@ _之前範例並未儲存圖片訊息中的圖片_
     GEMINI_API_KEY=
     FIREBASE_URL=
     CLOUD_FUNCTION_URL=
+    
+    # 添加這個
     STORAGE_BUCKET=
     ```
 
