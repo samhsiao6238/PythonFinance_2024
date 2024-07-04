@@ -400,6 +400,21 @@ _再次測試之前，先設定 Webhook_
 
 <br>
 
+## 檢查 Webhook settings
+
+1. 部署完成後，可回到 Line Developers 進行驗證。
+
+    ![](images/img_71.png)
+
+<br>
+
+2. 透過 Line 聊天可詢問最新發生的問題，測試日期為 `2024/07/04`。
+
+    ![](images/img_72.png)
+
+
+<br>
+
 ___
 
 _END_
