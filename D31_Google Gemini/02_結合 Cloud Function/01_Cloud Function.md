@@ -74,18 +74,18 @@ _可使用 `Google Cloud Console` 或 `gcloud CLI` 建立並部署 `Cloud Functi
 
 ## 建立與部署
 
-1. 建立本地資料夾，特別注意，在這個簡單的範例中可不用建立本地的文件，相關範例腳本在 Console 中會自動生成，但基於未來正式流程的建立，這裡還是從這個步驟開始。
+1. 建立本地資料夾；特別注意，這個簡易範例的實作可不用建立本地的文件，相關腳本在 Console 中都會自動生成，但基於未來正式流程的建立，這裡還是從 `本地建立專案資料夾` 這個步驟開始。
 
     ```bash
-    mkdir _exGeminiBot_ && cd _exGeminiBot_
+    cd ~/Desktop && mkdir _exGeminiBot_ && cd _exGeminiBot_
     ```
 
 <br>
 
-2. 編輯 `requirements.txt`，用於編輯需要安裝的套件。
+2. 建立主腳本 `main.py` 及套件管理文件 `requirements.txt`；其中管理文件將用於編輯需要安裝的套件，這裡暫時先留空白即可。
 
-    ```json
-    # 目前先保留空的
+    ```bash
+    touch main.py requirements.txt
     ```
 
 <br>
