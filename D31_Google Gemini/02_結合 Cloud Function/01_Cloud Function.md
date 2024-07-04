@@ -149,13 +149,25 @@ _可使用 `Google Cloud Console` 或 `gcloud CLI` 建立並部署 `Cloud Functi
 
 <br>
 
-8. 勾選 `使用者資料` 後點擊 `完成`。
+8. 勾選 `使用者資料` 後點擊 `下一步`。
 
     ![](images/img_58.png)
 
 <br>
 
-9. 進入 `Cloud Functions` 後點擊 `建立函式`。
+9. 自訂一個服務名稱 `20240705-1`。
+
+    ![](images/img_60.png)
+
+<br>
+
+10. 選取 `擁有者` 然後 `繼續`。
+
+    ![](images/img_61.png)
+
+<br>
+
+11. 進入 `Cloud Functions` 後點擊 `建立函式`。
 
     ![](images/img_02.png)
 
