@@ -2,7 +2,7 @@
 
 _[Haystack 官網](https://haystack.deepset.ai/)、[deepset 官網](https://www.deepset.ai/) 與 [Haystack GitHub](https://github.com/deepset-ai/haystack)_
 
-_由於 2.0 與 1.x 有相容性問題，所以參考教程的時候特別注意版本，這裡將使用 [2.0 教程](https://haystack.deepset.ai/tutorials)_
+_由於 2.0 與 1.x 有相容性問題，所以參考教程的時候特別注意版本，這裡將使用 [2.0 教程](https://haystack.deepset.ai/tutorials)。_
 
 <br>
 
