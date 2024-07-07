@@ -10,7 +10,11 @@ _由於 2.0 與 1.x 有相容性問題，所以參考教程的時候特別注意
 
 1. `Haystack` 是由 `deepset GmbH` 開發的開源框架，而 `deepset` 成立於 2018 年，是一家專注於建立和推動自然語言處理（NLP）技術的公司，主要產品有 `Haystack`、`deepset Cloud`，其中 `Haystack` 是一個在開源社區很受歡迎的 NLP 工具。
 
+<br>
+
 2. `Haystack` 用於建立基於 `搜索` 和 `問答` 的應用程序，允許開發者建立和部署 `端到端` 的自然語言處理（NLP）管道，特別適合處理大型文件集合，並在這些文件中找到準確答案。
+
+<br>
 
 3. `Haystack` 支持多種 NLP 模型和數據儲存，並且能夠與各種檢索後端無縫集成，如 Elasticsearch、FAISS、Milvus 等。
 
@@ -88,6 +92,8 @@ _AWS (Amazon Web Services)_
 
    - 提供 API 來建立和部署 NLP 應用，適合處理大量文本數據。
 
+<br>
+
 2. Amazon Kendra
 
    - 一個高效的企業搜索服務，利用機器學習來提供準確且相關的搜索結果。
@@ -104,11 +110,15 @@ _Google Cloud_
 
    - 支持多語言，並且可以集成到各種平台，如 Google Assistant、Messenger 和 Slack。
 
+<br>
+
 2. Cloud Natural Language API
 
    - 提供文本分析功能，包括情感分析、實體識別、語法分析和文本分類。
 
    - 可以與 Google 的其他服務（如 BigQuery）集成，用於更大規模的數據分析。
+
+<br>
 
 3. Google Cloud Search
 
@@ -134,6 +144,8 @@ _Microsoft Azure_
 
    - Azure 的文本分析服務支持情感分析、實體識別、關鍵短語提取等功能。
 
+<br>
+
 2. Azure Search
 
    - 一個完全託管的搜索服務，支持全文搜索、過濾、排序和自動補全功能。
@@ -149,6 +161,8 @@ _IBM Watson_
    - 一個智能搜索和內容分析平台，利用 AI 技術來發現和分析大量非結構化數據。
 
    - 支持文件檢索和問答功能，類似於 Haystack 的檢索和閱讀器架構。
+
+<br>
 
 2. Watson Assistant
 
