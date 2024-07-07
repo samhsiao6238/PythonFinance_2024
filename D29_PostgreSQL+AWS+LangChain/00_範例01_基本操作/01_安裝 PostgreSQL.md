@@ -22,6 +22,10 @@
 
 <br>
 
+3. 補充說明，在本地資料夾 `/opt/homebrew/Cellar/` 內的是由 Homebrew 安裝的所有套件，每個套件都有自己的一個子目錄，這些子目錄中包含該套件的不同版本；而指令 `brew services list` 顯示的是 Homebrew 管理的服務及其當前狀態，這些服務也是由 Homebrew 安裝和管理的，但僅限那些可作為服務運行的套件；所以要徹底刪除某套件時，可進行查詢。
+
+<br>
+
 ## 關於可選拓展 `pgvector`
 
 1. 安裝可選的拓展，`pgvector` 用於在 PostgreSQL 中進行向量搜索和相似度匹配。
