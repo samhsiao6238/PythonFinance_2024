@@ -84,7 +84,7 @@ _其他解決自然語言處理和問答系統的框架或服務_
 
 <br>
 
-_AWS (Amazon Web Services)_
+### _AWS (Amazon Web Services)_
 
 1. Amazon Comprehend
 
@@ -102,7 +102,7 @@ _AWS (Amazon Web Services)_
 
 <br>
 
-_Google Cloud_
+### _Google Cloud_
 
 1. Dialogflow
 
@@ -126,7 +126,7 @@ _Google Cloud_
 
 <br>
 
-_OpenAI_
+### _OpenAI_
 
 1. OpenAI GPT
 
@@ -136,7 +136,7 @@ _OpenAI_
 
 <br>
 
-_Microsoft Azure_
+### _Microsoft Azure_
 
 1. Azure Cognitive Services
 
@@ -154,7 +154,7 @@ _Microsoft Azure_
 
 <br>
 
-_IBM Watson_
+### _IBM Watson_
 
 1. Watson Discovery
 
