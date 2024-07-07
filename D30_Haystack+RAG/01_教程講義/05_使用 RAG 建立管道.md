@@ -46,7 +46,15 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 ## 開始進行
 
-1. 安裝 Haystack 2.0 和其他所需的套件，並透過條件指定版本。
+1. 建立專案腳本 `ex01.ipynb`。
+
+    ```bash
+    touch ex01.ipynb
+    ```
+
+<br>
+
+2. 安裝 Haystack 2.0 和其他所需的套件，並透過條件指定版本。
 
     ```bash
     pip install haystack-ai "datasets>=2.6.1" "sentence-transformers>=2.2.0"
@@ -54,7 +62,7 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-2. 建立環境變數：這個範例在後續會使用到 `OpenAI API` 來建立生成器 `OpenAIGenerator`。
+3. 建立環境變數：這個範例在後續會使用到 `OpenAI API` 來建立生成器 `OpenAIGenerator`。
 
     ```python
     from getpass import getpass
@@ -71,10 +79,9 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-3. 禁用 `tokenizers` 的 `並行處理` 以 `避免死鎖`，詳最後面說明。
+4. 禁用 `tokenizers` 的 `並行處理` 以 `避免死鎖`，詳最後面說明。
 
     ```python
-    import os
     # 禁用 tokenizers 的並行處理，詳最後面的說明
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
     ```
@@ -97,6 +104,15 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
         Document(content=doc["content"],
         meta=doc["meta"]) for doc in dataset
     ]
+    ```
+
+<br>
+
+2. 會出現一個警告，並自動載入一個進度條套件，此處不再贅述。
+
+    ```bash
+    TqdmWarning: IProgress not found. Please update jupyter and ipywidgets.
+    from .autonotebook import tqdm as notebook_tqdm
     ```
 
 <br>
@@ -132,7 +148,7 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-3. 出現兩個警告，這兩個都是版本棄用提醒，但都是由函數內建調用所引發，所以無法處理也無須理會。
+3. _可能會_ 出現警告，如下這兩個都是版本棄用提醒，但都是由函數內建調用所引發，所以無法處理也無須理會，套件升級後可能也會自動修正。
 
     ![](images/img_79.png)
 
@@ -229,7 +245,7 @@ _模板使用的是 `Jinja2` 循環語法_
 
     # 定義模板提示
     template = """
-    根據以下信息，回答問題。
+    根據以下信息，使用繁體中文回答問題。
 
     上下文:
     {% for document in documents %}
@@ -262,10 +278,9 @@ _模板使用的是 `Jinja2` 循環語法_
     # 初始化管道
     basic_rag_pipeline = Pipeline()
     ```
-
 <br>
 
-2. 添加組件到管道。
+1. 添加組件到管道。
 
     ```python
     # 添加組件到管道
