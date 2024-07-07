@@ -275,7 +275,7 @@ _以上完成安裝_
 
 <br>
 
-4. 創建調整模型，從 `list_models()` 中獲取的 `模型 ID` 來創建一個新的 `調整模型`，要創建調整模型，需要將數據集傳遞給 `genai.create_tuned_model` 方法，可以直接在調用中定義輸入和輸出值，也可以從文件導入數據框後傳遞給方法。
+4. 建立調整模型，從 `list_models()` 中獲取的 `模型 ID` 來建立一個新的 `調整模型`，要建立調整模型，需要將數據集傳遞給 `genai.create_tuned_model` 方法，可以直接在調用中定義輸入和輸出值，也可以從文件導入數據框後傳遞給方法。
 
     ```python
     import google.generativeai as genai
@@ -284,7 +284,7 @@ _以上完成安裝_
     # 設置調整模型的名稱
     model_id = 'models/gemini-1.0-pro-001'
     name = f'generate-num-{random.randint(0, 10000)}'
-    # 創建調整模型
+    # 建立調整模型
     operation = genai.create_tuned_model(
         # 使用支持調整的模型 ID
         source_model=model_id,
@@ -303,13 +303,13 @@ _以上完成安裝_
     )
     # 等待操作完成
     operation.result()
-    print(f"調整模型創建完成，模型 ID: {name}")
+    print(f"調整模型建立完成，模型 ID: {name}")
     ```
 
     _輸出_
 
     ```bash
-    調整模型創建完成，模型 ID: generate-num-5083
+    調整模型建立完成，模型 ID: generate-num-5083
     ```
 
 <br>
@@ -340,7 +340,7 @@ _以上完成安裝_
 1. 檢查其輸出是否符合預期。
 
     ```python
-    # 創建生成內容的模型對象
+    # 建立生成內容的模型對象
     model = genai.GenerativeModel(model_name=f'tunedModels/{name}')
 
     # 測試模型輸出

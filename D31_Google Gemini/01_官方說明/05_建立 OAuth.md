@@ -6,7 +6,7 @@ _可參考 [官方說明](https://ai.google.dev/gemini-api/docs/oauth?hl=zh-tw)_
 
 <br>
 
-## 創建 OAuth 憑證
+## 建立 OAuth 憑證
 
 1. 進行 `模型調整` 時，僅有 `API Key` 是不夠的，因為 `模型調整` 涉及的 `敏感數據` 和高級操作，需要更高級別的 `安全性權限` 管理，所以進行 `OAuth 驗證`。
 
