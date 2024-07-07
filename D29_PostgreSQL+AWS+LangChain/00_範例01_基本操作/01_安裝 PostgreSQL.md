@@ -26,6 +26,42 @@
 
 <br>
 
+## 端口佔用
+
+1. 假如使用 `brew services list` 查詢出現錯誤 `error`。
+
+    ![](images/img_33.png)
+
+<br>
+
+2. 通常是因為端口佔用，先查詢當前 `5432` 使用的 PID。
+
+    ```bash
+    lsof -i :5432
+    ```
+
+<br>
+
+3. 刪除佔用端口的 PID。
+
+    ```bash
+    sudo kill -9 4138
+    ```
+
+<br>
+
+4. 刪除後會再次查詢可看到服務自動在正確的端口上啟用。
+
+    ![](images/img_31.png)
+
+<br>
+
+5. 再次查詢服務，顯示正常 `started`。
+
+    ![](images/img_32.png)
+
+<br>
+
 ## 關於可選拓展 `pgvector`
 
 1. 安裝可選的拓展，`pgvector` 用於在 PostgreSQL 中進行向量搜索和相似度匹配。
