@@ -2,9 +2,7 @@
 
 <br>
 
-## 說明
-
-_MacOS_
+## 在 _MacOS_ 安裝
 
 <br>
 
@@ -24,7 +22,17 @@ _MacOS_
 
 <br>
 
-3. 透過 `brew services` 來啟動服務。
+3. 安裝可選的拓展，`pgvector` 用於在 PostgreSQL 中進行向量搜索和相似度匹配。
+
+    ```bash
+    brew install pgvector
+    ```
+
+<br>
+
+## 啟動
+
+1. 透過 `brew services` 來啟動服務。
 
     ```bash
     brew services start postgresql@15
@@ -32,7 +40,7 @@ _MacOS_
 
 <br>
 
-4. 檢查服務的狀態來確保其已啟動。
+2. 檢查服務的狀態來確保其已啟動。
 
     ```bash
     brew services list
@@ -40,7 +48,7 @@ _MacOS_
 
 <br>
 
-5. 停止服務。
+3. 停止服務。
 
     ```bash
     brew services stop postgresql@15
@@ -48,7 +56,7 @@ _MacOS_
 
 <br>
 
-6. 卸載 PostgreSQL 15。
+4. 卸載 PostgreSQL 15。
 
     ```bash
     brew uninstall postgresql@15
@@ -56,7 +64,7 @@ _MacOS_
 
 <br>
 
-7. 因為 `pgvector` 可能依賴於 PostgreSQL 導致無法卸載，可以先卸載 `pgvector`。
+5. 因為 `pgvector` 可能依賴於 PostgreSQL 導致無法卸載，可以先卸載 `pgvector`。
 
     ```bash
     brew uninstall pgvector
@@ -64,7 +72,7 @@ _MacOS_
 
 <br>
 
-8. 重新安裝時，可先安裝 `postgresql@15` 再安裝 `pgvector`，確保與新安裝的 PostgreSQL 兼容。
+6. 重新安裝時，可先安裝 `postgresql@15` 再安裝拓展 `pgvector`，確保與新安裝的 PostgreSQL 兼容。
 
     ```bash
     brew install pgvector
