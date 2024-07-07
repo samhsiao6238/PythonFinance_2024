@@ -84,14 +84,6 @@
 
 <br>
 
-6. 重新安裝時，可先安裝 `postgresql@15` 再安裝拓展 `pgvector`，確保與新安裝的 PostgreSQL 兼容。
-
-    ```bash
-    brew install pgvector
-    ```
-
-<br>
-
 ___
 
 _END_
