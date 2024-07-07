@@ -102,23 +102,80 @@ _若發生端口衝突_
 
 ## PostgreSQL 建立用戶和資料庫
 
-1. 確認已經啟動 PostgreSQL 了服務器。
+1. 啟動 PostgreSQL 服務器。
 
     ```bash
-    brew services start postgresql
+    brew services start postgresql@15
     ```
 
 <br>
 
-2. 進入 PostgreSQL 命令行界面。
+2. 若出現錯誤，可先透過 `brew` 查詢當前正在運行的 PostgreSQL 版本。
 
     ```bash
-    psql postgres
+    brew services list
+    ````
+
+    ![](images/img_28.png)
+
+<br>
+
+3. 將錯誤的服務逐一停止後，服務後重新啟動。
+
+    ```bash
+    brew services stop postgresql@15
+    brew services stop postgresql@14
     ```
 
 <br>
 
-3. 建立一個新的資料庫用戶同時設定密碼，這裡示範名稱是 `sam6238`、密碼是 `Sam112233`。
+4. 進入 PostgreSQL 指定資料庫 `mydatabase`。
+
+    ```bash
+    psql mydatabase
+    ```
+
+<br>
+
+## 查詢指令
+
+1. 查詢當前資料庫。
+
+    ```sql
+    SELECT current_database();
+    ```
+
+<br>
+
+2. 查看當前使用者。
+
+    ```sql
+    SELECT current_user;
+    ```
+
+<br>
+
+3. 查看所有資料庫。
+
+    ```sql
+    \l
+    # 或是
+    \list
+    ```
+
+<br>
+
+4. 查看所有使用者。
+
+    ```sql
+    \du
+    ```
+
+<br>
+
+## 建立資料庫成員
+
+1. 建立一個新的資料庫用戶同時設定密碼，這裡示範名稱是 `sam6238`、密碼是 `Sam112233`。
 
     ```sql
     CREATE USER sam6238 WITH PASSWORD 'Sam112233';
@@ -126,7 +183,7 @@ _若發生端口衝突_
 
 <br>
 
-4. 建立一個新的資料庫 `mydatabase`，可同時指定擁有者為前一個步驟新增的用戶 `sam6238`。
+2. 建立一個新的資料庫 `mydatabase`，可同時指定擁有者為前一個步驟新增的用戶 `sam6238`。
 
     ```sql
     CREATE DATABASE mydatabase OWNER sam6238;
@@ -134,7 +191,7 @@ _若發生端口衝突_
 
 <br>
 
-5. 為新用戶 `sam6238` 賦予對新資料庫 `mydatabase` 的所有權限。
+3. 為新用戶 `sam6238` 賦予對新資料庫 `mydatabase` 的所有權限。
 
     ```sql
     GRANT ALL PRIVILEGES ON DATABASE mydatabase TO sam6238;
@@ -142,18 +199,10 @@ _若發生端口衝突_
 
 <br>
 
-6. 退出 PostgreSQL 命令行界面。
+4. 退出 PostgreSQL 命令行界面。
 
-    ```sh
+    ```sql
     \q
-    ```
-
-<br>
-
-7. 若要停止服務。
-
-    ```bash
-    brew services stop postgresql
     ```
 
 <br>
