@@ -22,11 +22,23 @@
 
 <br>
 
-3. 安裝可選的拓展，`pgvector` 用於在 PostgreSQL 中進行向量搜索和相似度匹配。
+## 關於可選拓展 `pgvector`
+
+1. 安裝可選的拓展，`pgvector` 用於在 PostgreSQL 中進行向量搜索和相似度匹配。
 
     ```bash
     brew install pgvector
     ```
+
+<br>
+
+2. 經由安裝訊息可知，安裝預設使用了 `postgresql@14`。
+
+    ![](images/img_29.png)
+
+<br>
+
+3. 查詢可以發現此時安裝了 `14` 與 `15`，但都沒有啟動，在要使用 `pgvector` 的專案中，必須啟動 `postgresql@14`。
 
 <br>
 
