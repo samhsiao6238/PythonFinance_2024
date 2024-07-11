@@ -60,6 +60,12 @@
 
 <br>
 
+10. 點擊螢幕下方彈出視窗中的 `Save Changes`。
+
+    ![](images/img_23.png)
+
+<br>
+
 ## 設置機器人的權限
 
 1. 切換到 `OAuth2` 頁籤，選擇 `URL Generator`。
@@ -68,7 +74,7 @@
 
 <br>
 
-2. 勾選 `bot`。
+2. 勾選 `OAuth2 URL Generator` 欄位區域中的 `bot`。
 
     ![](images/img_08.png)
 
@@ -92,7 +98,7 @@
 
 <br>
 
-6. 點擊 `授權 Authorize`。
+6. 會顯示專案名稱以及授權項目，預設已經打勾，點擊 `授權 Authorize`。
 
     ![](images/img_12.png)
 
@@ -101,6 +107,18 @@
 7. 成功，前往 sam38's server。
 
     ![](images/img_13.png)
+
+<br>
+
+8. 點擊右上角人像圖標顯示或隱藏 `Member List`，可看到建立完成的機器人在腳本尚未運行前的狀態是 `Offline`。
+
+    ![](images/img_24.png)
+
+<br>
+
+9. 在後續的步驟中，一但腳本運行後，狀態就會顯示為 `Online`。
+
+    ![](images/img_25.png)
 
 <br>
 
