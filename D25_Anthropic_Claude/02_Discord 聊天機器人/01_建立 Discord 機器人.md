@@ -1,5 +1,7 @@
 # Discord 聊天機器人
 
+<img src="images/img_20.png" width="450px" />
+
 <br>
 
 ## 建立 Discord 機器人
