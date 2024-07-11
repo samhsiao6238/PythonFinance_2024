@@ -1,6 +1,6 @@
 # Discord 聊天機器人
 
-<img src="images/img_20.png" width="450px" />
+<img src="images/img_20.png" width="500px" />
 
 <br>
 
@@ -8,9 +8,11 @@
 
 1. 前往 [Discord Developer Portal](https://discord.com/developers/applications) 並登錄 Discord 帳戶。
 
+    <img src="images/img_21.png" width="500px" />
+
 <br>
 
-2. 點擊 `New Application` 。
+1. 點擊 `New Application` 。
 
     ![](images/img_01.png)
 
