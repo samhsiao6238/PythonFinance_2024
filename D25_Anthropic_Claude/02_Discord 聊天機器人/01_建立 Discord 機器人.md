@@ -42,13 +42,19 @@
 
 <br>
 
-7. 滑到 `Privileged Gateway Intents` ，三個功能都點選 `Save Change`。
+7. 若有開啟雙重認證，會要求輸入驗證碼。
+
+    ![](images/img_22.png)
+
+<br>
+
+8. 滑動到 `Privileged Gateway Intents` ，三個功能都點選 `Save Change`。
 
     ![](images/img_15.png)
 
 <br>
 
-8. 點擊 `Copy` 將 Token 記錄下來，貼到 `.env` 文件中；這是機器人登入 Discord 的密鑰。
+9. 點擊 `Copy` 將 Token 記錄下來，貼到 `.env` 文件中；這是機器人登入 Discord 的密鑰。
 
     ![](images/img_06.png)
 
