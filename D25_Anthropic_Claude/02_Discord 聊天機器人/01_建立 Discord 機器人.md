@@ -12,7 +12,7 @@
 
 <br>
 
-1. 點擊 `New Application` 。
+2. 點擊 `New Application` 。
 
     ![](images/img_01.png)
 
