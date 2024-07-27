@@ -8,7 +8,7 @@ _將 Markdown 圖片語法轉換為 HTML 圖片標籤，並設置寬度為 400px
 
 1. 開啟市集（`Ctrl+Shift+X`）安裝 VSCode 插件 `Replace Rules`，這個插件允許定義自動替換規則。
 
-    ![](images/img_08.png)
+    <img src="images/img_08.png" width="400px">
 
 <br>
 
@@ -16,13 +16,13 @@ _將 Markdown 圖片語法轉換為 HTML 圖片標籤，並設置寬度為 400px
 
 1. 使用快速鍵（`command + ,`）開啟 VSCode 的設定，搜尋並點擊 `settings.json` 來配置 Replace Rules規則。
 
-    ![](images/img_09.png)
+    <img src="images/img_09.png" width="400px">
 
 <br>
 
 2. 這會自動展開設定文件所在的位置。
 
-    ![](images/img_10.png)
+    <img src="images/img_10.png" width="400px">
 
 <br>
 
@@ -41,7 +41,7 @@ _將 Markdown 圖片語法轉換為 HTML 圖片標籤，並設置寬度為 400px
 
 4. 務必確保格式正確。
 
-    ![](images/img_11.png)
+    <img src="images/img_11.png" width="400px">
 
 <br>
 
@@ -70,13 +70,13 @@ _將 Markdown 圖片語法轉換為 HTML 圖片標籤，並設置寬度為 400px
 
 1. 編輯三個圖片。
 
-    ![](images/img_12.png)
+    <img src="images/img_12.png" width="400px">
 
 <br>
 
 2. 在 VSCode 中按下 `control + option + m` 組合快捷鍵，VSCode 會自動將當前文件中的 `![](images/img_XX.png)` 代碼轉換為 `<img src="images/img_XX.png" width="400px">`，其中 `XX` 可以是任何數字。
 
-    ![](images/img_13.png)
+    <img src="images/img_13.png" width="400px">
 
 <br>
 
