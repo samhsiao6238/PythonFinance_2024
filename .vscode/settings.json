@@ -18,6 +18,14 @@
     ],
     "[yaml]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    // 個體設定，全局也有預設的 400
+    "replacerules.rules": {
+        
+        "Convert Markdown Image to HTML": {
+            "find": "!\\[]\\(images/img_(\\d+)\\.png\\)",
+            "replace": "<img src=\"images/img_$1.png\" width=\"400px\">"
+        }
+    },
 }
 
