@@ -15,8 +15,11 @@
 		{
             "label": "Commit with DateTime",
             "type": "shell",
-            "command": "git add . && git commit -m \"Commit on $(date '+%Y-%m-%d %H:%M:%S')\"",
-            "group": {
+            // 僅提交
+            // "command": "git add . && git commit -m \"Commit on $(date '+%Y-%m-%d %H:%M:%S')\"",
+            // 提交並變更
+            "command": "git add . && git commit -m \"Commit on $(date '+%Y-%m-%d %H:%M:%S')\" && git push",
+			"group": {
                 "kind": "build",
                 "isDefault": true
             },
