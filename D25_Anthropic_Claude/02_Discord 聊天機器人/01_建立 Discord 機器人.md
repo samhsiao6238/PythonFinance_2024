@@ -16,19 +16,19 @@ _關於 Discord [桌面版](https://discord.com/) 的下載及安裝這裡省略
 
 <br>
 
-1. 點擊 `New Application` 。
+2. 登入後，點擊右上角 `New Application` 建立新的應用。
 
     ![](images/img_01.png)
 
 <br>
 
-3. 命名後勾選同意，接著點擊 `Create`。
+3. `命名` 並 `勾選同意`，接著點擊 `Create`。
 
     ![](images/img_02.png)
 
 <br>
 
-4. 切換到 `機器人 Bot` 頁籤。
+4. 切換到機器人 `Bot` 頁籤。
 
     ![](images/img_03.png)
 
