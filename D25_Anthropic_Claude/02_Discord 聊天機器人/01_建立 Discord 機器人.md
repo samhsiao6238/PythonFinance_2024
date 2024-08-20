@@ -40,7 +40,7 @@ _關於 Discord [桌面版](https://discord.com/) 的下載及安裝這裡省略
 
 <br>
 
-6. 點擊 `Yes, do it!`。
+6. 在彈出的視窗中點擊 `Yes, do it!`。
 
     ![](images/img_05.png)
 
@@ -52,19 +52,25 @@ _關於 Discord [桌面版](https://discord.com/) 的下載及安裝這裡省略
 
 <br>
 
-8. 滑動到 `Privileged Gateway Intents` ，三個功能都點選 `Save Change`。
+8. 通過認證後會顯示 `A new token was generated! Be sure to copy it as it will not be shown to you again.`。
+
+    ![](images/img_26.png)
+
+<br>
+
+9. 滑動到 `Privileged Gateway Intents` ，三個功能都點選 `Save Change`。
 
     ![](images/img_15.png)
 
 <br>
 
-9. 點擊 `Copy` 將 Token 記錄下來，貼到 `.env` 文件中；這是機器人登入 Discord 的密鑰。
+10. 點擊 `Copy` 將 Token 記錄下來，貼到 `.env` 文件中；這是機器人登入 Discord 的密鑰。
 
     ![](images/img_06.png)
 
 <br>
 
-10. 點擊螢幕下方彈出視窗中的 `Save Changes`。
+11. 點擊螢幕下方彈出視窗中的 `Save Changes`。
 
     ![](images/img_23.png)
 
