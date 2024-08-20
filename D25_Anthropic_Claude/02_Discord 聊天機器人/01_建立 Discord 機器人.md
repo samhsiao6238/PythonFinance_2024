@@ -10,13 +10,13 @@ _關於 Discord [桌面版](https://discord.com/) 的下載及安裝這裡省略
 
 ## 建立 Discord 機器人
 
-1. 前往 [Discord Developer Portal](https://discord.com/developers/applications) 並登錄 Discord 帳戶。
+1. 前往 [Discord Developer Portal](https://discord.com/developers/applications) 並登錄 Discord 帳戶；可使用手機 App 掃碼登入。
 
     <img src="images/img_21.png" width="500px" />
 
 <br>
 
-2. 點擊 `New Application` 。
+1. 點擊 `New Application` 。
 
     ![](images/img_01.png)
 
