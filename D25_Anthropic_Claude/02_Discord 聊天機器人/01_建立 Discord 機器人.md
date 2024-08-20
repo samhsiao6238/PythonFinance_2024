@@ -58,23 +58,35 @@ _關於 Discord [桌面版](https://discord.com/) 的下載及安裝這裡省略
 
 <br>
 
-## 設定並說明 Gateway Intents
+## 設定 Gateway Intents
 
 _決定機器人能接收到哪些事件，也就是設定了機器人的功能與行為範圍；特別注意，當機器人加入的伺服器數量達到 100 或更多時，Intents 需要進行驗證和批准。_
 
 <br>
 
-1. 滑動到 `Privileged Gateway Intents` ，三個功能都點選 `Save Change`。
+1. 向下滑動到 `Privileged Gateway Intents` 區塊，三個功能都點選 `Save Change`。
 
     ![](images/img_15.png)
 
 <br>
 
-2. `Presence Intent (存在狀態意圖)` 可允許機器人接收使用者的存在狀態更新事件，例如 `在線`、`離線`、`忙碌`等，適用於需要使用者在線狀態的情境。
+2. 有變更時，下方會彈出提醒儲存的視窗，點擊 `Save Changes`。
+
+    ![](images/img_27.png)
 
 <br>
 
-3. `Server Members Intent (伺服器成員意圖)` 可允許機器人接收與伺服器成員有關的事件，例如成員的加入、離開、更新等，適用於管理伺服器成員、執行歡迎訊息或紀錄成員變動等情境。
+## 說明 Gateway Intents
+
+_補充說明前面開啟的三個設定_
+
+<br>
+
+1. `Presence Intent (存在狀態意圖)` 可允許機器人接收使用者的存在狀態更新事件，例如 `在線`、`離線`、`忙碌`等，適用於需要使用者在線狀態的情境。
+
+<br>
+
+2. `Server Members Intent (伺服器成員意圖)` 可允許機器人接收與伺服器成員有關的事件，例如成員的加入、離開、更新等，適用於管理伺服器成員、執行歡迎訊息或紀錄成員變動等情境。
 
 <br>
 
