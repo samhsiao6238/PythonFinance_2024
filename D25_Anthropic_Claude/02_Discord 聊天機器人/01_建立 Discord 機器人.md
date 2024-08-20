@@ -72,13 +72,13 @@ _決定機器人能接收到哪些事件，也就是設定了機器人的功能�
 
 1. 向下滑動到 `Privileged Gateway Intents` 區塊，三個功能都點選 `Save Change`。
 
-    <img src="images/img_15.png" width="400px">
+    <img src="images/img_15.png" width="550px">
 
 <br>
 
 2. 有變更時，下方會彈出提醒儲存的視窗，點擊 `Save Changes`。
 
-    <img src="images/img_27.png" width="400px">
+    <img src="images/img_27.png" width="550px">
 
 <br>
 
@@ -108,21 +108,21 @@ _補充說明前面開啟的三個設定_
 
 <br>
 
-2. 勾選 `OAuth2 URL Generator` 欄位區域中的 `bot`。
+2. 勾選 `Scopes` 區域中的 `bot`。
 
     <img src="images/img_08.png" width="400px">
 
 <br>
 
-3. 在 `Bot Permissions` 勾選 `Administrator`，賦予機器人所有權限。
+3. 在 `Bot Permissions` 區塊中勾選 `Administrator`，賦予機器人所有權限。
 
-    <img src="images/img_09.png" width="400px">
+    <img src="images/img_09.png" width="200px">
 
 <br>
 
-4. 複製連結進行訪問，這是邀請機器人到伺服器中的連結。
+4. 向下滑動到 `Generated URL` 區塊，這是邀請機器人到伺服器中的連結，複製連結並進行訪問便可完成邀請。
 
-    <img src="images/img_10.png" width="400px">
+    <img src="images/img_10.png" width="550px">
 
 <br>
 
