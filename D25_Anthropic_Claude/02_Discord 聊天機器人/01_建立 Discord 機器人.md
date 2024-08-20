@@ -1,5 +1,9 @@
 # Discord 聊天機器人
 
+_關於 Discord 桌面版下載及安裝這裡省略，請自行操作。_
+
+<br>
+
 <img src="images/img_20.png" width="500px" />
 
 <br>
