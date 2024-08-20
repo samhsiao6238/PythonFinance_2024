@@ -18,7 +18,7 @@ _關於 Discord [桌面版](https://discord.com/) 的下載及安裝這裡省略
 
 2. 登入後，點擊右上角 `New Application` 建立新的應用。
 
-    <img src="images/img_01.png" width="400px">
+    <img src="images/img_01.png" width="150px">
 
 <br>
 
@@ -30,13 +30,13 @@ _關於 Discord [桌面版](https://discord.com/) 的下載及安裝這裡省略
 
 4. 切換到機器人 `Bot` 頁籤。
 
-    <img src="images/img_03.png" width="400px">
+    <img src="images/img_03.png" width="150px">
 
 <br>
 
 5. 第一次建立，先點擊一次 `Reset Token`。
 
-    <img src="images/img_04.png" width="400px">
+    <img src="images/img_04.png" width="150px">
 
 <br>
 
@@ -54,13 +54,13 @@ _關於 Discord [桌面版](https://discord.com/) 的下載及安裝這裡省略
 
 8. 通過認證後會顯示 `A new token was generated! Be sure to copy it as it will not be shown to you again.`。
 
-    <img src="images/img_26.png" width="400px">
+    <img src="images/img_26.png" width="550px">
 
 <br>
 
 9. 在 TTOKEN 區塊顯示的是機器人登入 Discord 的密鑰，可點擊 `Copy` 將 Token 記錄下來備用，之後將儲存在 `.env` 文件中作為敏感資訊處理。
 
-    <img src="images/img_06.png" width="400px">
+    <img src="images/img_06.png" width="550px">
 
 <br>
 
