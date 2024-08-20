@@ -126,25 +126,25 @@ _補充說明前面開啟的三個設定_
 
 <br>
 
-5. 生成並打開邀請連結，邀請機器人加入伺服器。
+5. 選擇要添加到哪個使用者伺服器中，然後點擊 `Continue` 將機器人加入伺服器。
 
     <img src="images/img_11.png" width="400px">
 
 <br>
 
-6. 會顯示專案名稱以及授權項目，預設已經打勾，點擊 `授權 Authorize`。
+6. 會顯示專案名稱，並勾選確認讓機器人取得管理者權限，預設已經打勾，可直接點擊授權 ` Authorize`。
 
     <img src="images/img_12.png" width="400px">
 
 <br>
 
-7. 成功，前往 sam38's server。
+7. 成功，點擊前往伺服器，這裡的 `sam38's server` 是我所設定的伺服器。
 
     <img src="images/img_13.png" width="400px">
 
 <br>
 
-8. 點擊右上角人像圖標顯示或隱藏 `Member List`，可看到建立完成的機器人在腳本尚未運行前的狀態是 `Offline`。
+8. 點擊右上角人像圖標可 _顯示或隱藏 `Member List`_，展開後可看到建立完成的機器人，並且在腳本尚未運行前的狀態是 `Offline`，假如有多個機器人也都會顯示在清單中。
 
     <img src="images/img_24.png" width="400px">
 
