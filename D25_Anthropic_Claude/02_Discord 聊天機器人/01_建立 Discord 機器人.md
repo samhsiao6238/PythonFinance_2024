@@ -58,19 +58,39 @@ _關於 Discord [桌面版](https://discord.com/) 的下載及安裝這裡省略
 
 <br>
 
-9. 滑動到 `Privileged Gateway Intents` ，三個功能都點選 `Save Change`。
+## 設定並說明 Gateway Intents
+
+_決定機器人能接收到哪些事件，也就是設定了機器人的功能與行為範圍；特別注意，當機器人加入的伺服器數量達到 100 或更多時，Intents 需要進行驗證和批准。_
+
+<br>
+
+1. 滑動到 `Privileged Gateway Intents` ，三個功能都點選 `Save Change`。
 
     ![](images/img_15.png)
 
 <br>
 
-10. 點擊 `Copy` 將 Token 記錄下來，貼到 `.env` 文件中；這是機器人登入 Discord 的密鑰。
+2. `Presence Intent (存在狀態意圖)` 可允許機器人接收使用者的存在狀態更新事件，例如 `在線`、`離線`、`忙碌`等，適用於需要使用者在線狀態的情境。
+
+<br>
+
+3. `Server Members Intent (伺服器成員意圖)` 可允許機器人接收與伺服器成員有關的事件，例如成員的加入、離開、更新等，適用於管理伺服器成員、執行歡迎訊息或紀錄成員變動等情境。
+
+<br>
+
+3. `Message Content Intent (訊息內容意圖)` 可允許機器人接收大部分訊息中的訊息內容，適用於機器人需要回應或分析訊息內容的情境，例如關鍵字觸發功能或聊天機器人功能。
+
+<br>
+
+## 編輯腳本
+
+1. 點擊 `Copy` 將 Token 記錄下來，貼到 `.env` 文件中；這是機器人登入 Discord 的密鑰。
 
     ![](images/img_06.png)
 
 <br>
 
-11. 點擊螢幕下方彈出視窗中的 `Save Changes`。
+2. 點擊螢幕下方彈出視窗中的 `Save Changes`。
 
     ![](images/img_23.png)
 
