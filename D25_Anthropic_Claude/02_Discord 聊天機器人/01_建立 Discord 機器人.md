@@ -18,49 +18,49 @@ _關於 Discord [桌面版](https://discord.com/) 的下載及安裝這裡省略
 
 2. 登入後，點擊右上角 `New Application` 建立新的應用。
 
-    ![](images/img_01.png)
+    <img src="images/img_01.png" width="400px">
 
 <br>
 
 3. `命名` 並 `勾選同意`，接著點擊 `Create`。
 
-    ![](images/img_02.png)
+    <img src="images/img_02.png" width="400px">
 
 <br>
 
 4. 切換到機器人 `Bot` 頁籤。
 
-    ![](images/img_03.png)
+    <img src="images/img_03.png" width="400px">
 
 <br>
 
 5. 第一次建立，先點擊一次 `Reset Token`。
 
-    ![](images/img_04.png)
+    <img src="images/img_04.png" width="400px">
 
 <br>
 
 6. 在彈出的視窗中點擊 `Yes, do it!`。
 
-    ![](images/img_05.png)
+    <img src="images/img_05.png" width="400px">
 
 <br>
 
 7. 若有開啟雙重認證，會要求輸入驗證碼。
 
-    ![](images/img_22.png)
+    <img src="images/img_22.png" width="400px">
 
 <br>
 
 8. 通過認證後會顯示 `A new token was generated! Be sure to copy it as it will not be shown to you again.`。
 
-    ![](images/img_26.png)
+    <img src="images/img_26.png" width="400px">
 
 <br>
 
 9. 在 TTOKEN 區塊顯示的是機器人登入 Discord 的密鑰，可點擊 `Copy` 將 Token 記錄下來備用，之後將儲存在 `.env` 文件中作為敏感資訊處理。
 
-    ![](images/img_06.png)
+    <img src="images/img_06.png" width="400px">
 
 <br>
 
@@ -72,13 +72,13 @@ _決定機器人能接收到哪些事件，也就是設定了機器人的功能�
 
 1. 向下滑動到 `Privileged Gateway Intents` 區塊，三個功能都點選 `Save Change`。
 
-    ![](images/img_15.png)
+    <img src="images/img_15.png" width="400px">
 
 <br>
 
 2. 有變更時，下方會彈出提醒儲存的視窗，點擊 `Save Changes`。
 
-    ![](images/img_27.png)
+    <img src="images/img_27.png" width="400px">
 
 <br>
 
@@ -102,57 +102,57 @@ _補充說明前面開啟的三個設定_
 
 ## 設置機器人的權限
 
-1. 切換到 `OAuth2` 頁籤，選擇 `URL Generator`。
+1. 切換到 `OAuth2` 頁籤，向下滑動到 `OAuth2 URL Generator`。
 
-    ![](images/img_07.png)
+    <img src="images/img_07.png" width="400px">
 
 <br>
 
 2. 勾選 `OAuth2 URL Generator` 欄位區域中的 `bot`。
 
-    ![](images/img_08.png)
+    <img src="images/img_08.png" width="400px">
 
 <br>
 
 3. 在 `Bot Permissions` 勾選 `Administrator`，賦予機器人所有權限。
 
-    ![](images/img_09.png)
+    <img src="images/img_09.png" width="400px">
 
 <br>
 
 4. 複製連結進行訪問，這是邀請機器人到伺服器中的連結。
 
-    ![](images/img_10.png)
+    <img src="images/img_10.png" width="400px">
 
 <br>
 
 5. 生成並打開邀請連結，邀請機器人加入伺服器。
 
-    ![](images/img_11.png)
+    <img src="images/img_11.png" width="400px">
 
 <br>
 
 6. 會顯示專案名稱以及授權項目，預設已經打勾，點擊 `授權 Authorize`。
 
-    ![](images/img_12.png)
+    <img src="images/img_12.png" width="400px">
 
 <br>
 
 7. 成功，前往 sam38's server。
 
-    ![](images/img_13.png)
+    <img src="images/img_13.png" width="400px">
 
 <br>
 
 8. 點擊右上角人像圖標顯示或隱藏 `Member List`，可看到建立完成的機器人在腳本尚未運行前的狀態是 `Offline`。
 
-    ![](images/img_24.png)
+    <img src="images/img_24.png" width="400px">
 
 <br>
 
 9. 在後續的步驟中，一但腳本運行後，狀態就會顯示為 `Online`。
 
-    ![](images/img_25.png)
+    <img src="images/img_25.png" width="400px">
 
 <br>
 
