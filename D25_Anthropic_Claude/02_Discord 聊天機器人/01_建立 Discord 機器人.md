@@ -58,7 +58,7 @@ _關於 Discord [桌面版](https://discord.com/) 的下載及安裝這裡省略
 
 <br>
 
-9. 點擊 `Copy` 將 Token 記錄下來，貼到 `.env` 文件中；這是機器人登入 Discord 的密鑰。
+9. 在 TTOKEN 區塊顯示的是機器人登入 Discord 的密鑰，可點擊 `Copy` 將 Token 記錄下來備用，之後將儲存在 `.env` 文件中作為敏感資訊處理。
 
     ![](images/img_06.png)
 
