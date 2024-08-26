@@ -1,6 +1,6 @@
 # LlamaIndex
 
-_以前稱為 GPT Index_
+_[官網連結](https://docs.llamaindex.ai/en/stable/)_
 
 <br>
 
@@ -34,7 +34,7 @@ _以前稱為 GPT Index_
 
 ## 在 Python 中的應用範例
 
-_以下是如何使用 LlamaIndex 與 OpenAI 的 GPT 模型集成進行查詢的一個基本範例_
+_依據 [官方的說明](https://docs.llamaindex.ai/en/stable/getting_started/starter_example/) 製作以下簡單範例_
 
 <br>
 
@@ -49,42 +49,67 @@ _以下是如何使用 LlamaIndex 與 OpenAI 的 GPT 模型集成進行查詢的
 2. 假設有一些文本文檔，想使用 LlamaIndex 來構建索引並進行查詢。
 
     ```python
-    from llama_index import SimpleDirectoryReader, GPTVectorStoreIndex, LLMPredictor
-    from llama_index import ServiceContext
-    from langchain.chat_models import ChatOpenAI
-
-    # 設定 OpenAI API 金鑰
-    openai_api_key = "Open API 密鑰"
-
-    # 從指定資料夾中讀取文件並加載數據
-    documents = SimpleDirectoryReader('文件路徑').load_data()
-
-    # 設置並使用 GPT 模型作為預測器，將其整合到 LlamaIndex 中
-    llm_predictor = LLMPredictor(
-        llm=ChatOpenAI(
-            temperature=0.5, 
-            model_name="gpt-3.5-turbo", 
-            openai_api_key=openai_api_key
-        )
+    from llama_index.core import (
+        VectorStoreIndex, SimpleDirectoryReader
     )
-    service_context = ServiceContext.from_defaults(
-        llm_predictor=llm_predictor
-    )
+    import openai
+    openai.api_key = "OPEN AI 密鑰"
 
-    # 使用向量化索引來構建數據索引
-    # 這樣的索引更適合用於自然語言查詢
-    index = GPTVectorStoreIndex.from_documents(
-        documents, 
-        service_context=service_context
-    )
+    # 將文件放置在 data 資料夾內
+    documents = SimpleDirectoryReader("data").load_data()
+    index = VectorStoreIndex.from_documents(documents)
 
-    # 通過該引擎來處理查詢並生成對應的自然語言響應
     query_engine = index.as_query_engine()
+    
+    # 提問並取得回答
+    response = query_engine.query("這份文件在說什麼？")
+    print(response)
+    ```
 
-    # 執行查詢
-    response = query_engine.query(
-        "What is the main topic of the documents?"
+<br>
+
+## 建立索引
+
+1. 可透過語法保存索引。
+
+    ```python
+    index.storage_context.persist()
+    ```
+
+<br>
+
+2. 加載索引。
+
+    ```python
+    StorageContext.from_defaults()
+    ```
+
+<br>
+
+3. 以下範例檢查索引是否存在，若存在則加載，否則生成並保存索引。
+
+    ```python
+    import os.path
+    from llama_index.core import (
+        VectorStoreIndex,
+        SimpleDirectoryReader,
+        StorageContext,
+        load_index_from_storage,
     )
+
+    # 保存索引
+    PERSIST_DIR = "./storage"
+
+    if not os.path.exists(PERSIST_DIR):
+        documents = SimpleDirectoryReader("data").load_data()
+        index = VectorStoreIndex.from_documents(documents)
+        index.storage_context.persist(persist_dir=PERSIST_DIR)
+    else:
+        storage_context = StorageContext.from_defaults(persist_dir=PERSIST_DIR)
+        index = load_index_from_storage(storage_context)
+
+    query_engine = index.as_query_engine()
+    response = query_engine.query("這份文件在說什麼？")
     print(response)
     ```
 
