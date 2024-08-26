@@ -97,21 +97,33 @@ _依據 [官方的說明](https://docs.llamaindex.ai/en/stable/getting_started/s
         load_index_from_storage,
     )
 
-    # 保存索引
+    # 保存索引的目錄
     PERSIST_DIR = "./storage"
+    DOCSTORE_PATH = os.path.join(PERSIST_DIR, "docstore.json")
 
-    if not os.path.exists(PERSIST_DIR):
+    if not os.path.exists(PERSIST_DIR) or not os.path.exists(DOCSTORE_PATH):
+        # 如果目錄或文件不存在，創建目錄並重新創建索引
+        os.makedirs(PERSIST_DIR, exist_ok=True)  
         documents = SimpleDirectoryReader("data").load_data()
         index = VectorStoreIndex.from_documents(documents)
-        index.storage_context.persist(persist_dir=PERSIST_DIR)
+        # 保存索引到指定目錄
+        index.storage_context.persist(persist_dir=PERSIST_DIR)  
     else:
+        # 如果存在，則加載已保存的索引
         storage_context = StorageContext.from_defaults(persist_dir=PERSIST_DIR)
         index = load_index_from_storage(storage_context)
 
     query_engine = index.as_query_engine()
     response = query_engine.query("這份文件在說什麼？")
     print(response)
+
     ```
+
+<br>
+
+4. 運行後會建立索引文件。
+
+    ![](images/img_01.png)
 
 <br>
 
