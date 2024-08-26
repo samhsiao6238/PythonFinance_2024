@@ -1,4 +1,4 @@
-# Ollama 和 LLaMA 
+# LLaMA 和 Ollama
 
 _有一定的關聯性，但它們是不同的實體_
 
