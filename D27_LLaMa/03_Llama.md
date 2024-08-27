@@ -6,35 +6,50 @@ _依據官網的 [Running Meta Llama on Mac](https://llama.meta.com/docs/llama-e
 
 ## 範例
 
-1. 官方提供的 Python 範例。
+1. 官方提供的 Python 範例，通過 HTTP POST 請求向本地伺服器上的 API 發送一個問題，並獲取 AI 模型生成的回答。
 
     ```python
+    # 用於發送 HTTP 請求
     import requests
+    # 用於處理 JSON 格式的數據
     import json
 
+    # 定義 API 端點的 URL
     url = "http://localhost:11434/api/chat"
 
+    # 構建要發送給 API 的請求數據，這裡是 JSON 格式
     def llama3(prompt):
         data = {
+            # 指定使用的模型為 "llama3"
             "model": "llama3",
             "messages": [
                 {
+                    # 定義角色為用戶
                     "role": "user",
+                    # 用戶的輸入內容 prompt
                     "content": prompt
 
                 }
             ],
+            # 不使用流式傳輸，直接獲取完整回應
             "stream": False,
         }
-
+        # 設置 HTTP 請求的標頭，表明數據格式為 JSON
         headers = {
             "Content-Type": "application/json"
         }
-
-        response = requests.post(url, headers=headers, json=data)
+        # 發送 POST 請求到指定的 URL，攜帶標頭和 JSON 數據
+        response = requests.post(
+            url, 
+            headers=headers, 
+            json=data
+        )
+        # 從回應中提取生成的文本內容並返回
         return response.json()["message"]["content"]
-
+    
+    # 呼叫函數 llama3
     response = llama3("誰建立了中華民國？")
+    # 輸出模型生成的回答
     print(response)
     ```
 
