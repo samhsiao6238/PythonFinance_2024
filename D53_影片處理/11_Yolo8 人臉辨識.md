@@ -32,7 +32,13 @@ _以下使用 YOLOv8 和 `face_recognition` 庫進行人臉偵測和辨識，展
 
 <br>
 
-2. 範例。
+2. 將相片加入專案資料夾內，目前並未另外設定資料夾。
+
+    ![](images/img_28.png)
+
+<br>
+
+3. 範例。
 
     ```python
     import cv2
