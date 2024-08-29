@@ -53,7 +53,7 @@
 
 ## 開發
 
-1. 創建一個腳本，並寫入以下代碼。
+1. 建立一個腳本，並寫入以下代碼。
 
     ```python
     from llama_index.core import (

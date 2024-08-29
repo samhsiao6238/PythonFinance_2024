@@ -102,7 +102,7 @@ _依據 [官方的說明](https://docs.llamaindex.ai/en/stable/getting_started/s
     DOCSTORE_PATH = os.path.join(PERSIST_DIR, "docstore.json")
 
     if not os.path.exists(PERSIST_DIR) or not os.path.exists(DOCSTORE_PATH):
-        # 如果目錄或文件不存在，創建目錄並重新創建索引
+        # 如果目錄或文件不存在，建立目錄並重新建立索引
         os.makedirs(PERSIST_DIR, exist_ok=True)  
         documents = SimpleDirectoryReader("data").load_data()
         index = VectorStoreIndex.from_documents(documents)
