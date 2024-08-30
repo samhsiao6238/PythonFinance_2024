@@ -620,7 +620,7 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
 
 <br>
 
-6. 分類 Classification：根據最相似的標籤對文本進行分類，可以使用邏輯回歸、支持向量機或神經網絡等分類器來實現；為 DataFrame 添加一個 label 列，可以用來標記每個評論的情感，比如 `正面（1）` 或`負面（0）`。
+6. 分類 Classification：根據最相似的標籤對文本進行分類，可以使用邏輯迴歸、支持向量機或神經網絡等分類器來實現；為 DataFrame 添加一個 label 列，可以用來標記每個評論的情感，比如 `正面（1）` 或`負面（0）`。
 
     ```python
     from openai import OpenAI
@@ -672,7 +672,7 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
     y = df['label']
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
-    # 使用邏輯回歸進行分類
+    # 使用邏輯迴歸進行分類
     clf = LogisticRegression(random_state=0)
     # 使用交叉驗證來評估模型性能，使用 StratifiedKFold 來確保每個折中的類別分布均勻
     cv = StratifiedKFold(n_splits=3)
