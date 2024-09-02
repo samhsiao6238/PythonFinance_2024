@@ -62,7 +62,7 @@ _ROC 曲線和 AUC 值是評估分類模型性能的重要指標，尤其在處�
         random_state=42
     )
 
-    # 3. 使用邏輯回歸模型進行訓練
+    # 3. 使用邏輯迴歸模型進行訓練
     model = LogisticRegression()
     model.fit(X_train, y_train)
 
