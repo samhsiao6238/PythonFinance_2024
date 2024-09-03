@@ -1,5 +1,3 @@
-以下是修改後的講義和代碼，修正了代碼的錯誤並提供了更明確的講解。
-
 # Q-learning
 
 _`Q-learning` 是一種 `無模型` 的強化學習算法，用於在給定環境中學習最佳策略，通過反覆試探和環境互動找到一個策略，使得在每個狀態下選擇行動時獲得的累積獎勵最大化。_
@@ -106,56 +104,59 @@ _`Q-learning` 是一種 `無模型` 的強化學習算法，用於在給定環�
     plt.show()
     ```
 
+<br>
+
 2. 輸出 Q 表。
 
-![](images/img_137.png)
+    ![](images/img_137.png)
+
+<br>
 
 3. 累積獎勵，訓練過程中，Q 表逐漸收斂，代表代理逐漸學會在不同狀態下選擇最優行動以獲得最大回報，訓練完成後可以測試模型在環境中的表現。
 
-![](images/img_138.png)
-
-<br>
+    ![](images/img_138.png)
 
 <br>
 
 ## 測試訓練後的模型
 
-1. 測試模型表現。
+1. 測試模型表現，將使用訓練好的 Q 表來執行策略，並打印出獲得的總獎勵。
 
     ```python
     # 測試訓練後的模型
     state = env.reset()
+
+    # 確保 state 是整數
+    if isinstance(state, tuple):
+        state = state[0]
+
     done = False
     total_reward = 0
 
     while not done:
         action = np.argmax(Q[state, :])
-        state, reward, done, truncated, info = env.step(action)
+
+        # 執行行動並獲得結果
+        result = env.step(action)
+
+        if len(result) == 5:
+            next_state, reward, done, truncated, info = result
+        else:
+            next_state, reward, done, info = result[:4]
+            truncated = False
+
+        # 確保 next_state 是整數
+        if isinstance(next_state, tuple):
+            next_state = next_state[0]
+
         total_reward += reward
+        state = next_state
 
     print(f"Total reward: {total_reward}")
     ```
 
-    此代碼將使用訓練好的 Q 表來執行策略，並打印出獲得的總獎勵。
+<br>
 
-2. 如果您希望觀察代理如何在環境中執行策略，可以使用以下代碼渲染環境。
+___
 
-    ```python
-    import time
-
-    state = env.reset()
-    done = False
-    env.render()
-
-    while not done:
-        action = np.argmax(Q[state, :])
-        state, reward, done, truncated, info = env.step(action)
-        env.render()
-        time.sleep(1)
-
-    env.close()
-    ```
-
-這樣你可以在屏幕上看到代理在 `Taxi-v3` 環境中行動的過程。
-
-這些修正和補充將幫助你更好地理解和測試 Q-learning 在 `Taxi-v3` 環境中的應用。如果仍有問題，请确保已正确安装所需的库，并检查所使用的 Python 版本与 Gym 版本的兼容性。
+_未完_
