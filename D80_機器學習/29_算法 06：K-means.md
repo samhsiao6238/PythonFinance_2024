@@ -264,74 +264,89 @@ _適合用於 K-means 演算法進行聚類分析的數據集很多，例如 `Ir
 
 _K-means 是一種聚類算法，通常用於將數據集劃分為 K 個簇（clusters）；而在異常檢測中，假設大多數數據點會形成密集的簇，而那些遠離所有簇中心的數據點可被視為異常點。_
 
+<br>
+
 1. 同樣使用 `Iris 數據集` 來展示 `K-means 進行異常檢測`，特別說明，Iris 數據集主要是用於分類，但可通過聚類的方法來檢測異常點。
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-from sklearn.datasets import load_iris
-from sklearn.preprocessing import StandardScaler
+    ```python
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn.cluster import KMeans
+    from sklearn.datasets import load_iris
+    from sklearn.preprocessing import StandardScaler
 
-# 加載 Iris 數據集
-data = load_iris()
-X = data.data
+    # 設定支持中文的字體，避免顯示錯誤
+    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
+    # 用來正常顯示負號
+    plt.rcParams['axes.unicode_minus'] = False
 
-# 標準化數據
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
+    # 加載 Iris 數據集
+    data = load_iris()
+    X = data.data
 
-# 查看數據集形狀
-print(f"數據集形狀: {X.shape}")
+    # 標準化數據
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
 
-# 設置 K-means 模型，將數據分成 3 個簇
-kmeans = KMeans(
-    n_clusters=3, random_state=42
-)
-kmeans.fit(X_scaled)
+    # 查看數據集形狀
+    print(f"數據集形狀: {X.shape}")
 
-# 獲取每個數據點距離最近簇中心的距離
-distances = kmeans.transform(X_scaled).min(axis=1)
+    # 設置 K-means 模型，將數據分成 3 個簇
+    kmeans = KMeans(
+        n_clusters=3, random_state=42
+    )
+    kmeans.fit(X_scaled)
 
-# 設置距離的閾值（可以通過觀察數據決定）
-# 假設前 95% 為正常點，其餘為異常點
-threshold = np.percentile(distances, 95)
+    # 獲取每個數據點距離最近簇中心的距離
+    distances = kmeans.transform(X_scaled).min(axis=1)
 
-# 標記異常點
-anomalies = distances > threshold
-print(f"檢測到的異常數據點數量: {anomalies.sum()}")
+    # 設置距離的閾值（可以通過觀察數據決定）
+    # 假設前 95% 為正常點，其餘為異常點
+    threshold = np.percentile(distances, 95)
 
-# 可視化 K-means 聚類結果和異常點
-plt.figure(figsize=(10, 6))
-plt.scatter(
-    X_scaled[:, 0], X_scaled[:, 1], 
-    c='b', s=30, 
-    label='正常數據點'
-)
-plt.scatter(
-    X_scaled[anomalies, 0], X_scaled[anomalies, 1], 
-    c='r', s=50, 
-    label='異常數據點', marker='x'
-)
+    # 標記異常點
+    anomalies = distances > threshold
+    print(f"檢測到的異常數據點數量: {anomalies.sum()}")
 
-# 繪製簇中心
-centers = kmeans.cluster_centers_
-plt.scatter(
-    centers[:, 0], centers[:, 1], c='g', 
-    s=200, alpha=0.75, marker='o', 
-    label='簇中心'
-)
+    # 可視化 K-means 聚類結果和異常點
+    plt.figure(figsize=(10, 6))
+    plt.scatter(
+        X_scaled[:, 0], X_scaled[:, 1], 
+        c='b', s=30, 
+        label='正常數據點'
+    )
+    plt.scatter(
+        X_scaled[anomalies, 0], X_scaled[anomalies, 1], 
+        c='r', s=50, 
+        label='異常數據點', marker='x'
+    )
 
-plt.title('K-means 異常檢測結果')
-plt.xlabel('標準化特徵 1')
-plt.ylabel('標準化特徵 2')
-plt.legend()
-plt.show()
-```
+    # 繪製簇中心
+    centers = kmeans.cluster_centers_
+    plt.scatter(
+        centers[:, 0], centers[:, 1], c='g', 
+        s=200, alpha=0.75, marker='o', 
+        label='簇中心'
+    )
 
-2. 圖中藍色圓點表示被 K-means 判斷為正常的數據點，紅色叉表示異常數據點，即遠離所有簇中心的數據點，綠色圓圈標記為 K-means 計算出的簇中心；正常數據點通常會聚集在簇中心附近，而異常點則遠離簇中心。
+    plt.title('K-means 異常檢測結果')
+    plt.xlabel('標準化特徵 1')
+    plt.ylabel('標準化特徵 2')
+    plt.legend()
+    plt.show()
+    ```
 
+<br>
 
+2. 結果顯示。
+
+    ![](images/img_134.png)
+
+<br>
+
+3. 圖中藍色圓點表示被 K-means 判斷為正常的數據點，紅色叉表示異常數據點，即遠離所有簇中心的數據點，綠色圓圈標記為 K-means 計算出的簇中心；正常數據點通常會聚集在簇中心附近，而異常點則遠離簇中心。
+
+    ![](images/img_135.png)
 
 <br>
 
