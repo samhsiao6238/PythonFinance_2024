@@ -350,6 +350,74 @@ _K-means 是一種聚類算法，通常用於將數據集劃分為 K 個簇（cl
 
 <br>
 
+4. 若不易觀察，可優化代碼使每個聚類中的數據點顯示為不同的顏色。
+
+    ```python
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn.cluster import KMeans
+    from sklearn.datasets import load_iris
+    from sklearn.preprocessing import StandardScaler
+
+    # 加載 Iris 數據集
+    data = load_iris()
+    X = data.data
+
+    # 標準化數據
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    # 設置 K-means 模型，將數據分成 3 個簇
+    kmeans = KMeans(n_clusters=3, random_state=42)
+    kmeans.fit(X_scaled)
+
+    # 獲取每個數據點距離最近簇中心的距離
+    distances = kmeans.transform(X_scaled).min(axis=1)
+
+    # 設置距離的閾值（可以通過觀察數據決定）
+    # 假設前 95% 為正常點，其餘為異常點
+    threshold = np.percentile(distances, 95)
+
+    # 標記異常點
+    anomalies = distances > threshold
+    print(f"檢測到的異常數據點數量: {anomalies.sum()}")
+
+    # 預測每個數據點的聚類標籤
+    labels = kmeans.labels_
+
+    # 可視化 K-means 聚類結果和異常點
+    plt.figure(figsize=(10, 6))
+    
+    plt.scatter(
+        X_scaled[:, 0], X_scaled[:, 1], 
+        c=labels, s=30,
+        # 使用聚類標籤來設置每個點的顏色
+        cmap='viridis', 
+        label='正常數據點'
+    )
+    plt.scatter(
+        X_scaled[anomalies, 0], X_scaled[anomalies, 1], 
+        c='r', s=50, 
+        label='異常數據點', marker='x'
+    )
+
+    # 繪製簇中心
+    centers = kmeans.cluster_centers_
+    plt.scatter(
+        centers[:, 0], centers[:, 1], 
+        c='black', s=200, alpha=0.75, 
+        marker='o', label='簇中心'
+    )
+
+    plt.title('K-means 異常檢測結果')
+    plt.xlabel('標準化特徵 1')
+    plt.ylabel('標準化特徵 2')
+    plt.legend()
+    plt.show()
+    ```
+
+    ![](images/img_136.png)
+
 ___
 
 _END_
