@@ -37,7 +37,7 @@ def re_outline(topic):
     """
 
     prompt = PromptTemplate(
-        # 指定模板中使用的變量名稱
+        # 指定模板中使用的變數名稱
         input_variables=["topic"],
         # 提供模板字串
         template=template,

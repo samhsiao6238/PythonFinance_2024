@@ -24,7 +24,7 @@ def generate_outline(topic):
     # 建立提示模板
     template = "作為經驗豐富的資料科學家和學者，請你為有關 {topic} 的主題製定演講大綱"
     prompt = PromptTemplate(
-        # 指定模板中使用的變量名稱
+        # 指定模板中使用的變數名稱
         input_variables=["topic"],
         # 提供模板字串
         template=template,

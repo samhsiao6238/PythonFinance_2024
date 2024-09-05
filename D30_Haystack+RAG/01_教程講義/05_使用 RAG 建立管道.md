@@ -221,7 +221,7 @@ _以下是一個建立管道的流程_
 
 <br>
 
-3. 建立 `生成器`：`生成器` 可與 LLM 進行互動，預設會讀取環境變數中的 `OPENAI_API_KEY` 變量值，這在前面步驟已進行寫入。
+3. 建立 `生成器`：`生成器` 可與 LLM 進行互動，預設會讀取環境變數中的 `OPENAI_API_KEY` 變數值，這在前面步驟已進行寫入。
 
     ```python
     from haystack.components.generators import OpenAIGenerator
