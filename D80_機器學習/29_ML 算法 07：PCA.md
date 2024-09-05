@@ -1,6 +1,6 @@
 # PCA
 
-_主成分分析，Principal Component Analysis_
+_主成分分析，Principal Component Analysis；用於數據降維和可視化的算法_
 
 <br>
 

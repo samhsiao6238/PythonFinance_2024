@@ -1,6 +1,6 @@
 # t-SNE
 
-_t-Distributed Stochastic Neighbor Embedding，t分佈隨機鄰域嵌入_
+_t-Distributed Stochastic Neighbor Embedding，t分佈隨機鄰域嵌入；用於數據降維和可視化的算法_
 
 <br>
 
