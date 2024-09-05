@@ -197,6 +197,37 @@ _展示 k-NN 的數據分佈和分類過程_
 
 <br>
 
+3. 添加混淆矩陣；`類別 1` 具有最高的正確預測率（17/21），`類別 2` 的誤判率相對較高（3 個誤判），特別是被錯誤預測為類別 0 和類別 1 的情況，`類別 0` 被錯誤預測為類別 2 的次數較多，這可能表明這兩個類別之間的樣本有一定的重疊或模型在這些特徵上難以區分。
+
+    ```python
+    import seaborn as sns
+
+    # 繪製混淆矩陣
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(
+        cm,
+        # 確保單元格顯示為數字
+        annot=True,
+        # 確保單元格的數字顯示為整數
+        fmt="d",
+        cmap="Blues", cbar=False,
+        xticklabels=data.target_names,
+        yticklabels=data.target_names
+    )
+    plt.title('k-NN 模型的混淆矩陣')
+    plt.xlabel('預測類別')
+    plt.ylabel('真實類別')
+    plt.show()
+    ```
+
+<br>
+
+4. 可視化混淆矩陣考。
+
+    ![](images/img_146.png)
+
+<br>
+
 ___
 
 _END_
