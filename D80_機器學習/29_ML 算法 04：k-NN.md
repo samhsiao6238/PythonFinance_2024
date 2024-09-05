@@ -228,6 +228,168 @@ _展示 k-NN 的數據分佈和分類過程_
 
 <br>
 
+## 使用 `Breast Cancer Wisconsin` 資料集
+
+_除了 `Iris 資料集` 外，`Breast Cancer Wisconsin` 資料集也很適用於 `k-NN 算法` 的機器學習數據集，這個資料集包含多種特徵，能夠很好地展示 `k-NN` 在二元分類問題中的效果_
+
+<br>
+
+1. 以下範例使用 k-NN 結合`Breast Cancer Wisconsin` 資料集，這個資料集特徵數量 `30`、類別數 `2`、樣本數 `569`。
+
+    ```python
+    # 引入所需的庫
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_breast_cancer
+    from sklearn.model_selection import train_test_split
+    from sklearn.neighbors import KNeighborsClassifier
+    from sklearn.metrics import (
+        classification_report, 
+        confusion_matrix, 
+        ConfusionMatrixDisplay
+    )
+    from sklearn.preprocessing import StandardScaler
+    from matplotlib.colors import ListedColormap
+
+    # 設定支持中文的字體，避免顯示錯誤
+    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
+    plt.rcParams['axes.unicode_minus'] = False
+
+    # 加載 Breast Cancer 資料集
+    data = load_breast_cancer()
+    X = data.data
+    y = data.target
+
+    # 對數據進行標準化處理
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    # 將數據集劃分為訓練集和測試集
+    X_train, X_test, y_train, y_test = train_test_split(
+        X_scaled, y, 
+        test_size=0.3, random_state=42
+    )
+
+    # 創建 k-NN 分類器，這裡我們設置 k=5
+    knn = KNeighborsClassifier(n_neighbors=5)
+    knn.fit(X_train, y_train)
+
+    # 預測測試集
+    y_pred = knn.predict(X_test)
+
+    # 計算混淆矩陣
+    cm = confusion_matrix(y_test, y_pred)
+
+    # 繪製混淆矩陣
+    disp = ConfusionMatrixDisplay(
+        confusion_matrix=cm,
+        display_labels=data.target_names
+    )
+    disp.plot(cmap=plt.cm.Blues)
+    plt.title('k-NN 模型的混淆矩陣 (k=5)')
+    plt.show()
+
+    # 打印分類報告
+    print("\n分類報告：\n", classification_report(y_test, y_pred, target_names=data.target_names))
+
+    # 計算特徵的影響（重要性）並可視化
+    feature_importance = np.zeros(X.shape[1])
+    for i, feature in enumerate(X.T):
+        knn.fit(X_train[:, i].reshape(-1, 1), y_train)
+        feature_importance[i] = knn.score(
+            X_test[:, i].reshape(-1, 1), y_test
+        )
+
+    # 顯示特徵的重要性
+    indices = np.argsort(feature_importance)[::-1]
+    plt.figure(figsize=(10, 6))
+    plt.title('特徵的重要性 (單特徵模型準確度)')
+    plt.bar(range(X.shape[1]), feature_importance[indices], align='center', color='b')
+    plt.xticks(
+        range(X.shape[1]),
+        [data.feature_names[i] for i in indices],
+        rotation=90
+    )
+    plt.xlabel('特徵')
+    plt.ylabel('重要性分數')
+    plt.grid(True)
+    plt.show()
+
+    # 可視化數據的兩個主要特徵的分佈和分類邊界
+    # 這裡我們選擇兩個主要特徵進行可視化
+    # 使用標準化後的數據的前兩個特徵
+    X_vis = X_scaled[:, :2]
+    knn_vis = KNeighborsClassifier(n_neighbors=5)
+    knn_vis.fit(X_train[:, :2], y_train)
+
+    # 計算邊界
+    h = .02  # 邊界的步長
+    x_min, x_max = X_vis[:, 0].min() - 1, X_vis[:, 0].max() + 1
+    y_min, y_max = X_vis[:, 1].min() - 1, X_vis[:, 1].max() + 1
+    xx, yy = np.meshgrid(
+        np.arange(x_min, x_max, h),
+        np.arange(y_min, y_max, h)
+    )
+
+    # 預測所有點的分類
+    Z = knn_vis.predict(np.c_[xx.ravel(), yy.ravel()])
+    Z = Z.reshape(xx.shape)
+
+    # 創建顏色映射
+    cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA'])
+    cmap_bold = ListedColormap(['#FF0000', '#00FF00'])
+
+    # 繪製邊界
+    plt.figure(figsize=(8, 6))
+    plt.contourf(xx, yy, Z, cmap=cmap_light)
+
+    # 繪製訓練點和測試點
+    plt.scatter(
+        X_train[:, 0], X_train[:, 1], 
+        c=y_train, cmap=cmap_bold, 
+        edgecolor='k', s=20, label='訓練數據'
+    )
+    plt.scatter(
+        X_test[:, 0], X_test[:, 1], 
+        c=y_pred, cmap=cmap_bold, 
+        edgecolor='k', marker='x',
+        s=50, label='測試數據'
+    )
+
+    # 設置圖形標題和標籤
+    plt.title('k-NN 數據分佈與分類邊界 (前兩個特徵)')
+    plt.xlabel('特徵 1: ' + data.feature_names[0])
+    plt.ylabel('特徵 2: ' + data.feature_names[1])
+    plt.legend()
+    plt.show()
+    ```
+
+<br>
+
+2. 混淆矩陣。
+
+    ![](images/img_147.png)
+
+<br>
+
+3. 分類報告。
+
+    ![](images/img_148.png)
+
+<br>
+
+4. 特徵重要性。
+
+    ![](images/img_149.png)
+
+<br>
+
+5. 分佈圖。
+
+    ![](images/img_150.png)
+
+<br>
+
 ___
 
 _END_
