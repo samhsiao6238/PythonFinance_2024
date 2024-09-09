@@ -1,6 +1,6 @@
 # XPath
 
-_XML Path Language_
+_XML Path Language，可參考以下 [說明文件](https://selenium-python.readthedocs.io/locating-elements.html)_
 
 <br>
 
