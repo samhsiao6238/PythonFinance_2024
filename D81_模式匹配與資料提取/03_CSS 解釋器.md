@@ -186,7 +186,7 @@ _比 `XPath` 語法更簡潔，且更適合處理 `HTML` 結構_
 
 <br>
 
-1. 安裝 BeautifulSoup。
+1. 安裝 `BeautifulSoup`。
 
     ```bash
     pip install beautifulsoup4
@@ -198,7 +198,8 @@ _比 `XPath` 語法更簡潔，且更適合處理 `HTML` 結構_
 
     ```python
     from bs4 import BeautifulSoup
-
+    
+    # 假設文本
     html_content = """
     <html>
       <body>
@@ -210,7 +211,11 @@ _比 `XPath` 語法更簡潔，且更適合處理 `HTML` 結構_
     """
 
     # 使用 BeautifulSoup 解析 HTML
-    soup = BeautifulSoup(html_content, 'html.parser')
+    # html.parser 是 BeautifulSoup 內建的解析器
+    soup = BeautifulSoup(
+      html_content,
+      'html.parser'
+    )
 
     # 使用 `soup.select('p')`
     # 可以選擇所有的 `<p>` 標籤，並提取其文本內容
@@ -352,6 +357,24 @@ _參考下表說明_
 <br>
 
 <img src="images/img_01.png" width="400px">
+
+<br>
+
+## 常見解析器
+
+_解析器用於將 HTML 文本解析成可以由 BeautifulSoup 操作的結構化樹狀數據格式，不同解析器有其適合的應用場景。_
+
+<br>
+
+1. `html.parser`：Python 內建的解析器，無需額外安裝，適合小型或簡單的 HTML 文檔。
+
+<br>
+
+2. `lxml`：需要安裝第三方庫，速度更快，支持 XML 和 HTML 的高效解析，推薦處理大型文檔。
+
+<br>
+
+3. `html5lib`：完全遵循 HTML5 標準的解析器，能處理格式不嚴謹的 HTML，但速度較慢。
 
 <br>
 
