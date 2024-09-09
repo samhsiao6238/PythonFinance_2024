@@ -2,7 +2,7 @@
 
 _CSS Selectors_
 
-![](images/img_03.png)
+<img src="images/img_03.png" width="300px">
 
 <br>
 
@@ -341,7 +341,7 @@ _參考下表說明_
 
 <br>
 
-![](images/img_01.png)
+<img src="images/img_01.png" width="400px">
 
 <br>
 
