@@ -2,7 +2,7 @@
 
 _CSS Selectors_
 
-<img src="images/img_03.png" width="300px">
+<img src="images/img_03.png" width="400px">
 
 <br>
 
