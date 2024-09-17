@@ -1060,6 +1060,101 @@ _或稱 `長條圖`_
 
 <br>
 
+2. 使用 matplotlib 繪製 `K 線圖`，也稱 `燭台圖`；由於 matplotlib 沒有內建的 K 線圖功能，因此需要手動設定每根 K 線的開盤價、收盤價、最高價、最低價來完成繪圖。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import pandas as pd
+
+    # 模擬股票數據
+    data = {
+        "Date": pd.date_range(start="2023-01-01", periods=10, freq="D"),
+        "Open": [100, 102, 106, 104, 105, 108, 107, 110, 112, 115],
+        "High": [105, 106, 107, 108, 110, 112, 111, 115, 116, 119],
+        "Low": [99, 98, 102, 101, 105, 107, 106, 109, 111, 105],
+        "Close": [104, 105, 103, 107, 109, 111, 110, 114, 110, 118],
+    }
+
+    # 將數據轉換為 DataFrame 並設置日期為索引
+    df = pd.DataFrame(data)
+    df.set_index("Date", inplace=True)
+
+    # 開始繪製 K 線圖
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # 設置顏色：上漲用綠色，下跌用紅色
+    colors = [
+        "green" if close >= open_ else "red"
+        for open_, close in zip(df["Open"], df["Close"])
+    ]
+
+    # 繪製 K 線圖
+    for i, (date, open_, close, high, low) in enumerate(
+        zip(df.index, df["Open"], df["Close"], df["High"], df["Low"])
+    ):
+        # 繪製影線（最高價到最低價）
+        ax.plot([i, i], [low, high], color="black", linewidth=1)
+
+        # 繪製矩形表示開盤價到收盤價
+        rect = plt.Rectangle(
+            (i - 0.2, min(open_, close)),
+            0.4,
+            abs(open_ - close),
+            color=colors[i],
+            alpha=0.8,
+        )
+        ax.add_patch(rect)
+
+    # 設置 X 軸日期標籤
+    ax.set_xticks(range(len(df.index)))
+    ax.set_xticklabels(df.index.strftime("%Y-%m-%d"), rotation=45)
+
+    # 設置標題和軸標籤
+    ax.set_title("K-Line (Candlestick) Chart")
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Price")
+
+    plt.tight_layout()
+    plt.show()
+    ```
+
+    ![](images/img_209.png)
+
+<br>
+
+3. 可使用 mplfinance 繪製股票K線圖，這是一個專門用於財務數據視覺化的庫；需要安裝套件 `pip install mplfinance`。
+
+    ```python
+    import mplfinance as mpf
+    import pandas as pd
+
+    # 模擬股票數據
+    data = {
+        "Date": pd.date_range(start="2023-01-01", periods=10, freq="D"),
+        "Open": [100, 102, 106, 104, 105, 108, 107, 110, 112, 115],
+        "High": [105, 106, 107, 108, 110, 112, 111, 115, 116, 119],
+        "Low": [99, 98, 102, 101, 105, 107, 106, 109, 111, 105],
+        "Close": [104, 105, 103, 107, 109, 111, 110, 114, 110, 118],
+        "Volume": [1500, 1800, 1700, 1600, 2000, 2100, 1900, 2200, 2300, 2400]
+    }
+
+
+    # 將數據轉換為 DataFrame 並設置日期為索引
+    df = pd.DataFrame(data)
+    df.set_index("Date", inplace=True)
+
+    # 使用 mplfinance 繪製 K 線圖
+    mpf.plot(
+        df, type="candle", style="charles", 
+        volume=True, title="Stock Candlestick Chart"
+    )
+    ```
+
+    ![](images/img_210.png)
+
+<br>
+
 ## 熱圖（Heatmap）
 
 1. 熱圖用來顯示矩陣形式的數據，並通過顏色來表示數值的大小。
@@ -1441,6 +1536,53 @@ _這在散點圖時已結合使用過，這裡介紹 3D Plot 本身的基礎與�
     ![](images/img_180.png)
 
 <br>
+
+2. 優化代碼。
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.ticker import PercentFormatter
+
+# 模擬數據
+values = [10, 20, 15, 35, 40]
+categories = ['A', 'B', 'C', 'D', 'E']
+
+# 計算累積百分比
+cumsum = np.cumsum(values)
+total = cumsum[-1]
+cumsum_percentage = cumsum / total * 100
+
+# 設置顏色
+colors = ['#FF9999', '#66B2FF', '#99FF99', '#FFCC99', '#FF6666']
+
+# 繪製帕累托圖
+fig, ax = plt.subplots(figsize=(8, 6))
+
+# 繪製柱狀圖，使用不同顏色
+bars = ax.bar(categories, values, color=colors)
+
+# 累積百分比曲線
+ax2 = ax.twinx()
+ax2.plot(categories, cumsum_percentage, color='red', marker='D', ms=7, linestyle='-', label="Cumulative %")
+
+# 添加累積百分比的百分比格式
+ax2.yaxis.set_major_formatter(PercentFormatter())
+
+# 設置標題和軸標籤
+ax.set_title('Pareto Chart')
+ax.set_xlabel('Category')
+ax.set_ylabel('Values')
+ax2.set_ylabel('Cumulative Percentage')
+
+# 顯示圖例
+ax2.legend(loc="upper left")
+
+# 顯示圖表
+plt.show()
+```
+
+![](images/img_208.png)
 
 ## 瀑布圖（Waterfall Chart）
 
