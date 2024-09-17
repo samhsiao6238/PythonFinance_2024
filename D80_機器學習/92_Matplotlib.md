@@ -12,6 +12,11 @@ _Python 視覺化工具，以下是常見的圖形類型_
     import matplotlib.pyplot as plt
     import numpy as np
 
+    # 設定支持中文的字體，避免顯示錯誤
+    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
+    # 用來正常顯示負號
+    plt.rcParams['axes.unicode_minus'] = False
+
     # 模擬數據
     x = np.linspace(0, 10, 100)
     y = np.sin(x)
@@ -25,6 +30,64 @@ _Python 視覺化工具，以下是常見的圖形類型_
     ```
 
     ![](images/img_167.png)
+
+<br>
+
+2. 使用了 twstock 模組來抓取台股的資料，並透過 matplotlib 來繪製折線圖；要先進行套件安裝 `pip install twstock`。
+
+    ```python
+    # 匯入所需的模組
+    import twstock
+    import matplotlib.pyplot as plt
+
+    # 設定支持中文的字體，避免顯示錯誤
+    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
+    # 用來正常顯示負號
+    plt.rcParams['axes.unicode_minus'] = False
+
+    # 獲取 TSMC（台積電）2330 的歷史股價數據
+    tsmc = twstock.Stock('2330')
+
+    # 獲取最近的 100 筆交易日的股價資料，從 2023 年 12 月開始
+    stock_data = tsmc.fetch_from(2023, 12)
+
+    # 提取日期與收盤價數據，將日期與收盤價分別儲存於 lists 中
+    dates = [data.date for data in stock_data]
+    closing_prices = [data.close for data in stock_data]
+
+    # 繪製收盤價的折線圖，設定圖表大小為 10x6 英吋
+    plt.figure(figsize=(10, 6)) 
+    # 繪製折線圖，並以圓圈標記每個點
+    plt.plot(
+        dates, closing_prices, 
+        marker='o', linestyle='-', 
+        color='blue'
+    )
+
+    # 設定圖表標題與軸標籤
+    plt.title(
+        'TSMC 收盤價時間序列圖',
+        fontsize=16, color='green'
+    )
+    # X 軸標籤
+    plt.xlabel('日期', fontsize=12)
+    # Y 軸標籤
+    plt.ylabel('收盤價', fontsize=12)
+
+    # 設定 X 軸的日期標籤，並將其旋轉 45 度，避免重疊
+    plt.xticks(rotation=45)
+
+    # 加入網格線，讓圖表更清晰
+    plt.grid(True)
+
+    # 自動調整子圖參數，避免標籤重疊
+    plt.tight_layout()
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_185.png)
 
 <br>
 
@@ -51,6 +114,10 @@ _Python 視覺化工具，以下是常見的圖形類型_
 
 ## 柱狀圖（Bar Plot）
 
+_或稱 `長條圖`_
+
+<br>
+
 1. 柱狀圖用於比較不同類別的數據。
 
     ```python
@@ -66,6 +133,104 @@ _Python 視覺化工具，以下是常見的圖形類型_
     ```
 
     ![](images/img_169.png)
+
+<br>
+
+2. 橫向佈局。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    # 模擬資料，關鍵字
+    words = [
+        'court appeal',
+        'supreme court',
+        'police officer',
+        'civil right'
+    ]
+    # 模擬重要性數據
+    importance = [0.01, 0.005, 0.008, 0.007] 
+    # 模擬主題編號
+    topics = [0, 1, 2, 1]
+
+    # 定義顏色對應每個 topic
+    colors = {0: 'red', 1: 'green', 2: 'blue'}
+
+    # 繪製橫向長條圖
+    plt.barh(
+        words, importance, 
+        color=[colors[t] for t in topics]
+    )
+
+    # 設定標題與軸標籤
+    plt.title('Main Topics', fontsize=16)
+    plt.xlabel('Word Importance')
+    plt.ylabel('Word')
+
+    # 顯示圖表
+    plt.tight_layout()
+    plt.show()
+    ```
+
+    ![](images/img_186.png)
+
+<br>
+
+3. 適合處理複雜的數據，其中包含使用 plt.tight_layout() 自動調整佈局，確保圖表不會因為字詞過長而重疊。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    # 模擬資料
+    words = [
+        'district court', 'court appeal', 'united state', 'u court', 'circuit affirmed', 
+        'ninth circuit', 'en banc', 'supreme court', 'fifth circuit', 'federal court', 
+        'u supreme', 'appeal u', 'fourth amendment', 'granted summary', 'violent felony', 
+        'police officer', 'school district', 'summary judgment', 'funeral home', 'circuit court',
+        'title vii', 'court decided', 'civil right', 'appellate court'
+    ]
+    # 模擬重要性數據
+    importance = np.random.rand(len(words)) / 100
+
+    # 為每個字詞分配主題編號 (Topic)
+    topics = np.random.randint(0, 3, len(words))
+
+    # 定義顏色對應每個 topic
+    colors = {0: 'red', 1: 'green', 2: 'blue'}
+
+    # 繪製橫向長條圖
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # 將字詞與其對應的 Word Importance 值進行繪製
+    ax.barh(
+        words, importance,
+        color=[colors[t] for t in topics]
+    )
+
+    # 設定標題與軸標籤
+    ax.set_title('Main Topics', fontsize=16)
+    ax.set_xlabel('Word Importance')
+    ax.set_ylabel('Word')
+
+    # 添加圖例來區分不同 Topic
+    from matplotlib.patches import Patch
+    legend_elements = [
+        Patch(facecolor='red', label='Topic 0'),
+        Patch(facecolor='green', label='Topic 1'),
+        Patch(facecolor='blue', label='Topic 2')
+    ]
+    ax.legend(handles=legend_elements, title="Topic")
+
+    # 自動調整圖表佈局以防止標籤重疊
+    plt.tight_layout()
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_187.png)
 
 <br>
 
