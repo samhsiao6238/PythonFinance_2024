@@ -1715,6 +1715,59 @@ _這在散點圖時已結合使用過，這裡介紹 3D Plot 本身的基礎與�
 
 <br>
 
+2. 使用 matplotlib 中的 plot_surface 方法繪製 3D 瀑布圖；這類瀑布圖在機器學習中的應用，主要集中在頻譜分析、信號處理、特徵提取和異常檢測等領域，它能夠提供一種多維數據的可視化方式，幫助機器學習工程師更好地理解數據特徵和模型輸入，尤其在處理與頻率、時間相關的問題上，瀑布圖的視覺化效果是非常有價值的。
+
+    ```python
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from mpl_toolkits.mplot3d import Axes3D
+    from matplotlib import cm
+
+    # 模擬數據
+    # 頻率範圍 (Hz)
+    X = np.linspace(0, 8000, 300)
+    # 時間範圍 (s)
+    Y = np.linspace(0, 1, 500)
+    X, Y = np.meshgrid(X, Y)
+
+    # 使用正弦波和指數衰減模擬更符合預期的效果
+    Z = (
+        20
+        * np.log10(
+            np.abs(
+                np.sin(X / 1000) * np.exp(-Y * 2) + np.random.rand(*X.shape) * 0.1
+            )
+        )
+        - 80
+    )
+
+    # 創建 3D 圖
+    fig = plt.figure(figsize=(12, 8))
+    ax = fig.add_subplot(111, projection="3d")
+
+    # 繪製 3D 瀑布圖，使用表面圖
+    surf = ax.plot_surface(X, Y, Z, cmap=cm.jet, edgecolor="none")
+
+    # 添加顏色條（colorbar）
+    fig.colorbar(surf, shrink=0.5, aspect=5)
+
+    # 設置標籤
+    ax.set_xlabel("Frequency (Hz)")
+    ax.set_ylabel("Time (s)")
+    ax.set_zlabel("Amplitude (dB)")
+    ax.set_title("3D Waterfall Plot")
+
+    # 調整視角來模擬瀑布圖的角度
+    ax.view_init(elev=30, azim=-60)
+
+    # 顯示圖形
+    plt.show()
+    ```
+
+    ![](images/img_212.png)
+
+<br>
+
 ## 等高線圖（Contour Plot）
 
 1. 等高線圖用於表示三維數據的二維投影，其中等高線代表數據中相同值的點。
