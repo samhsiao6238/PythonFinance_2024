@@ -1316,7 +1316,7 @@ _或稱 `長條圖`_
 
 ## 極區圖（Polar Plot）
 
-1. 極區圖用於展示數據的角度和半徑。
+1. 極區圖用於展示數據的角度和半徑；是一種以極坐標系為基礎的圖形，用來表示數據點在半徑（r）和角度（θ）上的分佈；在機器學習領域的應用場景主要集中在與 `方向性` 或 `週期性` 數據相關的領域，特別是 `信號處理、時間序列分析、機器人導航、風力渦輪機預測` 等，在這些領域中，極區圖能夠直觀地展示數據的角度與半徑之間的關係，從而幫助機器學習模型更好地理解數據特徵並進行決策。
 
     ```python
     # 模擬數據
@@ -1330,6 +1330,63 @@ _或稱 `長條圖`_
     ```
 
     ![](images/img_176.png)
+
+<br>
+
+2. 3D 堆積柱狀圖可以用來展示多個數據集的累積效果，尤其是當數據被劃分為多個組合部分，並需要同時展示總量及其組成部分時；這種圖形通常應用於比較多組數據的變化或展示組合數據的總體趨勢。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # 模擬數據
+    labels = ["A", "B", "C"]
+    x1 = [3, 2, 5]
+    x2 = [4, 7, 1]
+
+    # 創建 3D 圖
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection="3d")
+
+    # 設置 X 軸位置
+    x_pos = np.arange(len(labels))
+    y_pos = np.zeros(len(labels))
+    z_pos = np.zeros(len(labels))
+
+    # 設置柱子的寬度和深度
+    dx = np.ones(len(labels)) * 0.4
+    dy = np.ones(len(labels))
+
+    # 第一組數據 X1
+    dz1 = np.array(x1)
+    ax.bar3d(
+        x_pos, y_pos, z_pos, dx, dy, dz1, 
+        color="b", alpha=0.8, label="X1"
+    )
+
+    # 第二組數據 X2，疊加在 X1 之上
+    dz2 = np.array(x2)
+    ax.bar3d(
+        x_pos, y_pos, dz1, dx, dy, dz2, 
+        color="r", alpha=0.8, label="X2"
+    )
+
+    # 設置標籤
+    ax.set_xticks(x_pos)
+    ax.set_xticklabels(labels)
+    ax.set_xlabel("Category")
+    ax.set_ylabel("Y Axis")
+    ax.set_zlabel("Value")
+
+    # 添加標題
+    ax.set_title("3D Stacked Bar Chart")
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_213.png)
 
 <br>
 
