@@ -299,6 +299,124 @@ _或稱 `長條圖`_
 
 <br>
 
+4. 柱狀圖可使用 matplotlib 中的 `Axes3D` 來繪製 3D 柱狀圖；立體的柱狀圖預設沒間隔，看起來會很像長條圖，所以在 x_pos 和 y_pos 之間增加一些空隙。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # 模擬數據
+    categories = ['A', 'B', 'C', 'D']
+    values = [10, 15, 7, 10]
+
+    # 創建 3D 圖
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # 設置 X 軸位置並增加間隔
+    # 每個柱子之間設置 1.5 的間隔
+    x_pos = np.arange(len(categories)) * 1.5
+    y_pos = np.zeros(len(categories))
+    z_pos = np.zeros(len(categories))
+
+    # 設置柱子的寬度和深度
+    # 每個柱子的寬度設置為 0.95
+    dx = np.ones(len(categories)) * 0.95
+    # 每個柱子的深度設置為 5
+    dy = np.ones(len(categories)) * 5
+    # Z 軸高度為對應的值
+    dz = values
+
+    # 定義不同顏色
+    colors = ['#FF9999', '#66B2FF', '#99FF99', '#FFCC99']
+
+    # 繪製 3D 柱狀圖，每個柱子不同顏色
+    ax.bar3d(x_pos, y_pos, z_pos, dx, dy, dz, color=colors, alpha=0.8)
+
+    # 設置 X 軸標籤
+    ax.set_xticks(x_pos)
+    ax.set_xticklabels(categories)
+
+    # 設置標題和標籤
+    ax.set_title('3D Bar Plot with Spacing and Colors')
+    ax.set_xlabel('Category')
+    ax.set_ylabel('Y Axis')
+    ax.set_zlabel('Values')
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_197.png)
+
+<br>
+
+5. 進一步優化圖形功能，每個柱子的 Y 值不同，同時保持所有柱子的起點相同，並設置了適當的 Y 軸範圍。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # 模擬數據
+    categories = ['A', 'B', 'C', 'D']
+    # X 軸數據
+    x_values = [1, 2, 3, 4]
+    # Y 軸數據
+    y_values = [1, 3, 5, 2] 
+    # Z 軸數據（高度）
+    z_values = [10, 15, 7, 10] 
+
+    # 創建 3D 圖
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # 設置 X 和 Y 軸位置，間隔設置為 1.5
+    x_pos = np.array(x_values)
+    y_pos = np.array(y_values)
+    # 起點設為 0
+    z_pos = np.zeros(len(categories))
+
+    # 設置柱子的寬度和深度
+    # 寬度設置為 0.95
+    dx = np.ones(len(categories)) * 0.95
+    # 深度設置為 1
+    dy = np.ones(len(categories)) * 1  
+    # Z 軸高度
+    dz = z_values  
+
+    # 定義不同顏色
+    colors = ['#FF9999', '#66B2FF', '#99FF99', '#FFCC99']
+
+    # 繪製 3D 柱狀圖，每個柱子不同顏色
+    ax.bar3d(
+        x_pos, y_pos, z_pos, dx, dy, dz, color=colors, alpha=0.8
+    )
+
+    # 設置 X 軸標籤
+    ax.set_xticks(x_pos)
+    ax.set_xticklabels(categories)
+
+    # 設置 Y 軸範圍和標籤
+    # 設置 Y 軸範圍 0-5
+    ax.set_yticks(np.arange(0, 6, 1))  
+    ax.set_yticklabels(np.arange(0, 6, 1))
+
+    # 設置標題和標籤
+    ax.set_title('3D Bar Plot with Different Y Values')
+    ax.set_xlabel('Category')
+    ax.set_ylabel('Y Axis')
+    ax.set_zlabel('Values')
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_198.png)
+
+<br>
+
 ## 直方圖（Histogram）
 
 1. 直方圖用於顯示數據分佈的頻率，可以用來觀察數據的分佈模式。
