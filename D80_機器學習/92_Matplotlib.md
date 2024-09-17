@@ -1064,8 +1064,8 @@ _或稱 `長條圖`_
 
     ```python
     import matplotlib.pyplot as plt
-    import numpy as np
     import pandas as pd
+    import numpy as np
 
     # 模擬股票數據
     data = {
@@ -1074,16 +1074,19 @@ _或稱 `長條圖`_
         "High": [105, 106, 107, 108, 110, 112, 111, 115, 116, 119],
         "Low": [99, 98, 102, 101, 105, 107, 106, 109, 111, 105],
         "Close": [104, 105, 103, 107, 109, 111, 110, 114, 110, 118],
+        "Volume": [1500, 1800, 1700, 1600, 2000, 2100, 1900, 2200, 2300, 2400],
     }
 
     # 將數據轉換為 DataFrame 並設置日期為索引
     df = pd.DataFrame(data)
     df.set_index("Date", inplace=True)
 
-    # 開始繪製 K 線圖
-    fig, ax = plt.subplots(figsize=(10, 6))
+    # 創建子圖，用來同時顯示 K 線圖和成交量
+    fig, (ax1, ax2) = plt.subplots(
+        2, 1, gridspec_kw={"height_ratios": [3, 1]}, figsize=(10, 6)
+    )
 
-    # 設置顏色：上漲用綠色，下跌用紅色
+    # K 線圖顏色設定
     colors = [
         "green" if close >= open_ else "red"
         for open_, close in zip(df["Open"], df["Close"])
@@ -1093,10 +1096,10 @@ _或稱 `長條圖`_
     for i, (date, open_, close, high, low) in enumerate(
         zip(df.index, df["Open"], df["Close"], df["High"], df["Low"])
     ):
-        # 繪製影線（最高價到最低價）
-        ax.plot([i, i], [low, high], color="black", linewidth=1)
+        # 影線（最高價到最低價）
+        ax1.plot([i, i], [low, high], color="black", linewidth=1)
 
-        # 繪製矩形表示開盤價到收盤價
+        # 繪製矩形代表 K 線燭台
         rect = plt.Rectangle(
             (i - 0.2, min(open_, close)),
             0.4,
@@ -1104,17 +1107,19 @@ _或稱 `長條圖`_
             color=colors[i],
             alpha=0.8,
         )
-        ax.add_patch(rect)
+        ax1.add_patch(rect)
 
-    # 設置 X 軸日期標籤
-    ax.set_xticks(range(len(df.index)))
-    ax.set_xticklabels(df.index.strftime("%Y-%m-%d"), rotation=45)
+    # 隱藏 K 線圖的 X 軸標籤
+    ax1.set_xticks([])
+    ax1.set_title("Stock Candlestick Chart")
 
-    # 設置標題和軸標籤
-    ax.set_title("K-Line (Candlestick) Chart")
-    ax.set_xlabel("Date")
-    ax.set_ylabel("Price")
+    # 繪製成交量圖
+    ax2.bar(range(len(df.index)), df["Volume"], color="gray")
+    ax2.set_xticks(range(len(df.index)))
+    ax2.set_xticklabels(df.index.strftime("%Y-%m-%d"), rotation=45)
+    ax2.set_ylabel("Volume")
 
+    # 調整布局
     plt.tight_layout()
     plt.show()
     ```
@@ -1152,6 +1157,76 @@ _或稱 `長條圖`_
     ```
 
     ![](images/img_210.png)
+
+<br>
+
+4. 繼續使用 Matplotlib，在 K 線圖上添加一條平滑的五日移動平均線，可以計算收盤價的移動平均值，然後將其繪製在 K 線圖上，使用平滑曲線來顯示。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import pandas as pd
+    import numpy as np
+
+    # 模擬股票數據
+    data = {
+        "Date": pd.date_range(start="2023-01-01", periods=10, freq="D"),
+        "Open": [100, 102, 106, 104, 105, 108, 107, 110, 112, 115],
+        "High": [105, 106, 107, 108, 110, 112, 111, 115, 116, 119],
+        "Low": [99, 98, 102, 101, 105, 107, 106, 109, 111, 105],
+        "Close": [104, 105, 103, 107, 109, 111, 110, 114, 110, 118],
+        "Volume": [1500, 1800, 1700, 1600, 2000, 2100, 1900, 2200, 2300, 2400],
+    }
+
+    # 將數據轉換為 DataFrame 並設置日期為索引
+    df = pd.DataFrame(data)
+    df.set_index("Date", inplace=True)
+
+    # 計算 5 日移動平均線
+    df['MA5'] = df['Close'].rolling(window=5).mean()
+
+    # 創建子圖，用來同時顯示 K 線圖和成交量
+    fig, (ax1, ax2) = plt.subplots(2, 1, gridspec_kw={"height_ratios": [3, 1]}, figsize=(10, 6))
+
+    # K 線圖顏色設定
+    colors = ["green" if close >= open_ else "red" for open_, close in zip(df["Open"], df["Close"])]
+
+    # 繪製 K 線圖
+    for i, (date, open_, close, high, low) in enumerate(zip(df.index, df["Open"], df["Close"], df["High"], df["Low"])):
+        # 影線（最高價到最低價）
+        ax1.plot([i, i], [low, high], color="black", linewidth=1)
+
+        # 繪製矩形代表 K 線燭台
+        rect = plt.Rectangle(
+            (i - 0.2, min(open_, close)),
+            0.4,
+            abs(open_ - close),
+            color=colors[i],
+            alpha=0.8,
+        )
+        ax1.add_patch(rect)
+
+    # 繪製收盤價的 5 日移動平均線
+    ax1.plot(range(len(df.index)), df['MA5'], label='MA5', color='blue', linewidth=2)
+
+    # 隱藏 K 線圖的 X 軸標籤
+    ax1.set_xticks([])
+    ax1.set_title("Stock Candlestick Chart with MA5")
+
+    # 添加移動平均線圖例
+    ax1.legend()
+
+    # 繪製成交量圖
+    ax2.bar(range(len(df.index)), df["Volume"], color="gray")
+    ax2.set_xticks(range(len(df.index)))
+    ax2.set_xticklabels(df.index.strftime("%Y-%m-%d"), rotation=45)
+    ax2.set_ylabel("Volume")
+
+    # 調整布局
+    plt.tight_layout()
+    plt.show()
+    ```
+
+    ![](images/img_211.png)
 
 <br>
 
