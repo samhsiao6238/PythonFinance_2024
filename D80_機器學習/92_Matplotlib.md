@@ -91,6 +91,96 @@ _Python 視覺化工具，以下是常見的圖形類型_
 
 <br>
 
+3. 在 3D 空間中展示折線圖。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # 設定支持中文的字體，避免顯示錯誤
+    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
+    # 用來正常顯示負號
+    plt.rcParams['axes.unicode_minus'] = False
+
+    # 模擬數據
+    x = np.linspace(0, 10, 100)
+    y = np.sin(x)
+    # 使用正弦函數來模擬 Z 軸的變化，讓 Z 軸與 X 軸的變化更加明顯
+    # Z 軸使用線性變化（或可以使用 x**2, np.sin(x) 等視覺效果更強的函數）
+    z = x 
+
+    # 創建 3D 圖
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # 繪製 3D 折線圖
+    ax.plot(x, y, z, label='3D Line Plot', color='b', lw=2)
+
+    # 設置標題和標籤
+    ax.set_title('3D Line Plot')
+    ax.set_xlabel('X Axis')
+    ax.set_ylabel('Y Axis')
+    ax.set_zlabel('Z Axis')
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_199.png)
+
+<br>
+
+4. 在 3D 折線圖中，可通過變化線條顏色來表示數據的變化，舉例說，若是要觀察 X、Y 對 Z 的影響趨勢，可通過顏色來反映 Z 軸數據的變化；但從這個圖可以發現，這個圖形並不適合這類的呈現。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from mpl_toolkits.mplot3d import Axes3D
+    # 用於顏色映射
+    from matplotlib import cm
+
+    # 設定支持中文的字體，避免顯示錯誤
+    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
+    # 用來正常顯示負號
+    plt.rcParams['axes.unicode_minus'] = False
+
+    # 模擬數據
+    x = np.linspace(0, 10, 100)
+    y = np.sin(x)
+    # 使用正弦函數來模擬 Z 軸的變化
+    z = np.sin(2 * np.pi * x)
+
+    # 創建 3D 圖
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # 繪製 3D 折線圖，並使用 colormap 映射 Z 軸數據來設置顏色
+    points = ax.plot(x, y, z, label='3D Line Plot')
+
+    # 使用顏色映射，根據 Z 值的大小變化顏色
+    for i in range(len(x) - 1):
+        ax.plot(
+            x[i:i+2], 
+            y[i:i+2], 
+            z[i:i+2], 
+            color=cm.viridis(z[i]/max(z))
+        )
+
+    # 設置標題和標籤
+    ax.set_title('3D Line Plot with Color Mapping')
+    ax.set_xlabel('X Axis')
+    ax.set_ylabel('Y Axis')
+    ax.set_zlabel('Z Axis')
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_200.png)
+
+<br>
+
 ## 散點圖（Scatter Plot）
 
 1. 散點圖展示數據點的分佈，通常用來觀察變數之間的關係。
