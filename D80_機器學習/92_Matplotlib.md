@@ -1270,6 +1270,48 @@ _或稱 `長條圖`_
 
 <br>
 
+2. 若將 `熱圖` 轉換為 3D，通常稱為 `3D 表面圖`，這在 `高維度數據分析` 和模型調優中有重要的應用，可更清晰地了解數據隨著多維變量的變化趨勢，是機器學習領域中的強大工具；特別注意，`3D 表面圖（3D Surface Plot）` 和 `3D 面積圖（3D Area Plot）` 是兩種不同的圖表，完成圖看起來有點類似，但 `3D 表面圖` 主要應用在連續數據的可視化，而 `3D 面積圖` 則應用於累積類別數據的展示，下一個步驟中將說明 `面積圖`。
+
+    ```python
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # 模擬數據
+    data = np.random.rand(10, 10)
+
+    # 創建 X 和 Y 網格
+    x = np.arange(data.shape[0])
+    y = np.arange(data.shape[1])
+    x, y = np.meshgrid(x, y)
+
+    # 創建 3D 圖
+    fig = plt.figure(figsize=(10, 8))
+    ax = fig.add_subplot(111, projection="3d")
+
+    # 將 Z 軸數據設置為數據值
+    z = data
+
+    # 繪製表面圖
+    surf = ax.plot_surface(x, y, z, cmap="coolwarm")
+
+    # 添加顏色條
+    fig.colorbar(surf, shrink=0.5, aspect=5)
+
+    # 設置標籤
+    ax.set_xlabel("X Axis")
+    ax.set_ylabel("Y Axis")
+    ax.set_zlabel("Values")
+    ax.set_title("3D Heatmap (Surface Plot)")
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_216.png)
+
+<br>
+
 ## 面積圖（Area Plot）
 
 1. 面積圖展示累積數據的變化。
