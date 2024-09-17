@@ -646,6 +646,130 @@ _或稱 `長條圖`_
 
 <br>
 
+2. 使用 3D 呈現；也就是添加一個 Z 軸，將原本反映在 Y 軸的數據顯示於 Z 軸。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from mpl_toolkits.mplot3d import Axes3D
+    from matplotlib import cm
+
+    # 模擬數據
+    data = np.random.randn(1000)
+
+    # 設定直方圖參數
+    hist, bins = np.histogram(data, bins=30)
+
+    # 創建 3D 圖
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # 設置 X 軸位置
+    # 每個 bin 的中心點作為 X 軸位置
+    x_pos = (bins[:-1] + bins[1:]) / 2  
+    # 固定 y_pos 起點為 0
+    y_pos = np.zeros_like(x_pos)         
+    # 固定 z_pos 起點為 0
+    z_pos = np.zeros_like(x_pos)         
+
+    # 設置條的寬度和深度
+    # X 軸每個條的寬度
+    dx = np.ones_like(x_pos) * (bins[1] - bins[0])
+    # Y 軸每個條的深度
+    dy = np.ones_like(x_pos)                        
+    # Z 軸高度為頻率（histogram 值）
+    dz = hist                                       
+
+    # 使用顏色映射，根據 Z 軸高度來設置顏色
+    # 將頻率值歸一化到 [0, 1]，並使用 'viridis' 色彩映射
+    colors = cm.viridis(dz / max(dz))  
+
+    # 繪製 3D 直方圖
+    ax.bar3d(
+        x_pos, y_pos, z_pos, dx, dy, dz, color=colors, alpha=0.7
+    )
+
+    # 設置標題和標籤
+    ax.set_title('3D Histogram with Color Mapping')
+    ax.set_xlabel('Value')
+    ax.set_ylabel('Y Axis (Fixed)')
+    ax.set_zlabel('Frequency')
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_203.png)
+
+<br>
+
+3. 每個數據都有適合的圖形，若要有效應用多餘的一個座標，這裡以 `X` 軸代表價格範圍、Y 軸代表不同的地區或店鋪、Z 軸代表在某地區的產品銷售頻率；另外，使用 ax.view_init() 方法來調整視角，依據數據特徵將特定的軸面向使用者觀察視角。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from mpl_toolkits.mplot3d import Axes3D
+    from matplotlib import cm
+
+    # 模擬數據，三個地區的銷售數據
+    data_region_1 = np.random.randn(1000) + 1
+    data_region_2 = np.random.randn(1000) - 1
+    data_region_3 = np.random.randn(1000)
+
+    regions = [data_region_1, data_region_2, data_region_3]
+    y_labels = ['Region 1', 'Region 2', 'Region 3']
+
+    # 創建 3D 圖
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # 設置條的寬度
+    dx = 0.8  # X 軸寬度
+
+    # 對每個地區繪製 3D 直方圖
+    for i, data in enumerate(regions):
+        # 設定直方圖參數
+        hist, bins = np.histogram(data, bins=30)
+        # 每個 bin 的中心點作為 X 軸位置
+        x_pos = (bins[:-1] + bins[1:]) / 2  
+        # 將每個地區映射到不同的 Y 軸位置
+        y_pos = np.ones_like(x_pos) * i      
+        # Z 軸起點為 0
+        z_pos = np.zeros_like(x_pos)         
+        # Z 軸高度為頻率
+        dz = hist                            
+
+        # 使用顏色映射，根據 Z 軸高度來設置顏色
+        # 將頻率值歸一化並映射顏色
+        colors = cm.viridis(dz / max(dz)) 
+
+        # 繪製 3D 直方圖
+        ax.bar3d(
+            x_pos, y_pos, z_pos, dx, 0.5, dz, 
+            color=colors, alpha=0.7
+        )
+
+    # 設置 X、Y、Z 軸標籤
+    ax.set_title('3D Histogram for Multiple Regions')
+    ax.set_xlabel('Value')
+    ax.set_ylabel('Region')
+    ax.set_zlabel('Frequency')
+
+    # 設置 Y 軸標籤為不同的地區
+    ax.set_yticks(np.arange(len(y_labels)))
+    ax.set_yticklabels(y_labels)
+
+    # 調整視角
+    ax.view_init(elev=60, azim=160)
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_204.png)
+
+<br>
+
 ## 餅圖（Pie Chart）
 
 1. 餅圖用於顯示各類別佔總數的比例。
