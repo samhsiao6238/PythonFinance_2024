@@ -1331,6 +1331,43 @@ _或稱 `長條圖`_
 
 <br>
 
+3. 使顏色更加區別性，可以選擇一個具有更大色彩對比度的顏色映射方案（colormap），例如使用 plasma、coolwarm 或 inferno 等，也可以增加陰影或者邊界色，以突出圖形的細節。
+
+    ```python
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # 模擬隨機的 3D 數據
+    np.random.seed(42)
+    # 生成 100 個隨機的 x 座標
+    x = np.random.rand(100) * 10
+    # 生成 100 個隨機的 y 座標
+    y = np.random.rand(100) * 10
+    # 對應的 z 座標值，這裡基於一些數學函數進行變化
+    z = np.sin(x) + np.cos(y)
+
+    # 創建 3D 圖
+    fig = plt.figure(figsize=(10, 8))
+    ax = fig.add_subplot(111, projection="3d")
+
+    # 繪製三角剖分圖，使用顏色映射 'plasma'，並加上邊界色
+    ax.plot_trisurf(x, y, z, cmap="plasma", edgecolor="k")
+
+    # 設置標籤
+    ax.set_xlabel("X Axis")
+    ax.set_ylabel("Y Axis")
+    ax.set_zlabel("Z Axis")
+    ax.set_title("3D Triangular Surface Plot with Enhanced Colors")
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_215.png)
+
+<br>
+
 ## 堆積柱狀圖（Stacked Bar Plot）
 
 1. 堆積柱狀圖顯示不同類別在總數中的構成。
