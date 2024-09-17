@@ -930,6 +930,118 @@ _或稱 `長條圖`_
 
 <br>
 
+6. 繪製巢狀餅圖，可以使用 Matplotlib 庫的 wedgeprops 和 explode 等屬性來調整餅圖的層次結構。此外，也可以利用 Doughnut Chart（甜甜圈圖）的內外層來達到巢狀效果。
+
+    ```python
+    import matplotlib.pyplot as plt
+
+    # 模擬數據
+    # 外層數據
+    labels_outer = ['A1', 'A2', 'A3', 'A4']
+    sizes_outer = [35, 37, 39, 40]
+    colors_outer = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
+
+    # 內層數據
+    labels_inner = ['B1', 'B2', 'B3', 'B4', 'B5', 'B6']
+    sizes_inner = [15, 10, 20, 15, 20, 20]
+    colors_inner = ['#c2c2f0','#ffb3e6', '#c4e17f', '#ffcc99', '#ff9999','#66b3ff']
+
+    # 創建圖表
+    fig, ax = plt.subplots()
+
+    # 外層甜甜圈圖
+    ax.pie(
+        sizes_outer, 
+        labels=labels_outer, 
+        colors=colors_outer, 
+        radius=1.3, 
+        wedgeprops=dict(width=0.3, edgecolor='w')
+    )
+
+    # 內層甜甜圈圖
+    ax.pie(
+        sizes_inner, 
+        labels=labels_inner, 
+        colors=colors_inner, 
+        radius=1, 
+        wedgeprops=dict(width=0.3, edgecolor='w')
+    )
+
+    # 添加標題
+    plt.title('Nested Pie Chart')
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_206.png)
+
+<br>
+
+7. Axes3D 無法直接繪製 pie 圖，因為 pie 函數無法在 3D 投影中直接使用，以下範例使用 2D 的餅圖並添加投影效果來模擬 3D 的視覺效果。
+
+    ```python
+    import matplotlib.pyplot as plt
+
+    # 模擬數據
+    # 外層數據
+    labels_outer = ['A1', 'A2', 'A3', 'A4']
+    sizes_outer = [35, 37, 39, 40]
+    colors_outer = ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99']
+
+    # 定義外層的懸浮參數，讓第二塊區域懸浮
+    # 第二個區塊 A2 懸浮
+    explode_outer = [0, 0.1, 0, 0]
+
+    # 內層數據
+    labels_inner = ['B1', 'B2', 'B3', 'B4', 'B5', 'B6']
+    sizes_inner = [15, 10, 20, 15, 20, 20]
+    colors_inner = [
+        '#c2c2f0', '#ffb3e6', '#c4e17f', 
+        '#ffcc99', '#ff9999', '#66b3ff'
+    ]
+
+    # 創建圖表
+    fig, ax = plt.subplots(figsize=(8, 8))
+
+    # 外層甜甜圈圖
+    ax.pie(
+        sizes_outer, 
+        labels=labels_outer, 
+        colors=colors_outer, 
+        # 懸浮設定
+        explode=explode_outer,
+        radius=1.3*0.9, 
+        wedgeprops=dict(width=0.3, edgecolor='w'), 
+        startangle=90,
+        # 添加陰影以模擬 3D 效果
+        shadow=True 
+    )
+
+    # 內層甜甜圈圖，將半徑縮小至 0.8
+    ax.pie(
+        sizes_inner, 
+        labels=labels_inner, 
+        colors=colors_inner, 
+        # 將內圓的半徑減小到 0.8
+        radius=0.8,
+        wedgeprops=dict(width=0.3, edgecolor='w'), 
+        startangle=90,
+        # 添加陰影以模擬 3D 效果
+        shadow=True 
+    )
+
+    # 添加標題
+    plt.title('Nested Pie Chart with Floating Outer Section')
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_207.png)
+
+<br>
+
 ## 箱線圖（Box Plot）
 
 1. 箱線圖顯示數據的分佈情況，包括中位數和四分位數範圍。
