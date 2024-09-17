@@ -291,7 +291,25 @@ _或稱 `長條圖`_
 
 <br>
 
-2. 橫向佈局。
+2. 帶誤差條的柱狀圖（Bar Plot with Error Bars），用來表示數據的不確定性。
+
+    ```python
+    # 模擬數據
+    categories = ['A', 'B', 'C']
+    values = [10, 15, 7]
+    errors = [1.5, 2.0, 1.0]
+
+    # 繪製帶誤差條的柱狀圖
+    plt.bar(categories, values, yerr=errors)
+    plt.title('Bar Plot with Error Bars')
+    plt.show()
+    ```
+
+    ![](images/img_218.png)
+
+<br>
+
+3. 橫向佈局。
 
     ```python
     import matplotlib.pyplot as plt
@@ -332,7 +350,7 @@ _或稱 `長條圖`_
 
 <br>
 
-3. 適合處理複雜的數據，其中包含使用 plt.tight_layout() 自動調整佈局，確保圖表不會因為字詞過長而重疊。
+4. 適合處理複雜的數據，其中包含使用 plt.tight_layout() 自動調整佈局，確保圖表不會因為字詞過長而重疊。
 
     ```python
     import matplotlib.pyplot as plt
@@ -389,7 +407,7 @@ _或稱 `長條圖`_
 
 <br>
 
-4. 柱狀圖可使用 matplotlib 中的 `Axes3D` 來繪製 3D 柱狀圖；立體的柱狀圖預設沒間隔，看起來會很像長條圖，所以在 x_pos 和 y_pos 之間增加一些空隙。
+5. 柱狀圖可使用 matplotlib 中的 `Axes3D` 來繪製 3D 柱狀圖；立體的柱狀圖預設沒間隔，看起來會很像長條圖，所以在 x_pos 和 y_pos 之間增加一些空隙。
 
     ```python
     import matplotlib.pyplot as plt
@@ -442,7 +460,7 @@ _或稱 `長條圖`_
 
 <br>
 
-5. 進一步優化圖形功能，每個柱子的 Y 值不同，同時保持所有柱子的起點相同，並設置了適當的 Y 軸範圍。
+6. 進一步優化圖形功能，每個柱子的 Y 值不同，同時保持所有柱子的起點相同，並設置了適當的 Y 軸範圍。
 
     ```python
     import matplotlib.pyplot as plt
@@ -507,7 +525,7 @@ _或稱 `長條圖`_
 
 <br>
 
-6. 在3D柱狀圖中以Y軸的長度來顯示不同的Y數值，其中dy已經對應到不同的Y數值，這樣每個柱狀體會按照不同的Y值來顯示深度。
+7. 在3D柱狀圖中以Y軸的長度來顯示不同的Y數值，其中dy已經對應到不同的Y數值，這樣每個柱狀體會按照不同的Y值來顯示深度。
 
     ```python
     import matplotlib.pyplot as plt
@@ -565,7 +583,7 @@ _或稱 `長條圖`_
 
 <br>
 
-7. 延續前一點，使用 `ax.invert_yaxis()` 函數來反轉 Y 軸，將 Y 軸的起點由內向外繪製，也就是反轉 Y 軸的方向，這樣可以讓 Y 軸的值從內向外增加，使得柱狀圖的深度變得更加明顯；但由這兩點的結果可知， 3D 的柱狀圖並不適合當前情境。
+8. 延續前一點，使用 `ax.invert_yaxis()` 函數來反轉 Y 軸，將 Y 軸的起點由內向外繪製，也就是反轉 Y 軸的方向，這樣可以讓 Y 軸的值從內向外增加，使得柱狀圖的深度變得更加明顯；但由這兩點的結果可知， 3D 的柱狀圖並不適合當前情境。
 
     ```python
     import matplotlib.pyplot as plt
@@ -1506,6 +1524,40 @@ _或稱 `長條圖`_
     ```
 
     ![](images/img_215.png)
+
+<br>
+
+## 馬賽克圖（Mosaic Plot）
+
+1. 類似堆疊面積圖，但用於顯示分類數據的比例；以下範例先安裝套件。
+
+    ```bash
+    pip install statsmodels
+    ```
+
+<br>
+
+2. 簡易馬賽克圖。
+
+    ```python
+    import matplotlib.pyplot as plt
+    from statsmodels.graphics.mosaicplot import mosaic
+
+    # 模擬分類數據
+    data = {'Class A': 0.5, 'Class B': 0.3, 'Class C': 0.2}
+
+    # 繪製馬賽克圖
+    mosaic(data, title='Mosaic Plot')
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_219.png)
+
+<br>
+
+3. 馬賽克圖通常用來展示兩個或多個分類變數之間的關係，這些變數通常是離散的。這類圖對於發現類別之間的聯繫及數據的分佈特徵有具體幫助，特別是在數據探索（EDA）階段，馬賽克圖可以揭示類別變數的相互關係，對於分類問題的特徵工程和特徵選擇有很大的幫助。
 
 <br>
 
