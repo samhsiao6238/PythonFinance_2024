@@ -1191,9 +1191,16 @@ _或稱 `長條圖`_
     colors = ["green" if close >= open_ else "red" for open_, close in zip(df["Open"], df["Close"])]
 
     # 繪製 K 線圖
-    for i, (date, open_, close, high, low) in enumerate(zip(df.index, df["Open"], df["Close"], df["High"], df["Low"])):
+    for i, (date, open_, close, high, low) in enumerate(
+        zip(df.index, df["Open"], df["Close"], df["High"], df["Low"])
+    ):
         # 影線（最高價到最低價）
-        ax1.plot([i, i], [low, high], color="black", linewidth=1)
+        ax1.plot(
+            [i, i], 
+            [low, high], 
+            color="black", 
+            linewidth=1
+        )
 
         # 繪製矩形代表 K 線燭台
         rect = plt.Rectangle(
@@ -1206,7 +1213,13 @@ _或稱 `長條圖`_
         ax1.add_patch(rect)
 
     # 繪製收盤價的 5 日移動平均線
-    ax1.plot(range(len(df.index)), df['MA5'], label='MA5', color='blue', linewidth=2)
+    ax1.plot(
+        range(len(df.index)), 
+        df['MA5'], 
+        label='MA5', 
+        color='blue', 
+        linewidth=2
+    )
 
     # 隱藏 K 線圖的 X 軸標籤
     ax1.set_xticks([])
@@ -1216,9 +1229,16 @@ _或稱 `長條圖`_
     ax1.legend()
 
     # 繪製成交量圖
-    ax2.bar(range(len(df.index)), df["Volume"], color="gray")
+    ax2.bar(
+        range(len(df.index)), 
+        df["Volume"], 
+        color="gray"
+    )
     ax2.set_xticks(range(len(df.index)))
-    ax2.set_xticklabels(df.index.strftime("%Y-%m-%d"), rotation=45)
+    ax2.set_xticklabels(
+        df.index.strftime("%Y-%m-%d"), 
+        rotation=45
+    )
     ax2.set_ylabel("Volume")
 
     # 調整布局
