@@ -112,6 +112,71 @@ _Python 視覺化工具，以下是常見的圖形類型_
 
 <br>
 
+2. 通過添加顏色、大小和透明度來優化散點圖。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    # 模擬數據
+    x = np.random.rand(50)
+    y = np.random.rand(50)
+    # 隨機顏色
+    colors = np.random.rand(50)
+    # 隨機大小
+    sizes = 1000 * np.random.rand(50)
+
+    # 繪製散點圖
+    plt.scatter(
+        x, y, c=colors, s=sizes, alpha=0.5, cmap="viridis"
+    )
+    plt.title("Enhanced Scatter Plot")
+    plt.xlabel("X Axis")
+    plt.ylabel("Y Axis")
+    # 添加顏色條
+    plt.colorbar()
+    plt.show()
+    ```
+
+    ![](images/img_191.png)
+
+<br>
+
+3. 使用 mpl_toolkits.mplot3d 將散點圖擴展為 3D 圖形。這需要為每個點添加第三個維度（Z 軸數據）。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # 模擬數據
+    x = np.random.rand(50)
+    y = np.random.rand(50)
+    # 第三維數據
+    z = np.random.rand(50)
+
+    # 創建 3D 圖
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # 繪製 3D 散點圖
+    ax.scatter(
+        x, y, z, c=z, cmap='viridis', s=100, alpha=0.6
+    )
+
+    # 設置標題和軸標籤
+    ax.set_title('3D Scatter Plot')
+    ax.set_xlabel('X Axis')
+    ax.set_ylabel('Y Axis')
+    ax.set_zlabel('Z Axis')
+
+    plt.show()
+    ```
+
+    ![](images/img_192.png)
+
+<br>
+
 ## 柱狀圖（Bar Plot）
 
 _或稱 `長條圖`_
