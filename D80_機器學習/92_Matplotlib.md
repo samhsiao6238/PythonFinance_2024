@@ -775,6 +775,8 @@ _或稱 `長條圖`_
 1. 餅圖用於顯示各類別佔總數的比例。
 
     ```python
+    import matplotlib.pyplot as plt
+
     # 模擬數據
     labels = ['A', 'B', 'C', 'D']
     sizes = [20, 30, 25, 25]
@@ -786,6 +788,113 @@ _或稱 `長條圖`_
     ```
 
     ![](images/img_171.png)
+
+<br>
+
+2. 這是另一個模擬數據，以下將對此進行延伸。
+
+    ```python
+    import matplotlib.pyplot as plt
+
+    # 模擬數據
+    data = {'男性': 77.78, '女性': 22.22}
+    labels = data.keys()
+    sizes = data.values()
+
+    # 繪製餅圖
+    plt.figure(figsize=(6, 6))
+    plt.pie(
+        sizes, 
+        labels=labels, 
+        autopct='%1.2f%%', 
+        startangle=90, 
+        colors=['#1f77b4', '#ff7f0e'], 
+        wedgeprops={'edgecolor': 'black'}
+    )
+
+    # 添加標題
+    plt.title("DATA TYPE", fontsize=14, color='green')
+
+    # 顯示餅圖
+    plt.show()
+    ```
+
+    ![](images/img_164.png)
+
+<br>
+
+3. 強調特定區塊，使其懸浮。
+
+    ```python
+    import matplotlib.pyplot as plt
+
+    # 模擬數據
+    data = {'男性': 77.78, '女性': 22.22}
+    labels = data.keys()
+    sizes = data.values()
+
+    # 使用 explode 讓 `女性` 區塊懸浮
+    explode = (0, 0.1)
+
+    # 繪製餅圖
+    plt.figure(figsize=(6, 6))
+    plt.pie(
+        sizes,
+        explode=explode,
+        labels=labels,
+        autopct='%1.2f%%',
+        startangle=90, 
+        colors=['#1f77b4', '#ff7f0e'],
+        wedgeprops={'edgecolor': 'black'}
+    )
+
+    # 添加標題
+    plt.title("DATA TYPE", fontsize=14, color='green')
+
+    # 顯示餅圖
+    plt.show()
+    ```
+
+    ![](images/img_165.png)
+
+<br>
+
+4. 若要添加立體感，可透過增加邊框與陰影效果來達成。
+
+    ```python
+    import matplotlib.pyplot as plt
+
+    # 模擬數據
+    data = {'男性': 77.78, '女性': 22.22}
+    labels = data.keys()
+    sizes = data.values()
+
+    # 使用 explode 讓 `女性` 區塊懸浮
+    explode = (0, 0.1)
+
+    # 繪製餅圖
+    plt.figure(figsize=(6, 6))
+    plt.pie(
+        sizes,
+        explode=explode,
+        labels=labels,
+        autopct='%1.2f%%',
+        startangle=90, 
+        colors=['#1f77b4', '#ff7f0e'],
+        # 增加陰影效果
+        shadow=True,  
+        # 增加邊框來強調立體感
+        wedgeprops={'edgecolor': 'black', 'linewidth': 1.5} 
+    )
+
+    # 添加標題
+    plt.title("DATA TYPE", fontsize=14, color='green')
+
+    # 顯示餅圖
+    plt.show()
+    ```
+
+    ![](images/img_166.png)
 
 <br>
 
