@@ -1634,50 +1634,52 @@ _這在散點圖時已結合使用過，這裡介紹 3D Plot 本身的基礎與�
 
 2. 優化代碼。
 
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib.ticker import PercentFormatter
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from matplotlib.ticker import PercentFormatter
 
-# 模擬數據
-values = [10, 20, 15, 35, 40]
-categories = ['A', 'B', 'C', 'D', 'E']
+    # 模擬數據
+    values = [10, 20, 15, 35, 40]
+    categories = ['A', 'B', 'C', 'D', 'E']
 
-# 計算累積百分比
-cumsum = np.cumsum(values)
-total = cumsum[-1]
-cumsum_percentage = cumsum / total * 100
+    # 計算累積百分比
+    cumsum = np.cumsum(values)
+    total = cumsum[-1]
+    cumsum_percentage = cumsum / total * 100
 
-# 設置顏色
-colors = ['#FF9999', '#66B2FF', '#99FF99', '#FFCC99', '#FF6666']
+    # 設置顏色
+    colors = ['#FF9999', '#66B2FF', '#99FF99', '#FFCC99', '#FF6666']
 
-# 繪製帕累托圖
-fig, ax = plt.subplots(figsize=(8, 6))
+    # 繪製帕累托圖
+    fig, ax = plt.subplots(figsize=(8, 6))
 
-# 繪製柱狀圖，使用不同顏色
-bars = ax.bar(categories, values, color=colors)
+    # 繪製柱狀圖，使用不同顏色
+    bars = ax.bar(categories, values, color=colors)
 
-# 累積百分比曲線
-ax2 = ax.twinx()
-ax2.plot(categories, cumsum_percentage, color='red', marker='D', ms=7, linestyle='-', label="Cumulative %")
+    # 累積百分比曲線
+    ax2 = ax.twinx()
+    ax2.plot(categories, cumsum_percentage, color='red', marker='D', ms=7, linestyle='-', label="Cumulative %")
 
-# 添加累積百分比的百分比格式
-ax2.yaxis.set_major_formatter(PercentFormatter())
+    # 添加累積百分比的百分比格式
+    ax2.yaxis.set_major_formatter(PercentFormatter())
 
-# 設置標題和軸標籤
-ax.set_title('Pareto Chart')
-ax.set_xlabel('Category')
-ax.set_ylabel('Values')
-ax2.set_ylabel('Cumulative Percentage')
+    # 設置標題和軸標籤
+    ax.set_title('Pareto Chart')
+    ax.set_xlabel('Category')
+    ax.set_ylabel('Values')
+    ax2.set_ylabel('Cumulative Percentage')
 
-# 顯示圖例
-ax2.legend(loc="upper left")
+    # 顯示圖例
+    ax2.legend(loc="upper left")
 
-# 顯示圖表
-plt.show()
-```
+    # 顯示圖表
+    plt.show()
+    ```
 
-![](images/img_208.png)
+    ![](images/img_208.png)
+
+<br>
 
 ## 瀑布圖（Waterfall Chart）
 
