@@ -1775,30 +1775,32 @@ plt.show()
     import matplotlib.pyplot as plt
     from mpl_toolkits.mplot3d import Axes3D
 
-    # 模擬數據
+    # 模擬數據：x 和 y 為平面坐標，z 表示高度（例如地形的高度）
     x = np.linspace(-5, 5, 100)
     y = np.linspace(-5, 5, 100)
     x, y = np.meshgrid(x, y)
+
+    # z 為高度，這裡模擬一個圓形波浪的高度分佈
     z = np.sin(np.sqrt(x**2 + y**2))
 
-    # 創建 3D 圖
-    fig = plt.figure(figsize=(10, 6))
-    ax = fig.add_subplot(111, projection='3d')
+    # 創建 3D 圖表
+    fig = plt.figure(figsize=(8, 6))
+    ax = fig.add_subplot(111, projection="3d")
 
-    # 繪製 3D 曲面圖
-    ax.plot_surface(x, y, z, cmap='viridis', edgecolor='none', alpha=0.8)
+    # 繪製 3D 曲面圖，使用 'coolwarm' 配色方案
+    surf = ax.plot_surface(x, y, z, cmap="coolwarm", edgecolor="none")
 
-    # 在底部繪製 2D 等高線圖
-    ax.contour(x, y, z, zdir='z', offset=-1, cmap='coolwarm')
+    # 添加等高線
+    ax.contour(x, y, z, zdir="z", offset=-1, cmap="coolwarm")
 
-    # 設定視角
-    ax.view_init(45, 240)
+    # 設置 z 軸的範圍
+    ax.set_zlim(-1, 1)
 
-    # 標籤與標題
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_zlabel('Z')
-    ax.set_title('3D Contour Plot with Surface')
+    # 添加顏色條
+    fig.colorbar(surf, ax=ax, shrink=0.5, aspect=5)
+
+    # 添加標題
+    ax.set_title("3D Contour Plot")
 
     # 顯示圖表
     plt.show()
