@@ -898,6 +898,38 @@ _或稱 `長條圖`_
 
 <br>
 
+5. 透過參數調整來讓結果更加立體。
+
+    ```python
+    import matplotlib.pyplot as plt
+
+    # 模擬數據
+    labels = ['Python', 'C++', 'Ruby', 'Java']
+    sizes = [215, 130, 245, 210]
+    # 讓第一塊區域懸浮出來
+    explode = (0.1, 0, 0, 0)
+
+    # 繪製餅圖，並設置陰影和 3D 效果
+    plt.pie(
+        sizes, 
+        explode=explode, 
+        labels=labels, 
+        autopct='%1.1f%%', 
+        shadow=True, 
+        startangle=140
+    )
+
+    # 保持比例一致，防止餅圖變形
+    plt.axis('equal')  
+
+    plt.title('3D Pie Chart (2D with Shadow Effect)')
+    plt.show()
+    ```
+
+    ![](images/img_205.png)
+
+<br>
+
 ## 箱線圖（Box Plot）
 
 1. 箱線圖顯示數據的分佈情況，包括中位數和四分位數範圍。
