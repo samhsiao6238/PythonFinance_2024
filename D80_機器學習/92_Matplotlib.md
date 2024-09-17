@@ -477,7 +477,11 @@ _或稱 `長條圖`_
 
 ## 3D 分佈圖（3D Plot）
 
-1. 3D 分佈圖適合用於顯示三維數據的分佈情況，例如用於觀察數據點在三維空間中的分佈。
+_這在散點圖時已結合使用過，這裡介紹 3D Plot 本身的基礎與進階用法_
+
+<br>
+
+1. 基礎的 3D 分佈圖，適合用於顯示三維數據的分佈情況，例如用於觀察數據點在三維空間中的分佈。
 
     ```python
     from mpl_toolkits.mplot3d import Axes3D
@@ -501,6 +505,177 @@ _或稱 `長條圖`_
     ```
 
     ![](images/img_178.png)
+
+<br>
+
+2. 添加其他圖形元素、提高顏色精度、使用漸變色、調整光照等。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # 模擬數據
+    x = np.random.rand(50)
+    y = np.random.rand(50)
+    z = np.random.rand(50)
+
+    # 創建 3D 圖
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # 繪製散點圖
+    scatter = ax.scatter(
+        x, y, z, c=z, cmap='cool', s=80, alpha=0.6, edgecolor='w'
+    )
+
+    # 添加顏色條
+    cbar = plt.colorbar(scatter)
+    cbar.set_label('Color Scale')
+
+    # 設置標籤
+    ax.set_xlabel('X Axis')
+    ax.set_ylabel('Y Axis')
+    ax.set_zlabel('Z Axis')
+    plt.title('Enhanced 3D Scatter Plot')
+
+    plt.show()
+    ```
+
+    ![](images/img_196.png)
+
+<br>
+
+3. 結合 `plotly` 套件增強圖表的交互功能，可旋轉視角、縮放等，方便更直觀地觀察數據；先進行安裝相關套件。
+
+    ```bash
+    pip install plotly nbformat
+    ```
+
+<br>
+
+4. 運行以下腳本，可嘗試使用滑鼠進行互動。
+
+    ```python
+    import plotly.graph_objs as go
+    import numpy as np
+
+    # 模擬數據
+    x = np.random.randn(100)
+    y = np.random.randn(100)
+    z = np.random.randn(100)
+
+    # 創建 3D 散點圖
+    trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=5,
+            # 以 z 軸數據為基礎的顏色映射
+            color=z,
+            # 使用 Viridis 顏色圖譜
+            colorscale='Viridis',
+            opacity=0.8
+        )
+    )
+
+    # 設定圖表布局
+    layout = go.Layout(
+        title='Interactive 3D Scatter Plot',
+        scene=dict(
+            xaxis_title='X Axis',
+            yaxis_title='Y Axis',
+            zaxis_title='Z Axis'
+        )
+    )
+
+    # 繪製圖表
+    fig = go.Figure(data=[trace], layout=layout)
+    fig.show()
+    ```
+
+    ![](images/img_193.png)
+
+<br>
+
+5. 如果要觀察數據的密度分佈，可在散點圖中疊加密度估計，並且將密度信息映射到點的顏色上，如此便可直觀地看到數據分佈的集中程度。
+
+    ```python
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.stats import gaussian_kde
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # 模擬數據
+    x = np.random.randn(500)
+    y = np.random.randn(500)
+    z = np.random.randn(500)
+
+    # 計算數據密度
+    xyz = np.vstack([x, y, z])
+    density = gaussian_kde(xyz)(xyz)
+
+    # 繪製 3D 散點圖，根據密度設置顏色
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # 散點圖
+    ax.scatter(x, y, z, c=density, cmap='plasma', s=50)
+
+    # 設置軸標籤
+    ax.set_xlabel('X Label')
+    ax.set_ylabel('Y Label')
+    ax.set_zlabel('Z Label')
+    plt.title('3D Scatter Plot with Density')
+
+    plt.show()
+    ```
+
+    ![](images/img_194.png)
+
+<br>
+
+6. 在 3D 散點圖中，除了散點，還可疊加平面或曲面來表示回歸結果或分佈趨勢，這樣能夠提供更多的信息，特別是對於機器學習中的數據可視化；以下代碼是在散點圖的基礎上，疊加了一個模擬的回歸平面，這樣可更好觀察數據的趨勢和模型的擬合情況。
+
+    ```python
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # 模擬數據
+    x = np.random.randn(100)
+    y = np.random.randn(100)
+    # 模擬回歸關係
+    z = x * 0.5 + y * 0.2 + np.random.randn(100) * 0.1 
+
+    # 創建 3D 圖
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # 散點圖
+    ax.scatter(x, y, z, c='blue', s=50)
+
+    # 創建回歸平面
+    xx, yy = np.meshgrid(
+        np.linspace(-3, 3, 50), np.linspace(-3, 3, 50)
+    )
+    # 模擬回歸平面
+    zz = 0.5 * xx + 0.2 * yy
+    ax.plot_surface(
+        xx, yy, zz, alpha=0.3, 
+        rstride=100, cstride=100, color='orange'
+    )
+
+    # 設置軸標籤
+    ax.set_xlabel('X Label')
+    ax.set_ylabel('Y Label')
+    ax.set_zlabel('Z Label')
+    plt.title('3D Scatter Plot with Regression Plane')
+
+    plt.show()
+    ```
+
+    ![](images/img_195.png)
 
 <br>
 
