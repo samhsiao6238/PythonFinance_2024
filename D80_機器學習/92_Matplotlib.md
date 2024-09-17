@@ -1292,6 +1292,45 @@ _或稱 `長條圖`_
 
 <br>
 
+2. 在機器學習領域中，3D 面積圖可用來表示多個變量在不同維度下的累積變化，特別是在時間序列分析和多維特徵數據可視化中非常有用。
+
+    ```python
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # 模擬隨機的 3D 數據
+    np.random.seed(42)
+    # 生成 100 個隨機的 x 座標
+    x = np.random.rand(100) * 10
+    # 生成 100 個隨機的 y 座標
+    y = np.random.rand(100) * 10
+    # 對應的 z 座標值，這裡基於一些數學函數進行變化
+    z = np.sin(x) + np.cos(y)
+
+    # 創建 3D 圖
+    fig = plt.figure(figsize=(10, 8))
+    ax = fig.add_subplot(111, projection="3d")
+
+    # 繪製三角剖分圖
+    ax.plot_trisurf(
+        x, y, z, cmap="viridis", edgecolor="none"
+    )
+
+    # 設置標籤
+    ax.set_xlabel("X Axis")
+    ax.set_ylabel("Y Axis")
+    ax.set_zlabel("Z Axis")
+    ax.set_title("3D Triangular Surface Plot")
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_214.png)
+
+<br>
+
 ## 堆積柱狀圖（Stacked Bar Plot）
 
 1. 堆積柱狀圖顯示不同類別在總數中的構成。
