@@ -507,6 +507,125 @@ _或稱 `長條圖`_
 
 <br>
 
+6. 在3D柱狀圖中以Y軸的長度來顯示不同的Y數值，其中dy已經對應到不同的Y數值，這樣每個柱狀體會按照不同的Y值來顯示深度。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # 模擬數據
+    categories = ['A', 'B', 'C', 'D']
+    # X 軸數據
+    x_values = [1, 2, 3, 4]
+    # Y 軸數據（用來控制每個柱子的深度）
+    y_values = [1, 3, 5, 2] 
+    # Z 軸數據（柱子的高度）
+    z_values = [10, 15, 7, 10] 
+
+    # 創建 3D 圖
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # 設置 X 和 Y 軸位置，Y 軸不再設置為全 0，避免圖形渲染空白
+    x_pos = np.array(x_values)
+    y_pos = np.zeros(len(categories))  # 固定 y_pos 起點為 0
+    z_pos = np.zeros(len(categories))  # Z 軸起點設為 0
+
+    # 設置柱子的寬度
+    dx = np.ones(len(categories)) * 0.95  # X 軸寬度固定
+    # 使用 Y 軸數據作為每個柱子的深度
+    dy = np.array(y_values)  # 根據不同的Y值顯示深度
+    # 使用 Z 軸數據作為柱子的高度
+    dz = np.array(z_values)
+
+    # 定義不同顏色
+    colors = ['#FF9999', '#66B2FF', '#99FF99', '#FFCC99']
+
+    # 繪製 3D 柱狀圖，每個柱子不同顏色
+    ax.bar3d(
+        x_pos, y_pos, z_pos, dx, dy, dz, color=colors, alpha=0.8
+    )
+
+    # 設置 X 軸標籤
+    ax.set_xticks(x_pos)
+    ax.set_xticklabels(categories)
+
+    # 設置標題和標籤
+    ax.set_title('3D Bar Plot with Y as Depth and Z as Height')
+    ax.set_xlabel('Category (X Axis)')
+    ax.set_ylabel('Y Axis (Depth)')
+    ax.set_zlabel('Z Axis (Height)')
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_201.png)
+
+<br>
+
+7. 延續前一點，使用 `ax.invert_yaxis()` 函數來反轉 Y 軸，將 Y 軸的起點由內向外繪製，也就是反轉 Y 軸的方向，這樣可以讓 Y 軸的值從內向外增加，使得柱狀圖的深度變得更加明顯；但由這兩點的結果可知， 3D 的柱狀圖並不適合當前情境。
+
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # 模擬數據
+    categories = ['A', 'B', 'C', 'D']
+    # X 軸數據
+    x_values = [1, 2, 3, 4]
+    # Y 軸數據（用來控制每個柱子的深度）
+    y_values = [1, 3, 5, 2] 
+    # Z 軸數據（柱子的高度）
+    z_values = [10, 15, 7, 10] 
+
+    # 創建 3D 圖
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # 設置 X 和 Y 軸位置，Y 軸不再設置為全 0，避免圖形渲染空白
+    x_pos = np.array(x_values)
+    y_pos = np.zeros(len(categories))  # 固定 y_pos 起點為 0
+    z_pos = np.zeros(len(categories))  # Z 軸起點設為 0
+
+    # 設置柱子的寬度
+    dx = np.ones(len(categories)) * 0.95  # X 軸寬度固定
+    # 使用 Y 軸數據作為每個柱子的深度
+    dy = np.array(y_values)  # 根據不同的Y值顯示深度
+    # 使用 Z 軸數據作為柱子的高度
+    dz = np.array(z_values)
+
+    # 定義不同顏色
+    colors = ['#FF9999', '#66B2FF', '#99FF99', '#FFCC99']
+
+    # 繪製 3D 柱狀圖，每個柱子不同顏色
+    ax.bar3d(
+        x_pos, y_pos, z_pos, dx, dy, dz, color=colors, alpha=0.8
+    )
+
+    # 反轉 Y 軸，讓 Y 軸值由內向外增加
+    ax.invert_yaxis()
+
+    # 設置 X 軸標籤
+    ax.set_xticks(x_pos)
+    ax.set_xticklabels(categories)
+
+    # 設置標題和標籤
+    ax.set_title('3D Bar Plot with Y as Depth and Z as Height')
+    ax.set_xlabel('Category (X Axis)')
+    ax.set_ylabel('Y Axis (Depth)')
+    ax.set_zlabel('Z Axis (Height)')
+
+    # 顯示圖表
+    plt.show()
+    ```
+
+    ![](images/img_202.png)
+
+<br>
+
 ## 直方圖（Histogram）
 
 1. 直方圖用於顯示數據分佈的頻率，可以用來觀察數據的分佈模式。
