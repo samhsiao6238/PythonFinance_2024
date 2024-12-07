@@ -37,7 +37,7 @@
         'A', 'B', 'C', 'A', 'B', 'C', 'A', 'C'
     ]).reshape(-1, 1)
 
-    # 創建 One-Hot 編碼器
+    # 建立 One-Hot 編碼器
     encoder = OneHotEncoder(sparse_output=False)
 
     # 將類別數據進行 One-Hot 編碼
@@ -49,7 +49,7 @@
         columns=encoder.categories_[0]
     )
 
-    # 打印 One-Hot 編碼結果
+    # 輸出 One-Hot 編碼結果
     print("One-Hot 編碼結果：")
     print(df_one_hot)
 

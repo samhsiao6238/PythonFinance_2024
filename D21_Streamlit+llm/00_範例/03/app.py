@@ -40,7 +40,7 @@ if prompt := st.chat_input(placeholder="Who won the Women's U.S. Open in 2018?")
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
 
-    # 如果沒有提供OpenAI API密鑰，顯示提示信息並停止應用
+    # 如果沒有提供OpenAI API密鑰，顯示提示訊息並停止應用
     if not OPENAI_API_KEY:
         st.info("Please add your OpenAI API key to continue.")
         st.stop()

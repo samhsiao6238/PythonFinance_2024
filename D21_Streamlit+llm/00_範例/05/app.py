@@ -74,7 +74,7 @@ with st.form("myform"):
     # 在表單內添加一個提交按鈕
     submitted = st.form_submit_button("提交")
     if not OPENAI_API_KEY:
-        # 如果沒有提供 API 密鑰，顯示提示信息
+        # 如果沒有提供 API 密鑰，顯示提示訊息
         st.info("請新增 OpenAI API 金鑰以繼續。")
     elif submitted:
         # 調用自訂函數，生成博客大綱

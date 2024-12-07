@@ -6,7 +6,7 @@ _將 Markdown 圖片語法轉換為 HTML 圖片標籤，並設置寬度為 400px
 
 ## 安裝插件
 
-1. 開啟市集（`Ctrl+Shift+X`）安裝 VSCode 插件 `Replace Rules`，這個插件允許定義自動替換規則。
+1. 開啟市集（`Ctrl+Shift+X`）安裝 VSCode 插件 `Replace Rules`，這個插件允許定義自動更改規則。
 
     <img src="images/img_08.png" width="400px">
 
@@ -49,7 +49,7 @@ _將 Markdown 圖片語法轉換為 HTML 圖片標籤，並設置寬度為 400px
 
 <br>
 
-6. `"replacerules.rulesets": {}` 是為了將來可能會添加的規則集進行預留，也就是可以建立多個規則集，每個規則集包含多個規則，然後通過快捷鍵一次性運行這些規則集中的所有規則，這樣可方便地對文本進行複雜的多步替換操作。
+6. `"replacerules.rulesets": {}` 是為了將來可能會添加的規則集進行預留，也就是可以建立多個規則集，每個規則集包含多個規則，然後通過快捷鍵一次性運行這些規則集中的所有規則，這樣可方便地對文本進行複雜的多步更改操作。
 
     ![](images/img_14.png)
 

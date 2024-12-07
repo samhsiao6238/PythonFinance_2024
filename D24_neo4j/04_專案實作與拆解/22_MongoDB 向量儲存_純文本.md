@@ -86,7 +86,7 @@ _讀取純文本文件_
     st.title("文件問答系統")
 
     # 發問
-    question = st.text_input("請輸入您的問題：", "請簡述這個文本的主要內容")
+    question = st.text_input("請輸入自己的問題：", "請簡述這個文本的主要內容")
 
     # 提交
     if st.button("提交問題"):

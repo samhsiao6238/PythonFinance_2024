@@ -14,7 +14,7 @@ _可使用 Python 應用的對話或聊天機器人框架和平台_
 
 ## Telegram Bot
 
-1. 簡介：Telegram 提供強大的 API 來構建聊天機器人，可以處理文本、圖片、視頻等多媒體信息。
+1. 簡介：Telegram 提供強大的 API 來構建聊天機器人，可以處理文本、圖片、視頻等多媒體訊息。
 
 2. 庫：`python-telegram-bot`
 

@@ -60,7 +60,7 @@ _以下官方教程從安裝必要的工具開始，接著設置與連線資料�
 
 <br>
 
-2. 在腳本同層級目錄新建存放密鑰的敏感茲訓的腳本 `secrets.toml`，_特別注意_，要觀察一下 `.gitignore` 文件中是否已經寫入 `secrets.toml` 或 `**/secrets.toml`，並且記得替換自己的密碼。
+2. 在腳本同層級目錄新建存放密鑰的敏感茲訓的腳本 `secrets.toml`，_特別注意_，要觀察一下 `.gitignore` 文件中是否已經寫入 `secrets.toml` 或 `**/secrets.toml`，並且記得更改自己的密碼。
 
     ```bash
     MONGODB_URL = "mongodb+srv://sam6238:<password>@cluster0.yhwvqqt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"

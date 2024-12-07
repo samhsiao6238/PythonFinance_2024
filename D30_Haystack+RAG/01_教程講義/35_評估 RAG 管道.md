@@ -664,13 +664,13 @@ _使用以下指標來評估管道_
 
 <br>
 
-3. 以上程式碼是用來測試和驗證多語言支持的 RAG 管道，隨機抽取了一些問題，並使用管道生成答案，然後檢查這些答案的正確性，以下以輸出結果的第一個為例。具體說，每個問題的答案都應該是基於上下文中的信息生成的，並且能夠回答具體的問題。
+3. 以上程式碼是用來測試和驗證多語言支持的 RAG 管道，隨機抽取了一些問題，並使用管道生成答案，然後檢查這些答案的正確性，以下以輸出結果的第一個為例。具體說，每個問題的答案都應該是基於上下文中的訊息生成的，並且能夠回答具體的問題。
 
     ```bash
     Batches: 100%|██████████| 1/1 [00:00<00:00,  3.13it/s]
     # 這是輸入給管道的問題
     Question: Do [ EuroSCORE underestimate the mortality risk in cardiac valve surgery of Mexican population ]?
-    # 表示管道能夠正確地從文本中提取相關信息並生成詳細的回答
+    # 表示管道能夠正確地從文本中提取相關訊息並生成詳細的回答
     Answer from pipeline:
     Yes, the EuroSCORE does underestimate the mortality risk in cardiac valve surgery of the Mexican population. The data from the study conducted at the Instituto Nacional de Cardiología Ignacio Chávez (INCICh) in México showed that the actual total mortality rate was 9.68%, which was significantly higher than the mortality predicted by the additive (5%) and logistic (5.6%) EuroSCORE models. In addition, the Hosmer-Lemeshow test results had a P<.001 for both models, suggesting that the models did not fit the data well, indicating poor calibration in predicting mortality in this particular population.
     -----------------------------------

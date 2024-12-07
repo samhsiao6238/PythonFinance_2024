@@ -69,11 +69,11 @@ _以下講義是在 MacOS 上應用 YOLOv8_
 
         # 解析 YOLOv8 的偵測結果
         for result in results:
-            # 獲取邊界框座標
+            # 取得邊界框座標
             boxes = result.boxes.xyxy.cpu().numpy()
-            # 獲取置信度
+            # 取得置信度
             confidences = result.boxes.conf.cpu().numpy()
-            # 獲取類別索引
+            # 取得類別索引
             class_ids = result.boxes.cls.cpu().numpy()
 
             for box, confidence, class_id in zip(
@@ -81,7 +81,7 @@ _以下講義是在 MacOS 上應用 YOLOv8_
             ):
                 # 取得邊界框的座標
                 x1, y1, x2, y2 = map(int, box)
-                # 獲取物件類別名稱
+                # 取得物件類別名稱
                 label = model.names[int(class_id)]
 
                 # 繪製邊界框

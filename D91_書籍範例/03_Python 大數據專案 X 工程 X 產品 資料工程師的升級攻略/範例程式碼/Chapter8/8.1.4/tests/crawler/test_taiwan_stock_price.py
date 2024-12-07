@@ -485,14 +485,14 @@ def test_crawler_twse_error(mocker):
 
     這邊使用特別的技巧, mocker,
     因為在測試階段, 無法保證對方一定會給錯誤的結果
-    因此使用 mocker, 對 requests 做"替換", 換成我們設定的結果
+    因此使用 mocker, 對 requests 做"更改", 換成我們設定的結果
     如下
     """
-    # 將特定路徑下的 requests 替換掉
+    # 將特定路徑下的 requests 更改掉
     mock_requests = mocker.patch(
         "financialdata.crawler.taiwan_stock_price.requests"
     )
-    # 將 requests.get 的回傳值 response, 替換掉成 ""
+    # 將 requests.get 的回傳值 response, 更改掉成 ""
     # 如此一來, 當我們在測試爬蟲時,
     # 發送 requests 得到的 response, 就會是 ""
     mock_requests.get.return_value = ""

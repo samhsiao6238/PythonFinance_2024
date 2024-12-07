@@ -132,7 +132,7 @@ _展示 k-NN 的數據分佈和分類過程_
         test_size=0.3, random_state=42
     )
 
-    # 創建k-NN分類器，這裡我們設置k=3
+    # 建立k-NN分類器，這裡我們設置k=3
     knn = KNeighborsClassifier(n_neighbors=3)
     knn.fit(X_train, y_train)
 
@@ -143,7 +143,7 @@ _展示 k-NN 的數據分佈和分類過程_
     # 邊界的步長
     h = .02
 
-    # 創建顏色映射
+    # 建立顏色映射
     cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA', '#AAAAFF'])
     cmap_bold = ListedColormap(['#FF0000', '#00FF00', '#0000FF'])
 
@@ -183,7 +183,7 @@ _展示 k-NN 的數據分佈和分類過程_
     plt.legend()
     plt.show()
 
-    # 打印混淆矩陣和分類報告
+    # 輸出混淆矩陣和分類報告
     cm = confusion_matrix(y_test, y_pred)
     print("混淆矩陣：\n", cm)
     print("\n分類報告：\n", classification_report(y_test, y_pred))
@@ -270,7 +270,7 @@ _除了 `Iris 資料集` 外，`Breast Cancer Wisconsin` 資料集也很適用�
         test_size=0.3, random_state=42
     )
 
-    # 創建 k-NN 分類器，這裡我們設置 k=5
+    # 建立 k-NN 分類器，這裡我們設置 k=5
     knn = KNeighborsClassifier(n_neighbors=5)
     knn.fit(X_train, y_train)
 
@@ -289,7 +289,7 @@ _除了 `Iris 資料集` 外，`Breast Cancer Wisconsin` 資料集也很適用�
     plt.title('k-NN 模型的混淆矩陣 (k=5)')
     plt.show()
 
-    # 打印分類報告
+    # 輸出分類報告
     print("\n分類報告：\n", classification_report(y_test, y_pred, target_names=data.target_names))
 
     # 計算特徵的影響（重要性）並可視化
@@ -335,7 +335,7 @@ _除了 `Iris 資料集` 外，`Breast Cancer Wisconsin` 資料集也很適用�
     Z = knn_vis.predict(np.c_[xx.ravel(), yy.ravel()])
     Z = Z.reshape(xx.shape)
 
-    # 創建顏色映射
+    # 建立顏色映射
     cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA'])
     cmap_bold = ListedColormap(['#FF0000', '#00FF00'])
 

@@ -107,7 +107,7 @@
     ```python
     import firebase_admin
     from firebase_admin import credentials
-    # 要替換為自己的金鑰名稱
+    # 要更改為自己的金鑰名稱
     cred = credentials.Certificate("fir-2024-6e360-firebase-adminsdk-16wwf-d2983e1f68.json")
     firebase_admin.initialize_app(cred)
     ```
@@ -167,13 +167,13 @@
 
 <br>
 
-24. 上個步驟的腳本中，要替換為自己的資料庫網址，回到資料庫後點擊 `複製資料庫網址`。
+24. 上個步驟的腳本中，要更改為自己的資料庫網址，回到資料庫後點擊 `複製資料庫網址`。
 
     ![](images/img_29.png)
 
 <br>
 
-25. 替換腳本中的網址。
+25. 更改腳本中的網址。
 
     ![](images/img_30.png)
 

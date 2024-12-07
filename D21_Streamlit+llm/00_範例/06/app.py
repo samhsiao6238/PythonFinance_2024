@@ -41,12 +41,12 @@ messages = st.session_state.messages
 for msg in messages:
     st.chat_message(msg["role"]).write(msg["content"])
 
-# 當用戶輸入新的聊天信息時觸發
+# 當用戶輸入新的聊天訊息時觸發
 if prompt := st.chat_input(placeholder="Tell me a joke about sharks"):
     messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
 
-    # 如果沒有提供 API 密鑰，顯示提示信息
+    # 如果沒有提供 API 密鑰，顯示提示訊息
     if not OPENAI_API_KEY:
         st.info("請新增 OpenAI API 金鑰以繼續。")
         st.stop()
@@ -97,5 +97,5 @@ if st.session_state["response"]:
         )
         # 保存反饋到 Trubrics
         trubrics.save(config, collection)
-        # 顯示提示信息
+        # 顯示提示訊息
         st.toast("反饋已記錄！", icon="📝")

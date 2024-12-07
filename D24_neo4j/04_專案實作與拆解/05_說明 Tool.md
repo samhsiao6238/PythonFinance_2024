@@ -22,7 +22,7 @@ _以下筆記編排略有不清，將再行修正。_
         ),。
         Tool.from_function(
             name="Vector Search Index",
-            description="用於基於向量搜索的電影情節信息檢索。",
+            description="用於基於向量搜索的電影情節訊息檢索。",
             func=kg_qa,
             return_direct=False,
         ),
@@ -43,7 +43,7 @@ _以下筆記編排略有不清，將再行修正。_
 
 2. description (str): `可選的`，但建議提供且詳細說明，因為 _代理會使用描述來決定如何使用工具_。
 
-3. args_schema (Pydantic BaseModel): `可選的`，但建議提供，可以用來提供更多的信息（例如，少量樣本）或驗證預期的參數。
+3. args_schema (Pydantic BaseModel): `可選的`，但建議提供，可以用來提供更多的訊息（例如，少量樣本）或驗證預期的參數。
 
 <br>
 
@@ -224,7 +224,7 @@ _這兩個範例展示了如何處理單一輸入和多個輸入的情況。大�
 
 ## 定義自訂 args_schema
 
-1. 可以定義自訂的 `args_schema` 以提供更多關於輸入的信息。
+1. 可以定義自訂的 `args_schema` 以提供更多關於輸入的訊息。
 
 2. 程式碼。
 

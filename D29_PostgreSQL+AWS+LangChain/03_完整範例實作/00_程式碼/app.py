@@ -369,7 +369,7 @@ def main():
 
     elif selected_source == "🖼️ PPT":
         ppt_docs = st.file_uploader(
-            "在此上傳您的 PPT，然後按一下「Process」",
+            "在此上傳自己的 PPT，然後按一下「Process」",
             type=["ppt", "pptx"],
             accept_multiple_files=False,
         )
@@ -392,7 +392,7 @@ def main():
 
     elif selected_source == "📝 Word":
         word_docs = st.file_uploader(
-            "在此處上傳您的 Word 文件，然後按一下「Process」",
+            "在此處上傳自己的 Word 文件，然後按一下「Process」",
             type=["docx"],
             accept_multiple_files=False,
         )

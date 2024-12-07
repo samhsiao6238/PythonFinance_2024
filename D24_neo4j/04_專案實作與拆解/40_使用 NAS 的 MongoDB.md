@@ -36,7 +36,7 @@ _已經在 NAS 上架設好容器_
         db = client.admin.command('ping')
         print("MongoDB 連接成功:", db)
     except Exception as e:
-        # 如果連接失敗，捕獲並輸出異常信息
+        # 如果連接失敗，捕獲並輸出異常訊息
         print("MongoDB 連接失敗:", e)
     ```
 
@@ -155,7 +155,7 @@ _預設沒帳號密碼_
     db.<collection_name>.remove({name: "John"})
     ```
 
-11. 顯示資料庫狀態：顯示當前資料庫的狀態信息，包括大小、集合數量等。
+11. 顯示資料庫狀態：顯示當前資料庫的狀態訊息，包括大小、集合數量等。
 
     ```bash
     db.stats()

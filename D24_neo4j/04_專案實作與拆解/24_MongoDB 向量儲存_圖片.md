@@ -91,8 +91,8 @@ _以處理圖片為例_
                 print(f"Converted {filename} to {new_filename} with size {target_size}")
 
     # 指定來源資料夾和目標資料夾路徑
-    source_folder = "./face_detect_source" # 替換為你的來源資料夾路徑
-    target_folder = "./face_detect_done" # 替換為你的目標資料夾路徑
+    source_folder = "./face_detect_source" # 更改為你的來源資料夾路徑
+    target_folder = "./face_detect_done" # 更改為你的目標資料夾路徑
 
     # 轉換所有圖片為 .jpeg 格式，調整解析度並儲存到目標資料夾
     convert_images_to_jpg(source_folder, target_folder, output_format='jpeg', target_size=(224, 224))
@@ -208,7 +208,7 @@ _以處理圖片為例_
         print("載入現有向量儲存...")
 
     # 搜索相似圖片
-    # 替換為所要查詢圖片路徑
+    # 更改為所要查詢圖片路徑
     query_img_path = "./face_detect_source/image_01.jpg"
     similar_images = search_similar_images(query_img_path)
 
@@ -350,7 +350,7 @@ _添加評分_
         print("載入現有向量儲存...")
 
     # 搜索相似圖片
-    # 替換為所要查詢圖片路徑
+    # 更改為所要查詢圖片路徑
     query_img_path = "./face_detect_source/image_01.jpg"
     similar_images = search_similar_images(query_img_path)
 
@@ -512,7 +512,7 @@ _展示出圖片_
         print("載入現有向量儲存...")
 
     # 搜索相似圖片
-    # 替換為所要查詢圖片路徑
+    # 更改為所要查詢圖片路徑
     query_img_path = "./face_detect_source/image_01.jpg"
     similar_images = search_similar_images(query_img_path)
 
@@ -746,7 +746,7 @@ _展示出圖片_
         print("載入現有向量儲存...")
 
     # 搜索相似圖片
-    # 替換為所要查詢圖片路徑
+    # 更改為所要查詢圖片路徑
     query_img_path = "./face_detect_source/image_01.jpg"
     similar_images = search_similar_images(query_img_path)
 

@@ -132,7 +132,7 @@ _完成前一個步驟時會在 [OAuth 同意畫面](https://console.cloud.googl
 
 <br>
 
-3. 輸入名稱或使用預設的 `電腦用戶端 -1`，依照畫面說明 `您的 OAuth 2.0 用戶端名稱。這個名稱只會用於在控制台中識別用戶端，不會向使用者顯示`，然後點擊 `建立`。
+3. 輸入名稱或使用預設的 `電腦用戶端 -1`，依照畫面說明 `自己的 OAuth 2.0 用戶端名稱。這個名稱只會用於在控制台中識別用戶端，不會向使用者顯示`，然後點擊 `建立`。
 
     ![](images/img_50.png)
 
@@ -215,7 +215,7 @@ _使用 `curl` 進行測試，使用指定的 `專案 ID` 訪問 `Google API`，
     project_id=<自己的 Project ID>
     ```
 
-    _替換後_
+    _更改後_
     
     ```bash
     access_token=$(gcloud auth application-default print-access-token)

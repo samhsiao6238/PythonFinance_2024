@@ -56,7 +56,7 @@ _Support Vector Machine，支持向量機_
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
-    # 創建 SVM 模型，使用線性核函數
+    # 建立 SVM 模型，使用線性核函數
     svm_model = SVC(
         kernel='linear', 
         C=1.0, 
@@ -124,7 +124,7 @@ _Support Vector Machine，支持向量機_
     plt.title('SVM 模型的混淆矩陣')
     plt.show()
 
-    # 打印分類報告
+    # 輸出分類報告
     print("\n分類報告：\n", classification_report(y_test, y_pred))
     ```
 

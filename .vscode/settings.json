@@ -1,6 +1,17 @@
 {
+    "cSpell.enableFiletypes": [
+        "!markdown",
+        "!python"
+    ],
+    // 添加字彙
+    "cSpell.words": [
+        // 可將特殊命名字串加入
+        "myfunction", "mysource", "mytarget", "dateutil",
+        "boto3", "gettz", "timestr", "zipf", "ipynb",
+        "arcname", "botocore", "voclab", "elif", "TMQTT"
+    ],
     // 設定貼上相片的預設路徑
-    "pasteImage.path": "${currentFileDir}/images/", 
+    "pasteImage.path": "${currentFileDir}/images/",
     // 圖片前綴
     "pasteImage.namePrefix": "img_",
     // 預設名稱
@@ -19,13 +30,25 @@
     "[yaml]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    // 個體設定，全局也有預設的 400
-    "replacerules.rules": {
-        
-        "Convert Markdown Image to HTML": {
-            "find": "!\\[]\\(images/img_(\\d+)\\.png\\)",
-            "replace": "<img src=\"images/img_$1.png\" width=\"400px\">"
-        }
+    // 全局縮排設置
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    // 專門為 Markdown 文件設置縮排
+    "[markdown]": {
+        "editor.tabSize": 4
     },
+    // 設定 Python language server 為 Microsoft 的 Pylance
+    "python.languageServer": "Pylance",
+    "indentRainbow.colors": [
+        "rgba(255,69,0,0.1)",  // 第一層
+        "rgba(255,140,0,0.1)", // 第二層
+        "rgba(34,139,34,0.1)", // 第三層
+        "rgba(0,0,255,0.1)"    // 第四層
+    ],
+    // 當縮排不一致時顯示的錯誤顏色
+    "indentRainbow.errorColor": "rgba(128,32,32,0.8)",
+    // 忽略特定警告
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingImports": "none"
+    }
 }
-

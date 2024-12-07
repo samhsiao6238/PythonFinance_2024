@@ -37,9 +37,9 @@ for msg in st.session_state.messages:
 # 當用戶輸入新的消息時，將其添加到聊天記錄中並顯示
 # 這裡使用型別判斷
 if prompt := st.chat_input():
-    # 如果沒有提供API密鑰，顯示提示信息並停止應用
+    # 如果沒有提供API密鑰，顯示提示訊息並停止應用
     if not OPENAI_API_KEY:
-        # 顯示提示信息
+        # 顯示提示訊息
         st.info("請更新 OpenAI API key 的資訊再繼續。")
         # 停止應用
         st.stop()

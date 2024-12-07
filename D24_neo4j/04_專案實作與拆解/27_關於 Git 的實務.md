@@ -31,10 +31,10 @@ _剛好遇到錯誤，所以紀錄排除步驟_
     ```python
     import urllib.parse
 
-    # 需要轉換的路徑，假設它是以八進制字符編碼的形式
+    # 需要轉換的路徑，假設它是以八進制字元編碼的形式
     encoded_path = "a/D25_neo4j/13_\345\260\210\346\241\210 Noe4jBot/02_\345\205\266\344\273\226\345\212\237\350\203\275\347\257\204\344\276\213/.streamlit/secrets.toml" "b/D25_neo4j/13_\345\260\210\346\241\210 Noe4jBot/02_\345\205\266\344\273\226\345\212\237\350\203\275\347\257\204\344\276\213/.streamlit/secrets.toml"
 
-    # 替換八進制字符為百分號編碼字符
+    # 更改八進制字元為百分號編碼字元
     encoded_path = encoded_path.encode('latin1').decode('unicode_escape').encode('latin1').decode('utf-8')
 
     # 解碼 URL 編碼路徑

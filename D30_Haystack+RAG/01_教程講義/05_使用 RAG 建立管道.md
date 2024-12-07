@@ -14,7 +14,7 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-2. 將使用 `七大奇蹟` 的維基百科頁面作為文件，也可自行替換為任何文本。
+2. 將使用 `七大奇蹟` 的維基百科頁面作為文件，也可自行更改為任何文本。
 
 <br>
 
@@ -136,7 +136,7 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
     from haystack.components.embedders import SentenceTransformersDocumentEmbedder
 
     # 初始化 `文件嵌入器`
-    # 將整個文件嵌入到一個向量表示中，以捕捉文件整體的語義信息
+    # 將整個文件嵌入到一個向量表示中，以捕捉文件整體的語義訊息
     doc_embedder = SentenceTransformersDocumentEmbedder(
         model="sentence-transformers/all-MiniLM-L6-v2"
     )
@@ -178,7 +178,7 @@ _回到範例操作_
 
     ```python
     # 將文件轉換成嵌入表示
-    # 這裡的嵌入是將每個文件的文本轉換成對應的向量，捕捉其語義信息
+    # 這裡的嵌入是將每個文件的文本轉換成對應的向量，捕捉其語義訊息
     docs_with_embeddings = doc_embedder.run(docs)
     # 將包含嵌入的文件寫入到 document_store 中
     # 這一步將文件及其對應的嵌入向量保存到內存中的 document_store
@@ -245,7 +245,7 @@ _模板使用的是 `Jinja2` 循環語法_
 
     # 定義模板提示
     template = """
-    根據以下信息，使用繁體中文回答問題。
+    根據以下訊息，使用繁體中文回答問題。
 
     上下文:
     {% for document in documents %}

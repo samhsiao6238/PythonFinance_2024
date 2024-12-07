@@ -128,7 +128,7 @@ _Generative Adversarial Network，GAN 是一種深度學習模型，用於生成
         ]
     )
 
-    # 創建數據集和數據加載器
+    # 建立數據集和數據加載器
     dataset = datasets.MNIST(
         root="./data",
         train=True,

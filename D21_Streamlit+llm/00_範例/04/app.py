@@ -37,7 +37,7 @@ with st.form("my_form"):
     submitted = st.form_submit_button("Submit")
     # 假如沒有 Key
     if not OPENAI_API_KEY:
-        st.info("請新增您的 OpenAI API 金鑰以繼續。")
+        st.info("請新增自己的 OpenAI API 金鑰以繼續。")
     elif submitted:
         # 調用自訂函數
         generate_response(text)

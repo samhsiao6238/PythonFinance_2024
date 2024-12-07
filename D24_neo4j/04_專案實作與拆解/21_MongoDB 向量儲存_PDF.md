@@ -9,7 +9,7 @@ _讀取 PDF 並建立向量索引系統_
 1. 程式碼：建立為 `app.py`。
 
     ```python
-    # getpass：安全地提示用戶輸入密碼或其他敏感信息
+    # getpass：安全地提示用戶輸入密碼或其他敏感訊息
     import getpass, os, pymongo, pprint
     # PyPDFLoader：載入 PDF 文件並將其內容轉換為可處理的文本或數據結構
     from langchain_community.document_loaders import PyPDFLoader
@@ -96,7 +96,7 @@ _讀取 PDF 並建立向量索引系統_
         return "\n\n".join(doc.page_content for doc in docs)
 
 
-    # 建立一條鏈來回答有關您的數據的問題
+    # 建立一條鏈來回答有關自己的數據的問題
     rag_chain = (
         {"context": retriever | format_docs, "question": RunnablePassthrough()}
         | custom_rag_prompt
@@ -268,7 +268,7 @@ _優化腳本_
     st.title("文件問答系統")
 
     # User input for question
-    question = st.text_input("請輸入您的問題：", "簡述這篇論文的研究方法")
+    question = st.text_input("請輸入自己的問題：", "簡述這篇論文的研究方法")
 
     # Button to trigger query
     if st.button("提交問題"):
@@ -489,7 +489,7 @@ _優化腳本_
     st.title("文件問答系統")
 
     # 文字輸入框，用於查詢
-    question = st.text_input("請輸入您的問題：", "簡述這篇論文的研究方法")
+    question = st.text_input("請輸入自己的問題：", "簡述這篇論文的研究方法")
 
     # Button to trigger query
     if st.button("提交問題"):

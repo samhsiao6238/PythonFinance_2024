@@ -6,7 +6,7 @@ _依據官網的 [Running Meta Llama on Mac](https://llama.meta.com/docs/llama-e
 
 ## 範例
 
-1. 官方提供的 Python 範例，通過 HTTP POST 請求向本地伺服器上的 API 發送一個問題，並獲取 AI 模型生成的回答。
+1. 官方提供的 Python 範例，通過 HTTP POST 請求向本地伺服器上的 API 發送一個問題，並取得 AI 模型生成的回答。
 
     ```python
     # 用於發送 HTTP 請求
@@ -31,7 +31,7 @@ _依據官網的 [Running Meta Llama on Mac](https://llama.meta.com/docs/llama-e
 
                 }
             ],
-            # 不使用流式傳輸，直接獲取完整回應
+            # 不使用流式傳輸，直接取得完整回應
             "stream": False,
         }
         # 設置 HTTP 請求的標頭，表明數據格式為 JSON

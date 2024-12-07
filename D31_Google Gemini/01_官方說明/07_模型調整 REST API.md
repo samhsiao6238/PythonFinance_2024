@@ -144,7 +144,7 @@ _使用 `curl 指令` 或 `Python 代碼` 調整 `Gemini API` 的 `文字生成�
     with open("client_secret.json", "r") as file:
         client_info = json.load(file)
 
-    # 獲取 client_id
+    # 取得 client_id
     client_id = client_info["installed"]["client_id"]
 
     # 生成 code_verifier 和 code_challenge
@@ -153,13 +153,13 @@ _使用 `curl 指令` 或 `Python 代碼` 調整 `Gemini API` 的 `文字生成�
 
     '''
     指令說明：
-    1. client_id：從 JSON 檔案中獲取。
+    1. client_id：從 JSON 檔案中取得。
     2. scope：指定權限範圍，包括存取 `Google Cloud Platform` 和 `產生語言模型` 的權限。
     3. state：這是一個防止 CSRF 攻擊的安全碼，可以使用任意字串作為值，例如 12345。
     4. access_type：設定為 `offline`，以便在沒有使用者互動的情況下取得刷新令牌。
-    5. code_challenge：這是用於 PKCE 的程式碼挑戰，需要使用 `SHA256` 編碼生成，可以使用任意字串，例如 abcde12345。實際情況下需要用正確的值替換。
+    5. code_challenge：這是用於 PKCE 的程式碼挑戰，需要使用 `SHA256` 編碼生成，可以使用任意字串，例如 abcde12345。實際情況下需要用正確的值更改。
     6. code_challenge_method：設定為 S256，這是 PKCE 的標準方。
-    7. redirect_uri：從您的 JSON 檔案中獲取，即 http://localhost。
+    7. redirect_uri：從自己的 JSON 檔案中取得，即 http://localhost。
     '''
 
     # 生成 gcloud 命令
@@ -396,10 +396,10 @@ _設定環境變數給 REST API 調用使用_
 
 <br>
 
-2. 替換 Google Cloud 項目 ID，如此 API 會將請求發送到指定的項目中，`<project-id>` 可在 JSON 文件中找到。
+2. 更改 Google Cloud 項目 ID，如此 API 會將請求發送到指定的項目中，`<project-id>` 可在 JSON 文件中找到。
 
     ```bash
-    export project_id=<替換 project-id>
+    export project_id=<更改 project-id>
     # 在本範例中是
     export project_id=myproject-20240622
     ```
@@ -447,7 +447,7 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
         data = json.load(file)
         project_id = data['installed']['project_id']
 
-    # 獲取訪問令牌
+    # 取得訪問令牌
     access_token = !gcloud auth application-default print-access-token
     access_token = '\n'.join(access_token)
 
@@ -470,9 +470,9 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
 
 <br>
 
-## 獲取模型資訊
+## 取得模型資訊
 
-1. 若有授權問題，可再次執行 `OAuth 2.0 授權流程` 來獲取 `access_toke`，以下指令透過參數 `--scopes` 指定了 `授權範圍`。
+1. 若有授權問題，可再次執行 `OAuth 2.0 授權流程` 來取得 `access_toke`，以下指令透過參數 `--scopes` 指定了 `授權範圍`。
 
     ```bash
     gcloud auth application-default login --client-id-file=client_secret.json --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.tuning'
@@ -488,7 +488,7 @@ _特別注意，透過 `export` 所設定的環境變數是臨時性的，在所
 
 <br>
 
-3. 從 `Google Cloud` 的 `Generative Language API` 獲取經過調整的模型列表，可藉此確認前面設定的正確性。
+3. 從 `Google Cloud` 的 `Generative Language API` 取得經過調整的模型列表，可藉此確認前面設定的正確性。
 
     ```bash
     curl -X GET ${base_url}/v1beta/tunedModels \
@@ -511,7 +511,7 @@ _彙整一下上述步驟的筆記_
 
 <br>
 
-1. 列出當前可用的調整模型，驗證您的認證設置。
+1. 列出當前可用的調整模型，驗證自己的認證設置。
 
     ```bash
     base_url="https://generativelanguage.googleapis.com"
@@ -640,7 +640,7 @@ _彙整一下上述步驟的筆記_
 2. 透過指令設置模型。
 
     ```bash
-    export modelname="<替換前一步驟輸出的模型>"
+    export modelname="<更改前一步驟輸出的模型>"
     # 在本範例中
     export modelname="tunedModels/number-generator-model-gyw26dhike7r"
     ```

@@ -32,25 +32,18 @@
             "problemMatcher": []
         },
         {
-            // 任務名稱
             "label": "Replace Strings",
-            // 使用命令行執行
             "type": "shell",
-            // 執行 Python 解譯器
             "command": "python",
-            // 腳本名稱
-            "args": ["replace_script.py"],
+            "args": [
+                ".script/replace_script.py"
+            ],
             "presentation": {
-                // 顯示終端輸出
                 "reveal": "always",
-                // 終端面板共享
                 "panel": "shared"
-
             },
             "group": {
-                // 任務分組
                 "kind": "build",
-                // 設為默認任務
                 "isDefault": true
             },
             "problemMatcher": []

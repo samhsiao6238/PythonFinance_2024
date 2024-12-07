@@ -58,7 +58,7 @@ _官方的持久化資料庫，與沙箱略有不同_
 
 <br>
 
-3. 官方腳本：連線資料庫，替換其中的 `URI`、`Username`、`Password`，_特別注意_，其中的箭頭括號 `<>` 只是示意區塊，複製後無需貼上。
+3. 官方腳本：連線資料庫，更改其中的 `URI`、`Username`、`Password`，_特別注意_，其中的箭頭括號 `<>` 只是示意區塊，複製後無需貼上。
 
     ```python
     from neo4j import GraphDatabase

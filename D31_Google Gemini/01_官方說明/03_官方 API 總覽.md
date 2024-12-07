@@ -27,9 +27,9 @@ _官方入門範例和 API 總覽的內容進行篩選和補充，重複部分�
 
     load_dotenv()
 
-    # 設置 API 金鑰，請替換為您的實際金鑰
+    # 設置 API 金鑰，請更改為自己的實際金鑰
     GOOGLE_API_KEY = os.getenv("GEMINI_API_KEY")
-    # 配置 Google API 使用您的金鑰
+    # 配置 Google API 使用自己的金鑰
     genai.configure(api_key=GOOGLE_API_KEY)
 
     # 初始化模型，這裡使用 'gemini-1.5-flash'
@@ -239,7 +239,7 @@ _controlled generation、constrained decoding_
 
     # 定義 JSON 結構
     class Recipe(typing.TypedDict):
-        # 定義食譜名稱字段
+        # 定義食譜名稱欄位
         recipe_name: str
 
     # 初始化模型：必須使用 `gemini-1.5-pro`

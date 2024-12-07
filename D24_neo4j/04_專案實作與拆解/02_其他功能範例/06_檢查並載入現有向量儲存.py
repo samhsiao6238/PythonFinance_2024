@@ -59,7 +59,7 @@ else:
 st.title("文件問答系統")
 
 # User input for question
-question = st.text_input("請輸入您的問題：", "簡述這篇論文的研究方法")
+question = st.text_input("請輸入自己的問題：", "簡述這篇論文的研究方法")
 
 # Button to trigger query
 if st.button("提交問題"):

@@ -125,7 +125,7 @@ _以下使用 YOLOv8 和 `face_recognition` 庫進行人臉偵測和辨識，展
                         min_distance = min(distances)
                         # 當相似度滿足閾值
                         if min_distance < tolerance_1:
-                            # 獲取最接近的已知人臉索引
+                            # 取得最接近的已知人臉索引
                             best_match_index = distances.argmin()
                             name = known_face_names[best_match_index]
                             # 邊框變紅

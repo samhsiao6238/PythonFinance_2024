@@ -61,7 +61,7 @@ def main():
     st.title("建立連結 💼✨")
     st.write("使用 Amazon Bedrock 和 LangChain 根據社群媒體資料建立摘要的應用程式。 🚀")
 
-    st.sidebar.header("🔎 輸入此人的詳細信息")
+    st.sidebar.header("🔎 輸入此人的詳細訊息")
     name = st.sidebar.text_input("名字 (e.g., 'Andy Jassy Amazon'):")
 
     if st.sidebar.button("取得摘要"):

@@ -142,7 +142,7 @@ else:
     print("載入現有向量儲存...")
 
 # 搜索相似圖片
-# 替換為所要查詢圖片路徑
+# 更改為所要查詢圖片路徑
 query_img_path = "./face_detect_source/image_01.jpg"
 similar_images = search_similar_images(query_img_path)
 

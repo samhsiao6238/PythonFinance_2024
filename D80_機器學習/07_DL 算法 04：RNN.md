@@ -147,7 +147,7 @@ _Recurrent Neural Network，循環神經網絡_
 
 <br>
 
-2. 使用 Keras 的 `Sequential` 模型構建 RNN，先使用 `Embedding` 層將單詞編碼轉換為密集向量表示，再添加 `SimpleRNN` 層，這是基本的循環神經網絡層，用於捕捉文本中的時序信息，最後的輸出層使用 1 個神經元和 Sigmoid 激活函數，進行二元分類。
+2. 使用 Keras 的 `Sequential` 模型構建 RNN，先使用 `Embedding` 層將單詞編碼轉換為密集向量表示，再添加 `SimpleRNN` 層，這是基本的循環神經網絡層，用於捕捉文本中的時序訊息，最後的輸出層使用 1 個神經元和 Sigmoid 激活函數，進行二元分類。
 
 <br>
 

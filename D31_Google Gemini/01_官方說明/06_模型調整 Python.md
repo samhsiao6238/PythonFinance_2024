@@ -275,7 +275,7 @@ _以上完成安裝_
 
 <br>
 
-4. 建立調整模型，從 `list_models()` 中獲取的 `模型 ID` 來建立一個新的 `調整模型`，要建立調整模型，需要將數據集傳遞給 `genai.create_tuned_model` 方法，可以直接在調用中定義輸入和輸出值，也可以從文件導入數據框後傳遞給方法。
+4. 建立調整模型，從 `list_models()` 中取得的 `模型 ID` 來建立一個新的 `調整模型`，要建立調整模型，需要將數據集傳遞給 `genai.create_tuned_model` 方法，可以直接在調用中定義輸入和輸出值，也可以從文件導入數據框後傳遞給方法。
 
     ```python
     import google.generativeai as genai
@@ -317,7 +317,7 @@ _以上完成安裝_
 5. 檢查調整模型的狀態，在輸出中，`模型狀態 2` 表示模型已經準備就緒、處於 `READY` 狀態。
 
     ```python
-    # 獲取調整模型的詳細信息
+    # 取得調整模型的詳細訊息
     model = genai.get_tuned_model(f'tunedModels/{name}')
     print(f"模型狀態: {model.state}")
 
@@ -381,7 +381,7 @@ _以上完成安裝_
     import seaborn as sns
     import matplotlib.pyplot as plt
 
-    # 獲取調整模型的快照信息，構建 DataFrame
+    # 取得調整模型的快照訊息，構建 DataFrame
     snapshots = pd.DataFrame(model_info.tuning_task.snapshots)
 
     # 繪製損失曲線
@@ -455,7 +455,7 @@ _多次運行後可能會產生多個模型_
     # 列出所有已調整的模型，將生成器轉換為列表
     tuned_models = list(genai.list_tuned_models())
 
-    # 打印出所有模型的ID和名稱
+    # 輸出出所有模型的ID和名稱
     print("已調整的模型列表:")
     for model in tuned_models:
         print(f"Model ID: {model.name}, Name: {model.display_name}")

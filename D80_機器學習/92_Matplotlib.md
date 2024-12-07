@@ -45,10 +45,10 @@ _Python 視覺化工具，以下是常見的圖形類型_
     # 用來正常顯示負號
     plt.rcParams['axes.unicode_minus'] = False
 
-    # 獲取 TSMC（台積電）2330 的歷史股價數據
+    # 取得 TSMC（台積電）2330 的歷史股價數據
     tsmc = twstock.Stock('2330')
 
-    # 獲取最近的 100 筆交易日的股價資料，從 2023 年 12 月開始
+    # 取得最近的 100 筆交易日的股價資料，從 2023 年 12 月開始
     stock_data = tsmc.fetch_from(2023, 12)
 
     # 提取日期與收盤價數據，將日期與收盤價分別儲存於 lists 中
@@ -110,7 +110,7 @@ _Python 視覺化工具，以下是常見的圖形類型_
     # Z 軸使用線性變化（或可以使用 x**2, np.sin(x) 等視覺效果更強的函數）
     z = x 
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
@@ -151,7 +151,7 @@ _Python 視覺化工具，以下是常見的圖形類型_
     # 使用正弦函數來模擬 Z 軸的變化
     z = np.sin(2 * np.pi * x)
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
@@ -245,7 +245,7 @@ _Python 視覺化工具，以下是常見的圖形類型_
     # 第三維數據
     z = np.random.rand(50)
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
@@ -418,7 +418,7 @@ _或稱 `長條圖`_
     categories = ['A', 'B', 'C', 'D']
     values = [10, 15, 7, 10]
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
@@ -476,7 +476,7 @@ _或稱 `長條圖`_
     # Z 軸數據（高度）
     z_values = [10, 15, 7, 10] 
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
@@ -541,7 +541,7 @@ _或稱 `長條圖`_
     # Z 軸數據（柱子的高度）
     z_values = [10, 15, 7, 10] 
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
@@ -599,7 +599,7 @@ _或稱 `長條圖`_
     # Z 軸數據（柱子的高度）
     z_values = [10, 15, 7, 10] 
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
@@ -678,7 +678,7 @@ _或稱 `長條圖`_
     # 設定直方圖參數
     hist, bins = np.histogram(data, bins=30)
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
@@ -737,7 +737,7 @@ _或稱 `長條圖`_
     regions = [data_region_1, data_region_2, data_region_3]
     y_labels = ['Region 1', 'Region 2', 'Region 3']
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
@@ -964,7 +964,7 @@ _或稱 `長條圖`_
     sizes_inner = [15, 10, 20, 15, 20, 20]
     colors_inner = ['#c2c2f0','#ffb3e6', '#c4e17f', '#ffcc99', '#ff9999','#66b3ff']
 
-    # 創建圖表
+    # 建立圖表
     fig, ax = plt.subplots()
 
     # 外層甜甜圈圖
@@ -1019,7 +1019,7 @@ _或稱 `長條圖`_
         '#ffcc99', '#ff9999', '#66b3ff'
     ]
 
-    # 創建圖表
+    # 建立圖表
     fig, ax = plt.subplots(figsize=(8, 8))
 
     # 外層甜甜圈圖
@@ -1099,7 +1099,7 @@ _或稱 `長條圖`_
     df = pd.DataFrame(data)
     df.set_index("Date", inplace=True)
 
-    # 創建子圖，用來同時顯示 K 線圖和成交量
+    # 建立子圖，用來同時顯示 K 線圖和成交量
     fig, (ax1, ax2) = plt.subplots(
         2, 1, gridspec_kw={"height_ratios": [3, 1]}, figsize=(10, 6)
     )
@@ -1202,7 +1202,7 @@ _或稱 `長條圖`_
     # 計算 5 日移動平均線
     df['MA5'] = df['Close'].rolling(window=5).mean()
 
-    # 創建子圖，用來同時顯示 K 線圖和成交量
+    # 建立子圖，用來同時顯示 K 線圖和成交量
     fig, (ax1, ax2) = plt.subplots(2, 1, gridspec_kw={"height_ratios": [3, 1]}, figsize=(10, 6))
 
     # K 線圖顏色設定
@@ -1298,12 +1298,12 @@ _或稱 `長條圖`_
     # 模擬數據
     data = np.random.rand(10, 10)
 
-    # 創建 X 和 Y 網格
+    # 建立 X 和 Y 網格
     x = np.arange(data.shape[0])
     y = np.arange(data.shape[1])
     x, y = np.meshgrid(x, y)
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure(figsize=(10, 8))
     ax = fig.add_subplot(111, projection="3d")
 
@@ -1352,7 +1352,7 @@ _或稱 `長條圖`_
 
 <br>
 
-2. 使用 matplotlib 的 fill_between 函數來創建堆疊面積圖，模擬多組數據在不同時間段內的變化。這種圖表有助於展示多個類別之間的變化和相對貢獻，如音樂格式隨著時間推移的銷售變化。
+2. 使用 matplotlib 的 fill_between 函數來建立堆疊面積圖，模擬多組數據在不同時間段內的變化。這種圖表有助於展示多個類別之間的變化和相對貢獻，如音樂格式隨著時間推移的銷售變化。
 
     ```python
     import matplotlib.pyplot as plt
@@ -1467,7 +1467,7 @@ _或稱 `長條圖`_
     # 對應的 z 座標值，這裡基於一些數學函數進行變化
     z = np.sin(x) + np.cos(y)
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure(figsize=(10, 8))
     ax = fig.add_subplot(111, projection="3d")
 
@@ -1506,7 +1506,7 @@ _或稱 `長條圖`_
     # 對應的 z 座標值，這裡基於一些數學函數進行變化
     z = np.sin(x) + np.cos(y)
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure(figsize=(10, 8))
     ax = fig.add_subplot(111, projection="3d")
 
@@ -1614,7 +1614,7 @@ _或稱 `長條圖`_
     x1 = [3, 2, 5]
     x2 = [4, 7, 1]
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure()
     ax = fig.add_subplot(111, projection="3d")
 
@@ -1740,7 +1740,7 @@ _這在散點圖時已結合使用過，這裡介紹 3D Plot 本身的基礎與�
     y = np.random.rand(50)
     z = np.random.rand(50)
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
@@ -1766,7 +1766,7 @@ _這在散點圖時已結合使用過，這裡介紹 3D Plot 本身的基礎與�
 
 <br>
 
-3. 結合 `plotly` 套件增強圖表的交互功能，可旋轉視角、縮放等，方便更直觀地觀察數據；先進行安裝相關套件。
+3. 結合 `plotly` 套件增強圖表的互動功能，可旋轉視角、縮放等，方便更直觀地觀察數據；先進行安裝相關套件。
 
     ```bash
     pip install plotly nbformat
@@ -1785,7 +1785,7 @@ _這在散點圖時已結合使用過，這裡介紹 3D Plot 本身的基礎與�
     y = np.random.randn(100)
     z = np.random.randn(100)
 
-    # 創建 3D 散點圖
+    # 建立 3D 散點圖
     trace = go.Scatter3d(
         x=x, y=y, z=z,
         mode='markers',
@@ -1818,7 +1818,7 @@ _這在散點圖時已結合使用過，這裡介紹 3D Plot 本身的基礎與�
 
 <br>
 
-5. 如果要觀察數據的密度分佈，可在散點圖中疊加密度估計，並且將密度信息映射到點的顏色上，如此便可直觀地看到數據分佈的集中程度。
+5. 如果要觀察數據的密度分佈，可在散點圖中疊加密度估計，並且將密度訊息映射到點的顏色上，如此便可直觀地看到數據分佈的集中程度。
 
     ```python
     import numpy as np
@@ -1855,7 +1855,7 @@ _這在散點圖時已結合使用過，這裡介紹 3D Plot 本身的基礎與�
 
 <br>
 
-6. 在 3D 散點圖中，除了散點，還可疊加平面或曲面來表示回歸結果或分佈趨勢，這樣能夠提供更多的信息，特別是對於機器學習中的數據可視化；以下代碼是在散點圖的基礎上，疊加了一個模擬的回歸平面，這樣可更好觀察數據的趨勢和模型的擬合情況。
+6. 在 3D 散點圖中，除了散點，還可疊加平面或曲面來表示回歸結果或分佈趨勢，這樣能夠提供更多的訊息，特別是對於機器學習中的數據可視化；以下代碼是在散點圖的基礎上，疊加了一個模擬的回歸平面，這樣可更好觀察數據的趨勢和模型的擬合情況。
 
     ```python
     import numpy as np
@@ -1868,14 +1868,14 @@ _這在散點圖時已結合使用過，這裡介紹 3D Plot 本身的基礎與�
     # 模擬回歸關係
     z = x * 0.5 + y * 0.2 + np.random.randn(100) * 0.1 
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
     # 散點圖
     ax.scatter(x, y, z, c='blue', s=50)
 
-    # 創建回歸平面
+    # 建立回歸平面
     xx, yy = np.meshgrid(
         np.linspace(-3, 3, 50), np.linspace(-3, 3, 50)
     )
@@ -2067,7 +2067,7 @@ _這在散點圖時已結合使用過，這裡介紹 3D Plot 本身的基礎與�
         - 80
     )
 
-    # 創建 3D 圖
+    # 建立 3D 圖
     fig = plt.figure(figsize=(12, 8))
     ax = fig.add_subplot(111, projection="3d")
 
@@ -2149,7 +2149,7 @@ _這在散點圖時已結合使用過，這裡介紹 3D Plot 本身的基礎與�
 
 <br>
 
-3. 等高線圖可以與 3D 圖相結合，使用 Matplotlib 中的 Axes3D 模塊來實現 3D 視角的效果，這樣可以在同一個圖中既展示 2D 等高線圖，又展示 3D 的數據分佈；在前面的範例中，使用了 `Axes3D` 繪圖，適用於基本的 3D 曲面圖顯示，主要目的是展示數據的三維結構，而不考慮等高線或其他細節，而這個同時包含高解析度數據、3D 曲面圖、2D 等高線圖，展示曲面和等高線的情況下，該腳本提供了更多的視覺細節和交互性。
+3. 等高線圖可以與 3D 圖相結合，使用 Matplotlib 中的 Axes3D 模塊來實現 3D 視角的效果，這樣可以在同一個圖中既展示 2D 等高線圖，又展示 3D 的數據分佈；在前面的範例中，使用了 `Axes3D` 繪圖，適用於基本的 3D 曲面圖顯示，主要目的是展示數據的三維結構，而不考慮等高線或其他細節，而這個同時包含高解析度數據、3D 曲面圖、2D 等高線圖，展示曲面和等高線的情況下，該腳本提供了更多的視覺細節和互動性。
 
     ```python
     import numpy as np
@@ -2164,7 +2164,7 @@ _這在散點圖時已結合使用過，這裡介紹 3D Plot 本身的基礎與�
     # z 為高度，這裡模擬一個圓形波浪的高度分佈
     z = np.sin(np.sqrt(x**2 + y**2))
 
-    # 創建 3D 圖表
+    # 建立 3D 圖表
     fig = plt.figure(figsize=(8, 6))
     ax = fig.add_subplot(111, projection="3d")
 

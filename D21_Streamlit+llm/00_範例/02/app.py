@@ -25,7 +25,7 @@ question = st.text_input(
     disabled=not uploaded_file,
 )
 
-# 如果上傳了文件且輸入了問題但沒有提供API密鑰，顯示提示信息
+# 如果上傳了文件且輸入了問題但沒有提供API密鑰，顯示提示訊息
 if uploaded_file and question and not anthropic_api_key:
     st.info("請加入你的 Anthropic API key 來繼續。")
 

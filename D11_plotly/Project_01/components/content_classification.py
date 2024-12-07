@@ -31,7 +31,7 @@ fig = px.treemap(
 
 # 更新圖表的佈局設置
 fig.update_layout(width=1280, height=960, title_x=0.5)
-# 更新圖表痕跡的文本信息和字體大小
+# 更新圖表痕跡的文本訊息和字體大小
 fig.update_traces(textinfo="label+percent entry", textfont_size=14)
 
 # 定義 Dash 應用的佈局

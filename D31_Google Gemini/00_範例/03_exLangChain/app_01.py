@@ -44,7 +44,7 @@ if st.button("生成"):
                 generated_text += chunk.content
                 output_placeholder.text(generated_text)
 
-            # 顯示成功信息，指示文本生成完成
+            # 顯示成功訊息，指示文本生成完成
             st.success("文本生成已完成。")
 
         except Exception as e:

@@ -20,14 +20,14 @@ pip install nest_asyncio
 
 ### 第二步：設置環境變數和啟動環境
 
-將您的OpenAI API密鑰設置為環境變數，並確保在Jupyter Notebook中正確顯示輸出。
+將自己的OpenAI API密鑰設置為環境變數，並確保在Jupyter Notebook中正確顯示輸出。
 
 ```python
 import os
 import nest_asyncio
 from IPython.display import HTML, display
 
-os.environ["OPENAI_API_KEY"] = "sk-..."  # 替換為您的OpenAI API密鑰
+os.environ["OPENAI_API_KEY"] = "sk-..."  # 更改為自己的OpenAI API密鑰
 
 nest_asyncio.apply()
 
@@ -201,7 +201,7 @@ from llama_index.core.query_engine import SubQuestionQueryEngine
 from llama_index.agent.openai import OpenAIAgent
 
 # 設置環境變數
-os.environ["OPENAI_API_KEY"] = "sk-..."  # 替換為您的OpenAI API密鑰
+os.environ["OPENAI_API_KEY"] = "sk-..."  # 更改為自己的OpenAI API密鑰
 nest_asyncio.apply()
 
 def set_css():

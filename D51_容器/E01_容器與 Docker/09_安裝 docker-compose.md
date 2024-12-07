@@ -145,7 +145,7 @@ _[官方文件中](https://docs.docker.com/compose/install/) 依據作業系統�
 
 <br>
 
-4. 確保這個目錄在您的系統 PATH 環境變數中。
+4. 確保這個目錄在自己的系統 PATH 環境變數中。
 
 <br>
 
@@ -155,7 +155,7 @@ _使用以下步驟安裝 `docker-compose`_
 
 <br>
 
-1. 使用 `curl` 指令從 GitHub 發布頁下載最新的 `docker-compose` 執行檔到 `/usr/local/bin/docker-compose`，請替換下面指令中的 <v2.x.x> 為最新版本號。
+1. 使用 `curl` 指令從 GitHub 發布頁下載最新的 `docker-compose` 執行檔到 `/usr/local/bin/docker-compose`，請更改下面指令中的 <v2.x.x> 為最新版本號。
 
     ```bash
     sudo curl -L "https://github.com/docker/compose/releases/download/v2.x.x/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/ bin/docker-compose

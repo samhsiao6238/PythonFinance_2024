@@ -105,7 +105,7 @@ _這個範例的功能是使用 Atlas Vector Search 和 LangChain 來實現基�
 2. 導入所需的庫。
 
     ```python
-    # getpass：安全地提示用戶輸入密碼或其他敏感信息
+    # getpass：安全地提示用戶輸入密碼或其他敏感訊息
     import getpass, os, pymongo, pprint
     # PyPDFLoader：載入 PDF 文件並將其內容轉換為可處理的文本或數據結構
     from langchain_community.document_loaders import PyPDFLoader
@@ -290,7 +290,7 @@ _在 MongoDB 控制板上操作，以 `MyDatabase2024.MyCollection2024` 為例_
 
 <br>
 
-8. 並使用以下自訂的 `索引定義` 替換預設定義。
+8. 並使用以下自訂的 `索引定義` 更改預設定義。
 
     ```json
     {
@@ -347,7 +347,7 @@ _索引建立完成後，返回運行向量搜索查詢_
 
 <br>
 
-2. 檢索增強生成（RAG）：使用以下程式碼範例實現 RAG，根據您的數據回答問題。
+2. 檢索增強生成（RAG）：使用以下程式碼範例實現 RAG，根據自己的數據回答問題。
 
     ```python
     # 將 Atlas Vector Search 實例化為擷取器
@@ -382,7 +382,7 @@ _索引建立完成後，返回運行向量搜索查詢_
         return "\n\n".join(doc.page_content for doc in docs)
 
 
-    # 建立一條鏈來回答有關您的數據的問題
+    # 建立一條鏈來回答有關自己的數據的問題
     rag_chain = (
         {"context": retriever | format_docs, "question": RunnablePassthrough()}
         | custom_rag_prompt

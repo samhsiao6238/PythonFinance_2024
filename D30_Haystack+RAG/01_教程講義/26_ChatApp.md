@@ -20,7 +20,7 @@ _Building a Chat Application with Function Calling_
 
 <br>
 
-4. OpenAI 的 `函數調用功能` 將 `LLM` 連接到外部工具，通過向 `OpenAI API` 調用提供函數列表及其規範可輕鬆建立聊天助手，這些助手可以通過調用外部 API 來回答問題或從文本中提取結構化信息。
+4. OpenAI 的 `函數調用功能` 將 `LLM` 連接到外部工具，通過向 `OpenAI API` 調用提供函數列表及其規範可輕鬆建立聊天助手，這些助手可以通過調用外部 API 來回答問題或從文本中提取結構化訊息。
 
 <br>
 
@@ -460,7 +460,7 @@ _建立基本的 RAG 管道_
 
 ## 建立工具列表
 
-1. 除了 `rag_pipeline_func` 工具外，還建立一個名為 `get_current_weather` 的新工具，用於取得 `城市的天氣信息`，以下函數中使用硬編碼的數據來展示功能。
+1. 除了 `rag_pipeline_func` 工具外，還建立一個名為 `get_current_weather` 的新工具，用於取得 `城市的天氣訊息`，以下函數中使用硬編碼的數據來展示功能。
 
     ```python
     WEATHER_INFO = {
@@ -503,7 +503,7 @@ _建立基本的 RAG 管道_
             "type": "function",
             "function": {
                 "name": "rag_pipeline_func",
-                "description": "取得有關人們居住地點的信息",
+                "description": "取得有關人們居住地點的訊息",
                 "parameters": {
                     "type": "object",
                     "properties": {
@@ -598,7 +598,7 @@ _建立基本的 RAG 管道_
     ```python
     import json
 
-    # 解析函數調用信息
+    # 解析函數調用訊息
     # 提取第一個回應中的 content
     content = response['replies'][0].content
 
@@ -606,7 +606,7 @@ _建立基本的 RAG 管道_
     # content 是一個 JSON 字串，需要轉換為 Python 字典
     function_calls = json.loads(content)
 
-    # 提取第一個函數調用信息
+    # 提取第一個函數調用訊息
     # 提取函數調用列表中的第一個元素
     function_call = function_calls[0]
 
@@ -748,7 +748,7 @@ _建立基本的 RAG 管道_
 
                 print(response["replies"][0])
                 for function_call in function_calls:
-                    # 解析函數調用信息
+                    # 解析函數調用訊息
                     function_name = function_call["function"]["name"]
                     function_args = json.loads(function_call["function"]["arguments"])
 

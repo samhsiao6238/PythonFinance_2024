@@ -57,7 +57,7 @@ _先簡介主要套件 OpenAI_
 
 <br>
 
-4. 延續上一點說明，所以在官方文件中，一開始並未說明 `api_key` 與 `model` 參數，僅示範 `organization` 與 `project` 這兩個用於 `組織和項目管理` 附加信息的參數。
+4. 延續上一點說明，所以在官方文件中，一開始並未說明 `api_key` 與 `model` 參數，僅示範 `organization` 與 `project` 這兩個用於 `組織和項目管理` 附加訊息的參數。
 
     ```python
     from openai import OpenAI
@@ -195,11 +195,11 @@ _[Speech-to-text 語音轉文字](https://platform.openai.com/docs/guides/speech
 
 ## Prompting
 
-1. 在 OpenAI API 中，prompt 參數用於 `Text-to-Speech (TTS)` 和 `語音轉錄（Transcription）` 服務中，提供上下文或提示信息以幫助模型更好地理解和生成期望的輸出。在語音轉錄（Transcription）服務中，prompt 可以用來指定一些特定的詞語或短語，這些詞語或短語可能在音頻中出現，從而提高轉錄結果的 `準確性`。
+1. 在 OpenAI API 中，prompt 參數用於 `Text-to-Speech (TTS)` 和 `語音轉錄（Transcription）` 服務中，提供上下文或提示訊息以幫助模型更好地理解和生成期望的輸出。在語音轉錄（Transcription）服務中，prompt 可以用來指定一些特定的詞語或短語，這些詞語或短語可能在音頻中出現，從而提高轉錄結果的 `準確性`。
 
 <br>
 
-2. 在以下範例中，`prompt` 參數提供了一些特定的術語，如 `ZyntriQix`、`Digique Plus`、`CynapseFive` 等，這些術語可以是技術名詞、品牌名、產品名或其他特定詞彙，如果這些詞彙在音頻中出現，模型可以利用這些提示信息更準確地轉錄它們，而不是猜測或產生錯誤的結果。
+2. 在以下範例中，`prompt` 參數提供了一些特定的術語，如 `ZyntriQix`、`Digique Plus`、`CynapseFive` 等，這些術語可以是技術名詞、品牌名、產品名或其他特定詞彙，如果這些詞彙在音頻中出現，模型可以利用這些提示訊息更準確地轉錄它們，而不是猜測或產生錯誤的結果。
 
 <br>
 
@@ -213,7 +213,7 @@ _[Speech-to-text 語音轉文字](https://platform.openai.com/docs/guides/speech
     # 打開要轉錄的音頻文件
     audio_file = open("/path/to/file/speech.mp3", "rb")
 
-    # 調用 API 將音頻文件轉錄為文本，並提供提示信息
+    # 調用 API 將音頻文件轉錄為文本，並提供提示訊息
     transcription = client.audio.transcriptions.create(
         # 使用的轉錄模型
         model="whisper-1",
@@ -221,7 +221,7 @@ _[Speech-to-text 語音轉文字](https://platform.openai.com/docs/guides/speech
         file=audio_file,
         # 轉錄結果的格式
         response_format="text",
-        # 提供的提示信息
+        # 提供的提示訊息
         prompt="ZyntriQix, Digique Plus, CynapseFive, VortiQore V8, EchoNix Array, OrbitalLink Seven, DigiFractal Matrix, PULSE, RAPT, B.R.I.C.K., Q.U.A.R.T.Z., F.L.I.N.T."  
     )
 
@@ -248,7 +248,7 @@ _[Speech-to-text 語音轉文字](https://platform.openai.com/docs/guides/speech
     # 初始化 OpenAI 客戶端
     client = OpenAI(api_key=OPENAI_API_KEY)
 
-    # 系統提示，用於提供上下文信息和特定指令
+    # 系統提示，用於提供上下文訊息和特定指令
     system_prompt = (
         "You are a helpful assistant for the company ZyntriQix. "
         "Your task is to correct any spelling discrepancies in the transcribed text. "

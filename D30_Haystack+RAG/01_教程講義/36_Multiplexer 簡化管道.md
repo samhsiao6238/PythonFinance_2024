@@ -28,7 +28,7 @@ _簡單說明每個組件提供的功能_
 
 <br>
 
-3. `HuggingFaceAPIDocumentEmbedder`：使用 `Hugging Face` 的 API 將 `文件內容` 轉換為 `嵌入向量`，以便後續的檢索和分析，這種嵌入表示 _捕捉了文件的語義信息_。
+3. `HuggingFaceAPIDocumentEmbedder`：使用 `Hugging Face` 的 API 將 `文件內容` 轉換為 `嵌入向量`，以便後續的檢索和分析，這種嵌入表示 _捕捉了文件的語義訊息_。
 
 <br>
 
@@ -636,7 +636,7 @@ _簡單說明每個組件提供的功能_
 
         # 將由 retriever 檢索到的相關文件（List[Document]）傳遞到 prompt_builder 的 documents 參數
         # 使用這些文件來建立生成模型的提示文本
-        # 這些文件作為上下文信息來幫助生成更準確的答案
+        # 這些文件作為上下文訊息來幫助生成更準確的答案
         - retriever.documents -> prompt_builder.documents (List[Document])
 
         # 將由 prompt_builder 建立的提示文本（prompt，字串形式）傳遞到 llm 的 prompt 參數
@@ -644,12 +644,12 @@ _簡單說明每個組件提供的功能_
         - prompt_builder.prompt -> llm.prompt (str)
 
         # 將由 llm 生成的回答（List[str]）傳遞到 answer_builder 的 replies 參數
-        # 使用這些生成的回答來組合最終的答案對象，將生成的文本進一步處理並與其他信息結合
+        # 使用這些生成的回答來組合最終的答案對象，將生成的文本進一步處理並與其他訊息結合
         - llm.replies -> answer_builder.replies (List[str])
 
-        # 將 llm 生成的元數據（如模型信息、生成過程中的詳細數據等，List[Dict[str, Any]]）傳遞到 answer_builder 的 meta 參數
+        # 將 llm 生成的元數據（如模型訊息、生成過程中的詳細數據等，List[Dict[str, Any]]）傳遞到 answer_builder 的 meta 參數
         # 使用這些元數據來補充最終的答案對象
-        # 包括生成答案時的詳細信息和上下文，提供更豐富的答案背景
+        # 包括生成答案時的詳細訊息和上下文，提供更豐富的答案背景
         - llm.meta -> answer_builder.meta (List[Dict[str, Any]])
     ```
 

@@ -4,7 +4,7 @@ from dash import dcc, html  # 從 dash 庫導入 dcc 和 html
 
 df = pd.read_csv("netflix_titles.csv")  # 讀取 Netflix 標題數據
 
-# 過濾掉沒有國家信息的條目，如果有多個製作國家，則以第一個國家作為製作國家
+# 過濾掉沒有國家訊息的條目，如果有多個製作國家，則以第一個國家作為製作國家
 df["country"] = (
     df["country"]
     .str.split(",")

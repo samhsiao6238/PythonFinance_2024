@@ -96,7 +96,7 @@ _反覆執行直到收斂_
     )
 
     # 繪製集群中心點
-    # 獲取集群中心點
+    # 取得集群中心點
     centers = kmeans.cluster_centers_
     plt.scatter(
         # 標記集群中心點
@@ -114,7 +114,7 @@ _反覆執行直到收斂_
     plt.show()
 
     # 評估 K-means 模型
-    # 獲取集群內誤差平方和
+    # 取得集群內誤差平方和
     inertia = kmeans.inertia_
     print(f"集群內誤差平方和 (Inertia): {inertia:.2f}")
 
@@ -180,9 +180,9 @@ _適合用於 K-means 演算法進行聚類分析的數據集很多，例如 `Ir
 
     # 加載 Iris 數據集
     iris = load_iris()
-    # 獲取數據的特徵
+    # 取得數據的特徵
     X = iris.data
-    # 獲取數據的標籤
+    # 取得數據的標籤
     y = iris.target
 
     # 使用主成份法(PCA)將數據降至 2 維，方便可視化
@@ -195,7 +195,7 @@ _適合用於 K-means 演算法進行聚類分析的數據集很多，例如 `Ir
     )
     kmeans.fit(X_pca)
 
-    # 獲取 K-means 演算法的聚類標籤
+    # 取得 K-means 演算法的聚類標籤
     y_kmeans = kmeans.labels_
 
     # 繪製數據的散佈圖，根據 K-means 的聚類標籤進行著色
@@ -297,7 +297,7 @@ _K-means 是一種聚類算法，通常用於將數據集劃分為 K 個簇（cl
     )
     kmeans.fit(X_scaled)
 
-    # 獲取每個數據點距離最近簇中心的距離
+    # 取得每個數據點距離最近簇中心的距離
     distances = kmeans.transform(X_scaled).min(axis=1)
 
     # 設置距離的閾值（可以通過觀察數據決定）
@@ -371,7 +371,7 @@ _K-means 是一種聚類算法，通常用於將數據集劃分為 K 個簇（cl
     kmeans = KMeans(n_clusters=3, random_state=42)
     kmeans.fit(X_scaled)
 
-    # 獲取每個數據點距離最近簇中心的距離
+    # 取得每個數據點距離最近簇中心的距離
     distances = kmeans.transform(X_scaled).min(axis=1)
 
     # 設置距離的閾值（可以通過觀察數據決定）
