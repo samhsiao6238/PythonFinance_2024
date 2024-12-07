@@ -75,7 +75,7 @@
     import pandas as pd
     import yfinance as yf
 
-    # 下載數據，使用代碼範例 2303.TW
+    # 下載數據 2303.TW
     symbol = "2303.TW"
     # 載入數據
     data = yf.download(symbol, period="100d")
