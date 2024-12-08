@@ -14,6 +14,35 @@ _從 Yahoo Finance 獲取金融數據的 Python 套件_
 
 <br>
 
+2. 獲取個股 `微軟 MSFT` 的基本訊息，會得到一個 JSON 文件，可進一步解析內容。
+
+    ```python
+    import yfinance as yf
+
+    msft = yf.Ticker("MSFT")
+    # 公司基本信息
+    msft.info
+    ```
+
+    ![](images/img_49.png)
+
+<br>
+
+3. 下載 `蘋果 AAPL` 歷史數據。
+
+    ```python
+    data = yf.download(
+        "AAPL", 
+        start="2023-01-01", 
+        end="2024-11-01"
+    )
+    data.head()
+    ```
+
+    ![](images/img_50.png)
+
+<br>
+
 ## 取得資料
 
 1. 輸入範圍依實際股票代碼查詢套件股票代碼，這裡已 `2300 ~ 2310` 為例；特別注意，透過內建模組 `logging` 忽略錯誤部分。
