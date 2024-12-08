@@ -91,7 +91,7 @@ _建立新的腳本_
 
 <br>
 
-1. 輸入範圍依實際股票代碼查詢套件股票代碼，這裡已 `2300 ~ 2310` 為例；特別注意，透過內建模組 `logging` 忽略錯誤部分。
+1. 查詢有效的股票代碼及其公司名稱；假設不知道股票代碼情境下，可透過輸入範圍查詢股票代碼，這裡以 `2300 ~ 2310` 為例；另外，透過內建模組 `logging` 忽略代碼不存在可能產生的錯誤，借此簡化輸出作為觀察。
 
     ```python
     import yfinance as yf
@@ -100,6 +100,7 @@ _建立新的腳本_
 
     # 禁止不必要的錯誤日誌
     logging.getLogger("yfinance").setLevel(logging.CRITICAL)
+    
     # 測試 2300.TW 到 2309.TW
     codes = [f"{i}.TW" for i in range(2300, 2310)]
     valid_codes = []
