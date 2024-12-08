@@ -147,36 +147,36 @@ _建立新的腳本_
 
 ## 數據結構
 
-1. 透過以下代碼來觀察返回的數據結構。
+1. 透過以下代碼觀察返回的數據結構。
 
     ```python
     import pandas as pd
     import yfinance as yf
 
-    # 下載數據 2303.TW
+    # 代碼
     symbol = "2303.TW"
-    # 載入數據
+    # 載入數據，期間為 100 個交易日
     data = yf.download(symbol, period="100d")
 
     # 查看數據的基本結構
-    print("數據摘要:")
+    print("數據摘要：")
     print(data.head())
 
     # 查看欄位名稱
-    print("\n欄位名稱 (Columns):")
+    print("\n欄位名稱 (Columns)：")
     print(data.columns)
 
     # 查看索引
-    print("\n索引 (Index):")
+    print("\n索引 (Index)：")
     print(data.index)
 
     # 查看數據框架的結構
-    print("\n數據結構資訊:")
+    print("\n數據結構資訊：")
     data.info()
 
     # 查看是否存在多層索引
     if isinstance(data.columns, pd.MultiIndex):
-        print("\n此數據有多層索引，層級如下:")
+        print("\n此數據有多層索引，層級如下：")
         print(data.columns.levels)
     else:
         print("\n此數據為單層索引")
