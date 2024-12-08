@@ -43,6 +43,48 @@ _從 Yahoo Finance 獲取金融數據的 Python 套件_
 
 <br>
 
+4. 查詢 `S&P 500` 指數的成分股資訊。
+
+    ```python
+    import pandas as pd
+
+    # 取得標普500成分股的股票代碼
+    def get_sp500_tickers():
+        url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+        # 使用 pandas 讀取網頁表格
+        table = pd.read_html(url)
+        # 第一個表格包含成分股
+        sp500_table = table[0]
+        tickers = sp500_table["Symbol"].tolist()
+        return tickers
+
+    # 取得成分股
+    sp500_tickers = get_sp500_tickers()
+
+    # 顯示前 10 名股票代碼
+    print("前 10 名標普500成分股代碼：")
+    print(sp500_tickers[:10])
+    ```
+
+    ![](images/img_51.png)
+
+<br>
+
+5. 如果需要額外股票資訊。
+
+    ```python
+    data = yf.download(
+        sp500_tickers[:10], 
+        period="1d", 
+        group_by="ticker"
+    )
+    print(data)
+    ```
+
+    ![](images/img_52.png)
+
+<br>
+
 ## 取得資料
 
 _正式進入網格交易說明_
