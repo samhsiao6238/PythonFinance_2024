@@ -1,6 +1,6 @@
 # yfinance
 
-_從 Yahoo Finance 獲取金融數據的 Python 套件_
+_從 Yahoo Finance 取得金融數據的 Python 套件_
 
 <br>
 
@@ -14,13 +14,13 @@ _從 Yahoo Finance 獲取金融數據的 Python 套件_
 
 <br>
 
-2. 獲取個股 `微軟 MSFT` 的基本訊息，會得到一個 JSON 文件，可進一步解析內容。
+2. 取得個股 `微軟 MSFT` 的基本訊息，會得到一個 JSON 文件，可進一步解析內容。
 
     ```python
     import yfinance as yf
 
     msft = yf.Ticker("MSFT")
-    # 公司基本信息
+    # 公司基本訊息
     msft.info
     ```
 
