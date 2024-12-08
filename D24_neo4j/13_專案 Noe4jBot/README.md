@@ -182,7 +182,7 @@ _後補_
 
     - 導入 `re` 用於正規表示式操作。
 
-    - `collections.namedtuple` 用於建立命名元組。
+    - `collections.namedtuple` 用於建立命名數組。
 
     - `typing` 提供類型註解。
 

@@ -67,7 +67,7 @@ _脈衝神經網絡，Spiking Neural Networks_
     dv/dt = (v_rest - v) / tau + (R * input_current(t)) / tau : volt (unless refractory)
     '''
 
-    # 建立神經元組，包含 10 個神經元，應用上面定義的動力學方程
+    # 建立神經數組，包含 10 個神經元，應用上面定義的動力學方程
     neuron_group = NeuronGroup(
         10, 
         model=eqs, 
@@ -215,7 +215,7 @@ _基於 SNN 的模擬可以應用於多種場景_
     I : amp  # 電流作為外部輸入
     '''
 
-    # 建立神經元組
+    # 建立神經數組
     neuron_group = NeuronGroup(
         784, 
         model=eqs, 

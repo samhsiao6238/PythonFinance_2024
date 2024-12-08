@@ -123,7 +123,7 @@ _使用 `curl 指令` 或 `Python 代碼` 調整 `Gemini API` 的 `文字生成�
     def generate_code_verifier(length=64):
         """ 產生一個隨機的 code_verifier"""
         if length < 43 or length > 128:
-            raise ValueError("code_verifier 長度必須在 43 至 128 位元組之間")
+            raise ValueError("code_verifier 長度必須在 43 至 128 位數組之間")
         code_verifier = (
             base64.urlsafe_b64encode(os.urandom(length)).decode("utf-8").rstrip("=")
         )
