@@ -1,5 +1,7 @@
 # yfinance
 
+_從 Yahoo Finance 獲取金融數據的 Python 套件_
+
 <br>
 
 ## 準備工作
