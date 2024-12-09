@@ -196,6 +196,56 @@ _建立新的腳本_
 
 <br>
 
+## 確認代碼
+
+_使用股票代碼轉換為套件代碼_
+
+<br>
+
+1. 輸入股票代碼。
+
+    ```python
+    import yfinance as yf
+
+    # 股票代碼
+    symbol_base = '00795B'
+    ```
+
+<br>
+
+2. 自動化檢查。
+
+    ```python
+    # 定義尾綴列表
+    suffixes = ['.TW', '.TWO']
+
+    # 搜索有效代碼
+    valid_symbol = None
+    for suffix in suffixes:
+        # 組合測試代碼
+        symbol = f"{symbol_base}{suffix}"
+        try:
+            # 測試是否能下載最小數據集
+            data = yf.download(symbol, period='1d')
+            # 如果數據不為空，則該代碼有效
+            if not data.empty:
+                valid_symbol = symbol
+                print(f"有效代碼：{valid_symbol}")
+                break
+        except Exception as e:
+            print(f"代碼 {symbol} 無效: {e}")
+
+    # 結果
+    if valid_symbol:
+        print(f"找到有效代碼：{valid_symbol}")
+    else:
+        print("未找到有效的代碼，請檢查輸入或尾綴列表。")
+    ```
+
+    ![](images/img_81.png)
+
+<br>
+
 ___
 
 _END_
