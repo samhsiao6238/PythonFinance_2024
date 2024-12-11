@@ -117,13 +117,12 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-5. 編輯 `pyproject.toml`，在 `[project.scripts]` 區塊加入 `main = "sj_trading:main"`。
+5. 編輯 `pyproject.toml`，在 `[project.scripts]` 區塊加入 `main = "sj_trading:main"`，並刪除 `sj-trading = "sj_trading:main"`。
 
     ```toml
     [project.scripts]
     main = "sj_trading:main"
     hello = "sj_trading:hello"
-    sj-trading = "sj_trading:main"
     ```
 
 <br>
@@ -131,6 +130,8 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 ## 測試
 
 _關閉原本的 VSCode 與終端機視窗，重新啟動專案_
+
+<br>
 
 1. 運行以下指令測試登入。
 
