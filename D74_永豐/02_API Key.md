@@ -14,11 +14,23 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 2. 新增 API Key。
 
+    ![](images/img_28.png)
+
+<br>
+
+3. 先進行相關驗證。
+
+    ![](images/img_29.png)
+
+<br>
+
+4. 建立新的 API Key。
+
     ![](images/img_01.png)
 
 <br>
 
-3. 確定。
+5. 完成後複製密鑰並且下載憑證。
 
     ![](images/img_02.png)
 
