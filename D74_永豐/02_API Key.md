@@ -61,13 +61,14 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-4. 編輯 `.env` 文件，貼上以下內容；其中 `CA_PASSWORD` 就是用戶的身分證字號，第一碼大寫；如有必要可參考 [官網影片](https://www.youtube.com/watch?v=0tPCZiRsz-U&t=84s)。
+4. 編輯 `.env` 文件，貼上以下內容；其中 `CA_PASSWORD` 就是用戶的身分證字號，第一碼大寫；如有必要可參考 [官網影片](https://www.youtube.com/watch?v=0tPCZiRsz-U&t=84s)；`LINE_NOTIFY=` 部分暫時保持空白。
 
     ```bash
     API_KEY=<輸入-API_Key>
     SECRET_KEY=<輸入-Secret_Key>
     CA_CERT_PATH=Sinopac.pfx
     CA_PASSWORD=<輸入用戶密碼>
+    LINE_NOTIFY=
     ```
 
 <br>
