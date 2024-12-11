@@ -126,7 +126,11 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-6. 測試登入。
+## 測試
+
+_關閉原本的 VSCode 與終端機視窗，重新啟動專案_
+
+1. 運行以下指令測試登入。
 
     ```bash
     uv run main
