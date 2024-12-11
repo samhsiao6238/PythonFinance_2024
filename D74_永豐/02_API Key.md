@@ -36,12 +36,12 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-## 編輯專案
+## 編輯敏感資訊
 
-1. 在專案根目錄添加文件 `.env`，並編輯 `.gitignore`，加入 `.env`。
+1. 在專案根目錄添加文件 `.env`，並編輯既有文件 `.gitignore`，寫入 `.env` 避免將敏感資訊上傳。
 
     ```json
-    .env
+    touch .env
     ```
 
 <br>
