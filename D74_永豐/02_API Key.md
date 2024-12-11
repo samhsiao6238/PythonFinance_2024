@@ -6,7 +6,7 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 ## 管理 API Key
 
-1. 登入官網後，展開功能，選取。
+1. 登入官網後，展開功能，選取 `API 管理`。
 
     ![](images/img_27.png)
 
