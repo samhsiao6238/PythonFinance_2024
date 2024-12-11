@@ -74,11 +74,7 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 ## 編輯腳本
 
-_新增 `.ipynb` 文件並任意命名如 `ex01.ipynb`_
-
-<br>
-
-1. 核心選取自動建立的 `.venv`。
+1. 編輯預設建立的 `__init__.py` 腳本，添加以下代碼。
 
     ![](images/img_31.png)
 
