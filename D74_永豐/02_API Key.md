@@ -1,16 +1,24 @@
-# 申請 API Key
+# API Key
+
+_登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-## 前往官網
+## 管理 API Key
 
-1. 新增 API Key。
+1. 登入官網後，展開功能，選取。
+
+    ![](images/img_27.png)
+
+<br>
+
+2. 新增 API Key。
 
     ![](images/img_01.png)
 
 <br>
 
-2. 確定。
+3. 確定。
 
     ![](images/img_02.png)
 
