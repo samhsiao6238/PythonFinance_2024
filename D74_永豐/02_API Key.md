@@ -55,7 +55,13 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-3. 編輯 `.env` 文件，貼上以下內容；其中 `CA_PASSWORD` 就是用戶的身分證字號，第一碼大寫；如有必要可參考 [官網影片](https://www.youtube.com/watch?v=0tPCZiRsz-U&t=84s)。
+3. 將下載的憑證拖曳到專案資料夾中。
+
+    ![](images/img_30.png)
+
+<br>
+
+4. 編輯 `.env` 文件，貼上以下內容；其中 `CA_PASSWORD` 就是用戶的身分證字號，第一碼大寫；如有必要可參考 [官網影片](https://www.youtube.com/watch?v=0tPCZiRsz-U&t=84s)。
 
     ```bash
     API_KEY=<輸入-API_Key>
