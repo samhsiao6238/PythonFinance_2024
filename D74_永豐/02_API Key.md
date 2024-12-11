@@ -74,7 +74,17 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 ## 編輯腳本
 
-1. 導入套件。
+_新增 `.ipynb` 文件並任意命名如 `ex01.ipynb`_
+
+<br>
+
+1. 核心選取自動建立的 `.venv`。
+
+    ![](images/img_31.png)
+
+<br>
+
+2. 導入套件。
 
     ```python
     import os
@@ -83,7 +93,7 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-2. 載入環境變數。
+3. 載入環境變數。
 
     ```python
     load_dotenv()
@@ -91,7 +101,7 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-3. 編輯既有的 `main()` 函數，覆蓋原本內容即可。
+4. 編輯既有的 `main()` 函數，覆蓋原本內容即可。
 
     ```python
     def main():
@@ -110,7 +120,7 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-4. 編輯 `pyproject.toml`，在 `[project.scripts]` 區塊加入指令。
+5. 編輯 `pyproject.toml`，在 `[project.scripts]` 區塊加入指令。
 
     ```toml
     [project.scripts]
@@ -120,7 +130,7 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-5. 測試登入。
+6. 測試登入。
 
     ```bash
     uv run main
