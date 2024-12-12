@@ -54,7 +54,7 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-3. 編輯既有文件 `.gitignore`，寫入 `.env`、`Sinopac.pfx` 避免將敏感資訊上傳；特別注意，這個步驟很重要，在寫入敏感資訊前務必確認已完成。
+3. 在 VSCode 中編輯既有文件 `.gitignore`，寫入 `.env`、`Sinopac.pfx` 避免將敏感資訊上傳；特別注意，這個步驟很重要，在寫入敏感資訊前務必確認已完成；補充說明，雖然當前並未建立同步，但這步驟是編程工作的良好習慣。
 
     ```json
     .env
