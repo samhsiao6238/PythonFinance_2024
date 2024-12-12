@@ -173,7 +173,7 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 ## 測試
 
-_關閉原本的 VSCode 與終端機視窗，重新啟動專案_
+_測試 API 是否設置完成_
 
 <br>
 
