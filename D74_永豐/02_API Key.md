@@ -85,7 +85,7 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 ## 編輯腳本
 
-1. 編輯預設建立的 `__init__.py` 腳本，添加以下代碼。
+1. 再次開啟預設建立的 `__init__.py` 腳本進行編輯，依循後續步驟指引添加代碼。
 
     ![](images/img_31.png)
 
