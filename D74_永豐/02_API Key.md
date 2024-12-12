@@ -127,7 +127,40 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-5. 編輯 `pyproject.toml`，在 `[project.scripts]` 區塊加入 `main = "sj_trading:main"`。
+5. 完成的腳本如下。
+
+    ```python
+    import shioaji as sj
+    import os
+    from dotenv import load_dotenv
+
+    load_dotenv()
+
+    def main():
+        api = sj.Shioaji(simulation=True)
+        api.login(
+            api_key=os.environ["API_KEY"],
+            secret_key=os.environ["SECRET_KEY"],
+            fetch_contract=False
+        )
+        api.activate_ca(
+            ca_path=os.environ["CA_CERT_PATH"],
+            ca_passwd=os.environ["CA_PASSWORD"],
+        )
+        print("login and activate ca success")
+
+    def hello():
+        get_shioaji_client()
+
+    def get_shioaji_client() -> sj.Shioaji:
+        api = sj.Shioaji()
+        print("Shioaji API created")
+        return api
+    ```
+
+<br>
+
+6. 編輯 `pyproject.toml`，在 `[project.scripts]` 區塊加入 `main = "sj_trading:main"`。
 
     ```toml
     [project.scripts]
