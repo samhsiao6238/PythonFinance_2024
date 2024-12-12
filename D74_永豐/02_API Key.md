@@ -61,6 +61,8 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
     Sinopac.pfx
     ```
 
+    ![](images/img_46.png)
+
 <br>
 
 4. 將下載的憑證拖曳到專案資料夾中。
