@@ -38,7 +38,15 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 ## 編輯敏感資訊
 
-1. 在專案根目錄添加文件 `.env`。
+1. 確認回到專案根目錄。
+
+    ```bash
+    cd ~/Desktop/sj-trading
+    ```
+
+<br>
+
+2. 在專案根目錄添加文件 `.env`。
 
     ```json
     touch .env
@@ -46,7 +54,7 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-2. 編輯既有文件 `.gitignore`，寫入 `.env`、`Sinopac.pfx` 避免將敏感資訊上傳；特別注意，這個步驟很重要，在寫入敏感資訊前務必確認已完成。
+3. 編輯既有文件 `.gitignore`，寫入 `.env`、`Sinopac.pfx` 避免將敏感資訊上傳；特別注意，這個步驟很重要，在寫入敏感資訊前務必確認已完成。
 
     ```json
     .env
@@ -55,13 +63,13 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
 
 <br>
 
-3. 將下載的憑證拖曳到專案資料夾中。
+4. 將下載的憑證拖曳到專案資料夾中。
 
     ![](images/img_30.png)
 
 <br>
 
-4. 編輯 `.env` 文件，貼上以下內容；其中 `CA_PASSWORD` 就是用戶的身分證字號，第一碼大寫；如有必要可參考 [官網影片](https://www.youtube.com/watch?v=0tPCZiRsz-U&t=84s)；`LINE_NOTIFY=` 部分暫時保持空白。
+5. 編輯 `.env` 文件，貼上以下內容；其中 `CA_PASSWORD` 就是用戶的身分證字號，第一碼大寫；如有必要可參考 [官網影片](https://www.youtube.com/watch?v=0tPCZiRsz-U&t=84s)；`LINE_NOTIFY=` 部分暫時保持空白。
 
     ```bash
     API_KEY=<輸入-API_Key>
