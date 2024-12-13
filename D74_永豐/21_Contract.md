@@ -109,7 +109,7 @@ _Shioaji 提供多種合約資料，每種合約可以通過對應的 `api.Contr
 
 <br>
 
-## 合約查詢與範例
+## 合約查詢
 
 1. Stocks (股票)，支援現股、融資、融券，可用屬性有 `code` 股票代碼、`limit_up` / `limit_down` 漲跌停價格、`day_trade` 是否支援當日沖銷交易。
 
