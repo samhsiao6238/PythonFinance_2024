@@ -6,11 +6,9 @@ _官方說明_
 
 ## 基本概念
 
-_Contract 物件使用於下單（`place_order`）、訂閱行情（`subscribe_quote`）等_
+_`Contract` 物件使用於下單（`place_order`）、訂閱行情（`subscribe_quote`）等，以下說明取得 `Contract` 的方法。_
 
 <br>
-
-## 取得 Contracts 方法
 
 1. 登入成功後，API 會自動開始下載所有合約資料，可透過輸出的 `Contracts.status` 確認下載是否完成。
 
