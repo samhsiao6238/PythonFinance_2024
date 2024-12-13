@@ -16,10 +16,17 @@ _Contract 物件使用於下單（`place_order`）、訂閱行情（`subscribe_q
 
     ```python
     import shioaji as sj
-    api = sj.Shioaji()
+    import os
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    api_key = os.environ["API_KEY"]
+    secret_key = os.environ["SECRET_KEY"]
+
+    api = sj.Shioaji(simulation=True)
     api.login(
-        api_key="YOUR_API_KEY", 
-        secret_key="YOUR_SECRET_KEY",
+        api_key=api_key, 
+        secret_key=secret_key,
         # 等待下載完成
         contracts_timeout=10000,
     )
