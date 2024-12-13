@@ -109,6 +109,78 @@ _Shioaji 提供多種合約資料，每種合約可以通過對應的 `api.Contr
 
 <br>
 
+## 期貨
+
+1. 尋找當月期貨合約。
+
+    ```python
+    # 查詢當月有效的台股期貨合約
+    taiwan_futures = api.Contracts.Futures.TXF
+
+    print("台股期貨合約清單：")
+    for future_code, future in taiwan_futures.__dict__.items():
+        print(
+            f"代碼: {future_code}, 合約資訊: {future}"
+        )
+    ```
+
+    _輸出_
+
+    ![](images/img_56.png)
+
+<br>
+
+2. 使用以下方式自動選擇當月的台股期貨合約。
+
+    ```python
+    from datetime import datetime
+
+    # 動態取得當月合約
+    current_month = datetime.now().strftime("%Y%m")
+    txf_code = f"TXF{current_month}"
+
+    # 查詢是否存在當月合約
+    txf_contract = api.Contracts.Futures.TXF.get(txf_code)
+    if txf_contract:
+        print(f"當月台股期貨合約: {txf_contract}")
+    else:
+        print(f"無法找到代碼為 {txf_code} 的期貨合約，請確認是否存在或過期。")
+    ```
+
+    _輸出_
+
+    ```bash
+    當月台股期貨合約: 
+    code='TXFL4' 
+    symbol='TXF202412' 
+    name='臺股期貨12' 
+    category='TXF' 
+    delivery_month='202412' 
+    delivery_date='2024/12/18' 
+    underlying_kind='I' 
+    unit=1 
+    limit_up=25417.0 
+    limit_down=20797.0 
+    reference=23107.0 
+    update_date='2024/12/13'
+    ```
+
+<br>
+
+3. 關閉當前連線。
+
+    ```python
+    try:
+        # 初始化 API
+        api = sj.Shioaji()
+        api.logout()
+        print("登出成功")
+    except Exception as e:
+        print(f"登出失敗：{e}")
+    ```
+
+<br>
+
 ## 合約查詢
 
 _查詢指定標的合約的交易屬性_
