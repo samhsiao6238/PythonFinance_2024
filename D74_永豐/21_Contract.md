@@ -133,12 +133,19 @@ _查詢指定標的合約的交易屬性_
     # 股票的完整符號
     symbol='TSE28-90' 
     name='永豐金' 
-    category='17' 
-    unit=1000 
+    # 股票分類，標示該股票的產業或市場類別
+    category='17'
+    # 每張股票的單位數量，若為零股交易，單位數量將顯示為單股。
+    unit=1000
+    # 當日的漲停價格
     limit_up=26.1 
+    # 當日跌停價格
     limit_down=21.4 
-    reference=23.75 
-    update_date='2024/12/13' 
+    # 前一交易日的收盤價或基準價格
+    reference=23.75
+    # 此合約資訊的更新日期
+    update_date='2024/12/13'
+    # 是否支援當日沖銷交易
     day_trade=<DayTrade.Yes: 'Yes'>
     ```
 
