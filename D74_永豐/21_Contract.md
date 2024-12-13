@@ -41,8 +41,8 @@ _Contract 物件使用於下單（`place_order`）、訂閱行情（`subscribe_q
     import shioaji as sj
     api = sj.Shioaji()
     api.login(
-        api_key="YOUR_API_KEY", 
-        secret_key="YOUR_SECRET_KEY",
+        api_key=api_key, 
+        secret_key=secret_key,
         # 禁用自動下載
         fetch_contract=False
     )
