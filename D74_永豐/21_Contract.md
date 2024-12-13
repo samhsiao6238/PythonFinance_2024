@@ -111,7 +111,11 @@ _Shioaji 提供多種合約資料，每種合約可以通過對應的 `api.Contr
 
 ## 合約查詢
 
-1. Stocks (股票)，支援現股、融資、融券，可用屬性有 `code` 股票代碼、`limit_up` / `limit_down` 漲跌停價格、`day_trade` 是否支援當日沖銷交易。
+_查詢指定標的合約的交易屬性_
+
+<br>
+
+1. `Stocks (股票)`，支援現股、融資、融券，可用屬性有 `code` 股票代碼、`limit_up` / `limit_down` 漲跌停價格、`day_trade` 是否支援當日沖銷交易。
 
     ```python
     # 永豐金
@@ -135,7 +139,7 @@ _Shioaji 提供多種合約資料，每種合約可以通過對應的 `api.Contr
 
 <br>
 
-2. Futures (期貨)，可用屬性有 `delivery_month` 交割月份、`limit_up` / `limit_down` 漲跌停價格、`reference` 參考價格、
+2. `Futures (期貨)`，可用屬性有 `delivery_month` 交割月份、`limit_up` / `limit_down` 漲跌停價格、`reference` 參考價格、
 
     ```python
     # 臺股期貨01
@@ -157,7 +161,7 @@ _Shioaji 提供多種合約資料，每種合約可以通過對應的 `api.Contr
 
 <br>
 
-3. Options (選擇權)，可用屬性有 `strike_price` 履約價格、`option_right` 買權或賣權、`delivery_month` 交割月份。
+3. `Options (選擇權)`，可用屬性有 `strike_price` 履約價格、`option_right` 買權或賣權、`delivery_month` 交割月份。
 
     ```python
     # 臺指選擇權
@@ -179,7 +183,7 @@ _Shioaji 提供多種合約資料，每種合約可以通過對應的 `api.Contr
 
 <br>
 
-4. Indexs (指數)，僅支持行情訂閱，不支援下單；可用屬性有 `code` 指數代碼、`name` 指數名稱。
+4. `Indexs (指數)`，僅支持行情訂閱，不支援下單；可用屬性有 `code` 指數代碼、`name` 指數名稱。
 
     ```python
     # 加權指數
