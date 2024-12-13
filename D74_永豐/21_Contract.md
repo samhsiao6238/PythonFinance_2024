@@ -126,15 +126,20 @@ _查詢指定標的合約的交易屬性_
     _輸出_
 
     ```bash
-    Stock(
-        exchange=<Exchange.TSE: 'TSE'>, 
-        code='2890', 
-        name='永豐金', 
-        category='17', 
-        limit_up=19.1, 
-        limit_down=15.7, 
-        day_trade=<DayTrade.Yes: 'Yes'>
-    )
+    # TSE 代表上市股票
+    exchange=<Exchange.TSE: 'TSE'> 
+    # 股票代碼
+    code='2890' 
+    # 股票的完整符號
+    symbol='TSE28-90' 
+    name='永豐金' 
+    category='17' 
+    unit=1000 
+    limit_up=26.1 
+    limit_down=21.4 
+    reference=23.75 
+    update_date='2024/12/13' 
+    day_trade=<DayTrade.Yes: 'Yes'>
     ```
 
 <br>
