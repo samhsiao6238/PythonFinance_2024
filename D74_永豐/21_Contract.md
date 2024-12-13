@@ -30,6 +30,30 @@ _`Contract` 物件使用於下單（`place_order`）、訂閱行情（`subscribe
     )
     ```
 
+    _輸出_
+
+    ```bash
+    Response Code: 0 | 
+    Event Code: 0 | 
+    Info: host '210.59.255.161:80', 
+    hostname '210.59.255.161:80' IP 210.59.255.161:80 
+    (host 1 of 1) 
+    (host connection attempt 1 of 1) 
+    (total connection attempt 1 of 1) | 
+    Event: Session up
+    
+    [
+        StockAccount(
+            person_id='XXXXXXXXXX', 
+            broker_id='9A95', 
+            account_id='3453495', 
+            signed=True, 
+            username='蕭中柱'
+        )
+    ]
+    
+    ```
+
 <br>
 
 2. 在登入時設定 `fetch_contract=False` 搭配 `fetch_contracts(contract_download=True)` 手動下載合約。
@@ -46,6 +70,19 @@ _`Contract` 物件使用於下單（`place_order`）、訂閱行情（`subscribe
     )
     # 手動下載
     api.fetch_contracts(contract_download=True)
+    ```
+
+    _輸出_
+
+    ```bash
+    Response Code: 0 | 
+    Event Code: 0 | 
+    Info: host '210.59.255.161:80', 
+    hostname '210.59.255.161:80' IP 210.59.255.161:80 
+    (host 1 of 1) 
+    (host connection attempt 1 of 1) 
+    (total connection attempt 1 of 1) | 
+    Event: Session up
     ```
 
 <br>
