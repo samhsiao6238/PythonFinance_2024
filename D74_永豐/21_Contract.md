@@ -4,13 +4,9 @@ _官方說明_
 
 <br>
 
-## 基本概念
+## 前置作業
 
-_`Contract` 物件使用於下單（`place_order`）、訂閱行情（`subscribe_quote`）等，以下說明取得 `Contract` 的方法。_
-
-<br>
-
-1. 登入成功後，API 會自動開始下載所有合約資料，可透過輸出的 `Contracts.status` 確認下載是否完成。
+1. 先完成登入，然後再開始以下操作。
 
     ```python
     import shioaji as sj
@@ -22,6 +18,20 @@ _`Contract` 物件使用於下單（`place_order`）、訂閱行情（`subscribe
     secret_key = os.environ["SECRET_KEY"]
 
     api = sj.Shioaji(simulation=True)
+
+    ```
+
+<br>
+
+## `Contract`
+
+_`Contract` 物件使用於訂閱行情（`subscribe_quote`）、下單（`place_order`）等，以下說明取得 `Contract` 的各種方式。_
+
+<br>
+
+1. 登入成功後，API 會自動開始下載所有合約資料。
+
+    ```python
     api.login(
         api_key=api_key, 
         secret_key=secret_key,
@@ -87,6 +97,62 @@ _`Contract` 物件使用於下單（`place_order`）、訂閱行情（`subscribe
 
 <br>
 
+## 查看細節
+
+1. 可透過輸出的 `Contracts.status` 確認下載是否完成。
+
+    ```python
+    print(api.Contracts.status)
+    ```
+
+<br>
+
+2. 使用 repr() 查看完整的物件表示。
+
+    ```python
+    print(repr(api.Contracts.status))
+    ```
+
+<br>
+
+3. FetchStatus 是一個物件，可以使用 Python 內建的 dir() 來查看該物件的屬性或方法。
+
+    ```python
+    print(dir(api.Contracts.status))
+    ```
+
+<br>
+
+4. 某些物件內部的數據會存儲在 __dict__ 中，可以嘗試查看其內部數據。
+
+    ```python
+    print(api.Contracts.status.__dict__)
+    ```
+
+<br>
+
+5. 完整檢查並顯示下載進度。
+
+    ```python
+    # 檢查 FetchStatus 屬性
+    status = api.Contracts.status
+    print("合約下載狀態：", status)
+    # 打印 FetchStatus 的 name 和 value
+    try:
+        print("合約下載狀態名稱 (name)：", status.name)
+        print("合約下載狀態值 (value)：", status.value)
+    except AttributeError:
+        print("FetchStatus 沒有 name 或 value 屬性")
+
+    # 確認是否等於 Fetched
+    if str(status) == "FetchStatus.Fetched":
+        print("合約下載已完成")
+    else:
+        print("合約下載未完成，狀態為：", status)
+    ```
+
+<br>
+
 ## 支援的 Contracts 類型
 
 _Shioaji 提供多種合約資料，每種合約可以通過對應的 `api.Contracts` 屬性取得詳細資訊。_
@@ -106,6 +172,12 @@ _Shioaji 提供多種合約資料，每種合約可以通過對應的 `api.Contr
 <br>
 
 4. Indexs（指數）
+
+<br>
+
+## 股票
+
+_後補_
 
 <br>
 
