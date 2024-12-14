@@ -137,7 +137,7 @@ _`Contract` 物件使用於訂閱行情（`subscribe_quote`）、下單（`place
     # 檢查 FetchStatus 屬性
     status = api.Contracts.status
     print("合約下載狀態：", status)
-    # 打印 FetchStatus 的 name 和 value
+    # 輸出 FetchStatus 的 name 和 value
     try:
         print("合約下載狀態名稱 (name)：", status.name)
         print("合約下載狀態值 (value)：", status.value)
