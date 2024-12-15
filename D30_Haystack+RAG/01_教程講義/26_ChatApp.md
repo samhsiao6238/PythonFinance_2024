@@ -226,7 +226,7 @@ _先簡介兩者差異_
 5. 加入管道組件。
 
     ```python
-    # 初始化內存文件儲存組件
+    # 初始化記憶體文件儲存組件
     document_store = InMemoryDocumentStore()    
     # 在管道中加入組件：將文件內容轉換成嵌入向量
     indexing_pipeline.add_component(
@@ -236,7 +236,7 @@ _先簡介兩者差異_
         name="doc_embedder"
     )
     # 加入組件：將處理後的文件數據寫入到指定的文件儲存
-    # 指定使用 `內存文件儲存`
+    # 指定使用 `記憶體文件儲存`
     indexing_pipeline.add_component(
         instance=DocumentWriter(document_store=document_store),
         name="doc_writer"

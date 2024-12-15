@@ -24,7 +24,7 @@ _簡單說明每個組件提供的功能_
 
 <br>
 
-2. `InMemoryDocumentStore`：在內存中儲存和管理文件數據，便於快速檢索和查詢操作，適合小型數據集的開發情境。
+2. `InMemoryDocumentStore`：在記憶體中儲存和管理文件數據，便於快速檢索和查詢操作，適合小型數據集的開發情境。
 
 <br>
 
@@ -140,10 +140,10 @@ _簡單說明每個組件提供的功能_
 
 <br>
 
-5. 建立文件儲存對象 `InMemoryDocumentStore`，將範例數據集儲存在這個內存文件儲存並生成嵌入。
+5. 建立文件儲存對象 `InMemoryDocumentStore`，將範例數據集儲存在這個記憶體文件儲存並生成嵌入。
 
     ```python
-    # 初始化內存文件儲存
+    # 初始化記憶體文件儲存
     document_store = InMemoryDocumentStore()
     ```
 
@@ -152,7 +152,7 @@ _簡單說明每個組件提供的功能_
 6. 並通過 `DocumentWriter` 將它們寫入 `文件儲存(document store)`。
 
     ```python
-    # 添加 DocumentWriter 組件，用於將生成的嵌入寫入內存文件儲存
+    # 添加 DocumentWriter 組件，用於將生成的嵌入寫入記憶體文件儲存
     indexing_pipeline.add_component(
         instance=DocumentWriter(document_store=document_store),
         name="doc_writer"
@@ -269,7 +269,7 @@ _簡單說明每個組件提供的功能_
         ),
     )
 
-    # 添加內存嵌入檢索器
+    # 添加記憶體嵌入檢索器
     pipe.add_component(
         "retriever",
         InMemoryEmbeddingRetriever(document_store=document_store)
@@ -540,7 +540,7 @@ _簡單說明每個組件提供的功能_
         )
     )
 
-    # 添加內存嵌入檢索器
+    # 添加記憶體嵌入檢索器
     pipe.add_component(
         "retriever",
         InMemoryEmbeddingRetriever(document_store=document_store)

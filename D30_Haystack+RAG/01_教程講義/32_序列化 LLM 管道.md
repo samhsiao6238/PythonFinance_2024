@@ -356,7 +356,7 @@ _[官方文件](https://docs.haystack.deepset.ai/docs/huggingfacelocalgenerator)
     from haystack.document_stores.in_memory import InMemoryDocumentStore
     from haystack import Document
 
-    # 初始化內存文件儲存，並寫入文件
+    # 初始化記憶體文件儲存，並寫入文件
     docstore = InMemoryDocumentStore()
     docstore.write_documents([
         Document(content="Rome is the capital of Italy"),

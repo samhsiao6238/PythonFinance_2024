@@ -150,7 +150,7 @@ _建立索引管道，並使用 `InMemoryDocumentStore` 將文件寫入 `Documen
         model="sentence-transformers/all-MiniLM-L6-v2"
     )
 
-    # 建立 `內存文件儲存` 對象
+    # 建立 `記憶體文件儲存` 對象
     document_store = InMemoryDocumentStore()
 
     # 使用儲存對象建立 `文件寫入器`

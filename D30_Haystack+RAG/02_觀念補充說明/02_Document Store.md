@@ -42,7 +42,7 @@ _在 `Haystack` 和類似的 `自然語言處理 (NLP)` 框架中，`Document St
 
 ## 常見的 Document Store 類型
 
-1. 內存型 Document Store（In-Memory Document Store）。
+1. 記憶體型 Document Store（In-Memory Document Store）。
 
    - 範例：`InMemoryDocumentStore`
 
@@ -96,7 +96,7 @@ _在 `Haystack` 和類似的 `自然語言處理 (NLP)` 框架中，`Document St
 
 ## 如何選擇合適的 Document Store
 
-1. 數據量：根據需要儲存的數據量選擇合適的 Document Store。如果是小規模數據，可以選擇內存型 Document Store；如果是大規模數據，則需要考慮文件型或雲端型 Document Store。
+1. 數據量：根據需要儲存的數據量選擇合適的 Document Store。如果是小規模數據，可以選擇記憶體型 Document Store；如果是大規模數據，則需要考慮文件型或雲端型 Document Store。
 
 2. 性能需求：如果需要高性能和快速檢索，則需要選擇支持高效索引和檢索的 Document Store。
 

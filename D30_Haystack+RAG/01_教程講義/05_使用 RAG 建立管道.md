@@ -32,7 +32,7 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 <br>
 
-4. InMemoryEmbeddingRetriever：用於根據嵌入向量在內存中檢索相關文件。
+4. InMemoryEmbeddingRetriever：用於根據嵌入向量在記憶體中檢索相關文件。
 
 <br>
 
@@ -119,12 +119,12 @@ _Creating Your First QA Pipeline with Retrieval-Augmentation_
 
 ## 建立儲存
 
-1. 將下載的數據 `嵌入索引` 到 `DocumentStore`，這裡使用 `內存文件儲存` 對象 `InMemoryDocumentStore` 作為 `文件儲存`。
+1. 將下載的數據 `嵌入索引` 到 `DocumentStore`，這裡使用 `記憶體文件儲存` 對象 `InMemoryDocumentStore` 作為 `文件儲存`。
 
     ```python
     from haystack.document_stores.in_memory import InMemoryDocumentStore
 
-    # 初始化內存文件儲存
+    # 初始化記憶體文件儲存
     document_store = InMemoryDocumentStore()
     ```
 
@@ -181,7 +181,7 @@ _回到範例操作_
     # 這裡的嵌入是將每個文件的文本轉換成對應的向量，捕捉其語義訊息
     docs_with_embeddings = doc_embedder.run(docs)
     # 將包含嵌入的文件寫入到 document_store 中
-    # 這一步將文件及其對應的嵌入向量保存到內存中的 document_store
+    # 這一步將文件及其對應的嵌入向量保存到記憶體中的 document_store
     document_store.write_documents(
         docs_with_embeddings["documents"]
     )
@@ -210,12 +210,12 @@ _以下是一個建立管道的流程_
 
 <br>
 
-2. 建立 `檢索器`：這是一個嵌入索引器，透過內存嵌入索引器對象 `InMemoryEmbeddingRetriever` 來使用之前透過內存文件儲存器對象  `InMemoryDocumentStore` 所嵌入的文件進行檢索。
+2. 建立 `檢索器`：這是一個嵌入索引器，透過記憶體嵌入索引器對象 `InMemoryEmbeddingRetriever` 來使用之前透過記憶體文件儲存器對象  `InMemoryDocumentStore` 所嵌入的文件進行檢索。
 
     ```python
     from haystack.components.retrievers.in_memory import InMemoryEmbeddingRetriever
 
-    # 建立 `內存嵌入檢索器`
+    # 建立 `記憶體嵌入檢索器`
     retriever = InMemoryEmbeddingRetriever(document_store)
     ```
 
@@ -326,7 +326,7 @@ _模板使用的是 `Jinja2` 循環語法_
         # 嵌入器組件，使用 Sentence Transformers 模型將文本轉換成嵌入向量
         - text_embedder: SentenceTransformersTextEmbedder
         
-        # 檢索器組件，從內存中根據嵌入向量檢索相關的文件
+        # 檢索器組件，從記憶體中根據嵌入向量檢索相關的文件
         # 使用嵌入向量進行相似性檢索
         - retriever: InMemoryEmbeddingRetriever
         
