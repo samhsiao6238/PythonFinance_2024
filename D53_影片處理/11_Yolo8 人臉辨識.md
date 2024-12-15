@@ -69,11 +69,11 @@ _以下使用 YOLOv8 和 `face_recognition` 庫進行人臉偵測和辨識，展
         known_face_encodings.append(encoding)
         known_face_names.append(name)
 
-    # 設定相似度閾值，0.6 是默認值，值越小越嚴格
+    # 設定相似度閾值，0.6 是預設值，值越小越嚴格
     tolerance_1 = 0.4
     tolerance_2 = 0.38
 
-    # 使用攝像頭作為視頻來源，0 表示默認攝像頭
+    # 使用攝像頭作為視頻來源，0 表示預設攝像頭
     cap = cv2.VideoCapture(0)
 
     if not cap.isOpened():

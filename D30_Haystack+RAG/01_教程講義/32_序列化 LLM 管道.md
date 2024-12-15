@@ -300,7 +300,7 @@ _[官方文件](https://docs.haystack.deepset.ai/docs/huggingfacelocalgenerator)
 
 <br>
 
-4. 對於遠程文件授權，此組件默認使用 `HF_API_TOKEN` 環境變數。或者，可以在初始化時傳遞 Hugging Face API 令牌。
+4. 對於遠程文件授權，此組件預設使用 `HF_API_TOKEN` 環境變數。或者，可以在初始化時傳遞 Hugging Face API 令牌。
 
     ```python
     local_generator = HuggingFaceLocalGenerator(

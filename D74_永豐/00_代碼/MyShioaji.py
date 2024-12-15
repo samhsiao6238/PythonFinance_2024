@@ -179,7 +179,7 @@ def activate_ca(api):
         ca_path = os.environ.get("CA_CERT_PATH")
         ca_passwd = os.environ.get("CA_PASSWORD")
 
-        # 檢查是否獲取到必要的憑證資訊
+        # 檢查是否取得到必要的憑證資訊
         if not ca_path or not ca_passwd:
             print(
                 "未找到 CA 憑證資訊，"
