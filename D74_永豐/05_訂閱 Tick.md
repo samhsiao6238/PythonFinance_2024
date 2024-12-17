@@ -66,6 +66,16 @@ _`quote_type` 有幾種可選擇的報價類型_
 
 <br>
 
+6. 查看枚舉的名稱及值。
+
+    ```python
+    print(
+        sj.constant.QuoteType.Tick.name, 
+        sj.constant.QuoteType.Tick.value
+    )
+
+<br>
+
 ## 定義類別
 
 _建立新的模組，可傳入不同參數訂閱不同報價類型_
