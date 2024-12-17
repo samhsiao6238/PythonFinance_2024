@@ -88,7 +88,9 @@ _可傳入不同參數訂閱不同報價類型_
 
         # 回調函數，處理接收到的 Tick 資訊
         def quote_callback(self, exchange: Exchange, tick: TickSTKv1):
-            print(f"【Tick 資訊】\nExchange: {exchange}\nTick: {tick}")
+            print(
+                f"【Tick 資訊】\nExchange: {exchange}\nTick: {tick}"
+            )
 
         # 開始訂閱 Tick 資訊
         def start_subscription(self):
@@ -109,27 +111,40 @@ _可傳入不同參數訂閱不同報價類型_
 
         # 取消訂閱 Tick 資訊
         def stop_subscription(self):
-            print(f"取消訂閱 {self.stock_code} 的 Tick 資訊...")
+            print(
+                f"取消訂閱 {self.stock_code} 的 Tick 資訊..."
+            )
             self.api.quote.unsubscribe(
                 contract=self.api.Contracts.Stocks[self.stock_code],
                 quote_type=self.quote_type,
                 version=self.version
             )
-            print(f"已取消訂閱 {self.stock_code} 的 Tick 資訊。")
+            print(
+                f"已取消訂閱 {self.stock_code} 的 Tick 資訊。"
+            )
             self.event.set()
 
             # 從管理器中移除
-            TickSubscription.subscriptions.pop(self.stock_code, None)
+            TickSubscription.subscriptions.pop(
+                self.stock_code, 
+                None
+            )
 
         # 啟動訂閱並在指定時間後自動取消，這會排除進程阻塞
         def run(self, cancel_delay=60):
             # 啟動訂閱執行緒，設置為守護執行緒
-            subscribe_thread = Thread(target=self.start_subscription, daemon=True)
+            subscribe_thread = Thread(
+                target=self.start_subscription, 
+                daemon=True
+            )
             subscribe_thread.start()
 
             # 啟動取消訂閱執行緒，設置為守護執行緒
             def delayed_stop():
-                print(f"等待 {cancel_delay} 秒後將自動取消訂閱 {self.stock_code}...")
+                print(
+                    f"等待 {cancel_delay} 秒後"
+                    f"將自動取消訂閱 {self.stock_code}..."
+                )
                 time.sleep(cancel_delay)
                 self.stop_subscription()
 
@@ -137,7 +152,9 @@ _可傳入不同參數訂閱不同報價類型_
             stop_thread.start()
 
             # 立即返回，不阻塞主執行緒
-            print(f"訂閱 {self.stock_code} 已啟動，取消訂閱將在背景執行。")
+            print(
+                f"訂閱 {self.stock_code} 已啟動，取消訂閱將在背景執行。"
+            )
 
         # 停止所有正在運行的訂閱
         @classmethod
@@ -147,6 +164,10 @@ _可傳入不同參數訂閱不同報價類型_
                 subscription.stop_subscription()
             print("所有訂閱已停止。")
     ```
+
+<br>
+
+3. 補充説明，`守護者模式（Daemon Thread）` 是指將執行緒設定為 `守護執行緒`，當主執行緒結束時，所有守護執行緒也會自動終止，而不會阻塞主程式的退出；一般執行緒預設為 `非守護執行緒`，需要明確結束後才允許主執行緒退出。
 
 <br>
 
