@@ -50,6 +50,20 @@ _`quote_type` 有幾種可選擇的報價類型_
     print(sj.constant.QuoteType.Quote)
     ```
 
+    ![](images/img_72.png)
+
+<br>
+
+5. 可遍歷輸出；這只是示範 `__members__` 及 `.items()` 的用法。
+
+    ```python
+    # 遍歷並輸出 enum 的所有成員
+    for name, member in sj.constant.QuoteType.__members__.items():
+        print(f"{name}: {member}")
+    ```
+
+    ![](images/img_73.png)
+
 <br>
 
 ## 定義類別
