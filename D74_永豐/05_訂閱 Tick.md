@@ -217,28 +217,34 @@ _在測試腳本中，導入並使用自訂義的模組 `TickSubscription` 進�
 
 <br>
 
-1. 建立訂閱兩個訂閱，分別是訂閱 `2330` 與 `2317` 的 `Tick`。
+1. 導入庫並進行帳號登入，使用預設的模擬模式。
 
     ```python
+    # 導入庫
     from tick_subscription import TickSubscription
     import MyShioaji as msj
 
-    # 登入，務必確保已經登入
+    # 登入
     api = msj.login_Shioaji()
+    ```
 
-    # 建立訂閱並執行
+<br>
+
+2. 建立訂閱兩個訂閱，分別是訂閱 `2330` 與 `2317` 的 `Tick`。
+
+    ```python
+    # 建立訂閱
     tick_subscriber1 = TickSubscription(
         api=api,
         # 指定股票代碼
         stock_code="2330",
         quote_type="Tick",
     )
-    # 建立訂閱並執行
+    # 建立訂閱
     tick_subscriber2 = TickSubscription(
         api=api,
         stock_code="2317",
         quote_type="Tick",
-        version="v1"
     )
     ```
 
@@ -246,7 +252,7 @@ _在測試腳本中，導入並使用自訂義的模組 `TickSubscription` 進�
 
 <br>
 
-2. 啟動訂閱；會開始輸出第一個訂閱的 `2330` 的資訊。
+3. 啟動訂閱；會開始輸出第一個訂閱的 `2330` 的資訊。
 
     ```python
     # 啟動訂閱
@@ -257,7 +263,7 @@ _在測試腳本中，導入並使用自訂義的模組 `TickSubscription` 進�
 
 <br>
 
-3. 另外開啟一個 CELL，起訂另一個訂閱 `2317`。
+4. 另外開啟一個 CELL，起訂另一個訂閱 `2317`。
 
     ```python
     tick_subscriber2.run(600)
@@ -267,7 +273,7 @@ _在測試腳本中，導入並使用自訂義的模組 `TickSubscription` 進�
 
 <br>
 
-4. 再開啟另一個 CELL，運行以下代碼建立第三個訂閱工具，同時啟動訂閱 `2303`。
+5. 再開啟另一個 CELL，運行以下代碼建立第三個訂閱工具，同時啟動訂閱 `2303`。
 
     ```python
     # 建立訂閱並執行
@@ -283,7 +289,7 @@ _在測試腳本中，導入並使用自訂義的模組 `TickSubscription` 進�
 
 <br>
 
-5. 停止指定的訂閱，例如第一個訂閱，其餘訂閱會繼續運行。
+6. 停止指定的訂閱，例如第一個訂閱，其餘訂閱會繼續運行。
 
     ```python
     # 停止指定訂閱
@@ -294,7 +300,7 @@ _在測試腳本中，導入並使用自訂義的模組 `TickSubscription` 進�
 
 <br>
 
-6. 停止所有訂閱；這是調用類別函數來運行。
+7. 停止所有訂閱；這是調用類別函數來運行。
 
     ```python
     # 停止所有訂閱
