@@ -74,6 +74,8 @@ _`quote_type` 有幾種可選擇的報價類型_
         sj.constant.QuoteType.Tick.value
     )
 
+    ![](images/img_74.png)
+
 <br>
 
 ## 定義類別
