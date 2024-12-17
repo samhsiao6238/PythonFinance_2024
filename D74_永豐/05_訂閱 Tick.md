@@ -113,25 +113,40 @@ _建立新的模組，可傳入不同參數訂閱不同報價類型_
 
             self.api = api
             self.stock_code = stock_code
-            self.quote_type = getattr(sj.constant.QuoteType, quote_type)
-            self.version = getattr(sj.constant.QuoteVersion, version)
+            self.quote_type = getattr(
+                sj.constant.QuoteType, 
+                quote_type
+            )
+            self.version = getattr(
+                sj.constant.QuoteVersion, 
+                version
+            )
             self.event = Event()
 
             # 將實例加入管理器
             TickSubscription.subscriptions[stock_code] = self
 
         # 回調函數，處理接收到的 Tick 資訊
-        def quote_callback(self, exchange: Exchange, tick: TickSTKv1):
+        def quote_callback(
+            self, 
+            exchange: Exchange, 
+            tick: TickSTKv1
+        ):
             print(
                 f"【Tick 資訊】\nExchange: {exchange}\nTick: {tick}"
             )
 
         # 開始訂閱 Tick 資訊
         def start_subscription(self):
-            print(f"開始訂閱 {self.stock_code} 的 Tick 資訊...")
+            print(
+                f"開始訂閱 {self.stock_code} 的 "
+                f"{self.quote_type.value} 資訊..."
+            )
 
             # 綁定回調函數，避免裝飾器寫法
-            self.api.quote.set_on_tick_stk_v1_callback(self.quote_callback)
+            self.api.quote.set_on_tick_stk_v1_callback(
+                self.quote_callback
+            )
 
             # 訂閱指定股票
             self.api.quote.subscribe(
@@ -182,12 +197,16 @@ _建立新的模組，可傳入不同參數訂閱不同報價類型_
                 time.sleep(cancel_delay)
                 self.stop_subscription()
 
-            stop_thread = Thread(target=delayed_stop, daemon=True)
+            stop_thread = Thread(
+                target=delayed_stop, 
+                daemon=True
+            )
             stop_thread.start()
 
             # 立即返回，不阻塞主執行緒
             print(
-                f"訂閱 {self.stock_code} 已啟動，取消訂閱將在背景執行。"
+                f"訂閱 {self.stock_code} 已啟動，"
+                "取消訂閱將在背景執行。"
             )
 
         # 定義類別方法，停止所有正在運行的訂閱
@@ -282,6 +301,7 @@ _在測試腳本中，導入並使用自訂義的模組 `TickSubscription` 進�
         stock_code="2303",
         quote_type="Tick",
     )
+    # 啟動訂閱
     tick_subscriber3.run(600)
     ```
 
