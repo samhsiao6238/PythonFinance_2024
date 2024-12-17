@@ -4,6 +4,16 @@ _定義類別 `TickSubscription` 用已訂閱 Tick 資訊，並在接收到 Tick
 
 <br>
 
+## 準備工作
+
+1. 建立類別模組文件；另外也添加一個測試腳本 `ex01.ipynb`，已經存在可免。
+
+    ```bash
+    touch tick_subscription.py ex01.ipynb
+    ```
+
+<br>
+
 ## 報價類型
 
 _`quote_type` 有幾種可選擇的報價類型_
@@ -22,9 +32,11 @@ _`quote_type` 有幾種可選擇的報價類型_
 
 <br>
 
-4. 可使用 API 屬性觀察這些常數。
+4. 可在測試腳本中使用 API 屬性觀察這些常數。
 
     ```python
+    import shioaji as sj
+
     sj.constant.QuoteType
     # 逐筆交易資訊
     sj.constant.QuoteType.Tick
@@ -42,15 +54,7 @@ _建立新的模組，可傳入不同參數訂閱不同報價類型_
 
 <br>
 
-1. 建立類別模組。
-
-    ```bash
-    touch tick_subscription.py
-    ```
-
-<br>
-
-2. 編輯類別，報價類型預設為 `Tick`、報價版本，預設為 `v1`；特別注意，檢查 API 若不存在時，`raise` 會拋出異常 `ValueError`，並立即中斷並退出當前函數的執行，也不需要 `return`。
+1. 編輯類別，報價類型預設為 `Tick`、報價版本，預設為 `v1`；特別注意，檢查 API 若不存在時，`raise` 會拋出異常 `ValueError`，並立即中斷並退出當前函數的執行，也不需要 `return`。
 
     ```python
     import shioaji as sj
@@ -160,14 +164,16 @@ _建立新的模組，可傳入不同參數訂閱不同報價類型_
         @classmethod
         def stop_all(cls):
             print("停止所有訂閱...")
-            for stock_code, subscription in list(cls.subscriptions.items()):
+            # stock_code 會在 `stop_subscription` 傳出，無需重複
+            # 所以使用 `_` 表示即可
+            for _, subscription in list(cls.subscriptions.items()):
                 subscription.stop_subscription()
             print("所有訂閱已停止。")
     ```
 
 <br>
 
-3. 補充説明，`守護者模式（Daemon Thread）` 是指將執行緒設定為 `守護執行緒`，當主執行緒結束時，所有守護執行緒也會自動終止，而不會阻塞主程式的退出；一般執行緒預設為 `非守護執行緒`，需要明確結束後才允許主執行緒退出。
+2. 補充説明，`守護者模式（Daemon Thread）` 是指將執行緒設定為 `守護執行緒`，當主執行緒結束時，所有守護執行緒也會自動終止，而不會阻塞主程式的退出；一般執行緒預設為 `非守護執行緒`，需要明確結束後才允許主執行緒退出。
 
 <br>
 
