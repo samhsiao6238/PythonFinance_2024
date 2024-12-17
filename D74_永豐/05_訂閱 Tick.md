@@ -217,7 +217,7 @@ _在測試腳本中，導入並使用自訂義的模組 `TickSubscription` 進�
 
 <br>
 
-1. 建立訂閱工具。
+1. 建立訂閱。
 
     ```python
     from tick_subscription import TickSubscription
@@ -226,14 +226,14 @@ _在測試腳本中，導入並使用自訂義的模組 `TickSubscription` 進�
     # 登入，務必確保已經登入
     api = msj.login_Shioaji()
 
-    # 建立訂閱工具並執行
+    # 建立訂閱並執行
     tick_subscriber1 = TickSubscription(
         api=api,
         # 指定股票代碼
         stock_code="2330",
         quote_type="Tick",
     )
-    # 建立訂閱工具並執行
+    # 建立訂閱並執行
     tick_subscriber2 = TickSubscription(
         api=api,
         stock_code="2317",
@@ -270,7 +270,7 @@ _在測試腳本中，導入並使用自訂義的模組 `TickSubscription` 進�
 4. 再開啟另一個 CELL，運行以下代碼建立第三個訂閱工具，同時啟動訂閱 `2303`。
 
     ```python
-    # 建立訂閱工具並執行
+    # 建立訂閱並執行
     tick_subscriber3 = TickSubscription(
         api=api,
         stock_code="2303",
