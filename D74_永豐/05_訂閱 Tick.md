@@ -28,7 +28,7 @@ _`quote_type` 有幾種可選擇的報價類型_
 
 <br>
 
-3. `Snapshot` 表示市場快照資訊，提供最新的 `成交價`、`成交量`、`開盤價`、`最高價`、`最低價` 等摘要資料，適合快速檢視整體市場狀況。
+3. `Quote` 表示完整的報價資訊，包含最新的 `成交價`、`買賣五檔` 等綜合資訊，適合需要更多細節的市場數據觀察需求。
 
 <br>
 
@@ -37,13 +37,17 @@ _`quote_type` 有幾種可選擇的報價類型_
     ```python
     import shioaji as sj
 
-    sj.constant.QuoteType
+    # 查看報價類型的所有成員
+    print(sj.constant.QuoteType.__members__)
+
     # 逐筆交易資訊
-    sj.constant.QuoteType.Tick
+    print(sj.constant.QuoteType.Tick)
+
     # 買賣報價資訊
-    sj.constant.QuoteType.BidAsk
-    # 市場快照資訊
-    sj.constant.QuoteType.Snapshot
+    print(sj.constant.QuoteType.BidAsk)
+
+    # 完整報價資訊
+    print(sj.constant.QuoteType.Quote)
     ```
 
 <br>
