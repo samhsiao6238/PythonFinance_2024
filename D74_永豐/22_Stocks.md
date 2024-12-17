@@ -6,17 +6,16 @@ _以下說明 Stocks 的各種屬性_
 
 ## 訂閱行情
 
-_通過 `subscribe` 函數可以輕鬆實現行情訂閱，僅需傳入目標合約（Contract）。_
+_通過 `subscribe` 函數可以輕鬆實現 `訂閱行情 (subscribe quotes)`，僅需傳入標的物的 `合約（Contract）`。_
 
 <br>
 
-1. 調用 `subscribe` 函數。
+1. 調用 `subscribe` 函數，訂閱的行情類型有 `逐筆成交 (tick)` 與 `五檔價量 (bidask)` 兩種。
 
     ```python
     api.quote.subscribe(
         contract: shioaji.contracts.Contract,
-        # 訂閱的行情類型，逐筆成交或五檔價量
-        # `tick`（逐筆成交）、`bidask`（五檔價量）
+        # 訂閱的行情類型為逐筆成交 `tick`
         quote_type: shioaji.constant.QuoteType=<QuoteType.Tick: 'tick'>,
         # 是否訂閱盤中零股資訊
         intraday_odd: bool=False,
@@ -72,6 +71,7 @@ _通過 `subscribe` 函數可以輕鬆實現行情訂閱，僅需傳入目標合
         api.Contracts.Stocks["2330"], 
         quote_type=sj.constant.QuoteType.Tick,
         version=sj.constant.QuoteVersion.v1,
+        # 是否訂閱零股交易
         intraday_odd=True
     )
     ```
@@ -98,11 +98,12 @@ _通過 `subscribe` 函數可以輕鬆實現行情訂閱，僅需傳入目標合
 
 <br>
 
-4. BidAsk，訂閱普通股票五檔價量。
+4. 訂閱類型 `BidAsk` 是訂閱普通股票 `五檔價量`。
 
     ```python
     api.quote.subscribe(
         api.Contracts.Stocks["2330"], 
+        # 訂閱五檔價量
         quote_type=sj.constant.QuoteType.BidAsk,
         version=sj.constant.QuoteVersion.v1
     )
@@ -125,13 +126,15 @@ _通過 `subscribe` 函數可以輕鬆實現行情訂閱，僅需傳入目標合
 
 <br>
 
-5. 訂閱盤中零股五檔價量。
+5. 訂閱包含 `盤中零股` 的 `五檔價量`。
 
     ```python
     api.quote.subscribe(
         api.Contracts.Stocks["2330"], 
+        # 五檔價量
         quote_type=sj.constant.QuoteType.BidAsk,
         version=sj.constant.QuoteVersion.v1,
+        # 零股
         intraday_odd=True
     )
     ```
@@ -153,13 +156,18 @@ _通過 `subscribe` 函數可以輕鬆實現行情訂閱，僅需傳入目標合
 
 <br>
 
-## Quote (綜合行情)
+## Quote
+
+_綜合行情_
+
+<br>
 
 1. 訂閱綜合行情。
 
     ```python
     api.quote.subscribe(
         api.Contracts.Stocks["2330"], 
+        # 訂閱綜合行情
         quote_type=sj.constant.QuoteType.Quote,
         version=sj.constant.QuoteVersion.v1
     )
@@ -187,9 +195,9 @@ _通過 `subscribe` 函數可以輕鬆實現行情訂閱，僅需傳入目標合
 
 <br>
 
-## 訂閱數據屬性
+## 訂閱數據的屬性
 
-1. Tick
+1. `Tick` 逐筆成交。
 
    - `code`: 商品代碼
    - `datetime`: 時間
@@ -208,7 +216,7 @@ _通過 `subscribe` 函數可以輕鬆實現行情訂閱，僅需傳入目標合
 
 <br>
 
-2. BidAsk
+2. `BidAsk` 五檔價量。
 
    - `code`: 商品代碼
    - `datetime`: 時間
@@ -219,7 +227,7 @@ _通過 `subscribe` 函數可以輕鬆實現行情訂閱，僅需傳入目標合
 
 <br>
 
-3. Quote
+3. `Quote` 綜合行情。
 
    - 包含 Tick 和 BidAsk 所有屬性，以及：
    - `closing_oddlot_shares`: 盤後零股成交股數
@@ -229,7 +237,7 @@ _通過 `subscribe` 函數可以輕鬆實現行情訂閱，僅需傳入目標合
 
 ## 訂閱回調 (Callback)
 
-1. 設定 Tick 回調，使用 Pythonic 裝飾器方式。
+1. 設定 Tick 回調，使用 `Pythonic` 風格的 `裝飾器` 方式。
 
     ```python
     from shioaji import TickSTKv1, Exchange
@@ -246,12 +254,14 @@ _通過 `subscribe` 函數可以輕鬆實現行情訂閱，僅需傳入目標合
     ```python
     def tick_callback(exchange: Exchange, tick: TickSTKv1):
         print(f"Exchange: {exchange}, Tick: {tick}")
+
+    # 使用傳統方式訂閱回調
     api.quote.set_on_tick_stk_v1_callback(tick_callback)
     ```
 
 <br>
 
-3. 設定 BidAsk 回調。
+3. 設定 `BidAsk` 回調。
 
     ```python
     @api.on_bidask_stk_v1()
@@ -261,7 +271,7 @@ _通過 `subscribe` 函數可以輕鬆實現行情訂閱，僅需傳入目標合
 
 <br>
 
-4. 設定 Quote 回調。
+4. 設定 `Quote` 回調。
 
     ```python
     @api.on_quote_stk_v1()
