@@ -6,7 +6,7 @@ _定義類別 `TickSubscription` 用已訂閱 Tick 資訊，並在接收到 Tick
 
 ## 準備工作
 
-1. 建立類別模組文件；另外也添加一個測試腳本 `ex01.ipynb`，已經存在可免。
+1. 建立類別模組文件 `tick_subscription.py`；另外也添加一個測試腳本 `ex01.ipynb`，已經存在可免。
 
     ```bash
     touch tick_subscription.py ex01.ipynb
@@ -84,7 +84,7 @@ _建立新的模組，可傳入不同參數訂閱不同報價類型_
 
 <br>
 
-1. 編輯類別，報價類型預設為 `Tick`、報價版本，預設為 `v1`；特別注意，檢查 API 若不存在時，`raise` 會拋出異常 `ValueError`，並立即中斷並退出當前函數的執行，也不需要 `return`。
+1. 編輯類別文件 `tick_subscription.py`，類別名稱為 `TickSubscription`；其中 `報價類型` 預設為 `Tick`，`報價版本` 預設為 `v1`；特別注意，檢查 API 若不存在時，`raise` 會拋出異常 `ValueError`，並立即中斷並退出當前函數的執行，也不需要 `return`。
 
     ```python
     import shioaji as sj
