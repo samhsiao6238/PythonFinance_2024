@@ -1,8 +1,46 @@
-# 封裝訂閱回調類別
+# 訂閱 Tick
+
+_定義類別 `TickSubscription` 用已訂閱 Tick 資訊，並在接收到 Tick 資料時執行預設的 `回調函數` 處理相關數據，同時提供取消訂閱的功能。_
+
+<br>
+
+## 報價類型
+
+_`quote_type` 有幾種可選擇的報價類型_
+
+<br>
+
+1. `Tick` 表示逐筆交易資訊，包含每一筆成交的價格、數量等資料。
+
+<br>
+
+2. `BidAsk` 表示報價中的買賣價量資訊，如買價、賣價、買量、賣量等，用於觀察市場買賣雙方出價資訊的需求。
+
+<br>
+
+3. `Snapshot` 表示市場快照資訊，提供最新的 `成交價`、`成交量`、`開盤價`、`最高價`、`最低價` 等摘要資料，適合快速檢視整體市場狀況。
+
+<br>
+
+4. 可使用 API 屬性觀察這些常數。
+
+    ```python
+    sj.constant.QuoteType
+    # 逐筆交易資訊
+    sj.constant.QuoteType.Tick
+    # 買賣報價資訊
+    sj.constant.QuoteType.BidAsk
+    # 市場快照資訊
+    sj.constant.QuoteType.Snapshot
+    ```
 
 <br>
 
 ## 定義類別
+
+_可傳入不同參數訂閱不同報價類型_
+
+<br>
 
 1. 建立類別模組。
 
@@ -12,7 +50,7 @@
 
 <br>
 
-2. 編輯腳本。
+2. 編輯類別，報價類型預設為 `Tick`、報價版本，預設為 `v1`；特別注意，檢查 API 若不存在時，`raise` 會拋出異常 `ValueError`，並立即中斷並退出當前函數的執行，也不需要 `return`。
 
     ```python
     import shioaji as sj
@@ -26,18 +64,18 @@
         # 類別層級變數，管理所有訂閱的實例
         subscriptions = {}
 
-        def __init__(self, api, stock_code="2330", quote_type="Tick", version="v1"):
-            """
-            初始化 Tick 訂閱工具
-
-            Args:
-                api (Shioaji): 已初始化並登入的 Shioaji API 物件
-                stock_code (str): 股票代碼，預設為 "2330"
-                quote_type (str): 報價類型，預設為 'Tick'
-                version (str): 報價版本，預設為 'v1'
-            """
+        # 初始化函數
+        def __init__(
+            self, api, 
+            stock_code="2330", 
+            quote_type="Tick", 
+            version="v1"
+        ):
+            # 檢查 API 對象是否存在
             if not api:
-                raise ValueError("api 未傳入，請確認是否已初始化並登入 Shioaji。")
+                raise ValueError(
+                    "api 未傳入，請確認是否已初始化並登入 Shioaji。"
+                )
 
             self.api = api
             self.stock_code = stock_code
@@ -199,6 +237,21 @@
     ```
 
     ![](images/img_71.png)
+
+<br>
+
+## 轉換訂閱類別 
+
+1. 使用自訂類別 `TickSubscription` 時，可傳入不同的 `quote_type`，例如改成訂閱 `買賣報價資訊 (BidAsk)`。
+
+    ```python
+    tick_subscriber = TickSubscription(
+        api=api, 
+        stock_code="2330", 
+        quote_type="BidAsk"
+    )
+    tick_subscriber.run()
+    ```
 
 <br>
 
