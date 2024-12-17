@@ -140,7 +140,7 @@ _建立新的模組，可傳入不同參數訂閱不同報價類型_
         def start_subscription(self):
             print(
                 f"開始訂閱 {self.stock_code} 的 "
-                f"{self.quote_type.value} 資訊..."
+                f"{self.quote_type.name} 資訊..."
             )
 
             # 綁定回調函數，避免裝飾器寫法
@@ -343,6 +343,8 @@ _在測試腳本中，導入並使用自訂義的模組 `TickSubscription` 進�
     )
     tick_subscriber.run()
     ```
+
+    ![](images/img_75.png)
 
 <br>
 
