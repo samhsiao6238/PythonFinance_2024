@@ -67,12 +67,13 @@ _`api.scanners()`，提供快速取得特定排行資訊的方法_
 1. 以 ChangePercentRank (漲幅%) 為例。
 
     ```python
-    # 此範例將取得目前漲幅排名前 1 名的標的
+    import shioaji as sj
+
+    # 取得目前漲幅排名前 1 名的標的
     scanners = api.scanners(
         scanner_type=sj.constant.ScannerType.ChangePercentRank,
         count=1
     )
-
     # 查看結果
     scanners
     ```
@@ -80,7 +81,23 @@ _`api.scanners()`，提供快速取得特定排行資訊的方法_
     _輸出_
 
     ```bash
-    # 後補
+    [ScannerItem(
+        date='2024-12-18', 
+        code='4131', 
+        name='浩泰', 
+        ts=1734532200000000000, 
+        open=32.8, high=33.0, low=32.8, close=33.0, 
+        price_range=0.2, tick_type=1, 
+        change_price=3.0, change_type=1, 
+        average_price=32.97, volume=1, 
+        total_volume=104, amount=33000, 
+        total_amount=3428900, yesterday_volume=0, 
+        volume_ratio=0.0, buy_price=33.0, buy_volume=2367, 
+        sell_price=0.0, sell_volume=0, 
+        bid_orders=61, bid_volumes=283, 
+        ask_orders=6, ask_volumes=47, 
+        rank_value=10.0
+    )]
     ```
 
 <br>
@@ -95,16 +112,15 @@ _`api.scanners()`，提供快速取得特定排行資訊的方法_
         scanner_type=sj.constant.ScannerType.ChangePercentRank, 
         count=5
     )
-
     # 將回傳的 ChangePercentRank 物件轉為 DataFrame，便於檢視與分析
     df = pd.DataFrame(s.__dict__ for s in scanners)
-
     # 將 ts (timestamp) 欄位轉成可讀的日期時間格式
     df.ts = pd.to_datetime(df.ts)
-
     # 查看 DataFrame
     df
     ```
+
+    ![](images/img_94.png)
 
 <br>
 
