@@ -16,23 +16,147 @@ _定義類別 `TickSubscription` 用已訂閱 Tick 資訊，並在接收到 Tick
 
 ## 報價類型
 
-_`quote_type` 有幾種可選擇的報價類型_
+_`quote_type` 有三種可選擇的報價類型：`Tick`、`BidAsk`、`Quote`。_
 
 <br>
 
-1. `Tick` 表示逐筆交易資訊，包含每一筆成交的價格、數量等資料。
+1. `Tick` 側重 `逐筆成交資訊`，適合監控每一筆交易的即時狀態；主要數據有 `成交價格（close）`、`成交數量（volume）`、`當前總成交量（total_volume）`、`最高價（high）`、`最低價（low）`、`市場狀態（tick_type 表示成交、委託狀態）` 等資料，用於即時監控市場成交狀態和價格變動。
+
+    ```bash
+    Response Code: 200 | Event Code: 16 | Info: TIC/v1/STK/*/TSE/2330 | Event: Subscribe or Unsubscribe ok
+    【Tick 資訊】
+    Exchange: TSE
+    Tick: Tick(
+        code='2330', 
+        datetime=datetime.datetime(2024, 12, 18, 9, 21, 16, 828392), 
+        open=Decimal('1075'), 
+        avg_price=Decimal('1075.18'), 
+        close=Decimal('1075'), high=Decimal('1080'), 
+        low=Decimal('1070'), 
+        amount=Decimal('5375000'), 
+        total_amount=Decimal('8524095000'), 
+        volume=5, 
+        total_volume=7928, 
+        tick_type=2, 
+        chg_type=3, 
+        price_chg=Decimal('0'), 
+        pct_chg=Decimal('0.00'), 
+        bid_side_total_vol=2334, 
+        ask_side_total_vol=2723, 
+        bid_side_total_cnt=526, 
+        ask_side_total_cnt=485, 
+        closing_oddlot_shares=0, 
+        fixed_trade_vol=0, 
+        suspend=0, 
+        simtrade=0, 
+        intraday_odd=0
+    )
+    ```
 
 <br>
 
-2. `BidAsk` 表示報價中的買賣價量資訊，如買價、賣價、買量、賣量等，用於觀察市場買賣雙方出價資訊的需求。
+2. `BidAsk` 表示報價中的 `五檔價量資訊` 資訊，側重 `市場深度資訊`，用於觀察市場的供需變化、交易深度和流動性；重點數據有 `買價/賣價（bid_price, ask_price）`、`買量/賣量（bid_volume, ask_volume）`、`買賣雙方總量（bid_side_total_vol）`、`差異量（ask_side_total_vol）`。
+
+    ```bash
+    Response Code: 200 | Event Code: 16 | Info: QUO/v1/STK/*/TSE/2330 | Event: Subscribe or Unsubscribe ok
+    Exchange.TSE BidAsk(
+        code='2330', 
+        datetime=datetime.datetime(2024, 12, 18, 9, 13, 21, 625234), 
+        bid_price=
+        [
+            Decimal('1070'), 
+            Decimal('1065'), 
+            Decimal('1060'), 
+            Decimal('1055'), 
+            Decimal('1050')
+        ], 
+        bid_volume=[3194, 4047, 3030, 2064, 1913], 
+        diff_bid_vol=[0, 0, 0, 0, 0], 
+        ask_price=
+        [
+            Decimal('1075'), 
+            Decimal('1080'), 
+            Decimal('1085'), 
+            Decimal('1090'), 
+            Decimal('1095')
+        ], 
+        ask_volume=[3154, 4027, 4355, 4719, 3537], 
+        diff_ask_vol=[-1, 0, 0, 0, 0], 
+        suspend=0, 
+        simtrade=0, 
+        intraday_odd=0
+    )
+    ```
 
 <br>
 
-3. `Quote` 表示完整的報價資訊，包含最新的 `成交價`、`買賣五檔` 等綜合資訊，適合需要更多細節的市場數據觀察需求。
+3. `Quote` 提供 `完整綜合資訊`，包含最新的 `買賣五檔` 綜合資訊，適合進行市場綜合分析，包括價格趨勢、深度和成交概況；重點數據有 `最新成交價（close）`、
+`開盤價/最高價/最低價（open, high, low）`、`平均價（avg_price）`、`買賣五檔價量（bid_price, ask_price, bid_volume, ask_volume）`、`成交總金額/總量（total_amount, total_volume）`、`價格變動（price_chg, pct_chg）`。
+
+    ```bash
+    Response Code: 200 | Event Code: 16 | Info: QUO/v2/STK/*/TSE/2330 | Event: Subscribe or Unsubscribe ok
+    Exchange.TSE Quote(
+        code='2330', 
+        datetime=datetime.datetime(2024, 12, 18, 9, 17, 1, 861481), 
+        open=Decimal('1075'), 
+        avg_price=Decimal('1075.18'), 
+        close=Decimal('1075'), 
+        high=Decimal('1080'), 
+        low=Decimal('1070'), 
+        amount=Decimal('4300000'), 
+        total_amount=Decimal('8101490000'), 
+        volume=0, 
+        total_volume=7535, 
+        tick_type=1, 
+        chg_type=3, 
+        price_chg=Decimal('0'), 
+        pct_chg=Decimal('0.00'), 
+        bid_side_total_vol=2216, 
+        ask_side_total_vol=2448, 
+        bid_side_total_cnt=474, 
+        ask_side_total_cnt=440, 
+        closing_oddlot_shares=0, 
+        closing_oddlot_close=Decimal('0.0'), 
+        closing_oddlot_amount=Decimal('0'), 
+        closing_oddlot_bid_price=Decimal('0.0'), 
+        closing_oddlot_ask_price=Decimal('0.0'), 
+        fixed_trade_vol=0, 
+        fixed_trade_amount=Decimal('0'), 
+        bid_price=
+        [
+            Decimal('1070'), 
+            Decimal('1065'), 
+            Decimal('1060'), 
+            Decimal('1055'), 
+            Decimal('1050')
+        ], 
+        bid_volume=[4348, 4267, 3188, 2241, 2071], 
+        diff_bid_vol=[0, 0, 0, 0, 0], 
+        ask_price=
+        [
+            Decimal('1075'), 
+            Decimal('1080'), 
+            Decimal('1085'), 
+            Decimal('1090'), 
+            Decimal('1095')
+        ], 
+        ask_volume=[107, 3536, 4424, 4758, 3580], 
+        diff_ask_vol=[0, -1, 0, 0, 0], 
+        avail_borrowing=11432389, 
+        suspend=0, 
+        simtrade=0
+    )
+    ```
 
 <br>
 
-4. 可在測試腳本中使用 API 屬性觀察這些常數。
+4. 報價類型比較表彙整如下。
+
+    ![](images/img_83.png)
+
+<br>
+
+5. 可在測試腳本中使用 API 屬性觀察這些常數。
 
     ```python
     import shioaji as sj
@@ -54,7 +178,7 @@ _`quote_type` 有幾種可選擇的報價類型_
 
 <br>
 
-5. 可遍歷輸出；這只是示範 `__members__` 及 `.items()` 的用法。
+6. 可遍歷輸出；這只是示範 `__members__` 及 `.items()` 的用法。
 
     ```python
     # 遍歷並輸出 enum 的所有成員
@@ -66,7 +190,7 @@ _`quote_type` 有幾種可選擇的報價類型_
 
 <br>
 
-6. 查看枚舉的名稱及值。
+7. 查看枚舉的名稱及值。
 
     ```python
     print(
