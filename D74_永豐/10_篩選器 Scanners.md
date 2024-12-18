@@ -75,10 +75,12 @@ _`api.scanners()`，提供快速取得特定排行資訊的方法_
 
     # 查看結果
     scanners
-    # 可能回傳類似如下的清單:
-    # [ChangePercentRank(
-    #     date='2021-04-09', code='5211', name='蒙恬', ... 
-    # )]
+    ```
+
+    _輸出_
+
+    ```bash
+    # 後補
     ```
 
 <br>
