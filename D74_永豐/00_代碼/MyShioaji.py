@@ -49,7 +49,7 @@ def login_Shioaji(
     simulation=True
 ):
     try:
-        # 如果未傳入 API，則進行初始化
+        # 確保 API 已初始化
         if api is None:
             print("API 尚未初始化，正在初始化 Shioaji API...")
             api = init_Shioaji(simulation=simulation)
