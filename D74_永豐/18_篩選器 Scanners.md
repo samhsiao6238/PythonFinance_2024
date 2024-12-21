@@ -64,7 +64,7 @@ _`api.scanners()`，提供快速取得特定排行資訊的方法_
 
 ## 實作
 
-1. 以 ChangePercentRank (漲幅%) 為例。
+1. 使用 `ChangePercentRank` 取得目前漲幅排名第一名的標的。
 
     ```python
     import shioaji as sj
@@ -102,19 +102,19 @@ _`api.scanners()`，提供快速取得特定排行資訊的方法_
 
 <br>
 
-2. 將結果轉換為 DataFrame。
+2. 取得漲幅 `前五名` 的標的，並將結果轉換為 DataFrame。
 
     ```python
     import pandas as pd
 
-    # 取得前 5 名漲幅最高的標的
+    # 取得漲幅前 `5` 名的標的
     scanners = api.scanners(
         scanner_type=sj.constant.ScannerType.ChangePercentRank, 
         count=5
     )
-    # 將回傳的 ChangePercentRank 物件轉為 DataFrame，便於檢視與分析
+    # 轉換為 DataFrame
     df = pd.DataFrame(s.__dict__ for s in scanners)
-    # 將 ts (timestamp) 欄位轉成可讀的日期時間格式
+    # 將 ts 欄位轉換成可讀的日期時間格式
     df.ts = pd.to_datetime(df.ts)
     # 查看 DataFrame
     df
