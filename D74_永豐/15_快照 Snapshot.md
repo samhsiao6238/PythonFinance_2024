@@ -10,31 +10,24 @@ _快照；快速取得 `即時行情資訊`_
 
 <br>
 
-2. 要同時對多個商品取得 `snapshot`，僅需將多個合約物件先放入一個列表 `list`，再將列表傳入 `api.snapshots` 即可。
+2. 在 API 中，股票、期貨、選擇權等交易商品 皆可透過 `Snapshot` 取得一組描述當前狀態的資料結構，內容包含該商品目前的 `開盤價(open)`、`最高價(high)`、`最低價(low)`、`收盤價(close)`、`漲跌幅資訊(change_price、change_rate、change_type)`、`加權平均價格(average_price)`、`當前成交量(volume)`、`累計成交量(total_volume)`、`當前委買價(buy_price)`、`當前委買量(buy_volume)`、`當前委賣價(sell_price)`、`當前委賣量(sell_volume)`、`昨日總量(yesterday_volume)` 等資訊。
 
 <br>
 
-3. 在實務應用中，取得 snapshot 後通常會即時顯示於報價系統、進行策略判斷或轉為 DataFrame 以利後續統計與分析。
+3. 要同時對多個商品取得 `snapshot`，僅需將多個合約物件先放入一個列表 `list`，再將列表傳入 `api.snapshots` 即可，依據 API 限制，一次可查詢最多 `500` 個合約的資訊。
 
 <br>
 
-4. 若 `snapshots` 回傳的結果中某商品不存在(例如非交易時間或代碼錯誤)，可能會出現相關錯誤或返回空集合，需在程式中做相對應的檢查。
+4. 與其他類型數據相同，`snapshot` 可轉換為 `DataFrame` 進一步進行繪圖、統計或分析。
 
 <br>
 
-5. `Snapshot` 是一組描述股票、期貨、選擇權等交易商品當前狀態的資料結構，包含該商品目前的開盤價(open)、最高價(high)、最低價(low)、收盤價(close)、漲跌幅資訊(change_price、change_rate、change_type)、加權平均價格(average_price)、當前成交量(volume)、累計成交量(total_volume)、當前委買價(buy_price)及委買量(buy_volume)、當前委賣價(sell_price)及委賣量(sell_volume)、昨日總量(yesterday_volume)等資訊。
+## 函數與參數說明
 
-<br>
-
-6. 透過 `snapshot` 可快速取得商品當前的最新行情狀態，一次查詢可以取得最多 `500` 個合約(contract)的資訊。
-
-<br>
-
-## 操作方式說明
-
-1. 主要有三個參數，分別是 `商品列表`、`請求逾時`、`回調函數`；其中 `回調函數` 會在每一個商品快照取得後都呼叫一次；另外，`回傳值` 是一個 `Snapshot` 的列表 `(List[Snapshot])`。
+1. `快照` 主要有三個參數，分別是 `商品列表`、`請求逾時`、`回調函數`；若有多個商品時，`回調函數` 會在每個商品快照取得後都呼叫一次；該函數的 `回傳值` 是一個 `Snapshot` 的列表 `(List[Snapshot])`。
 
     ```python
+    # 取得快照
     api.snapshots(
         # 建立商品合約列表，可同時包含股票、期貨、選擇權、指數等合約
         contracts: List[
@@ -45,10 +38,11 @@ _快照；快速取得 `即時行情資訊`_
                 shioaji.contracts.Index
             ]
         ],
-        # 設定請求逾時(毫秒)，預設為 `30000` 毫秒。
+        # 設定請求逾時，單位是 `毫秒`，預設為 `30000` 毫秒。
         timeout: int = 30000,
         # 回調函式，這會在取得每個 snapshot 後呼叫一次
         cb: Callable[[shioaji.data.Snapshot], NoneType] = None,
+        # 回傳值是快照列表
     ) -> List[shioaji.data.Snapshot]
     ```
 
