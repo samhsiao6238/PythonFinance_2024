@@ -10,7 +10,7 @@ _快照；快速取得 `即時行情資訊`_
 
 <br>
 
-2. 在 API 中，股票、期貨、選擇權等交易商品 皆可透過 `Snapshot` 取得一組描述當前狀態的資料結構，內容包含該商品目前的 `開盤價(open)`、`最高價(high)`、`最低價(low)`、`收盤價(close)`、`漲跌幅資訊(change_price、change_rate、change_type)`、`加權平均價格(average_price)`、`當前成交量(volume)`、`累計成交量(total_volume)`、`當前委買價(buy_price)`、`當前委買量(buy_volume)`、`當前委賣價(sell_price)`、`當前委賣量(sell_volume)`、`昨日總量(yesterday_volume)` 等資訊。
+2. 在 API 中，股票、期貨、選擇權等交易商品 皆可透過 `Snapshot` 取得一組描述當前狀態的資料結構，內容包含該商品目前的 `開盤價(open)`、`最高價(high)`、`最低價(low)` 等資訊，詳細內容可查看後續說明。
 
 <br>
 
@@ -50,7 +50,7 @@ _快照；快速取得 `即時行情資訊`_
 
 ## 實作
 
-1. 載入套件並登入。
+1. 載入套件並登入；這裡使用 `模擬模式`。
 
     ```python
     # 導入庫
