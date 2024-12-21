@@ -6,11 +6,11 @@ _快照；快速取得 `即時行情資訊`_
 
 ## 簡介
 
-1. `snapshot` 是用於快速取得即時行情資訊的結構，與 `ticks` 不同之處在於 `snapshot` 是該刻的整體狀態，而 `ticks` 是逐筆成交紀錄。
+1. `snapshot` 是用於快速取得即時行情資訊的結構，與 `ticks` 不同之處在於 `snapshot` 是 `當下` 的整體狀態，而 `ticks` 是逐筆成交紀錄。
 
 <br>
 
-2. 若對於多個商品同時取得 snapshot，請將多個合約物件放入一個 list，再傳入 `api.snapshots`。
+2. 要同時對多個商品取得 `snapshot`，僅需將多個合約物件先放入一個列表 `list`，再將列表傳入 `api.snapshots` 即可。
 
 <br>
 
