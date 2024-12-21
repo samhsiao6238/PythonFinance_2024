@@ -64,7 +64,19 @@ _`api.scanners()`，提供快速取得特定排行資訊的方法_
 
 ## 實作
 
-1. 使用 `ChangePercentRank` 取得目前漲幅排名第一名的標的。
+1. 導入庫並登入帳號。
+
+    ```python
+    # 導入庫
+    import MyShioaji as msj
+
+    # 登入，使用正式模式
+    api = msj.login_Shioaji()
+    ```
+
+<br>
+
+2. 使用 `ChangePercentRank` 取得目前漲幅排名第一名的標的。
 
     ```python
     import shioaji as sj
@@ -102,7 +114,7 @@ _`api.scanners()`，提供快速取得特定排行資訊的方法_
 
 <br>
 
-2. 取得漲幅 `前五名` 的標的，並將結果轉換為 DataFrame。
+3. 取得漲幅 `前五名` 的標的，並將結果轉換為 DataFrame。
 
     ```python
     import pandas as pd
