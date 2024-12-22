@@ -47,7 +47,7 @@ _依據官網的 [Running Meta Llama on Mac](https://llama.meta.com/docs/llama-e
         # 從回應中提取生成的文本內容並返回
         return response.json()["message"]["content"]
     
-    # 呼叫函數 llama3
+    # 調用函數 llama3
     response = llama3("誰建立了中華民國？")
     # 輸出模型生成的回答
     print(response)

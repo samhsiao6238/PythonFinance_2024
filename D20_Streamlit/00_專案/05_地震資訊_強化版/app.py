@@ -413,7 +413,7 @@ def main():
 
 
 # @st.experimental_memo 是 Streamlit 的一個裝飾器，用於快取函數的結果。
-# 當函數在相同的輸入參數下被多次呼叫時，Streamlit 不會重新計算函數，而是直接傳回先前快取的結果。
+# 當函數在相同的輸入參數下被多次調用時，Streamlit 不會重新計算函數，而是直接傳回先前快取的結果。
 # 可以顯著提高應用的效能，尤其是在處理耗時的資料載入、處理或計算時。
 @st.experimental_memo
 def get_dataframe(url: str) -> pd.DataFrame:

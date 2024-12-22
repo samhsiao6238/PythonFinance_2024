@@ -44,7 +44,7 @@ def main():
 # 當腳本直接執行時執行以下程式碼
 if __name__ == "__main__":
     try:
-        # 呼叫main函數
+        # 調用main函數
         main()
     # 捕捉鍵盤中斷異常（如使用者按Ctrl+C）
     except KeyboardInterrupt:
