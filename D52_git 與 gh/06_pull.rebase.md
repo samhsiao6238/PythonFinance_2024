@@ -52,13 +52,13 @@
 
 <br>
 
-## 設定為全局 
+## 設定為全域 
 
 1. 在個別倉庫中設定時不需加任何額外參數。
 
 <br>
 
-2. 全局設定要加上 `--global` 參數，所有的 `git pull` 操作預設將使用合併而非 `rebase`。
+2. 全域設定要加上 `--global` 參數，所有的 `git pull` 操作預設將使用合併而非 `rebase`。
 
     ```bash
     git config --global pull.rebase false
