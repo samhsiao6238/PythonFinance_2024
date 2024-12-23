@@ -78,6 +78,7 @@ _登入 [官網](https://www.sinotrade.com.tw/newweb/)_
     SECRET_KEY=<輸入-Secret_Key>
     CA_CERT_PATH=Sinopac.pfx
     CA_PASSWORD=<輸入用戶密碼>
+    PERSON_ID=<輸入用戶身分證號>
     LINE_NOTIFY=
     ```
 
