@@ -1,6 +1,5 @@
 import re
 import pandas as pd
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -19,6 +18,10 @@ load_dotenv()
 # 定義 URL
 URL = "https://www.worldgymtaiwan.com/aerobic-schedule-list/taipei-minquan-east"
 
+# 定義 Selenium Docker 端點
+
+SELENIUM_HUB_URL = "http://192.168.1.239:4444/wd/hub"
+
 # 讀取環境變數 LINE Notify Token
 LINE_NOTIFY_TOKEN = os.getenv("LINE_NOTIFY")
 
@@ -27,14 +30,11 @@ ALLOWED_KEYWORDS = [
     "派對", "活力有氧", "Body Jam", "熱舞", "街舞", "MV", "舞蹈"
 ]
 
-# 設置 ChromeDriver 路徑
-CHROMEDRIVER_PATH = "/usr/bin/chromedriver"
-
 # 配置遠程 Selenium WebDriver，連接到 Docker 容器的 chromedriver
 def setup_webdriver():
     try:
         # Selenium Docker 端點
-        selenium_hub_url = "http://192.168.1.239:4444/wd/hub"
+        selenium_hub_url = SELENIUM_HUB_URL
 
         # 設定 ChromeOptions
         chrome_options = Options()
@@ -180,7 +180,10 @@ def send_line_notify(message):
         print(f"發送 LINE 通知時發生錯誤：{e}")
 
 # 保存課程表為 CSV
-def save_schedule_to_csv(schedule_df, output_file="weekly_schedule.csv"):
+def save_schedule_to_csv(
+        schedule_df, 
+        output_file="weekly_schedule.csv"
+):
     try:
         schedule_df.to_csv(
             output_file, 
