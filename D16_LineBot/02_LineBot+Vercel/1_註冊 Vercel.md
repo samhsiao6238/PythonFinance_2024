@@ -6,7 +6,7 @@ _[官網網址](https://vercel.com/)，這是作為 Heroku 的替代方案，可
 
 # 註冊步驟
 
-1. 進入官網後，使用 `Github` 帳號註冊。
+1. 進入官網後，使用 `GitHub` 帳號註冊。
 
    ![](images/img_16.png)
 
@@ -20,13 +20,17 @@ _[官網網址](https://vercel.com/)，這是作為 Heroku 的替代方案，可
 
 ## 新用戶
 
+_依序完成_
+
+<br>
+
 1. 建立帳號，輸入類型以及名字。
 
    ![](images/img_01.png)
 
 </br>
 
-2. （整合）連結 GitHub。
+2. 連結 GitHub 進行整合。
 
    ![](images/img_02.png)
 
@@ -38,19 +42,19 @@ _[官網網址](https://vercel.com/)，這是作為 Heroku 的替代方案，可
 
 </br>
 
-4. 授權。
+4. 授權 Vercel。
 
    ![](images/img_03.png)
 
 </br>
 
-5. 驗證。
+5. 輸入電話號碼進行驗證。
 
    ![](images/img_04.png)
 
 </br>
 
-6. 驗證碼。
+6. 填入驗證碼。
 
    ![](images/img_05.png)
 
