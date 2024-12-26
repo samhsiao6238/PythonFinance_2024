@@ -50,7 +50,7 @@ _參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python)_
 
 </br>
 
-3. 在 VSCode 中編輯 `index.py`。
+3. 在 VSCode 中編輯 `api` 資料夾內的文件 `index.py`，複製以下內容貼上即可。
 
    ```python
    # 導入 Flask 相關模組
@@ -63,13 +63,19 @@ _參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python)_
    from linebot.exceptions import InvalidSignatureError
 
    # 導入 LineBot 的模型
-   from linebot.models import MessageEvent, TextMessage, TextSendMessage
+   from linebot.models import (
+      MessageEvent, TextMessage, TextSendMessage
+   )
 
    import os  # 導入 os 模組
 
    # 從環境變數中取得 LineBot 的設置
-   line_bot_api = LineBotApi(os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
-   line_handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
+   line_bot_api = LineBotApi(
+      os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
+   )
+   line_handler = WebhookHandler(
+      os.getenv("LINE_CHANNEL_SECRET")
+   )
    # 建立 Flask 應用
    app = Flask(__name__)
 
@@ -77,55 +83,64 @@ _參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python)_
    # 定義根路由
    @app.route("/")
    def home():
-       # 返回簡單的文字訊息
-       return "=== 這是預設的首頁 ==="
+      # 返回簡單的文字訊息
+      return "=== 這是預設的首頁 ==="
 
 
    # 定義 webhook 路由
    @app.route("/webhook", methods=["POST"])
    def callback():
-       # 取得 X-Line-Signature 標頭值
-       signature = request.headers["X-Line-Signature"]
-       # 取得請求主體
-       body = request.get_data(as_text=True)
-       # 記錄請求主體
-       app.logger.info("Request body: " + body)
-       try:
-           # 處理 webhook 主體
-           line_handler.handle(body, signature)
-       # 捕捉無效簽名的錯誤
-       except InvalidSignatureError:
-           # 返回 400 錯誤
-           abort(400)
-       # 返回正確的響應
-       return "OK"
+      # 取得 X-Line-Signature 標頭值
+      signature = request.headers["X-Line-Signature"]
+      # 取得請求主體
+      body = request.get_data(as_text=True)
+      # 記錄請求主體
+      app.logger.info("Request body: " + body)
+      try:
+         # 處理 webhook 主體
+         line_handler.handle(body, signature)
+      # 捕捉無效簽名的錯誤
+      except InvalidSignatureError:
+         # 返回 400 錯誤
+         abort(400)
+      # 返回正確的響應
+      return "OK"
 
 
    # 處理 Line 的訊息事件
    @line_handler.add(MessageEvent, message=TextMessage)
    def handle_message(event):
 
-       if event.message.type != "text":
-           line_bot_api.reply_message(
-               event.reply_token, TextSendMessage(text="我目前僅可以讀取文字訊息")
-           )
-           return
-       if event.message.text == "說話":
+      if event.message.type != "text":
+         line_bot_api.reply_message(
+               event.reply_token, 
+               TextSendMessage(
+                  text="我目前僅可以讀取文字訊息"
+               )
+         )
+         return
+      if event.message.text == "說話":
 
-           line_bot_api.reply_message(
-               event.reply_token, TextSendMessage(text="我可以說話囉，歡迎來跟我互動 ^_^ ")
-           )
-           return
-       else:
-           line_bot_api.reply_message(
-               event.reply_token, TextSendMessage(text="我目前還未擁有對應的功能")
-           )
-           return
+         line_bot_api.reply_message(
+               event.reply_token, 
+               TextSendMessage(
+                  text="我可以說話囉，歡迎來跟我互動 ^_^ "
+               )
+         )
+         return
+      else:
+         line_bot_api.reply_message(
+               event.reply_token, 
+               TextSendMessage(
+                  text="我目前還未擁有對應的功能"
+               )
+         )
+         return
 
 
    if __name__ == "__main__":
-       # 運行 Flask 應用
-       app.run()
+      # 運行 Flask 應用
+      app.run()
 
    ```
 
