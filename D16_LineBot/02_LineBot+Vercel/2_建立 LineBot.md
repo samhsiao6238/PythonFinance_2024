@@ -214,31 +214,33 @@ _若有其他步驟請依據使用經驗自行判斷，應該沒難度。_
 
 <br>
 
-7. 在這個階段，可以先取得 `secret` 以及 `token`，首先取得 `secret` 並記錄下來。
+## 進入開發介面
+
+1. 在這個階段，可以先取得 `secret` 以及 `token`，首先取得 `secret` 並記錄下來。
 
    ![](images/img_111.png)
 
 <br>
 
-8. 日後若要重新設定新的 `secret` 則點擊 `issue` 即可。
+2. 日後若要重新設定新的 `secret` 則點擊 `issue` 即可。
 
    ![](images/img_112.png)
 
 <br>
 
-9. 切換到 `Messaging API` 頁籤。
+3. 切換到 `Messaging API` 頁籤。
 
    ![](images/img_113.png)
 
 <br>
 
-10. 點擊 `issue` 建立新的 `token`，先記錄下來。
+4. 點擊 `issue` 建立新的 `token`，先記錄下來。
 
    ![](images/img_114.png)
 
 <br>
 
-11. 日後要更新則點擊 `Reissue` 即可。
+5. 日後要更新則點擊 `Reissue` 即可。
 
    ![](images/img_115.png)
 
