@@ -1,15 +1,15 @@
 # 建立 LineBot
 
-_實作：本實作會以建立 LineBot 為例介紹 Vercel 與 GitHub 整合。_
+_實作：本實作會以建立 LineBot 為例，介紹 Vercel 與 GitHub 整合。_
 
 </br>
 
 ## MacOS
 
-1. 建立並進入專案目錄，這裡使用 `00_專案` 中的 `01_基礎`。
+1. 建立並進入專案目錄，這裡示範在 `桌面` 建立 `_test02_`；專案路徑及名稱可自行修正。
 
    ```bash
-   mkdir <專案資料夾名稱> && cd <專案資料夾名稱>
+   cd ~/Desktop && mkdir _test02_ && cd _test02_
    ```
 
 </br>
@@ -22,27 +22,23 @@ _實作：本實作會以建立 LineBot 為例介紹 Vercel 與 GitHub 整合。
 
 </br>
 
-3. 若要部署在 `Vercel`，要建立如下的資料結構，這裡先建立起來備用。
-
-   ![img](images/img_51.png)
-
-   _指令_
+3. 若要部署在 `Vercel`，需建立如下的資料結構。
 
    ```bash
-   mkdir api && touch api/index.py
-   touch requirements.txt
-   touch vercel.json
+   mkdir api && touch api/index.py && touch requirements.txt && touch vercel.json
    ```
+
+   ![img](images/img_51.png)
 
 </br>
 
 ## 範例程式
 
-1. 參考 [官方 Github](https://github.com/line/line-bot-sdk-python)。
+_參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python)_
 
 </br>
 
-2. 依照官方指示，先安裝套件。
+1. 依照官方指示，先安裝套件。
 
    ```bash
    $ python -m pip install line-bot-sdk
