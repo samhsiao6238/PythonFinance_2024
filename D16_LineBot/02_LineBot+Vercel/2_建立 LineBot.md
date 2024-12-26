@@ -262,24 +262,24 @@ _以上完成初步建置，接著回到腳本編輯。_
 
    ```json
    {
-       "builds": [
-       {
-           "src": "api/index.py",
-           "use": "@vercel/python"
-       }
-       ],
-       "routes": [
-       {
-           "src": "/(.*)",
-           "dest": "api/index.py"
-       }
-       ]
+      "builds": [
+      {
+         "src": "api/index.py",
+         "use": "@vercel/python"
+      }
+      ],
+      "routes": [
+      {
+         "src": "/(.*)",
+         "dest": "api/index.py"
+      }
+      ]
    }
    ```
 
 </br>
 
-3. 將 `secret` 及 `token` 貼到範例中。
+1. 將 `secret` 及 `token` 貼到範例中。
 
    ![](images/img_116.png)
 
