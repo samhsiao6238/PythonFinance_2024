@@ -147,73 +147,87 @@ _透過 Vercel CLI 進行部署，進入根目錄中開啟終端機，務必確�
 
 <br>
 
-6. 選擇當前的專案。
+## 開始設定專案
+
+1. 選擇當前的專案。
 
     ![](images/img_144.png)
 
 <br>
 
-7. 不要連結現有專案：N。
+2. 不要連結現有專案：`N`。
 
     ![](images/img_145.png)
 
 <br>
 
-8. 專案名稱，幾如有提供預設則使用預設即可（ENTER）。
+3. 專案名稱，使用預設即可，按下 `ENTER`。
     
     ![](images/img_146.png)
 
 <br>
 
-9. 在哪個目錄（ENTER）。
+4. 在哪個目錄，同樣使用預設，按下 `ENTER` 即可。
 
     ![](images/img_147.png)
 
 <br>
 
-10. 假如沒有提供預設名稱，則手動輸入。
+5. 假如沒有提供預設名稱，則手動輸入。
 
     ![](images/img_153.png)
 
 </br>
 
-11. 出現錯誤。
+## 錯誤排除
+
+_若因版本問題出現錯誤，請依以下步驟排除，若順利完成，可跳過此步驟。_
+
+<br>
+
+1. 出現如下錯誤。
 
     ![](images/img_151.png)
 
 <br>
 
-12. 進入 Vercel 控制台中在前面步驟所建立的專案中，點擊 `Settings`。
+2. 進入 Vercel 控制台中在前面步驟所建立的專案中，點擊 `Settings`。
 
     ![](images/img_155.png) 
 
 <br>
 
-13. 在 `General` 頁籤中找到 `Node.js Version`，手動切換到 `18.0`。
+1. 在 `General` 頁籤中找到 `Node.js Version`，手動切換到 `18.0`。
 
     ![](images/img_150.png)
 
 <br>
 
-14. 切換後記得儲存 `Save`。
+4. 切換後記得儲存 `Save`。
 
     ![](images/img_152.png)
 
 <br>
 
-15. 再次透過 `sudo vercel` 指令進行設定。
+5. 再次透過 `sudo vercel` 指令進行設定。
 
     ![](images/img_54.png)
 
 <br>
 
-16. 完成後會顯示進行部署的提示。
+## 開始部署
+
+_以上程序完成後會提示進行部署_
+
+<br>
+
+1. 提示進行部署。
 
     ![](images/img_154.png)
 
 <br>
 
-17. 使用以下指令進行部署，切記加上 `sudo`。
+2. 使用以下指令進行部署，切記加上 `sudo`。
 
     ```bash
     sudo vercel --prod
@@ -221,85 +235,91 @@ _透過 Vercel CLI 進行部署，進入根目錄中開啟終端機，務必確�
 
 <br>
 
-18. 完成部署，而訊息中顯示因為 `builds` 已經存在於設置檔案中，所以設置沒有套用，這並不影響部署的完成。
+3. 完成部署，而訊息中顯示因為 `builds` 已經存在於設置檔案中，所以設置沒有套用，這並不影響部署的完成。
 
     ![](images/img_156.png)
 
 <br>
 
-19. 另外依據說明，這並非一個 repo，這在之後的步驟會進行部署，這裡暫不理會。
+4. 另外依據說明，這並非一個 repo，這在之後的步驟會進行部署，這裡暫不理會。
 
     ![](images/img_157.png)
 
 </br>
 
-## C. 前往 Vercel 主控台
+## 前往 Vercel 主控台
 
-1. 到 Vercel 主控台，點擊剛剛上傳的專案，這裡示範是 `mybot`，名稱是部署的時候自動建立的。
+1. 進入 Vercel 並開啟 `主控台`。
+
+    ![](images/img_17.png)
+
+<br>
+
+2. 會顯示前面步驟上傳的專案，點擊進入。
 
     ![](images/img_69.png)
 
 </br>
 
-2. 先複製 Domain，可能會有兩個以上的 URL，任意複製一個即可。
+3. 先複製 Domain，可能會有兩個以上的 URL，任意複製一個即可。
 
     ![](images/img_70.png)
 
 <br>
 
-3. 這個時候網頁會顯示有錯誤，不用理會。
+4. 開啟瀏覽器進行訪問所複製的網址，這個時頁會顯示如下錯誤，_不用理會_。
 
     ![](images/img_158.png)
 
 </br>
 
-## D. 前往 Line Developers
+## 前往 Line Developers
 
-1. 回到 Line Developers，編輯或修改 Webhook。
+1. 回到 `Line Developers` 編輯 `Webhook`。
 
-   ![](images/img_71.png)
+    ![](images/img_71.png)
 
 </br>
 
 2. 貼上網址，加上「/webhook」，然後 Update。
 
-   ![](images/img_72.png)
+    ![](images/img_72.png)
 
 </br>
 
 3. 再次說明這裡的 `webhook` 尾綴是定義在 `index.py` 中的路由 `route`。
 
-   ![](images/img_73.png)
+    ![](images/img_73.png)
 
 </br>
 
 4. 確認 `Use webhook` 是開啟。
 
-   ![](images/img_74.png)
+    ![](images/img_74.png)
 
 </br>
 
 5. 這時還沒完成設定，點擊驗證會是錯的。
 
-   ![](images/img_76.png)
+    ![](images/img_76.png)
 
 </br>
 
 6. 繼續進行設定，點擊 Edit。
 
-   ![](images/img_78.png)
+    ![](images/img_78.png)
 
 </br>
 
 7. 選擇接受邀請。
 
-   ![](images/img_79.png)
+    ![](images/img_79.png)
 
 </br>
 
 8. 總的來說是這樣。
 
-   ![](images/img_80.png)
+    ![](images/img_80.png)
 
 </br>
 
@@ -311,13 +331,13 @@ _🔺 以上完成第一階段的 Line Developers 設定_
 
 1. 接著進入 Vercel 的設定 `Settings`。
 
-   ![](images/img_81.png)
+    ![](images/img_81.png)
 
 </br>
 
 2. 點擊左側環境變數。
 
-   ![](images/img_82.png)
+    ![](images/img_82.png)
 
 </br>
 
