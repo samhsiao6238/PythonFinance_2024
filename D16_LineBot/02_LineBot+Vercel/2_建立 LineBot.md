@@ -36,7 +36,7 @@ _以下是在 MacOS 中操作_
 
 ## 範例程式
 
-_參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python)_
+_以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python) 後略作修改的腳本_
 
 </br>
 
@@ -65,19 +65,13 @@ _參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python)_
    from linebot.exceptions import InvalidSignatureError
 
    # 導入 LineBot 的模型
-   from linebot.models import (
-      MessageEvent, TextMessage, TextSendMessage
-   )
+   from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
    import os  # 導入 os 模組
 
    # 從環境變數中取得 LineBot 的設置
-   line_bot_api = LineBotApi(
-      os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
-   )
-   line_handler = WebhookHandler(
-      os.getenv("LINE_CHANNEL_SECRET")
-   )
+   line_bot_api = LineBotApi(os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
+   line_handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
    # 建立 Flask 應用
    app = Flask(__name__)
 
@@ -115,27 +109,18 @@ _參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python)_
 
       if event.message.type != "text":
          line_bot_api.reply_message(
-               event.reply_token, 
-               TextSendMessage(
-                  text="我目前僅可以讀取文字訊息"
-               )
+               event.reply_token, TextSendMessage(text="我目前僅可以讀取文字訊息")
          )
          return
       if event.message.text == "說話":
 
          line_bot_api.reply_message(
-               event.reply_token, 
-               TextSendMessage(
-                  text="我可以說話囉，歡迎來跟我互動 ^_^ "
-               )
+               event.reply_token, TextSendMessage(text="我可以說話囉，歡迎來跟我互動 ^_^ ")
          )
          return
       else:
          line_bot_api.reply_message(
-               event.reply_token, 
-               TextSendMessage(
-                  text="我目前還未擁有對應的功能"
-               )
+               event.reply_token, TextSendMessage(text="我目前還未擁有對應的功能")
          )
          return
 
