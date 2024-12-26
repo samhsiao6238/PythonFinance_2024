@@ -6,7 +6,13 @@ _[官網網址](https://vercel.com/)，這是作為 Heroku 的替代方案，可
 
 # 註冊步驟
 
-1. 進入官網後點擊 `Start Deploying` 開始部署。
+1. 進入官網後，使用 `Github` 帳號註冊。
+
+   ![](images/img_16.png)
+
+<br>
+
+2. 點擊 `Start Deploying` 開始部署。
 
    ![](images/img_101.png)
 
