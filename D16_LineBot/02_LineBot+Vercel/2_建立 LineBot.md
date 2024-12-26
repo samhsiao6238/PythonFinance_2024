@@ -29,7 +29,7 @@ _以下是在 MacOS 中操作，若在 Win 系統操作，將中終端機指令�
 3. 若要部署在 `Vercel`，需建立如下的資料結構。
 
    ```bash
-   mkdir api && touch api/index.py && touch requirements.txt && touch vercel.json
+   mkdir api && touch api/index.py && touch requirements.txt vercel.json .env
    ```
 
    ![img](images/img_51.png)
@@ -38,7 +38,7 @@ _以下是在 MacOS 中操作，若在 Win 系統操作，將中終端機指令�
 
 ## 範例程式
 
-_以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python) 後略作修改的腳本_
+_以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python) 後略作修改的腳本，使用開啟的 VSCode 進行編輯。_
 
 </br>
 
@@ -46,10 +46,10 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 
 <br>
 
-2. 依照官方指示，先安裝套件；假如有提示缺少套件則再進行安裝即可。
+2. 先安裝套件。
 
    ```bash
-   python -m pip install line-bot-sdk
+   python -m pip install line-bot-sdk flask python-dotenv
    ```
 
 </br>
