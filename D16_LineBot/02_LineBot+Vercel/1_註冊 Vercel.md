@@ -8,7 +8,7 @@ _[官網網址](https://vercel.com/)，這是作為 Heroku 的替代方案，可
 
 1. 進入官網後點擊 `Start Deploying` 開始部署。
 
-![](images/img_101.png)
+   ![](images/img_101.png)
 
 <br>
 
