@@ -38,7 +38,11 @@ _參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python)_
 
 </br>
 
-1. 依照官方指示，先安裝套件。
+1. 建立並啟動虛擬環境，這裡不再贅述。
+
+<br>
+
+2. 依照官方指示，先安裝套件。
 
    ```bash
    $ python -m pip install line-bot-sdk
