@@ -15,9 +15,7 @@ _[官網網址](https://vercel.com/)，這是作為 Heroku 的替代方案，可
 ## 新用戶
 
 
-1. 建立帳號。
-
-   - 輸入類型以及名字
+1. 建立帳號，輸入類型以及名字。
 
    ![](images/img_01.png)
 
@@ -73,40 +71,40 @@ _[官網網址](https://vercel.com/)，這是作為 Heroku 的替代方案，可
 
 10. 需要再次授權。
 
-    ![](images/img_10.png)
+   ![](images/img_10.png)
 
 </br>
 
 11. 若是第一次啟用，會顯示沒有發現出存庫。
 
-    ![](images/img_11.png)
+   ![](images/img_11.png)
 
 </br>
 
 12. 若已有倉庫可選擇儲存庫，也可以切換帳號。
 
-    ![](images/img_12.png)
+   ![](images/img_12.png)
 
 </br>
 
 13. 任意載入一個儲存庫。
 
-    ![](images/img_13.png)
+   ![](images/img_13.png)
 
 </br>
 
 14. 進行必要與客製的設置之後點擊部署 `Deploy`。
 
-    ![](images/img_14.png)
+   ![](images/img_14.png)
 
 </br>
 
 15. 完成時，畫面中央會顯示錯誤訊息，不用理會，因為目前尚未建立專案。
 
-    ![](images/img_15.png)
+   ![](images/img_15.png)
 
 </br>
 
----
+___
 
 _以上是完成 Vercel 的註冊，準備好後待用。_
