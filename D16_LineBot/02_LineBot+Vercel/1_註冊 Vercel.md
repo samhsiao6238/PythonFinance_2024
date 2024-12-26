@@ -14,7 +14,6 @@ _[官網網址](https://vercel.com/)，這是作為 Heroku 的替代方案，可
 
 ## 新用戶
 
-
 1. 建立帳號，輸入類型以及名字。
 
    ![](images/img_01.png)
