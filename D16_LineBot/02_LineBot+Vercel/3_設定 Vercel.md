@@ -115,13 +115,11 @@ _透過 Vercel CLI 進行部署，進入根目錄中開啟終端機，務必確�
 
 <br>
 
-1. 運行 CLI，輸入 `Y`。
+1. 運行 CLI。
 
     ```bash
     sudo vercel
     ```
-
-    ![](images/img_17.png)
 
 <br>
 
