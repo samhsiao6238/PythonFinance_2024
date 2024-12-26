@@ -29,7 +29,7 @@ _以下是在 MacOS 中操作，若在 Win 系統操作，將中終端機指令�
 3. 若要部署在 `Vercel`，需建立如下的資料結構。
 
    ```bash
-   mkdir api && touch api/index.py && touch requirements.txt vercel.json .env .gitignore
+   mkdir api && touch api/index.py && touch requirements.txt vercel.json .env .gitignore randomNumber.py
    ```
 
    ![img](images/img_51.png)
@@ -57,91 +57,132 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 3. 在 VSCode 中編輯 `api` 資料夾內的文件 `index.py`，複製以下內容貼上即可。
 
    ```python
-   import os
-   import sys
-   from argparse import ArgumentParser
-
    from flask import Flask, request, abort
-   from linebot.v3 import (
-      WebhookHandler
-   )
-   from linebot.v3.exceptions import (
-      InvalidSignatureError
-   )
-   from linebot.v3.webhooks import (
-      MessageEvent,
-      TextMessageContent,
-   )
-   from linebot.v3.messaging import (
-      Configuration,
-      ApiClient,
-      MessagingApi,
-      ReplyMessageRequest,
-      TextMessage
-   )
+   from linebot import LineBotApi, WebhookHandler
+   from linebot.exceptions import InvalidSignatureError
+   from linebot.models import *
 
    import os
-   from dotenv import load_dotenv
-   load_dotenv()
+   import json
+
+   # 判斷是否本地運行
+   # 如果沒有 Vercel 環境變數，則認為是在本地
+   if os.getenv("VERCEL") is None:
+      from dotenv import load_dotenv
+      load_dotenv()
+
+   from .randomNumber import randomNumberMain
+
+   line_bot_api = LineBotApi(os.getenv("CHANNEL_ACCESS_TOKEN"))
+   line_handler = WebhookHandler(os.getenv("CHANNEL_SECRET"))
 
    app = Flask(__name__)
 
 
-   channel_secret = os.getenv('CHANNEL_SECRET', None)
-   channel_access_token = os.getenv('CHANNEL_ACCESS_TOKEN', None)
-   if channel_secret is None:
-      print('Specify LINE_CHANNEL_SECRET as environment variable.')
-      sys.exit(1)
-   if channel_access_token is None:
-      print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
-      sys.exit(1)
-
-   handler = WebhookHandler(channel_secret)
-
-   configuration = Configuration(
-      access_token=channel_access_token
-   )
+   # domain root
+   @app.route('/')
+   def home():
+      return '這是個測試網頁 09。'
 
 
-   @app.route("/callback", methods=['POST'])
+   @app.route("/webhook", methods=['POST'])
    def callback():
       # get X-Line-Signature header value
       signature = request.headers['X-Line-Signature']
-
       # get request body as text
       body = request.get_data(as_text=True)
       app.logger.info("Request body: " + body)
-
       # handle webhook body
       try:
-         handler.handle(body, signature)
+         line_handler.handle(body, signature)
       except InvalidSignatureError:
          abort(400)
-
       return 'OK'
 
 
-   @handler.add(MessageEvent, message=TextMessageContent)
-   def message_text(event):
-      with ApiClient(configuration) as api_client:
-         line_bot_api = MessagingApi(api_client)
-         line_bot_api.reply_message_with_http_info(
-               ReplyMessageRequest(
-                  reply_token=event.reply_token,
-                  messages=[TextMessage(text=event.message.text)]
-               )
+   @line_handler.add(MessageEvent, message=TextMessage)
+   def handle_message(event):
+      # 取得「使用者」訊息
+      user_message = event.message.text
+
+      if user_message == '文字':
+         # 設定「機器人」回覆訊息
+         bot_message = "文字"
+         # 發送訊息
+         line_bot_api.reply_message(
+               event.reply_token, TextSendMessage(text=bot_message))
+
+      if user_message == '圖片':
+         # 設定「機器人」回覆訊息
+         bot_message = ImageSendMessage(
+               original_content_url='https://i.imgur.com/Hfl3xaT.png',
+               preview_image_url='https://i.imgur.com/Hfl3xaT.png'
          )
+         # 發送訊息
+         line_bot_api.reply_message(event.reply_token, bot_message)
+
+      if user_message == '亂數':
+         # 設定「機器人」回覆訊息
+         bot_message = randomNumberMain(0, 100)
+         # 發送訊息
+         line_bot_api.reply_message(
+               event.reply_token, TextSendMessage(text=bot_message))
+
+      if user_message == '讀取':
+         # 讀取 JSON 檔案
+         filename = '/tmp/data.json'
+         data = read_JSON_data(filename)
+         # 發送訊息
+         replyLineMessage = TextSendMessage(str(data))
+         line_bot_api.reply_message(event.reply_token, replyLineMessage)
+
+      if user_message == '寫入':
+         # 讀取 JSON 檔案
+         filename = '/tmp/data.json'
+         data = read_JSON_data(filename)
+         # 寫入新資料
+         newData = {"number": randomNumberMain(0, 100)}
+         data.append(newData)
+         write_JSON_data(filename, data)
+         # 發送訊息
+         replyLineMessage = TextSendMessage(str(data))
+         line_bot_api.reply_message(event.reply_token, replyLineMessage)
+
+      if user_message == '清除':
+         # 寫入空白
+         filename = '/tmp/data.json'
+         data = []
+         write_JSON_data(filename, data)
+         # 發送訊息
+         replyLineMessage = TextSendMessage(str(data))
+         line_bot_api.reply_message(event.reply_token, replyLineMessage)
+
+      else:
+         # 設定「機器人」回覆訊息
+         bot_message = "回傳文字：" + user_message
+         # 發送訊息
+         line_bot_api.reply_message(
+               event.reply_token, TextSendMessage(text=bot_message))
 
 
    if __name__ == "__main__":
-      arg_parser = ArgumentParser(
-         usage='Usage: python ' + __file__ + ' [--port <port>] [--help]'
-      )
-      arg_parser.add_argument('-p', '--port', default=8000, help='port')
-      arg_parser.add_argument('-d', '--debug', default=False, help='debug')
-      options = arg_parser.parse_args()
+      app.run()
 
-      app.run(debug=options.debug, port=options.port)
+
+   # 讀取JSON資料
+   def read_JSON_data(filename):
+      try:
+         with open(filename, 'r') as file:
+               data = json.load(file)
+      except FileNotFoundError:
+         data = []
+      return data
+
+
+   # 寫入JSON資料
+   def write_JSON_data(filename, data):
+      with open(filename, 'w') as file:
+         json.dump(data, file)
 
    ```
 
@@ -156,10 +197,26 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 
 <br>
 
-5. 在 `.gitignore` 文件中寫入 `.env`。
+5. 在 `.gitignore` 文件中寫入 `.env`、`.vercel`。
 
    ```json
    .env
+   .vercel
+   ```
+
+<br>
+
+6. 編輯 `randomNumber.py`。
+
+   ```python
+   import random
+
+
+   # 亂數產生
+   def randomNumberMain(min, max):
+      num = random.randint(min, max)
+
+      return str(num)
    ```
 
 <br>
