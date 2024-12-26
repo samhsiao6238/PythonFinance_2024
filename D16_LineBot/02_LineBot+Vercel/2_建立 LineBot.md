@@ -42,10 +42,10 @@ _參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python)_
 
 <br>
 
-2. 依照官方指示，先安裝套件。
+2. 依照官方指示，先安裝套件；假如有提示缺少套件則再進行安裝即可。
 
    ```bash
-   $ python -m pip install line-bot-sdk
+   python -m pip install line-bot-sdk
    ```
 
 </br>
