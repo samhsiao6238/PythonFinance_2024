@@ -1,8 +1,6 @@
 # Vercel
 
-- Heroku 的替代方案。
-- 可以部署 LineBot。
-- [官網網址](https://vercel.com/)。
+_[官網網址](https://vercel.com/)，這是作為 Heroku 的替代方案，可以部署 LineBot。_
 
 </br>
 
