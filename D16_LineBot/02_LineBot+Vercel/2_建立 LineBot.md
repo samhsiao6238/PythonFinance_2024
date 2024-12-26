@@ -212,13 +212,13 @@ _若有其他步驟請依據使用經驗自行判斷，應該沒難度。_
 
 <br>
 
-## 進入開發介面
+## 取得憑證
 
 _先取得 `secret` 以及 `token`_
 
 <br>
 
-1. 首先取得 `secret` 並記錄下來。
+1. 首先取得 `secret` 並記錄在 `.env` 文件中的 `CHANNEL_SECRET`。
 
    ![](images/img_111.png)
 
@@ -236,7 +236,7 @@ _先取得 `secret` 以及 `token`_
 
 <br>
 
-4. 點擊 `issue` 建立新的 `token` 並記錄下來。
+4. 點擊 `issue` 建立新的 `token` 並記錄在 `.env` 文件中的 `CHANNEL_SECRET`。
 
    ![](images/img_114.png)
 
@@ -287,13 +287,7 @@ _回到專案資料夾中繼續編輯腳本_
 
 </br>
 
-1. 將 `secret` 及 `token` 貼到範例中。
-
-   ![](images/img_116.png)
-
-<br>
-
-4. 運行腳本。
+3. 運行腳本。
 
    ```bash
    python index.py
