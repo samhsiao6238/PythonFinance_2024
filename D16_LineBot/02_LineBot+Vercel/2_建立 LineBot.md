@@ -29,7 +29,7 @@ _以下是在 MacOS 中操作，若在 Win 系統操作，將中終端機指令�
 3. 若要部署在 `Vercel`，需建立如下的資料結構。
 
    ```bash
-   mkdir api && touch api/index.py && touch requirements.txt vercel.json .env
+   mkdir api && touch api/index.py && touch requirements.txt vercel.json .env .gitignore
    ```
 
    ![img](images/img_51.png)
@@ -152,6 +152,14 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
    ```json
    CHANNEL_ACCESS_TOKEN=<填入自己的 Token>
    CHANNEL_SECRET=<填入自己的 Secret>
+   ```
+
+<br>
+
+5. 在 `.gitignore` 文件中寫入 `.env`。
+
+   ```json
+   .env
    ```
 
 <br>

@@ -111,11 +111,17 @@ _以上完成敏感資訊處理_
 
 ## 進行設定與部署
 
-1. 透過 Vercel CLI 進行部署，進入根目錄中開啟終端機，務必確認是在根目錄。
+_透過 Vercel CLI 進行部署，進入根目錄中開啟終端機，務必確認是在根目錄_
 
-   ```bash
-   sudo vercel
-   ```
+<br>
+
+1. 運行 CLI，輸入 `Y`。
+
+    ```bash
+    sudo vercel
+    ```
+
+    ![](images/img_17.png)
 
 <br>
 
