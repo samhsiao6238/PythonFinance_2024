@@ -383,59 +383,91 @@ _進入 VSCode 進行操作_
 
 </br>
 
-2. 選公開。
+2. 選擇 `Public`。
 
-   ![](images/img_87.png)
+    ![](images/img_87.png)
 
 </br>
 
-3. 完成部署在 Github 上查看。
+3. 完成部署後，可在 `Github` 上查看該專案。
 
     ![](images/img_161.png)
 
 <br>
 
-## G. 再回到 Vercel 中
+## 再回到 Vercel 中
 
-1. 點擊連結到專案。
+_同樣在主控台中進入專案_
 
-   ![](images/img_88.png)
+<br>
+
+1. 專案右下角會出現 `Connect Git repository`，點擊進行連結。
+
+    ![](images/img_88.png)
 
 </br>
 
 2. 選取 GitHub。
 
-   ![](images/img_89.png)
+    ![](images/img_89.png)
 
 </br>
 
-3. 連結對應的專案，在這裡是 `mybot`。
+3. 連結對應的專案，在這裡是 `_test02_`。
 
     ![](images/img_90.png)
 
 </br>
 
-4. 回到產品部署 `Production Deployment` 的畫面，可以點擊 `Source code` 查看內容以確認是否為更新的內容。
+4. 切換到 `Project` 頁籤。
 
-   ![](images/img_91.png)
+    ![](images/img_18.png)
 
-</br>
+<br>
 
-## H. 驗證結果
+5. 可點擊 `Source code` 查看內容，確認是否為更新的內容。
 
-1. Vercel 的部署有時會有延遲狀況，可以透過去修改一下 `index.py` 來同步並觀察一下部署狀況。
-
-   ![](images/img_92.png)
+    ![](images/img_91.png)
 
 </br>
 
-2. 直到畫面正常顯示就表示部署完成。
+## 驗證結果
+
+1. 編輯 `index.py`，添加一個路由 `home`；再次點擊部署到 Github。
+
+    ```python
+    @app.route("/")
+    def home():
+        return "<h1>歡迎來到 Vercel 測試首頁。</h1><p>這是一個基本的應用。</p>"
+    ```
+
+<br>
+
+2. 輸入說明後提交。
+
+    ![](images/img_19.png)
+
+<br>
+
+3. 若完成同步，主控台會顯示該說明。
+
+    ![](images/img_20.png)
+
+<br>
+
+4. Vercel 的部署有時會有延遲狀況，可以透過去修改一下 `index.py` 來同步並觀察一下部署狀況。
+
+    ![](images/img_92.png)
+
+</br>
+
+5. 直到畫面正常顯示就表示部署完成。
 
    ![](images/img_93.png)
 
 </br>
 
-3. 也可以透過驗證 Webhook 確認是否完成部署。
+6. 也可以透過驗證 Webhook 確認是否完成部署。
 
    ![](images/img_94.png)
 
