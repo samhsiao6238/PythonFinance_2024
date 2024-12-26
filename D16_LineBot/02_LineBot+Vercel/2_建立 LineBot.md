@@ -135,7 +135,16 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 
 </br>
 
-## 建立 Line Developer
+4. 編輯 `.env` 文件，先貼上以下內容。
+
+   ```json
+   CHANNEL_ACCESS_TOKEN=<填入自己的 Token>
+   CHANNEL_SECRET=<填入自己的 Secret>
+   ```
+
+<br>
+
+## 進入 Line Developer
 
 _特別注意，這並非唯一的進入程序，只要能進入設定畫面並進行設定皆可。_
 
@@ -205,7 +214,11 @@ _若有其他步驟請依據使用經驗自行判斷，應該沒難度。_
 
 ## 進入開發介面
 
-1. 在這個階段，可以先取得 `secret` 以及 `token`，首先取得 `secret` 並記錄下來。
+_先取得 `secret` 以及 `token`_
+
+<br>
+
+1. 首先取得 `secret` 並記錄下來。
 
    ![](images/img_111.png)
 
@@ -223,7 +236,7 @@ _若有其他步驟請依據使用經驗自行判斷，應該沒難度。_
 
 <br>
 
-4. 點擊 `issue` 建立新的 `token`，先記錄下來。
+4. 點擊 `issue` 建立新的 `token` 並記錄下來。
 
    ![](images/img_114.png)
 
