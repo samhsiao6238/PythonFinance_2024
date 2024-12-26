@@ -463,17 +463,17 @@ _同樣在主控台中進入專案_
 
 5. 直到畫面正常顯示就表示部署完成。
 
-   ![](images/img_93.png)
+    ![](images/img_93.png)
 
 </br>
 
 6. 也可以透過驗證 Webhook 確認是否完成部署。
 
-   ![](images/img_94.png)
+    ![](images/img_94.png)
 
 </br>
 
-## I. 其他補充
+## 其他補充
 
     _介紹完伺服器後，再使用 `Ngrok` 將 LineBot 部署在樹莓派上_
 
