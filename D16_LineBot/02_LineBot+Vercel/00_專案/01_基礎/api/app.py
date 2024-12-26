@@ -18,8 +18,12 @@ load_dotenv()
 
 app = Flask(__name__)
 # 從環境變數中取得 LineBot 的設置
-configuration = Configuration(access_token=os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
-handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
+configuration = Configuration(
+    access_token=os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
+)
+handler = WebhookHandler(
+    os.getenv("LINE_CHANNEL_SECRET")
+)
 
 
 @app.route("/callback", methods=["POST"])
