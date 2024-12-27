@@ -42,6 +42,8 @@ _以下是在 MacOS 中操作，若在 Win 系統操作，將中終端機指令�
    touch .gitignore api/.env api/randomNumber.py
    ```
 
+   ![](images/img_21.png)
+
 <br>
 
 ## 範例程式
@@ -89,9 +91,14 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
    # 如果沒有 Vercel 環境變數，則認為是在本地
    if os.getenv("VERCEL") is None:
       from dotenv import load_dotenv
-      load_dotenv(dotenv_path="../.env")
+      load_dotenv()
 
-   from .randomNumber import randomNumberMain
+   try:
+      # 適用於 Vercel 環境
+      from .randomNumber import randomNumberMain
+   except ImportError:
+      # 適用於本地運行
+      from randomNumber import randomNumberMain
 
    line_bot_api = LineBotApi(os.getenv("CHANNEL_ACCESS_TOKEN"))
    line_handler = WebhookHandler(os.getenv("CHANNEL_SECRET"))
