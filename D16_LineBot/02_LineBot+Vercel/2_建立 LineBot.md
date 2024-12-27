@@ -42,7 +42,7 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 
 </br>
 
-1. 建立並啟動虛擬環境，這裡不再贅述。
+1. 建立並啟動虛擬環境 `envLineBot`，這裡不再贅述。
 
 <br>
 
