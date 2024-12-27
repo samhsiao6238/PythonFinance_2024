@@ -29,7 +29,7 @@ _以下是在 MacOS 中操作，若在 Win 系統操作，將中終端機指令�
 3. 若要部署在 `Vercel`，需建立如下的資料結構。
 
    ```bash
-   mkdir api && touch api/index.py && touch requirements.txt vercel.json
+   mkdir api && touch api/index.py requirements.txt vercel.json
    ```
 
    ![img](images/img_51.png)
@@ -39,7 +39,7 @@ _以下是在 MacOS 中操作，若在 Win 系統操作，將中終端機指令�
 4. 另外，先建立幾個腳本備用；其中 `.env` 用以儲存敏感資訊、`.gitignore` 用以設定不同步的清單、`randomNumber.py` 則是範例的自訂模組。
 
    ```bash
-   touch .env .gitignore randomNumber.py
+   touch .gitignore api/.env api/randomNumber.py
    ```
 
 <br>
