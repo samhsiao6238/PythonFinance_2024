@@ -46,7 +46,7 @@ _以下是在 MacOS 中操作，若在 Win 系統操作，將中終端機指令�
 
 ## 範例程式
 
-_以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python/blob/master/examples/flask-echo/app_with_handler.py) 後略作修改的腳本，使用開啟的 VSCode 進行編輯。_
+_以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk-python/blob/master/examples/flask-echo/app_with_handler.py) 及 [網路文章](https://github.com/mant0u0/LineBot-Mant0u) 後略作修改的腳本，使用開啟的 VSCode 進行編輯。_
 
 </br>
 
