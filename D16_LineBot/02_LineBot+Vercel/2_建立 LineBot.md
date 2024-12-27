@@ -89,7 +89,7 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
    # 如果沒有 Vercel 環境變數，則認為是在本地
    if os.getenv("VERCEL") is None:
       from dotenv import load_dotenv
-      load_dotenv()
+      load_dotenv(dotenv_path="../.env")
 
    from .randomNumber import randomNumberMain
 
