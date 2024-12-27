@@ -80,15 +80,15 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 
    ```python
    from flask import Flask, request, abort
-   from linebot import LineBotApi, WebhookHandler
-   from linebot.exceptions import InvalidSignatureError
-   from linebot.models import *
+   from linebot.v3.messaging import Configuration, ApiClient, MessagingApi
+   from linebot.v3.webhook import WebhookHandler
+   from linebot.v3.webhooks import MessageEvent, TextMessageContent
+   from linebot.v3.messaging.models import TextMessage, ReplyMessageRequest, ImageMessage
 
    import os
    import json
 
    # 判斷是否本地運行
-   # 如果沒有 Vercel 環境變數，則認為是在本地
    if os.getenv("VERCEL") is None:
       from dotenv import load_dotenv
       load_dotenv()
@@ -100,22 +100,30 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
       # 適用於本地運行
       from randomNumber import randomNumberMain
 
-   line_bot_api = LineBotApi(os.getenv("CHANNEL_ACCESS_TOKEN"))
-   line_handler = WebhookHandler(os.getenv("CHANNEL_SECRET"))
+
+   channel_access_token = os.getenv("CHANNEL_ACCESS_TOKEN")
+   channel_secret = os.getenv("CHANNEL_SECRET")
+
+   if not channel_access_token or not channel_secret:
+      raise ValueError(
+         "Missing CHANNEL_ACCESS_TOKEN or CHANNEL_SECRET environment variables."
+      )
+
+   configuration = Configuration(access_token=channel_access_token)
+   line_handler = WebhookHandler(channel_secret)
 
    app = Flask(__name__)
 
-
    # domain root
-   @app.route('/')
+   @app.route("/")
    def home():
-      return '這是個測試網頁 09。'
+      return "這是個測試網頁 1227。"
 
 
-   @app.route("/webhook", methods=['POST'])
+   @app.route("/webhook", methods=["POST"])
    def callback():
       # get X-Line-Signature header value
-      signature = request.headers['X-Line-Signature']
+      signature = request.headers["X-Line-Signature"]
       # get request body as text
       body = request.get_data(as_text=True)
       app.logger.info("Request body: " + body)
@@ -124,82 +132,108 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
          line_handler.handle(body, signature)
       except InvalidSignatureError:
          abort(400)
-      return 'OK'
+      return "OK"
 
 
-   @line_handler.add(MessageEvent, message=TextMessage)
+   @line_handler.add(MessageEvent, message=TextMessageContent)
    def handle_message(event):
       # 取得「使用者」訊息
       user_message = event.message.text
 
-      if user_message == '文字':
-         # 設定「機器人」回覆訊息
-         bot_message = "文字"
-         # 發送訊息
-         line_bot_api.reply_message(
-               event.reply_token, TextSendMessage(text=bot_message))
+      with ApiClient(configuration) as api_client:
+         line_bot_api = MessagingApi(api_client)
 
-      if user_message == '圖片':
-         # 設定「機器人」回覆訊息
-         bot_message = ImageSendMessage(
-               original_content_url='https://i.imgur.com/Hfl3xaT.png',
-               preview_image_url='https://i.imgur.com/Hfl3xaT.png'
-         )
-         # 發送訊息
-         line_bot_api.reply_message(event.reply_token, bot_message)
+         if user_message == "文字":
+               bot_message = "文字"
+               line_bot_api.reply_message_with_http_info(
+                  ReplyMessageRequest(
+                     reply_token=event.reply_token,
+                     messages=[TextMessage(text=bot_message)],
+                  )
+               )
 
-      if user_message == '亂數':
-         # 設定「機器人」回覆訊息
-         bot_message = randomNumberMain(0, 100)
-         # 發送訊息
-         line_bot_api.reply_message(
-               event.reply_token, TextSendMessage(text=bot_message))
+         elif user_message == "圖片":
+               bot_message = ImageMessage(
+                  original_content_url="https://i.imgur.com/Hfl3xaT.png",
+                  preview_image_url="https://i.imgur.com/Hfl3xaT.png",
+               )
+               line_bot_api.reply_message_with_http_info(
+                  ReplyMessageRequest(
+                     reply_token=event.reply_token,
+                     messages=[bot_message],
+                  )
+               )
 
-      if user_message == '讀取':
-         # 讀取 JSON 檔案
-         filename = '/tmp/data.json'
-         data = read_JSON_data(filename)
-         # 發送訊息
-         replyLineMessage = TextSendMessage(str(data))
-         line_bot_api.reply_message(event.reply_token, replyLineMessage)
+         elif user_message == "亂數":
+               bot_message = randomNumberMain(0, 100)
+               line_bot_api.reply_message_with_http_info(
+                  ReplyMessageRequest(
+                     reply_token=event.reply_token,
+                     messages=[TextMessage(text=f"亂數：{bot_message}")],
+                  )
+               )
 
-      if user_message == '寫入':
-         # 讀取 JSON 檔案
-         filename = '/tmp/data.json'
-         data = read_JSON_data(filename)
-         # 寫入新資料
-         newData = {"number": randomNumberMain(0, 100)}
-         data.append(newData)
-         write_JSON_data(filename, data)
-         # 發送訊息
-         replyLineMessage = TextSendMessage(str(data))
-         line_bot_api.reply_message(event.reply_token, replyLineMessage)
+         elif user_message == "讀取":
+               filename = "/tmp/data.json"
+               data = read_JSON_data(filename)
+               reply_message = str(data)
+               line_bot_api.reply_message_with_http_info(
+                  ReplyMessageRequest(
+                     reply_token=event.reply_token,
+                     messages=[TextMessage(text=reply_message)],
+                  )
+               )
 
-      if user_message == '清除':
-         # 寫入空白
-         filename = '/tmp/data.json'
-         data = []
-         write_JSON_data(filename, data)
-         # 發送訊息
-         replyLineMessage = TextSendMessage(str(data))
-         line_bot_api.reply_message(event.reply_token, replyLineMessage)
+         elif user_message == "寫入":
+               filename = "/tmp/data.json"
+               data = read_JSON_data(filename)
+               newData = {"number": randomNumberMain(0, 100)}
+               data.append(newData)
+               write_JSON_data(filename, data)
+               line_bot_api.reply_message_with_http_info(
+                  ReplyMessageRequest(
+                     reply_token=event.reply_token,
+                     messages=[TextMessage(text=str(data))],
+                  )
+               )
 
-      else:
-         # 設定「機器人」回覆訊息
-         bot_message = "回傳文字：" + user_message
-         # 發送訊息
-         line_bot_api.reply_message(
-               event.reply_token, TextSendMessage(text=bot_message))
+         elif user_message == "清除":
+               filename = "/tmp/data.json"
+               data = []
+               write_JSON_data(filename, data)
+               line_bot_api.reply_message_with_http_info(
+                  ReplyMessageRequest(
+                     reply_token=event.reply_token,
+                     messages=[TextMessage(text="已清除所有資料")],
+                  )
+               )
+
+         else:
+               bot_message = f"回傳文字：{user_message}"
+               line_bot_api.reply_message_with_http_info(
+                  ReplyMessageRequest(
+                     reply_token=event.reply_token,
+                     messages=[TextMessage(text=bot_message)],
+                  )
+               )
 
 
    if __name__ == "__main__":
-      app.run()
+      # 判斷是否本地運行
+      is_local = os.getenv("VERCEL") is None
+      if is_local:
+         # 若是本地則啟用 :8000
+         app.run(host="0.0.0.0", port=8000)
+      else:
+         # 否則使用 Vercel 提供的 PORT
+         port = int(os.environ.get("PORT", 5000))
+         app.run(host="0.0.0.0", port=port)
 
 
    # 讀取JSON資料
    def read_JSON_data(filename):
       try:
-         with open(filename, 'r') as file:
+         with open(filename, "r") as file:
                data = json.load(file)
       except FileNotFoundError:
          data = []
@@ -208,7 +242,7 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 
    # 寫入JSON資料
    def write_JSON_data(filename, data):
-      with open(filename, 'w') as file:
+      with open(filename, "w") as file:
          json.dump(data, file)
 
    ```
@@ -411,7 +445,7 @@ _回到專案資料夾中繼續編輯腳本_
 
 <br>
 
-6. 啟動 `ngrok`，在同樣的端口上運行。
+6. 啟動 `ngrok`，在同樣的端口 `8000` 上運行。
 
    ```bash
    ngrok http 8000
@@ -442,13 +476,13 @@ _回到專案資料夾中繼續編輯腳本_
 
 <br>
 
-3. 特別注意，先查看一下腳本中的路由設置，範例專案是設定為 `/callback`，有時也常用 `/webhook`。
+3. 特別注意，先查看一下腳本中的路由設置，範例專案是設定為 `/webhook`，有時也常用 `/callback`。
 
    ![](images/img_120.png)
 
 <br>
 
-4. 貼上 `ngrok` 提供的網址以及代碼中指定的路由 `/callback`。
+4. 貼上 `ngrok` 提供的網址以及代碼中指定的路由 `/webhook`。
 
    ![](images/img_121.png)
 
