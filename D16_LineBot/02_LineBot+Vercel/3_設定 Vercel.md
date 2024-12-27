@@ -217,7 +217,7 @@ _若因版本問題出現錯誤，請依以下步驟排除，若順利完成，�
 
 <br>
 
-1. 在 `General` 頁籤中找到 `Node.js Version`，手動切換到 `18.0`。
+3. 在 `General` 頁籤中找到 `Node.js Version`，手動切換到 `18.0`。
 
     ![](images/img_150.png)
 
