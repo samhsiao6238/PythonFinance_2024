@@ -226,7 +226,7 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 
 <br>
 
-7. 編輯 `randomNumber.py`。
+7. 編輯 `randomNumber.py`；這是用來生成隨機數的一個模組。
 
    ```python
    import random
