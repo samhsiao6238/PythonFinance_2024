@@ -135,7 +135,7 @@ _透過 Vercel CLI 進行部署，進入根目錄中開啟終端機，務必確�
 
 <br>
 
-1. 運行 CLI。
+1. 運行 CLI 指令部署專案。
 
     ```bash
     sudo vercel
