@@ -66,10 +66,10 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 
 <br>
 
-3. 先安裝套件。
+3. 更新 PIP 並安裝套件。
 
    ```bash
-   python -m pip install line-bot-sdk flask python-dotenv
+   pip install --upgrade pip && python -m pip install line-bot-sdk flask python-dotenv
    ```
 
 </br>
