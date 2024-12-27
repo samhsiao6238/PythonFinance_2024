@@ -47,7 +47,7 @@ _說明前面步驟設定的 `.env` 文件，這在前面已完成，此處僅�
 
 <br>
 
-2. 安裝套件。
+2. 安裝載入環境變數的套件。
 
     ```bash
     pip install python-dotenv
@@ -55,7 +55,7 @@ _說明前面步驟設定的 `.env` 文件，這在前面已完成，此處僅�
 
 <br>
 
-3. 在專案內根目錄自建立一格隱藏檔案 `.env` 並編輯內容。
+3. 在專案內根目錄自建立隱藏檔案 `.env` 並編輯內容。
 
     ```bash
     _CHANNEL_ACCESS_TOKEN_ = <貼上 TKOKEN>
@@ -64,7 +64,7 @@ _說明前面步驟設定的 `.env` 文件，這在前面已完成，此處僅�
 
 <br>
 
-4. 特別注意， `.env` 檔案內的字串無需加上引號，與等號間有無間隔皆可。
+4. 特別注意，`.env` 檔案內的字串無需加上引號，與等號間有無間隔皆可。
     
     ![](images/img_137.png)
 
@@ -88,24 +88,44 @@ _說明前面步驟設定的 `.env` 文件，這在前面已完成，此處僅�
 
 7. 在程序中使用 `os` 來取得 Token 及 Secret。
 
-    _取得_
     ```python
-    CHANNEL_ACCESS_TOKEN = os.getenv("_CHANNEL_ACCESS_TOKEN_")
-    CHANNEL_SECRET = os.getenv("_CHANNEL_SECRET_")
-    ```
-    _使用_
-    ```
-    configuration = Configuration(access_token=CHANNEL_ACCESS_TOKEN)
-    handler = WebhookHandler(CHANNEL_SECRET)
+    # 讀取環境變數
+    CHANNEL_ACCESS_TOKEN = os.getenv("CHANNEL_ACCESS_TOKEN")
+    CHANNEL_SECRET = os.getenv("CHANNEL_SECRET")
+
+    # 使用環境變數
+    configuration = Configuration(
+        access_token=CHANNEL_ACCESS_TOKEN
+    )
+    handler = WebhookHandler(
+        CHANNEL_SECRET
+    )
     ```
 
 <br>
 
-8. 重新運行一次腳本，然後進行對話測試，確認沒問題，便可以進行以下步驟。
+8. 若 `.env` 文件與腳本位在不同目路中，可使用相對路徑讀取環境變數。 
 
-    ![](images/img_139.png)
+    ```python
+    from dotenv import load_dotenv
+    from pathlib import Path
+    # 使用相對路徑載入環境變數
+    load_dotenv(dotenv_path=Path("../.env"))
+    ```
 
-_以上完成敏感資訊處理_
+<br>
+
+9. 也可以使用絕對路徑。
+
+    ```python
+    from dotenv import load_dotenv
+    from pathlib import Path
+
+    # 定位絕對路徑
+    dotenv_path = Path(__file__).parent.parent / ".env"
+    # 載入環境變數
+    load_dotenv(dotenv_path=dotenv_path)
+    ```
 
 <br>
 
