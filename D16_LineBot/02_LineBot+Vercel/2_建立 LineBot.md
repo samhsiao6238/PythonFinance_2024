@@ -50,11 +50,23 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 
 </br>
 
-1. 建立並啟動虛擬環境 `envLineBot`，這裡不再贅述。
+1. 建立並啟動虛擬環境 `envLineBot`，相關建立細節不做贅述。
+
+   ```bash
+   cd ~/Documents/PythonVenv && python -m venv envLineBot
+   ```
 
 <br>
 
-2. 先安裝套件。
+2. 設定路徑後，啟動虛擬環境。
+
+   ```bash
+   source ~/.zshrc
+   ```
+
+<br>
+
+3. 先安裝套件。
 
    ```bash
    python -m pip install line-bot-sdk flask python-dotenv
@@ -62,7 +74,7 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 
 </br>
 
-3. 在 VSCode 中編輯 `api` 資料夾內的文件 `index.py`，複製以下內容貼上即可。
+4. 在 VSCode 中編輯 `api` 資料夾內的文件 `index.py`，複製以下內容貼上即可。
 
    ```python
    from flask import Flask, request, abort
@@ -196,7 +208,7 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 
 </br>
 
-4. 編輯 `.env` 文件，先貼上以下內容。
+5. 編輯 `.env` 文件，先貼上以下內容。
 
    ```json
    CHANNEL_ACCESS_TOKEN=<填入自己的 Token>
@@ -205,7 +217,7 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 
 <br>
 
-5. 在 `.gitignore` 文件中寫入 `.env`、`.vercel`。
+6. 在 `.gitignore` 文件中寫入 `.env`、`.vercel`。
 
    ```json
    .env
@@ -214,7 +226,7 @@ _以下代碼是參考 [Line 官方 Github](https://github.com/line/line-bot-sdk
 
 <br>
 
-6. 編輯 `randomNumber.py`。
+7. 編輯 `randomNumber.py`。
 
    ```python
    import random
