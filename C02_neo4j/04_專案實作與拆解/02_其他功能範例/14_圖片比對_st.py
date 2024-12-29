@@ -162,7 +162,7 @@ data_count = atlas_collection.count_documents({})
 st.sidebar.write(f"當前資料庫中的資料筆數: {data_count}")
 
 if uploaded_file is not None:
-    # 保存上傳的圖片
+    # 儲存上傳的圖片
     query_img_path = os.path.join(upload_folder, uploaded_file.name)
     with open(query_img_path, "wb") as f:
         f.write(uploaded_file.getbuffer())

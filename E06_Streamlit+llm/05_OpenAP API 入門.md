@@ -114,7 +114,7 @@ _[Text-to-speech 語音轉文字](https://platform.openai.com/docs/guides/text-t
 
 4. 輸出格式：選擇音頻的輸出格式（預設為 MP3，但也支持其他格式如 opus、aac、flac、wav、pcm）。
 
-5. 保存或播放：將生成的音頻文件保存或實時播放。
+5. 儲存或播放：將生成的音頻文件儲存或實時播放。
 
 6. 範例。
 
@@ -125,7 +125,7 @@ _[Text-to-speech 語音轉文字](https://platform.openai.com/docs/guides/text-t
     # 初始化 OpenAI 客戶端
     client = OpenAI(api_key="YOUR_API_KEY")
 
-    # 設定保存音頻文件的路徑
+    # 設定儲存音頻文件的路徑
     speech_file_path = Path(__file__).parent / "speech.mp3"
 
     # 調用 API 將文本轉換為語音
@@ -138,7 +138,7 @@ _[Text-to-speech 語音轉文字](https://platform.openai.com/docs/guides/text-t
     input="今天是個美好的日子，因為我要去見個重要的人。"
     )
 
-    # 將生成的音頻流保存為 MP3 文件
+    # 將生成的音頻流儲存為 MP3 文件
     response.stream_to_file(speech_file_path)
     ```
 
@@ -420,7 +420,7 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
 
 <br>
 
-3. 使用 OpenAI 提供的 API 取得文本嵌入，並將嵌入結果保存到文件或數據框中以便進行後續分析，這些技術和工具可以幫助開發者更好地理解和處理自然語言數據，實現各種智能應用。
+3. 使用 OpenAI 提供的 API 取得文本嵌入，並將嵌入結果儲存到文件或數據框中以便進行後續分析，這些技術和工具可以幫助開發者更好地理解和處理自然語言數據，實現各種智能應用。
 
 <br>
 
@@ -458,10 +458,10 @@ _可參考 [Chat Completions API](https://platform.openai.com/docs/guides/text-g
     # 將文本轉換為嵌入
     df['embedding'] = df.combined.apply(lambda x: get_embedding(x, model='text-embedding-3-small'))
 
-    # 保存結果到 CSV 文件
+    # 儲存結果到 CSV 文件
     df.to_csv('output/embedded_reviews.csv', index=False)
 
-    # 從保存的文件中載入嵌入數據
+    # 從儲存的文件中載入嵌入數據
     df = pd.read_csv('output/embedded_reviews.csv')
     df['embedding'] = df.embedding.apply(eval).apply(np.array)
 

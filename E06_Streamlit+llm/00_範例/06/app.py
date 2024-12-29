@@ -95,7 +95,7 @@ if st.session_state["response"]:
             # 設置元數據，包括聊天記錄
             metadata={"chat": messages}
         )
-        # 保存反饋到 Trubrics
+        # 儲存反饋到 Trubrics
         trubrics.save(config, collection)
         # 顯示提示訊息
         st.toast("反饋已記錄！", icon="📝")

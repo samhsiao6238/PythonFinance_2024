@@ -181,7 +181,7 @@ _回到範例操作_
     # 這裡的嵌入是將每個文件的文本轉換成對應的向量，捕捉其語義訊息
     docs_with_embeddings = doc_embedder.run(docs)
     # 將包含嵌入的文件寫入到 document_store 中
-    # 這一步將文件及其對應的嵌入向量保存到記憶體中的 document_store
+    # 這一步將文件及其對應的嵌入向量儲存到記憶體中的 document_store
     document_store.write_documents(
         docs_with_embeddings["documents"]
     )

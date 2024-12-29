@@ -169,7 +169,7 @@ uploaded_file = st.file_uploader("上傳圖片進行搜索", type=["png", "jpg",
 
 # 依據上傳圖片的狀態
 if uploaded_file is not None:
-    # 保存上傳的圖片
+    # 儲存上傳的圖片
     query_img_path = os.path.join(upload_folder, uploaded_file.name)
     with open(query_img_path, "wb") as f:
         f.write(uploaded_file.getbuffer())

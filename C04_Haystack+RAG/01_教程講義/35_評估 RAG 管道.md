@@ -538,9 +538,9 @@ _在 Haystack 的最新官方文件中並無刪除或斷開組件連接得方法
         擴展 draw 函數，生成圖片後直接在 Jupyter Notebook 中顯示。
 
         :param pipeline: 要繪製的管道對象
-        :param image_path: 保存圖片的路徑
+        :param image_path: 儲存圖片的路徑
         """
-        # 生成並保存管道圖片
+        # 生成並儲存管道圖片
         pipeline.draw(image_path)
 
         # 讀取並顯示圖片
@@ -806,7 +806,7 @@ _轉換為 Pandas DataFrame 並儲存為 CSV 文件_
     results_df = evaluation_result.to_pandas()
     print(results_df)
 
-    # 保存 DataFrame 為 CSV 文件
+    # 儲存 DataFrame 為 CSV 文件
     results_df.to_csv("evaluation_results.csv", index=False)
     ```
 
@@ -826,7 +826,7 @@ _轉換為 Pandas DataFrame 並儲存為 CSV 文件_
     bottom_3 = results_df.nsmallest(3, 'sas_evaluator')
     combined_results = pd.concat([top_3, bottom_3])
 
-    # 保存過濾後的結果為另一個 CSV 文件
+    # 儲存過濾後的結果為另一個 CSV 文件
     combined_results.to_csv("top_and_bottom_results.csv", index=False)
 
     # 顯示過濾後的結果

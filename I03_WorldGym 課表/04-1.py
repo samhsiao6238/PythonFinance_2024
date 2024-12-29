@@ -180,7 +180,7 @@ def send_line_notify(message):
     except Exception as e:
         print(f"發送 LINE 通知時發生錯誤：{e}")
 
-# 保存課程表為 CSV
+# 儲存課程表為 CSV
 def save_schedule_to_csv(
         schedule_df, 
         output_file="weekly_schedule.csv"
@@ -191,9 +191,9 @@ def save_schedule_to_csv(
             encoding="utf-8-sig", 
             index=False
         )
-        print(f"課程表已保存到 '{output_file}'。")
+        print(f"課程表已儲存到 '{output_file}'。")
     except Exception as e:
-        print(f"保存 CSV 文件時發生錯誤：{e}")
+        print(f"儲存 CSV 文件時發生錯誤：{e}")
 
 # 發送當天課程的 LINE 通知
 def send_today_schedule(schedule_df):
@@ -280,7 +280,7 @@ def main():
         print("課程表為空或解析失敗。")
         return
 
-    # 保存課程為 CSV 文件
+    # 儲存課程為 CSV 文件
     save_schedule_to_csv(schedule_df)
 
     # 根據 schedule_type 發送對應通知

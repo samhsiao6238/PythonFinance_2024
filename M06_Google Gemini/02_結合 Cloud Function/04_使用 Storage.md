@@ -6,7 +6,7 @@ _之前範例並未儲存圖片訊息中的圖片_
 
 ## 說明
 
-1. 若要保存訊息中的圖片，使用 `Firebase Storage` 儲存圖片，並在 `Firebase Realtime Database` 中保存圖片的 `URL` 是一種最佳實踐，因為 `Storage` 適合儲存大文件，如圖片和影片，而 `Realtime Database` 適合儲存結構化數據，包含圖片的 `URL`，尤其它支持實時數據同步，非常適合快速查詢和顯示。
+1. 若要儲存訊息中的圖片，使用 `Firebase Storage` 儲存圖片，並在 `Firebase Realtime Database` 中儲存圖片的 `URL` 是一種最佳實踐，因為 `Storage` 適合儲存大文件，如圖片和影片，而 `Realtime Database` 適合儲存結構化數據，包含圖片的 `URL`，尤其它支持實時數據同步，非常適合快速查詢和顯示。
 
 <br>
 

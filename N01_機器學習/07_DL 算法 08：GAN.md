@@ -57,7 +57,7 @@ _Generative Adversarial Network，GAN 是一種深度學習模型，用於生成
     import torch.optim as optim
     # 引入數據集和數據變換模塊
     from torchvision import datasets, transforms
-    # 引入用於圖像保存的工具
+    # 引入用於圖像儲存的工具
     from torchvision.utils import save_image
     import matplotlib.pyplot as plt
     import numpy as np
@@ -219,7 +219,7 @@ _Generative Adversarial Network，GAN 是一種深度學習模型，用於生成
                     f" loss G: {g_loss.item():.4f}"
                 )
 
-        # 每個 epoch 保存一些生成的圖像
+        # 每個 epoch 儲存一些生成的圖像
         if epoch % 10 == 0:
             save_image(
                 fake_imgs.view(

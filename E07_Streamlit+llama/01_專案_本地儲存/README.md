@@ -71,7 +71,7 @@ for year in years:
 
 ### 第四步：設置向量索引
 
-為每個年份建立向量索引並保存到磁碟。
+為每個年份建立向量索引並儲存到磁碟。
 
 ```python
 from llama_index.core import VectorStoreIndex, StorageContext

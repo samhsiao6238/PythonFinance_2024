@@ -241,7 +241,7 @@ _以處理圖片為例_
 
 ## 說明
 
-1. 一旦模型的 `權重文件` 下載並保存到本地快取目錄後，`Keras` 在後續的使用中會直接從本地載入這些文件，不會再次從網路下載。
+1. 一旦模型的 `權重文件` 下載並儲存到本地快取目錄後，`Keras` 在後續的使用中會直接從本地載入這些文件，不會再次從網路下載。
 
 <br>
 
@@ -904,7 +904,7 @@ _展示出圖片_
     uploaded_file = st.file_uploader("上傳圖片進行搜索", type=["png", "jpg", "jpeg"])
 
     if uploaded_file is not None:
-        # 保存上傳的圖片
+        # 儲存上傳的圖片
         query_img_path = os.path.join(upload_folder, uploaded_file.name)
         with open(query_img_path, "wb") as f:
             f.write(uploaded_file.getbuffer())
@@ -1251,7 +1251,7 @@ _展示出圖片_
     st.sidebar.write(f"當前資料庫中的資料筆數: {data_count}")
 
     if uploaded_file is not None:
-        # 保存上傳的圖片
+        # 儲存上傳的圖片
         query_img_path = os.path.join(upload_folder, uploaded_file.name)
         with open(query_img_path, "wb") as f:
             f.write(uploaded_file.getbuffer())
@@ -1495,7 +1495,7 @@ _展示出圖片_
 
     # 依據上傳圖片的狀態
     if uploaded_file is not None:
-        # 保存上傳的圖片
+        # 儲存上傳的圖片
         query_img_path = os.path.join(upload_folder, uploaded_file.name)
         with open(query_img_path, "wb") as f:
             f.write(uploaded_file.getbuffer())

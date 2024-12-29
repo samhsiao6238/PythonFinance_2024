@@ -66,7 +66,7 @@ top_holdings = pd.Series(
 # 測試觀察
 top_holdings.to_excel('top_holdings_1.xlsx')
 
-'''保存數據'''
+'''儲存數據'''
 # 儲存為 Excel
 df_portfolio.to_excel('portfolio_data.xlsx', index=False)
 monthly_return.to_excel('monthly_return_data.xlsx', index=False)

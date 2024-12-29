@@ -385,7 +385,7 @@ _更多關於 `transformers` 庫的 `pipeline` 說明可參考 [Hugging Face Tra
         )
         x_offset += target_size
 
-    # 保存最終合成的圖像
+    # 儲存最終合成的圖像
     combined_image.save('combined_image.jpeg')
 
     # 顯示合成的圖像

@@ -189,7 +189,7 @@ try:
             print(f"=>輸出：user_input={user_input}", "\n")
             print(f"=>輸出：chat_history={context}", "\n")
             output = graph_search({"query": user_input, "chat_history": context})
-            # session_state 是一個持久化儲存技術，將這些跨頁面的數據可以用字典的型態被保存
+            # session_state 是一個持久化儲存技術，將這些跨頁面的數據可以用字典的型態被儲存
             # 儲存當前對話
             st.session_state.user_input.append(user_input)
             # 儲存結果

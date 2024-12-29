@@ -275,7 +275,7 @@ _確保 Playwright 已正確安裝，可運行簡單的測試腳本；注意，�
         except Exception as e:
             print(f"發送 LINE 通知時發生錯誤：{e}")
 
-    # 將課程表保存為 CSV 文件
+    # 將課程表儲存為 CSV 文件
     def save_schedule_to_csv(
         schedule_df, output_file="weekly_schedule.csv"
     ):
@@ -283,9 +283,9 @@ _確保 Playwright 已正確安裝，可運行簡單的測試腳本；注意，�
             schedule_df.to_csv(
                 output_file, encoding="utf-8-sig", index=False
             )
-            print(f"課程表已保存到 '{output_file}'。")
+            print(f"課程表已儲存到 '{output_file}'。")
         except Exception as e:
-            print(f"保存 CSV 文件時發生錯誤：{e}")
+            print(f"儲存 CSV 文件時發生錯誤：{e}")
 
     def main():
         # 下載 HTML 內容
@@ -300,7 +300,7 @@ _確保 Playwright 已正確安裝，可運行簡單的測試腳本；注意，�
         if schedule_df.empty:
             print("課表資料為空或解析失敗。")
         else:
-            # 保存為 CSV 文件
+            # 儲存為 CSV 文件
             save_schedule_to_csv(schedule_df)
             
             # 取得當前日期和星期幾

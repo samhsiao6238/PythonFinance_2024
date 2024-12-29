@@ -133,7 +133,7 @@ _這個範例的功能是使用 Atlas Vector Search 和 LangChain 來實現基�
 3. 設置環境變數：執行以下程式碼會提示用戶輸入 OpenAI API Key 和 Atlas 集群的 SRV 超連結。
 
     ```python
-    # 輸入後會保存在環境變數以及變數中
+    # 輸入後會儲存在環境變數以及變數中
     os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
     ATLAS_CONNECTION_STRING = getpass.getpass("MongoDB Atlas SRV Connection String:")
     ```

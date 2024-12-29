@@ -339,10 +339,10 @@ _可直接查看最後的完整代碼_
 
 <br>
 
-8. 將課程表保存為 CSV 文件。
+8. 將課程表儲存為 CSV 文件。
 
     ```python
-    # 將課程表保存為 CSV 文件
+    # 將課程表儲存為 CSV 文件
     def save_schedule_to_csv(schedule_df, output_file="weekly_schedule.csv"):
         try:
             schedule_df.to_csv(
@@ -350,9 +350,9 @@ _可直接查看最後的完整代碼_
                 encoding="utf-8-sig", 
                 index=False
             )
-            print(f"課程表已保存到 '{output_file}'。")
+            print(f"課程表已儲存到 '{output_file}'。")
         except Exception as e:
-            print(f"保存 CSV 文件時發生錯誤：{e}")
+            print(f"儲存 CSV 文件時發生錯誤：{e}")
     ```
 
 <br>
@@ -375,7 +375,7 @@ _可直接查看最後的完整代碼_
         if schedule_df.empty:
             print("課表資料為空或解析失敗。")
         else:
-            # 保存為 CSV 文件
+            # 儲存為 CSV 文件
             save_schedule_to_csv(schedule_df)
             
             # 取得當前日期和星期幾
@@ -690,13 +690,13 @@ _可直接查看最後的完整代碼_
         except Exception as e:
             print(f"發送 LINE 通知時發生錯誤：{e}")
 
-    # 將課程表保存為 CSV 文件
+    # 將課程表儲存為 CSV 文件
     def save_schedule_to_csv(schedule_df, output_file="weekly_schedule.csv"):
         try:
             schedule_df.to_csv(output_file, encoding="utf-8-sig", index=False)
-            print(f"課程表已保存到 '{output_file}'。")
+            print(f"課程表已儲存到 '{output_file}'。")
         except Exception as e:
-            print(f"保存 CSV 文件時發生錯誤：{e}")
+            print(f"儲存 CSV 文件時發生錯誤：{e}")
 
     def main():
         # 下載 HTML 內容
@@ -711,7 +711,7 @@ _可直接查看最後的完整代碼_
         if schedule_df.empty:
             print("課表資料為空或解析失敗。")
         else:
-            # 保存為 CSV 文件
+            # 儲存為 CSV 文件
             save_schedule_to_csv(schedule_df)
             
             # 取得當前日期和星期幾

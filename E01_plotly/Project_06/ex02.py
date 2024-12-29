@@ -37,7 +37,7 @@ df = pd.DataFrame(
     }
 )
 
-# 將 DataFrame 保存為 Excel 文件
+# 將 DataFrame 儲存為 Excel 文件
 excel_path = "simulated_trading_data.xlsx"
 df.to_excel(excel_path, index=False)
 

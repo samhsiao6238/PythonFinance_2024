@@ -70,7 +70,7 @@ _依據 [官方的說明](https://docs.llamaindex.ai/en/stable/getting_started/s
 
 ## 建立索引
 
-1. 可透過語法保存索引。
+1. 可透過語法儲存索引。
 
     ```python
     index.storage_context.persist()
@@ -86,7 +86,7 @@ _依據 [官方的說明](https://docs.llamaindex.ai/en/stable/getting_started/s
 
 <br>
 
-3. 以下範例檢查索引是否存在，若存在則加載，否則生成並保存索引。
+3. 以下範例檢查索引是否存在，若存在則加載，否則生成並儲存索引。
 
     ```python
     import os.path
@@ -97,7 +97,7 @@ _依據 [官方的說明](https://docs.llamaindex.ai/en/stable/getting_started/s
         load_index_from_storage,
     )
 
-    # 保存索引的目錄
+    # 儲存索引的目錄
     PERSIST_DIR = "./storage"
     DOCSTORE_PATH = os.path.join(PERSIST_DIR, "docstore.json")
 
@@ -106,10 +106,10 @@ _依據 [官方的說明](https://docs.llamaindex.ai/en/stable/getting_started/s
         os.makedirs(PERSIST_DIR, exist_ok=True)  
         documents = SimpleDirectoryReader("data").load_data()
         index = VectorStoreIndex.from_documents(documents)
-        # 保存索引到指定目錄
+        # 儲存索引到指定目錄
         index.storage_context.persist(persist_dir=PERSIST_DIR)  
     else:
-        # 如果存在，則加載已保存的索引
+        # 如果存在，則加載已儲存的索引
         storage_context = StorageContext.from_defaults(persist_dir=PERSIST_DIR)
         index = load_index_from_storage(storage_context)
 

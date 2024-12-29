@@ -143,9 +143,9 @@ _Graph Neural Network，圖神經網絡_
         loss = train()
         # 測試模型
         acc = test()
-        # 保存訓練損失
+        # 儲存訓練損失
         train_losses.append(loss)
-        # 保存測試準確率
+        # 儲存測試準確率
         test_accuracies.append(acc)
 
     # 可視化訓練過程中的損失和準確率變化
