@@ -1,6 +1,6 @@
 # MariaDB
 
-_在 NAS 使用 Docker 部署_
+_在 NAS 使用 Docker 部署資料庫_
 
 <br>
 
