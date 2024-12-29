@@ -259,15 +259,7 @@ _基於當前權限_
 
 <br>
 
-1. 切換到目標資料庫。
-
-    ```sql
-    USE testdb;
-    ```
-
-<br>
-
-2. 確認當前選中的資料庫。
+1. 確認當前選中的資料庫。
 
     ```sql
     SELECT DATABASE();
@@ -275,7 +267,7 @@ _基於當前權限_
 
 <br>
 
-3. 建立一個資料表。
+2. 建立一個資料表。
 
     ```sql
     CREATE TABLE users (
@@ -287,7 +279,7 @@ _基於當前權限_
 
 <br>
 
-4. 插入數據。
+3. 插入數據。
 
     ```sql
     INSERT INTO users (name, email) 
@@ -296,7 +288,7 @@ _基於當前權限_
 
 <br>
 
-5. 查看數據。
+4. 查看數據。
 
     ```sql
     SELECT * FROM users;
@@ -304,7 +296,7 @@ _基於當前權限_
 
 <br>
 
-6. 退出 MariaDB。
+5. 若要退出 MariaDB。
 
     ```sql
     EXIT;
