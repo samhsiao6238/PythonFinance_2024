@@ -265,13 +265,72 @@ _指令使用大小寫皆可，`大寫` 語句只是資料庫的慣用表達方�
 
 <br>
 
-2. 查看當前用戶的權限，結果表明用戶能夠登錄 MariaDB，但無法對資料庫執行任何操作，除非有其他授權。
+2. 查看當前用戶的權限，結果表明 _授予用戶對指定數據庫的所有操作權限_，但並不包括全局級別的權限如 `CREATE USER`、`RELOAD` 或 `GRANT OPTION`，如果需要全局權限，需要明確地通過 `GRANT` 授予，如此符合 `最小權限原則`。
 
     ```bash
     SHOW GRANTS FOR CURRENT_USER();
     ```
 
     ![](images/img_12.png)
+
+<br>
+
+## 資料庫簡易操作
+
+_基於當前權限_
+
+<br>
+
+1. 切換到目標資料庫。
+
+    ```sql
+    USE testdb;
+    ```
+
+<br>
+
+2. 確認當前選中的資料庫。
+
+    ```sql
+    SELECT DATABASE();
+    ```
+
+<br>
+
+3. 建立一個資料表。
+
+    ```sql
+    CREATE TABLE users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(100),
+        email VARCHAR(100)
+    );
+    ```
+
+<br>
+
+4. 插入數據。
+
+    ```sql
+    INSERT INTO users (name, email) 
+    VALUES ('Alice', 'alice@example.com'), ('Bob', 'bob@example.com');
+    ```
+
+<br>
+
+5. 查看數據。
+
+    ```sql
+    SELECT * FROM users;
+    ```
+
+<br>
+
+6. 退出 MariaDB。
+
+    ```sql
+    EXIT;
+    ```
 
 <br>
 
