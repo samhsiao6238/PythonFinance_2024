@@ -23,7 +23,7 @@ _接續前步驟所完成的容器，以下展示透過自動化腳本重建容�
 3. 編輯文件 `Dockerfile`，這裡要觀察變化，所以將版本號改為 `3.10-bullseye`。
 
    ```dockerfile
-   # 使用指定映像
+   # 使用指定鏡像
    FROM python:3.10-bullseye
 
    # 安裝必要庫
@@ -32,7 +32,7 @@ _接續前步驟所完成的容器，以下展示透過自動化腳本重建容�
 
 <br>
 
-4. 關於 Docker 說明文件及相關映像的版本號，可以參考 [Docker Hub](https://hub.docker.com/) 的官方版本，進入後搜尋 `python`。
+4. 關於 Docker 說明文件及相關鏡像的版本號，可以參考 [Docker Hub](https://hub.docker.com/) 的官方版本，進入後搜尋 `python`。
 
    ![](images/img_27.png)
 

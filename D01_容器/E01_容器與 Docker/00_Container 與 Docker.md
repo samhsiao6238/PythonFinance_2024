@@ -24,7 +24,7 @@ _本節將介紹在 VSCode 中使用 devcontainer，所以先介紹一下它與 
 
 1. Devcontainer 在名稱上是 `Development Container` 的縮寫，具體上是 VSCode 中的功能，功能名稱為 `Remote - Containers`。
 
-2. Devcontainer 讓開發者可以使用一個定義好的 Docker 容器作為開發環境，其設定檔路徑與命名為 `.devcontainer/devcontainer.json`，開發者透過設定檔案可指定所需的基礎映像、安裝的工具、連接埠轉送、掛載的磁碟區等設定，這使得任何擁有 Docker 和 VSCode 的使用者都能快速設定並進入一個一致的開發環境，無論其本機作業系統如何。
+2. Devcontainer 讓開發者可以使用一個定義好的 Docker 容器作為開發環境，其設定檔路徑與命名為 `.devcontainer/devcontainer.json`，開發者透過設定檔案可指定所需的基礎鏡像、安裝的工具、連接埠轉送、掛載的磁碟區等設定，這使得任何擁有 Docker 和 VSCode 的使用者都能快速設定並進入一個一致的開發環境，無論其本機作業系統如何。
 
 <br>
 

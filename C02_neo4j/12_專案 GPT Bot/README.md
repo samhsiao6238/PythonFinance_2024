@@ -103,7 +103,7 @@ _包含了容器的重建_
 
 <br>
 
-3. 關於使用 `映像檔案`、`Dockerfiles` 或 `Docker Compose` 安裝的相關技術可參考 [ Dev Container 官方說明](https://containers.dev/guide/dockerfile)。
+3. 關於使用 `鏡像檔案`、`Dockerfiles` 或 `Docker Compose` 安裝的相關技術可參考 [ Dev Container 官方說明](https://containers.dev/guide/dockerfile)。
 
 <br>
 
@@ -113,7 +113,7 @@ _包含了容器的重建_
   {
     // 指定開發環境名稱，這是可以自訂的
     "name": "Python 3",
-    // 容器基於的映像，當前設定使用微軟的 `python:1-3.11-bullseye`
+    // 容器基於的鏡像，當前設定使用微軟的 `python:1-3.11-bullseye`
     "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
     "customizations": {
       // 指定在 Codespace 中要使用的設定，特別注意這裡是相對於根目錄的路徑

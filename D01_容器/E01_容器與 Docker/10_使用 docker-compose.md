@@ -159,7 +159,7 @@ _以下開始實作_
 12. 除了在 `docker-compose.yml` 文件中直接指定啟動命令外，也可在 `Dockerfile` 中進行指定，這樣的設置將在每次啟動容器時，都會執行 `streamlit run app.py` 指令，具體使用哪一種方式取決於容器所要提供的服務； _特別注意_ ，無論在 `Dockerfile` 中如何設置， `docker-compose.yml` 文件中的參數 `command` 將會覆蓋 `Dockerfile` 中的任何 `CMD` 指令。
 
     ```Dockerfile
-    # 使用指定映像
+    # 使用指定鏡像
     FROM python:3.12-bullseye
 
     # 安裝必要庫

@@ -22,7 +22,7 @@ _說明如何使用 Docker 及 Docker Compose 來運行 ngrok，藉此從外網�
 
 <br>
 
-2. 在資料夾內新增一個 `Dockerfile` 檔案，藉此建置 Streamlit 應用程式的 Docker 映像。
+2. 在資料夾內新增一個 `Dockerfile` 檔案，藉此建置 Streamlit 應用程式的 Docker 鏡像。
 
     ```dockerfile
     # 使用官方 Python 鏡像作為基礎鏡像
@@ -46,7 +46,7 @@ _說明如何使用 Docker 及 Docker Compose 來運行 ngrok，藉此從外網�
 
 <br>
 
-3. 在包含 `Dockerfile` 和 `app.py` 的目錄中執行以下命令來建立 Docker 映像，其中參數 `-t` 參數是 `--tag` 的簡寫形式，用於指定鏡像 `名稱`與 `標籤`，如本例中僅提供名稱但不指定的 `標籤` 的情況會預設為 `latest`，如果要指定則改寫為 `my-streamlit-app:tagname` 的格式即可。
+3. 在包含 `Dockerfile` 和 `app.py` 的目錄中執行以下命令來建立 Docker 鏡像，其中參數 `-t` 參數是 `--tag` 的簡寫形式，用於指定鏡像 `名稱`與 `標籤`，如本例中僅提供名稱但不指定的 `標籤` 的情況會預設為 `latest`，如果要指定則改寫為 `my-streamlit-app:tagname` 的格式即可。
 
     ```bash
     docker build -t my-streamlit-app .

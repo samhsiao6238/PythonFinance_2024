@@ -122,7 +122,7 @@ _控制台_
 
 <br>
 
-1. 開啟 Comtainer Manager 套件，搜尋並安裝映像。
+1. 開啟 Comtainer Manager 套件，搜尋並安裝鏡像。
 
    ```bash
    selenium/standalone-chrome
@@ -130,7 +130,7 @@ _控制台_
 
 <br>
 
-2. 安裝好之後，可在映像檔中看到，選取後點擊 `執行`。
+2. 安裝好之後，可在鏡像檔中看到，選取後點擊 `執行`。
 
    ![](images/img_07.png)
 
