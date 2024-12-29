@@ -123,7 +123,7 @@ _`Contract` 物件使用於訂閱行情（`subscribe_quote`）、下單（`place
 
 <br>
 
-4. 某些物件內部的數據會存儲在 __dict__ 中，可以嘗試查看其內部數據。
+4. 某些物件內部的數據會儲存在 __dict__ 中，可以嘗試查看其內部數據。
 
     ```python
     print(api.Contracts.status.__dict__)

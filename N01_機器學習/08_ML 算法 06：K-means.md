@@ -222,7 +222,7 @@ _適合用於 K-means 演算法進行聚類分析的數據集很多，例如 `Ir
     plt.show()
 
     # 使用肘部法則選擇最佳的聚類數目
-    # 存儲每個聚類數目下的 SSE（Sum of Squared Errors）
+    # 儲存每個聚類數目下的 SSE（Sum of Squared Errors）
     sse = []
     for k in range(1, 11):
         kmeans = KMeans(

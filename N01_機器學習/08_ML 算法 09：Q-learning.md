@@ -41,7 +41,7 @@ _`Q-learning` 是一種 `無模型` 的強化學習算法，用於在給定環�
     epsilon = 0.1  # 探索機率
     episodes = 1000  # 訓練的回合數
 
-    # 存儲每回合的總獎勵
+    # 儲存每回合的總獎勵
     reward_list = []
 
     # 訓練 Q-learning 模型
