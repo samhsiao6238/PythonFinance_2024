@@ -58,7 +58,7 @@ _在本機開啟終端機_
 
 <br>
 
-3. 檢查是否成功拉取 `mariadb:latest`。
+4. 檢查是否成功拉取 `mariadb:latest`。
 
     ```bash
     docker images
@@ -101,8 +101,8 @@ _在本機開啟終端機_
     ```bash
     export MYSQL_USER=sam6238
     export MYSQL_PASSWORD=sam112233
-    export MYSQL_ROOT_PASSWORD=<NAS-的密碼>
     export MYSQL_DATABASE=testdb
+    export MYSQL_ROOT_PASSWORD=<NAS-的密碼>
     ```
 
 <br>
