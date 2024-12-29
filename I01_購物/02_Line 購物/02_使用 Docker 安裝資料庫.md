@@ -110,7 +110,7 @@ _在本機開啟終端機_
 2. 可透過 `echo` 指令加上 `$` 提取變數，確認皆已正確設置。
 
     ```bash
-    echo $MYSQL_USER $MYSQL_PASSWORD $MYSQL_ROOT_PASSWORD $MYSQL_DATABASE
+    echo $MYSQL_USER $MYSQL_PASSWORD $MYSQL_DATABASE $MYSQL_ROOT_PASSWORD
     ```
 
 <br>
@@ -130,6 +130,16 @@ _在本機開啟終端機_
     ```
 
     ![](images/img_06.png)
+
+<br>
+
+4. 補充說明，建立後所傳回的是 `新建立的容器的 ID`，這是容器的唯一標識符；`容器 ID` 是一個 `64 字元` 的十六進制字串，但在一般操作上僅需 `前 12 個字元`，所以運行 `docker ps` 指令時，顯示的就是這個字串。
+
+    ```bash
+    docker ps
+    ```
+
+    ![](images/img_17.png)
 
 <br>
 
