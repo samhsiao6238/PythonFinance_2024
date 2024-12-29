@@ -336,16 +336,7 @@ _以下將切換到 root 帳號進行授權，並先分開處理以說明各項�
 
 <br>
 
-2. 授予 `全部權限`，特別注意，這個 `全部` 是僅針對資料庫 `testdb` 授予所有表的全部操作權限。
-
-    ```sql
-    GRANT ALL PRIVILEGES ON testdb.* TO 'sam6238'@'%';
-    FLUSH PRIVILEGES;
-    ```
-
-<br>
-
-3. 在前一項的基礎上，可授予 `GRANT OPTION` 權限給 `sam6238`，允許該用戶將該權限授予其他用戶。
+2. 在前一項的基礎上，可授予 `GRANT OPTION` 權限給 `sam6238`，允許該用戶將該權限授予其他用戶。
 
     ```sql
     GRANT ALL PRIVILEGES ON testdb.* TO 'sam6238'@'%' WITH GRANT OPTION;
@@ -354,8 +345,7 @@ _以下將切換到 root 帳號進行授權，並先分開處理以說明各項�
 
 <br>
 
-
-4. 授予指定用戶 `SELECT` 權限，也就是授予對 `mysql.user` 表的查詢權限。
+3. 授予指定用戶 `SELECT` 權限，也就是授予對 `mysql.user` 表的查詢權限。
 
     ```sql
     GRANT SELECT ON mysql.user TO 'sam6238'@'%';
@@ -364,7 +354,7 @@ _以下將切換到 root 帳號進行授權，並先分開處理以說明各項�
 
 <br>
 
-5. 授予 `CREATE USER` 權限，也就是針對 `所有資料庫（*.*）` 授予 `建立用戶` 的權限。
+4. 授予 `CREATE USER` 權限，也就是針對 `所有資料庫（*.*）` 授予 `建立用戶` 的權限。
 
     ```sql
     GRANT CREATE USER ON *.* TO 'sam6238'@'%';
@@ -373,7 +363,7 @@ _以下將切換到 root 帳號進行授權，並先分開處理以說明各項�
 
 <br>
 
-6. 還要授予 `RELOAD` 權限，也就是針對 `所有資料庫（*.*）` 授予 `刷新權限表` 的權限。
+5. 還要授予 `RELOAD` 權限，也就是針對 `所有資料庫（*.*）` 授予 `刷新權限表` 的權限。
 
     ```sql
     GRANT RELOAD ON *.* TO 'sam6238'@'%';
@@ -382,7 +372,7 @@ _以下將切換到 root 帳號進行授權，並先分開處理以說明各項�
 
 <br>
 
-7. 以上語句可一次性表達。
+6. 以上語句可一次性表達。
 
     ```sql
     GRANT ALL PRIVILEGES ON testdb.* TO 'sam6238'@'%' WITH GRANT OPTION;
@@ -393,7 +383,7 @@ _以下將切換到 root 帳號進行授權，並先分開處理以說明各項�
 
 <br>
 
-8. 再次切換帳號到 `sam6238`。
+7. 再次切換帳號到 `sam6238`。
 
     ```sql
     \! mariadb -u sam6238 -p
@@ -401,7 +391,7 @@ _以下將切換到 root 帳號進行授權，並先分開處理以說明各項�
 
 <br>
 
-9. 查看當前用戶的權限；以下顯示當前用戶 `sam6238@%` 的所有權限。
+8. 查看當前用戶的權限；以下顯示當前用戶 `sam6238@%` 的所有權限。
 
     ```sql
     SHOW GRANTS FOR CURRENT_USER();
