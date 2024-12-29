@@ -40,7 +40,7 @@ _在本機開啟終端機_
 
 <br>
 
-2. 查詢當前鏡像，並篩選關鍵字 `mariadb`。
+2. 查詢當前鏡像，並篩選關鍵字 `mariadb`，確定尚未下載相關鏡像。
 
     ```bash
     docker images | grep mariadb
@@ -48,7 +48,7 @@ _在本機開啟終端機_
 
 <br>
 
-3. 確定尚未安裝相關鏡像，使用以下指令拉取 MariaDB 鏡像。
+3. 拉取 MariaDB 鏡像。
 
     ```bash
     docker pull mariadb:latest
