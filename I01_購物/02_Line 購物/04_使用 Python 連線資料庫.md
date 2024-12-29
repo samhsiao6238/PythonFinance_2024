@@ -82,6 +82,8 @@ _使用 Python 的 `pymysql` 庫進行連接_
 
     ```
 
+    ![](images/img_25.png)
+
 <br>
 
 ___
