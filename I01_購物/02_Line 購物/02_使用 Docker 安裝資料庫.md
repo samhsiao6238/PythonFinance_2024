@@ -135,10 +135,6 @@ _在本機開啟終端機_
 
 4. 補充說明，建立後所傳回的是 `新建立的容器的 ID`，這是容器的唯一標識符；`容器 ID` 是一個 `64 字元` 的十六進制字串，但在一般操作上僅需 `前 12 個字元`，所以運行 `docker ps` 指令時，顯示的就是這個字串。
 
-    ```bash
-    docker ps
-    ```
-
     ![](images/img_17.png)
 
 <br>
@@ -183,7 +179,7 @@ _在 NAS 中要使用 `mariadb` 的 CLI 客戶端連線到 MariaDB_
 
 <br>
 
-1. 在宿主機測試連線，這裡使用 `root` 連線，所以要輸入的是 NAS 的密碼；宿主機就是 NAS，也就是安裝容器的主機。
+1. 透過執行 `容器內命令` 在宿主機測試連線，這裡使用 `root` 連線，所以要輸入的是 NAS 的密碼；宿主機就是 NAS，也就是安裝容器的主機，`docker exec` 用於進入正在運行的容器內執行命令。
 
     ```bash
     docker exec -it mariadb mariadb -u root -p
@@ -211,11 +207,17 @@ _在 NAS 中要使用 `mariadb` 的 CLI 客戶端連線到 MariaDB_
 
 ## 運行資料庫
 
+_指令使用大小寫皆可，`大寫` 語句只是資料庫的慣用表達方式，音易讀性較高，並可與 Linux 指令區隔，建議使用。_
+
+<br>
+
 1. 查看現有資料庫。
 
     ```sql
     SHOW DATABASES;
     ```
+
+    ![](images/img_18.png)
 
 <br>
 
@@ -225,9 +227,19 @@ _在 NAS 中要使用 `mariadb` 的 CLI 客戶端連線到 MariaDB_
     USE testdb;
     ```
 
+    ![](images/img_19.png)
+
 <br>
 
-3. 建立新資料庫
+3. 查看資料表；當前尚無資料表。
+
+    ```sql
+    SHOW TABLES;
+    ```
+
+<br>
+
+4. 嘗試建立新資料庫。
 
     ```sql
     CREATE DATABASE newdb_test;
@@ -235,31 +247,9 @@ _在 NAS 中要使用 `mariadb` 的 CLI 客戶端連線到 MariaDB_
 
 <br>
 
-4. 然後確認資料庫是否建立成功。
-
-    ```sql
-    SHOW DATABASES;
-    ```
+5. 顯示當前用戶無權限建立。
 
     ![](images/img_09.png)
-
-<br>
-
-5. 選取資料庫；指令使用大小寫皆可，`大寫` 語句只是資料庫的慣用表達方式，音易讀性較高，並可與 Linux 指令區隔，建議使用。
-
-    ```sql
-    use testdb;
-    ```
-
-    ![](images/img_10.png)
-
-<br>
-
-6. 查看資料表；當前尚無資料表。
-
-    ```sql
-    SHOW TABLES;
-    ```
 
 <br>
 
