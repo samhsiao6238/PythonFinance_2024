@@ -6,6 +6,10 @@ _修改代碼，整合 NAS 中以 Docker 安裝的 Selenium 瀏覽器，並將�
 
 ## 準備工作
 
+_再次強調，在 NAS 中安裝套件時，不要使用 `root` 帳號_
+
+<br>
+
 1. 連線 NAS。
 
     ```bash

@@ -6,7 +6,7 @@ _假如連線的是 NAS 中的 MariaDB_
 
 ## 步驟
 
-_使用 Python 的 `pymysql` 庫進行連接_
+_使用 Python 的 `pymysql` 庫進行連接；特別注意，安裝套件時，不要使用 `root` 帳號_
 
 <br>
 
