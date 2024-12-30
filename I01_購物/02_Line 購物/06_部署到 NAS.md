@@ -90,6 +90,10 @@ _以下代碼也可在 `.ipynb` 中運行_
     from selenium.webdriver.chrome.options import Options
     from selenium.webdriver.support.ui import WebDriverWait
     from selenium.webdriver.support import expected_conditions as EC
+    import os
+
+    # 取得腳本所在的目錄
+    script_dir = os.path.dirname(os.path.abspath(__file__))
 
     # MariaDB 連線資訊
     db_config = {
@@ -160,11 +164,15 @@ _以下代碼也可在 `.ipynb` 中運行_
 
         return results
 
+
     # 儲存數據到 Excel
     def save_to_excel(data, file_name="merchant_data.xlsx"):
+        # 使用腳本所在的路徑
+        file_path = os.path.join(script_dir, file_name)
         df = pd.DataFrame(data)
-        df.to_excel(file_name, index=False)
-        print(f"數據已儲存到本地 EXCEL 文件：{file_name}")
+        df.to_excel(file_path, index=False)
+        print(f"數據已儲存到本地 EXCEL 文件：{file_path}")
+
 
     # 儲存數據到 MariaDB
     def save_to_mariadb(data):
@@ -252,9 +260,13 @@ _先在 `.ipynb` 中運行測試_
 1. 從資料庫讀取資料並存入 Excel。
 
     ```python
+    import os
     from tabulate import tabulate
 
-    output_excel_file = "data_from_db.xlsx"
+    # 動態取得腳本所在的目錄
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # Excel 輸出文件
+    output_excel_file = os.path.join(script_dir, "data_from_db.xlsx")
 
     try:
         # 建立連線
@@ -264,7 +276,7 @@ _先在 `.ipynb` 中運行測試_
         # 建立游標
         cursor = connection.cursor()
 
-        # 按商家名稱排序並獲取最新記錄
+        # 按商家名稱排序並取得最新記錄
         query = """
         SELECT id, merchant_name, cashback, query_time
         FROM merchant_data
@@ -272,7 +284,7 @@ _先在 `.ipynb` 中運行測試_
         """
         cursor.execute(query)
 
-        # 獲取所有結果
+        # 取得所有結果
         rows = cursor.fetchall()
 
         # 檢查是否有資料
@@ -349,7 +361,10 @@ _建立新的腳本，因為要作為獨立腳本運作，所以基於前面的�
     }
 
     # Excel 輸出文件
-    output_excel_file = "data_from_db.xlsx"
+    # 動態取得腳本所在的目錄
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # Excel 輸出文件
+    output_excel_file = os.path.join(script_dir, "data_from_db.xlsx")
 
     # LINE Notify Token
     LINE_NOTIFY_TOKEN = os.getenv("LINE_NOTIFY")
@@ -388,7 +403,7 @@ _建立新的腳本，因為要作為獨立腳本運作，所以基於前面的�
             # 建立游標
             cursor = connection.cursor()
 
-            # 按商家名稱排序並獲取最新記錄
+            # 按商家名稱排序並取得最新記錄
             query = """
             SELECT merchant_name, cashback, query_time
             FROM merchant_data
@@ -396,7 +411,7 @@ _建立新的腳本，因為要作為獨立腳本運作，所以基於前面的�
             """
             cursor.execute(query)
 
-            # 獲取所有結果
+            # 取得所有結果
             rows = cursor.fetchall()
 
             if rows:
