@@ -245,6 +245,10 @@ _以下代碼也可在 `.ipynb` 中運行_
 
 ## 讀取資料
 
+_先在 `.ipynb` 中運行測試_
+
+<br>
+
 1. 從資料庫讀取資料並存入 Excel。
 
     ```python
@@ -302,6 +306,161 @@ _以下代碼也可在 `.ipynb` 中運行_
             cursor.close()
         if connection:
             connection.close()
+    ```
+
+<br>
+
+## 建立正式通知
+
+_建立新的腳本，因為要作為獨立腳本運作，所以基於前面的測試腳本進行修改。_
+
+<br>
+
+1. 建立新的腳本。
+
+    ```bash
+    touch exInfoCouponChanged.py
+    ```
+
+<br>
+
+2. 編輯腳本，以下代碼運行時會比對數據變化並對於變化發送 Line 通知。
+
+    ```python
+    from tabulate import tabulate
+    import pandas as pd
+    import pymysql
+    import requests
+    from dotenv import load_dotenv
+    import os
+    import re
+
+    # 載入環境變數
+    load_dotenv()
+
+    # MariaDB 連線資訊
+    db_config = {
+        "host": "192.168.1.239",
+        "port": 3306,
+        "user": "sam6238",
+        "password": "sam112233",
+        "database": "testdb",
+        "charset": "utf8mb4"
+    }
+
+    # Excel 輸出文件
+    output_excel_file = "data_from_db.xlsx"
+
+    # LINE Notify Token
+    LINE_NOTIFY_TOKEN = os.getenv("LINE_NOTIFY")
+
+    # 發送 LINE Notify 通知
+    def send_line_notify(message):
+        url = "https://notify-api.line.me/api/notify"
+        headers = {"Authorization": f"Bearer {LINE_NOTIFY_TOKEN}"}
+        data = {"message": message}
+        response = requests.post(url, headers=headers, data=data)
+        if response.status_code == 200:
+            print("成功發送 LINE 通知。")
+        else:
+            print(f"發送 LINE 通知失敗，狀態碼：{response.status_code}")
+
+    # 將回饋轉換為數字
+    def convert_cashback_to_float(cashback):
+        try:
+            if cashback == "無":
+                return 0.0
+            # 提取最大值作為數字，例如 "0~6%" 提取 6
+            match = re.search(r"(\d+(?:\.\d+)?)%", cashback)
+            if match:
+                return float(match.group(1))
+        except ValueError:
+            print(f"無法解析回饋數值：{cashback}")
+        return 0.0
+
+    # 處理數據並檢查回饋變化
+    def process_and_notify():
+        try:
+            # 建立連線
+            connection = pymysql.connect(**db_config)
+            print("成功連線到 MariaDB。")
+
+            # 建立游標
+            cursor = connection.cursor()
+
+            # 按商家名稱排序並獲取最新記錄
+            query = """
+            SELECT merchant_name, cashback, query_time
+            FROM merchant_data
+            ORDER BY merchant_name ASC, query_time DESC;
+            """
+            cursor.execute(query)
+
+            # 獲取所有結果
+            rows = cursor.fetchall()
+
+            if rows:
+                print("\nmerchant_data 表內容（按商家名稱排序）：")
+                headers = ["商家名稱", "回饋", "查詢時間"]
+                print(tabulate(rows, headers=headers, tablefmt="grid"))
+
+                # 將結果轉換為 pandas DataFrame
+                df = pd.DataFrame(rows, columns=headers)
+
+                # 轉換 cashback 為數字，"無" 視為 0
+                df["回饋數值"] = df["回饋"].apply(convert_cashback_to_float)
+
+                # 比較每個商家的回饋變化
+                notifications = []
+                grouped = df.groupby("商家名稱")
+                for merchant, group in grouped:
+                    # 最新的數據
+                    latest_row = group.iloc[0]
+                    # 其餘的數據
+                    previous_rows = group.iloc[1:]
+
+                    if not previous_rows.empty:
+                        latest_cashback = latest_row["回饋數值"]
+                        previous_cashback = previous_rows.iloc[0]["回饋數值"]
+
+                        # 檢查回饋是否變化
+                        if latest_cashback != previous_cashback:
+                            change = "上升" if latest_cashback > previous_cashback else "下降"
+                            notifications.append(
+                                f"商家【{merchant}】的回饋從 {previous_cashback}% {change} 到 {latest_cashback}%"
+                            )
+
+                # 發送 LINE 通知
+                if notifications:
+                    message = "\n".join(notifications)
+                    send_line_notify(message)
+                else:
+                    print("回饋沒有變化，無需發送通知。")
+
+                # 將 DataFrame 寫入 Excel
+                df.to_excel(output_excel_file, index=False, engine='openpyxl')
+                print(f"\n數據已成功寫入到 Excel 文件：{output_excel_file}")
+
+            else:
+                print("merchant_data 表中無資料。")
+
+        except pymysql.MySQLError as e:
+            print(f"連線或查詢失敗，錯誤：{e}")
+
+        except Exception as e:
+            print(f"操作失敗，錯誤：{e}")
+
+        finally:
+            # 關閉連線
+            if cursor:
+                cursor.close()
+            if connection:
+                connection.close()
+
+    # 主程序入口
+    if __name__ == "__main__":
+        process_and_notify()
+
     ```
 
 <br>
