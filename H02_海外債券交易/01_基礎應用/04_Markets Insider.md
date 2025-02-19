@@ -10,45 +10,47 @@ _Markets Insider 是 Business Insider 旗下的財經資訊平台，專門提供
 
 ## 說明
 
-_這個講義要從這個網站得到的資訊是歷史交易紀錄，這裡先以 `US02209SBE28` 為例。_
+_以下嘗試從 `Markets Insider` 網站取得標的商品的歷史交易紀錄，這裡以 `US02209SBE28` 為例。_
 
 <br>
 
 ## 搜尋所需的封包
 
-1. [官網](https://markets.businessinsider.com/)。
+1. 訪問 [Markets Insider](https://markets.businessinsider.com/) 網站。
 
 <br>
 
-2. 搜尋。
+2. 在右上方輸入 ISIN Code `US02209SBE28` 進行搜尋。
 
     ![](images/img_24.png)
 
 <br>
 
-3. 會有一個圖表，以下就是要來取得這張圖表中的歷史紀錄。
+3. 下方會顯示圖表，以下就是要來取得這張圖表中的歷史紀錄。
 
     ![](images/img_25.png)
 
 <br>
 
-4. 開啟檢視 `F12`。
+## 開始操作
+
+1. 在瀏覽器點擊 `F12` 進行檢視。
 
 <br>
 
-5. 點擊 `Network` 然後切換到 `Fetch/XHR`。
+2. 點擊 `Network` 然後切換到 `Fetch/XHR`。
 
     ![](images/img_26.png)
 
 <br>
 
-6. 在 `Name` 欄位內任意選取一個項目，然後右邊切換到 `Respopnse`。
+3. 在 `Name` 欄位內任意選取一個項目，然後右邊切換到 `Respopnse`。
 
     ![](images/img_27.png)
 
 <br>
 
-7. 在這個步驟需要逐一人工檢查，然後會在 `` 的項目下看到所需的歷史交易紀錄，也是網頁中用來繪製圖表的數據。
+7. 在這個步驟需要逐一人工檢查，然後會在 `Chart...` 的項目下看到所需的歷史交易紀錄，也是網頁中用來繪製圖表的數據。
 
     ![](images/img_28.png)
 
