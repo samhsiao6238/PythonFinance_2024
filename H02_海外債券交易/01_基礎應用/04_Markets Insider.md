@@ -1,5 +1,9 @@
 # Markets Insider
 
+_Markets Insider 是 Business Insider 旗下的財經資訊平台，專門提供即時金融市場數據、股票報價、外匯、加密貨幣、期貨、商品價格等投資相關資訊。_
+
+<br>
+
 ![](images/img_23.png)
 
 <br>
