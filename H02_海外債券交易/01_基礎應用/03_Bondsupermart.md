@@ -136,9 +136,8 @@ else:
     print(f'Failed to retrieve data, status code: {response.status_code}')
 ```
 
-
 <br>
 
----
+___
 
 _END_
