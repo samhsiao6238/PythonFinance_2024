@@ -2,27 +2,27 @@
 
 <br>
 
-[Börse Frankfurt](https://www.boerse-frankfurt.de/en)
+1. [Börse Frankfurt](https://www.boerse-frankfurt.de/en)
 
-![](images/img_37.png)
-
-<br>
-
-[Bondsupermart](https://www.bondsupermart.com/bsm/)
-
-![](images/img_38.png)
+    ![](images/img_37.png)
 
 <br>
 
-[Markets Insider](https://markets.businessinsider.com/)
+2. [Bondsupermart](https://www.bondsupermart.com/bsm/)
 
-![](images/img_23.png)
+    ![](images/img_38.png)
 
 <br>
 
-_[Fintel](https://fintel.io/)_
+3. [Markets Insider](https://markets.businessinsider.com/)
 
-![](images/img_34.png)
+    ![](images/img_23.png)
+
+<br>
+
+4. [Fintel](https://fintel.io/)
+
+    ![](images/img_34.png)
 
 <br>
 
