@@ -235,7 +235,7 @@ _以下嘗試從 `Markets Insider` 網站取得標的商品的歷史交易紀錄
 
 <br>
 
-## 對照
+## 批次下載
 
 1. 這是對照表，提供做為參考，後續可作為獨立文件繼續拓展，無需寫入每一個腳本中。
 
@@ -434,6 +434,117 @@ _以下嘗試從 `Markets Insider` 網站取得標的商品的歷史交易紀錄
             )
 
     print("\n📊 所有數據下載完成！")
+    ```
+
+<br>
+
+## 繪圖
+
+1. 繪製基本圖形。
+
+    ```python
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import os
+    from matplotlib.ticker import MaxNLocator
+
+    # 設定 Excel 檔案名稱
+    excel_file = "data/MI_歷史數據_全.xlsx"
+
+    # 讀取 Excel 文件的所有工作表
+    xls = pd.ExcelFile(excel_file)
+
+    # 設定 MacOS 適用的字體，避免中文亂碼
+    plt.rcParams["font.family"] = "Arial Unicode MS"
+    # 確保負號正常顯示
+    plt.rcParams["axes.unicode_minus"] = False
+
+    # 確保輸出目錄存在
+    output_dir = "charts"
+    os.makedirs(output_dir, exist_ok=True)
+
+    # 遍歷每個 Sheet，繪製並儲存折線圖
+    for sheet_name in xls.sheet_names:
+        df = pd.read_excel(xls, sheet_name=sheet_name)
+
+        # 檢查 DataFrame 是否包含必要欄位
+        if "Date" in df.columns and "Close" in df.columns:
+            # 轉換日期格式
+            df["Date"] = pd.to_datetime(df["Date"])
+
+            # 計算最高點與最低點
+            max_idx = df["Close"].idxmax()
+            min_idx = df["Close"].idxmin()
+            last_idx = df.index[-1]
+
+            max_date, max_price = df.loc[max_idx, ["Date", "Close"]]
+            min_date, min_price = df.loc[min_idx, ["Date", "Close"]]
+            last_date, last_price = df.loc[last_idx, ["Date", "Close"]]
+
+            # 設定圖形大小
+            plt.figure(figsize=(12, 6))
+
+            # 繪製折線圖
+            plt.plot(
+                df["Date"],
+                df["Close"],
+                marker="o",
+                markersize=2,
+                linestyle="-",
+                linewidth=1.0,
+                label="收盤價 (Close)",
+            )
+
+            # 標註最高點
+            plt.annotate(
+                f"最高: {max_price:.2f}",
+                xy=(max_date, max_price),
+                xytext=(max_date, max_price + 2),
+                arrowprops=dict(facecolor="red", arrowstyle="->"),
+                fontsize=10,
+                color="red",
+            )
+
+            # 標註最低點
+            plt.annotate(
+                f"最低: {min_price:.2f}",
+                xy=(min_date, min_price),
+                xytext=(min_date, min_price - 2),
+                arrowprops=dict(facecolor="blue", arrowstyle="->"),
+                fontsize=10,
+                color="blue",
+            )
+
+            # 標註最後價格
+            plt.annotate(
+                f"最後: {last_price:.2f}",
+                xy=(last_date, last_price),
+                xytext=(last_date, last_price + 2),
+                arrowprops=dict(facecolor="black", arrowstyle="->"),
+                fontsize=10,
+                color="black",
+            )
+
+            # 設定標題與標籤
+            plt.title(f"{sheet_name} - 價格變動", fontsize=14)
+            plt.xlabel("日期", fontsize=12)
+            plt.ylabel("收盤價 (Close)", fontsize=12)
+
+            # 設定 X 軸日期間隔，使其不擁擠
+            plt.xticks(rotation=45)
+            # 最多顯示 8 個日期刻度
+            plt.gca().xaxis.set_major_locator(MaxNLocator(nbins=8))
+
+            # 顯示圖例
+            plt.legend(fontsize=10)
+
+            # 儲存圖表
+            chart_path = os.path.join(output_dir, f"{sheet_name}.png")
+            # 增加 DPI 使圖形更清晰
+            plt.savefig(chart_path, bbox_inches="tight", dpi=300)
+            plt.close()
+
+    print(f"📊 所有折線圖已儲存至資料夾: {output_dir}")
     ```
 
 <br>
