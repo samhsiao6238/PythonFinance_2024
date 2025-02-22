@@ -159,6 +159,87 @@ _準備部分的代碼相同不做贅述，以下是包含準備部分的完整�
 
 <br>
 
+## 獲取截圖
+
+1. 取得個別標的查詢畫面截圖。
+
+    ```python
+    from selenium import webdriver
+    from selenium.webdriver.chrome.service import Service
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from webdriver_manager.chrome import ChromeDriverManager
+
+    # 設定 Chrome 瀏覽器參數
+    options = webdriver.ChromeOptions()
+    # 使用新版無頭模式
+    options.add_argument("--headless=new")
+    # 避免 GPU 問題
+    options.add_argument("--disable-gpu")
+    # 避免 Linux 權限問題
+    options.add_argument("--no-sandbox")
+    # 避免 Docker 記憶體不足
+    options.add_argument("--disable-dev-shm-usage")
+    # 防止 Selenium 被檢測
+    options.add_argument("--disable-blink-features=AutomationControlled")
+
+    # 自動安裝 ChromeDriver 並啟動 WebDriver
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(
+        service=service, options=options
+    )
+
+    # 設定目標網址
+    url = "https://www.boerse-frankfurt.de/bond/us872898aj06-tsmc-arizona-corp-4-5-22-52"
+    print(f"🔍 正在訪問: {url}")
+    driver.get(url)
+
+    try:
+        # 等待 Cookie 同意按鈕並點擊
+        WebDriverWait(driver, 5).until(
+            EC.element_to_be_clickable((
+                By.ID, "cookie-hint-btn-accept"
+            ))
+        ).click()
+        print("已接受 Cookie 設定")
+    except Exception:
+        print("⚠️ 未偵測到 Cookie 按鈕，可能已自動接受或不存在")
+
+    try:
+        # 確保主要內容區塊載入完成
+        WebDriverWait(driver, 15).until(
+            EC.presence_of_element_located((
+                By.CLASS_NAME, "content-wrapper"
+            ))
+        )
+        # 確保 `document.readyState` 為 "complete"
+        WebDriverWait(driver, 10).until(
+            lambda d: d.execute_script("return document.readyState") == "complete"
+        )
+        # 等待圖表載入 (嘗試找到 `canvas` 或 `svg` 元素)
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((
+                By.TAG_NAME, "canvas"
+            ))
+        )
+        print("頁面與線圖載入完成，開始截圖")
+        # 截取整個頁面的圖片
+        screenshot_path = "screenshot.png"
+        driver.save_screenshot(screenshot_path)
+        print(f"📸 截圖已儲存至: {screenshot_path}")
+    except Exception as e:
+        print(f"❌ 頁面或圖表加載失敗: {e}")
+    finally:
+        # 關閉 WebDriver
+        driver.quit()
+        print("🚪 瀏覽器已關閉")
+    ```
+
+    ![](images/img_40.png)
+
+<br>
+
 ___
 
 _END_
