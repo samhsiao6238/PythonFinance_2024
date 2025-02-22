@@ -115,7 +115,7 @@ _以下嘗試從 `Markets Insider` 網站取得標的商品的歷史交易紀錄
             
             # 檢查回應是否成功
             if response.status_code == 200:
-                print("✅ API 請求成功，完整回應內容如下：")
+                print("API 請求成功，完整回應內容如下：")
                 # 完整輸出 API 回應
                 print(response.text)
                 # 直接跳出迴圈
@@ -248,7 +248,7 @@ _以下嘗試從 `Markets Insider` 網站取得標的商品的歷史交易紀錄
         'US842434DA71': '南加州天然氣 2054 5.6', "",
         'US872898AJ06': '台積電 2052 4.5', "1,118393079,16,333",
         'USF2893TAE67': '法國電力 2040 5.6', "1,10955366,1330,333",
-        'US05526DBV64': '英美菸草 2052 4.65', "1,117582253,1330,333",
+        'US05526DBV64': '英美菸草 2052 5.65', "1,117582253,1330,333",
         'US717081ED10': '輝瑞 2046 4.125', "",
         'US716973AG71': '輝瑞 2053 5.3', "1,127131476,1330,333",
     }
@@ -272,7 +272,7 @@ _以下嘗試從 `Markets Insider` 網站取得標的商品的歷史交易紀錄
         'US842434DA71': ('南加州天然氣 2054 5.6', ''),  # 尚未查到
         'US872898AJ06': ('台積電 2052 4.5', '1,118393079,16,333'),
         'USF2893TAE67': ('法國電力 2040 5.6', '1,10955366,1330,333'),
-        'US05526DBV64': ('英美菸草 2052 4.65', '1,117582253,1330,333'),
+        'US05526DBV64': ('英美菸草 2052 5.65', '1,117582253,1330,333'),
         'US717081ED10': ('輝瑞 2046 4.125', ''),  # 尚未查到
         'US716973AG71': ('輝瑞 2053 5.3', '1,127131476,1330,333')
     }
@@ -322,7 +322,7 @@ _以下嘗試從 `Markets Insider` 網站取得標的商品的歷史交易紀錄
                 # 加入至數據字典
                 all_data[bond_name] = df
                 print(
-                    f"✅ {bond_name} ({isin}) 數據取得成功，"
+                    f"{bond_name} ({isin}) 數據取得成功，"
                     f"共 {len(df)} 筆"
                 )
 
@@ -371,7 +371,7 @@ _以下嘗試從 `Markets Insider` 網站取得標的商品的歷史交易紀錄
         'US842434DA71': ('南加州天然氣 2054 5.6', ''),  # 尚未查到
         'US872898AJ06': ('台積電 2052 4.5', '1,118393079,16,333'),
         'USF2893TAE67': ('法國電力 2040 5.6', '1,10955366,1330,333'),
-        'US05526DBV64': ('英美菸草 2052 4.65', '1,117582253,1330,333'),
+        'US05526DBV64': ('英美菸草 2052 5.65', '1,117582253,1330,333'),
         'US717081ED10': ('輝瑞 2046 4.125', ''),  # 尚未查到
         'US716973AG71': ('輝瑞 2053 5.3', '1,127131476,1330,333')
     }
@@ -421,7 +421,7 @@ _以下嘗試從 `Markets Insider` 網站取得標的商品的歷史交易紀錄
                 # 儲存為獨立的 Excel 文件
                 df.to_excel(excel_filename, index=False)
                 print(
-                    f"✅ {bond_name} ({isin}) "
+                    f"{bond_name} ({isin}) "
                     f"數據儲存至 {excel_filename}"
                 )
 
@@ -548,6 +548,174 @@ _以下嘗試從 `Markets Insider` 網站取得標的商品的歷史交易紀錄
     ```
 
 <br>
+
+## 添加美國各個天期公債
+
+1. 安裝套件。
+
+```bash
+pip install akshare scipy
+```
+
+2. 繪圖，公司債價格線 加粗 (linewidth=2.0)，移除 點標記 (marker='')。
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import os
+from matplotlib.ticker import MaxNLocator
+import akshare as ak
+from scipy.interpolate import make_interp_spline
+import numpy as np
+
+# 設定 Excel 檔案名稱
+excel_file = "data/MI_歷史數據_全.xlsx"
+
+# 讀取 Excel 文件的所有工作表
+xls = pd.ExcelFile(excel_file)
+
+# 設定 MacOS 適用的字體，避免繁體中文顯示亂碼
+plt.rcParams["font.family"] = "Arial Unicode MS"
+# 確保負號正常顯示
+plt.rcParams["axes.unicode_minus"] = False
+
+# 確保輸出目錄存在
+output_dir = "charts"
+os.makedirs(output_dir, exist_ok=True)
+
+# 取得美國國債利率資料
+try:
+    us_bond_rates = ak.bond_zh_us_rate()
+    us_bond_rates["日期"] = pd.to_datetime(us_bond_rates["日期"])
+
+    # 過濾僅保留所需的欄位（繁體中文）
+    selected_columns = {
+        "美国国债收益率2年": "美國國債收益率2年",
+        "美国国债收益率5年": "美國國債收益率5年",
+        "美国国债收益率10年": "美國國債收益率10年",
+        "美国国债收益率30年": "美國國債收益率30年",
+        "美国国债收益率10年-2年": "美國國債收益率10年-2年",
+    }
+
+    us_bond_rates = us_bond_rates.rename(columns=selected_columns)[
+        ["日期"] + list(selected_columns.values())
+    ]
+
+    # 補齊數據缺失值
+    us_bond_rates = us_bond_rates.set_index("日期").interpolate().reset_index()
+
+    print(f"成功取得美國國債利率數據：{list(us_bond_rates.columns[1:])}")
+
+except Exception as e:
+    print(f"❌ 無法取得美國國債利率數據：{e}")
+    us_bond_rates = None
+
+# 遍歷每個 Sheet，繪製並儲存折線圖
+for sheet_name in xls.sheet_names:
+    df = pd.read_excel(xls, sheet_name=sheet_name)
+
+    # 檢查 DataFrame 是否包含必要欄位
+    if "Date" in df.columns and "Close" in df.columns:
+        # 轉換日期格式
+        df["Date"] = pd.to_datetime(df["Date"])
+
+        # 設定圖形
+        fig, ax1 = plt.subplots(figsize=(12, 6))
+
+        # 繪製公司債價格（左 Y 軸）
+        ax1.plot(
+            df["Date"],
+            df["Close"],
+            linestyle="-",
+            linewidth=2.0,
+            label=f"{sheet_name} 收盤價",
+            color="blue",
+        )
+        ax1.set_ylabel("公司債價格", fontsize=12, color="blue")
+        ax1.tick_params(axis="y", labelcolor="blue")
+
+        # 繪製美國國債利率（右 Y 軸）
+        if us_bond_rates is not None:
+            # 建立右 Y 軸
+            ax2 = ax1.twinx()
+
+            # 合併美國國債利率資料
+            merged_df = pd.merge(
+                df, us_bond_rates, left_on="Date", right_on="日期", how="left"
+            )
+
+            # 設定不同顏色與樣式
+            bond_colors = {
+                "美國國債收益率2年": "green",
+                "美國國債收益率5年": "orange",
+                "美國國債收益率10年": "red",
+                "美國國債收益率30年": "purple",
+                "美國國債收益率10年-2年": "brown",
+            }
+
+            # 計算「10年-2年」的最小值
+            min_spread = merged_df["美國國債收益率10年-2年"].min()
+
+            # 遍歷選定的美國國債利率數據，使用 B-Spline 平滑曲線
+            for bond_col, color in bond_colors.items():
+                if bond_col in merged_df.columns:
+                    x = np.arange(len(merged_df["Date"]))
+                    # 確保數據完整
+                    y = merged_df[bond_col].interpolate()
+
+                    # 避免數據點不足導致插值錯誤
+                    if len(y.dropna()) > 3:
+                        # B-Spline 平滑曲線
+                        spl = make_interp_spline(x, y, k=3)
+                        x_smooth = np.linspace(x.min(), x.max(), 500)
+                        y_smooth = spl(x_smooth)
+
+                        # 避免索引越界
+                        x_smooth_int = np.clip(
+                            x_smooth.astype(int), 0, len(merged_df["Date"]) - 1
+                        )
+
+                        ax2.plot(
+                            merged_df["Date"].iloc[x_smooth_int],
+                            y_smooth,
+                            linestyle="-",
+                            linewidth=1.5,
+                            label=bond_col,
+                            color=color,
+                            # 半透明處理
+                            alpha=0.3,
+                        )
+
+            ax2.set_ylabel("美國國債利率 (%)", fontsize=12, color="green")
+            ax2.tick_params(axis="y", labelcolor="green")
+
+            # 讓「10年-2年」不會超出底線
+            ax2.set_ylim(
+                # 若「10年-2年」數據為負，讓底線適應
+                min(-0.5, min_spread * 1.2),
+                # 最高值留 20% 空間
+                max(merged_df[bond_colors.keys()].max()) * 1.2,
+            )
+
+        # 設定標題與標籤
+        ax1.set_title(f"{sheet_name} - 價格變動與美國國債利率", fontsize=14)
+        ax1.set_xlabel("日期", fontsize=12)
+
+        # 設定 X 軸日期間隔，使其不擁擠
+        ax1.xaxis.set_major_locator(MaxNLocator(nbins=8))
+        plt.xticks(rotation=45)
+
+        # 顯示圖例
+        fig.legend(loc="upper left", bbox_to_anchor=(0.1, 0.9), fontsize=10)
+
+        # 儲存圖表
+        chart_path = os.path.join(output_dir, f"{sheet_name}.png")
+        # 增加 DPI 使圖形更清晰
+        plt.savefig(chart_path, bbox_inches="tight", dpi=300)
+        plt.close()
+
+print(f"📊 所有折線圖已儲存至資料夾：{output_dir}")
+```
 
 ___
 
