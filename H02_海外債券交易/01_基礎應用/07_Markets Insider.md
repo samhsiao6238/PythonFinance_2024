@@ -100,20 +100,26 @@ _以下嘗試從 `Markets Insider` 網站取得標的商品的歷史交易紀錄
     # 重試機制
     max_attempts = 3
     attempt = 0
-    data = None  # 儲存 API 回應的數據
+    # 儲存 API 回應的數據
+    data = None
 
     while attempt < max_attempts:
         try:
             print(
-                f"🔍 正在查詢債券數據 (嘗試 {attempt + 1}/{max_attempts}) ..."
+                "🔍 正在查詢債券數據"
+                f" (嘗試 {attempt + 1}/{max_attempts}) ..."
             )
-            response = requests.get(url, headers=headers, timeout=15)
+            response = requests.get(
+                url, headers=headers, timeout=15
+            )
             
             # 檢查回應是否成功
             if response.status_code == 200:
                 print("✅ API 請求成功，完整回應內容如下：")
-                print(response.text)  # 完整輸出 API 回應
-                break  # 直接跳出迴圈
+                # 完整輸出 API 回應
+                print(response.text)
+                # 直接跳出迴圈
+                break
             else:
                 print(
                     f"❌ 請求失敗，狀態碼: {response.status_code}"
@@ -131,7 +137,7 @@ _以下嘗試從 `Markets Insider` 網站取得標的商品的歷史交易紀錄
 
 <br>
 
-2. 篩選交易資訊。
+2. 篩選交易資訊；`instrumentType=Bond` 指定查詢的是 `債券`，`tkData=1,46441575,1330,333` 用於特定債券的標識符，不同債券會有不同的 `tkData`，`from=19700201&to=20231216` 指定查詢時間範圍。
 
     ```python
     import requests
@@ -184,6 +190,48 @@ _以下嘗試從 `Markets Insider` 網站取得標的商品的歷史交易紀錄
     ```
 
     ![](images/img_33.png)
+
+<br>
+
+## 儲存標資訊
+
+1. 查詢並儲存指定標的資訊。
+
+    ```python
+    import requests
+    import pandas as pd
+    from datetime import datetime
+
+    # URL 從哪裡取得資料
+    url = "https://markets.businessinsider.com/Ajax/Chart_GetChartData?instrumentType=Bond&tkData=1,46441575,1330,333&from=19700201&to=20250220"
+
+    # 發送請求取得資料
+    response = requests.get(url)
+
+    # 檢查響應狀態碼，確保請求成功
+    if response.status_code == 200:
+        # 解析 JSON 數據
+        data = response.json()
+
+        # 轉換為 DataFrame
+        df = pd.DataFrame(data)
+
+        # 將日期從字串轉換為 datetime 對象
+        df['Date'] = pd.to_datetime(df['Date'])
+
+        # 儲存為 Excel 文件
+        excel_file = 'data/MarketsInsider_數據.xlsx'
+        df.to_excel(
+            excel_file, index=False
+        )
+
+        print(f"數據已儲存到 {excel_file}")
+    else:
+        print(
+            "Failed to retrieve data:",
+            response.status_code
+        )
+    ```
 
 <br>
 
