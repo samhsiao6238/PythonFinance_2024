@@ -1,7 +1,3 @@
-
-
-<img src="images/img_99.png" width="400px">
-
-<img src="images/img_98.png" width="400px">
-
-<img src="images/img_97.png" width="400px">
+Yahoo奇摩新闻编辑室
+2025年3月20日 周四 下午1:12
+俄乌战争已持续三年多，美国总统川普近期分别与普丁、泽伦斯基通话，双方各自谈了什么？达成哪些共识？ Yahoo奇摩新闻带您快速掌握目前美国协调停战的最新进度，以及仍有哪些争议点。

@@ -47,6 +47,22 @@
                 "isDefault": true
             },
             "problemMatcher": []
+        },
+        {
+            // 簡體轉繁體
+            "label": "Translate Current Markdown (CN → TW)",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                ".script/CN2TW_md_translator.py",
+                "${file}",
+                "${fileDirname}/${fileBasenameNoExtension}_tw.md"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
         }
     ]
 }
