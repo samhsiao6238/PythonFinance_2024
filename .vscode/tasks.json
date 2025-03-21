@@ -50,13 +50,12 @@
         },
         {
             // 簡體轉繁體
-            "label": "Translate Current Markdown (CN → TW)",
+            "label": "Translate Current File (CN → TW)",
             "type": "shell",
             "command": "python",
             "args": [
                 ".script/CN2TW_md_translator.py",
-                "${file}",
-                "${fileDirname}/${fileBasenameNoExtension}_tw.md"
+                "${file}"
             ],
             "presentation": {
                 "reveal": "always",
