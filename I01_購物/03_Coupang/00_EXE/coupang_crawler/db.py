@@ -1,5 +1,4 @@
 import pymysql
-import os
 
 def insert_into_db(data_list, db_config):
     connection = pymysql.connect(
@@ -32,3 +31,4 @@ def insert_into_db(data_list, db_config):
                     data["price"], data["unit_price"], data["timestamp"]
                 ))
         connection.commit()
+        print("✅ 已寫入資料庫。")

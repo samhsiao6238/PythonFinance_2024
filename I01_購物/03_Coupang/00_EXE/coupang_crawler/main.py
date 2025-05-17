@@ -13,12 +13,17 @@ db_config = {
     "password": os.getenv("DB_PASSWORD"),
     "database": os.getenv("DB_NAME")
 }
+# 載入會員帳號密碼
+EMAIL = os.getenv("COUPANG_EMAIL")
+PASSWORD = os.getenv("COUPANG_PASSWORD")
 
+# 關鍵字
 search_keyword = "kose 洗面乳"
-advanced_keywords = ["2條"]  # 可改為空清單以關閉篩選
+# 空列表會自動關閉篩選
+advanced_keywords = ["2條"]
 
 # 登入與建立 driver
-driver = login_and_get_driver()
+driver = login_and_get_driver(EMAIL, PASSWORD)
 print("✅ 已登入 Coupang")
 
 # 取得全部與篩選結果
@@ -34,7 +39,7 @@ if all_results:
         print(f"   單位價格: {r['unit_price']}")
         print(f"   時間戳: {r['timestamp']}")
         print("-" * 60)
-
+    # 調用函數
     insert_into_db(all_results, db_config)
     print("✅ 已寫入資料庫。")
 else:
